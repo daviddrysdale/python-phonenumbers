@@ -26,7 +26,6 @@ sdist:
 
 install: dist
 	sudo python setup.py install
-	sudo rm -rf build/
 
 clean:
 	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc tests/*.pyc
