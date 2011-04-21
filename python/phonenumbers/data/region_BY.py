@@ -1,0 +1,19 @@
+"""Auto-generated file, do not edit by hand. BY metadata"""
+from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+
+PHONE_METADATA_BY = PhoneMetadata(id='BY', country_code=375, international_prefix='8~10',
+    general_desc=PhoneNumberDesc(national_number_pattern=u'[12-4]\d{8}|[89]\d{9}', possible_number_pattern=u'\d{7,10}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern=u'(?:1(?:5(?:1[1-5]|2\d|6[1-4]|9[1-7])|6(?:[235]\d|4[1-7])|7\d{2})|2(?:1(?:[246]\d|3[0-35-9]|5[1-9])|2(?:[235]\d|4[0-8])|3(?:2\d|3[02-79]|4[024-7]|5[0-7])))\d{5}', possible_number_pattern=u'\d{7,9}', example_number=u'152450911'),
+    mobile=PhoneNumberDesc(national_number_pattern=u'(?:2(?:5[679]|9[1-9])|33\d|44\d)\d{6}', possible_number_pattern=u'\d{9}', example_number=u'294911911'),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'80[13]\d{7}', possible_number_pattern=u'\d{10}', example_number=u'8011234567'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'902\d{7}', possible_number_pattern=u'\d{10}', example_number=u'9021234567'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    national_prefix=u'8',
+    national_prefix_for_parsing=u'80?',
+    number_format=[NumberFormat(pattern='([1-4]\d)(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[1-4]'], national_prefix_formatting_rule=u'8 0\\1'),
+        NumberFormat(pattern='([89]\d{2})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u'8 \\1')])

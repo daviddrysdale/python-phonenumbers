@@ -1,0 +1,28 @@
+"""Auto-generated file, do not edit by hand. MX metadata"""
+from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+
+PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix='00',
+    general_desc=PhoneNumberDesc(national_number_pattern=u'[1-9]\d{9,10}', possible_number_pattern=u'\d{7,11}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern=u'[2-9]\d{9}', possible_number_pattern=u'\d{7,10}'),
+    mobile=PhoneNumberDesc(national_number_pattern=u'1\d{10}', possible_number_pattern=u'\d{11}'),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'800\d{7}', possible_number_pattern=u'\d{10}'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'900\d{7}', possible_number_pattern=u'\d{10}'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    national_prefix=u'01',
+    national_prefix_for_parsing=u'01|04[45](\d{10})',
+    national_prefix_transform_rule=u'1\\1',
+    number_format=[NumberFormat(pattern='(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]00']),
+        NumberFormat(pattern='(\d{2})(\d{4})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['33|55|81']),
+        NumberFormat(pattern='(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2467]|3[0-24-9]|5[0-46-9]|8[2-9]|9[1-9]']),
+        NumberFormat(pattern='1(\d{2})(\d{4})(\d{4})', format=u'045 \\1 \\2 \\3', leading_digits_pattern=['1(?:33|55|81)']),
+        NumberFormat(pattern='1(\d{3})(\d{3})(\d{4})', format=u'045 \\1 \\2 \\3', leading_digits_pattern=['1(?:[124579]|3[0-24-9]|5[0-46-9]|8[02-9])'])],
+    intl_number_format=[NumberFormat(pattern='(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]00']),
+        NumberFormat(pattern='(\d{2})(\d{4})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['33|55|81']),
+        NumberFormat(pattern='(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2467]|3[0-24-9]|5[0-46-9]|8[2-9]|9[1-9]']),
+        NumberFormat(pattern='(1)(\d{2})(\d{4})(\d{4})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:33|55|81)']),
+        NumberFormat(pattern='(1)(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:[124579]|3[0-24-9]|5[0-46-9]|8[02-9])'])])

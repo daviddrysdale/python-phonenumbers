@@ -1,0 +1,21 @@
+"""Auto-generated file, do not edit by hand. BR metadata"""
+from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+
+PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix='00(?:1[45]|2[135]|[34]1|43)',
+    general_desc=PhoneNumberDesc(national_number_pattern=u'[1-9]\d{7,9}', possible_number_pattern=u'\d{8,10}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern=u'(?:[14689][1-9]|2[12478]|3[1-578]|5[13-5]|7[13-579])[2-5]\d{7}', possible_number_pattern=u'\d{8,10}', example_number=u'1123456789'),
+    mobile=PhoneNumberDesc(national_number_pattern=u'(?:[14689][1-9]|2[12478]|3[1-578]|5[13-5]|7[13-579])[6-9]\d{7}', possible_number_pattern=u'\d{10}', example_number=u'1161234567'),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'800\d{6,7}', possible_number_pattern=u'\d{8,10}', example_number=u'800123456'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'[359]00\d{6,7}', possible_number_pattern=u'\d{8,10}', example_number=u'300123456'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'(?:400\d|3003)\d{4}', possible_number_pattern=u'\d{8,10}', example_number=u'40041234'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    national_prefix=u'0',
+    national_prefix_for_parsing=u'0(?:(1[245]|2[135]|[34]1)(\d{10}))?',
+    national_prefix_transform_rule=u'\\2',
+    number_format=[NumberFormat(pattern='(\d{2})(\d{4})(\d{4})', format=u'\\1 \\2-\\3', leading_digits_pattern=['[1-9][1-9]'], national_prefix_formatting_rule=u'(\\1)', domestic_carrier_code_formatting_rule=u'0 $CC (\\1)'),
+        NumberFormat(pattern='([34]00\d)(\d{4})', format=u'\\1-\\2', leading_digits_pattern=['[34]00', '400|3003']),
+        NumberFormat(pattern='([3589]00)(\d{2,3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[3589]00'], national_prefix_formatting_rule=u'0\\1')])

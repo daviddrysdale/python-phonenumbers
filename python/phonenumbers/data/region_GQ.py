@@ -1,0 +1,17 @@
+"""Auto-generated file, do not edit by hand. GQ metadata"""
+from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+
+PHONE_METADATA_GQ = PhoneMetadata(id='GQ', country_code=240, international_prefix='00',
+    general_desc=PhoneNumberDesc(national_number_pattern=u'[23589]\d{8}', possible_number_pattern=u'\d{6,9}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern=u'3(?:3(?:3\d[7-9]|[0-24-9]\d[46])|5\d{2}[7-9])\d{4}', possible_number_pattern=u'\d{6,9}', example_number=u'333091234'),
+    mobile=PhoneNumberDesc(national_number_pattern=u'(?:222|551)\d{6}', possible_number_pattern=u'\d{6,9}', example_number=u'222123456'),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'80\d[1-9]\d{5}', possible_number_pattern=u'\d{6,9}', example_number=u'800123456'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'90\d[1-9]\d{5}', possible_number_pattern=u'\d{6,9}', example_number=u'900123456'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    number_format=[NumberFormat(pattern='(\d{2})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[235]']),
+        NumberFormat(pattern='(\d{3})(\d{6})', format=u'\\1 \\2', leading_digits_pattern=['[89]'])])

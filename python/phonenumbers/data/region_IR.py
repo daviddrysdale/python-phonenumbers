@@ -1,0 +1,19 @@
+"""Auto-generated file, do not edit by hand. IR metadata"""
+from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+
+PHONE_METADATA_IR = PhoneMetadata(id='IR', country_code=98, international_prefix='00',
+    general_desc=PhoneNumberDesc(national_number_pattern=u'[2-6]\d{4,9}|[1789]\d{9}', possible_number_pattern=u'\d{5,10}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern=u'2(?:1[2-9]\d{2,7}|51\d{3,7})|(?:241|3(?:11|5[23])|441|5[14]1)\d{4,7}|(?:3(?:34|41)|6(?:11|52)|)\d{6,7}|(?:1(?:[134589][12]|[27][1-4])|2(?:2[189]|[3689][12]|42|5[256]|7[34])|3(?:12|2[1-4]|3[125]|4[24-9]|51|[6-9][12])|4(?:[135-9][12]|2[1-467]|4[2-4])|5(?:12|2[89]|3[1-5]|4[2-8]|[5-7][12]|8[1245])|6(?:12|[347-9][12]|51|6[1-6])|7(?:[13589][12]|2[1289]|4[1-4]|6[1-6]|7[1-3])|8(?:[145][12]|3[124578]|6[1256]|7[1245]))\d{7}', possible_number_pattern=u'\d{5,10}', example_number=u'2123456789'),
+    mobile=PhoneNumberDesc(national_number_pattern=u'9(?:1\d|3[124-8])\d{7}', possible_number_pattern=u'\d{10}', example_number=u'9123456789'),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    voip=PhoneNumberDesc(national_number_pattern=u'993[12]\d{6}', possible_number_pattern=u'\d{10}', example_number=u'9932123456'),
+    pager=PhoneNumberDesc(national_number_pattern=u'943[24678]\d{6}', possible_number_pattern=u'\d{10}', example_number=u'9432123456'),
+    uan=PhoneNumberDesc(national_number_pattern=u'9990\d{6}', possible_number_pattern=u'\d{10}', example_number=u'9990123456'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    national_prefix=u'0',
+    national_prefix_for_parsing=u'0',
+    number_format=[NumberFormat(pattern='(21)(\d{4})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['21'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[13-89]|2[02-9]'], national_prefix_formatting_rule=u'0\\1')])

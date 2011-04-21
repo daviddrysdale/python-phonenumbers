@@ -1,0 +1,26 @@
+"""Auto-generated file, do not edit by hand. MX metadata"""
+from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+
+PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix='0[09]',
+    general_desc=PhoneNumberDesc(national_number_pattern=u'[1-9]\d{9,10}', possible_number_pattern=u'\d{7,11}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern=u'(?:33|55|81)\d{8}|(?:2(?:2[2-9]|3[1-35-8]|4[13-9]|7[1-689]|8[1-58]|9[467])|3(?:1[1-79]|[2458][1-9]|7[1-8]|9[1-5])|4(?:1[1-57-9]|[24-6][1-9]|[37][1-8]|8[1-35-9]|9[2-689])|5(?:88|9[1-79])|6(?:1[2-68]|[234][1-9]|5[1-3689]|6[12457-9]|7[1-7]|8[67]|9[4-8])|7(?:[13467][1-9]|2[1-8]|5[13-9]|8[1-69]|9[17])|8(?:2[13-689]|3[1-6]|4[124-6]|6[1246-9]|7[1-378]|9[12479])|9(?:1[346-9]|2[1-4]|3[2-46-8]|5[1348]|[69][1-9]|7[12]|8[1-8]))\d{7}', possible_number_pattern=u'\d{7,10}', example_number=u'2221234567'),
+    mobile=PhoneNumberDesc(national_number_pattern=u'1(?:(?:33|55|81)\d{8}|(?:2(?:2[2-9]|3[1-35-8]|4[13-9]|7[1-689]|8[1-58]|9[467])|3(?:1[1-79]|[2458][1-9]|7[1-8]|9[1-5])|4(?:1[1-57-9]|[24-6][1-9]|[37][1-8]|8[1-35-9]|9[2-689])|5(?:88|9[1-79])|6(?:1[2-68]|[2-4][1-9]|5[1-3689]|6[12457-9]|7[1-7]|8[67]|9[4-8])|7(?:[13467][1-9]|2[1-8]|5[13-9]|8[1-69]|9[17])|8(?:2[13-689]|3[1-6]|4[124-6]|6[1246-9]|7[1-378]|9[12479])|9(?:1[346-9]|2[1-4]|3[2-46-8]|5[1348]|[69][1-9]|7[12]|8[1-8]))\d{7})', possible_number_pattern=u'\d{11}', example_number=u'12221234567'),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'800\d{7}', possible_number_pattern=u'\d{10}', example_number=u'8001234567'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'900\d{7}', possible_number_pattern=u'\d{10}', example_number=u'9001234567'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    national_prefix=u'01',
+    national_prefix_for_parsing=u'0[12]|04[45](\d{10})',
+    national_prefix_transform_rule=u'1\\1',
+    number_format=[NumberFormat(pattern='([358]\d)(\d{4})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['33|55|81'], national_prefix_formatting_rule=u'01 \\1'),
+        NumberFormat(pattern='(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2467]|3[12457-9]|5[89]|8[02-9]|9[0-35-9]'], national_prefix_formatting_rule=u'01 \\1'),
+        NumberFormat(pattern='1([358]\d)(\d{4})(\d{4})', format=u'045 \\1 \\2 \\3', leading_digits_pattern=['1(?:33|55|81)'], national_prefix_formatting_rule=u'\\1'),
+        NumberFormat(pattern='1(\d{3})(\d{3})(\d{4})', format=u'045 \\1 \\2 \\3', leading_digits_pattern=['1(?:[2467]|3[12457-9]|5[89]|8[2-9]|9[1-35-9])'], national_prefix_formatting_rule=u'\\1')],
+    intl_number_format=[NumberFormat(pattern='([358]\d)(\d{4})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['33|55|81'], national_prefix_formatting_rule=u'01 \\1'),
+        NumberFormat(pattern='(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2467]|3[12457-9]|5[89]|8[02-9]|9[0-35-9]'], national_prefix_formatting_rule=u'01 \\1'),
+        NumberFormat(pattern='(1)([358]\d)(\d{4})(\d{4})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:33|55|81)'], national_prefix_formatting_rule=u'01 \\1'),
+        NumberFormat(pattern='(1)(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:[2467]|3[12457-9]|5[89]|8[2-9]|9[1-35-9])'], national_prefix_formatting_rule=u'01 \\1')])

@@ -1,0 +1,20 @@
+"""Auto-generated file, do not edit by hand. MD metadata"""
+from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+
+PHONE_METADATA_MD = PhoneMetadata(id='MD', country_code=373, international_prefix='00',
+    general_desc=PhoneNumberDesc(national_number_pattern=u'[256-9]\d{7}', possible_number_pattern=u'\d{8}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern=u'(?:2(?:1[0569]|2\d|3[015-7]|4[1-46-9]|5[0-24689]|6[2-589]|7[1-37]|9[1347-9])|5(?:33|5[257]))\d{5}', possible_number_pattern=u'\d{5,8}', example_number=u'22212345'),
+    mobile=PhoneNumberDesc(national_number_pattern=u'(?:6(?:50|7[12]|[89]\d)|7(?:80|9\d))\d{5}', possible_number_pattern=u'\d{8}', example_number=u'65012345'),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'800\d{5}', possible_number_pattern=u'\d{8}', example_number=u'80012345'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'900\d{5}', possible_number_pattern=u'\d{8}', example_number=u'90012345'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    national_prefix=u'0',
+    national_prefix_for_parsing=u'0',
+    number_format=[NumberFormat(pattern='(22)(\d{3})(\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['22'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='([25-7]\d{2})(\d{2})(\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2[13-79]|[5-7]'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='([89]00)(\d{5})', format=u'\\1 \\2', leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u'0\\1')])

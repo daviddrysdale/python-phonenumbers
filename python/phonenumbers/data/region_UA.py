@@ -1,0 +1,20 @@
+"""Auto-generated file, do not edit by hand. UA metadata"""
+from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+
+PHONE_METADATA_UA = PhoneMetadata(id='UA', country_code=380, international_prefix='0~0',
+    general_desc=PhoneNumberDesc(national_number_pattern=u'[3-689]\d{8}', possible_number_pattern=u'\d{5,9}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern=u'(?:3[1-8]|4[13-8]|5[1-7]|6[12459])\d{7}', possible_number_pattern=u'\d{5,9}', example_number=u'311234567'),
+    mobile=PhoneNumberDesc(national_number_pattern=u'(?:39|50|6[36-8]|9[1-9])\d{7}', possible_number_pattern=u'\d{9}', example_number=u'391234567'),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'800\d{6}', possible_number_pattern=u'\d{9}', example_number=u'800123456'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'900\d{6}', possible_number_pattern=u'\d{9}', example_number=u'900123456'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    national_prefix=u'0',
+    national_prefix_for_parsing=u'0',
+    number_format=[NumberFormat(pattern='([3-69]\d)(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['39|4(?:[45][0-5]|87)|5(?:0|6[37]|7[37])|6[36-8]|9[1-9]', '39|4(?:[45][0-5]|87)|5(?:0|6(?:3[14-7]|7)|7[37])|6[36-8]|9[1-9]'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='([3-689]\d{2})(\d{3})(\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['3[1-8]2|4[1378]2|5(?:[12457]2|6[24])|6(?:[49]2|[12][29]|5[24])|8|90', '3(?:[1-46-8]2[013-9]|52)|4[1378]2|5(?:[12457]2|6[24])|6(?:[49]2|[12][29]|5[24])|8|90'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='([3-6]\d{3})(\d{5})', format=u'\\1 \\2', leading_digits_pattern=['3(?:5[013-9]|[1-46-8])|4(?:[137][013-9]|6|[45][6-9]|8[4-6])|5(?:[1245][013-9]|6[0135-9]|3|7[4-6])|6(?:[49][013-9]|5[0135-9]|[12][13-8])', '3(?:5[013-9]|[1-46-8](?:22|[013-9]))|4(?:[137][013-9]|6|[45][6-9]|8[4-6])|5(?:[1245][013-9]|6(?:3[02389]|[015689])|3|7[4-6])|6(?:[49][013-9]|5[0135-9]|[12][13-8])'], national_prefix_formatting_rule=u'0\\1')])

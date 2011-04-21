@@ -1,0 +1,18 @@
+"""Auto-generated file, do not edit by hand. GR metadata"""
+from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+
+PHONE_METADATA_GR = PhoneMetadata(id='GR', country_code=30, international_prefix='00',
+    general_desc=PhoneNumberDesc(national_number_pattern=u'[26-9]\d{9}', possible_number_pattern=u'\d{10}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern=u'2(?:1\d{2}|2(?:3[1-8]|4[1-7]|5[1-4]|6[1-8]|7[1-5]|[289][1-9])|3(?:1\d|2[1-5]|3[1-4]|[45][1-3]|7[1-7]|8[1-6]|9[1-79])|4(?:1\d|2[1-8]|3[1-4]|4[13-5]|6[1-578]|9[1-5])|5(?:1\d|2[1-3]|4[124]|5[1-6]|[39][1-4])|6(?:1\d|3[24]|4[1-7]|5[13-9]|[269][1-6]|7[14]|8[1-35])|7(?:1\d|[23][1-5]|4[1-7]|5[1-57]|6[134]|9[15-7])|8(?:1\d|2[1-5]|[34][1-4]|9[1-7]))\d{6}', possible_number_pattern=u'\d{10}', example_number=u'2123456789'),
+    mobile=PhoneNumberDesc(national_number_pattern=u'69\d{8}', possible_number_pattern=u'\d{10}', example_number=u'6912345678'),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'800\d{7}', possible_number_pattern=u'\d{10}', example_number=u'8001234567'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'90[19]\d{7}', possible_number_pattern=u'\d{10}', example_number=u'9091234567'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'8(?:0[16]|12|25)\d{7}', possible_number_pattern=u'\d{10}', example_number=u'8011234567'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'70\d{8}', possible_number_pattern=u'\d{10}', example_number=u'7012345678'),
+    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    number_format=[NumberFormat(pattern='([27]\d)(\d{4})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['21|7']),
+        NumberFormat(pattern='(\d{3})(\d{3})(\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2[2-9]1|[689]']),
+        NumberFormat(pattern='(2\d{3})(\d{6})', format=u'\\1 \\2', leading_digits_pattern=['2[2-9][02-9]'])])
