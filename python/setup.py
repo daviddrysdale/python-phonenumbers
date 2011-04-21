@@ -30,7 +30,7 @@ if not python_24:
     raise RuntimeError("Python 2.4 or newer is required")
 
 distutils.core.setup(name='phonenumbers',
-                     version='3.1a1',
+                     version='3.2a1',
                      description="Python version of Google's common library for parsing, formatting, storing and validating international phone numbers.",
                      author='David Drysdale',
                      author_email='dmd@lurklurk.org',
