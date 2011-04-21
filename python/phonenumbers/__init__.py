@@ -6,6 +6,8 @@ Examples of use:
 >>> x = phonenumbers.parse("+442083661177", None)
 >>> print x
 Country Code: 44 National Number: 2083661177 Leading Zero: False
+>>> type(x)
+<class 'phonenumbers.phonenumber.PhoneNumber'>
 >>> phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.NATIONAL)
 u'020 8366 1177'
 >>> phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
@@ -40,15 +42,18 @@ True
 >>> print formatter.input_digit("2")
 (650) 253-2222
 >>>
->>> text = "Call me at 510-748-8230 some time after 9:30."
->>>
 >>> text = "Call me at 510-748-8230 if it's before 9:30, or on 703-4800500 after 10am."
 >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
 ...     print match
 ... 
 PhoneNumberMatch [11,23) 510-748-8230
 PhoneNumberMatch [51,62) 703-4800500
-
+>>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
+...     print phonenumbers.format_number(match.number, phonenumbers.PhoneNumberFormat.E164)
+... 
++15107488230
++17034800500
+>>>
 """
 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -74,3 +79,7 @@ from phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 from asyoutypeformatter import AsYouTypeFormatter
 from phonenumberutil import *
 from phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher
+
+if __name__ == '__main__':  # pragma no cover
+    import doctest
+    doctest.testmod()
