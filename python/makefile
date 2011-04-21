@@ -28,6 +28,7 @@ TARBALL=dist/phonenumbers-$(VERSION).tar.gz
 # Build setuptools packaged tarball $(TARBALL)
 sdist: 
 	python setup.py sdist
+$(TARBALL): sdist
 
 install:
 	sudo python setup.py install
