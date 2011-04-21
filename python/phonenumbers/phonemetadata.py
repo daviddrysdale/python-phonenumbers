@@ -1,0 +1,401 @@
+"""PhoneMetaData object definitions"""
+
+# Based on original Java code and protocol buffer:
+#     resources/phonemetadata.proto
+#     java/src/com/google/i18n/phonenumbers/Phonemetadata.java
+#   Copyright (C) 2010-2011 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+class NumberFormat(object):
+    """Representation of way that a phone number can be formatted for output"""
+    def __init__(self,
+                 pattern=None,
+                 format=None,
+                 leading_digits_pattern=None,
+                 national_prefix_formatting_rule=None,
+                 domestic_carrier_code_formatting_rule=None):
+        # pattern is a regex that is used to match the national (significant)
+        # number. For example, the pattern "(20)(\d{4})(\d{4})" will match
+        # number "2070313000", which is the national (significant) number for
+        # Google London. Note the presence of the parentheses, which are
+        # capturing groups what specifies the grouping of numbers.
+        self.pattern = pattern  # None or Unicode string holding regexp
+
+        # format specifies how the national (significant) number matched by
+        # pattern should be formatted. Using the same example as above, format
+        # could contain "$1 $2 $3", meaning that the number should be
+        # formatted as "20 7031 3000". Each $x is replaced by the numbers
+        # captured by group x in the regex specified by pattern.
+        self.format = format  # None or Unicode string
+
+        # This field is a regex that is used to match a certain number of
+        # digits at the beginning of the national (significant) number. When
+        # the match is successful, the accompanying pattern and format should
+        # be used to format this number. For example, if
+        # leading_digits="[1-3]|44", then all the national numbers starting
+        # with 1, 2, 3 or 44 should be formatted using the accompanying
+        # pattern and format.
+        #
+        # The first leading_digits_pattern matches up to the first three digits
+        # of the national (significant) number; the next one matches the first
+        # four digits, then the first five and so on, until the
+        # leading_digits_pattern can uniquely identify one pattern and format
+        # to be used to format the number.
+        #
+        # In the case when only one formatting pattern exists, no
+        # leading_digits_pattern is needed.
+        self.leading_digits_pattern = []  # list of Unicode strings holding regexps
+        if leading_digits_pattern is not None:
+            self.leading_digits_pattern = leading_digits_pattern
+
+        # This field specifies how the national prefix ($NP) together with the
+        # first group ($FG) in the national significant number should be
+        # formatted in the NATIONAL format when a national prefix exists for a
+        # certain country. For example, when this field contains "($NP$FG)", a
+        # number from Beijing, China (whose $NP = 0), which would by default
+        # be formatted without national prefix as 10 1234 5678 in NATIONAL
+        # format, will instead be formatted as (010) 1234 5678; to format it
+        # as (0)10 1234 5678, the field would contain "($NP)$FG". Note $FG
+        # should always be present in this field, but $NP can be omitted. For
+        # example, having "$FG" could indicate the number should be formatted
+        # in NATIONAL format without the national prefix. This is commonly
+        # used to override the rule from general_desc.
+        #
+        # When this field is missing, a number will be formatted without
+        # national prefix in NATIONAL format. This field does not affect how a
+        # number is formatted in other formats, such as INTERNATIONAL.
+        self.national_prefix_formatting_rule = national_prefix_formatting_rule  # None or Unicode string
+
+        # This field specifies how any carrier code ($CC) together with the
+        # first group ($FG) in the national significant number should be
+        # formatted when format_with_carrier_code is called, if carrier codes
+        # are used for a certain country.
+        self.domestic_carrier_code_formatting_rule = domestic_carrier_code_formatting_rule  # None or Unicode string
+
+    def merge_from(self, other):
+        """Merge information from another NumberFormat object into this one."""
+        if other.pattern is not None:
+            self.pattern = other.pattern
+        if other.format is not None:
+            self.format = other.format
+        self.leading_digits_pattern.extend(other.leading_digits_pattern)
+        if other.national_prefix_formatting_rule is not None:
+            self.national_prefix_formatting_rule = other.national_prefix_formatting_rule
+        if other.domestic_carrier_code_formatting_rule is not None:
+            self.domestic_carrier_code_formatting_rule = other.domestic_carrier_code_formatting_rule
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+    def __unicode__(self):
+        # Generate a string that is valid Python input for the constructor
+        # Note that we use %r on self.format, which generates its own quotes
+        result = u"NumberFormat(pattern='%s', format=%r" % (self.pattern, self.format)
+        if len(self.leading_digits_pattern) > 0:
+            result += (u", leading_digits_pattern=[%s]" %
+                       ", ".join(["'%s'" % ld for ld in self.leading_digits_pattern]))
+        if self.national_prefix_formatting_rule is not None:
+            # Note that we use %r on self.national_prefix_formatting_rule, which generates its own quotes
+            result += u", national_prefix_formatting_rule=%r" % self.national_prefix_formatting_rule
+        if self.domestic_carrier_code_formatting_rule is not None:
+            # Note that we use %r on self.domestic_carrier_code_formatting_rule, which generates its own quotes
+            result += u", domestic_carrier_code_formatting_rule=%r" % self.domestic_carrier_code_formatting_rule
+        result += u")"
+        return result
+
+
+class PhoneNumberDesc(object):
+    """Class representing the description of a set of phone numbers."""
+
+    def __init__(self,
+                 national_number_pattern=None,
+                 possible_number_pattern=None,
+                 example_number=None):
+        # The national_number_pattern is the pattern that a valid national
+        # significant number would match. This specifies information such as
+        # its total length and leading digits.
+        self.national_number_pattern = national_number_pattern  # None or Unicode string holding regexp
+
+        # The possible_number_pattern represents what a potentially valid
+        # phone number for this region may be written as. This is a superset
+        # of the national_number_pattern above and includes numbers that have
+        # the area code omitted. Typically the only restrictions here are in
+        # the number of digits.  This could be used to highlight tokens in a
+        # text that may be a phone number, or to quickly prune numbers that
+        # could not possibly be a phone number for this locale.
+        self.possible_number_pattern = possible_number_pattern  # None or Unicode string holding regexp
+
+        # An example national significant number for the specific type. It
+        # should not contain any formatting information.
+        self.example_number = example_number  # None or Unicode string
+
+    def merge_from(self, other):
+        """Merge information from another PhoneNumberDesc object into this one."""
+        if other.national_number_pattern is not None:
+            self.national_number_pattern = other.national_number_pattern
+        if other.possible_number_pattern is not None:
+            self.possible_number_pattern = other.possible_number_pattern
+        if other.example_number is not None:
+            self.example_number = other.example_number
+
+    def __eq__(self, other):
+        return (self.national_number_pattern == other.national_number_pattern and
+                self.possible_number_pattern == other.possible_number_pattern and
+                self.example_number == other.example_number)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+    def __unicode__(self):
+        # Generate a string that is valid Python input for constructor
+        result = u"PhoneNumberDesc("
+        sep = u""
+        if self.national_number_pattern is not None:
+            result += u"%snational_number_pattern=u'%s'" % (sep, self.national_number_pattern)
+            sep = u", "
+        if self.possible_number_pattern is not None:
+            result += u"%spossible_number_pattern=u'%s'" % (sep, self.possible_number_pattern)
+            sep = u", "
+        if self.example_number is not None:
+            result += u"%sexample_number=u'%s'" % (sep, self.example_number)
+            sep = u", "
+        result += u")"
+        return result
+
+
+class PhoneMetadata(object):
+    """Class representing metadata for international telephone numbers for a region.
+
+    This class is hand created based on phonemetadata.proto. Please refer to that file
+    for detailed descriptions of the meaning of each field.
+    """
+    region_metadata = {}  # country code => PhoneMetadata
+
+    def __init__(self,
+                 id,
+                 general_desc=None,
+                 fixed_line=None,
+                 mobile=None,
+                 toll_free=None,
+                 premium_rate=None,
+                 shared_cost=None,
+                 personal_number=None,
+                 voip=None,
+                 pager=None,
+                 uan=None,
+                 no_international_dialling=None,
+                 country_code=None,
+                 international_prefix=None,
+                 preferred_international_prefix=None,
+                 national_prefix=None,
+                 preferred_extn_prefix=None,
+                 national_prefix_for_parsing=None,
+                 national_prefix_transform_rule=None,
+                 number_format=None,
+                 intl_number_format=None,
+                 main_country_for_code=False,
+                 leading_digits=None,
+                 leading_zero_possible=False,
+                 register=True):
+        # The general_desc contains information which is a superset of
+        # descriptions for all types of phone numbers. If any element is
+        # missing in the description of a specific type of number, the element
+        # will inherit from its counterpart in the general_desc. Every locale
+        # is assumed to have fixed line and mobile numbers - if these types
+        # are missing altogether, they will inherit all fields from the
+        # general_desc. For all other types, if the whole type is missing, it
+        # will be given a national_number_pattern of "NA" and a
+        # possible_number_pattern of "NA".
+        self.general_desc = general_desc  # None or PhoneNumberDesc
+        self.fixed_line = fixed_line  # None or PhoneNumberDesc
+        self.mobile = mobile  # None or PhoneNumberDesc
+        self.toll_free = toll_free  # None or PhoneNumberDesc
+        self.premium_rate = premium_rate  # None or PhoneNumberDesc
+        self.shared_cost = shared_cost  # None or PhoneNumberDesc
+        self.personal_number = personal_number  # None or PhoneNumberDesc
+        self.voip = voip  # None or PhoneNumberDesc
+        self.pager = pager  # None or PhoneNumberDesc
+        self.uan = uan  # None or PhoneNumberDesc
+
+        # The rules here distinguish the numbers that are only able to be
+        # dialled nationally.
+        self.no_international_dialling = no_international_dialling  # None or PhoneNumberDesc
+
+        # The ISO 3166-1 alpha-2 representation of a country/region
+        self.id = id  # None or Unicode string
+
+        # The country calling code that one would dial from overseas when
+        # trying to dial a phone number in this country. For example, this
+        # would be "64" for New Zealand.
+        self.country_code = country_code  # None or int
+
+        # The international_prefix of country A is the number that needs to be
+        # dialled from country A to another country (country B). This is
+        # followed by the country code for country B. Note that some countries
+        # may have more than one international prefix, and for those cases, a
+        # regular expression matching the international prefixes will be
+        # stored in this field.
+        self.international_prefix = international_prefix  # None or Unicode string
+
+        # If more than one international prefix is present, a preferred prefix
+        # can be specified here for out-of-country formatting purposes. If
+        # this field is not present, and multiple international prefixes are
+        # present, then "+" will be used instead.
+        self.preferred_international_prefix = preferred_international_prefix  # None or Unicode string
+
+        # The national prefix of country A is the number that needs to be
+        # dialled before the national significant number when dialling
+        # internally. This would not be dialled when dialling
+        # internationally. For example, in New Zealand, the number that would
+        # be locally dialled as 09 345 3456 would be dialled from overseas as
+        # +64 9 345 3456. In this case, 0 is the national prefix.
+        self.national_prefix = national_prefix  # None or Unicode string
+
+        # The preferred prefix when specifying an extension in this
+        # country. This is used for formatting only, and if this is not
+        # specified, a suitable default should be used instead. For example,
+        # if you wanted extensions to be formatted in the following way: 1
+        # (365) 345 445 ext. 2345 " ext. "  should be the preferred extension
+        # prefix.
+        self.preferred_extn_prefix = preferred_extn_prefix  # None or Unicode string
+
+        # This field is used for cases where the national prefix of a country
+        # contains a carrier selection code, and is written in the form of a
+        # regular expression. For example, to dial the number 2222-2222 in
+        # Fortaleza, Brazil (area code 85) using the long distance carrier Oi
+        # (selection code 31), one would dial 0 31 85 2222 2222. Assuming the
+        # only other possible carrier selection code is 32, the field will
+        # contain "03[12]".
+        #
+        # When it is missing, this field inherits the value of national_prefix,
+        # if that is present.
+        self.national_prefix_for_parsing = national_prefix_for_parsing  # None or Unicode string holding regexp
+
+        # This field is only populated and used under very rare situations.
+        # For example, mobile numbers in Argentina are written in two
+        # completely different ways when dialed in-country and out-of-country
+        # (e.g. 0343 15 555 1212 is exactly the same number as +54 9 343 555
+        # 1212).  This field is used together with national_prefix_for_parsing
+        # to transform the number into a particular representation for storing
+        # in the PhoneNumber class in those rare cases.
+        self.national_prefix_transform_rule = national_prefix_transform_rule  # None or Unicode string
+
+        # Specifies whether the mobile and fixed-line patterns are the same or
+        # not.  This is used to speed up determining phone number type in
+        # countries where these two types of phone numbers can never be
+        # distinguished.
+        self.same_mobile_and_fixed_line_pattern = (self.mobile == self.fixed_line)
+
+        # Note that the number format here is used for formatting only, not
+        # parsing.  Hence all the varied ways a user *may* write a number need
+        # not be recorded - just the ideal way we would like to format it for
+        # them. When this element is absent, the national significant number
+        # will be formatted as a whole without any formatting applied.
+        self.number_format = []  # List of NumberFormat objects
+        if number_format is not None:
+            self.number_format = number_format
+
+        # This field is populated only when the national significant number is
+        # formatted differently when it forms part of the INTERNATIONAL format
+        # and NATIONAL format. A case in point is mobile numbers in Argentina:
+        # The number, which would be written in INTERNATIONAL format as
+        # +54 9 343 555 1212, will be written as 0343 15 555 1212 for NATIONAL
+        # format. In this case, the prefix 9 is inserted when dialling from
+        # overseas, but otherwise the prefix 0 and the carrier selection code
+        # 15 (inserted after the area code of 343) is used.
+        self.intl_number_format = []  # List of NumberFormat objects
+        if intl_number_format is not None:
+            self.intl_number_format = intl_number_format
+
+        # This field is set when this country is considered to be the main
+        # country for a calling code. It may not be set by more than one
+        # country with the same calling code, and it should not be set by
+        # countries with a unique calling code. This can be used to indicate
+        # that "GB" is the main country for the calling code "44" for example,
+        # rather than Jersey or the Isle of Man.
+        self.main_country_for_code = main_country_for_code  # bool
+
+        # This field is populated only for countries or regions that share a
+        # country calling code. If a number matches this pattern, it could
+        # belong to this region. This is not intended as a replacement for
+        # is_valid_for_region, and does not mean the number must come from this
+        # region (for example, 800 numbers are valid for all NANPA countries.)
+        # This field should be a regular expression of the expected prefix
+        # match.
+        self.leading_digits = leading_digits  # None or Unicode string holding regexp
+
+        # The leading zero in a phone number is meaningful in some countries
+        # (e.g.  Italy). This means they cannot be dropped from the national
+        # number when converting into international format. If leading zeros
+        # are possible for valid international numbers for this region/country
+        # then set this to true.  This only needs to be set for the region
+        # that is the main_country_for_code and all regions associated with
+        # that calling code will use the same setting.
+        self.leading_zero_possible = leading_zero_possible  # bool
+
+        if register:
+            # Register this instance with the class-wide map
+            if self.id in PhoneMetadata.region_metadata:
+                raise Exception("Duplicate PhoneMetadata for %s" % self.id)
+            PhoneMetadata.region_metadata[self.id] = self
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+    def __unicode__(self):
+        # Generate a string that is valid Python input for the constructor
+        country_code = self.country_code
+        if country_code is None:
+            country_code = -1
+        result = (u"PhoneMetadata(id='%s', country_code=%d, international_prefix='%s'" %
+                  (self.id, country_code, self.international_prefix))
+        result += ",\n    general_desc=%s" % self.general_desc
+        result += ",\n    fixed_line=%s" % self.fixed_line
+        result += ",\n    mobile=%s" % self.mobile
+        result += ",\n    toll_free=%s" % self.toll_free
+        result += ",\n    premium_rate=%s" % self.premium_rate
+        result += ",\n    shared_cost=%s" % self.shared_cost
+        result += ",\n    personal_number=%s" % self.personal_number
+        result += ",\n    voip=%s" % self.voip
+        result += ",\n    pager=%s" % self.pager
+        result += ",\n    uan=%s" % self.uan
+        result += ",\n    no_international_dialling=%s" % self.no_international_dialling
+
+        if self.preferred_international_prefix is not None:
+            result += ",\n    preferred_international_prefix=u'%s'" % self.preferred_international_prefix
+        if self.national_prefix is not None:
+            result += ",\n    national_prefix=u'%s'" % self.national_prefix
+        if self.preferred_extn_prefix is not None:
+            result += ",\n    preferred_extn_prefix=u'%s'" % self.preferred_extn_prefix
+        if self.national_prefix_for_parsing is not None:
+            result += ",\n    national_prefix_for_parsing=u'%s'" % self.national_prefix_for_parsing
+        if self.national_prefix_transform_rule is not None:
+            # Note that we use %r on self.national_prefix_transform_rule, which generates its own quotes
+            result += ",\n    national_prefix_transform_rule=%r" % self.national_prefix_transform_rule
+        if len(self.number_format) > 0:
+            result += ",\n    number_format=[%s]" % ',\n        '.join(map(unicode, self.number_format))
+        if len(self.intl_number_format) > 0:
+            result += ",\n    intl_number_format=[%s]" % ',\n        '.join(map(unicode, self.intl_number_format))
+        if self.main_country_for_code:
+            result += ",\n    main_country_for_code=True"
+        if self.leading_digits is not None:
+            result += ",\n    leading_digits='%s'" % self.leading_digits
+        if self.leading_zero_possible:
+            result += ",\n    leading_zero_possible=True"
+        result += u")"
+        return result

@@ -1,0 +1,427 @@
+"""A formatter which formats phone numbers as they are entered.
+
+An AsYouTypeFormatter can be created by invoking
+AsYouTypeFormatter(region_code). After that digits can be added by invoking
+input_digit() on the formatter instance, and the partially formatted phone
+number will be returned each time a digit is added. clear() should be invoked
+before a new number needs to be formatted.
+
+See the unit tests for more details on how the formatter is to be used.
+"""
+
+# Based on original Java code:
+#     java/src/com/google/i18n/phonenumbers/AsYouTypeFormatter.java
+#   Copyright (C) 2009-2011 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import re
+from re_util import fullmatch
+
+from phonemetadata import PhoneMetadata
+from phonenumberutil import _VALID_START_CHAR_PATTERN, _DIGIT_MAPPINGS, _PLUS_SIGN
+from phonenumberutil import _extract_country_code, region_code_for_country_code
+
+_EMPTY_METADATA = PhoneMetadata(id="", international_prefix="NA", register=False)
+
+# A pattern that is used to match character classes in regular expressions. An
+# example of a character class is [1-4].
+_CHARACTER_CLASS_PATTERN = re.compile("\\[([^\\[\\]])*\\]")
+# Any digit in a regular expression that actually denotes a digit. For
+# example, in the regular expression 80[0-2]\d{6,10}, the first 2 digits (8
+# and 0) are standalone digits, but the rest are not.
+# Two look-aheads are needed because the number following \\d could be a
+# two-digit number, since the phone number can be as long as 15 digits.
+_STANDALONE_DIGIT_PATTERN = re.compile("\\d(?=[^,}][^,}])")
+
+# This is the minimum length of national number accrued that is required to
+# trigger the formatter. The first element of the leadingDigitsPattern of each
+# numberFormat contains a regular expression that matches up to this number of
+# digits.
+_MIN_LEADING_DIGITS_LENGTH = 3
+# The digits that have not been entered yet will be represented by a \u2008,
+# the punctuation space.
+_DIGIT_PLACEHOLDER = u"\u2008"
+_DIGIT_PATTERN = re.compile(_DIGIT_PLACEHOLDER)
+
+
+class AsYouTypeFormatter(object):
+    def __init__(self, region_code):
+        """Gets an AsYouTypeFormatter for the specific region.
+
+        Arguments:
+
+        region_code -- The ISO 3166-1 two-letter region code that denotes the region where
+              the phone number is being entered
+
+        Return an AsYouTypeFormatter} object, which could be used to format
+        phone numbers in the specific region "as you type"
+        """
+        self._clear()
+        self._default_country = region_code.upper()
+        # If needed, set to a default instance of the metadata. This allows us
+        # to function with an incorrect region code, even if formatting only
+        # works for numbers specified with "+".
+        self._current_metadata = PhoneMetadata.region_metadata.get(self._default_country, _EMPTY_METADATA)
+        self._default_metadata = self._current_metadata
+
+    def _maybe_create_new_template(self):
+        """Returns True if a new template is created as opposed to reusing the existing template.
+
+        When there are multiple available formats, the formatter uses the
+        first format where a formatting template could be created.
+        """
+        for number_format in self._possible_formats:
+            pattern = number_format.pattern
+            if self._current_formatting_pattern == pattern:
+                return False
+            if self._create_formatting_template(number_format):
+                self._current_formatting_pattern = pattern
+                return True
+        self._able_to_format = False
+        return False
+
+    def _get_available_formats(self, leading_three_digits):
+        if (self._is_international_formatting and
+            len(self._current_metadata.intl_number_format) > 0):
+            format_list = self._current_metadata.intl_number_format
+        else:
+            format_list = self._current_metadata.number_format
+        self._possible_formats.extend(format_list)
+        self._narrow_down_possible_formats(leading_three_digits)
+
+    def _narrow_down_possible_formats(self, leading_digits):
+        index_of_leading_digits_pattern = len(leading_digits) - _MIN_LEADING_DIGITS_LENGTH
+        ii = 0
+        while ii < len(self._possible_formats):
+            format = self._possible_formats[ii]
+            ii += 1
+            if len(format.leading_digits_pattern) > index_of_leading_digits_pattern:
+                leading_digits_pattern = re.compile(format.leading_digits_pattern[index_of_leading_digits_pattern])
+                m = leading_digits_pattern.match(leading_digits)
+                if not m:
+                    # remove the element we've just examined, now at (ii-1)
+                    ii -= 1
+                    self._possible_formats.pop(ii)
+            else:
+                # The particular format has no more specific
+                # leading_digits_pattern, and it should be retained.
+                pass
+
+    def _create_formatting_template(self, num_format):
+        number_pattern = num_format.pattern
+
+        # The formatter doesn't format numbers when numberPattern contains
+        # "|", e.g.  (20|3)\d{4}. In those cases we quickly return.
+        if number_pattern.find('|') != -1:
+            return False
+
+        # Replace anything in the form of [..] with \d
+        number_pattern = re.sub(_CHARACTER_CLASS_PATTERN, "\\\\d", number_pattern)
+
+        # Replace any standalone digit (not the one in d{}) with \d
+        number_pattern = re.sub(_STANDALONE_DIGIT_PATTERN, "\\\\d", number_pattern)
+        self.formatting_template = ""
+        temp_template = self._get_formatting_template(number_pattern, num_format.format)
+        if len(temp_template) > len(self._national_number):
+            self._formatting_template = temp_template
+            return True
+        return False
+
+    def _get_formatting_template(self, number_pattern, number_format):
+        """Gets a formatting template which could be used to efficiently
+        format a partial number where digits are added one by one."""
+        # Create a phone number consisting only of the digit 9 that matches the
+        # number_pattern by applying the pattern to the longest_phone_number string.
+        longest_phone_number = "999999999999999"
+        number_re = re.compile(number_pattern)
+        m = number_re.search(longest_phone_number)  # this will always succeed
+        a_phone_number = m.group(0)
+
+        # Formats the number according to number_format
+        template = re.sub(number_pattern, number_format, a_phone_number)
+        # Replaces each digit with character _DIGIT_PLACEHOLDER
+        template = re.sub("9", _DIGIT_PLACEHOLDER, template)
+        return template
+
+    def _clear(self):
+        """Clears the internal state of the formatter, so it can be reused."""
+        self._current_output = ""
+        self._accrued_input = ""
+        self._accrued_input_without_formatting = ""
+        self._formatting_template = ""
+        self._last_match_position = 0
+
+        # The pattern from numberFormat that is currently used to create formatting_template.
+        self._current_formatting_pattern = ""
+        self._prefix_before_national_number = ""
+        self._national_number = ""
+        self._able_to_format = True
+        # The position of a digit upon which input_digit_and_remember_position is
+        # most recently invoked, as found in accrued_input_without_formatting.
+        self._position_to_remember = 0
+        # The position of a digit upon which input_digit_and_remember_position is
+        # most recently invoked, as found in the original sequence of
+        # characters the user entered.
+        self._original_position = 0
+        self._is_international_formatting = False
+        self._is_expecting_country_calling_code = False
+        self._possible_formats = []
+
+    def clear(self):
+        self._clear()
+        if self._current_metadata != self._default_metadata:
+            self._current_metadata = PhoneMetadata.region_metadata.get(self._default_country, _EMPTY_METADATA)
+
+    def input_digit(self, next_char, remember_position=False):
+        """Formats a phone number on-the-fly as each digit is entered.
+
+        If remember_position is set, remembers the position where next_char is
+        inserted, so that it could be retrieved later by using
+        get_remembered_position. The remembered position will be automatically
+        adjusted if additional formatting characters are later
+        inserted/removed in front of next_char.
+
+        Arguments:
+
+        next_char -- The most recently entered digit of a phone
+              number. Formatting characters are allowed, but as soon as they
+              are encountered this method formats the number as entered and
+              not "as you type" anymore. Full width digits and Arabic-indic
+              digits are allowed, and will be shown as they are.
+        remember_position -- Whether to track the position where next_char is
+              inserted.
+
+        Returns the partially formatted phone number.
+        """
+        self._accrued_input += next_char
+        if remember_position:
+            self._original_position = len(self._accrued_input)
+        # We do formatting on-the-fly only when each character entered is
+        # either a plus sign or a digit.
+        if not fullmatch(_VALID_START_CHAR_PATTERN, next_char):
+            self._able_to_format = False
+        if not self._able_to_format:
+            self._current_output = self._accrued_input
+            return self._current_output
+
+        next_char = self._normalize_and_accrue_digits_and_plus_sign(next_char, remember_position)
+
+        # We start to attempt to format only when at least
+        # MIN_LEADING_DIGITS_LENGTH digits (the plus sign is counted as a
+        # digit as well for this purpose) have been entered.
+        len_input = len(self._accrued_input_without_formatting)
+        if len_input >= 0 and len_input <= 2:
+            self._current_output = self._accrued_input
+            return self._current_output
+        if len_input == 3:
+            if self._attempt_to_extract_idd():
+                self._is_expecting_country_calling_code = True
+            else:
+                # No IDD or plus sign is found, must be entering in national format.
+                self._remove_national_prefix_from_national_number()
+                self._current_output = self._attempt_to_choose_formatting_pattern()
+                return self._current_output
+        if len_input <= 5:
+            if self._is_expecting_country_calling_code:
+                if self._attempt_to_extract_ccc():
+                    self._is_expecting_country_calling_code = False
+                self._current_output = self._prefix_before_national_number + self._national_number
+                return self._current_output
+        if len_input <= 6:
+            # We make a last attempt to extract a country calling code at the
+            # 6th digit because the maximum length of IDD and country calling
+            # code are both 3.
+            if self._is_expecting_country_calling_code and not self._attempt_to_extract_ccc():
+                self._able_to_format = False
+                self._current_output = self._accrued_input
+                return self._current_output
+
+        if len(self._possible_formats) > 0:
+            # The formatting pattern is already chosen.
+            temp_national_number = self._input_digit_helper(next_char)
+            # See if the accrued digits can be formatted properly already. If
+            # not, use the results from inputDigitHelper, which does
+            # formatting based on the formatting pattern chosen.
+            formatted_number = self._attempt_to_format_accrued_digits()
+            if len(formatted_number) > 0:
+                self._current_output = formatted_number
+                return self._current_output
+            self._narrow_down_possible_formats(self._national_number)
+            if self._maybe_create_new_template():
+                self._current_output = self._input_accrued_national_number()
+                return self._current_output
+            if self._able_to_format:
+                self._current_output = self._prefix_before_national_number + temp_national_number
+                return self._current_output
+            else:
+                self._current_output = temp_national_number
+                return self._current_output
+        else:
+            self._current_output = self._attempt_to_choose_formatting_pattern()
+            return self._current_output
+
+    def _attempt_to_format_accrued_digits(self):
+        for num_format in self._possible_formats:
+            num_re = re.compile(num_format.pattern)
+            if fullmatch(num_re, self._national_number):
+                formatted_number = re.sub(num_re, num_format.format, self._national_number)
+                return self._prefix_before_national_number + formatted_number
+        return ""
+
+    def get_remembered_position(self):
+        """Returns the current position in the partially formatted phone
+        number of the character which was previously passed in as the
+        parameter of input_digit(remember_position=True)."""
+        if not self._able_to_format:
+            return self._original_position
+        accrued_input_index = 0
+        current_output_index = 0
+        while (accrued_input_index < self._position_to_remember and
+               current_output_index < len(self._current_output)):
+            if (self._accrued_input_without_formatting[accrued_input_index] ==
+                self._current_output[current_output_index]):
+                accrued_input_index += 1
+            current_output_index += 1
+        return current_output_index
+
+    def _attempt_to_choose_formatting_pattern(self):
+        """Attempts to set the formatting template and returns a string which
+        contains the formatted version of the digits entered so far."""
+        # We start to attempt to format only when as least MIN_LEADING_DIGITS_LENGTH digits of national
+        # number (excluding national prefix) have been entered.
+        if len(self._national_number) >= _MIN_LEADING_DIGITS_LENGTH:
+            self._get_available_formats(self._national_number[:_MIN_LEADING_DIGITS_LENGTH])
+            self._maybe_create_new_template()
+            return self._input_accrued_national_number()
+        else:
+            return self._prefix_before_national_number + self._national_number
+
+    def _input_accrued_national_number(self):
+        """Invokes inputDigitHelper on each digit of the national number
+        accrued, and returns a formatted string in the end."""
+        length_of_national_number = len(self._national_number)
+        if length_of_national_number > 0:
+            temp_national_number = ""
+            for ii in xrange(length_of_national_number):
+                temp_national_number = self._input_digit_helper(self._national_number[ii])
+            if self._able_to_format:
+                return self._prefix_before_national_number + temp_national_number
+            else:
+                return temp_national_number
+        else:
+            return self._prefix_before_national_number
+
+    def _remove_national_prefix_from_national_number(self):
+        start_of_national_number = 0
+        if self._current_metadata.country_code == 1 and self._national_number[0] == '1':
+            start_of_national_number = 1
+            self._prefix_before_national_number += "1 "
+            self._is_international_formatting = True
+        elif self._current_metadata.national_prefix is not None:
+            npp_re = re.compile(self._current_metadata.national_prefix_for_parsing)
+            m = npp_re.match(self._national_number)
+            if m:
+                # When the national prefix is detected, we use international
+                # formatting rules instead of national ones, because national
+                # formatting rules could contain local formatting rules for
+                # numbers entered without area code.
+                self._is_international_formatting = True
+                start_of_national_number = m.end()
+                self._prefix_before_national_number += self._national_number[:start_of_national_number]
+        self._national_number = self._national_number[start_of_national_number:]
+
+    def _attempt_to_extract_idd(self):
+        """Extracts IDD and plus sign to self._prefix_before_national_number
+        when they are available, and places the remaining input into
+        _national_number.
+
+        Returns True when accrued_input_without_formatting begins with the plus sign or valid IDD for
+        default_country.
+        """
+        international_prefix = re.compile("\\" + _PLUS_SIGN + "|" + self._current_metadata.international_prefix)
+        idd_match = international_prefix.match(self._accrued_input_without_formatting)
+        if idd_match:
+            self._is_international_formatting = True
+            start_of_country_calling_code = idd_match.end()
+            self._national_number = ""
+            self._national_number += self._accrued_input_without_formatting[start_of_country_calling_code:]
+            self._prefix_before_national_number += self._accrued_input_without_formatting[:start_of_country_calling_code]
+            if self._accrued_input_without_formatting[0] != _PLUS_SIGN:
+                self._prefix_before_national_number += " "
+            return True
+        return False
+
+    def _attempt_to_extract_ccc(self):
+        """Extracts the country calling code from the beginning of
+        _national_number to _prefix_before_national_number when they are
+        available, and places the remaining input into _national_number.
+
+        Returns True when a valid country calling code can be found.
+        """
+        if len(self._national_number) == 0:
+            return False
+
+        number_without_ccc = ""
+        country_code, number_without_ccc = _extract_country_code(self._national_number)
+        if country_code == 0:
+            return False
+
+        self._national_number = number_without_ccc
+        new_region_code = region_code_for_country_code(country_code)
+        if new_region_code != self._default_country:
+            self._current_metadata = PhoneMetadata.region_metadata.get(new_region_code, None)
+
+        self._prefix_before_national_number += str(country_code)
+        self._prefix_before_national_number += " "
+        return True
+
+    def _normalize_and_accrue_digits_and_plus_sign(self, next_char, remember_position):
+        """Accrues digits and the plus sign to
+        _accrued_input_without_formatting for later use. If next_char contains
+        a digit in non-ASCII format (e.g. the full-width version of digits),
+        it is first normalized to the ASCII version. The return value is
+        next_char itself, or its normalized version, if next_char is a digit
+        in non-ASCII format. This method assumes its input is either a digit
+        or the plus sign."""
+        if next_char == _PLUS_SIGN:
+            self._accrued_input_without_formatting += next_char
+        else:
+            next_char = _DIGIT_MAPPINGS[next_char]
+            self._accrued_input_without_formatting += next_char
+            self._national_number += next_char
+
+        if remember_position:
+            self._position_to_remember = len(self._accrued_input_without_formatting)
+
+        return next_char
+
+    def _input_digit_helper(self, next_char):
+        digit_match = _DIGIT_PATTERN.search(self._formatting_template, self._last_match_position)
+        if digit_match:
+            # Reset to search for _DIGIT_PLACEHOLDER from start of string
+            digit_match = _DIGIT_PATTERN.search(self._formatting_template)
+            temp_template = re.sub(_DIGIT_PATTERN,
+                                   next_char,
+                                   self._formatting_template,
+                                   count=1)
+            self._formatting_template = temp_template + self._formatting_template[len(temp_template):]
+            self._last_match_position = digit_match.start()
+            return self._formatting_template[:self._last_match_position + 1]
+        else:
+            if len(self._possible_formats) == 1:
+                # More digits are entered than we could handle, and there are
+                # no other valid patterns to try.
+                self._able_to_format = False
+            # else, we just reset the formatting pattern.
+            self._current_formatting_pattern = ""
+            return self._accrued_input

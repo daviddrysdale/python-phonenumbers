@@ -1,0 +1,99 @@
+phonenumbers Python Library
+
+This is a Python port of libphonenumber, originally from:
+  http://code.google.com/p/libphonenumber/.
+
+Original Java code is Copyright (C) 2009-2011 Google Inc.
+
+===========================
+phonenumbers Installation
+===========================
+
+Install using setup.py:
+  $ tar xfz phonenumbers-3.1a1.tar.gz
+  $ cd phonenumbers-3.1a1
+  $ python setup.py build
+  $ sudo python setup.py install # or su first
+
+
+===========================
+Running Tests
+===========================
+
+With phonenumbers on the Python path, run:
+  $ python tests/__init__.py
+
+
+===========================
+Auto-Generating Python Code
+===========================
+
+The code within the phonenumbers/data subdirectory is automatically
+generated from the master XML metadata file 
+(resources/PhoneNumberMetadata.xml). 
+
+The script buildmetadatafromxml.py performs this autogeneration. 
+Run it with:
+  python buildmetadatafromxml.py resources/PhoneNumberMetadata.xml phonenumbers/data/
+
+This script requires the lxml Python package to be installed.
+
+This will:
+ - Create the phonenumbers/data/ directory if not present.
+ - Create a collection of files, one for each region code:
+     phonenumbers/data/region_<code>.py
+   Each file contains the Python constructors for the metadata for that
+   region.
+ - Create a file phonenumbers/data/__init__.py which 
+   accumulates all of the per-region files.
+
+This approach results in a large set of Python files, but makes it easy
+to apply local fixes to the formatting metadata.
+
+
+===========================
+Library Developer Internals
+===========================
+
+The Python code is derived from the original Java code, and
+mostly sticks to the structure of that code to make it easier
+to include future changes to the upstream code.
+
+However, there are a number of differences:
+ - Naming conventions are converted to Python standards; in 
+   particular, method names are connected_with_underscores
+   rather than beingInCamelCase.
+ - The PhoneNumber and PhoneMetadata classes are written by hand
+   based on the Java code and the protocol buffer definitions, 
+   rather than by using the the Python protocol buffer library.
+   This makes the mapping to the Java code easier to follow, and
+   allows for the custom modifications that have been made to
+   the base protocol buffer.  Attribute values of None are used
+   to indicate that a particular (optional) attribute is not
+   present (instead of hasAttribute() methods).
+ - The Java PhoneNumberUtil class was a singleton, and so its
+   contents are included at the top level in phonenumberutil.py. 
+   Static methods from the PhoneNumberUtil class thus become 
+   functions in phonenumberutil.py; private and package methods 
+   get a leading underscore in their name.
+ - Accessor functions (setAttribute() and getAttribute() are 
+   avoided, and direct access to attributes is used instead.
+ - Methods named get_something_from(object) are typically renamed
+   to something_from(object).
+ - The format() methods in PhoneNumberUtil were renamed to 
+   format_number() to avoid clashing with the Python built-in
+   format().
+ - The internals of phonenumberutil.py do not have logging.
+ - The PhoneNumber and PhoneMetadata classes are written by hand.
+
+Much of the functionality of this library depends on regular 
+expressions, so it's worth highlighting the translation between
+Java and Python regexps:
+ - Java replacement group references are "$1 $2" etc, Python's are
+   "\1 \2" etc.
+ - Java Matcher(x).lookingAt() translates to Python re_obj.match(x)
+ - Java Matcher(x).find() translates to Python m = re.search(x).
+ - Java Matcher(x).matches() translates to Python m = re_obj.match(x)
+   together with a check that m.end() == len(x).
+The last of these is encapsulated in the fullmatch() function in
+re_util.py.

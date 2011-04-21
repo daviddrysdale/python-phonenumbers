@@ -1,0 +1,10 @@
+
+=====================
+ What's new in 3.1a1
+=====================
+
+Initial port of libphonenumber, based on upstream version 3.1,
+from http://code.google.com/p/libphonenumber/
+
+Subversion revision 169 of 
+http://libphonenumber.googlecode.com/svn/trunk/java

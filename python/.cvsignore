@@ -1,0 +1,5 @@
+.coverage
+*.pyc
+dist
+MANIFEST
+phonenumbers.egg-info

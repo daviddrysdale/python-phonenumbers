@@ -1,0 +1,330 @@
+"""Functionality to match phone numbers in a piece of text"""
+
+# Based on original Java code:
+#     java/src/com/google/i18n/phonenumbers/PhoneNumberMatch.java
+#     java/src/com/google/i18n/phonenumbers/PhoneNumberMatcher.java
+#   Copyright (C) 2011 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import sys
+import re
+
+import phonenumberutil
+
+
+def _limit(lower, upper):
+    """Returns a regular expression quantifier with an upper and lower limit."""
+    if ((lower < 0) or (upper <= 0) or (upper < lower)):
+        raise Exception("Illegal argument to _limit")
+    return u"{%d,%d}" % (lower, upper)
+
+
+def _remove_space(chars):
+    """Returns a copy of chars with any space characters removed"""
+    return re.sub("(?u)\s", u"", chars)
+
+# Build the PATTERN and INNER regular expression patterns. The building blocks
+# below exist to make the patterns more easily understood.
+
+# Limit on the number of leading (plus) characters.
+_LEAD_LIMIT = _limit(0, 2)
+# Limit on the number of consecutive punctuation characters.
+_PUNCTUATION_LIMIT = _limit(0, 4)
+# The maximum number of digits allowed in a digit-separated block. As we allow
+# all digits in a single block, set high enough to accommodate the entire
+# national number and the international country code.
+_DIGIT_BLOCK_LIMIT = (phonenumberutil._MAX_LENGTH_FOR_NSN +
+                      phonenumberutil._MAX_LENGTH_COUNTRY_CODE)
+# Limit on the number of blocks separated by punctuation. Use digitBlockLimit
+# since in some formats use spaces to separate each digit.
+_BLOCK_LIMIT = _limit(0, _DIGIT_BLOCK_LIMIT)
+
+# Same as phonenumberutil._VALID_PUNCTUATION but without space characters.
+_NON_SPACE_PUNCTUATION_CHARS = _remove_space(phonenumberutil._VALID_PUNCTUATION)
+# A punctuation sequence without white space.
+_NON_SPACE_PUNCTUATION = u"[" + _NON_SPACE_PUNCTUATION_CHARS + u"]" + _PUNCTUATION_LIMIT
+# A punctuation sequence allowing white space.
+_PUNCTUATION = u"[" + phonenumberutil._VALID_PUNCTUATION + u"]" + _PUNCTUATION_LIMIT
+# A digits block without punctuation.
+_DIGIT_SEQUENCE = u"(?u)\\d" + _limit(1, _DIGIT_BLOCK_LIMIT)
+# Punctuation that may be at the start of a phone number - brackets and plus signs.
+_LEAD_CLASS = u"[(\\[" + phonenumberutil._PLUS_CHARS + u"]"
+
+# Phone number pattern allowing optional punctuation.
+# This is the phone number pattern used by _find(), similar to
+# phonenumberutil._VALID_PHONE_NUMBER, but with the following differences:
+# - All captures are limited in order to place an upper bound to the text
+#   matched by the pattern.
+# - Leading punctuation / plus signs are limited.
+# - Consecutive occurrences of punctuation are limited.
+# - Number of digits is limited.
+# - No whitespace is allowed at the start or end.
+# - No alpha digits (vanity numbers such as 1-800-SIX-FLAGS) are currently
+#   supported.
+_PATTERN = re.compile(u"(?:" + _LEAD_CLASS + _PUNCTUATION + u")" + _LEAD_LIMIT +
+                      _DIGIT_SEQUENCE + u"(?:" + _PUNCTUATION + _DIGIT_SEQUENCE + u")" + _BLOCK_LIMIT +
+                      u"(?:" + phonenumberutil._KNOWN_EXTN_PATTERNS + u")?",
+                      phonenumberutil._REGEX_FLAGS)
+
+# Phone number pattern with no whitespace allowed.  This pattern is only used
+# in a second attempt to find a phone number occurring in the context of other
+# numbers, such as when the preceding or following token is a zip code.
+_INNER = re.compile(_LEAD_CLASS + _LEAD_LIMIT +
+                    _DIGIT_SEQUENCE + u"(?:" + _NON_SPACE_PUNCTUATION + _DIGIT_SEQUENCE + u")" + _BLOCK_LIMIT,
+                    phonenumberutil._REGEX_FLAGS)
+
+# Matches strings that look like publication pages. Example: "Computing
+# Complete Answers to Queries in the Presence of Limited Access Patterns.
+# Chen Li. VLDB J. 12(3): 211-227 (2003)."
+#
+# The string "211-227 (2003)" is not a telephone number.
+_PUB_PAGES = re.compile(u"\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}")
+
+# Matches strings that look like dates using "/" as a separator. Examples:
+# 3/10/2011, 31/10/96 or 08/31/95.
+_SLASH_SEPARATED_DATES = re.compile(u"(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}")
+
+
+class PhoneNumberMatcher(object):
+    """A stateful class that finds and extracts telephone numbers from text.
+
+    Vanity numbers (phone numbers using alphabetic digits such as '1-800-SIX-FLAGS' are
+    not found.
+
+    This class is not thread-safe.
+    """
+    # The potential states of a PhoneNumberMatcher.
+    _NOT_READY = 0
+    _READY = 1
+    _DONE = 2
+
+    def __init__(self, text, region,
+                 leniency=phonenumberutil.Leniency.VALID, max_tries=sys.maxint):
+        """Creates a new instance.
+
+        Arguments:
+        text -- The character sequence that we will search, None for no text.
+        country -- The ISO 3166-1 two-letter country code indicating the
+              country to assume for phone numbers not written in international
+              format (with a leading plus, or with the international dialing
+              prefix of the specified region). May be None or "ZZ" if only
+              numbers with a leading plus should be considered.
+        leniency -- The leniency to use when evaluating candidate phone
+              numbers.
+        max_tries -- The maximum number of invalid numbers to try before
+              giving up on the text.  This is to cover degenerate cases where
+              the text has a lot of false positives in it. Must be >= 0.
+        """
+        if leniency is None:
+            raise ValueError("Need a leniency value")
+        if int(max_tries) < 0:
+            raise ValueError("Need max_tries to be positive int")
+        # The text searched for phone numbers.
+        self.text = text
+        if self.text is None:
+            self.text = u""
+        # The region (country) to assume for phone numbers without an
+        # international prefix, possibly None.
+        self.preferred_region = region
+        # The degree of validation requested.
+        self.leniency = leniency
+        # The maximum number of retries after matching an invalid number.
+        self._max_tries = int(max_tries)
+        # The iteration tristate.
+        self._state = PhoneNumberMatcher._NOT_READY
+        # The last successful match, None unless in state _READY
+        self._last_match = None
+        # The next index to start searching at. Undefined in state _DONE
+        self._search_index = 0
+
+    def has_next(self):
+        """Indicates whether there is another match available"""
+        if self._state == PhoneNumberMatcher._NOT_READY:
+            self._last_match = self._find(self._search_index)
+            if self._last_match is None:
+                self._state = PhoneNumberMatcher._DONE
+            else:
+                self._search_index = self._last_match.end
+                self._state = PhoneNumberMatcher._READY
+        return (self._state == PhoneNumberMatcher._READY)
+
+    def next(self):
+        """Return the next match; raises Exception if no next match available"""
+        # Check the state and find the next match as a side-effect if necessary.
+        if not self.has_next():
+            raise StopIteration("No next match")
+        # Don't retain that memory any longer than necessary.
+        result = self._last_match
+        self._last_match = None
+        self._state = PhoneNumberMatcher._NOT_READY
+        return result
+
+    def __iter__(self):
+        while self.has_next():
+            yield self.next()
+
+    def _find(self, index):
+        """Attempts to find the next subsequence in the searched sequence on or after index
+        that represents a phone number. Returns the next match, None if none was found.
+
+        Arguments:
+        index -- The search index to start searching at.
+        Returns the phone number match found, None if none can be found.
+        """
+        match = _PATTERN.search(self.text, index)
+        while self._max_tries > 0 and match is not None:
+            start = match.start()
+            candidate = self.text[start:match.end()]
+
+            # Check for extra numbers at the end.
+            # TODO: This is the place to start when trying to support
+            # extraction of multiple phone number from split notations (+41 79
+            # 123 45 67 / 68).
+            candidate = self._trim_after_first_match(phonenumberutil._SECOND_NUMBER_START_PATTERN,
+                                                     candidate)
+
+            match = self._extract_match(candidate, start)
+            if match is not None:
+                return match
+            # Move along
+            index = start + len(candidate)
+            self._max_tries -= 1
+            match = _PATTERN.search(self.text, index)
+        return None
+
+    def _trim_after_first_match(self, pattern, candidate):
+        """Trims away any characters after the first match of pattern in
+        candidate, returning the trimmed version."""
+        trailing_chars_match = pattern.search(candidate)
+        if trailing_chars_match:
+            candidate = candidate[:trailing_chars_match.start()]
+        return candidate
+
+    def _extract_match(self, candidate, offset):
+        """Attempts to extract a match from a candidate string.
+
+        Arguments:
+        candidate -- The candidate text that might contain a phone number.
+        offset -- The offset of candidate within self.text
+        Returns the match found, None if none can be found
+        """
+        # Skip a match that is more likely a publication page reference or a
+        # date.
+        if (_PUB_PAGES.search(candidate) or
+            _SLASH_SEPARATED_DATES.search(candidate)):
+            return None
+
+        # Try to come up with a valid match given the entire candidate.
+        match = self._parse_and_verify(candidate, offset)
+        if match is not None:
+            return match
+
+        # If that failed, try to find an inner match without white space.
+        return self._extract_inner_match(candidate, offset)
+
+    def _extract_inner_match(self, candidate, offset):
+        """Attempts to extract a match from candidate using the _INNER pattern.
+
+        Arguments:
+        candidate -- The candidate text that might contain a phone number
+        offset -- The offset of candidate within text
+        Returns the match found, None if none can be found
+        """
+        index = 0
+        matcher = _INNER.search(candidate, index)
+        while (self._max_tries > 0 and matcher is not None):
+            inner_candidate = candidate[matcher.start():matcher.end()]
+            match = self._parse_and_verify(inner_candidate, offset + matcher.start())
+            if match is not None:
+                return match
+            # Move along
+            self._max_tries -= 1
+            index = matcher.end()
+            matcher = _INNER.search(candidate, index)
+        return None
+
+    def _parse_and_verify(self, candidate, offset):
+        """Parses a phone number from the candidate using phonenumberutil.parse and
+        verifies it matches the requested leniency. If parsing and verification succeed, a
+        corresponding PhoneNumberMatch is returned, otherwise this method returns None.
+
+        Arguments:
+        candidate -- The candidate match.
+        offset -- The offset of candidate within self.text.
+        Returns the parsed and validated phone number match, or None.
+        """
+        try:
+            numobj = phonenumberutil.parse(candidate, self.preferred_region)
+            if phonenumberutil.verify(self.leniency, numobj):
+                return PhoneNumberMatch(offset, candidate, numobj)
+        except phonenumberutil.NumberParseException:
+            # ignore and continue
+            pass
+        return None
+
+
+class PhoneNumberMatch(object):
+    """The immutable match of a phone number within a piece of text.
+
+    Matches may be found using the find() method of PhoneNumberMatcher.
+
+    A match consists of the phone number (in .number) as well as the .start
+    and .end offsets of the corresponding subsequence of the searched
+    text. Use .raw_string to obtain a copy of the matched subsequence.
+
+    The following annotated example clarifies the relationship between the
+    searched text, the match offsets, and the parsed number:
+
+    >>> text = "Call me at +1 425 882-8080 for details."
+    >>> country = "US"
+    >>> import phonenumbers
+    >>> matcher = phonenumbers.PhoneNumberMatcher(text, country)
+    >>> matcher.has_next()
+    True
+    >>> m = matcher.next()  # Find the first phone number match
+    >>> m.raw_string # contains the phone number as it appears in the text.
+    "+1 425 882-8080"
+    >>> (m.start, m.end)  # define the range of the matched subsequence.
+    (11, 26)
+    >>> text[m.start, m.end]
+    "+1 425 882-8080"
+    >>> phonenumberutil.parse("+1 425 882-8080", "US") == m.number
+    True
+    """
+    def __init__(self, start, raw_string, numobj):
+        if start < 0:
+            raise Exception("Start index not >= 0")
+        if raw_string is None or numobj is None:
+            raise Exception("Invalid argument")
+        # The start index into the text.
+        self.start = start
+        # The raw substring matched.
+        self.raw_string = raw_string
+        self.end = self.start + len(raw_string)
+        # The matched phone number.
+        self.number = numobj
+
+    def __eq__(self, other):
+        return (self.start == other.start and
+                self.raw_string == other.raw_string and
+                self.end == other.end and
+                self.number == other.number)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+    def __unicode__(self):
+        return u"PhoneNumberMatch [%s,%s) %s" % (self.start, self.end, self.raw_string)
