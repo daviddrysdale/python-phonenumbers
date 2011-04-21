@@ -494,7 +494,7 @@ def length_of_geographical_area_code(numobj):
     >>> import phonenumbers
     >>> numobj = phonenumbers.parse("16502530000", "US")
     >>> nsn = phonenumbers.national_significant_number(numobj)
-    >>> ac_len = libphoneutil.length_of_geographical_area_code(numobj)
+    >>> ac_len = phonenumbers.length_of_geographical_area_code(numobj)
     >>> if ac_len > 0:
     ...     area_code = nsn[:ac_len]
     ...     subscriber_number = nsn[ac_len:]
@@ -552,7 +552,7 @@ def length_of_national_destination_code(numobj):
     >>> import phonenumbers
     >>> numobj = phonenumbers.parse("18002530000", "US")
     >>> nsn = phonenumbers.national_significant_number(numobj)
-    >>> ndc_len = libphoneutil.length_of_national_destination_code(numobj)
+    >>> ndc_len = phonenumbers.length_of_national_destination_code(numobj)
     >>> if ndc_len > 0:
     ...     national_destination_code = nsn[:ndc_len]
     ...     subscriber_number = nsn[ndc_len:]
