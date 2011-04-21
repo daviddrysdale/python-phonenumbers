@@ -369,31 +369,9 @@ class ValidationResult(object):
     TOO_LONG = 3
 
 
-class Leniency(object):
-    """Leniency when finding potential phone numbers in text segments"""
-    # Phone numbers accepted are possible (i.e. is_possible_number(number)) but
-    # not necessarily valid (is_valid_number(number)).
-    POSSIBLE = 0
-
-    # Phone numbers accepted are both possible (is_possible_number(number)) and
-    # valid (is_valid_number(PhoneNumber)).
-    VALID = 1
-
-
 # Derived data structures
 SUPPORTED_REGIONS = set([item for sublist in COUNTRY_CODE_TO_REGION_CODE.values() for item in sublist])
 _NANPA_REGIONS = set(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
-
-
-def verify(leniency, numobj):
-    """Returns True if number is a verified number according to the
-    leniency."""
-    if leniency == Leniency.POSSIBLE:
-        return is_possible_number(numobj)
-    elif leniency == Leniency.VALID:
-        return is_valid_number(numobj)
-    else:
-        raise Exception("Error: unsupported Leniency value %s" % leniency)
 
 
 def _extract_possible_number(number):

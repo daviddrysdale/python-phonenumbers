@@ -95,6 +95,28 @@ _PUB_PAGES = re.compile(u"\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}")
 _SLASH_SEPARATED_DATES = re.compile(u"(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}")
 
 
+class Leniency(object):
+    """Leniency when finding potential phone numbers in text segments"""
+    # Phone numbers accepted are possible (i.e. is_possible_number(number)) but
+    # not necessarily valid (is_valid_number(number)).
+    POSSIBLE = 0
+
+    # Phone numbers accepted are both possible (is_possible_number(number)) and
+    # valid (is_valid_number(PhoneNumber)).
+    VALID = 1
+
+
+def _verify(leniency, numobj):
+    """Returns True if number is a verified number according to the
+    leniency."""
+    if leniency == Leniency.POSSIBLE:
+        return phonenumberutil.is_possible_number(numobj)
+    elif leniency == Leniency.VALID:
+        return phonenumberutil.is_valid_number(numobj)
+    else:
+        raise Exception("Error: unsupported Leniency value %s" % leniency)
+
+
 class PhoneNumberMatcher(object):
     """A stateful class that finds and extracts telephone numbers from text.
 
@@ -109,7 +131,7 @@ class PhoneNumberMatcher(object):
     _DONE = 2
 
     def __init__(self, text, region,
-                 leniency=phonenumberutil.Leniency.VALID, max_tries=sys.maxint):
+                 leniency=Leniency.VALID, max_tries=sys.maxint):
         """Creates a new instance.
 
         Arguments:
@@ -265,7 +287,7 @@ class PhoneNumberMatcher(object):
         """
         try:
             numobj = phonenumberutil.parse(candidate, self.preferred_region)
-            if phonenumberutil.verify(self.leniency, numobj):
+            if _verify(self.leniency, numobj):
                 return PhoneNumberMatch(offset, candidate, numobj)
         except phonenumberutil.NumberParseException:
             # ignore and continue

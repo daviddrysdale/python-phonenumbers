@@ -78,7 +78,7 @@ from phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 # Functionality
 from asyoutypeformatter import AsYouTypeFormatter
 from phonenumberutil import *
-from phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher
+from phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 
 if __name__ == '__main__':  # pragma no cover
     import doctest
