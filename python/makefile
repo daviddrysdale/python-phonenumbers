@@ -23,7 +23,10 @@ coverage_generate:
 coverage_report:
 	coverage -m -r $(COVERAGE_FILES)
 
-sdist:
+VERSION=3.2a1
+TARBALL=dist/phonenumbers-$(VERSION).tar.gz
+# Build setuptools packaged tarball $(TARBALL)
+sdist: 
 	python setup.py sdist
 
 install:
@@ -31,6 +34,15 @@ install:
 
 clean:
 	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc tests/*.pyc
+	rm -rf build deb_dist dist
 
 distclean:
 	rm -rf phonenumbers/data tests/testdata
+
+# Create Debian package.  Requires py2dsc, included in the python-stdeb package.
+DEB_VERSION=$(VERSION)-1_all
+deb: deb_dist/python-phonenumbers_$(DEB_VERSION).deb
+
+deb_dist/python-phonenumbers_$(VERSION)-1_all.deb: $(TARBALL)
+	py2dsc $(TARBALL)
+	cd deb_dist/phonenumbers-$(VERSION) && dpkg-buildpackage -us -uc -nc
