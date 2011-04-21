@@ -1,0 +1,13 @@
+phonenumbers Python Library
+
+This is a Python port of libphonenumber, originally from:
+  http://code.google.com/p/libphonenumber/.
+
+Original Java code is Copyright (C) 2009-2011 Google Inc.
+
+ - The python/ directory holds the Python code.
+ - The resources/ directory is a copy of the resources/
+   directory from libphonenumber.  This is not needed
+   to run the Python code, but is needed when upstream
+   changes to the master XML metadata need to be 
+   incorporated.
