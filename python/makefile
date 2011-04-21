@@ -8,7 +8,7 @@ tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buil
 	python buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata
 
 test: tests/testdata/__init__.py
-	#python phonenumbers/__init__.py
+	python phonenumbers/__init__.py
 	python phonenumbers/re_util.py
 	python tests/__init__.py
 
@@ -26,7 +26,7 @@ coverage_report:
 sdist:
 	python setup.py sdist
 
-install: dist
+install:
 	sudo python setup.py install
 
 clean:

@@ -351,8 +351,11 @@ class PhoneMetadata(object):
         if register:
             # Register this instance with the class-wide map
             if self.id in PhoneMetadata.region_metadata:
-                raise Exception("Duplicate PhoneMetadata for %s" % self.id)
-            PhoneMetadata.region_metadata[self.id] = self
+                other = PhoneMetadata.region_metadata[self.id]
+                if unicode(self) != unicode(other):
+                    raise Exception("Duplicate PhoneMetadata for %s" % self.id)
+            else:
+                PhoneMetadata.region_metadata[self.id] = self
 
     def __str__(self):
         return unicode(self).encode('utf-8')
