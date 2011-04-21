@@ -80,6 +80,43 @@ from asyoutypeformatter import AsYouTypeFormatter
 from phonenumberutil import *
 from phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 
+__all__ = ['PhoneNumber', 'CountryCodeSource'
+           'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata'
+           'AsYouTypeFormatter',
+           'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS', 'UNKNOWN_REGION',
+           'MatchType', 'NumberParseException', 'PhoneNumberFormat', 
+           'PhoneNumberType', 'ValidationResult',
+           'convert_alpha_characters_in_number',
+           'country_code_for_region',
+           'example_number',
+           'example_number_for_type',
+           'format_by_pattern',
+           'format_in_original_format',
+           'format_national_number_with_carrier_code',
+           'format_national_number_with_preferred_carrier_code',
+           'format_number',
+           'format_out_of_country_calling_number',
+           'format_out_of_country_keeping_alpha_chars',
+           'is_alpha_number',
+           'is_nanpa_country',
+           'is_number_match',
+           'is_possible_number',
+           'is_possible_number_string',
+           'is_possible_number_with_reason',
+           'is_valid_number',
+           'is_valid_number_for_region',
+           'length_of_geographical_area_code',
+           'length_of_national_destination_code',
+           'national_significant_number',
+           'ndd_prefix_for_region',
+           'normalize_digits_only',
+           'number_type',
+           'parse',
+           'region_code_for_country_code',
+           'region_code_for_number',
+           'truncate_too_long_number',
+           'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency']
+
 if __name__ == '__main__':  # pragma no cover
     import doctest
     doctest.testmod()
