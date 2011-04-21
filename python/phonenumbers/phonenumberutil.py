@@ -156,8 +156,8 @@ _ALL_PLUS_NUMBER_GROUPING_SYMBOLS = dict({u'-': u'-',  # Put grouping symbols.
                                           u'\uFF0E': u'.'},
                                          # Put (lower letter -> upper letter) and
                                          # (upper letter -> upper letter) mappings.
-                                         **dict([(c.lower(), c) for c in _ALPHA_MAPPINGS.keys()] +
-                                                [(c, c)         for c in _ALPHA_MAPPINGS.keys()],
+                                         **dict([(_c.lower(), _c) for _c in _ALPHA_MAPPINGS.keys()] +
+                                                [(_c, _c)         for _c in _ALPHA_MAPPINGS.keys()],
                                                 **_ASCII_DIGITS_MAP))
 
 # Pattern that makes it easy to distinguish whether a region has a unique
@@ -182,7 +182,7 @@ _VALID_DIGITS = ''.join(_DIGIT_MAPPINGS.keys())
 # We accept alpha characters in phone numbers, ASCII only, upper and lower
 # case.
 _VALID_ALPHA = (''.join(_ALPHA_MAPPINGS.keys()) +
-                ''.join([k.lower() for k in _ALPHA_MAPPINGS.keys()]))
+                ''.join([_k.lower() for _k in _ALPHA_MAPPINGS.keys()]))
 _PLUS_CHARS = u"+\uFF0B"
 _PLUS_CHARS_PATTERN = re.compile(u"[" + _PLUS_CHARS + u"]+")
 _SEPARATOR_PATTERN = re.compile(u"[" + _VALID_PUNCTUATION + u"]+")
@@ -370,7 +370,7 @@ class ValidationResult(object):
 
 
 # Derived data structures
-SUPPORTED_REGIONS = set([item for sublist in COUNTRY_CODE_TO_REGION_CODE.values() for item in sublist])
+SUPPORTED_REGIONS = set([_item for _sublist in COUNTRY_CODE_TO_REGION_CODE.values() for _item in _sublist])
 _NANPA_REGIONS = set(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
 
 
