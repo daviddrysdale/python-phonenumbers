@@ -29,3 +29,6 @@ install: dist
 
 clean:
 	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc tests/*.pyc
+
+distclean:
+	rm -rf phonenumbers/data tests/testdata
