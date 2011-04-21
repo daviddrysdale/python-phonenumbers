@@ -45,12 +45,12 @@ True
 >>> text = "Call me at 510-748-8230 if it's before 9:30, or on 703-4800500 after 10am."
 >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
 ...     print match
-... 
+...
 PhoneNumberMatch [11,23) 510-748-8230
 PhoneNumberMatch [51,62) 703-4800500
 >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
 ...     print phonenumbers.format_number(match.number, phonenumbers.PhoneNumberFormat.E164)
-... 
+...
 +15107488230
 +17034800500
 >>>
@@ -84,7 +84,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource'
            'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata'
            'AsYouTypeFormatter',
            'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS', 'UNKNOWN_REGION',
-           'MatchType', 'NumberParseException', 'PhoneNumberFormat', 
+           'MatchType', 'NumberParseException', 'PhoneNumberFormat',
            'PhoneNumberType', 'ValidationResult',
            'convert_alpha_characters_in_number',
            'country_code_for_region',

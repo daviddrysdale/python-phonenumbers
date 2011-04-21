@@ -246,8 +246,8 @@ _VALID_PHONE_NUMBER = (u"[" + _PLUS_CHARS + u"]*(?:[" + _VALID_PUNCTUATION + u"]
 
 # Default extension prefix to use when formatting. This will be put in front
 # of any extension component of the number, after the main national number is
-# formatted. For example, if you wish the default extension formatting to be 
-# " extn: 3456", then you should specify " extn: " here as the default 
+# formatted. For example, if you wish the default extension formatting to be
+# " extn: 3456", then you should specify " extn: " here as the default
 # extension prefix. This can be overridden by region-specific preferences.
 _DEFAULT_EXTN_PREFIX = u" ext. "
 
