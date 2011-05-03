@@ -873,8 +873,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
     def testTruncateTooLongNumber(self):
         # US number 650-253-0000, but entered with one additional digit at the end.
-        self.assertTrue(phonenumbers.truncate_too_long_number(US_LONG_NUMBER))
-        self.assertEquals(US_NUMBER, US_LONG_NUMBER)
+        us_long_number = PhoneNumber()
+        us_long_number.merge_from(US_LONG_NUMBER)
+        self.assertTrue(phonenumbers.truncate_too_long_number(us_long_number))
+        self.assertEquals(US_NUMBER, us_long_number)
 
         # GB number 080 1234 5678, but entered with 4 extra digits at the end.
         tooLongNumber = PhoneNumber(country_code=44, national_number=80123456780123L)
