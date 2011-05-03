@@ -5923,7 +5923,7 @@
              7100-7599, 7700-7999 with 10 digits; excluding ranges used in GG, IM, JE. -->
         <nationalNumberPattern>
           7(?:
-            [1-4]\d\d|
+            [1-49]\d\d|
             5(?:
               0[0-8]|
               [13-9]\d|
@@ -5938,12 +5938,6 @@
             8(?:
               [014-9]\d|
               [23][0-8]
-            )|
-            9(?:
-              [04-9]\d|
-              1[02-9]|
-              2[0135-9]|
-              3[0-689]
             )
           )\d{6}
         </nationalNumberPattern>
