@@ -29,8 +29,11 @@ python_24 = (major > 2 or (major == 2 and minor >= 4))
 if not python_24:
     raise RuntimeError("Python 2.4 or newer is required")
 
+# Discover version from local code
+from phonenumbers import __version__
+
 distutils.core.setup(name='phonenumbers',
-                     version='3.4a1',
+                     version=__version__,
                      description="Python version of Google's common library for parsing, formatting, storing and validating international phone numbers.",
                      author='David Drysdale',
                      author_email='dmd@lurklurk.org',

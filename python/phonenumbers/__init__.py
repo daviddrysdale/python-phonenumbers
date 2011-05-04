@@ -72,6 +72,9 @@ PhoneNumberMatch [51,62) 703-4800500
 # I'll use regular expressions."  Now they have two problems.'
 #                                                   -- jwz 1997-08-12
 
+# Version number is taken from the upstream libphonenumber version
+__version__ = "3.4a1"
+
 # Data class definitions
 from phonenumber import PhoneNumber, CountryCodeSource
 from phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata

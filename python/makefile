@@ -23,7 +23,7 @@ coverage_generate:
 coverage_report:
 	coverage -m -r $(COVERAGE_FILES)
 
-VERSION=3.4a1
+VERSION=$(shell grep __version__ phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
 TARBALL=dist/phonenumbers-$(VERSION).tar.gz
 # Build setuptools packaged tarball $(TARBALL)
 sdist: 
