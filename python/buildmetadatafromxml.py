@@ -38,6 +38,7 @@ __init__.py and per-region data files will be created in the directory.
 import sys
 import os
 import re
+import datetime
 
 from lxml import etree  # From http://lxml.de/, run 'easy_install lxml'
 
@@ -65,6 +66,21 @@ _REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %s met
 from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 '''
 
+# Copyright notice covering the XML metadata; include current year.
+COPYRIGHT_NOTICE = """# Copyright (C) 2010-%s Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+""" % datetime.datetime.now().year
 
 # XML processing utility functions that are useful for the particular
 # structure of the phone number metadata
@@ -367,9 +383,10 @@ class XPhoneNumberMetadata(object):
             filename = os.path.join(datadir, "region_%s.py" % country_id)
             self.emit_metadata_for_region_py(country_id, filename)
 
-        # Now build a module t file that includes them all
+        # Now build a module file that includes them all
         with open(modulefilename, "w") as outfile:
             print >> outfile, METADATA_FILE_PROLOG
+            print >> outfile, COPYRIGHT_NOTICE
             for country_id in sorted(self.territory.keys()):
                 print >> outfile, "from region_%s import PHONE_METADATA_%s" % (country_id, country_id)
             # Emit the mapping from country code to region code
