@@ -1,7 +1,7 @@
 """Auto-generated file, do not edit by hand. PE metadata"""
 from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_PE = PhoneMetadata(id='PE', country_code=51, international_prefix='00',
+PHONE_METADATA_PE = PhoneMetadata(id='PE', country_code=51, international_prefix='19(?:1[124]|77|90)00',
     general_desc=PhoneNumberDesc(national_number_pattern=u'[14-9]\d{7,8}', possible_number_pattern=u'\d{6,9}'),
     fixed_line=PhoneNumberDesc(national_number_pattern=u'(?:1\d|4[1-4]|5[1-46]|6[1-7]|7[2-46]|8[2-4])\d{6}', possible_number_pattern=u'\d{6,8}', example_number=u'11234567'),
     mobile=PhoneNumberDesc(national_number_pattern=u'9\d{8}', possible_number_pattern=u'\d{9}', example_number=u'912345678'),

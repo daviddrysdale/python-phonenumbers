@@ -257,13 +257,42 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         for ii in xrange(8, 20):
             self.assertEqualRange(text, ii, 19, 28)
 
+    def testMatchWithSurroundingZipcodes(self):
+        number = "415-666-7777"
+        zipPreceding = "My address is CA 34215. " + number + " is my number."
+        expectedResult = phonenumberutil.parse(number, "US")
+
+        matcher = PhoneNumberMatcher(zipPreceding, "US")
+        if matcher.has_next():
+            match = matcher.next()
+        else:
+            match = None
+        self.assertTrue(match is not None,
+                        msg="Did not find a number in '" + zipPreceding + "'; expected " + number)
+        self.assertEquals(expectedResult, match.number)
+        self.assertEquals(number, match.raw_string)
+
+        # Now repeat, but this time the phone number has spaces in it. It should still be found.
+        number = "(415) 666 7777"
+
+        zipFollowing = "My number is " + number + ". 34215 is my zip-code."
+        matcher = PhoneNumberMatcher(zipFollowing, "US")
+        if matcher.has_next():
+            matchWithSpaces = matcher.next()
+        else:
+            matchWithSpaces = None
+        self.assertTrue(matchWithSpaces is not None,
+                        msg="Did not find a number in '" + zipFollowing + "'; expected " + number)
+        self.assertEquals(expectedResult, matchWithSpaces.number)
+        self.assertEquals(number, matchWithSpaces.raw_string)
+
     def testNoMatchIfRegionIsNone(self):
         # Fail on non-international prefix if region code is None.
         self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("Random text body - number is 0331 6005, see you there", None)))
 
     def testNoMatchInEmptyString(self):
         self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("", "US")))
-        self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("    ", "US")))
+        self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("  ", "US")))
 
     def testNoMatchIfNoNumber(self):
         self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("Random text body - number is foobar, see you there", "US")))

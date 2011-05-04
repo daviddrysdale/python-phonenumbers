@@ -28,12 +28,7 @@ def _limit(lower, upper):
         raise Exception("Illegal argument to _limit")
     return u"{%d,%d}" % (lower, upper)
 
-
-def _remove_space(chars):
-    """Returns a copy of chars with any space characters removed"""
-    return re.sub("(?u)\s", u"", chars)
-
-# Build the PATTERN and INNER regular expression patterns. The building blocks
+# Build the PATTERN regular expression pattern. The building blocks
 # below exist to make the patterns more easily understood.
 
 # Limit on the number of leading (plus) characters.
@@ -49,10 +44,6 @@ _DIGIT_BLOCK_LIMIT = (phonenumberutil._MAX_LENGTH_FOR_NSN +
 # since in some formats use spaces to separate each digit.
 _BLOCK_LIMIT = _limit(0, _DIGIT_BLOCK_LIMIT)
 
-# Same as phonenumberutil._VALID_PUNCTUATION but without space characters.
-_NON_SPACE_PUNCTUATION_CHARS = _remove_space(phonenumberutil._VALID_PUNCTUATION)
-# A punctuation sequence without white space.
-_NON_SPACE_PUNCTUATION = u"[" + _NON_SPACE_PUNCTUATION_CHARS + u"]" + _PUNCTUATION_LIMIT
 # A punctuation sequence allowing white space.
 _PUNCTUATION = u"[" + phonenumberutil._VALID_PUNCTUATION + u"]" + _PUNCTUATION_LIMIT
 # A digits block without punctuation.
@@ -76,13 +67,6 @@ _PATTERN = re.compile(u"(?:" + _LEAD_CLASS + _PUNCTUATION + u")" + _LEAD_LIMIT +
                       u"(?:" + phonenumberutil._KNOWN_EXTN_PATTERNS + u")?",
                       phonenumberutil._REGEX_FLAGS)
 
-# Phone number pattern with no whitespace allowed.  This pattern is only used
-# in a second attempt to find a phone number occurring in the context of other
-# numbers, such as when the preceding or following token is a zip code.
-_INNER = re.compile(_LEAD_CLASS + _LEAD_LIMIT +
-                    _DIGIT_SEQUENCE + u"(?:" + _NON_SPACE_PUNCTUATION + _DIGIT_SEQUENCE + u")" + _BLOCK_LIMIT,
-                    phonenumberutil._REGEX_FLAGS)
-
 # Matches strings that look like publication pages. Example: "Computing
 # Complete Answers to Queries in the Presence of Limited Access Patterns.
 # Chen Li. VLDB J. 12(3): 211-227 (2003)."
@@ -93,6 +77,10 @@ _PUB_PAGES = re.compile(u"\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}")
 # Matches strings that look like dates using "/" as a separator. Examples:
 # 3/10/2011, 31/10/96 or 08/31/95.
 _SLASH_SEPARATED_DATES = re.compile(u"(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}")
+
+# Matches white-space, which may indicate the end of a phone number and the
+# start of something else (such as a neighbouring zip-code).
+_GROUP_SEPARATOR = re.compile(u"(?u)\\s+")  # Unicode Separator, \p{Z}
 
 
 class Leniency(object):
@@ -251,28 +239,48 @@ class PhoneNumberMatcher(object):
         if match is not None:
             return match
 
-        # If that failed, try to find an inner match without white space.
+        # If that failed, try to find an "inner match" -- there might be a
+        # phone number within this candidate.
         return self._extract_inner_match(candidate, offset)
 
     def _extract_inner_match(self, candidate, offset):
-        """Attempts to extract a match from candidate using the _INNER pattern.
+        """Attempts to extract a match from candidate if the whole candidate
+        does not qualify as a match.
 
         Arguments:
         candidate -- The candidate text that might contain a phone number
-        offset -- The offset of candidate within text
+        offset -- The current offset of candidate within text
         Returns the match found, None if none can be found
         """
-        index = 0
-        matcher = _INNER.search(candidate, index)
-        while (self._max_tries > 0 and matcher is not None):
-            inner_candidate = candidate[matcher.start():matcher.end()]
-            match = self._parse_and_verify(inner_candidate, offset + matcher.start())
+        # Try removing either the first or last "group" in the number and see
+        # if this gives a result.  We consider white space to be a possible
+        # indications of the start or end of the phone number.
+        group_match = _GROUP_SEPARATOR.search(candidate)
+        if group_match:
+            group_start_index = group_match.end()
+            # Remove the first group.
+            without_first_group = candidate[group_start_index:]
+            without_first_group = self._trim_after_first_match(phonenumberutil._UNWANTED_END_CHAR_PATTERN,
+                                                               without_first_group)
+            match = self._parse_and_verify(without_first_group, offset + group_start_index)
             if match is not None:
                 return match
-            # Move along
             self._max_tries -= 1
-            index = matcher.end()
-            matcher = _INNER.search(candidate, index)
+
+            if self._max_tries > 0:
+                last_group_start = group_start_index
+                group_match = _GROUP_SEPARATOR.search(candidate, last_group_start)
+                while group_match:
+                    # Find the last group.
+                    last_group_start = group_match.start()
+                    group_match = _GROUP_SEPARATOR.search(candidate, group_match.end())
+                without_last_group = candidate[:last_group_start]
+                without_last_group = self._trim_after_first_match(phonenumberutil._UNWANTED_END_CHAR_PATTERN,
+                                                                  without_last_group)
+                match = self._parse_and_verify(without_last_group, offset)
+                if match is not None:
+                    return match
+                self._max_tries -= 1
         return None
 
     def _parse_and_verify(self, candidate, offset):

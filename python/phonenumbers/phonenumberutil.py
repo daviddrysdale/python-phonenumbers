@@ -63,7 +63,8 @@ _NANPA_COUNTRY_CODE = 1
 _PLUS_SIGN = u'+'
 _RFC3966_EXTN_PREFIX = u";ext="
 
-# Simple ASCII digits map used to populate DIGIT_MAPPINGS and ALPHA_MAPPINGS.
+# Simple ASCII digits map used to populate _DIGIT_MAPPINGS and
+# _ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
 _ASCII_DIGITS_MAP = {u'0': u'0', u'1': u'1',
                      u'2': u'2', u'3': u'3',
                      u'4': u'4', u'5': u'5',
@@ -377,7 +378,7 @@ _NANPA_REGIONS = set(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
 def _extract_possible_number(number):
     """Attempt to extract a possible number from the string passed in.
 
-    This currently strips all leading characters that could not be used to
+    This currently strips all leading characters that cannot be used to
     start a phone number. Characters that can be used to start a phone number
     are defined in the VALID_START_CHAR_PATTERN. If none of these characters
     are found in the number passed in, an empty string is returned. This
@@ -821,7 +822,7 @@ def format_national_number_with_preferred_carrier_code(numobj, fallback_carrier_
 def format_out_of_country_calling_number(numobj, region_calling_from):
     """Formats a phone number for out-of-country dialing purposes.
 
-    If no country_calling_from is supplied, we format the number in its
+    If no region_calling_from is supplied, we format the number in its
     INTERNATIONAL format. If the country calling code is the same as the
     region where the number is from, then NATIONAL formatting will be applied.
 
@@ -1610,15 +1611,15 @@ def is_possible_number_string(number, region_dialing_from):
     number -- The number that needs to be checked, in the form of a string.
     region_dialling_from -- The ISO 3166-1 two-letter region code that denotes
               the region that we are expecting the number to be dialed from.
-              Note this is different from the region where the number
-              belongs. For example, the number +1 650 253 0000 is a number
-              that belongs to US. When written in this form, it could be
-              dialed from any region. When it is written as 00 1 650 253 0000,
-              it could be dialed from any region which uses an international
-              dialling prefix of 00. When it is written as 650 253 0000, it
-              could only be dialed from within the US, and when written as 253
-              0000, it could only be dialed from within a smaller area in the
-              US (Mountain View, CA, to be more specific).
+              Note this is different from the region where the number belongs.
+              For example, the number +1 650 253 0000 is a number that belongs
+              to US. When written in this form, it can be dialed from any
+              region. When it is written as 00 1 650 253 0000, it can be
+              dialed from any region which uses an international dialling
+              prefix of 00. When it is written as 650 253 0000, it can only be
+              dialed from within the US, and when written as 253 0000, it can
+              only be dialed from within a smaller area in the US (Mountain
+              View, CA, to be more specific).
 
     Returns True if the number is possible
     """
@@ -1764,7 +1765,8 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
 
             # If the number was not valid before but is valid now, or if it
             # was too long before, we consider the number with the country
-            # code stripped to be a better result and keep that instead.
+            # calling code stripped to be a better result and keep that
+            # instead.
             if ((fullmatch(valid_pattern, full_number) is None and
                  fullmatch(valid_pattern, potential_national_number)) or
                 (_test_number_length_against_pattern(possible_pattern, full_number) ==

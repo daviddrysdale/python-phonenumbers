@@ -317,6 +317,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals("1234", phonenumbers.format_number(DE_SHORT_NUMBER, PhoneNumberFormat.NATIONAL))
         self.assertEquals("+49 1234", phonenumbers.format_number(DE_SHORT_NUMBER, PhoneNumberFormat.INTERNATIONAL))
 
+        deNumber.clear()
         deNumber.country_code = 49
         deNumber.national_number = 41341234
         self.assertEquals("04134 1234", phonenumbers.format_number(deNumber, PhoneNumberFormat.NATIONAL))
@@ -662,11 +663,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(PhoneNumberType.MOBILE, phonenumbers.number_type(BS_MOBILE))
         self.assertEquals(PhoneNumberType.MOBILE, phonenumbers.number_type(GB_MOBILE))
         self.assertEquals(PhoneNumberType.MOBILE, phonenumbers.number_type(IT_MOBILE))
+        self.assertEquals(PhoneNumberType.MOBILE, phonenumbers.number_type(AR_MOBILE))
 
         mobileNumber = PhoneNumber(country_code=49, national_number=15123456789L)
         self.assertEquals(PhoneNumberType.MOBILE, phonenumbers.number_type(mobileNumber))
-
-        self.assertEquals(PhoneNumberType.MOBILE, phonenumbers.number_type(AR_MOBILE))
 
     def testIsFixedLine(self):
         self.assertEquals(PhoneNumberType.FIXED_LINE, phonenumbers.number_type(BS_NUMBER))
@@ -835,6 +835,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(ValidationResult.TOO_SHORT,
                           phonenumbers.is_possible_number_with_reason(number))
 
+        number.clear()
         number.country_code = 65
         number.national_number = 1234567890L
         self.assertEquals(ValidationResult.IS_POSSIBLE,

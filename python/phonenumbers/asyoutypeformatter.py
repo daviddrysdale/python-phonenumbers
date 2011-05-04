@@ -28,20 +28,30 @@ import re
 from re_util import fullmatch
 
 from phonemetadata import PhoneMetadata
-from phonenumberutil import _VALID_START_CHAR_PATTERN, _DIGIT_MAPPINGS, _PLUS_SIGN
+from phonenumberutil import _VALID_START_CHAR_PATTERN, _VALID_PUNCTUATION
+from phonenumberutil import _DIGIT_MAPPINGS, _PLUS_SIGN
 from phonenumberutil import _extract_country_code, region_code_for_country_code
 
-_EMPTY_METADATA = PhoneMetadata(id="", international_prefix="NA", register=False)
+_EMPTY_METADATA = PhoneMetadata(id=u"", international_prefix=u"NA", register=False)
 
 # A pattern that is used to match character classes in regular expressions. An
 # example of a character class is [1-4].
-_CHARACTER_CLASS_PATTERN = re.compile("\\[([^\\[\\]])*\\]")
+_CHARACTER_CLASS_PATTERN = re.compile(u"\\[([^\\[\\]])*\\]")
 # Any digit in a regular expression that actually denotes a digit. For
 # example, in the regular expression 80[0-2]\d{6,10}, the first 2 digits (8
 # and 0) are standalone digits, but the rest are not.
 # Two look-aheads are needed because the number following \\d could be a
 # two-digit number, since the phone number can be as long as 15 digits.
-_STANDALONE_DIGIT_PATTERN = re.compile("\\d(?=[^,}][^,}])")
+_STANDALONE_DIGIT_PATTERN = re.compile(u"\\d(?=[^,}][^,}])")
+
+# A pattern that is used to determine if a number_format under
+# available_formats is eligible to be used by the AYTF. It is eligible when
+# the format element under number_format contains groups of the dollar sign
+# followed by a single digit, separated by valid phone number
+# punctuation. This prevents invalid punctuation (such as the star sign in
+# Israeli star numbers) getting into the output of the AYTF.
+_ELIGIBLE_FORMAT_PATTERN = re.compile(u"[" + _VALID_PUNCTUATION + u"]*" +
+                                      u"(\\\\\\d" + u"[" + _VALID_PUNCTUATION + u"]*)+")
 
 # This is the minimum length of national number accrued that is required to
 # trigger the formatter. The first element of the leadingDigitsPattern of each
@@ -96,8 +106,13 @@ class AsYouTypeFormatter(object):
             format_list = self._current_metadata.intl_number_format
         else:
             format_list = self._current_metadata.number_format
-        self._possible_formats.extend(format_list)
+        for this_format in format_list:
+            if self._is_format_eligible(this_format.format):
+                self._possible_formats.append(this_format)
         self._narrow_down_possible_formats(leading_three_digits)
+
+    def _is_format_eligible(self, format):
+        return fullmatch(_ELIGIBLE_FORMAT_PATTERN, format)
 
     def _narrow_down_possible_formats(self, leading_digits):
         index_of_leading_digits_pattern = len(leading_digits) - _MIN_LEADING_DIGITS_LENGTH
@@ -138,7 +153,7 @@ class AsYouTypeFormatter(object):
         return False
 
     def _get_formatting_template(self, number_pattern, number_format):
-        """Gets a formatting template which could be used to efficiently
+        """Gets a formatting template which can be used to efficiently
         format a partial number where digits are added one by one."""
         # Create a phone number consisting only of the digit 9 that matches the
         # number_pattern by applying the pattern to the longest_phone_number string.
@@ -178,6 +193,7 @@ class AsYouTypeFormatter(object):
         self._possible_formats = []
 
     def clear(self):
+        """Clears the internal state of the formatter, so it can be reused."""
         self._clear()
         if self._current_metadata != self._default_metadata:
             self._current_metadata = PhoneMetadata.region_metadata.get(self._default_country, _EMPTY_METADATA)
@@ -186,7 +202,7 @@ class AsYouTypeFormatter(object):
         """Formats a phone number on-the-fly as each digit is entered.
 
         If remember_position is set, remembers the position where next_char is
-        inserted, so that it could be retrieved later by using
+        inserted, so that it can be retrieved later by using
         get_remembered_position. The remembered position will be automatically
         adjusted if additional formatting characters are later
         inserted/removed in front of next_char.

@@ -8,7 +8,7 @@ PHONE_METADATA_HK = PhoneMetadata(id='HK', country_code=852, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern=u'800\d{6}', possible_number_pattern=u'\d{9}', example_number=u'800123456'),
     premium_rate=PhoneNumberDesc(national_number_pattern=u'900\d{8}', possible_number_pattern=u'\d{11}', example_number=u'90012345678'),
     shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
-    personal_number=PhoneNumberDesc(national_number_pattern=u'8[1-3]\d{6}', possible_number_pattern=u'\d{8}'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'8[1-3]\d{6}', possible_number_pattern=u'\d{8}', example_number=u'81123456'),
     voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
     pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
     uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
