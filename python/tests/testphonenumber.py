@@ -40,6 +40,15 @@ class PhoneNumberTest(unittest.TestCase):
         numberB = PhoneNumber(country_code=1, national_number=6502530000L)
         self.assertEquals(numberA, numberB)
 
+    def test_non_equal_with_different_object(self):
+        numberA = PhoneNumber()
+        numberA.country_code = 1
+        numberA.national_number = 6502530000L
+        numberA.preferred_domestic_carrier_code = ""
+        self.assertNotEqual(numberA, None)
+        self.assertNotEqual(numberA, "")
+        self.assertNotEqual(numberA, 1)
+
     def test_equal_with_italian_leading_zero_set_to_default(self):
         numberA = PhoneNumber()
         numberA.country_code = 1
