@@ -165,13 +165,15 @@ class PhoneNumber(object):
             self.preferred_domestic_carrier_code = other.preferred_domestic_carrier_code
 
     def __eq__(self, other):
-        return (self.country_code == other.country_code and
-                self.national_number == other.national_number and
-                self.extension == other.extension and
-                self.italian_leading_zero == other.italian_leading_zero and
-                self.raw_input == other.raw_input and
-                self.country_code_source == other.country_code_source and
-                self.preferred_domestic_carrier_code == other.preferred_domestic_carrier_code)
+        if isinstance(other, PhoneNumber):
+            return (self.country_code == other.country_code and
+                    self.national_number == other.national_number and
+                    self.extension == other.extension and
+                    self.italian_leading_zero == other.italian_leading_zero and
+                    self.raw_input == other.raw_input and
+                    self.country_code_source == other.country_code_source and
+                    self.preferred_domestic_carrier_code == other.preferred_domestic_carrier_code)
+        return False
 
     def __ne__(self, other):
         return not self.__eq__(other)
