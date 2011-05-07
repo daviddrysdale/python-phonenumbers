@@ -345,6 +345,8 @@ class PhoneNumberMatch(object):
         self.number = numobj
 
     def __eq__(self, other):
+        if not isinstance(other, PhoneNumberMatch):
+            return False
         return (self.start == other.start and
                 self.raw_string == other.raw_string and
                 self.end == other.end and

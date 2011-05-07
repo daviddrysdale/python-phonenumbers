@@ -1740,3 +1740,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertTrue(phonenumbers.is_alpha_number("1800 six-flags ext. 1234"))
         self.assertFalse(phonenumbers.is_alpha_number("1800 123-1234"))
         self.assertFalse(phonenumbers.is_alpha_number("1800 123-1234 extension: 1234"))
+
+    def testEqualDesc(self):
+        desc1 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
+        desc2 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
+        self.assertNotEqual(desc1, None)
+        self.assertNotEqual(desc1, "")
+        self.assertEquals(desc1, desc2)

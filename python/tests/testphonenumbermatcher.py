@@ -52,6 +52,11 @@ class PhoneNumberMatchTest(unittest.TestCase):
         self.assertEquals(match1.number, match2.number)
         self.assertEquals(match1.raw_string, match2.raw_string)
         self.assertEquals("1 800 234 45 67", match1.raw_string)
+        # Check only comparisons of the same type work
+        self.assertNotEqual(match1, None)
+        self.assertNotEqual(match1, "")
+        self.assertNotEqual(match1, "1 800 234 45 67")
+        self.assertNotEqual(match1, 0)
 
     def testIllegalArguments(self):
         """Tests the value type semantics for matches with a None number."""

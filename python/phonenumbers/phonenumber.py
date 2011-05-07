@@ -165,6 +165,8 @@ class PhoneNumber(object):
             self.preferred_domestic_carrier_code = other.preferred_domestic_carrier_code
 
     def __eq__(self, other):
+        if not isinstance(other, PhoneNumber):
+            return False
         return (self.country_code == other.country_code and
                 self.national_number == other.national_number and
                 self.extension == other.extension and

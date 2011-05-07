@@ -151,6 +151,8 @@ class PhoneNumberDesc(object):
             self.example_number = other.example_number
 
     def __eq__(self, other):
+        if not isinstance(other, PhoneNumberDesc):
+            return False
         return (self.national_number_pattern == other.national_number_pattern and
                 self.possible_number_pattern == other.possible_number_pattern and
                 self.example_number == other.example_number)
