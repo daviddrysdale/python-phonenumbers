@@ -27,7 +27,7 @@ from phonemetadata import NumberFormat, PhoneMetadata
 # Import auto-generated data structures
 try:
     from data import _COUNTRY_CODE_TO_REGION_CODE
-except ImportError:
+except ImportError:  # pragma no cover
     # Before the generated code exists, the data/ directory is empty.
     # The generation process imports this module, creating a circular
     # dependency.  The hack below works around this.

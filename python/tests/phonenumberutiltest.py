@@ -207,6 +207,12 @@ class PhoneNumberUtilTest(unittest.TestCase):
         number = PhoneNumber(country_code=123, national_number=6502530000L)
         self.assertEquals(0, phonenumbers.length_of_national_destination_code(number))
 
+        # A number with an extension; still has NDC "7912"
+        number2 = PhoneNumber()
+        number2.merge_from(GB_MOBILE)
+        number2.extension = "1234"
+        self.assertEquals(4, phonenumbers.length_of_national_destination_code(number2))
+
     def testGetNationalSignificantNumber(self):
         self.assertEquals("6502530000", phonenumbers.national_significant_number(US_NUMBER))
         # An Italian mobile number.
@@ -260,6 +266,11 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(expectedOutput,
                           phonenumbers.normalize_digits_only(inputNumber),
                           msg="Conversion did not correctly remove alpha character")
+        # Python version extra test
+        inputNumber = u"\uFF10\u0663\u06F4\u020B56234"
+        expectedOutput = u"034\u020B56234"
+        self.assertEquals(expectedOutput,
+                          phonenumbers.convert_alpha_characters_in_number(inputNumber))
 
     def testFormatUSNumber(self):
         self.assertEquals("650 253 0000", phonenumbers.format_number(US_NUMBER, PhoneNumberFormat.NATIONAL))
@@ -1752,7 +1763,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Python-specific extra tests for equality against other types
         desc1 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
         desc2 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
-        desc3 = PhoneNumberDesc(national_number_pattern="\\d{4,7}", 
+        desc3 = PhoneNumberDesc(national_number_pattern="\\d{4,7}",
                                 possible_number_pattern="\\d{7}",
                                 example_number="1234567")
         self.assertNotEqual(desc1, None)
@@ -1762,13 +1773,13 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertTrue(desc1 != desc3)
         desc1.merge_from(desc3)
         self.assertEquals(desc1, desc3)
-        self.assertEquals(r"PhoneNumberDesc(national_number_pattern='\\d{4,7}', " + 
+        self.assertEquals(r"PhoneNumberDesc(national_number_pattern='\\d{4,7}', " +
                           r"possible_number_pattern='\\d{7}', example_number='1234567')",
                           str(desc3))
         nf1 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
         nf2 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
         nf3 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['2'],
-                           national_prefix_formatting_rule='$NP', 
+                           national_prefix_formatting_rule='$NP',
                            domestic_carrier_code_formatting_rule='$NP')
         self.assertEquals(nf1, nf2)
         self.assertNotEqual(nf1, nf3)
@@ -1802,7 +1813,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(r"""PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}')""",
                           str(metadata.general_desc))
         self.assertEquals(repr(metadata.general_desc), str(metadata.general_desc))
-        
+
         metadata2 = PhoneMetadata("XX",
                                   preferred_international_prefix=u'9123',
                                   national_prefix=u'1',
@@ -1864,10 +1875,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(new_general_desc, metadata.general_desc)
         new_metadata = eval(repr(metadata))
         self.assertEquals(new_metadata, metadata)
-        
-        metadata1 = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=True)
-        self.assertRaises(Exception, PhoneMetadata, *("XY",), 
+
+        PhoneMetadata("XY", preferred_international_prefix=u'9123', register=True)
+        self.assertRaises(Exception, PhoneMetadata, *("XY",),
                           **{'preferred_international_prefix': '9999',
                              'register': True})
-        metadata2 = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=False)
-                          
