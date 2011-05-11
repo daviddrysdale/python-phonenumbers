@@ -28,8 +28,9 @@ def fullmatch(pattern, string, flags=0):
     grouped_pattern = re.compile("^(?:%s)$" % pattern.pattern)
     m = grouped_pattern.match(string)
     if m and m.end() < len(string):
-        # Incomplete match, treat as failure
-        m = None
+        # Incomplete match (which should never happen because of the $ at the
+        # end of the regexp), treat as failure.
+        m = None  # pragma no cover
     return m
 
 if __name__ == '__main__':  # pragma no cover

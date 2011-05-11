@@ -86,6 +86,8 @@ class PhoneNumberTest(unittest.TestCase):
         numberB.raw_input = "+1-650-253-00-00"
         numberB.country_code_source = CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN
         self.assertNotEqual(numberA, numberB)
+        # Python-specific: Force a test of __ne__() method
+        self.assertTrue(numberA != numberB)
 
     def test_non_equal_with_preferred_dcc_default(self):
         numberA = PhoneNumber()
@@ -109,6 +111,7 @@ class PhoneNumberTest(unittest.TestCase):
         self.assertEquals(numberA, numberB)
 
     def test_equal_other_objects(self):
+        # Python-specific extra tests for equality against other types
         numberA = PhoneNumber()
         numberA.country_code = 1
         numberA.national_number = 6502530000L

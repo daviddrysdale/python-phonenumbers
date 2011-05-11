@@ -510,6 +510,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
                           phonenumbers.format_national_number_with_preferred_carrier_code(arNumber, "15"))
         self.assertEquals("01234 19 12-5678",
                           phonenumbers.format_national_number_with_preferred_carrier_code(arNumber, ""))
+        # Python version extra test: check string conversion with preferred carrier code
+        self.assertEquals('Country Code: 54 National Number: 91234125678 ' +
+                          'Leading Zero: False Preferred Domestic Carrier Code: 19',
+                          str(arNumber))
         # When the preferred_domestic_carrier_code is present (even when it
         # contains an empty string), use it instead of the default carrier
         # code passed in.
@@ -1071,6 +1075,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             # Should strip and normalize national significant number.
             self.assertEquals(strippedNumber, numberToFill,
                               msg="Did not strip off the country calling code correctly.")
+            # Python extra test covering string conversion with country_code_source present
+            self.assertEquals("Country Code: 1 National Number: None Leading Zero: False Country Code Source: 5",
+                              str(number))
         except NumberParseException, e:
             self.fail("Should not have thrown an exception: %s" % e)
 
@@ -1742,8 +1749,26 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertFalse(phonenumbers.is_alpha_number("1800 123-1234 extension: 1234"))
 
     def testEqualDesc(self):
+        # Python-specific extra tests for equality against other types
         desc1 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
         desc2 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
         self.assertNotEqual(desc1, None)
         self.assertNotEqual(desc1, "")
         self.assertEquals(desc1, desc2)
+
+    def testMetadataAsString(self):
+        # Python-specific extra tests for string conversion
+        metadata = PhoneMetadata.region_metadata["AD"]
+        self.assertEquals("""PhoneMetadata(id='AD', country_code=376, international_prefix='00',
+    general_desc=PhoneNumberDesc(),
+    fixed_line=PhoneNumberDesc(),
+    mobile=PhoneNumberDesc(),
+    toll_free=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    premium_rate=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'))""",
+                          str(metadata))

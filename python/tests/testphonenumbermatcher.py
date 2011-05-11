@@ -45,6 +45,7 @@ class PhoneNumberMatchTest(unittest.TestCase):
         number = PhoneNumber()
         match1 = PhoneNumberMatch(10, "1 800 234 45 67", number)
         match2 = PhoneNumberMatch(10, "1 800 234 45 67", number)
+        match3 = PhoneNumberMatch(10, "1 801 234 45 67", number)
 
         self.assertEquals(match1, match2)
         self.assertEquals(match1.start, match2.start)
@@ -52,7 +53,10 @@ class PhoneNumberMatchTest(unittest.TestCase):
         self.assertEquals(match1.number, match2.number)
         self.assertEquals(match1.raw_string, match2.raw_string)
         self.assertEquals("1 800 234 45 67", match1.raw_string)
-        # Check only comparisons of the same type work
+        # Python-specific: check __ne__()
+        self.assertNotEqual(match1, match3)
+        self.assertTrue(match1 != match3)
+        # Python-specific: Check only comparisons of the same type work
         self.assertNotEqual(match1, None)
         self.assertNotEqual(match1, "")
         self.assertNotEqual(match1, "1 800 234 45 67")
@@ -537,3 +541,15 @@ class PhoneNumberMatcherTest(unittest.TestCase):
     def hasNoMatches(self, matcher):
         """Returns True if there were no matches found."""
         return not matcher.has_next()
+
+    def testInternals(self):
+        # Python-specific test: coverage of internals
+        from phonenumbers.phonenumbermatcher import _limit, _verify
+        self.assertEqual("{1,2}", _limit(1,2))
+        self.assertRaises(Exception, _limit, *(-1, 2))
+        self.assertRaises(Exception, _limit, *(1, 0))
+        self.assertRaises(Exception, _limit, *(2, 1))
+        number = PhoneNumber(country_code=44, national_number=7912345678L)
+        self.assertRaises(Exception, _verify, *(99, number)) 
+        self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"leniency": None})
+        self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"max_tries": -2})

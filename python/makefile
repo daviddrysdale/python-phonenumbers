@@ -22,6 +22,8 @@ coverage_generate:
 	coverage -x tests/__init__.py
 coverage_report:
 	coverage -m -r $(COVERAGE_FILES)
+coverage_annotate:
+	coverage annotate $(COVERAGE_FILES)
 
 VERSION=$(shell grep __version__ phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
 TARBALL=dist/phonenumbers-$(VERSION).tar.gz
