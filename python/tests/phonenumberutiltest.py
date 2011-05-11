@@ -1125,6 +1125,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
             self.assertEquals(NumberParseException.INVALID_COUNTRY_CODE,
                               e.error_type,
                               msg="Wrong error type stored in exception.")
+            self.assertEquals("(0) Country calling code supplied was not recognised.",
+                              str(e))
 
         number.clear()
         try:
@@ -1646,6 +1648,12 @@ class PhoneNumberUtilTest(unittest.TestCase):
                                   preferred_domestic_carrier_code="14", raw_input="143121286979")
         self.assertEquals(phonenumbers.MatchType.EXACT_MATCH,
                           phonenumbers.is_number_match(brNumberOne, brNumberTwo))
+
+        # Extra tests in the Python version
+        self.assertEquals(phonenumbers.MatchType.NOT_A_NUMBER,
+                          phonenumbers.is_number_match("+9991234567", "+99943211234"))
+        self.assertEquals(phonenumbers.MatchType.NOT_A_NUMBER,
+                          phonenumbers.is_number_match(brNumberOne, "+9991235467"))
 
     def testIsNumberMatchNonMatches(self):
         # Non-matches.
