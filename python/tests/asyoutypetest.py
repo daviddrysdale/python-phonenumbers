@@ -22,7 +22,7 @@ import pathfix
 pathfix.fix()
 
 from phonenumbers import AsYouTypeFormatter
-from testphonenumberutil import insert_test_metadata, reinstate_real_metadata
+from phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 
 
 class AsYouTypeFormatterTest(unittest.TestCase):

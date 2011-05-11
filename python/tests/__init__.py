@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 import unittest
 
-from testphonenumber import PhoneNumberTest
-from testphonenumberutil import PhoneNumberUtilTest
-from testasyoutype import AsYouTypeFormatterTest
-from testexamplenumbers import ExampleNumbersTest
-from testphonenumbermatcher import PhoneNumberMatchTest, PhoneNumberMatcherTest
+from phonenumbertest import PhoneNumberTest
+from phonenumberutiltest import PhoneNumberUtilTest
+from asyoutypetest import AsYouTypeFormatterTest
+from examplenumberstest import ExampleNumbersTest
+from phonenumbermatchertest import PhoneNumberMatchTest, PhoneNumberMatcherTest
 
 if __name__ == '__main__':
     unittest.main()
