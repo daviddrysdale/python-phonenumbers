@@ -96,21 +96,30 @@ class NumberFormat(object):
         if other.domestic_carrier_code_formatting_rule is not None:
             self.domestic_carrier_code_formatting_rule = other.domestic_carrier_code_formatting_rule
 
+    def __eq__(self, other):
+        if not isinstance(other, NumberFormat):
+            return False
+        return (repr(self) == repr(other))
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __repr__(self):
+        return str(self)
+
     def __str__(self):
         return unicode(self).encode('utf-8')
 
     def __unicode__(self):
-        # Generate a string that is valid Python input for the constructor
-        # Note that we use %r on self.format, which generates its own quotes
-        result = u"NumberFormat(pattern='%s', format=%r" % (self.pattern, self.format)
+        # Generate a string that is valid Python input for the constructor.
+        # Note that we use %r, which generates its own quotes.
+        result = u"NumberFormat(pattern=%r, format=%r" % (self.pattern, self.format)
         if len(self.leading_digits_pattern) > 0:
             result += (u", leading_digits_pattern=[%s]" %
-                       ", ".join(["'%s'" % ld for ld in self.leading_digits_pattern]))
+                       ", ".join(["%r" % ld for ld in self.leading_digits_pattern]))
         if self.national_prefix_formatting_rule is not None:
-            # Note that we use %r on self.national_prefix_formatting_rule, which generates its own quotes
             result += u", national_prefix_formatting_rule=%r" % self.national_prefix_formatting_rule
         if self.domestic_carrier_code_formatting_rule is not None:
-            # Note that we use %r on self.domestic_carrier_code_formatting_rule, which generates its own quotes
             result += u", domestic_carrier_code_formatting_rule=%r" % self.domestic_carrier_code_formatting_rule
         result += u")"
         return result
@@ -153,12 +162,13 @@ class PhoneNumberDesc(object):
     def __eq__(self, other):
         if not isinstance(other, PhoneNumberDesc):
             return False
-        return (self.national_number_pattern == other.national_number_pattern and
-                self.possible_number_pattern == other.possible_number_pattern and
-                self.example_number == other.example_number)
+        return (repr(self) == repr(other))
 
     def __ne__(self, other):
         return not self.__eq__(other)
+
+    def __repr__(self):
+        return str(self)
 
     def __str__(self):
         return unicode(self).encode('utf-8')
@@ -168,13 +178,13 @@ class PhoneNumberDesc(object):
         result = u"PhoneNumberDesc("
         sep = u""
         if self.national_number_pattern is not None:
-            result += u"%snational_number_pattern=u'%s'" % (sep, self.national_number_pattern)
+            result += u"%snational_number_pattern=%r" % (sep, self.national_number_pattern)
             sep = u", "
         if self.possible_number_pattern is not None:
-            result += u"%spossible_number_pattern=u'%s'" % (sep, self.possible_number_pattern)
+            result += u"%spossible_number_pattern=%r" % (sep, self.possible_number_pattern)
             sep = u", "
         if self.example_number is not None:
-            result += u"%sexample_number=u'%s'" % (sep, self.example_number)
+            result += u"%sexample_number=%r" % (sep, self.example_number)
             sep = u", "
         result += u")"
         return result
@@ -359,6 +369,17 @@ class PhoneMetadata(object):
             else:
                 PhoneMetadata.region_metadata[self.id] = self
 
+    def __eq__(self, other):
+        if not isinstance(other, PhoneMetadata):
+            return False
+        return (repr(self) == repr(other))
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __repr__(self):
+        return str(self)
+
     def __str__(self):
         return unicode(self).encode('utf-8')
 
@@ -367,7 +388,7 @@ class PhoneMetadata(object):
         country_code = self.country_code
         if country_code is None:
             country_code = -1
-        result = (u"PhoneMetadata(id='%s', country_code=%d, international_prefix='%s'" %
+        result = (u"PhoneMetadata(id='%s', country_code=%d, international_prefix=%r" %
                   (self.id, country_code, self.international_prefix))
         result += ",\n    general_desc=%s" % self.general_desc
         result += ",\n    fixed_line=%s" % self.fixed_line

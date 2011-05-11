@@ -1748,27 +1748,126 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertFalse(phonenumbers.is_alpha_number("1800 123-1234"))
         self.assertFalse(phonenumbers.is_alpha_number("1800 123-1234 extension: 1234"))
 
-    def testEqualDesc(self):
+    def testMetadataEquality(self):
         # Python-specific extra tests for equality against other types
         desc1 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
         desc2 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
+        desc3 = PhoneNumberDesc(national_number_pattern="\\d{4,7}", 
+                                possible_number_pattern="\\d{7}",
+                                example_number="1234567")
         self.assertNotEqual(desc1, None)
         self.assertNotEqual(desc1, "")
         self.assertEquals(desc1, desc2)
+        self.assertNotEqual(desc1, desc3)
+        self.assertTrue(desc1 != desc3)
+        desc1.merge_from(desc3)
+        self.assertEquals(desc1, desc3)
+        self.assertEquals(r"PhoneNumberDesc(national_number_pattern='\\d{4,7}', " + 
+                          r"possible_number_pattern='\\d{7}', example_number='1234567')",
+                          str(desc3))
+        nf1 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
+        nf2 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
+        nf3 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['2'],
+                           national_prefix_formatting_rule='$NP', 
+                           domestic_carrier_code_formatting_rule='$NP')
+        self.assertEquals(nf1, nf2)
+        self.assertNotEqual(nf1, nf3)
+        self.assertNotEqual(nf1, None)
+        self.assertNotEqual(nf1, "")
+        self.assertNotEqual(nf1, 123)
+        self.assertTrue(nf1 != nf3)
+        nf1.merge_from(nf3)
+        # Still not equal because the leading digits are combined not overwritten
+        self.assertNotEqual(nf1, nf3)
+
+        metadata1 = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=False)
+        metadata2 = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=False)
+        metadata3 = PhoneMetadata("XY", preferred_international_prefix=u'9100', register=False)
+        self.assertEquals(metadata1, metadata2)
+        self.assertNotEqual(metadata1, metadata3)
+        self.assertTrue(metadata1 != metadata3)
+        self.assertNotEqual(metadata1, None)
+        self.assertNotEqual(metadata1, "")
+        self.assertNotEqual(metadata1, 123)
 
     def testMetadataAsString(self):
-        # Python-specific extra tests for string conversion
-        metadata = PhoneMetadata.region_metadata["AD"]
-        self.assertEquals("""PhoneMetadata(id='AD', country_code=376, international_prefix='00',
-    general_desc=PhoneNumberDesc(),
-    fixed_line=PhoneNumberDesc(),
-    mobile=PhoneNumberDesc(),
-    toll_free=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
-    premium_rate=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
-    shared_cost=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
-    personal_number=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
-    voip=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
-    pager=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
-    uan=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern=u'NA', possible_number_pattern=u'NA'))""",
+        # Python-specific extra tests for string conversions
+        metadata = PhoneMetadata.region_metadata["AU"]
+        self.assertEquals('\\' + 'd',
+                          metadata.number_format[0].pattern[1:3])
+        self.assertEquals(r"""NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=u'\\1')""",
+                          str(metadata.number_format[0]))
+        self.assertEquals(repr(metadata.number_format[0]),
+                          str(metadata.number_format[0]))
+        self.assertEquals(r"""PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}')""",
+                          str(metadata.general_desc))
+        self.assertEquals(repr(metadata.general_desc), str(metadata.general_desc))
+        
+        metadata2 = PhoneMetadata("XX",
+                                  preferred_international_prefix=u'9123',
+                                  national_prefix=u'1',
+                                  preferred_extn_prefix=u'2',
+                                  national_prefix_for_parsing=u'1',
+                                  national_prefix_transform_rule='',
+                                  number_format=[NumberFormat()],
+                                  intl_number_format=[NumberFormat()],
+                                  leading_digits='123',
+                                  leading_zero_possible=True)
+        self.assertEquals("""PhoneMetadata(id='XX', country_code=-1, international_prefix=None,
+    general_desc=None,
+    fixed_line=None,
+    mobile=None,
+    toll_free=None,
+    premium_rate=None,
+    shared_cost=None,
+    personal_number=None,
+    voip=None,
+    pager=None,
+    uan=None,
+    no_international_dialling=None,
+    preferred_international_prefix=u'9123',
+    national_prefix=u'1',
+    preferred_extn_prefix=u'2',
+    national_prefix_for_parsing=u'1',
+    national_prefix_transform_rule='',
+    number_format=[NumberFormat(pattern=None, format=None)],
+    intl_number_format=[NumberFormat(pattern=None, format=None)],
+    leading_digits='123',
+    leading_zero_possible=True)""",
+                          str(metadata2))
+        # And now the grand finale:
+        self.assertEquals(r"""PhoneMetadata(id='AU', country_code=61, international_prefix='001[12]',
+    general_desc=PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='[2378]\\d{8}', possible_number_pattern='\\d{9}'),
+    mobile=PhoneNumberDesc(national_number_pattern='4\\d{8}', possible_number_pattern='\\d{9}'),
+    toll_free=PhoneNumberDesc(national_number_pattern='1800\\d{6}', possible_number_pattern='\\d{10}'),
+    premium_rate=PhoneNumberDesc(national_number_pattern='190[0126]\\d{6}', possible_number_pattern='\\d{10}'),
+    shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    preferred_international_prefix=u'0011',
+    national_prefix=u'0',
+    national_prefix_for_parsing=u'0',
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=u'\\1'),
+        NumberFormat(pattern='(\\d{1})(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2-478]'], national_prefix_formatting_rule=u'0\\1')])""",
                           str(metadata))
+
+    def testMetadataEval(self):
+        # Python-specific extra tests for string conversions
+        metadata = PhoneMetadata.region_metadata["AU"]
+        new_number_format = eval(repr(metadata.number_format[0]))
+        self.assertEquals(new_number_format, metadata.number_format[0])
+        new_general_desc = eval(repr(metadata.general_desc))
+        self.assertEquals(new_general_desc, metadata.general_desc)
+        new_metadata = eval(repr(metadata))
+        self.assertEquals(new_metadata, metadata)
+        
+        metadata1 = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=True)
+        self.assertRaises(Exception, PhoneMetadata, *("XY",), 
+                          **{'preferred_international_prefix': '9999',
+                             'register': True})
+        metadata2 = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=False)
+                          
