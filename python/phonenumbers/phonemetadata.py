@@ -364,7 +364,7 @@ class PhoneMetadata(object):
             # Register this instance with the class-wide map
             if self.id in PhoneMetadata.region_metadata:
                 other = PhoneMetadata.region_metadata[self.id]
-                if unicode(self) != unicode(other):
+                if self != other:
                     raise Exception("Duplicate PhoneMetadata for %s" % self.id)
             else:
                 PhoneMetadata.region_metadata[self.id] = self
