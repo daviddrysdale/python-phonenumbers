@@ -537,6 +537,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals('Country Code: 54 National Number: 91234125678 ' +
                           'Leading Zero: False Preferred Domestic Carrier Code: 19',
                           str(arNumber))
+        self.assertEquals("PhoneNumber(country_code=54, national_number=91234125678L, extension=None, " +
+                          "italian_leading_zero=False, country_code_source=None, preferred_domestic_carrier_code='19')",
+                          repr(arNumber))
         # When the preferred_domestic_carrier_code is present (even when it
         # contains an empty string), use it instead of the default carrier
         # code passed in.

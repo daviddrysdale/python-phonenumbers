@@ -178,6 +178,16 @@ class PhoneNumber(object):
     def __ne__(self, other):
         return not self.__eq__(other)
 
+    def __repr__(self):
+        return (("PhoneNumber(country_code=%r, national_number=%r, extension=%r, " +
+                 "italian_leading_zero=%r, country_code_source=%r, preferred_domestic_carrier_code=%r)") %
+                (self.country_code,
+                 self.national_number,
+                 self.extension,
+                 self.italian_leading_zero,
+                 self.country_code_source,
+                 self.preferred_domestic_carrier_code))
+
     def __str__(self):
         return unicode(self).encode('utf-8')
 

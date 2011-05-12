@@ -355,6 +355,12 @@ class PhoneNumberMatch(object):
     def __ne__(self, other):
         return not self.__eq__(other)
 
+    def __repr__(self):
+        return ("PhoneNumberMatch(start=%r, raw_string=%r, numobj=%r)" %
+                (self.start,
+                 self.raw_string,
+                 self.number))
+
     def __str__(self):
         return unicode(self).encode('utf-8')
 
