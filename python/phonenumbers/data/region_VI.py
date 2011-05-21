@@ -3,8 +3,8 @@ from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_VI = PhoneMetadata(id='VI', country_code=1, international_prefix='011',
     general_desc=PhoneNumberDesc(national_number_pattern='[3589]\\d{9}', possible_number_pattern='\\d{7}(?:\\d{3})?'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='340(?:201|22[0678]|244|277|332|344|422|47[34]|51[34]|626|64[23]|677|69[023]|71[234589]|727|77\\d|884|998)\\d{4}', possible_number_pattern='\\d{7}(?:\\d{3})?', example_number='3406421234'),
-    mobile=PhoneNumberDesc(national_number_pattern='340(?:201|22[0678]|244|277|332|344|422|47[34]|51[34]|626|64[23]|677|69[023]|71[234589]|727|77\\d|884|998)\\d{4}', possible_number_pattern='\\d{7}(?:\\d{3})?', example_number='3406421234'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='340(?:2(?:01|2[07]|36|44|77)|3(?:32|44)|4(?:4[38]|7[34])|5(?:1[34]|55)|6(?:26|4[23]|9[023])|7(?:[17]\\d|27)|884|998)\\d{4}', possible_number_pattern='\\d{7}(?:\\d{3})?', example_number='3406421234'),
+    mobile=PhoneNumberDesc(national_number_pattern='340(?:2(?:01|2[07]|36|44|77)|3(?:32|44)|4(?:4[38]|7[34])|5(?:1[34]|55)|6(?:26|4[23]|9[023])|7(?:[17]\\d|27)|884|998)\\d{4}', possible_number_pattern='\\d{7}(?:\\d{3})?', example_number='3406421234'),
     toll_free=PhoneNumberDesc(national_number_pattern='8(?:00|55|66|77|88)[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='8002345678'),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='9002345678'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

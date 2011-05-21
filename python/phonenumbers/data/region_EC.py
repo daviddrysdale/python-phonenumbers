@@ -18,6 +18,6 @@ PHONE_METADATA_EC = PhoneMetadata(id='EC', country_code=593, international_prefi
     number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2-\\3', leading_digits_pattern=['[2-7]'], national_prefix_formatting_rule=u'(0\\1)'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(1800)(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=u'\\1')],
-    intl_number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['[2-7]'], national_prefix_formatting_rule=u'(0\\1)'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u'(0\\1)'),
-        NumberFormat(pattern='(1800)(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=u'(0\\1)')])
+    intl_number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['[2-7]']),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]']),
+        NumberFormat(pattern='(1800)(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'])])
