@@ -1880,7 +1880,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
                           str(metadata.general_desc))
         self.assertEquals(repr(metadata.general_desc), str(metadata.general_desc))
 
-        metadata2 = PhoneMetadata("XX",
+        # Create some metadata, including an invalid example number
+        metadataXX = PhoneMetadata("XX",
+                                  personal_number=PhoneNumberDesc(example_number='12'),
                                   preferred_international_prefix=u'9123',
                                   national_prefix=u'1',
                                   preferred_extn_prefix=u'2',
@@ -1889,7 +1891,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
                                   number_format=[NumberFormat()],
                                   intl_number_format=[NumberFormat()],
                                   leading_digits='123',
-                                  leading_zero_possible=True)
+                                  leading_zero_possible=True,
+                                  register=False)
         self.assertEquals("""PhoneMetadata(id='XX', country_code=-1, international_prefix=None,
     general_desc=None,
     fixed_line=None,
@@ -1897,7 +1900,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
     toll_free=None,
     premium_rate=None,
     shared_cost=None,
-    personal_number=None,
+    personal_number=PhoneNumberDesc(example_number='12'),
     voip=None,
     pager=None,
     uan=None,
@@ -1911,8 +1914,16 @@ class PhoneNumberUtilTest(unittest.TestCase):
     intl_number_format=[NumberFormat(pattern=None, format=None)],
     leading_digits='123',
     leading_zero_possible=True)""",
-                          str(metadata2))
-        # And now the grand finale:
+                          str(metadataXX))
+ 
+        # Coverage test: invalid example number for region
+        PhoneMetadata.region_metadata['XX'] = metadataXX
+        phonenumbers.phonenumberutil.SUPPORTED_REGIONS.add("XX")
+        self.assertTrue(phonenumbers.example_number_for_type("XX", PhoneNumberType.PERSONAL_NUMBER) is None)
+        phonenumbers.phonenumberutil.SUPPORTED_REGIONS.remove('XX')
+        del PhoneMetadata.region_metadata['XX']
+
+        # And now the grand finale: check a real metadata example
         self.assertEquals(r"""PhoneMetadata(id='AU', country_code=61, international_prefix='001[12]',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='[2378]\\d{8}', possible_number_pattern='\\d{9}'),
