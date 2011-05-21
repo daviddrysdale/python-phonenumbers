@@ -54,8 +54,8 @@ _ELIGIBLE_FORMAT_PATTERN = re.compile(u"[" + _VALID_PUNCTUATION + u"]*" +
                                       u"(\\\\\\d" + u"[" + _VALID_PUNCTUATION + u"]*)+")
 
 # This is the minimum length of national number accrued that is required to
-# trigger the formatter. The first element of the leadingDigitsPattern of each
-# numberFormat contains a regular expression that matches up to this number of
+# trigger the formatter. The first element of the leading_digits_pattern of each
+# number_format contains a regular expression that matches up to this number of
 # digits.
 _MIN_LEADING_DIGITS_LENGTH = 3
 # The digits that have not been entered yet will be represented by a \u2008,
@@ -135,7 +135,7 @@ class AsYouTypeFormatter(object):
     def _create_formatting_template(self, num_format):
         number_pattern = num_format.pattern
 
-        # The formatter doesn't format numbers when numberPattern contains
+        # The formatter doesn't format numbers when number_pattern contains
         # "|", e.g.  (20|3)\d{4}. In those cases we quickly return.
         if number_pattern.find('|') != -1:
             return False
@@ -176,7 +176,7 @@ class AsYouTypeFormatter(object):
         self._formatting_template = ""
         self._last_match_position = 0
 
-        # The pattern from numberFormat that is currently used to create formatting_template.
+        # The pattern from number_format that is currently used to create formatting_template.
         self._current_formatting_pattern = ""
         self._prefix_before_national_number = ""
         self._national_number = ""
@@ -323,7 +323,7 @@ class AsYouTypeFormatter(object):
             return self._prefix_before_national_number + self._national_number
 
     def _input_accrued_national_number(self):
-        """Invokes inputDigitHelper on each digit of the national number
+        """Invokes input_digit_helper on each digit of the national number
         accrued, and returns a formatted string in the end."""
         length_of_national_number = len(self._national_number)
         if length_of_national_number > 0:

@@ -40,7 +40,7 @@ _PUNCTUATION_LIMIT = _limit(0, 4)
 # national number and the international country code.
 _DIGIT_BLOCK_LIMIT = (phonenumberutil._MAX_LENGTH_FOR_NSN +
                       phonenumberutil._MAX_LENGTH_COUNTRY_CODE)
-# Limit on the number of blocks separated by punctuation. Use digitBlockLimit
+# Limit on the number of blocks separated by punctuation. Use _DIGIT_BLOCK_LIMIT
 # since in some formats use spaces to separate each digit.
 _BLOCK_LIMIT = _limit(0, _DIGIT_BLOCK_LIMIT)
 

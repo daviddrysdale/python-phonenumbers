@@ -31,15 +31,15 @@ class CountryCodeSource(object):
     FROM_NUMBER_WITH_IDD = 5
 
     # The country_code is derived based on a phone number without a leading
-    # "+", e.g. the French number "33 (0)1 42 68 53 00" when defaultCountry is
+    # "+", e.g. the French number "33 (0)1 42 68 53 00" when default_country is
     # supplied as France.
     FROM_NUMBER_WITHOUT_PLUS_SIGN = 10
 
     # The country_code is derived NOT based on the phone number itself, but
-    # from the defaultCountry parameter provided in the parsing function by
+    # from the default_country parameter provided in the parsing function by
     # the clients. This happens mostly for numbers written in the national
     # format (without country code). For example, this would be set when
-    # parsing the French number "(0)1 42 68 53 00", when defaultCountry is
+    # parsing the French number "(0)1 42 68 53 00", when default_country is
     # supplied as France.
     FROM_DEFAULT_COUNTRY = 20
 

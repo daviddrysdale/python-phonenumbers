@@ -611,7 +611,7 @@ def length_of_national_destination_code(numobj):
 def _normalize_helper(number, replacements, remove_non_matches):
     """Normalizes a string of characters representing a phone number by
     replacing all characters found in the accompanying map with the values
-    therein, and stripping all other characters if removeNonMatches is true.
+    therein, and stripping all other characters if remove_non_matches is true.
 
     Arguments:
     number -- a string representing a phone number
@@ -965,7 +965,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
     """
     raw_input = numobj.raw_input
     # If there is no raw input, then we can't keep alpha characters because there aren't any.
-    # In this case, we return formatOutOfCountryCallingNumber.
+    # In this case, we return format_out_of_country_calling_number.
     if raw_input is None or len(raw_input) == 0:
         return format_out_of_country_calling_number(numobj, region_calling_from)
     country_code = numobj.country_code
@@ -1088,7 +1088,7 @@ def _format_national_number(number, region_code, num_format, carrier_code=None):
     """Format a national number."""
     # Note in some regions, the national number can be written in two
     # completely different ways depending on whether it forms part of the
-    # NATIONAL format or INTERNATIONAL format. The numberFormat parameter here
+    # NATIONAL format or INTERNATIONAL format. The num_format parameter here
     # is used to specify which format to use for those cases. If a carrier_code
     # is specified, this will be inserted into the formatted string to replace
     # $CC.
@@ -1564,7 +1564,7 @@ def is_possible_number_with_reason(numobj):
        significant number. It is sometimes okay to dial the subscriber number
        only when dialing in the same area. This function will return true if
        the subscriber-number-only version is passed in. On the other hand,
-       because isValidNumber validates using information on both starting
+       because is_valid_number validates using information on both starting
        digits (for fixed line numbers, that would most likely be area codes)
        and length (obviously includes the length of area codes for fixed line
        numbers), it will return false for the subscriber-number-only version.
@@ -1967,7 +1967,7 @@ def parse(number, region, keep_raw_input=False,
     This method with throw a NumberParseException if the number is not
     considered to be a possible number. Note that validation of whether the
     number is actually a valid number for a particular region is not
-    performed. This can be done separately with PhoneNumber.isValidNumber.
+    performed. This can be done separately with is_valid_number.
 
     Arguments:
     number -- The number that we are attempting to parse. This can
