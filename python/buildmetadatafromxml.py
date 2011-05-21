@@ -82,6 +82,7 @@ COPYRIGHT_NOTICE = """# Copyright (C) 2010-%s Google Inc.
 # limitations under the License.
 """ % datetime.datetime.now().year
 
+
 # XML processing utility functions that are useful for the particular
 # structure of the phone number metadata
 def _get_unique_child(xtag, eltname):
@@ -131,11 +132,11 @@ def _expand_formatting_rule(rule, national_prefix):
 
 
 class XNumberFormat(object):
-    """Parsed NumberFormat object from XML element"""
-    def __init__(self, xtag, national_prefix_allowed, national_prefix,
-                 national_prefix_formatting_rule, carrier_code_formatting_rule):
+    """Parsed NumberFormat objects from XML element"""
+    def __init__(self, owning_xterr, xtag, national_prefix, national_prefix_formatting_rule, carrier_code_formatting_rule):
         if xtag is None:
             self.o = None
+            self.io = None
         else:
             self.o = NumberFormat()
             # Find the REQUIRED attribute
@@ -143,8 +144,6 @@ class XNumberFormat(object):
             # Find the IMPLIED attribute(s)
             self.o.domestic_carrier_code_formatting_rule = xtag.get('carrierCodeFormattingRule', None)
             self.o.national_prefix_formatting_rule = xtag.get('nationalPrefixFormattingRule', None)
-            if not national_prefix_allowed and self.o.national_prefix_formatting_rule is not None:
-                raise Exception("Found unexpected nationalPrefixFormattingRule attribute")
 
             # Post-process formatting rules for expansions and defaults
             if self.o.national_prefix_formatting_rule is not None:
@@ -179,25 +178,33 @@ class XNumberFormat(object):
             for xleading_digit in xleading_digits:
                 self.o.leading_digits_pattern.append(_dews_re(xleading_digit.text))
 
+            # Add this NumberFormat object into the owning metadata
+            owning_xterr.o.number_format.append(self.o)
+
+            # Extract the pattern for international format; if not present, use the national format.
+            # If the intlFormat is set to "NA" the intlFormat should be ignored.
+            self.io = NumberFormat(pattern=self.o.pattern,
+                                   leading_digits_pattern=self.o.leading_digits_pattern)
+
+            intl_format = _get_unique_child_value(xtag, "intlFormat")
+            if intl_format is None:
+                # Default to use the same as the national pattern if none is defined.
+                self.io.format = self.o.format
+            else:
+                # Replace '$1' etc  with '\1' to match Python regexp group reference format
+                intl_format = re.sub('\$', ur'\\', intl_format)
+                if intl_format != "NA":
+                    self.io.format = intl_format
+                owning_xterr.has_explicit_intl_format = True
+            if self.io.format is not None:
+                # Add this international NumberFormat object into the owning metadata
+                owning_xterr.o.intl_number_format.append(self.io)
+
     def __str__(self):
         return unicode(self).encode('utf-8')
 
     def __unicode__(self):
         return unicode(self.o)
-
-
-def _get_number_formats(xtag, elt, national_prefix_allowed, national_prefix,
-                        national_prefix_formatting_rule, carrier_code_formatting_rule):
-    """Build a list of XNumberFormat objects from the given child element tag of the given node"""
-    xelts = xtag.xpath(elt)
-    results = []
-    for xelt in xelts:
-        results.append(XNumberFormat(xelt,
-                                     national_prefix_allowed,
-                                     national_prefix,
-                                     national_prefix_formatting_rule,
-                                     carrier_code_formatting_rule))
-    return results
 
 
 class XPhoneNumberDesc(object):
@@ -311,24 +318,27 @@ class XTerritory(object):
         self.o.short_code = XPhoneNumberDesc(_get_unique_child(xterritory, 'shortCode'),
                                              template=self.o.general_desc.o)
         # Look for available formats
+        self.has_explicit_intl_format = False
         formats = _get_unique_child(xterritory, "availableFormats")
-        self.o.number_formats = []
-        self.o.intl_number_formats = []
         if formats is not None:
-            self.o.number_format = _get_number_formats(formats,
-                                                       "numberFormat",
-                                                       True,
-                                                       self.o.national_prefix,
-                                                       national_prefix_formatting_rule,
-                                                       carrier_code_formatting_rule)
-            self.o.intl_number_format = _get_number_formats(formats,
-                                                            "intlNumberFormat",
-                                                            False,
-                                                            self.o.national_prefix,
-                                                            national_prefix_formatting_rule,
-                                                            carrier_code_formatting_rule)
+            for xelt in formats.xpath("numberFormat"):
+                # Create an XNumberFormat object, which contains a NumberFormat object
+                # or two, and which self-registers them with self.o
+                xnf = XNumberFormat(self,
+                                    xelt,
+                                    self.o.national_prefix,
+                                    national_prefix_formatting_rule,
+                                    carrier_code_formatting_rule)
             if len(self.o.number_format) == 0:
                 raise Exception("No number formats found in available formats")
+        if not self.has_explicit_intl_format:
+            # Only a small number of regions need to specify the intlFormats
+            # in the XML.  For the majority of countries the intlNumberFormat
+            # metadata is an exact copy of the national NumberFormat metadata.
+            # To minimize the size of the metadata file, we only keep
+            # intlNumberFormats that actually differ in some way to the
+            # national formats.
+            self.o.intl_number_format = []
 
     def __str__(self):
         return unicode(self).encode('utf-8')

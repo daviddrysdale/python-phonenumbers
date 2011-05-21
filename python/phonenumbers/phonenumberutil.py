@@ -284,7 +284,13 @@ _VALID_PHONE_NUMBER_PATTERN = re.compile(_VALID_PHONE_NUMBER + u"(?:" + _KNOWN_E
 # We use a non-capturing group because Python's re.split() returns any capturing
 # groups interspersed with the other results (unlike Java's Pattern.split()).
 _NON_DIGITS_PATTERN = re.compile("(?:\\D+)")
-_FIRST_GROUP_PATTERN = re.compile(r"(\\1)")
+
+# The FIRST_GROUP_PATTERN was originally set to \1 but there are some
+# countries for which the first group is not used in the national pattern
+# (e.g. Argentina) so the \1 group does not match correctly.  Therefore, we
+# use \d, so that the first group actually used in the pattern will be
+# matched.
+_FIRST_GROUP_PATTERN = re.compile(r"(\\\d)")
 _NP_PATTERN = re.compile("\\$NP")
 _FG_PATTERN = re.compile("\\$FG")
 _CC_PATTERN = re.compile("\\$CC")
@@ -1186,6 +1192,9 @@ def example_number_for_type(region_code, num_type):
     Returns a valid number for the specified region and type. Returns None
     when the metadata does not contain such information.
     """
+    # Check the region code is valid.
+    if not _is_valid_region_code(region_code):
+        return None
     metadata = PhoneMetadata.region_metadata[region_code.upper()]
     desc = _number_desc_for_type(metadata, num_type)
     if desc.example_number is not None:
@@ -1427,8 +1436,6 @@ def country_code_for_region(region_code):
     if not _is_valid_region_code(region_code):
         return 0
     metadata = PhoneMetadata.region_metadata.get(region_code.upper(), None)
-    if metadata is None:
-        return 0
     return metadata.country_code
 
 
@@ -1456,8 +1463,6 @@ def ndd_prefix_for_region(region_code, strip_non_digits):
     if not _is_valid_region_code(region_code):
         return None
     metadata = PhoneMetadata.region_metadata.get(region_code.upper(), None)
-    if metadata is None:
-        return None
     national_prefix = metadata.national_prefix
     if national_prefix is None or len(national_prefix) == 0:
         return None

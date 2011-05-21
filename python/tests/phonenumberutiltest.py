@@ -70,6 +70,11 @@ GB_MOBILE = PhoneNumber(country_code=44, national_number=7912345678L)
 GB_NUMBER = PhoneNumber(country_code=44, national_number=2070313000L)
 IT_MOBILE = PhoneNumber(country_code=39, national_number=345678901L)
 IT_NUMBER = PhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+# Numbers to test the formatting rules from Mexico.
+MX_MOBILE1 = PhoneNumber(country_code=52, national_number=12345678900L)
+MX_MOBILE2 = PhoneNumber(country_code=52, national_number=15512345678L)
+MX_NUMBER1 = PhoneNumber(country_code=52, national_number=3312345678L)
+MX_NUMBER2 = PhoneNumber(country_code=52, national_number=8211234567L)
 NZ_NUMBER = PhoneNumber(country_code=64, national_number=33316005L)
 SG_NUMBER = PhoneNumber(country_code=65, national_number=65218000L)
 # A too-long and hence invalid US number.
@@ -147,8 +152,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals("0", metadata.national_prefix)
         self.assertEquals("0(?:(11|343|3715)15)?", metadata.national_prefix_for_parsing)
         self.assertEquals("9\\1", metadata.national_prefix_transform_rule)
-        self.assertEquals("\\1 15 \\2-\\3", metadata.number_format[2].format)
-        self.assertEquals("9(\\d{4})(\\d{2})(\\d{4})",
+        self.assertEquals("\\2 15 \\3-\\4", metadata.number_format[2].format)
+        self.assertEquals("(9)(\\d{4})(\\d{2})(\\d{4})",
                           metadata.number_format[3].pattern)
         self.assertEquals("(9)(\\d{4})(\\d{2})(\\d{4})",
                           metadata.intl_number_format[3].pattern)
@@ -234,6 +239,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # of these should return None.
         self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.FIXED_LINE) is not None)
         self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.MOBILE) is not None)
+        # CS is an invalid region, so we have no data for it.
+        self.assertTrue(phonenumbers.example_number_for_type("CS", PhoneNumberType.MOBILE) is None)
         # Python version extra test
         self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.UNKNOWN) is not None)
 
@@ -364,6 +371,23 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals("011 15 8765-4321", phonenumbers.format_number(AR_MOBILE, PhoneNumberFormat.NATIONAL))
         self.assertEquals("+54 9 11 8765 4321", phonenumbers.format_number(AR_MOBILE, PhoneNumberFormat.INTERNATIONAL))
         self.assertEquals("+5491187654321", phonenumbers.format_number(AR_MOBILE, PhoneNumberFormat.E164))
+
+    def testFormatMXNumber(self):
+        self.assertEquals("045 234 567 8900", phonenumbers.format_number(MX_MOBILE1, PhoneNumberFormat.NATIONAL))
+        self.assertEquals("+52 1 234 567 8900", phonenumbers.format_number(MX_MOBILE1, PhoneNumberFormat.INTERNATIONAL))
+        self.assertEquals("+5212345678900", phonenumbers.format_number(MX_MOBILE1, PhoneNumberFormat.E164))
+
+        self.assertEquals("045 55 1234 5678", phonenumbers.format_number(MX_MOBILE2, PhoneNumberFormat.NATIONAL))
+        self.assertEquals("+52 1 55 1234 5678", phonenumbers.format_number(MX_MOBILE2, PhoneNumberFormat.INTERNATIONAL))
+        self.assertEquals("+5215512345678", phonenumbers.format_number(MX_MOBILE2, PhoneNumberFormat.E164))
+
+        self.assertEquals("01 33 1234 5678", phonenumbers.format_number(MX_NUMBER1, PhoneNumberFormat.NATIONAL))
+        self.assertEquals("+52 33 1234 5678", phonenumbers.format_number(MX_NUMBER1, PhoneNumberFormat.INTERNATIONAL))
+        self.assertEquals("+523312345678", phonenumbers.format_number(MX_NUMBER1, PhoneNumberFormat.E164))
+
+        self.assertEquals("01 821 123 4567", phonenumbers.format_number(MX_NUMBER2, PhoneNumberFormat.NATIONAL))
+        self.assertEquals("+52 821 123 4567", phonenumbers.format_number(MX_NUMBER2, PhoneNumberFormat.INTERNATIONAL))
+        self.assertEquals("+528211234567", phonenumbers.format_number(MX_NUMBER2, PhoneNumberFormat.E164))
 
     def testFormatOutOfCountryCallingNumber(self):
         self.assertEquals("00 1 900 253 0000",
@@ -1934,16 +1958,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
     def testCoverage(self):
         # Python version extra tests
-        # Temporarily add 'CS' to metadata, but without metadata
-        PhoneMetadata.region_metadata['CS'] = None
-        phonenumbers.phonenumberutil.SUPPORTED_REGIONS.add("CS")
-        self.assertEquals(0, phonenumbers.country_code_for_region("CS"))
-        self.assertTrue(phonenumbers.ndd_prefix_for_region("CS", True) is None)
         self.assertTrue(phonenumbers.phonenumberutil._region_code_for_number_from_list(GB_NUMBER, ("XX",)) is None)
-        # Restore normality
-        phonenumbers.phonenumberutil.SUPPORTED_REGIONS.remove('CS')
-        del PhoneMetadata.region_metadata['CS']
-
         self.assertEquals((0, "abcdef"),
                           phonenumbers.phonenumberutil._extract_country_code("abcdef"))
         metadata = PhoneMetadata.region_metadata["AU"]

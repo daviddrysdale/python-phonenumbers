@@ -32,7 +32,7 @@ sdist:
 	python setup.py sdist
 $(TARBALL): sdist
 
-install:
+install: sdist
 	sudo python setup.py install
 
 clean:

@@ -1,4 +1,13 @@
 
+
+=====================
+ What's new in 3.4b1
+=====================
+
+Merge up to upstream Subversion revision 205.
+Changed version marker from a to b.
+More unit test coverage
+
 =====================
  What's new in 3.3a1
 =====================

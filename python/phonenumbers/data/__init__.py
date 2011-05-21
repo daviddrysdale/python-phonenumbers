@@ -28,6 +28,7 @@ from region_AS import PHONE_METADATA_AS
 from region_AT import PHONE_METADATA_AT
 from region_AU import PHONE_METADATA_AU
 from region_AW import PHONE_METADATA_AW
+from region_AX import PHONE_METADATA_AX
 from region_AZ import PHONE_METADATA_AZ
 from region_BA import PHONE_METADATA_BA
 from region_BB import PHONE_METADATA_BB
@@ -49,6 +50,7 @@ from region_BW import PHONE_METADATA_BW
 from region_BY import PHONE_METADATA_BY
 from region_BZ import PHONE_METADATA_BZ
 from region_CA import PHONE_METADATA_CA
+from region_CC import PHONE_METADATA_CC
 from region_CD import PHONE_METADATA_CD
 from region_CF import PHONE_METADATA_CF
 from region_CG import PHONE_METADATA_CG
@@ -62,6 +64,7 @@ from region_CO import PHONE_METADATA_CO
 from region_CR import PHONE_METADATA_CR
 from region_CU import PHONE_METADATA_CU
 from region_CV import PHONE_METADATA_CV
+from region_CX import PHONE_METADATA_CX
 from region_CY import PHONE_METADATA_CY
 from region_CZ import PHONE_METADATA_CZ
 from region_DE import PHONE_METADATA_DE
@@ -286,7 +289,7 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     57: ("CO",),
     58: ("VE",),
     60: ("MY",),
-    61: ("AU",),
+    61: ("AU", "CC", "CX",),
     62: ("ID",),
     63: ("PH",),
     64: ("NZ",),
@@ -369,7 +372,7 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     355: ("AL",),
     356: ("MT",),
     357: ("CY",),
-    358: ("FI",),
+    358: ("FI", "AX",),
     359: ("BG",),
     370: ("LT",),
     371: ("LV",),
