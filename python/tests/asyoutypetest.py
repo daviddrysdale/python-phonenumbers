@@ -22,6 +22,9 @@ import pathfix
 pathfix.fix()
 
 from phonenumbers import AsYouTypeFormatter
+from phonenumbers import PhoneMetadata, PhoneNumberDesc, NumberFormat
+# Access internal functions of phonenumberutil.py
+from phonenumbers import phonenumberutil
 from phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 
 
@@ -153,6 +156,15 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEquals("+48 88 123 12", formatter.input_digit('2'))
         self.assertEquals("+48 88 123 12 1", formatter.input_digit('1'))
         self.assertEquals("+48 88 123 12 12", formatter.input_digit('2'))
+
+        # Python version extra test
+        formatter.clear()
+        self.assertEquals('0', formatter.input_digit('0'))
+        self.assertEquals('01', formatter.input_digit('1'))
+        self.assertEquals('011 ', formatter.input_digit('1'))
+        self.assertEquals('011 4', formatter.input_digit('4'))
+        self.assertEquals('011 42', formatter.input_digit('2'))
+        self.assertEquals('011422', formatter.input_digit('2'))
 
     def testAYTFUSFullWidthCharacters(self):
         formatter = AsYouTypeFormatter("US")
@@ -681,3 +693,24 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEquals("+81 3332 2 56", formatter.input_digit('6'))
         self.assertEquals("+81 3332 2 567", formatter.input_digit('7'))
         self.assertEquals("+81 3332 2 5678", formatter.input_digit('8'))
+
+
+    def testEdgeCases(self):
+        # Python version extra tests for coverage
+        metadataXX = PhoneMetadata(id='XX', country_code=384, international_prefix='011',
+                                   general_desc=PhoneNumberDesc(national_number_pattern='\\d{10}', possible_number_pattern='\\d{6,10}'),
+                                   fixed_line=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+                                   mobile=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+                                   national_prefix=u'0',
+                                   national_prefix_for_parsing=u'0',
+                                   number_format=[NumberFormat(pattern='([135][246]|[246][123])(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[1-59]|[78]0'], national_prefix_formatting_rule=u'(0\\1)')])
+        PhoneMetadata.region_metadata['XX'] = metadataXX
+        phonenumberutil.SUPPORTED_REGIONS.add("XX")
+        formatter = AsYouTypeFormatter('XX')
+        # A pattern with "|" in it doesn't get formatting
+        self.assertEquals('1', formatter.input_digit('1'))
+        self.assertEquals('12', formatter.input_digit('2'))
+        self.assertEquals('123', formatter.input_digit('3'))
+        self.assertEquals('1234', formatter.input_digit('4'))
+        phonenumberutil.SUPPORTED_REGIONS.remove('XX')
+        del PhoneMetadata.region_metadata['XX']

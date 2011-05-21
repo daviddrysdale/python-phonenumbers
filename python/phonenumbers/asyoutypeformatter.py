@@ -266,7 +266,7 @@ class AsYouTypeFormatter(object):
             # The formatting pattern is already chosen.
             temp_national_number = self._input_digit_helper(next_char)
             # See if the accrued digits can be formatted properly already. If
-            # not, use the results from inputDigitHelper, which does
+            # not, use the results from input_digit_helper, which does
             # formatting based on the formatting pattern chosen.
             formatted_number = self._attempt_to_format_accrued_digits()
             if len(formatted_number) > 0:
