@@ -1329,6 +1329,11 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(arNumber, phonenumbers.parse("+54 23 1234 0000", "AR"))
         self.assertEquals(arNumber, phonenumbers.parse("023 1234 0000", "AR"))
 
+        # Python version extra test
+        arIncompleteNumber = phonenumbers.parse("03715 15 65", "AR")
+        self.assertEquals("37151565",
+                          phonenumbers.format_number(arIncompleteNumber, PhoneNumberFormat.NATIONAL))
+
     def testParseWithXInNumber(self):
         # Test that having an 'x' in the phone number at the start is ok and that it just gets removed.
         self.assertEquals(AR_NUMBER, phonenumbers.parse("01187654321", "AR"))
@@ -1915,7 +1920,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
     leading_digits='123',
     leading_zero_possible=True)""",
                           str(metadataXX))
- 
+
         # Coverage test: invalid example number for region
         PhoneMetadata.region_metadata['XX'] = metadataXX
         phonenumberutil.SUPPORTED_REGIONS.add("XX")
@@ -1982,3 +1987,13 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals((CountryCodeSource.FROM_DEFAULT_COUNTRY, ""),
                           phonenumberutil._maybe_strip_i18n_prefix_and_normalize("", "011"))
         self.assertFalse(phonenumberutil._check_region_for_parsing("", "cs"))
+
+        metadataXY = PhoneMetadata("XY",
+                                   general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                                possible_number_pattern='\\d{4,10}'),
+                                   national_prefix_for_parsing=u'0(1|2|3)(4|5|6)',
+                                   national_prefix_transform_rule=u'\\2',
+                                   register=False)
+        self.assertEquals(('1', '41234567'),
+                          phonenumberutil._maybe_strip_national_prefix_carrier_code("0141234567",
+                                                                                     metadataXY))

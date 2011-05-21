@@ -157,7 +157,7 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEquals("+48 88 123 12 1", formatter.input_digit('1'))
         self.assertEquals("+48 88 123 12 12", formatter.input_digit('2'))
 
-        # Python version extra test
+        # Python version extra test: invalid country code after IDD
         formatter.clear()
         self.assertEquals('0', formatter.input_digit('0'))
         self.assertEquals('01', formatter.input_digit('1'))
@@ -165,6 +165,9 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEquals('011 4', formatter.input_digit('4'))
         self.assertEquals('011 42', formatter.input_digit('2'))
         self.assertEquals('011422', formatter.input_digit('2'))
+        self.assertEquals('0114221', formatter.input_digit('1'))
+        self.assertEquals('01142212', formatter.input_digit('2'))
+        self.assertEquals('011422123', formatter.input_digit('3'))
 
     def testAYTFUSFullWidthCharacters(self):
         formatter = AsYouTypeFormatter("US")
@@ -693,7 +696,6 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEquals("+81 3332 2 56", formatter.input_digit('6'))
         self.assertEquals("+81 3332 2 567", formatter.input_digit('7'))
         self.assertEquals("+81 3332 2 5678", formatter.input_digit('8'))
-
 
     def testEdgeCases(self):
         # Python version extra tests for coverage

@@ -2055,7 +2055,7 @@ def parse(number, region, keep_raw_input=False,
         if keep_raw_input:
             numobj.preferred_domestic_carrier_code = carrier_code
     len_national_number = len(normalized_national_number)
-    if len_national_number < _MIN_LENGTH_FOR_NSN:
+    if len_national_number < _MIN_LENGTH_FOR_NSN:  # pragma no cover
         raise NumberParseException(NumberParseException.TOO_SHORT_NSN,
                                    "The string supplied is too short to be a phone number.")
 
