@@ -716,3 +716,6 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEquals('1234', formatter.input_digit('4'))
         phonenumberutil.SUPPORTED_REGIONS.remove('XX')
         del PhoneMetadata.region_metadata['XX']
+        # Hit internal error arm
+        formatter._national_number = ""
+        self.assertEquals("", formatter._input_accrued_national_number())

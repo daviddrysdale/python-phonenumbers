@@ -279,7 +279,7 @@ class AsYouTypeFormatter(object):
             if self._able_to_format:
                 self._current_output = self._prefix_before_national_number + temp_national_number
                 return self._current_output
-            else:
+            else:  # pragma no cover
                 self._current_output = temp_national_number
                 return self._current_output
         else:
