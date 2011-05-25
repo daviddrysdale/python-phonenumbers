@@ -324,11 +324,11 @@ class XTerritory(object):
             for xelt in formats.xpath("numberFormat"):
                 # Create an XNumberFormat object, which contains a NumberFormat object
                 # or two, and which self-registers them with self.o
-                xnf = XNumberFormat(self,
-                                    xelt,
-                                    self.o.national_prefix,
-                                    national_prefix_formatting_rule,
-                                    carrier_code_formatting_rule)
+                XNumberFormat(self,
+                              xelt,
+                              self.o.national_prefix,
+                              national_prefix_formatting_rule,
+                              carrier_code_formatting_rule)
             if len(self.o.number_format) == 0:
                 raise Exception("No number formats found in available formats")
         if not self.has_explicit_intl_format:
