@@ -2,15 +2,15 @@
 from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CY = PhoneMetadata(id='CY', country_code=357, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[27-9]\\d{7}', possible_number_pattern='\\d{8}'),
+    general_desc=PhoneNumberDesc(national_number_pattern='[257-9]\\d{7}', possible_number_pattern='\\d{8}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='2[2-6]\\d{6}', possible_number_pattern='\\d{8}', example_number='22345678'),
-    mobile=PhoneNumberDesc(national_number_pattern='7777\\d{4}|9(?:[69]\\d|7[67])\\d{5}', possible_number_pattern='\\d{8}', example_number='96123456'),
-    toll_free=PhoneNumberDesc(national_number_pattern='8000\\d{4}', possible_number_pattern='\\d{8}', example_number='80001234'),
-    premium_rate=PhoneNumberDesc(national_number_pattern='9009\\d{4}', possible_number_pattern='\\d{8}', example_number='90091234'),
-    shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    mobile=PhoneNumberDesc(national_number_pattern='9[5-79]\\d{6}', possible_number_pattern='\\d{8}', example_number='96123456'),
+    toll_free=PhoneNumberDesc(national_number_pattern='800\\d{5}', possible_number_pattern='\\d{8}', example_number='80001234'),
+    premium_rate=PhoneNumberDesc(national_number_pattern='90[09]\\d{5}', possible_number_pattern='\\d{8}', example_number='90012345'),
+    shared_cost=PhoneNumberDesc(national_number_pattern='80[1-9]\\d{5}', possible_number_pattern='\\d{8}', example_number='80112345'),
     personal_number=PhoneNumberDesc(national_number_pattern='700\\d{5}', possible_number_pattern='\\d{8}', example_number='70012345'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    uan=PhoneNumberDesc(national_number_pattern='(?:50|77)\\d{6}', possible_number_pattern='\\d{8}', example_number='77123456'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='([27-9]\\d)(\\d{6})', format=u'\\1 \\2')])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{6})', format=u'\\1 \\2')])

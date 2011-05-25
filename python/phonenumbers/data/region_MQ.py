@@ -3,8 +3,8 @@ from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MQ = PhoneMetadata(id='MQ', country_code=596, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[56]\\d{8}', possible_number_pattern='\\d{9}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='596(?:3[0789]|4[28]|[5-7]\\d|9[67])\\d{4}', possible_number_pattern='\\d{9}', example_number='596301234'),
-    mobile=PhoneNumberDesc(national_number_pattern='696(?:[2-49]\\d|7[0-4]|8[0-6])\\d{4}', possible_number_pattern='\\d{9}', example_number='696201234'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='596(?:0[2-5]|[12]0|3[05-9]|4[024-8]|[5-7]\\d|89|9[4-8])\\d{4}', possible_number_pattern='\\d{9}', example_number='596301234'),
+    mobile=PhoneNumberDesc(national_number_pattern='696(?:[0-479]\\d|5[01]|8[0-689])\\d{4}', possible_number_pattern='\\d{9}', example_number='696201234'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

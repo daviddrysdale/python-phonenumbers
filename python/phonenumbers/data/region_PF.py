@@ -2,9 +2,9 @@
 from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_PF = PhoneMetadata(id='PF', country_code=689, international_prefix='00',
-    general_desc=PhoneNumberDesc(),
-    fixed_line=PhoneNumberDesc(),
-    mobile=PhoneNumberDesc(),
+    general_desc=PhoneNumberDesc(national_number_pattern='[2-9]\\d{5}', possible_number_pattern='\\d{6}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:36\\d|4(?:[02-9]\\d|1[02-9])|[5689]\\d{2})\\d{3}', possible_number_pattern='\\d{6}', example_number='401234'),
+    mobile=PhoneNumberDesc(national_number_pattern='(?:[27]\\d{3}|3[0-49]\\d{2}|411[3-6])\\d{2}', possible_number_pattern='\\d{6}', example_number='212345'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
@@ -12,4 +12,5 @@ PHONE_METADATA_PF = PhoneMetadata(id='PF', country_code=689, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'))
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:36|44)\\d{4}', possible_number_pattern='\\d{6}', example_number='441234'),
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3')])
