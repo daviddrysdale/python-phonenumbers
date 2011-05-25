@@ -299,6 +299,20 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         self.assertEquals(expectedResult, matchWithSpaces.number)
         self.assertEquals(number, matchWithSpaces.raw_string)
 
+    def testNonMatchingBracketsAreInvalid(self):
+        # The digits up to the ", " form a valid US number, but it shouldn't
+        # be matched as one since there was a non-matching bracket present.
+        self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("80.585 [79.964, 81.191]", "US")))
+
+        # The trailing "]" is thrown away before parsing, so the resultant
+        # number, while a valid US number, does not have matching brackets.
+        self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("80.585 [79.964]", "US")))
+
+        self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("80.585 ((79.964)", "US")))
+
+        # This case has too many sets of brackets to be valid.
+        self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("(80).(585) (79).(9)64", "US")))
+
     def testNoMatchIfRegionIsNone(self):
         # Fail on non-international prefix if region code is None.
         self.assertTrue(self.hasNoMatches(PhoneNumberMatcher("Random text body - number is 0331 6005, see you there", None)))

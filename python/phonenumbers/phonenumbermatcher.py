@@ -19,6 +19,8 @@
 import sys
 import re
 
+# Extra regexp function; see README
+from re_util import fullmatch
 import phonenumberutil
 
 
@@ -28,8 +30,29 @@ def _limit(lower, upper):
         raise Exception("Illegal argument to _limit")
     return u"{%d,%d}" % (lower, upper)
 
-# Build the PATTERN regular expression pattern. The building blocks
-# below exist to make the patterns more easily understood.
+# Build the MATCHING_BRACKETS and PATTERN regular expression patterns. The
+# building blocks below exist to make the patterns more easily understood.
+
+_OPENING_PARENS = u"(\\[\uFF08\uFF3B"
+_CLOSING_PARENS = u")\\]\uFF09\uFF3D"
+_NON_PARENS = u"[^" + _OPENING_PARENS + _CLOSING_PARENS + u"]"
+# Limit on the number of pairs of brackets in a phone number.
+_BRACKET_PAIR_LIMIT = _limit(0, 3)
+
+# Pattern to check that brackets match. Opening brackets should be closed
+# within a phone number.  This also checks that there is something inside the
+# brackets. Having no brackets at all is also fine.
+#
+# An opening bracket at the beginning may not be closed, but subsequent ones
+# should be.  It's also possible that the leading bracket was dropped, so we
+# shouldn't be surprised if we see a closing bracket first. We limit the sets
+# of brackets in a phone number to four.
+_MATCHING_BRACKETS = re.compile(u"(?:[" + _OPENING_PARENS + u"])?" + u"(?:" + _NON_PARENS + u"+" +
+                                u"[" + _CLOSING_PARENS + u"])?" +
+                                _NON_PARENS + u"+" +
+                                u"(?:[" + _OPENING_PARENS + u"]" + _NON_PARENS +
+                                u"+[" + _CLOSING_PARENS + u"])" + _BRACKET_PAIR_LIMIT +
+                                _NON_PARENS + u"*")
 
 # Limit on the number of leading (plus) characters.
 _LEAD_LIMIT = _limit(0, 2)
@@ -49,7 +72,7 @@ _PUNCTUATION = u"[" + phonenumberutil._VALID_PUNCTUATION + u"]" + _PUNCTUATION_L
 # A digits block without punctuation.
 _DIGIT_SEQUENCE = u"(?u)\\d" + _limit(1, _DIGIT_BLOCK_LIMIT)
 # Punctuation that may be at the start of a phone number - brackets and plus signs.
-_LEAD_CLASS = u"[(\\[" + phonenumberutil._PLUS_CHARS + u"]"
+_LEAD_CLASS = u"[" + _OPENING_PARENS + phonenumberutil._PLUS_CHARS + u"]"
 
 # Phone number pattern allowing optional punctuation.
 # This is the phone number pattern used by _find(), similar to
@@ -77,6 +100,7 @@ _PUB_PAGES = re.compile(u"\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}")
 # Matches strings that look like dates using "/" as a separator. Examples:
 # 3/10/2011, 31/10/96 or 08/31/95.
 _SLASH_SEPARATED_DATES = re.compile(u"(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}")
+
 
 # Matches white-space, which may indicate the end of a phone number and the
 # start of something else (such as a neighbouring zip-code).
@@ -294,6 +318,10 @@ class PhoneNumberMatcher(object):
         Returns the parsed and validated phone number match, or None.
         """
         try:
+            # Check the candidate doesn't contain any formatting which would
+            # indicate that it really isn't a phone number.
+            if not fullmatch(_MATCHING_BRACKETS, candidate):
+                return None
             numobj = phonenumberutil.parse(candidate, self.preferred_region)
             if _verify(self.leniency, numobj):
                 return PhoneNumberMatch(offset, candidate, numobj)
