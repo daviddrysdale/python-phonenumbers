@@ -130,3 +130,10 @@ class ExampleNumbersTest(unittest.TestCase):
                 phonenumberutil._can_be_internationally_dialled(exampleNumber)):
                 self.wrong_type_cases.append(exampleNumber)
         self.assertEquals(0, len(self.wrong_type_cases))
+
+    def testBlankMetadata(self):
+        # Python version extra test
+        # Some metadata is blank; check that we cope with this.
+        # Example: MH (+692)
+        number = phonenumberutil.parse("+6921234567", "US")
+        self.assertEquals("Country Code: 692 National Number: 1234567 Leading Zero: False", str(number))

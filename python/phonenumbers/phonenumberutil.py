@@ -1310,8 +1310,8 @@ def _is_number_matching_desc(national_number, number_desc):
     """Determine if the number matches the given PhoneNumberDesc"""
     if number_desc is None:
         return False
-    possible_re = re.compile(number_desc.possible_number_pattern)
-    national_re = re.compile(number_desc.national_number_pattern)
+    possible_re = re.compile(number_desc.possible_number_pattern or "")
+    national_re = re.compile(number_desc.national_number_pattern or "")
     return (fullmatch(possible_re, national_number) and
             fullmatch(national_re, national_number))
 
@@ -1598,7 +1598,7 @@ def is_possible_number_with_reason(numobj):
             return ValidationResult.TOO_LONG
         else:
             return ValidationResult.IS_POSSIBLE
-    possible_re = re.compile(general_desc.possible_number_pattern)
+    possible_re = re.compile(general_desc.possible_number_pattern or "")
     return _test_number_length_against_pattern(possible_re, national_number)
 
 
@@ -1763,10 +1763,10 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
         if normalized_number.startswith(default_country_code_str):
             potential_national_number = full_number[len(default_country_code_str):]
             general_desc = metadata.general_desc
-            valid_pattern = re.compile(general_desc.national_number_pattern)
+            valid_pattern = re.compile(general_desc.national_number_pattern or "")
             _, potential_national_number = _maybe_strip_national_prefix_carrier_code(potential_national_number,
                                                                                      metadata)
-            possible_pattern = re.compile(general_desc.possible_number_pattern)
+            possible_pattern = re.compile(general_desc.possible_number_pattern or "")
 
             # If the number was not valid before but is valid now, or if it
             # was too long before, we consider the number with the country
@@ -1882,7 +1882,7 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
     prefix_pattern = re.compile(possible_national_prefix)
     prefix_match = prefix_pattern.match(number)
     if prefix_match:
-        national_number_pattern = re.compile(metadata.general_desc.national_number_pattern)
+        national_number_pattern = re.compile(metadata.general_desc.national_number_pattern or "")
         # prefix_match.groups() == () implies nothing was captured by the
         # capturing groups in possible_national_prefix; therefore, no
         # transformation is necessary, and we just remove the national prefix.
