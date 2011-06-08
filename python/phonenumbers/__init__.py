@@ -74,7 +74,7 @@ PhoneNumberMatch [51,62) 703-4800500
 
 # Version number is taken from the upstream libphonenumber version
 # together with an indication of the version of the Python-specific code.
-__version__ = "3.5b1"
+__version__ = "3.5b2"
 
 # Data class definitions
 from phonenumber import PhoneNumber, CountryCodeSource
