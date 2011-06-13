@@ -26,13 +26,13 @@ True
 >>> print formatter.input_digit("5")
 65
 >>> print formatter.input_digit("0")
-(650
+650
 >>> print formatter.input_digit("2")
-(650) 2
+650-2
 >>> print formatter.input_digit("5")
-(650) 25
+650-25
 >>> print formatter.input_digit("3")
-(650) 253
+650-253
 >>> print formatter.input_digit("2")
 650-2532
 >>> print formatter.input_digit("2")
@@ -74,7 +74,7 @@ PhoneNumberMatch [51,62) 703-4800500
 
 # Version number is taken from the upstream libphonenumber version
 # together with an indication of the version of the Python-specific code.
-__version__ = "3.5b2"
+__version__ = "3.6b1"
 
 # Data class definitions
 from phonenumber import PhoneNumber, CountryCodeSource

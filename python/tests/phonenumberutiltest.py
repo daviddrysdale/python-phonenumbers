@@ -113,8 +113,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals("011", metadata.international_prefix)
         self.assertTrue(metadata.national_prefix is not None)
         self.assertEquals(2, len(metadata.number_format))
-        self.assertEquals("(\\d{3})(\\d{3})(\\d{4})", metadata.number_format[0].pattern)
-        self.assertEquals("\\1 \\2 \\3", metadata.number_format[0].format)
+        self.assertEquals("(\\d{3})(\\d{3})(\\d{4})", metadata.number_format[1].pattern)
+        self.assertEquals("\\1 \\2 \\3", metadata.number_format[1].format)
         self.assertEquals("[13-9]\\d{9}|2[0-35-9]\\d{8}",
                           metadata.general_desc.national_number_pattern)
         self.assertEquals("\\d{7}(?:\\d{3})?", metadata.general_desc.possible_number_pattern)
@@ -244,6 +244,12 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Python version extra test
         self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.UNKNOWN) is not None)
 
+    def testConvertAlphaCharactersInNumber(self):
+        input = "1800-ABC-DEF"
+        # Alpha chars are converted to digits; everything else is left untouched.
+        expectedOutput = "1800-222-333"
+        self.assertEquals(expectedOutput, phonenumberutil.convert_alpha_characters_in_number(input))
+
     def testNormaliseRemovePunctuation(self):
         inputNumber = "034-56&+#234"
         expectedOutput = "03456234"
@@ -277,11 +283,6 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(expectedOutput,
                           phonenumbers.normalize_digits_only(inputNumber),
                           msg="Conversion did not correctly remove alpha character")
-        # Python version extra test
-        inputNumber = u"\uFF10\u0663\u06F4\u020B56234"
-        expectedOutput = u"034\u020B56234"
-        self.assertEquals(expectedOutput,
-                          phonenumbers.convert_alpha_characters_in_number(inputNumber))
 
     def testFormatUSNumber(self):
         self.assertEquals("650 253 0000", phonenumbers.format_number(US_NUMBER, PhoneNumberFormat.NATIONAL))
@@ -998,6 +999,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Alpha numbers.
         self.assertTrue(phonenumberutil._is_viable_phone_number("0800-4-pizza"))
         self.assertTrue(phonenumberutil._is_viable_phone_number("0800-4-PIZZA"))
+
+    def testIsViablePhoneNumberNonAscii(self):
         # Only one or two digits before possible punctuation followed by more digits.
         self.assertTrue(phonenumberutil._is_viable_phone_number(u"1\u300034"))
         self.assertFalse(phonenumberutil._is_viable_phone_number(u"1\u30003+4"))
@@ -1281,6 +1284,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(US_NUMBER, phonenumbers.parse("0~01-650-253-0000", "PL"))
         # Using "++" at the start.
         self.assertEquals(US_NUMBER, phonenumbers.parse("++1 (650) 253-0000", "PL"))
+
+    def testParseNonAscii(self):
         # Using a full-width plus sign.
         self.assertEquals(US_NUMBER, phonenumbers.parse(u"\uFF0B1 (650) 253-0000", "SG"))
         # The whole number, including punctuation, is here represented in full-width form.
@@ -1293,6 +1298,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
                                                         u"\u3000\uFF12\uFF15\uFF13\u30FC\uFF10\uFF10\uFF10" +
                                                         u"\uFF10",
                                                         "SG"))
+        # Using a very strange decimal digit range (Mongolian digits).
+        self.assertEquals(US_NUMBER, phonenumbers.parse(u"\u1811 \u1816\u1815\u1810 " +
+                                                        u"\u1812\u1815\u1813 \u1810\u1810\u1810\u1810",
+                                                        "US"))
 
     def testParseWithLeadingZero(self):
         self.assertEquals(IT_NUMBER, phonenumbers.parse("+39 02-36618 300", "NZ"))

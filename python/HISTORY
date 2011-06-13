@@ -1,5 +1,20 @@
 
 =====================
+ What's new in 3.6b1
+=====================
+
+Merge up to upstream Subversion revision 231 (but
+geocoding functionality not yet ported).
+Require Python 2.5, to allow import unicodedata.
+
+
+=====================
+ What's new in 3.5b2
+=====================
+
+Fix GH-3: crash in parse() for number with blank metadata
+
+=====================
  What's new in 3.5b1
 =====================
 

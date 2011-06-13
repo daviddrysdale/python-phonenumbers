@@ -64,6 +64,28 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEquals("65025", formatter.input_digit('5'))
         self.assertEquals("650253", formatter.input_digit('3'))
 
+    def testTooLongNumberMatchingMultipleLeadingDigits(self):
+        # See http://code.google.com/p/libphonenumber/issues/detail?id=36
+        # The bug occurred last time for countries which have two
+        # formatting rules with exactly the same leading digits pattern
+        # but differ in length.
+        formatter = AsYouTypeFormatter("ZZ")
+        self.assertEquals("+", formatter.input_digit('+'))
+        self.assertEquals("+8", formatter.input_digit('8'))
+        self.assertEquals("+81 ", formatter.input_digit('1'))
+        self.assertEquals("+81 9", formatter.input_digit('9'))
+        self.assertEquals("+81 90", formatter.input_digit('0'))
+        self.assertEquals("+81 90 1", formatter.input_digit('1'))
+        self.assertEquals("+81 90 12", formatter.input_digit('2'))
+        self.assertEquals("+81 90 123", formatter.input_digit('3'))
+        self.assertEquals("+81 90 1234", formatter.input_digit('4'))
+        self.assertEquals("+81 90 1234 5", formatter.input_digit('5'))
+        self.assertEquals("+81 90 1234 56", formatter.input_digit('6'))
+        self.assertEquals("+81 90 1234 567", formatter.input_digit('7'))
+        self.assertEquals("+81 90 1234 5678", formatter.input_digit('8'))
+        self.assertEquals("+81 90 12 345 6789", formatter.input_digit('9'))
+        self.assertEquals("+81901234567890", formatter.input_digit('0'))
+
     def testAYTFUS(self):
         formatter = AsYouTypeFormatter("US")
         self.assertEquals("6", formatter.input_digit('6'))

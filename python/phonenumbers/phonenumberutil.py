@@ -17,8 +17,8 @@
 # limitations under the License.
 import re
 
-# Extra regexp function; see README
-from re_util import fullmatch
+from re_util import fullmatch   # Extra regexp function; see README
+import unicode_util
 
 # Data class definitions
 from phonenumber import PhoneNumber, CountryCodeSource
@@ -57,54 +57,19 @@ _MAX_LENGTH_FOR_NSN = 15
 _MAX_LENGTH_COUNTRY_CODE = 3
 # Region-code for the unknown region.
 UNKNOWN_REGION = u"ZZ"
-# The set of regions that share country code 1.
+# The set of regions that share country calling code 1.
 _NANPA_COUNTRY_CODE = 1
 # The PLUS_SIGN signifies the international prefix.
 _PLUS_SIGN = u'+'
 _RFC3966_EXTN_PREFIX = u";ext="
 
-# Simple ASCII digits map used to populate _DIGIT_MAPPINGS and
+# Simple ASCII digits map used to populate _ALPHA_PHONE_MAPPINGS and
 # _ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
 _ASCII_DIGITS_MAP = {u'0': u'0', u'1': u'1',
                      u'2': u'2', u'3': u'3',
                      u'4': u'4', u'5': u'5',
                      u'6': u'6', u'7': u'7',
                      u'8': u'8', u'9': u'9'}
-
-# These mappings map a character (key) to a specific digit that should replace
-# it for normalization purposes. Non-European digits that may be used in phone
-# numbers are mapped to a European equivalent.
-_DIGIT_MAPPINGS = dict({u'\uFF10': u'0',  # Fullwidth digit 0
-                        u'\u0660': u'0',  # Arabic-indic digit 0
-                        u'\u06F0': u'0',  # Eastern-Arabic digit 0
-                        u'\uFF11': u'1',  # Fullwidth digit 1
-                        u'\u0661': u'1',  # Arabic-indic digit 1
-                        u'\u06F1': u'1',  # Eastern-Arabic digit 1
-                        u'\uFF12': u'2',  # Fullwidth digit 2
-                        u'\u0662': u'2',  # Arabic-indic digit 2
-                        u'\u06F2': u'2',  # Eastern-Arabic digit 2
-                        u'\uFF13': u'3',  # Fullwidth digit 3
-                        u'\u0663': u'3',  # Arabic-indic digit 3
-                        u'\u06F3': u'3',  # Eastern-Arabic digit 3
-                        u'\uFF14': u'4',  # Fullwidth digit 4
-                        u'\u0664': u'4',  # Arabic-indic digit 4
-                        u'\u06F4': u'4',  # Eastern-Arabic digit 4
-                        u'\uFF15': u'5',  # Fullwidth digit 5
-                        u'\u0665': u'5',  # Arabic-indic digit 5
-                        u'\u06F5': u'5',  # Eastern-Arabic digit 5
-                        u'\uFF16': u'6',  # Fullwidth digit 6
-                        u'\u0666': u'6',  # Arabic-indic digit 6
-                        u'\u06F6': u'6',  # Eastern-Arabic digit 6
-                        u'\uFF17': u'7',  # Fullwidth digit 7
-                        u'\u0667': u'7',  # Arabic-indic digit 7
-                        u'\u06F7': u'7',  # Eastern-Arabic digit 7
-                        u'\uFF18': u'8',  # Fullwidth digit 8
-                        u'\u0668': u'8',  # Arabic-indic digit 8
-                        u'\u06F8': u'8',  # Eastern-Arabic digit 8
-                        u'\uFF19': u'9',  # Fullwidth digit 9
-                        u'\u0669': u'9',  # Arabic-indic digit 9
-                        u'\u06F9': u'9',  # Eastern-Arabic digit 9
-                        }, **_ASCII_DIGITS_MAP)
 
 # Only upper-case variants of alpha characters are stored.
 _ALPHA_MAPPINGS = {u'A': u'2',
@@ -134,7 +99,7 @@ _ALPHA_MAPPINGS = {u'A': u'2',
                    u'Y': u'9',
                    u'Z': u'9', }
 # For performance reasons, amalgamate both into one map.
-_ALL_NORMALIZATION_MAPPINGS = dict(_ALPHA_MAPPINGS, **_DIGIT_MAPPINGS)
+_ALPHA_PHONE_MAPPINGS = dict(_ALPHA_MAPPINGS, **_ASCII_DIGITS_MAP)
 
 # Separate map of all symbols that we wish to retain when formatting alpha
 # numbers. This includes digits, ASCII letters and number grouping symbols
@@ -174,12 +139,12 @@ _UNIQUE_INTERNATIONAL_PREFIX = re.compile(u"[\\d]+(?:[~\u2053\u223C\uFF5E][\\d]+
 # excludes punctuation found as a leading character only.  This consists of
 # dash characters, white space characters, full stops, slashes, square
 # brackets, parentheses and tildes. It also includes the letter 'x' as that is
-# found as a placeholder for carrier information in some phone numbers.
+# found as a placeholder for carrier information in some phone numbers. Full-width
+# variants are also present.
 _VALID_PUNCTUATION = (u"-x\u2010-\u2015\u2212\u30FC\uFF0D-\uFF0F " +
                       u"\u00A0\u200B\u2060\u3000()\uFF08\uFF09\uFF3B\uFF3D.\\[\\]/~\u2053\u223C\uFF5E")
 
-# Digits accepted in phone numbers that we understand.
-_VALID_DIGITS = ''.join(_DIGIT_MAPPINGS.keys())
+_DIGITS = '\\d'  # Java "\\p{Nd}", so need "(?u)" or re.UNICODE wherever this is used
 # We accept alpha characters in phone numbers, ASCII only, upper and lower
 # case.
 _VALID_ALPHA = (''.join(_ALPHA_MAPPINGS.keys()) +
@@ -187,7 +152,7 @@ _VALID_ALPHA = (''.join(_ALPHA_MAPPINGS.keys()) +
 _PLUS_CHARS = u"+\uFF0B"
 _PLUS_CHARS_PATTERN = re.compile(u"[" + _PLUS_CHARS + u"]+")
 _SEPARATOR_PATTERN = re.compile(u"[" + _VALID_PUNCTUATION + u"]+")
-_CAPTURING_DIGIT_PATTERN = re.compile(u"([" + _VALID_DIGITS + u"])")
+_CAPTURING_DIGIT_PATTERN = re.compile(u"(" + _DIGITS + u")", re.UNICODE)
 
 # Regular expression of acceptable characters that may start a phone number
 # for the purposes of parsing. This allows us to strip away meaningless
@@ -196,8 +161,8 @@ _CAPTURING_DIGIT_PATTERN = re.compile(u"([" + _VALID_DIGITS + u"])")
 # alpha characters, although they may be used later in the number. It also
 # does not include other punctuation, as this will be stripped later during
 # parsing and is of no information value when parsing a number.
-_VALID_START_CHAR = u"[" + _PLUS_CHARS + _VALID_DIGITS + u"]"
-_VALID_START_CHAR_PATTERN = re.compile(_VALID_START_CHAR)
+_VALID_START_CHAR = u"[" + _PLUS_CHARS + _DIGITS + u"]"
+_VALID_START_CHAR_PATTERN = re.compile(_VALID_START_CHAR, re.UNICODE)
 
 # Regular expression of characters typically used to start a second phone
 # number for the purposes of parsing. This allows us to strip off parts of the
@@ -242,8 +207,8 @@ _VALID_ALPHA_PHONE_PATTERN = re.compile(u"(?:.*?[A-Za-z]){3}.*")
 # Corresponds to the following:
 # plus_sign*([punctuation]*[digits]){3,}([punctuation]|[digits]|[alpha])*
 # Note VALID_PUNCTUATION starts with a -, so must be the first in the range.
-_VALID_PHONE_NUMBER = (u"[" + _PLUS_CHARS + u"]*(?:[" + _VALID_PUNCTUATION + u"]*[" + _VALID_DIGITS + u"]){3,}[" +
-                       _VALID_PUNCTUATION + _VALID_ALPHA + _VALID_DIGITS + u"]*")
+_VALID_PHONE_NUMBER = (u"[" + _PLUS_CHARS + u"]*(?:[" + _VALID_PUNCTUATION + u"]*" + _DIGITS + u"){3,}[" +
+                       _VALID_PUNCTUATION + _VALID_ALPHA + _DIGITS + u"]*")
 
 # Default extension prefix to use when formatting. This will be put in front
 # of any extension component of the number, after the main national number is
@@ -266,12 +231,12 @@ _DEFAULT_EXTN_PREFIX = u" ext. "
 # java, so we allow two options for representing the accented o - the
 # character itself, and one in the unicode decomposed form with the combining
 # acute accent.
-_CAPTURING_EXTN_DIGITS = u"([" + _VALID_DIGITS + u"]{1,7})"
+_CAPTURING_EXTN_DIGITS = u"(" + _DIGITS + u"{1,7})"
 _KNOWN_EXTN_PATTERNS = (_RFC3966_EXTN_PREFIX + _CAPTURING_EXTN_DIGITS + u"|" +
                         u"[ \u00A0\\t,]*(?:ext(?:ensi(?:o\u0301?|\u00F3))?n?|" +
                         u"\uFF45\uFF58\uFF54\uFF4E?|[,x\uFF58#\uFF03~\uFF5E]|int|anexo|\uFF49\uFF4E\uFF54)" +
                         u"[:\\.\uFF0E]?[ \u00A0\\t,-]*" + _CAPTURING_EXTN_DIGITS + u"#?|" +
-                        u"[- ]+([" + _VALID_DIGITS + u"]{1,5})#")
+                        u"[- ]+(" + _DIGITS + u"{1,5})#")
 
 # Regexp of all known extension prefixes used by different regions followed by
 # 1 or more valid digits, for use when parsing.
@@ -301,13 +266,13 @@ class PhoneNumberFormat(object):
     Phone number format.
 
     INTERNATIONAL and NATIONAL formats are consistent with the definition in
-    ITU-T Recommendation E. 123. For example, the number of the Google Zurich
-    office will be written as "+41 44 668 1800" in INTERNATIONAL format, and
-    as "044 668 1800" in NATIONAL format.  E164 format is as per INTERNATIONAL
-    format but with no formatting applied, e.g. +41446681800.  RFC3966 is as
-    per INTERNATIONAL format, but with all spaces and other separating symbols
-    replaced with a hyphen, and with any phone number extension appended with
-    ";ext=".
+    ITU-T Recommendation E123. For example, the number of the Google
+    Switzerland office will be written as "+41 44 668 1800" in INTERNATIONAL
+    format, and as "044 668 1800" in NATIONAL format.  E164 format is as per
+    INTERNATIONAL format but with no formatting applied, e.g. +41446681800.
+    RFC3966 is as per INTERNATIONAL format, but with all spaces and other
+    separating symbols replaced with a hyphen, and with any phone number
+    extension appended with ";ext=".
 
     Note: If you are considering storing the number in a neutral format, you
     are highly advised to use the PhoneNumber class.
@@ -442,15 +407,17 @@ def _normalize(number):
     """Normalizes a string of characters representing a phone number.
 
     This performs the following conversions:
-
-     - Wide-ascii digits are converted to normal ASCII (European) digits.
-     - Letters are converted to their numeric representation on a telephone
-       keypad. The keypad used here is the one defined in ITU Recommendation
-       E.161. This is only done if there are 3 or more letters in the number,
-       to lessen the risk that such letters are typos - otherwise alpha
-       characters are stripped.
-      - Punctuation is stripped.
-      - Arabic-Indic numerals are converted to European numerals.
+     - Punctuation is stripped.
+     - For ALPHA/VANITY numbers:
+        - Letters are converted to their numeric representation on a telephone
+          keypad. The keypad used here is the one defined in ITU
+          Recommendation E.161. This is only done if there are 3 or more
+          letters in the number, to lessen the risk that such letters are
+          typos - otherwise alpha characters are stripped.
+     - For other numbers:
+        - Wide-ascii digits are converted to normal ASCII (European) digits.
+        - Arabic-Indic numerals are converted to European numerals.
+        - Spurious alpha characters are stripped.
 
     Arguments:
     number -- string representing a phone number
@@ -459,9 +426,9 @@ def _normalize(number):
     """
     m = fullmatch(_VALID_ALPHA_PHONE_PATTERN, number)
     if m:
-        return _normalize_helper(number, _ALL_NORMALIZATION_MAPPINGS, True)
+        return _normalize_helper(number, _ALPHA_PHONE_MAPPINGS, True)
     else:
-        return _normalize_helper(number, _DIGIT_MAPPINGS, True)
+        return normalize_digits_only(number)
 
 
 def normalize_digits_only(number):
@@ -475,17 +442,20 @@ def normalize_digits_only(number):
 
     Returns the normalized string version of the phone number.
     """
-    return _normalize_helper(number, _DIGIT_MAPPINGS, True)
+    number = unicode(number)
+    number_length = len(number)
+    normalized_digits = u""
+    for ii in xrange(number_length):
+        d = unicode_util.digit(number[ii], -1)
+        if d != -1:
+            normalized_digits += unicode(d)
+    return normalized_digits
 
 
 def convert_alpha_characters_in_number(number):
-    """Convert alpha chars in a number to their respective digits on a keypad.
-
-    Retains existing formatting. This implementation of this function also
-    converts wide-Unicode digits to normal ASCII digits, and converts
-    Arabic-Indic numerals to European numerals.
-    """
-    return _normalize_helper(number, _ALL_NORMALIZATION_MAPPINGS, False)
+    """Convert alpha chars in a number to their respective digits on a keypad,
+    but retains existing formatting."""
+    return _normalize_helper(number, _ALPHA_PHONE_MAPPINGS, False)
 
 
 def length_of_geographical_area_code(numobj):
@@ -510,16 +480,16 @@ def length_of_geographical_area_code(numobj):
     ...     subscriber_number = nsn
 
     N.B.: area code is a very ambiguous concept, so the I18N team generally
-    recommends against using it for most purposes. Read the following
-    carefully before deciding to use this method:
+    recommends against using it for most purposes, but recommends using the
+    more general national_number instead. Read the following carefully before
+    deciding to use this method:
 
      - geographical area codes change over time, and this method honors those
        changes; therefore, it doesn't guarantee the stability of the result it
        produces.
      - subscriber numbers may not be diallable from all devices (notably
-       mobile devices, which typically requires the full national_number to be
+       mobile devices, which typically require the full national_number to be
        dialled in most countries).
-
      - most non-geographical numbers have no area codes.
      - some geographical numbers have no area codes.
 
@@ -568,7 +538,7 @@ def length_of_national_destination_code(numobj):
     ...     subscriber_number = nsn
 
     Refer to the unittests to see the difference between this function and
-    length_of_geographical_area_code().
+    length_of_geographical_area_code.
 
     Arguments:
     numobj -- The PhoneNumber object to find the length of the NDC from.
@@ -829,8 +799,9 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
     """Formats a phone number for out-of-country dialing purposes.
 
     If no region_calling_from is supplied, we format the number in its
-    INTERNATIONAL format. If the country calling code is the same as the
-    region where the number is from, then NATIONAL formatting will be applied.
+    INTERNATIONAL format. If the country calling code is the same as that of
+    the region where the number is from, then NATIONAL formatting will be
+    applied.
 
     If the number itself has a country calling code of zero or an otherwise
     invalid country calling code, then we return the number with no formatting
@@ -1802,9 +1773,7 @@ def _parse_prefix_as_idd(idd_pattern, number):
         # country calling codes cannot begin with 0.
         digit_match = _CAPTURING_DIGIT_PATTERN.search(number[match_end:])
         if digit_match:
-            normalized_group = _normalize_helper(digit_match.group(1),
-                                                 _DIGIT_MAPPINGS,
-                                                 True)
+            normalized_group = normalize_digits_only(digit_match.group(1))
             if normalized_group == u"0":
                 return (False, number)
         return (True, number[match_end:])

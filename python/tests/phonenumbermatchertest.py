@@ -299,6 +299,104 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         self.assertEquals(expectedResult, matchWithSpaces.number)
         self.assertEquals(number, matchWithSpaces.raw_string)
 
+    def testIsLatinLetter(self):
+        self.assertTrue(PhoneNumberMatcher._is_latin_letter('c'))
+        self.assertTrue(PhoneNumberMatcher._is_latin_letter('C'))
+        self.assertTrue(PhoneNumberMatcher._is_latin_letter(u'\u00C9'))
+        self.assertTrue(PhoneNumberMatcher._is_latin_letter(u'\u0301'))  # Combining acute accent
+        # Punctuation, digits and white-space are not considered "latin letters".
+        self.assertFalse(PhoneNumberMatcher._is_latin_letter(':'))
+        self.assertFalse(PhoneNumberMatcher._is_latin_letter('5'))
+        self.assertFalse(PhoneNumberMatcher._is_latin_letter('-'))
+        self.assertFalse(PhoneNumberMatcher._is_latin_letter('.'))
+        self.assertFalse(PhoneNumberMatcher._is_latin_letter(' '))
+        self.assertFalse(PhoneNumberMatcher._is_latin_letter(u'\u6211'))  # Chinese character
+
+    def testMatchesWithSurroundingLatinChars(self):
+        contextPairs = []
+        contextPairs.append(NumberContext("abc", "def"))
+        contextPairs.append(NumberContext("abc", ""))
+        contextPairs.append(NumberContext("", "def"))
+        # Latin small letter e with an acute accent.
+        contextPairs.append(NumberContext(u"\u00C9", ""))
+        # Same character decomposed (with combining mark).
+        contextPairs.append(NumberContext(u"e\u0301", ""))
+
+        # Numbers should not be considered valid, if they are surrounded by
+        # Latin characters, but should be considered possible.
+        self.findMatchesInContexts(contextPairs, False, True)
+
+    def testMatchesWithSurroundingLatinCharsAndLeadingPunctuation(self):
+        # Contexts with trailing characters. Leading characters are okay here
+        # since the numbers we will insert start with punctuation, but
+        # trailing characters are still not allowed.
+        possibleOnlyContexts = []
+        possibleOnlyContexts.append(NumberContext("abc", "def"))
+        possibleOnlyContexts.append(NumberContext("", "def"))
+        possibleOnlyContexts.append(NumberContext("", u"\u00C9"))
+
+        # Numbers should not be considered valid, if they have trailing Latin
+        # characters, but should be considered possible.
+        numberWithPlus = "+14156667777"
+        numberWithBrackets = "(415)6667777"
+        self.findMatchesInContexts(possibleOnlyContexts, False, True, "US", numberWithPlus)
+        self.findMatchesInContexts(possibleOnlyContexts, False, True, "US", numberWithBrackets)
+
+        validContexts = []
+        validContexts.append(NumberContext("abc", ""))
+        validContexts.append(NumberContext(u"\u00C9", ""))
+        validContexts.append(NumberContext(u"\u00C9", "."))  # Trailing punctuation.
+        validContexts.append(NumberContext(u"\u00C9", " def"))  # Trailing white-space.
+
+        # Numbers should be considered valid, since they start with punctuation.
+        self.findMatchesInContexts(validContexts, True, True, "US", numberWithPlus)
+        self.findMatchesInContexts(validContexts, True, True, "US", numberWithBrackets)
+
+    def testMatchesWithSurroundingChineseChars(self):
+        validContexts = []
+        validContexts.append(NumberContext(u"\u6211\u7684\u7535\u8BDD\u53F7\u7801\u662F", ""))
+        validContexts.append(NumberContext("", u"\u662F\u6211\u7684\u7535\u8BDD\u53F7\u7801"))
+        validContexts.append(NumberContext(u"\u8BF7\u62E8\u6253", u"\u6211\u5728\u660E\u5929"))
+
+        # Numbers should be considered valid, since they are surrounded by Chinese.
+        self.findMatchesInContexts(validContexts, True, True)
+
+    def testMatchesWithSurroundingPunctuation(self):
+        validContexts = []
+        validContexts.append(NumberContext("My number-", ""))    # At end of text.
+        validContexts.append(NumberContext("", ".Nice day."))    # At start of text.
+        validContexts.append(NumberContext("Tel:", "."))    # Punctuation surrounds number.
+        validContexts.append(NumberContext("Tel: ", " on Saturdays."))    # White-space is also fine.
+
+        # Numbers should be considered valid, since they are surrounded by punctuation.
+        self.findMatchesInContexts(validContexts, True, True)
+
+    def findMatchesInContexts(self, contexts, isValid, isPossible,
+                              region="US", number="415-666-7777"):
+        """Helper method which tests the contexts provided and ensures
+        that:
+         - if isValid is True, they all find a test number inserted in the
+           middle when leniency of matching is set to VALID; else no test
+           number should be extracted at that leniency level
+         - if isPossible is True, they all find a test number inserted in the
+           middle when leniency of matching is set to POSSIBLE; else no test
+           number should be extracted at that leniency level"""
+        if isValid:
+            self.doTestInContext(number, region, contexts, Leniency.VALID)
+        else:
+            for context in contexts:
+                text = context.leadingText + number + context.trailingText
+                self.assertTrue(self.hasNoMatches(PhoneNumberMatcher(text, region)),
+                                msg="Should not have found a number in " + text)
+        if isPossible:
+            self.doTestInContext(number, region, contexts, Leniency.POSSIBLE)
+        else:
+            for context in contexts:
+                text = context.leadingText + number + context.trailingText
+                self.assertTrue(self.hasNoMatches(PhoneNumberMatcher(text, region,
+                                                                     leniency=Leniency.POSSIBLE, max_tries=sys.maxint)),
+                                msg="Should not have found a number in " + text)
+
     def testNonMatchingBracketsAreInvalid(self):
         # The digits up to the ", " form a valid US number, but it shouldn't
         # be matched as one since there was a non-matching bracket present.
@@ -474,6 +572,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
             self.findValidInContext(number, defaultCountry)
 
     def findPossibleInContext(self, number, defaultCountry):
+        """Tests valid numbers in contexts that should pass for Leniency.POSSIBLE"""
         contextPairs = [NumberContext("", ""),    # no context
                         NumberContext("     ", "\t"),    # whitespace only
                         NumberContext("Hello ", ""),    # no context at end
@@ -504,8 +603,9 @@ class PhoneNumberMatcherTest(unittest.TestCase):
 
         self.doTestInContext(number, defaultCountry, contextPairs, Leniency.POSSIBLE)
 
-    # Tests valid numbers in contexts that fail for Leniency.POSSIBLE.
     def findValidInContext(self, number, defaultCountry):
+        """Tests valid numbers in contexts that fail for Leniency.POSSIBLE but
+        are valid for Leniency.VALID."""
         contextPairs = [
             # With other small numbers.
             NumberContext("It's only 9.99! Call ", " to buy"),

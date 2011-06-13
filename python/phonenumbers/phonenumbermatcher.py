@@ -21,6 +21,7 @@ import re
 
 # Extra regexp function; see README
 from re_util import fullmatch
+import unicode_util
 import phonenumberutil
 
 
@@ -64,7 +65,7 @@ _PUNCTUATION_LIMIT = _limit(0, 4)
 _DIGIT_BLOCK_LIMIT = (phonenumberutil._MAX_LENGTH_FOR_NSN +
                       phonenumberutil._MAX_LENGTH_COUNTRY_CODE)
 # Limit on the number of blocks separated by punctuation. Use _DIGIT_BLOCK_LIMIT
-# since in some formats use spaces to separate each digit.
+# since some formats use spaces to separate each digit.
 _BLOCK_LIMIT = _limit(0, _DIGIT_BLOCK_LIMIT)
 
 # A punctuation sequence allowing white space.
@@ -73,6 +74,7 @@ _PUNCTUATION = u"[" + phonenumberutil._VALID_PUNCTUATION + u"]" + _PUNCTUATION_L
 _DIGIT_SEQUENCE = u"(?u)\\d" + _limit(1, _DIGIT_BLOCK_LIMIT)
 # Punctuation that may be at the start of a phone number - brackets and plus signs.
 _LEAD_CLASS = u"[" + _OPENING_PARENS + phonenumberutil._PLUS_CHARS + u"]"
+_LEAD_PATTERN = re.compile(_LEAD_CLASS)
 
 # Phone number pattern allowing optional punctuation.
 # This is the phone number pattern used by _find(), similar to
@@ -244,6 +246,23 @@ class PhoneNumberMatcher(object):
             candidate = candidate[:trailing_chars_match.start()]
         return candidate
 
+    @classmethod
+    def _is_latin_letter(self, letter):
+        """Helper method to determine if a character is a Latin-script letter
+        or not. For our purposes, combining marks should also return true
+        since we assume they have been added to a preceding Latin character."""
+        # Combining marks are a subset of non-spacing-mark
+        if (not unicode_util.is_letter(letter) and
+            unicode_util.Category.get(letter) != unicode_util.Category.NON_SPACING_MARK):
+            return False
+        block = unicode_util.Block.get(letter)
+        return (block == unicode_util.Block.BASIC_LATIN or
+                block == unicode_util.Block.LATIN_1_SUPPLEMENT or
+                block == unicode_util.Block.LATIN_EXTENDED_A or
+                block == unicode_util.Block.LATIN_EXTENDED_ADDITIONAL or
+                block == unicode_util.Block.LATIN_EXTENDED_B or
+                block == unicode_util.Block.COMBINING_DIACRITICAL_MARKS)
+
     def _extract_match(self, candidate, offset):
         """Attempts to extract a match from a candidate string.
 
@@ -257,6 +276,22 @@ class PhoneNumberMatcher(object):
         if (_PUB_PAGES.search(candidate) or
             _SLASH_SEPARATED_DATES.search(candidate)):
             return None
+
+        # If leniency is set to VALID only, we also want to skip numbers that
+        # are surrounded by Latin alphabetic characters, to skip cases like
+        # abc8005001234 or 8005001234def.
+        if self.leniency == Leniency.VALID:
+            # If the candidate is not at the start of the text, and does not
+            # start with punctuation and the previous character is not a Latin
+            # letter, return None.
+            if (offset > 0 and
+                not _LEAD_PATTERN.match(candidate) and
+                self._is_latin_letter(self.text[offset - 1])):
+                return None
+            last_char_index = offset + len(candidate)
+            if (last_char_index < len(self.text) and
+                self._is_latin_letter(self.text[last_char_index])):
+                return None
 
         # Try to come up with a valid match given the entire candidate.
         match = self._parse_and_verify(candidate, offset)
@@ -278,7 +313,7 @@ class PhoneNumberMatcher(object):
         """
         # Try removing either the first or last "group" in the number and see
         # if this gives a result.  We consider white space to be a possible
-        # indications of the start or end of the phone number.
+        # indication of the start or end of the phone number.
         group_match = _GROUP_SEPARATOR.search(candidate)
         if group_match:
             group_start_index = group_match.end()

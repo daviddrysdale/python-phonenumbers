@@ -25,11 +25,12 @@ See the unit tests for more details on how the formatter is to be used.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import re
-from re_util import fullmatch
 
+import unicode_util
+from re_util import fullmatch
 from phonemetadata import PhoneMetadata
 from phonenumberutil import _VALID_START_CHAR_PATTERN, _VALID_PUNCTUATION
-from phonenumberutil import _DIGIT_MAPPINGS, _PLUS_SIGN
+from phonenumberutil import _PLUS_SIGN
 from phonenumberutil import _extract_country_code, region_code_for_country_code
 
 _EMPTY_METADATA = PhoneMetadata(id=u"", international_prefix=u"NA", register=False)
@@ -90,13 +91,20 @@ class AsYouTypeFormatter(object):
         When there are multiple available formats, the formatter uses the
         first format where a formatting template could be created.
         """
-        for number_format in self._possible_formats:
+        ii = 0
+        while ii < len(self._possible_formats):
+            number_format = self._possible_formats[ii]
             pattern = number_format.pattern
             if self._current_formatting_pattern == pattern:
                 return False
             if self._create_formatting_template(number_format):
                 self._current_formatting_pattern = pattern
                 return True
+            else:
+                # Remove the current number format from _possible_formats
+                del self._possible_formats[ii]
+                ii -= 1
+            ii += 1
         self._able_to_format = False
         return False
 
@@ -147,7 +155,7 @@ class AsYouTypeFormatter(object):
         number_pattern = re.sub(_STANDALONE_DIGIT_PATTERN, "\\\\d", number_pattern)
         self.formatting_template = ""
         temp_template = self._get_formatting_template(number_pattern, num_format.format)
-        if len(temp_template) > len(self._national_number):
+        if len(temp_template) > 0:
             self._formatting_template = temp_template
             return True
         return False
@@ -161,7 +169,11 @@ class AsYouTypeFormatter(object):
         number_re = re.compile(number_pattern)
         m = number_re.search(longest_phone_number)  # this will always succeed
         a_phone_number = m.group(0)
-
+        # No formatting template can be created if the number of digits
+        # entered so far is longer than the maximum the current formatting
+        # rule can accommodate.
+        if len(a_phone_number) < len(self._national_number):
+            return u""
         # Formats the number according to number_format
         template = re.sub(number_pattern, number_format, a_phone_number)
         # Replaces each digit with character _DIGIT_PLACEHOLDER
@@ -410,16 +422,19 @@ class AsYouTypeFormatter(object):
         in non-ASCII format. This method assumes its input is either a digit
         or the plus sign."""
         if next_char == _PLUS_SIGN:
+            normalized_char = next_char
             self._accrued_input_without_formatting += next_char
         else:
-            next_char = _DIGIT_MAPPINGS[next_char]
-            self._accrued_input_without_formatting += next_char
-            self._national_number += next_char
-
+            next_digit = unicode_util.digit(next_char, -1)
+            if next_digit != -1:
+                normalized_char = unicode(next_digit)
+            else:  # pragma no cover
+                normalized_char = next_char
+            self._accrued_input_without_formatting += normalized_char
+            self._national_number += normalized_char
         if remember_position:
             self._position_to_remember = len(self._accrued_input_without_formatting)
-
-        return next_char
+        return normalized_char
 
     def _input_digit_helper(self, next_char):
         digit_match = _DIGIT_PATTERN.search(self._formatting_template, self._last_match_position)
