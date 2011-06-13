@@ -16,7 +16,7 @@ PHONE_METADATA_US = PhoneMetadata(id='US', country_code=1, international_prefix=
     national_prefix=u'1',
     preferred_extn_prefix=u' extn. ',
     national_prefix_for_parsing=u'1',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3'),
-        NumberFormat(pattern='(\\d{3})(\\d{4})', format=u'\\1 \\2')],
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format=u'\\1 \\2'),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3')],
     intl_number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3')],
     main_country_for_code=True)
