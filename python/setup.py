@@ -25,9 +25,9 @@ except ImportError:
     pass
 
 major, minor = sys.version_info[:2]
-python_24 = (major > 2 or (major == 2 and minor >= 4))
-if not python_24:
-    raise RuntimeError("Python 2.4 or newer is required")
+python_25 = (major > 2 or (major == 2 and minor >= 5))
+if not python_25:
+    raise RuntimeError("Python 2.5 or newer is required")
 
 # Discover version from local code
 from phonenumbers import __version__

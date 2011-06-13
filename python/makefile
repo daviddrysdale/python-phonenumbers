@@ -10,6 +10,7 @@ tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buil
 test: tests/testdata/__init__.py
 	python phonenumbers/__init__.py
 	python phonenumbers/re_util.py
+	python phonenumbers/unicode_util.py
 	python tests/__init__.py
 
 # Coverage; requires coverage module
@@ -19,6 +20,7 @@ coverage_clean:
 	coverage -e
 coverage_generate:
 	coverage -x phonenumbers/re_util.py
+	coverage -x phonenumbers/unicode_util.py
 	coverage -x tests/__init__.py
 coverage_report:
 	coverage -m -r $(COVERAGE_FILES)
