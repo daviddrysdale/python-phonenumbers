@@ -35,7 +35,7 @@ from region_YT import PHONE_METADATA_YT
 # denote the country/region represented by that country code.
 # In the case of multiple countries sharing a calling code,
 # such as the NANPA countries, the one indicated with
-# "isMainCountryCode" in the metadata should be first.
+# "main_country_for_code" in the metadata should be first.
 _COUNTRY_CODE_TO_REGION_CODE = {
     1: ("US", "BS",),
     39: ("IT",),

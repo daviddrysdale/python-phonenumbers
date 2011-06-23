@@ -258,7 +258,7 @@ from region_ZW import PHONE_METADATA_ZW
 # denote the country/region represented by that country code.
 # In the case of multiple countries sharing a calling code,
 # such as the NANPA countries, the one indicated with
-# "isMainCountryCode" in the metadata should be first.
+# "main_country_for_code" in the metadata should be first.
 _COUNTRY_CODE_TO_REGION_CODE = {
     1: ("US", "AG", "AI", "AS", "BB", "BM", "BS", "CA", "DM", "DO", "GD", "GU", "JM", "KN", "KY", "LC", "MP", "MS", "PR", "TC", "TT", "VC", "VG", "VI",),
     7: ("RU", "KZ",),

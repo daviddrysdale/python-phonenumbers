@@ -59,7 +59,7 @@ _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
 # denote the country/region represented by that country code.
 # In the case of multiple countries sharing a calling code,
 # such as the NANPA countries, the one indicated with
-# "isMainCountryCode" in the metadata should be first.'''
+# "main_country_for_code" in the metadata should be first.'''
 
 # Boilerplate header for individual region data files
 _REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %s metadata"""
