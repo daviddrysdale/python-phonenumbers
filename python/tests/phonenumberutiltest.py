@@ -773,7 +773,6 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # This number is valid for the Bahamas, but is not a valid US number.
         self.assertTrue(phonenumbers.is_valid_number(BS_NUMBER))
         self.assertTrue(phonenumbers.is_valid_number_for_region(BS_NUMBER, "BS"))
-        self.assertTrue(phonenumbers.is_valid_number_for_region(BS_NUMBER, "bs"))
         self.assertFalse(phonenumbers.is_valid_number_for_region(BS_NUMBER, "US"))
         bsInvalidNumber = PhoneNumber(country_code=1, national_number=2421232345L)
         # This number is no longer valid.
@@ -836,7 +835,6 @@ class PhoneNumberUtilTest(unittest.TestCase):
     def testGetCountryCodeForRegion(self):
         self.assertEquals(1, phonenumbers.country_code_for_region("US"))
         self.assertEquals(64, phonenumbers.country_code_for_region("NZ"))
-        self.assertEquals(64, phonenumbers.country_code_for_region("nz"))
         self.assertEquals(0, phonenumbers.country_code_for_region(None))
         self.assertEquals(0, phonenumbers.country_code_for_region("ZZ"))
         # CS is already deprecated so the library doesn't support it.
@@ -863,7 +861,6 @@ class PhoneNumberUtilTest(unittest.TestCase):
     def testIsNANPACountry(self):
         self.assertTrue(phonenumbers.is_nanpa_country("US"))
         self.assertTrue(phonenumbers.is_nanpa_country("BS"))
-        self.assertTrue(phonenumbers.is_nanpa_country("bs"))
 
     def testIsPossibleNumber(self):
         self.assertTrue(phonenumbers.is_possible_number(US_NUMBER))
@@ -879,7 +876,6 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertTrue(phonenumbers.is_possible_number_string("(020) 7031 3000", "GB"))
         self.assertTrue(phonenumbers.is_possible_number_string("7031 3000", "GB"))
         self.assertTrue(phonenumbers.is_possible_number_string("3331 6005", "NZ"))
-        self.assertTrue(phonenumbers.is_possible_number_string("3331 6005", "nz"))
 
     def testIsPossibleNumberWithReason(self):
         # National numbers for country calling code +1 that are within 7 to 10 digits are possible.
@@ -1234,7 +1230,6 @@ class PhoneNumberUtilTest(unittest.TestCase):
     def testParseNationalNumber(self):
         # National prefix attached.
         self.assertEquals(NZ_NUMBER, phonenumbers.parse("033316005", "NZ"))
-        self.assertEquals(NZ_NUMBER, phonenumbers.parse("033316005", "nz"))
         self.assertEquals(NZ_NUMBER, phonenumbers.parse("33316005", "NZ"))
         # National prefix attached and some formatting present.
         self.assertEquals(NZ_NUMBER, phonenumbers.parse("03-331 6005", "NZ"))

@@ -3,7 +3,7 @@
  What's new in 3.6b1
 =====================
 
-Merge up to upstream Subversion revision 231 (but
+Merge up to upstream Subversion revision 266 (but
 geocoding functionality not yet ported).
 Require Python 2.5, to allow import unicodedata.
 

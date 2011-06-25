@@ -150,11 +150,12 @@ class PhoneNumberMatcher(object):
 
         Arguments:
         text -- The character sequence that we will search, None for no text.
-        country -- The ISO 3166-1 two-letter country code indicating the
-              country to assume for phone numbers not written in international
-              format (with a leading plus, or with the international dialing
-              prefix of the specified region). May be None or "ZZ" if only
-              numbers with a leading plus should be considered.
+        country -- The region that we are expecting the number to be from.
+              This is only used if the number being parsed is not written in
+              international format (with a leading plus, or with the
+              international dialing prefix of the specified region). May be
+              None or "ZZ" if only numbers with a leading plus should be
+              considered.
         leniency -- The leniency to use when evaluating candidate phone
               numbers.
         max_tries -- The maximum number of invalid numbers to try before

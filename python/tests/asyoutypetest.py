@@ -379,7 +379,7 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEquals("020 7031 3000", formatter.input_digit('0'))
 
     def testAYTFGBTollFree(self):
-        formatter = AsYouTypeFormatter("gb")
+        formatter = AsYouTypeFormatter("GB")
         self.assertEquals("0", formatter.input_digit('0'))
         self.assertEquals("08", formatter.input_digit('8'))
         self.assertEquals("080", formatter.input_digit('0'))

@@ -1,5 +1,18 @@
-"""Python phone number parsing and formatting library"""
+"""Python phone number parsing and formatting library
 
+If you use this library, and want to be notified about important changes,
+please sign up to the libphonenumber mailing list at
+http://groups.google.com/group/libphonenumber-discuss/about.
+
+NOTE: A lot of methods in this module require Region Code strings. These must
+be provided using ISO 3166-1 two-letter country-code format. These should be
+in upper-case. The list of the codes can be found here:
+http://www.iso.org/iso/english_country_names_and_code_elements
+
+author: Shaopeng Jia (original Java version)
+author: Lara Rennie (original Java Version)
+author: David Drysdale (Python version)
+"""
 # Based on original Java code:
 #     java/src/com/google/i18n/phonenumbers/PhoneNumberUtil.java
 #   Copyright (C) 2009-2011 Google Inc.
@@ -608,7 +621,7 @@ def _is_valid_region_code(region_code):
     """Helper function to check region code is not unknown or None"""
     if region_code is None:
         return False
-    return (region_code.upper() in SUPPORTED_REGIONS)
+    return (region_code in SUPPORTED_REGIONS)
 
 
 def format_number(numobj, num_format):
@@ -630,18 +643,18 @@ def format_number(numobj, num_format):
 
     Returns the formatted phone number.
     """
-    country_code = numobj.country_code
+    country_calling_code = numobj.country_code
     nsn = national_significant_number(numobj)
     if num_format == PhoneNumberFormat.E164:
         # Early exit for E164 case since no formatting of the national number needs to be applied.
         # Extensions are not formatted.
-        return _format_number_by_format(country_code, num_format, nsn)
+        return _format_number_by_format(country_calling_code, num_format, nsn)
 
     # Note region_code_for_country_code() is used because formatting
     # information for regions which share a country calling code is contained
     # by only one region for performance reasons. For example, for NANPA
     # regions it will be contained in the metadata for US.
-    region_code = region_code_for_country_code(country_code)
+    region_code = region_code_for_country_code(country_calling_code)
     if not _is_valid_region_code(region_code):
         return nsn
 
@@ -650,7 +663,7 @@ def format_number(numobj, num_format):
                                                       region_code,
                                                       num_format,
                                                       formatted_number)
-    return _format_number_by_format(country_code,
+    return _format_number_by_format(country_calling_code,
                                     num_format,
                                     formatted_number)
 
@@ -815,8 +828,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
 
     Arguments:
     numobj -- The phone number to be formatted
-    region_calling_from -- The ISO 3166-1 two-letter region code that denotes
-              the region where the call is being placed
+    region_calling_from -- The region where the call is being placed
 
     Returns the formatted phone number
     """
@@ -1143,8 +1155,7 @@ def example_number(region_code):
     """Gets a valid number for the specified region.
 
     Arguments:
-    region_code -- The ISO 3166-1 two-letter region code that denotes
-              the region for which an example number is needed.
+    region_code -- The region for which an example number is needed.
 
     Returns a valid fixed-line number for the specified region. Returns None
     when the metadata does not contain such information.
@@ -1156,12 +1167,12 @@ def example_number_for_type(region_code, num_type):
     """Gets a valid number for the specified region and number type.
 
     Arguments:
-    region_code -- The ISO 3166-1 two-letter region code that denotes
-              the region for which an example number is needed.
+    region_code -- The region for which an example number is needed.
     num_type -- The type of number that is needed.
 
     Returns a valid number for the specified region and type. Returns None
-    when the metadata does not contain such information.
+    when the metadata does not contain such information or if an invalid
+    region was specified.
     """
     # Check the region code is valid.
     if not _is_valid_region_code(region_code):
@@ -1316,8 +1327,7 @@ def is_valid_number_for_region(numobj, region_code):
 
     Arguments:
     numobj -- The phone number object that we want to validate.
-    region_code -- The ISO 3166-1 two-letter region code that denotes the
-              region that we want to validate the phone number for.
+    region_code -- The region that we want to validate the phone number for.
 
     Returns a boolean that indicates whether the number is of a valid pattern.
     """
@@ -1399,8 +1409,7 @@ def country_code_for_region(region_code):
     Zealand.
 
     Arguments:
-    region_code -- The ISO 3166-1 two-letter region code that denotes
-              the region that we want to get the country calling code for.
+    region_code -- The region that we want to get the country calling code for.
 
     Returns the country calling code for the region denoted by region_code.
     """
@@ -1424,8 +1433,7 @@ def ndd_prefix_for_region(region_code, strip_non_digits):
     prefix when required.
 
     Arguments:
-    region_code -- The ISO 3166-1 two-letter region code that denotes
-              the region that we want to get the dialling prefix for.
+    region_code -- The region that we want to get the dialling prefix for.
     strip_non_digits -- whether to strip non-digits from the national
                dialling prefix.
 
@@ -1451,7 +1459,7 @@ def is_nanpa_country(region_code):
     Numbering Plan Administration (NANPA).
     """
     return (region_code is not None and
-            region_code.upper() in _NANPA_REGIONS)
+            region_code in _NANPA_REGIONS)
 
 
 def _is_leading_zero_possible(country_code):
@@ -1585,17 +1593,16 @@ def is_possible_number_string(number, region_dialing_from):
 
     Arguments:
     number -- The number that needs to be checked, in the form of a string.
-    region_dialling_from -- The ISO 3166-1 two-letter region code that denotes
-              the region that we are expecting the number to be dialed from.
-              Note this is different from the region where the number belongs.
-              For example, the number +1 650 253 0000 is a number that belongs
-              to US. When written in this form, it can be dialed from any
-              region. When it is written as 00 1 650 253 0000, it can be
-              dialed from any region which uses an international dialling
-              prefix of 00. When it is written as 650 253 0000, it can only be
-              dialed from within the US, and when written as 253 0000, it can
-              only be dialed from within a smaller area in the US (Mountain
-              View, CA, to be more specific).
+    region_dialling_from -- The region that we are expecting the number to be
+              dialed from.  Note this is different from the region where the
+              number belongs.  For example, the number +1 650 253 0000 is a
+              number that belongs to US. When written in this form, it can be
+              dialed from any region. When it is written as 00 1 650 253 0000,
+              it can be dialed from any region which uses an international
+              dialling prefix of 00. When it is written as 650 253 0000, it
+              can only be dialed from within the US, and when written as 253
+              0000, it can only be dialed from within a smaller area in the US
+              (Mountain View, CA, to be more specific).
 
     Returns True if the number is possible
     """
@@ -1942,8 +1949,7 @@ def parse(number, region, keep_raw_input=False,
     number -- The number that we are attempting to parse. This can
               contain formatting such as +, ( and -, as well as a phone
               number extension.
-    region -- The ISO 3166-1 two-letter region code that denotes the
-              region that we are expecting the number to be from. This
+    region -- The region that we are expecting the number to be from. This
               is only used if the number being parsed is not written in
               international format. The country_code for the number in
               this case would be stored as that of the default region
