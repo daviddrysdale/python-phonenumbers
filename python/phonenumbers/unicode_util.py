@@ -15,7 +15,11 @@
 'Lu'
 >>> unicode_util.Category.get(u2) == unicode_util.Category.LOWERCASE_LETTER
 True
->>> unicode_util.Category.get(u'\U00010100')
+>>> beyond_bmp = u'\U00010100'
+>>> if len(beyond_bmp) == 1:  # We have a UCS4 build of Python
+...     unicode_util.Category.get(beyond_bmp)
+... else:  # UCS2 build of Python; no unknown characters available
+...     'Po'
 'Po'
 >>> unicode_util.is_letter(u1)
 False
