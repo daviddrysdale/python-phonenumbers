@@ -861,6 +861,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
     def testIsNANPACountry(self):
         self.assertTrue(phonenumbers.is_nanpa_country("US"))
         self.assertTrue(phonenumbers.is_nanpa_country("BS"))
+        self.assertFalse(phonenumbers.is_nanpa_country("DE"))
+        self.assertFalse(phonenumbers.is_nanpa_country("ZZ"))
+        self.assertFalse(phonenumbers.is_nanpa_country(None))
 
     def testIsPossibleNumber(self):
         self.assertTrue(phonenumbers.is_possible_number(US_NUMBER))

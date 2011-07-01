@@ -48,7 +48,7 @@ except ImportError:  # pragma no cover
     import sys
     if os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py":
         print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
-        _COUNTRY_CODE_TO_REGION_CODE = {1: ("US")}
+        _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
     else:
         raise
 

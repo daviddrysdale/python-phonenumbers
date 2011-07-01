@@ -730,12 +730,14 @@ class AsYouTypeFormatterTest(unittest.TestCase):
                                    number_format=[NumberFormat(pattern='([135][246]|[246][123])(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[1-59]|[78]0'], national_prefix_formatting_rule=u'(0\\1)')])
         PhoneMetadata.region_metadata['XX'] = metadataXX
         phonenumberutil.SUPPORTED_REGIONS.add("XX")
+        phonenumberutil.COUNTRY_CODE_TO_REGION_CODE[384] = ("XX",)
         formatter = AsYouTypeFormatter('XX')
         # A pattern with "|" in it doesn't get formatting
         self.assertEquals('1', formatter.input_digit('1'))
         self.assertEquals('12', formatter.input_digit('2'))
         self.assertEquals('123', formatter.input_digit('3'))
         self.assertEquals('1234', formatter.input_digit('4'))
+        del phonenumberutil.COUNTRY_CODE_TO_REGION_CODE[384]
         phonenumberutil.SUPPORTED_REGIONS.remove('XX')
         del PhoneMetadata.region_metadata['XX']
         # Hit internal error arm

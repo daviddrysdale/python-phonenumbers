@@ -32,6 +32,7 @@ from phonemetadata import PhoneMetadata
 from phonenumberutil import _VALID_START_CHAR_PATTERN, _VALID_PUNCTUATION
 from phonenumberutil import _PLUS_SIGN
 from phonenumberutil import _extract_country_code, region_code_for_country_code
+from phonenumberutil import country_code_for_region
 
 _EMPTY_METADATA = PhoneMetadata(id=u"", international_prefix=u"NA", register=False)
 
@@ -65,12 +66,23 @@ _DIGIT_PLACEHOLDER = u"\u2008"
 _DIGIT_PATTERN = re.compile(_DIGIT_PLACEHOLDER)
 
 
+def _get_metadata_for_region(region_code):
+    """The metadata needed by this class is the same for all regions
+    sharing the same country calling code. Therefore, we return the
+    metadata for "main" region for this country calling code."""
+    country_calling_code = country_code_for_region(region_code)
+    main_country = region_code_for_country_code(country_calling_code)
+    # Set to a default instance of the metadata. This allows us to
+    # function with an incorrect region code, even if formatting only
+    # works for numbers specified with "+".
+    return PhoneMetadata.region_metadata.get(main_country, _EMPTY_METADATA)
+
+
 class AsYouTypeFormatter(object):
     def __init__(self, region_code):
         """Gets an AsYouTypeFormatter for the specific region.
 
         Arguments:
-
         region_code -- The region where the phone number is being entered
 
         Return an AsYouTypeFormatter} object, which could be used to format
@@ -78,10 +90,7 @@ class AsYouTypeFormatter(object):
         """
         self._clear()
         self._default_country = region_code.upper()
-        # If needed, set to a default instance of the metadata. This allows us
-        # to function with an incorrect region code, even if formatting only
-        # works for numbers specified with "+".
-        self._current_metadata = PhoneMetadata.region_metadata.get(self._default_country, _EMPTY_METADATA)
+        self._current_metadata = _get_metadata_for_region(self._default_country)
         self._default_metadata = self._current_metadata
 
     def _maybe_create_new_template(self):
@@ -207,7 +216,7 @@ class AsYouTypeFormatter(object):
         """Clears the internal state of the formatter, so it can be reused."""
         self._clear()
         if self._current_metadata != self._default_metadata:
-            self._current_metadata = PhoneMetadata.region_metadata.get(self._default_country, _EMPTY_METADATA)
+            self._current_metadata = _get_metadata_for_region(self._default_country)
 
     def input_digit(self, next_char, remember_position=False):
         """Formats a phone number on-the-fly as each digit is entered.
@@ -406,7 +415,7 @@ class AsYouTypeFormatter(object):
         self._national_number = number_without_ccc
         new_region_code = region_code_for_country_code(country_code)
         if new_region_code != self._default_country:
-            self._current_metadata = PhoneMetadata.region_metadata.get(new_region_code, None)
+            self._current_metadata = _get_metadata_for_region(new_region_code)
 
         self._prefix_before_national_number += str(country_code)
         self._prefix_before_national_number += " "
