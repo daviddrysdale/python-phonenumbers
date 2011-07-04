@@ -1463,10 +1463,9 @@ def is_nanpa_country(region_code):
 
 
 def _is_leading_zero_possible(country_code):
-    """Checks whether country_code represents the country calling code from a
-    region whose national significant number could contain a leading zero. An
-    example of such a region is Italy.  Returns False if no metadata for the
-    country is found."""
+    """Checks whether the country calling code is from a region whose national
+    significant number could contain a leading zero. An example of such a
+    region is Italy.  Returns False if no metadata for the country is found."""
     region_code = region_code_for_country_code(country_code)
     metadata = PhoneMetadata.region_metadata.get(region_code, None)
     if metadata is None:
