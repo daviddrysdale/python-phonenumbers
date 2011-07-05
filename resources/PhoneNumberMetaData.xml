@@ -1817,7 +1817,7 @@
         <nationalNumberPattern>
           4(?:
             7\d|
-            8[4-9]|
+            8[3-9]|
             9[1-9]
           )\d{6}
         </nationalNumberPattern>
