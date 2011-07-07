@@ -1,8 +1,16 @@
 
+phonenumbers/geodata/__init__.py: buildgeocodingdata.py ../resources/geocoding
+	python buildgeocodingdata.py ../resources/geocoding $@
+
+tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding
+	python buildgeocodingdata.py ../resources/test/geocoding $@
+
+geodata: phonenumbers/geodata/__init__.py tests/testgeodata/__init__.py
+
 phonenumbers/data/__init__.py: ../resources/PhoneNumberMetaData.xml buildmetadatafromxml.py
 	python buildmetadatafromxml.py ../resources/PhoneNumberMetaData.xml phonenumbers/data
 
-metadata: phonenumbers/data/__init__.py tests/testdata/__init__.py
+metadata: phonenumbers/data/__init__.py tests/testdata/__init__.py geodata
 
 tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
 	python buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata
