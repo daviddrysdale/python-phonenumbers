@@ -422,11 +422,11 @@ class XPhoneNumberMetadata(object):
 
 def _standalone(argv):
     """Parse the given XML file and emit generated code."""
-    if len(sys.argv) != 3:
+    if len(argv) != 2:
         print >> sys.stderr, __doc__
         sys.exit(1)
-    pmd = XPhoneNumberMetadata(sys.argv[1])
-    pmd.emit_metadata_py(sys.argv[2])
+    pmd = XPhoneNumberMetadata(argv[0])
+    pmd.emit_metadata_py(argv[1])
 
 
 if __name__ == "__main__":
