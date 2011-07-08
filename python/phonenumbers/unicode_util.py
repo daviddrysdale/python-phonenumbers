@@ -15,11 +15,11 @@
 'Lu'
 >>> unicode_util.Category.get(u2) == unicode_util.Category.LOWERCASE_LETTER
 True
->>> beyond_bmp = u'\U00010100'
+>>> beyond_bmp = u'\U00010100'  # AEGEAN WORD SEPARATOR LINE
 >>> if len(beyond_bmp) == 1:  # We have a UCS4 build of Python
 ...     unicode_util.Category.get(beyond_bmp)
-... else:  # UCS2 build of Python; no unknown characters available
-...     'Po'
+... else:  # UCS2 build of Python; no non-BMP chars available
+...     unicode_util.Category.OTHER_PUNCTUATION
 'Po'
 >>> unicode_util.is_letter(u1)
 False
@@ -67,6 +67,9 @@ import unicodedata  # Python 2.5 onward
 
 
 class Category(object):
+    """General category of a Unicode character.
+
+    See http://www.unicode.org/reports/tr18/#Categories"""
     LETTER = "L"
     UPPERCASE_LETTER = "Lu"
     LOWERCASE_LETTER = "Ll"
@@ -107,6 +110,7 @@ class Category(object):
 
     @classmethod
     def get(cls, unichr):
+        """Return the general category code for the given Unicode character"""
         unichr = unicode(unichr)
         return unicodedata.category(unichr)
 
