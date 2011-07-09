@@ -27,6 +27,7 @@ test: tests/testdata/__init__.py
 	python phonenumbers/__init__.py
 	python phonenumbers/re_util.py
 	python phonenumbers/unicode_util.py
+	python phonenumbers/geocoder.py
 	python tests/__init__.py
 
 # Coverage; requires coverage module
