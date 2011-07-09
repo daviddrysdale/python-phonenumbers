@@ -1,5 +1,6 @@
 .coverage
 *.pyc
+*.class
 dist
 deb_dist
 MANIFEST

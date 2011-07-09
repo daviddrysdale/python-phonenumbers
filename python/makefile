@@ -1,3 +1,11 @@
+# Dump the JRE's Locale information
+DumpLocale.class: DumpLocale.java
+	javac $<
+
+phonenumbers/geodata/locale.py: DumpLocale.class
+	java DumpLocale > $@
+
+locale: phonenumbers/geodata/locale.py
 
 phonenumbers/geodata/__init__.py: buildgeocodingdata.py ../resources/geocoding
 	python buildgeocodingdata.py ../resources/geocoding $@
