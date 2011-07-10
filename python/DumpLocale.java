@@ -1,4 +1,5 @@
 import java.util.Locale;
+import java.util.HashMap;
 /*
  * This class dumps relevant information from the java.util.Locale metadata into
  * a Python format.
@@ -37,6 +38,8 @@ class DumpLocale {
     System.out.println("LOCALE_DATA = {");
     String[] all_countries = Locale.getISOCountries();
     String[] all_langs = Locale.getISOLanguages();
+    // Name => first language code that maps to that name
+    HashMap<String, String> name_to_lang = new HashMap<String, String>();
     for (String country: all_countries) {
       System.out.print("  '"+country+"': {");
       Locale country_locale = new Locale("", country);
@@ -44,9 +47,20 @@ class DumpLocale {
         Locale lang_locale = new Locale(lang);
         String country_in_lang = country_locale.getDisplayCountry(lang_locale);
         if ((country_in_lang != null) && (country_in_lang.length() != 0)) {
-          System.out.print("'"+lang+"': ");
-          printName(country_in_lang);
-          System.out.print(", ");
+          String previous_lang = name_to_lang.get(country_in_lang);
+          if (previous_lang != null) {
+            // Already seen this name before.  Print the name as "*<otherlang>"
+            // on the assumption that this will save a lot of space (about 30%)
+            System.out.print("'"+lang+"':");
+            System.out.print("'*"+previous_lang+"'");
+            System.out.print(",");
+          } else {
+            // First time we've seen this name
+            name_to_lang.put(country_in_lang, lang);
+            System.out.print("'"+lang+"':");
+            printName(country_in_lang);
+            System.out.print(",");
+          }
         }
       }
       System.out.println("},");

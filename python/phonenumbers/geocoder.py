@@ -112,7 +112,13 @@ def country_name_for_number(numobj, lang, script=None, region=None):
     number_region = region_code_for_number(numobj)
     if number_region in LOCALE_DATA:
         # The Locale data has a set of names for this region, in various languages.
-        return LOCALE_DATA[number_region].get(lang, "")
+        name = LOCALE_DATA[number_region].get(lang, "")
+        if name.startswith('*'):
+            # If the location name is "*<other_lang>", this indicates that the
+            # name is held elsewhere, specifically in the [other_lang] entry
+            other_lang = name[1:]
+            name = LOCALE_DATA[number_region].get(other_lang, "")
+        return name
     return u""
 
 
