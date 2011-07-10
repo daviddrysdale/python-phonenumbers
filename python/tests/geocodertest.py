@@ -111,6 +111,22 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         self.assertEquals(u"\uC81C\uC8FC",
                           geocoder.description_for_number(KO_NUMBER3, _KOREAN))
 
-    def testGetDescritionForInvaildNumber(self):
+    def testGetDescriptionForInvalildNumber(self):
         self.assertEquals("", geocoder.description_for_number(KO_INVALID_NUMBER, _ENGLISH))
         self.assertEquals("", geocoder.description_for_number(US_INVALID_NUMBER, _ENGLISH))
+
+    def testCoverage(self):
+        # Python version extra tests
+        invalid_number = PhoneNumber(country_code=210, national_number=123456L)
+        self.assertEquals("", geocoder.country_name_for_number(invalid_number, "en"))
+        # Add in some script and region specific fictional names
+        TEST_GEOCODE_DATA['1650960'] = {'en': u'Mountain View, CA',
+                                        "en_GB": u'Mountain View California',
+                                        "en_Latn": u'MountainView'}
+        self.assertEquals("Mountain View California",
+                          geocoder.description_for_number(US_NUMBER2, _ENGLISH, region="GB"))
+        self.assertEquals("MountainView",
+                          geocoder.description_for_number(US_NUMBER2, _ENGLISH, script="Latn"))
+        self.assertEquals("MountainView",
+                          geocoder.description_for_number(US_NUMBER2, _ENGLISH, script="Latn", region="GB"))
+        TEST_GEOCODE_DATA['1650960'] = {'en': u'Mountain View, CA'}
