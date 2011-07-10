@@ -85,6 +85,10 @@ However, there are a number of differences:
    format().
  - The internals of phonenumberutil.py do not have logging.
  - The PhoneNumber and PhoneMetadata classes are written by hand.
+ - The Python version is less concerned with speed and size 
+   optimization than the Java version (as Python code is more likely
+   to run on a server platform and less likely to run on an 
+   embedded/smartphone platform).
 
 Much of the functionality of this library depends on regular 
 expressions, so it's worth highlighting the translation between
