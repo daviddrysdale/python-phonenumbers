@@ -116,7 +116,7 @@ def output_geodata_code(geodata, outfilename):
         print >> outfile, GEODATA_FILE_PROLOG
         print >> outfile, COPYRIGHT_NOTICE
         print >> outfile, "GEOCODE_DATA = {"
-        for prefix in geodata:
+        for prefix in sorted(geodata.keys()):
             if len(prefix) > longest_prefix:
                 longest_prefix = len(prefix)
             print >> outfile, "  '%s': %r," % (prefix, geodata[prefix])
