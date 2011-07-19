@@ -119,7 +119,7 @@ def output_geodata_code(geodata, outfilename):
         for prefix in sorted(geodata.keys()):
             if len(prefix) > longest_prefix:
                 longest_prefix = len(prefix)
-            print >> outfile, "  '%s': %r," % (prefix, geodata[prefix])
+            print >> outfile, " '%s':%r," % (prefix, geodata[prefix])
         print >> outfile, "}"
         print >> outfile, "GEOCODE_LONGEST_PREFIX = %d" % longest_prefix
 
