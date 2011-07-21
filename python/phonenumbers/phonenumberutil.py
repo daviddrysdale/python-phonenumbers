@@ -1458,8 +1458,7 @@ def is_nanpa_country(region_code):
     Returns True if region_code is one of the regions under the North American
     Numbering Plan Administration (NANPA).
     """
-    return (region_code is not None and
-            region_code in _NANPA_REGIONS)
+    return region_code in _NANPA_REGIONS
 
 
 def _is_leading_zero_possible(country_code):
