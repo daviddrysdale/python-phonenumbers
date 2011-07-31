@@ -1,3 +1,5 @@
+all: metadata geodata locale
+
 # Dump the JRE's Locale information
 DumpLocale.class: DumpLocale.java
 	javac $<

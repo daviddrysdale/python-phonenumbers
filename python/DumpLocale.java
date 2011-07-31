@@ -34,7 +34,31 @@ class DumpLocale {
     System.out.print("'");
   }
 
+  private static void printProperty(String propName) {
+    String propVal = System.getProperty(propName, null);
+    if (propVal != null) {
+      System.out.println("  " + propName + "=" + propVal);
+    }
+  }
+
+  private static void printProlog() {
+    System.out.println("\"\"\"Locale information.");
+    System.out.println("Holds a map from ISO 3166-1 country code (e.g. GB) to a dict.");
+    System.out.println("Each dict maps from an ISO 639-1 language code (e.g. ja) to the country's name in that language.");
+    System.out.println("");
+    System.out.println("Generated from java.util.Locale, generation info:");
+    printProperty("java.version");
+    printProperty("java.vendor");
+    printProperty("os.name");
+    printProperty("os.arch");
+    printProperty("os.version");
+    System.out.println("");
+    System.out.println("Auto-generated file, do not edit by hand.");
+    System.out.println("\"\"\"");
+  }
+
   public static void main(String[] args) {
+    printProlog();
     System.out.println("LOCALE_DATA = {");
     String[] all_countries = Locale.getISOCountries();
     String[] all_langs = Locale.getISOLanguages();
