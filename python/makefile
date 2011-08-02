@@ -59,6 +59,7 @@ install: sdist
 clean:
 	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc tests/*.pyc
 	rm -rf build deb_dist dist
+	rm -f DumpLocale.class
 
 distclean:
 	rm -rf phonenumbers/data tests/testdata
