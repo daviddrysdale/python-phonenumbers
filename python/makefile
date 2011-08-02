@@ -25,7 +25,7 @@ metadata: phonenumbers/data/__init__.py tests/testdata/__init__.py geodata
 tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
 	python buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata
 
-test: tests/testdata/__init__.py
+test: alldata tests/testdata/__init__.py
 	python phonenumbers/__init__.py
 	python phonenumbers/re_util.py
 	python phonenumbers/unicode_util.py
@@ -58,7 +58,8 @@ install: alldata
 	sudo python setup.py install
 
 clean:
-	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc tests/*.pyc
+	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc phonenumbers/geodata/*.pyc
+	rm -f tests/*.pyc tests/data/*.pyc tests/geodata/*.pyc
 	rm -rf build deb_dist dist
 	rm -f DumpLocale.class
 
