@@ -1,4 +1,4 @@
-all: metadata geodata locale
+alldata: metadata geodata locale
 
 # Dump the JRE's Locale information
 DumpLocale.class: DumpLocale.java
@@ -49,11 +49,12 @@ coverage_annotate:
 VERSION=$(shell grep __version__ phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
 TARBALL=dist/phonenumbers-$(VERSION).tar.gz
 # Build setuptools packaged tarball $(TARBALL)
-sdist: 
+sdist: alldata
 	python setup.py sdist
 $(TARBALL): sdist
 
-install: sdist
+install: alldata
+	python setup.py build
 	sudo python setup.py install
 
 clean:
@@ -61,9 +62,10 @@ clean:
 	rm -rf build deb_dist dist
 	rm -f DumpLocale.class
 
-distclean:
+distclean: clean
 	rm -rf phonenumbers/data tests/testdata
 	rm -rf phonenumbers.egg-info
+	rm -rf build
 
 # Create Debian package.  Requires py2dsc, included in the python-stdeb package.
 DEB_VERSION=$(VERSION)-1_all
