@@ -63,6 +63,7 @@ clean:
 
 distclean:
 	rm -rf phonenumbers/data tests/testdata
+	rm -rf phonenumbers.egg-info
 
 # Create Debian package.  Requires py2dsc, included in the python-stdeb package.
 DEB_VERSION=$(VERSION)-1_all
