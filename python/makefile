@@ -33,18 +33,19 @@ test: alldata tests/testdata/__init__.py
 	python tests/__init__.py
 
 # Coverage; requires coverage module
+COVERAGE=$(shell hash python-coverage 2>&- && echo python-coverage || echo coverage)
 COVERAGE_FILES=phonenumbers/*.py
 coverage: coverage_clean coverage_generate coverage_report
 coverage_clean:
-	coverage -e
+	$(COVERAGE) -e
 coverage_generate:
-	coverage -x phonenumbers/re_util.py
-	coverage -x phonenumbers/unicode_util.py
-	coverage -x tests/__init__.py
+	$(COVERAGE) -x phonenumbers/re_util.py
+	$(COVERAGE) -x phonenumbers/unicode_util.py
+	$(COVERAGE) -x tests/__init__.py
 coverage_report:
-	coverage -m -r $(COVERAGE_FILES)
+	$(COVERAGE) -m -r $(COVERAGE_FILES)
 coverage_annotate:
-	coverage annotate $(COVERAGE_FILES)
+	$(COVERAGE) annotate $(COVERAGE_FILES)
 
 VERSION=$(shell grep __version__ phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
 TARBALL=dist/phonenumbers-$(VERSION).tar.gz
