@@ -68,9 +68,13 @@ distclean: clean
 	rm -rf phonenumbers.egg-info
 	rm -rf build
 
+# Cehcks that the prerequisites for building the deb are installed.
+deb_prechecks:
+	hash py2dsc 2>&- || { echo >&2 "Building the deb requires py2dsc, but it's not installed.  Aborting.\nOn Ubuntu, 'sudo apt-get install python-stdeb' should do the trick."; exit 1; }
+
 # Create Debian package.  Requires py2dsc, included in the python-stdeb package.
 DEB_VERSION=$(VERSION)-1_all
-deb: deb_dist/python-phonenumbers_$(DEB_VERSION).deb
+deb: deb_prechecks deb_dist/python-phonenumbers_$(DEB_VERSION).deb
 
 deb_dist/python-phonenumbers_$(VERSION)-1_all.deb: $(TARBALL)
 	py2dsc $(TARBALL)
