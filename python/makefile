@@ -62,12 +62,12 @@ clean:
 	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc phonenumbers/geodata/*.pyc
 	rm -f tests/*.pyc tests/data/*.pyc tests/geodata/*.pyc
 	rm -rf build deb_dist dist
-	rm -f DumpLocale.class
 
 distclean: clean
 	rm -rf phonenumbers/data tests/testdata
 	rm -rf phonenumbers.egg-info
 	rm -rf build
+	rm -f DumpLocale.class
 
 # Create Debian package.  Requires py2dsc, included in the python-stdeb package.
 DEB_VERSION=$(VERSION)-1_all
