@@ -109,6 +109,15 @@ def load_geodata(indir):
     return geodata
 
 
+def _stable_dict_repr(strdict):
+    """Return a repr() for a dict keyed by a string, in sorted key order"""
+    # '4143':{'fr': u'Zurich', 'de': u'Z\xfcrich', 'en': u'Zurich', 'it': u'Zurigo'},
+    lines = []
+    for key in sorted(strdict.keys()):
+        lines.append("%r: %r" % (key, strdict[key]))
+    return "{%s}" % ", ".join(lines)
+
+
 def output_geodata_code(geodata, outfilename):
     """Output the geocoding data in Python form to the given file """
     with open(outfilename, "wb") as outfile:
@@ -119,7 +128,7 @@ def output_geodata_code(geodata, outfilename):
         for prefix in sorted(geodata.keys()):
             if len(prefix) > longest_prefix:
                 longest_prefix = len(prefix)
-            print >> outfile, " '%s':%r," % (prefix, geodata[prefix])
+            print >> outfile, " '%s':%s," % (prefix, _stable_dict_repr(geodata[prefix]))
         print >> outfile, "}"
         print >> outfile, "GEOCODE_LONGEST_PREFIX = %d" % longest_prefix
 
