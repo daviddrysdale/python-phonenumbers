@@ -2,8 +2,8 @@
 from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AT = PhoneMetadata(id='AT', country_code=43, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='\\d{4,13}', possible_number_pattern='\\d{3,13}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='1\\d{3,12}|(?:2(?:1[467]|2[134-8]|5[2357]|6[1-46-8]|7[1-8]|8[124-7]|8[1458])|3(?:1[1-8]|3[23568]|4[5-7]|5[1378]|6[1-38]|8[3-68])|4(?:2[1-8]|35|63|7[1368]|8[2457])|5(?:1[27]|2[1-8]|3[357]|4[147]|5[12578]|6[37])|6(?:13|2[1-47]|4[1-35-8]|5[468]|62)|7(?:2[1-8]|3[25]|4[13478]|5[68]|6[16-8]|7[1-6]|9[45]))\\d{3,10}|5(?:0[1-9]|[79]\\d)\\d{2,10}|720\\d{6,10}', possible_number_pattern='\\d{3,13}', example_number='1234567890'),
+    general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{3,12}', possible_number_pattern='\\d{3,13}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='1\\d{3,12}|(?:2(?:1[467]|2[134-8]|5[2357]|6[1-46-8]|7[1-8]|8[124-7]|8[1458])|3(?:1[1-8]|3[23568]|4[5-7]|5[1378]|6[1-38]|8[3-68])|4(?:2[1-8]|35|63|7[1368]|8[2457])|5(?:12|2[1-8]|3[357]|4[147]|5[12578]|6[37])|6(?:13|2[1-47]|4[1-35-8]|5[468]|62)|7(?:2[1-8]|3[25]|4[13478]|5[68]|6[16-8]|7[1-6]|9[45]))\\d{3,10}', possible_number_pattern='\\d{3,13}', example_number='1234567890'),
     mobile=PhoneNumberDesc(national_number_pattern='6(?:44|5[0-3579]|6[013-9]|[7-9]\\d)\\d{4,10}', possible_number_pattern='\\d{7,13}', example_number='644123456'),
     toll_free=PhoneNumberDesc(national_number_pattern='80[02]\\d{6,10}', possible_number_pattern='\\d{9,13}', example_number='800123456'),
     premium_rate=PhoneNumberDesc(national_number_pattern='(?:711|9(?:0[01]|3[019]))\\d{6,10}', possible_number_pattern='\\d{9,13}', example_number='900123456'),
@@ -11,7 +11,7 @@ PHONE_METADATA_AT = PhoneMetadata(id='AT', country_code=43, international_prefix
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='780\\d{6,10}', possible_number_pattern='\\d{9,13}', example_number='780123456'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    uan=PhoneNumberDesc(national_number_pattern='5(?:(?:0[1-9]|17)\\d{2,10}|[79]\\d{3,11})|720\\d{6,10}', possible_number_pattern='\\d{5,13}', example_number='50123'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',

@@ -14,7 +14,7 @@ PHONE_METADATA_CO = PhoneMetadata(id='CO', country_code=57, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'0',
-    national_prefix_for_parsing=u'0([3579]|4(?:44|56))',
+    national_prefix_for_parsing=u'0([3579]|4(?:44|56))?',
     number_format=[NumberFormat(pattern='(\\d)(\\d{7})', format=u'\\1 \\2', leading_digits_pattern=['1(?:8[2-9]|9[0-3]|[2-7])|[24-8]', '1(?:8[2-9]|9(?:09|[1-3])|[2-7])|[24-8]'], national_prefix_formatting_rule=u'(\\1)', domestic_carrier_code_formatting_rule=u'0$CC \\1'),
         NumberFormat(pattern='(\\d{3})(\\d{7})', format=u'\\1 \\2', leading_digits_pattern=['3'], domestic_carrier_code_formatting_rule=u'0$CC \\1'),
         NumberFormat(pattern='(1)(\\d{3})(\\d{7})', format=u'\\1-\\2-\\3', leading_digits_pattern=['1(?:80|9[04])', '1(?:800|9(?:0[01]|4[78]))'], national_prefix_formatting_rule=u'0\\1')],
