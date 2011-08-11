@@ -29,8 +29,8 @@ import re
 import unicode_util
 from re_util import fullmatch
 from phonemetadata import PhoneMetadata
-from phonenumberutil import _VALID_START_CHAR_PATTERN, _VALID_PUNCTUATION
-from phonenumberutil import _PLUS_SIGN
+from phonenumberutil import _VALID_PUNCTUATION
+from phonenumberutil import _PLUS_SIGN, _PLUS_CHARS_PATTERN
 from phonenumberutil import _extract_country_code, region_code_for_country_code
 from phonenumberutil import country_code_for_region
 
@@ -201,10 +201,10 @@ class AsYouTypeFormatter(object):
         self._prefix_before_national_number = ""
         self._national_number = ""
         self._able_to_format = True
-        # The position of a digit upon which input_digit_and_remember_position is
+        # The position of a digit upon which input_digit(remember_position=True) is
         # most recently invoked, as found in accrued_input_without_formatting.
         self._position_to_remember = 0
-        # The position of a digit upon which input_digit_and_remember_position is
+        # The position of a digit upon which input_digit(remember_position=True) is
         # most recently invoked, as found in the original sequence of
         # characters the user entered.
         self._original_position = 0
@@ -243,8 +243,9 @@ class AsYouTypeFormatter(object):
         if remember_position:
             self._original_position = len(self._accrued_input)
         # We do formatting on-the-fly only when each character entered is
-        # either a plus sign or a digit.
-        if not fullmatch(_VALID_START_CHAR_PATTERN, next_char):
+        # either a digit, or a plus sign (accepted at the start of the number
+        # only).
+        if not self._is_digit_or_leading_plus_sign(next_char):
             self._able_to_format = False
         if not self._able_to_format:
             self._current_output = self._accrued_input
@@ -305,6 +306,11 @@ class AsYouTypeFormatter(object):
         else:
             self._current_output = self._attempt_to_choose_formatting_pattern()
             return self._current_output
+
+    def _is_digit_or_leading_plus_sign(self, next_char):
+        return (next_char.isdigit() or
+                (len(self._accrued_input) == 1 and
+                 fullmatch(_PLUS_CHARS_PATTERN, next_char)))
 
     def _attempt_to_format_accrued_digits(self):
         for num_format in self._possible_formats:

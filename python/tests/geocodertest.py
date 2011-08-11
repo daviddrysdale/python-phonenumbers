@@ -111,7 +111,7 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         self.assertEquals(u"\uC81C\uC8FC",
                           geocoder.description_for_number(KO_NUMBER3, _KOREAN))
 
-    def testGetDescriptionForInvalildNumber(self):
+    def testGetDescriptionForInvalidNumber(self):
         self.assertEquals("", geocoder.description_for_number(KO_INVALID_NUMBER, _ENGLISH))
         self.assertEquals("", geocoder.description_for_number(US_INVALID_NUMBER, _ENGLISH))
 

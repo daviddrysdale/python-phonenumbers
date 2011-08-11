@@ -64,6 +64,22 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEquals("65025", formatter.input_digit('5'))
         self.assertEquals("650253", formatter.input_digit('3'))
 
+    def testInvalidPlusSign(self):
+        formatter = AsYouTypeFormatter("ZZ")
+        self.assertEquals("+", formatter.input_digit('+'))
+        self.assertEquals("+4", formatter.input_digit('4'))
+        self.assertEquals("+48 ", formatter.input_digit('8'))
+        self.assertEquals("+48 8", formatter.input_digit('8'))
+        self.assertEquals("+48 88", formatter.input_digit('8'))
+        self.assertEquals("+48 88 1", formatter.input_digit('1'))
+        self.assertEquals("+48 88 12", formatter.input_digit('2'))
+        self.assertEquals("+48 88 123", formatter.input_digit('3'))
+        self.assertEquals("+48 88 123 1", formatter.input_digit('1'))
+        # A plus sign can only appear at the beginning of the number;
+        # otherwise, no formatting is applied.
+        self.assertEquals("+48881231+", formatter.input_digit('+'))
+        self.assertEquals("+48881231+2", formatter.input_digit('2'))
+
     def testTooLongNumberMatchingMultipleLeadingDigits(self):
         # See http://code.google.com/p/libphonenumber/issues/detail?id=36
         # The bug occurred last time for countries which have two

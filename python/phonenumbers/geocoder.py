@@ -122,12 +122,40 @@ def country_name_for_number(numobj, lang, script=None, region=None):
     return u""
 
 
-def description_for_number(numobj, lang, script=None, region=None):
-    """Return a text description of the given PhoneNumber object for the given language.
+def description_for_valid_number(numobj, lang, script=None, region=None):
+    """Return a text description of a PhoneNumber object for the given language.
 
     The description might consist of the name of the country where the phone
     number is from and/or the name of the geographical area the phone number
-    is from.
+    is from.  This function assumes the validity of the number passed in has
+    already been checked.
+
+    Arguments:
+    numobj -- A valid PhoneNumber object for which we want to get a text
+                  description.
+    lang -- A 2-letter lowercase ISO 639-1 language code for the language in
+                  which the description should be returned (e.g. "en")
+    script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
+                  ISO script code as defined in ISO 15924, separated by an
+                  underscore (e.g. "Hant")
+    region --  A 2-letter uppercase ISO 3166-1 country code (e.g. "GB")
+
+    Returns a text description in the given language code, for the given phone
+    number, or an empty string if no description is available."""
+    area_description = area_description_for_number(numobj, lang, script, region)
+    if area_description != "":
+        return area_description
+    else:
+        # Fall back to the description of the number's region
+        return country_name_for_number(numobj, lang, script, region)
+
+
+def description_for_number(numobj, lang, script=None, region=None):
+    """Return a text description of a PhoneNumber object for the given language.
+
+    The description might consist of the name of the country where the phone
+    number is from and/or the name of the geographical area the phone number
+    is from.  This function explicitly checks the validity of the number passed in
 
     Arguments:
     numobj -- The PhoneNumber object for which we want to get a text description.
@@ -142,12 +170,7 @@ def description_for_number(numobj, lang, script=None, region=None):
     number, or an empty string if no description is available."""
     if not is_valid_number(numobj):
         return ""
-    area_description = area_description_for_number(numobj, lang, script, region)
-    if area_description != "":
-        return area_description
-    else:
-        # Fall back to the description of the number's region
-        return country_name_for_number(numobj, lang, script, region)
+    return description_for_valid_number(numobj, lang, script, region)
 
 if __name__ == '__main__':  # pragma no cover
     import doctest

@@ -230,34 +230,55 @@ _VALID_PHONE_NUMBER = (u"[" + _PLUS_CHARS + u"]*(?:[" + _VALID_PUNCTUATION + u"]
 # extension prefix. This can be overridden by region-specific preferences.
 _DEFAULT_EXTN_PREFIX = u" ext. "
 
+# Pattern to capture digits used in an extension. Places a maximum length of
+# "7" for an extension.
+_CAPTURING_EXTN_DIGITS = u"(" + _DIGITS + u"{1,7})"
+
 # Regexp of all possible ways to write extensions, for use when parsing. This
 # will be run as a case-insensitive regexp match. Wide character versions are
-# also provided after each ASCII version. There are three regular expressions
-# here. The first covers RFC 3966 format, where the extension is added using
-# ";ext=". The second more generic one starts with optional white space and
-# ends with an optional full stop (.), followed by zero or more spaces/tabs
-# and then the numbers themselves. The other one covers the special case of
-# American numbers where the extension is written with a hash at the end, such
-# as "- 503#".  Note that the only capturing groups should be around the
-# digits that you want to capture as part of the extension, or else parsing
-# will fail!  Canonical-equivalence doesn't seem to be an option with Android
-# java, so we allow two options for representing the accented o - the
-# character itself, and one in the unicode decomposed form with the combining
-# acute accent.
-_CAPTURING_EXTN_DIGITS = u"(" + _DIGITS + u"{1,7})"
-_KNOWN_EXTN_PATTERNS = (_RFC3966_EXTN_PREFIX + _CAPTURING_EXTN_DIGITS + u"|" +
-                        u"[ \u00A0\\t,]*(?:ext(?:ensi(?:o\u0301?|\u00F3))?n?|" +
-                        u"\uFF45\uFF58\uFF54\uFF4E?|[,x\uFF58#\uFF03~\uFF5E]|int|anexo|\uFF49\uFF4E\uFF54)" +
-                        u"[:\\.\uFF0E]?[ \u00A0\\t,-]*" + _CAPTURING_EXTN_DIGITS + u"#?|" +
-                        u"[- ]+(" + _DIGITS + u"{1,5})#")
+# also provided after each ASCII version.
+
+# One-character symbols that can be used to indicate an extension.
+_SINGLE_EXTN_SYMBOLS_FOR_MATCHING = u"x\uFF58#\uFF03~\uFF5E"
+# For parsing, we are slightly more lenient in our interpretation than for
+# matching. Here we allow a "comma" as a possible extension indicator. When
+# matching, this is hardly ever used to indicate this.
+_SINGLE_EXTN_SYMBOLS_FOR_PARSING = "," + _SINGLE_EXTN_SYMBOLS_FOR_MATCHING
+
+
+def _create_extn_pattern(single_extn_symbols):
+    """Helper initialiser method to create the regular-expression pattern to
+    match extensions, allowing the one-char extension symbols provided by
+    single_extn_symbols."""
+    # There are three regular expressions here. The first covers RFC 3966
+    # format, where the extension is added using ";ext=". The second more
+    # generic one starts with optional white space and ends with an optional
+    # full stop (.), followed by zero or more spaces/tabs and then the numbers
+    # themselves. The other one covers the special case of American numbers
+    # where the extension is written with a hash at the end, such as "- 503#".
+    # Note that the only capturing groups should be around the digits that you
+    # want to capture as part of the extension, or else parsing will fail!
+    # Canonical-equivalence doesn't seem to be an option with Android java, so
+    # we allow two options for representing the accented o - the character
+    # itself, and one in the unicode decomposed form with the combining acute
+    # accent.
+    return (_RFC3966_EXTN_PREFIX + _CAPTURING_EXTN_DIGITS + u"|" +
+            u"[ \u00A0\\t,]*(?:ext(?:ensi(?:o\u0301?|\u00F3))?n?|" +
+            u"\uFF45\uFF58\uFF54\uFF4E?|" +
+            u"[" + single_extn_symbols + u"]|int|anexo|\uFF49\uFF4E\uFF54)" +
+            u"[:\\.\uFF0E]?[ \u00A0\\t,-]*" + _CAPTURING_EXTN_DIGITS + u"#?|" +
+            u"[- ]+(" + _DIGITS + u"{1,5})#")
+
+_EXTN_PATTERNS_FOR_PARSING = _create_extn_pattern(_SINGLE_EXTN_SYMBOLS_FOR_PARSING)
+_EXTN_PATTERNS_FOR_MATCHING = _create_extn_pattern(_SINGLE_EXTN_SYMBOLS_FOR_MATCHING)
 
 # Regexp of all known extension prefixes used by different regions followed by
 # 1 or more valid digits, for use when parsing.
-_EXTN_PATTERN = re.compile(u"(?:" + _KNOWN_EXTN_PATTERNS + u")$", _REGEX_FLAGS)
+_EXTN_PATTERN = re.compile(u"(?:" + _EXTN_PATTERNS_FOR_PARSING + u")$", _REGEX_FLAGS)
 
 # We append optionally the extension pattern to the end here, as a valid phone
 # number may have an extension prefix appended, followed by 1 or more digits.
-_VALID_PHONE_NUMBER_PATTERN = re.compile(_VALID_PHONE_NUMBER + u"(?:" + _KNOWN_EXTN_PATTERNS + u")?", _REGEX_FLAGS)
+_VALID_PHONE_NUMBER_PATTERN = re.compile(_VALID_PHONE_NUMBER + u"(?:" + _EXTN_PATTERNS_FOR_PARSING + u")?", _REGEX_FLAGS)
 
 # We use a non-capturing group because Python's re.split() returns any capturing
 # groups interspersed with the other results (unlike Java's Pattern.split()).
@@ -340,7 +361,6 @@ class MatchType(object):
     # Either or both has no region specified, and the NSNs and extensions are
     # the same.
     NSN_MATCH = 3
-
     # The country_code, NSN, presence of a leading zero for Italian numbers
     # and any extension present are the same.
     EXACT_MATCH = 4
@@ -444,7 +464,7 @@ def _normalize(number):
         return normalize_digits_only(number)
 
 
-def normalize_digits_only(number):
+def normalize_digits_only(number, keep_non_digits=False):
     """Normalizes a string of characters representing a phone number.
 
     This converts wide-ascii and arabic-indic numerals to European numerals,
@@ -462,6 +482,8 @@ def normalize_digits_only(number):
         d = unicode_util.digit(number[ii], -1)
         if d != -1:
             normalized_digits += unicode(d)
+        elif keep_non_digits:
+            normalized_digits += number[ii]
     return normalized_digits
 
 
@@ -1850,13 +1872,15 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
         possible_national_prefix is None or
         len(possible_national_prefix) == 0):
         # Early return for numbers of zero length.
-        return (carrier_code, number)
+        return (u"", number)
 
     # Attempt to parse the first digits as a national prefix.
     prefix_pattern = re.compile(possible_national_prefix)
     prefix_match = prefix_pattern.match(number)
     if prefix_match:
         national_number_pattern = re.compile(metadata.general_desc.national_number_pattern or "")
+        # Check if the original number is viable.
+        is_viable_original_number = fullmatch(national_number_pattern, number)
         # prefix_match.groups() == () implies nothing was captured by the
         # capturing groups in possible_national_prefix; therefore, no
         # transformation is necessary, and we just remove the national prefix.
@@ -1865,24 +1889,26 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
         if (transform_rule is None or
             len(transform_rule) == 0 or
             prefix_match.groups()[num_groups - 1] is None):
+            # If the original number was viable, and the resultant number is not, we return.
             # Check that the resultant number is viable. If not, return.
             national_number_match = fullmatch(national_number_pattern,
                                               number[prefix_match.end():])
-            if not national_number_match:
-                return (carrier_code, number)
+            if (is_viable_original_number and not national_number_match):
+                return (u"", number)
 
             if (num_groups > 0 and
                 prefix_match.groups(num_groups) is not None):
                 carrier_code = prefix_match.group(1)
             return (carrier_code, number[prefix_match.end():])
         else:
-            # Check that the resultant number is viable. If not, return. Check this by copying the
-            # number and making the transformation on the copy first.
+            # Check that the resultant number is still viable. If not,
+            # return. Check this by copying the number and making the
+            # transformation on the copy first.
             transformed_number = re.sub(prefix_pattern, transform_rule, number, count=1)
             national_number_match = fullmatch(national_number_pattern,
                                               transformed_number)
-            if not national_number_match:
-                return (carrier_code, number)
+            if (is_viable_original_number and not national_number_match):
+                return ("", number)
             if num_groups > 1:
                 carrier_code = prefix_match.group(1)
             return (carrier_code, transformed_number)
@@ -2035,9 +2061,7 @@ def parse(number, region, keep_raw_input=False,
     if len_national_number > _MAX_LENGTH_FOR_NSN:
         raise NumberParseException(NumberParseException.TOO_LONG,
                                    "The string supplied is too long to be a phone number.")
-    if (normalized_national_number[0] == '0' and
-        metadata is not None and
-        metadata.leading_zero_possible):
+    if normalized_national_number[0] == '0':
         numobj.italian_leading_zero = True
     numobj.national_number = long(normalized_national_number)
     return numobj

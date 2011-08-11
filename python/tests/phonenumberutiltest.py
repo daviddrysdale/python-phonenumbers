@@ -115,7 +115,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(2, len(metadata.number_format))
         self.assertEquals("(\\d{3})(\\d{3})(\\d{4})", metadata.number_format[1].pattern)
         self.assertEquals("\\1 \\2 \\3", metadata.number_format[1].format)
-        self.assertEquals("[13-9]\\d{9}|2[0-35-9]\\d{8}",
+        self.assertEquals("[13-689]\\d{9}|2[0-35-9]\\d{8}",
                           metadata.general_desc.national_number_pattern)
         self.assertEquals("\\d{7}(?:\\d{3})?", metadata.general_desc.possible_number_pattern)
         self.assertTrue(metadata.general_desc == metadata.fixed_line)
@@ -137,7 +137,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals("(\\d{3})(\\d{3,4})(\\d{4})",
                           metadata.number_format[5].pattern)
         self.assertEquals("\\1 \\2 \\3", metadata.number_format[5].format)
-        self.assertEquals("(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:[1-9]\\d|0[2-9]))\\d{3,8}",
+        self.assertEquals("(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:[1-9]\\d|0[2-9]))\\d{1,8}",
                           metadata.fixed_line.national_number_pattern)
         self.assertEquals("\\d{2,14}", metadata.fixed_line.possible_number_pattern)
         self.assertEquals("30123456", metadata.fixed_line.example_number)
@@ -1755,8 +1755,6 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(phonenumbers.MatchType.NSN_MATCH,
                           phonenumbers.is_number_match("+64 3 331-6005", "03 331 6005"))
         self.assertEquals(phonenumbers.MatchType.NSN_MATCH,
-                          phonenumbers.is_number_match("3 331-6005", "03 331 6005"))
-        self.assertEquals(phonenumbers.MatchType.NSN_MATCH,
                           phonenumbers.is_number_match(NZ_NUMBER, "03 331 6005"))
         # Here the second number possibly starts with the country calling code for Zealand,
         # although we are unsure.
@@ -1789,6 +1787,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Short NSN matches with the country not specified for either one or both numbers.
         self.assertEquals(phonenumbers.MatchType.SHORT_NSN_MATCH,
                           phonenumbers.is_number_match("+64 3 331-6005", "331 6005"))
+        # We did not know that the "0" was a national prefix since neither
+        # number has a country code, so this is considered a SHORT_NSN_MATCH.
+        self.assertEquals(phonenumbers.MatchType.SHORT_NSN_MATCH,
+                          phonenumbers.is_number_match("3 331-6005", "03 331 6005"))
         self.assertEquals(phonenumbers.MatchType.SHORT_NSN_MATCH,
                           phonenumbers.is_number_match("3 331-6005", "331 6005"))
         self.assertEquals(phonenumbers.MatchType.SHORT_NSN_MATCH,
