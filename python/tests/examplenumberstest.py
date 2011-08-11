@@ -135,5 +135,5 @@ class ExampleNumbersTest(unittest.TestCase):
         # Python version extra test
         # Some metadata is blank; check that we cope with this.
         # Example: MH (+692)
-        number = phonenumberutil.parse("+6921234567", "US")
-        self.assertEquals("Country Code: 692 National Number: 1234567 Leading Zero: False", str(number))
+        number = phonenumberutil.parse("+6927654321", "US")
+        self.assertEquals("Country Code: 692 National Number: 7654321 Leading Zero: False", str(number))
