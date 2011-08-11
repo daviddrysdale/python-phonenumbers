@@ -220,7 +220,6 @@ from region_SY import PHONE_METADATA_SY
 from region_SZ import PHONE_METADATA_SZ
 from region_TC import PHONE_METADATA_TC
 from region_TD import PHONE_METADATA_TD
-from region_TF import PHONE_METADATA_TF
 from region_TG import PHONE_METADATA_TG
 from region_TH import PHONE_METADATA_TH
 from region_TJ import PHONE_METADATA_TJ
@@ -351,7 +350,7 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     258: ("MZ",),
     260: ("ZM",),
     261: ("MG",),
-    262: ("RE", "TF", "YT",),
+    262: ("RE", "YT",),
     263: ("ZW",),
     264: ("NA",),
     265: ("MW",),
