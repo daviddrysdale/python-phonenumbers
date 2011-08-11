@@ -168,8 +168,8 @@ STRICT_GROUPING_CASES = [NumberTest("(415) 6667777", "US"),
                          ]
 
 # Strings with number-like things that should found at all levels.
-EXACT_GROUPING_CASES = [NumberTest("\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17\uFF17\uFF17\uFF17", "US"),
-                        NumberTest("\uFF14\uFF11\uFF15-\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17", "US"),
+EXACT_GROUPING_CASES = [NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17\uFF17\uFF17\uFF17", "US"),
+                        NumberTest(u"\uFF14\uFF11\uFF15-\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17", "US"),
                         NumberTest("4156667777", "US"),
                         NumberTest("4156667777 x 123", "US"),
                         NumberTest("415-666-7777", "US"),
@@ -415,8 +415,8 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         possibleOnlyContexts = []
         possibleOnlyContexts.append(NumberContext("$", ""))
         possibleOnlyContexts.append(NumberContext("", "$"))
-        possibleOnlyContexts.append(NumberContext("\u00A3", ""))  # Pound sign
-        possibleOnlyContexts.append(NumberContext("\u00A5", ""))  # Yen sign
+        possibleOnlyContexts.append(NumberContext(u"\u00A3", ""))  # Pound sign
+        possibleOnlyContexts.append(NumberContext(u"\u00A5", ""))  # Yen sign
         self.findMatchesInContexts(possibleOnlyContexts, False, True)
 
     def testPhoneNumberWithLeadingOrTrailingMoneyMatches(self):
@@ -837,6 +837,6 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         self.assertRaises(Exception, _limit, *(1, 0))
         self.assertRaises(Exception, _limit, *(2, 1))
         number = PhoneNumber(country_code=44, national_number=7912345678L)
-        self.assertRaises(Exception, _verify, *(99, number))
+        self.assertRaises(Exception, _verify, *(99, number, "12345678"))
         self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"leniency": None})
         self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"max_tries": -2})

@@ -196,7 +196,7 @@ def _verify_strict_grouping(numobj, candidate):
     # The check here makes sure that we haven't mistakenly already used the extension to
     # match the last group of the subscriber number. Note the extension cannot have
     # formatting in-between digits.
-    return (normalized_candidate[from_index:].find(numobj.extension) != -1)
+    return (normalized_candidate[from_index:].find(numobj.extension or "") != -1)
 
 
 def _verify_exact_grouping(numobj, candidate):
@@ -269,8 +269,8 @@ def _contains_only_valid_x_chars(numobj, candidate):
     ii = 0
     while ii < (len(candidate) - 1):
         if (candidate[ii] == 'x' or candidate[ii] == 'X'):
-            charAtNextIndex = candidate[ii + 1]
-            if (charAtNextIndex == 'x' or charAtNextIndex == 'X'):
+            next_char = candidate[ii + 1]
+            if (next_char == 'x' or next_char == 'X'):
                 # This is the carrier code case, in which the 'X's always
                 # precede the national significant number.
                 ii += 1
@@ -420,7 +420,7 @@ class PhoneNumberMatcher(object):
 
     @classmethod
     def _is_currency_symbol(cls, character):
-        return unicode_util.Category.get == unicode_util.Category.CURRENCY_SYMBOL
+        return unicode_util.Category.get(character) == unicode_util.Category.CURRENCY_SYMBOL
 
     def _extract_match(self, candidate, offset):
         """Attempts to extract a match from a candidate string.
@@ -470,7 +470,7 @@ class PhoneNumberMatcher(object):
 
             without_first_group_start = group_match.end()
             # Try the rest of the candidate without the first group.
-            without_first_group = candidate[without_first_group_start]
+            without_first_group = candidate[without_first_group_start:]
             without_first_group = self._trim_after_first_match(pnu._UNWANTED_END_CHAR_PATTERN,
                                                                without_first_group)
             match = self._parse_and_verify(without_first_group, offset + without_first_group_start)
