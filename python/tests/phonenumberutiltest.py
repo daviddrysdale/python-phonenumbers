@@ -2006,3 +2006,6 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(('1', '41234567'),
                           phonenumberutil._maybe_strip_national_prefix_carrier_code("0141234567",
                                                                                      metadataXY))
+        self.assertEquals(('', '01412345'),
+                          phonenumberutil._maybe_strip_national_prefix_carrier_code("01412345",
+                                                                                     metadataXY))
