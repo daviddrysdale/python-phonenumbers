@@ -60,6 +60,16 @@ Example Usage
     ... 
     +15107488230
     +17034800500
+    >>> from phonenumbers.geocoder import area_description_for_number
+    >>> ch_number = phonenumbers.parse("0431234567", "CH")
+    >>> print repr(area_description_for_number(ch_number, "de"))
+    u'Z\\xfcrich'
+    >>> print repr(area_description_for_number(ch_number, "en"))
+    u'Zurich'
+    >>> print repr(area_description_for_number(ch_number, "fr"))
+    u'Zurich'
+    >>> print repr(area_description_for_number(ch_number, "it"))
+    u'Zurigo'
     >>>
 
 Project Layout
