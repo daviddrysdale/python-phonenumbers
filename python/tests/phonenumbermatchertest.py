@@ -155,6 +155,8 @@ VALID_CASES = [NumberTest("65 02 53 00 00.", "US"),
                NumberTest("1979-2011 100%", "US"),
                NumberTest("800 234 1 111x1111", "US"),
                NumberTest("+494949-4-94", "DE"),  # National number in wrong format
+               # Python version extra test - multiple x for extension marker
+               NumberTest("800 234 1 111 xx 1111", "US"),
                ]
 
 # Strings with number-like things that should only be found up to and
