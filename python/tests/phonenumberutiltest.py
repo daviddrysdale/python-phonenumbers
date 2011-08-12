@@ -1338,7 +1338,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
         # Python version extra test
         arIncompleteNumber = phonenumbers.parse("03715 15 65", "AR")
-        self.assertEquals("37151565",
+        self.assertEquals("9371565",
                           phonenumbers.format_number(arIncompleteNumber, PhoneNumberFormat.NATIONAL))
 
     def testParseWithXInNumber(self):
