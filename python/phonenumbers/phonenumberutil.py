@@ -15,7 +15,7 @@ author: David Drysdale (Python version)
 """
 # Based on original Java code:
 #     java/src/com/google/i18n/phonenumbers/PhoneNumberUtil.java
-#   Copyright (C) 2009-2011 Google Inc.
+#   Copyright (C) 2009-2011 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
