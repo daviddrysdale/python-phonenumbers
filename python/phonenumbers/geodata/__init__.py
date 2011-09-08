@@ -34630,7 +34630,7 @@ GEOCODE_DATA = {
  '493366':{'de': u'Beeskow'},
  '493371':{'de': u'Luckenwalde'},
  '493372':{'de': u'J\xfcterbog'},
- '493375':{'de': u'K\xf6nigs Wusterhausen<br>M\xfcnchehofe Kreis Dahme-'},
+ '493375':{'de': u'K\xf6nigs Wusterhausen'},
  '493377':{'de': u'Zossen Brandenburg'},
  '493378':{'de': u'Ludwigsfelde'},
  '493379':{'de': u'Mahlow'},
