@@ -155,6 +155,7 @@ VALID_CASES = [NumberTest("65 02 53 00 00.", "US"),
                NumberTest("1979-2011 100%", "US"),
                NumberTest("800 234 1 111x1111", "US"),
                NumberTest("+494949-4-94", "DE"),  # National number in wrong format
+               NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17", "US"),
                # Python version extra test - multiple x for extension marker
                NumberTest("800 234 1 111 xx 1111", "US"),
                ]
@@ -499,7 +500,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         self._doTestNumberMatchesForLeniency(testCases, Leniency.STRICT_GROUPING)
 
     def testNonMatchesWithStrictGroupLeniency(self):
-        testCases = POSSIBLE_ONLY_CASES + VALID_CASES
+        testCases = IMPOSSIBLE_CASES + POSSIBLE_ONLY_CASES + VALID_CASES
         self._doTestNumberNonMatchesForLeniency(testCases, Leniency.STRICT_GROUPING)
 
     def testMatchesWithExactGroupingLeniency(self):
@@ -507,7 +508,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         self._doTestNumberMatchesForLeniency(testCases, Leniency.EXACT_GROUPING)
 
     def testNonMatchesExactGroupLeniency(self):
-        testCases = POSSIBLE_ONLY_CASES + VALID_CASES + STRICT_GROUPING_CASES
+        testCases = IMPOSSIBLE_CASES + POSSIBLE_ONLY_CASES + VALID_CASES + STRICT_GROUPING_CASES
         self._doTestNumberNonMatchesForLeniency(testCases, Leniency.EXACT_GROUPING)
 
     def _doTestNumberMatchesForLeniency(self, testCases, leniency):

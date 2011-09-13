@@ -131,6 +131,12 @@ class ExampleNumbersTest(unittest.TestCase):
                 self.wrong_type_cases.append(exampleNumber)
         self.assertEquals(0, len(self.wrong_type_cases))
 
+    def testEveryRegionHasAnExampleNumber(self):
+        for regionCode in phonenumberutil.SUPPORTED_REGIONS:
+            exampleNumber = phonenumberutil.example_number(regionCode)
+            self.assertTrue(exampleNumber is not None,
+                            msg="None found for region %s" % regionCode)
+
     def testBlankMetadata(self):
         # Python version extra test
         # Some metadata is blank; check that we cope with this.

@@ -665,6 +665,9 @@ def format_number(numobj, num_format):
 
     Returns the formatted phone number.
     """
+    if numobj.national_number==0 and numobj.raw_input is not None:
+        if len(numobj.raw_input) > 0:
+            return numobj.raw_input
     country_calling_code = numobj.country_code
     nsn = national_significant_number(numobj)
     if num_format == PhoneNumberFormat.E164:
@@ -1672,6 +1675,10 @@ def _extract_country_code(number):
     that the leading plus sign or IDD has already been removed.  Returns (0,
     number) if number doesn't start with a valid country calling code.
     """
+
+    if len(number) == 0 or number[0] == u'0':
+        # Country codes do not begin with a '0'.
+        return (0, number)
     for ii in xrange(1, min(len(number), _MAX_LENGTH_COUNTRY_CODE) + 1):
         try:
             country_code = int(number[:ii])
@@ -2025,10 +2032,28 @@ def parse(number, region, keep_raw_input=False,
         metadata = None
     else:
         metadata = PhoneMetadata.region_metadata.get(region.upper(), None)
-    country_code, normalized_national_number = _maybe_extract_country_code(national_number,
-                                                                           metadata,
-                                                                           keep_raw_input,
-                                                                           numobj)
+
+    country_code = 0
+    try:
+        country_code, normalized_national_number = _maybe_extract_country_code(national_number,
+                                                                               metadata,
+                                                                               keep_raw_input,
+                                                                               numobj)
+    except NumberParseException, e:
+        matchobj = _PLUS_CHARS_PATTERN.match(national_number)
+        if (e.error_type == NumberParseException.INVALID_COUNTRY_CODE and
+            matchobj is not None):
+            # Strip the plus-char, and try again.
+            country_code, normalized_national_number = _maybe_extract_country_code(national_number[matchobj.end():],
+                                                                                   metadata,
+                                                                                   keep_raw_input,
+                                                                                   numobj)
+            if country_code == 0:
+                raise NumberParseException(NumberParseException.INVALID_COUNTRY_CODE,
+                                           "Could not interpret numbers after plus-sign.")
+        else:
+            raise
+
     if country_code != 0:
         number_region = region_code_for_country_code(country_code)
         if number_region != region:

@@ -107,6 +107,9 @@ class AsYouTypeFormatter(object):
                 return False
             if self._create_formatting_template(number_format):
                 self._current_formatting_pattern = pattern
+                # With a new formatting template, the matched position using
+                # the old template needs to be reset.
+                self._last_match_position = 0
                 return True
             else:
                 # Remove the current number format from _possible_formats
@@ -196,11 +199,25 @@ class AsYouTypeFormatter(object):
         self._formatting_template = ""
         self._last_match_position = 0
 
-        # The pattern from number_format that is currently used to create formatting_template.
+        # The pattern from number_format that is currently used to create
+        # formatting_template.
         self._current_formatting_pattern = ""
+        # This contains anything that has been entered so far preceding the
+        # national significant number, and it is formatted (e.g. with space
+        # inserted). For example, this can contain IDD, country code, and/or
+        # NDD, etc.
         self._prefix_before_national_number = ""
+        # This contains the national prefix that has been extracted. It
+        # contains only digits without formatting.
+        self._national_prefix_extracted = ""
         self._national_number = ""
+        # This indicates whether AsYouTypeFormatter is currently doing the
+        # formatting.
         self._able_to_format = True
+        # Set to true when users enter their own
+        # formatting. AsYouTypeFormatter will do no formatting at all when
+        # this is set to True.
+        self._input_has_formatting = False
         # The position of a digit upon which input_digit(remember_position=True) is
         # most recently invoked, as found in accrued_input_without_formatting.
         self._position_to_remember = 0
@@ -247,11 +264,30 @@ class AsYouTypeFormatter(object):
         # only).
         if not self._is_digit_or_leading_plus_sign(next_char):
             self._able_to_format = False
+            self._input_has_formatting = True
+        else:
+            next_char = self._normalize_and_accrue_digits_and_plus_sign(next_char, remember_position)
         if not self._able_to_format:
+            # When we are unable to format because of reasons other than that
+            # formatting chars have been entered, it can be due to really long
+            # IDDs or NDDs. If that is the case, we might be able to do
+            # formatting again after extracting them.
+            if self._input_has_formatting:
+                self._current_output = self._accrued_input
+                return self._current_output
+            elif self._attempt_to_extract_idd():
+                if self._attempt_to_extract_ccc():
+                    self._current_output = self._attempt_to_choose_pattern_with_prefix_extracted()
+                    return self._current_output
+            elif self._able_to_extract_longer_ndd():
+                # Add an additional space to separate long NDD and national
+                # significant number for readability.
+                self._prefix_before_national_number += " "
+                self._current_output = self._attempt_to_choose_pattern_with_prefix_extracted()
+                return self._current_output
+
             self._current_output = self._accrued_input
             return self._current_output
-
-        next_char = self._normalize_and_accrue_digits_and_plus_sign(next_char, remember_position)
 
         # We start to attempt to format only when at least
         # MIN_LEADING_DIGITS_LENGTH digits (the plus sign is counted as a
@@ -260,28 +296,19 @@ class AsYouTypeFormatter(object):
         if len_input >= 0 and len_input <= 2:
             self._current_output = self._accrued_input
             return self._current_output
-        if len_input == 3:
+        elif len_input == 3:
             if self._attempt_to_extract_idd():
                 self._is_expecting_country_calling_code = True
             else:
-                # No IDD or plus sign is found, must be entering in national format.
-                self._remove_national_prefix_from_national_number()
+                # No IDD or plus sign is found, might be entering in national format.
+                self._national_prefix_extracted = self._remove_national_prefix_from_national_number()
                 self._current_output = self._attempt_to_choose_formatting_pattern()
                 return self._current_output
-        if len_input <= 5:
-            if self._is_expecting_country_calling_code:
-                if self._attempt_to_extract_ccc():
-                    self._is_expecting_country_calling_code = False
-                self._current_output = self._prefix_before_national_number + self._national_number
-                return self._current_output
-        if len_input <= 6:
-            # We make a last attempt to extract a country calling code at the
-            # 6th digit because the maximum length of IDD and country calling
-            # code are both 3.
-            if self._is_expecting_country_calling_code and not self._attempt_to_extract_ccc():
-                self._able_to_format = False
-                self._current_output = self._accrued_input
-                return self._current_output
+        if self._is_expecting_country_calling_code:
+            if self._attempt_to_extract_ccc():
+                self._is_expecting_country_calling_code = False
+            self._current_output = self._prefix_before_national_number + self._national_number
+            return self._current_output
 
         if len(self._possible_formats) > 0:
             # The formatting pattern is already chosen.
@@ -306,6 +333,28 @@ class AsYouTypeFormatter(object):
         else:
             self._current_output = self._attempt_to_choose_formatting_pattern()
             return self._current_output
+
+    def _attempt_to_choose_pattern_with_prefix_extracted(self):
+        self._able_to_format = True
+        self._is_expecting_country_calling_code = False
+        self._possible_formats = []
+        return self._attempt_to_choose_formatting_pattern()
+
+    # Some national prefixes are a substring of others. If extracting the
+    # shorter NDD doesn't result in a number we can format, we try to see if
+    # we can extract a longer version here.
+    def _able_to_extract_longer_ndd(self):
+        if len(self._national_prefix_extracted) > 0:
+            # Put the extracted NDD back to the national number before
+            # attempting to extract a new NDD.
+            self._national_number = self._national_prefix_extracted + self._national_number
+            # Remove the previously extracted NDD from
+            # prefixBeforeNationalNumber. We cannot simply set it to empty
+            # string because people sometimes enter national prefix after
+            # country code, e.g +44 (0)20-1234-5678.
+            index_of_previous_ndd = self._prefix_before_national_number.rfind(self._national_prefix_extracted)
+            self._prefix_before_national_number = self._prefix_before_national_number[:index_of_previous_ndd]
+        return self._national_prefix_extracted != self._remove_national_prefix_from_national_number()
 
     def _is_digit_or_leading_plus_sign(self, next_char):
         return (next_char.isdigit() or
@@ -369,7 +418,7 @@ class AsYouTypeFormatter(object):
             start_of_national_number = 1
             self._prefix_before_national_number += "1 "
             self._is_international_formatting = True
-        elif self._current_metadata.national_prefix is not None:
+        elif self._current_metadata.national_prefix_for_parsing is not None:
             npp_re = re.compile(self._current_metadata.national_prefix_for_parsing)
             m = npp_re.match(self._national_number)
             if m:
@@ -380,7 +429,9 @@ class AsYouTypeFormatter(object):
                 self._is_international_formatting = True
                 start_of_national_number = m.end()
                 self._prefix_before_national_number += self._national_number[:start_of_national_number]
+        national_prefix = self._national_number[:start_of_national_number]
         self._national_number = self._national_number[start_of_national_number:]
+        return national_prefix
 
     def _attempt_to_extract_idd(self):
         """Extracts IDD and plus sign to self._prefix_before_national_number
@@ -395,9 +446,8 @@ class AsYouTypeFormatter(object):
         if idd_match:
             self._is_international_formatting = True
             start_of_country_calling_code = idd_match.end()
-            self._national_number = ""
-            self._national_number += self._accrued_input_without_formatting[start_of_country_calling_code:]
-            self._prefix_before_national_number += self._accrued_input_without_formatting[:start_of_country_calling_code]
+            self._national_number = self._accrued_input_without_formatting[start_of_country_calling_code:]
+            self._prefix_before_national_number = self._accrued_input_without_formatting[:start_of_country_calling_code]
             if self._accrued_input_without_formatting[0] != _PLUS_SIGN:
                 self._prefix_before_national_number += " "
             return True

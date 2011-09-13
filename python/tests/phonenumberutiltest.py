@@ -85,6 +85,8 @@ US_PREMIUM = PhoneNumber(country_code=1, national_number=9002530000L)
 US_LOCAL_NUMBER = PhoneNumber(country_code=1, national_number=2530000L)
 US_SHORT_BY_ONE_NUMBER = PhoneNumber(country_code=1, national_number=650253000L)
 US_TOLLFREE = PhoneNumber(country_code=1, national_number=8002530000L)
+US_SPOOF = PhoneNumber(country_code=1, national_number=0L)
+US_SPOOF_WITH_RAW_INPUT = PhoneNumber(country_code=1, national_number=0L, raw_input="000-000-0000")
 # A number with an invalid region code
 XY_NUMBER = PhoneNumber(country_code=999, national_number=1234567890L)
 
@@ -294,6 +296,11 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals("900 253 0000", phonenumbers.format_number(US_PREMIUM, PhoneNumberFormat.NATIONAL))
         self.assertEquals("+1 900 253 0000", phonenumbers.format_number(US_PREMIUM, PhoneNumberFormat.INTERNATIONAL))
         self.assertEquals("+1-900-253-0000", phonenumbers.format_number(US_PREMIUM, PhoneNumberFormat.RFC3966))
+        # Numbers with all zeros in the national number part will be formatted by using the raw_input
+        # if that is available no matter which format is specified.
+        self.assertEquals("000-000-0000",
+                          phonenumbers.format_number(US_SPOOF_WITH_RAW_INPUT, PhoneNumberFormat.NATIONAL))
+        self.assertEquals("0", phonenumbers.format_number(US_SPOOF, PhoneNumberFormat.NATIONAL))
 
     def testFormatBSNumber(self):
         self.assertEquals("242 365 1234", phonenumbers.format_number(BS_NUMBER, PhoneNumberFormat.NATIONAL))
@@ -1245,6 +1252,11 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # recognise the country calling code and parse accordingly.
         self.assertEquals(NZ_NUMBER, phonenumbers.parse("01164 3 331 6005", "US"))
         self.assertEquals(NZ_NUMBER, phonenumbers.parse("+64 3 331 6005", "US"))
+        # We should ignore the leading plus here, since it is not followed by
+        # a valid country code but instead is followed by the IDD for the US.
+        self.assertEquals(NZ_NUMBER, phonenumbers.parse("+01164 3 331 6005", "US"))
+        self.assertEquals(NZ_NUMBER, phonenumbers.parse("+0064 3 331 6005", "NZ"))
+        self.assertEquals(NZ_NUMBER, phonenumbers.parse("+ 00 64 3 331 6005", "NZ"))
 
         nzNumber = PhoneNumber(country_code=64, national_number=64123456L)
         self.assertEquals(nzNumber, phonenumbers.parse("64(0)64123456", "NZ"))
@@ -1418,6 +1430,16 @@ class PhoneNumberUtilTest(unittest.TestCase):
             self.fail("This is not a recognised region code: should fail: " + invalidCountryCode)
         except NumberParseException, e:
             # Expected this exception.
+            self.assertEquals(NumberParseException.INVALID_COUNTRY_CODE,
+                              e.error_type,
+                              msg="Wrong error type stored in exception.")
+
+        try:
+            plusAndIddAndInvalidCountryCode = "+ 00 210 3 331 6005"
+            phonenumbers.parse(plusAndIddAndInvalidCountryCode, "NZ")
+            self.fail("This should not parse without throwing an exception.")
+        except NumberParseException, e:
+            # Expected this exception. 00 is a correct IDD, but 210 is not a valid country code.
             self.assertEquals(NumberParseException.INVALID_COUNTRY_CODE,
                               e.error_type,
                               msg="Wrong error type stored in exception.")
