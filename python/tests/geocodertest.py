@@ -52,6 +52,7 @@ KO_INVALID_NUMBER = PhoneNumber(country_code=82, national_number=1234L)
 US_NUMBER1 = PhoneNumber(country_code=1, national_number=6502530000L)
 US_NUMBER2 = PhoneNumber(country_code=1, national_number=6509600000L)
 US_NUMBER3 = PhoneNumber(country_code=1, national_number=2128120000L)
+US_NUMBER4 = PhoneNumber(country_code=1, national_number=6174240000L)
 US_INVALID_NUMBER = PhoneNumber(country_code=1, national_number=123456789L)
 BS_NUMBER1 = PhoneNumber(country_code=1, national_number=2423651234L)
 AU_NUMBER = PhoneNumber(country_code=61, national_number=236618300L)
@@ -88,6 +89,12 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
                           geocoder.description_for_number(AU_NUMBER, _ENGLISH, region=_USA))
         self.assertEquals("",
                           geocoder.description_for_number(NUMBER_WITH_INVALID_COUNTRY_CODE, _ENGLISH, region=_USA))
+
+    def testGetDescriptionForNumberWithMissingPrefix(self):
+        # Test that the name of the country is returned when the number passed in
+        # is valid but not covered by the geocoding data file.
+        self.assertEquals("United States",
+                          geocoder.description_for_number(US_NUMBER4, _ENGLISH, region=_USA))
 
     def testGetDescriptionForNumber_en_US(self):
         self.assertEquals("CA",
