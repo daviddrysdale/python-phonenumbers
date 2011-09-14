@@ -100,3 +100,25 @@ Java and Python regexps:
    together with a check that m.end() == len(x).
 The last of these is encapsulated in the fullmatch() function in
 re_util.py.
+
+
+===========================
+Release Procedure
+===========================
+
+ - Ensure that HISTORY file is up-to-date.
+ - Set the __version__ field in phonenumbers/__init__.py
+ - Create a release-<version> branch and shift to it with:
+     git checkout -b release-<version>
+ - Push the branch to Github with:
+     git push origin release-<version>
+ - Create a setup-tools packaged tarball dist/phonenumbers-<version>.tar.gz 
+   with:
+     make sdist  # runs setup.py sdist
+ - Create a Debian package deb_dist/python-phonenumbers-<version>-1_all.deb 
+   on a Linux machine with:
+     make deb
+ - Upload the tarball and Debian package to Github downloads page at:
+     https://github.com/daviddrysdale/python-phonenumbers/downloads
+ - Push the package to PyPI with:
+     setup.py register
