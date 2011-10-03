@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Generated from:
-# http://www.itu.int/oth/T0202000051/en [2011-08-11]
+# Translated from de/49.txt using Freebase and Wikipedia.
 
 49201|Essen
 49202|Wuppertal
@@ -71,13 +70,13 @@
 492195|Radevormwald
 492196|Wermelskirchen
 492202|Bergisch Gladbach
-492203|Köln-Porz
+492203|Cologne-Porz
 492204|Bensberg
 492205|Rösrath
 492206|Overath
 492207|Kürten-Dürscheid
 492208|Niederkassel
-49221|Köln
+49221|Cologne
 492222|Bornheim Rheinland
 492223|Königswinter
 492224|Bad Honnef
@@ -152,7 +151,7 @@
 492336|Schwelm
 492337|Hagen-Dahl
 492338|Breckerfeld
-492339|Sprockhövel-Haßlinghausen
+492339|Sprockhövel-Hasslinghausen
 49234|Bochum
 492351|Lüdenscheid
 492352|Altena Westfalen
@@ -845,7 +844,7 @@
 4934441|Hohenmölsen
 4934443|Teuchern
 4934444|Lützen
-4934445|Stößen
+4934445|Stössen
 4934446|Grosskorbetha
 493445|Naumburg Saale
 4934461|Nebra Unstrut
@@ -859,7 +858,7 @@
 493448|Meuselwitz Thüringen
 4934491|Schmölln Thüringen
 4934492|Lucka
-4934493|Gößnitz Thüringen
+4934493|Gössnitz Thüringen
 4934494|Ehrenhain
 4934495|Dobitschen
 4934496|Nöbdenitz
@@ -920,7 +919,7 @@
 4934782|Mansfeld Südharz
 4934783|Gerbstedt
 4934785|Sandersleben
-4934901|Roßlau Elbe
+4934901|Rosslau Elbe
 4934903|Coswig Anhalt
 4934904|Oranienbaum
 4934905|Wörlitz
@@ -985,7 +984,7 @@
 493521|Meissen
 493522|Grossenhain Sachsen
 493523|Coswig bei Dresden
-4935240|Tauscha bei Großenhain
+4935240|Tauscha bei Grossenhain
 4935241|Lommatzsch
 4935242|Nossen
 4935243|Weinböhla
@@ -993,7 +992,7 @@
 4935245|Burkhardswalde-Munzig
 4935246|Ziegenhain Sachsen
 4935247|Zehren Sachsen
-4935248|Schönfeld bei Großenhain
+4935248|Schönfeld bei Grossenhain
 4935249|Basslitz
 493525|Riesa
 4935263|Gröditz bei Riesa
@@ -1081,14 +1080,14 @@
 4935723|Bernsdorf OL
 4935724|Lohsa
 4935725|Wittichenau
-4935726|Groß Särchen
+4935726|Gross Särchen
 4935727|Burghammer
 4935728|Uhyst Spree
 493573|Senftenberg
 493574|Lauchhammer
 4935751|Welzow
 4935752|Ruhland
-4935753|Großräschen
+4935753|Grossräschen
 4935754|Klettwitz
 4935755|Ortrand
 4935756|Hosena
@@ -1114,7 +1113,7 @@
 4935828|Reichenbach OL
 4935829|Gersdorf bei Görlitz
 493583|Zittau
-4935841|Großschönau Sachsen
+4935841|Grossschönau Sachsen
 4935842|Oderwitz
 4935843|Hirschfelde bei Zittau
 4935844|Oybin Kurort
@@ -1142,11 +1141,11 @@
 4935935|Kleinwelka
 4935936|Sohland Spree
 4935937|Prischwitz
-4935938|Großpostwitz OL
+4935938|Grosspostwitz OL
 4935939|Hochkirch
 493594|Bischofswerda
 4935951|Neukirch Lausitz
-4935952|Großröhrsdorf OL
+4935952|Grossröhrsdorf OL
 4935953|Burkau
 4935954|Grossharthau
 4935955|Pulsnitz
@@ -1173,7 +1172,7 @@
 493605|Leinefelde
 493606|Heiligenstadt Heilbad
 4936071|Teistungen
-4936072|Weißenborn-Lüderode
+4936072|Weissenborn-Lüderode
 4936074|Worbis
 4936075|Dingelstädt Eichsfeld
 4936076|Niederorschel
@@ -1256,11 +1255,11 @@
 4936463|Gebstedt
 4936464|Wormstedt
 4936465|Oberndorf bei Apolda
-493647|Pößneck
+493647|Pössneck
 4936481|Neustadt an der Orla
 4936482|Triptis
 4936483|Ziegenrück
-4936484|Knau bei Pößneck
+4936484|Knau bei Pössneck
 49365|Gera
 4936601|Hermsdorf Thüringen
 4936602|Ronneburg Thüringen
@@ -1300,7 +1299,7 @@
 4936702|Lauscha
 4936703|Gräfenthal
 4936704|Steinheid
-4936705|Oberweißbach Thüringer Wald
+4936705|Oberweissbach Thüringer Wald
 493671|Saalfeld Saale
 493672|Rudolstadt
 4936730|Sitzendorf
@@ -1370,7 +1369,7 @@
 4936946|Erbenhausen Thüringen
 4936947|Jüchsen
 4936948|Römhild
-4936949|Obermaßfeld-Grimmenthal
+4936949|Obermassfeld-Grimmenthal
 493695|Bad Salzungen
 4936961|Bad Liebenstein
 4936962|Vacha
@@ -1512,7 +1511,7 @@
 4938231|Barth
 4938232|Zingst Ostseebad
 4938233|Prerow Ostseebad
-4938234|Born Darß
+4938234|Born Darss
 4938292|Kröpelin
 4938293|Kühlungsborn Ostseebad
 4938294|Neubukow
@@ -1945,7 +1944,7 @@
 493987|Templin
 4939881|Ringenwalde bei Templin
 4939882|Gollin
-4939883|Groß Dölln
+4939883|Gross Dölln
 4939884|Hassleben bei Prenzlau
 4939885|Jakobshagen
 4939886|Milmersdorf
@@ -1965,7 +1964,7 @@
 4939931|Röbel Müritz
 4939932|Malchow bei Waren
 4939933|Vollrathsruhe
-4939934|Groß Plasten
+4939934|Gross Plasten
 493994|Malchin
 4939951|Faulenrost
 4939952|Grammentin
@@ -1980,7 +1979,7 @@
 4939972|Walkendorf
 4939973|Altkalen
 4939975|Thürkow
-4939976|Groß Bützin
+4939976|Gross Bützin
 4939977|Jördenstorf
 4939978|Gross Roge
 493998|Demmin
@@ -2257,7 +2256,7 @@
 494480|Ovelgönne-Strückhausen
 494481|Hatten-Sandkrug
 494482|Hatten
-494483|Ovelgönne-Großenmeer
+494483|Ovelgönne-Grossenmeer
 494484|Hude-Wüsting
 494485|Elsfleth-Huntorf
 494486|Edewecht-Friedrichsfehn
@@ -2270,7 +2269,7 @@
 494494|Bösel Oldenburg
 494495|Friesoythe-Thüle
 494496|Friesoythe-Markhausen
-494497|Barßel-Harkebrügge
+494497|Barssel-Harkebrügge
 494498|Saterland-Ramsloh
 494499|Barssel
 494501|Kastorf Holstein
@@ -2280,7 +2279,7 @@
 494505|Stockelsdorf-Curau
 494506|Stockelsdorf-Krumbeck
 494508|Krummesse
-494509|Groß Grönau
+494509|Gross Grönau
 49451|Lübeck
 494521|Eutin
 494522|Plön
@@ -2367,7 +2366,7 @@
 494681|Wyk auf Föhr
 494682|Amrum
 494683|Oldsum
-494684|Langeneß Hallig
+494684|Langeness Hallig
 494702|Sandstedt
 494703|Loxstedt-Donnern
 494704|Drangstedt
@@ -2568,14 +2567,14 @@
 495045|Springe-Bennigsen
 495051|Bergen Kreis Celle
 495052|Hermannsburg
-495053|Faßberg-Müden
+495053|Fassberg-Müden
 495054|Bergen-Sülze
 495055|Fassberg
 495056|Winsen-Meissendorf
 495060|Bodenburg
 495062|Holle bei Hildesheim
 495063|Bad Salzdetfurth
-495064|Groß Düngen
+495064|Gross Düngen
 495065|Sibbesse
 495066|Sarstedt
 495067|Bockenem
@@ -2788,7 +2787,7 @@
 495381|Seesen
 495382|Bad Gandersheim
 495383|Lutter am Barenberge
-495384|Seesen-Groß Rhüden
+495384|Seesen-Gross Rhüden
 495401|Georgsmarienhütte
 495402|Bissendorf Kreis Osnabrück
 495403|Bad Iburg
@@ -3031,7 +3030,7 @@
 495824|Bad Bodenteich
 495825|Wieren
 495826|Suderburg
-495827|Unterlüß
+495827|Unterlüss
 495828|Himbergen
 495829|Wriedel
 495831|Wittingen
@@ -3285,7 +3284,7 @@
 496247|Worms-Pfeddersheim
 496249|Guntersblum
 496251|Bensheim
-496252|Heppenheim Bergstraße
+496252|Heppenheim Bergstrasse
 496253|Fürth Odenwald
 496254|Lautertal Odenwald
 496255|Lindenfels
@@ -3330,7 +3329,7 @@
 496307|Schopp
 496308|Olsbrücken
 49631|Kaiserslautern
-496321|Neustadt an der Weinstraße
+496321|Neustadt an der Weinstrasse
 496322|Bad Dürkheim
 496323|Edenkoben
 496324|Hassloch
@@ -3369,7 +3368,7 @@
 496361|Rockenhausen
 496362|Alsenz
 496363|Niederkirchen
-496364|Nußbach Pfalz
+496364|Nussbach Pfalz
 496371|Landstuhl
 496372|Bruchmühlbach-Miesau
 496373|Schönenberg-Kübelberg
@@ -3569,7 +3568,7 @@
 496659|Eichenzell
 496660|Steinau-Marjoss
 496661|Schlüchtern
-496663|Steinau an der Straße
+496663|Steinau an der Strasse
 496664|Sinntal-Sterbfritz
 496665|Sinntal-Altengronau
 496666|Freiensteinau
@@ -3780,7 +3779,7 @@
 497158|Neuhausen auf den Fildern
 497159|Renningen
 497161|Göppingen
-497162|Süßen
+497162|Süssen
 497163|Ebersbach an der Fils
 497164|Boll Kreis Göppingen
 497165|Göppingen-Hohenstaufen
@@ -3890,11 +3889,11 @@
 497346|Illerkirchberg
 497347|Dietenheim
 497348|Beimerstetten
-497351|Biberach an der Riß
+497351|Biberach an der Riss
 497352|Ochsenhausen
 497353|Schwendi
 497354|Erolzheim
-497355|Hochdorf Riß
+497355|Hochdorf Riss
 497356|Schemmerhofen
 497357|Attenweiler
 497358|Eberhardzell-Füramoos
@@ -4307,7 +4306,7 @@
 498166|Allershausen Oberbayern
 498167|Zolling
 498168|Attenkirchen
-498170|Straßlach-Dingharting
+498170|Strasslach-Dingharting
 498171|Wolfratshausen
 498176|Egling bei Wolfratshausen
 498177|Münsing Starnberger See
@@ -4420,7 +4419,7 @@
 498364|Seeg
 498365|Wertach
 498366|Oy-Mittelberg
-498367|Roßhaupten Forggensee
+498367|Rosshaupten Forggensee
 498368|Halblech
 498369|Rückholz
 498370|Wiggensbach
@@ -4502,7 +4501,7 @@
 498533|Rotthalmünster
 498534|Tettenweis
 498535|Haarbach
-498536|Kößlarn
+498536|Kösslarn
 498537|Bad Füssing-Aigen
 498538|Pocking-Hartkirchen
 498541|Vilshofen Niederbayern
@@ -4550,7 +4549,7 @@
 498629|Palling
 498630|Oberneukirchen
 498631|Mühldorf am Inn
-498633|Tüßling
+498633|Tüssling
 498634|Garching an der Alz
 498635|Pleiskirchen
 498636|Ampfing
@@ -4638,7 +4637,7 @@
 498803|Peissenberg
 498805|Hohenpeissenberg
 498806|Utting am Ammersee
-498807|Dießen am Ammersee
+498807|Diessen am Ammersee
 498808|Pähl
 498809|Wessobrunn
 49881|Weilheim in Oberbayern
@@ -4661,7 +4660,7 @@
 498867|Rottenbuch Oberbayern
 498868|Schwabsoien
 498869|Kinsau
-4989|München
+4989|Munich
 49906|Donauwörth
 499070|Tapfheim
 499071|Dillingen an der Donau
@@ -4696,7 +4695,7 @@
 499105|Grosshabersdorf
 499106|Markt Erlbach
 499107|Trautskirchen
-49911|Nürnberg
+49911|Nuremberg
 499120|Leinburg
 499122|Schwabach
 499123|Lauf an der Pegnitz
@@ -4708,8 +4707,8 @@
 499132|Herzogenaurach
 499133|Baiersdorf Mittelfrankenanken
 499134|Neunkirchen am Brand
-499135|Heßdorf Mittelfrankenanken
-499141|Weißenburg in Bayern
+499135|Hessdorf Mittelfrankenanken
+499141|Weissenburg in Bayern
 499142|Treuchtlingen
 499143|Pappenheim Mittelfranken
 499144|Pleinfeld
@@ -4789,7 +4788,7 @@
 499236|Nagel
 499238|Röslau
 499241|Pegnitz
-499242|Gößweinstein
+499242|Gössweinstein
 499243|Pottenstein
 499244|Betzenstein
 499245|Obertrubach
@@ -5007,7 +5006,7 @@
 499564|Bad Rodach
 499565|Untersiemau
 499566|Meeder
-499567|Seßlach-Gemünda
+499567|Sesslach-Gemünda
 499568|Neustadt bei Coburg
 499569|Sesslach
 499571|Lichtenfels Bayern
@@ -5036,7 +5035,7 @@
 499633|Mitterteich
 499634|Wiesau
 499635|Bärnau
-499636|Plößberg
+499636|Plössberg
 499637|Falkenberg Oberpfalz
 499638|Neualbenreuth
 499639|Mähring
@@ -5053,7 +5052,7 @@
 499653|Eslarn
 499654|Pleystein
 499655|Tännesberg
-499656|Moosbach bei Vohenstrauß
+499656|Moosbach bei Vohenstrauss
 499657|Waldthurn
 499658|Georgenberg
 499659|Leuchtenberg

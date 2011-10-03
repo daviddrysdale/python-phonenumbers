@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-822|서울
-8231|경기
-8232|인천
-8233|강원
-8241|충남
-8242|대전
-8243|충북
-8251|부산
-8252|울산
-8253|대구
-8254|경북
-8255|경남
-8261|전남
-8262|광주
-8263|전북
-8264|제주
+# Generated from:
+# http://www.itu.int/oth/T0202000031/en [2009-02-17]
+# http://en.wikipedia.org/wiki/+225 [451649778]
+
+22520|Plateau
+22521|Abidjan
+22522|Cocody
+22523|Banco
+22524|Abobo
+22530|Yamoussoukro
+22531|Bouaké
+22532|Daloa
+22533|Man
+22534|San Pedro
+22535|Abengourou
+22536|Korhogo

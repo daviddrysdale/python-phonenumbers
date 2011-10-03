@@ -12,19 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-822|서울
-8231|경기
-8232|인천
-8233|강원
-8241|충남
-8242|대전
-8243|충북
-8251|부산
-8252|울산
-8253|대구
-8254|경북
-8255|경남
-8261|전남
-8262|광주
-8263|전북
-8264|제주
+# Translated from pt/258.txt using Freebase and Wikipedia.
+
+25821|Maputo
+25823|Beira
+25824|Quelimane
+258251|Manica
+258252|Tete
+25826|Nampula
+258271|Lichinga
+258272|Pemba
+258281|Chokwe
+258282|Xai-Xai
+258293|Inhambane

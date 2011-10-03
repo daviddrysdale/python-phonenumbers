@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Generated from:
-# http://www.rtr.at/en/tk/E129/Austrian_Numbering_Plan_2011-03-30.pdf [2011-03-30]
+# Translated from de/43.txt using Freebase and Wikipedia.
 
-431|Wien
+431|Vienna
 432142|Gattendorf
 432143|Kittsee
 432144|Deutsch Jahrndorf
@@ -45,21 +44,21 @@
 432230|Schwadorf
 432231|Purkersdorf
 432232|Fischamend
-432233|Preßbaum
+432233|Pressbaum
 432234|Gramatneusiedl
 432235|Maria-Lanzendorf
 432236|Mödling
 432237|Gaaden
 432238|Kaltenleutgeben
 432239|Breitenfurt bei Wien
-432242|Sankt Andrä-Wördern
+432242|St. Andrä-Wördern
 432243|Klosterneuburg
 432244|Langenzersdorf
 432245|Wolkersdorf im Weinviertel
 432246|Gerasdorf bei Wien
 432247|Deutsch-Wagram
 432248|Markgrafneusiedl
-432249|Groß-Enzersdorf
+432249|Gross-Enzersdorf
 432252|Baden
 432253|Oberwaltersdorf
 432254|Ebreichsdorf
@@ -69,12 +68,12 @@
 432258|Alland
 432259|Münchendorf
 432262|Korneuburg
-432263|Großrußbach
+432263|Grossrussbach
 432264|Rückersdorf, Harmannsdorf
 432265|Hausleiten
 432266|Stockerau
 432267|Sierndorf
-432268|Großmugl
+432268|Grossmugl
 432269|Niederfellabrunn
 432271|Ried am Riederberg
 432272|Tulln an der Donau
@@ -108,7 +107,7 @@
 432552|Poysdorf
 432554|Stützenhofen
 432555|Herrnbaumgarten
-432556|Großkrut
+432556|Grosskrut
 432557|Bernhardsthal
 432572|Mistelbach
 432573|Wilfersdorf
@@ -123,8 +122,8 @@
 432614|Kleinwarasdorf
 432615|Lutzmannsburg
 432616|Lockenhaus
-432617|Draßmarkt
-432618|Markt Sankt Martin
+432617|Drassmarkt
+432618|Markt St. Martin
 432619|Lackendorf
 432620|Willendorf
 432621|Sieggraben
@@ -135,7 +134,7 @@
 432626|Mattersburg
 432627|Pitten
 432628|Felixdorf
-432629|Warth, Niederösterreich
+432629|Warth, Lower Austria
 432630|Ternitz
 432631|Pöttsching
 432632|Pernitz
@@ -147,12 +146,12 @@
 432638|Winzendorf-Muthmannsdorf
 432639|Bad Fischau
 432641|Kirchberg am Wechsel
-432642|Aspangberg-Sankt Peter
+432642|Aspangberg-St. Peter
 432643|Lichtenegg
 432644|Grimmenstein
 432645|Wiesmath
 432646|Kirchschlag in der Buckligen Welt
-432647|Krumbach, Niederösterreich
+432647|Krumbach, Lower Austria
 432648|Hochneukirchen
 432649|Mönichkirchen
 432662|Gloggnitz
@@ -163,13 +162,13 @@
 432667|Schwarzau im Gebirge
 432672|Berndorf
 432673|Altenmarkt an der Triesting
-432674|Weißenbach an der Triesting
-432680|Sankt Margarethen im Burgenland
+432674|Weissenbach an der Triesting
+432680|St. Margarethen im Burgenland
 432682|Eisenstadt
 432683|Purbach am Neusiedler See
 432684|Schützen am Gebirge
 432685|Rust
-432686|Draßburg
+432686|Drassburg
 432687|Siegendorf
 432688|Steinbrunn
 432689|Hornstein
@@ -177,11 +176,11 @@
 432712|Aggsbach
 432713|Spitz
 432714|Rossatz
-432715|Weißenkirchen in der Wachau
+432715|Weissenkirchen in der Wachau
 432716|Gföhl
 432717|Unter-Meisling
 432718|Lichtenau im Waldviertel
-432719|Droß
+432719|Dross
 432722|Kirchberg an der Pielach
 432723|Rabenstein an der Pielach
 432724|Schwarzenbach an der Pielach
@@ -197,7 +196,7 @@
 432738|Fels am Wagram
 432739|Tiefenfucha
 432741|Flinsbach
-432742|Sankt Pölten
+432742|St. Pölten
 432743|Böheimkirchen
 432744|Kasten bei Böheimkirchen
 432745|Pyhra
@@ -209,16 +208,16 @@
 432753|Gansbach
 432754|Loosdorf
 432755|Mank
-432756|Sankt Leonhard am Forst
+432756|St. Leonhard am Forst
 432757|Pöchlarn
 432758|Pöggstall
 432762|Lilienfeld
-432763|Sankt Veit an der Gölsen
+432763|St. Veit an der Gölsen
 432764|Hainfeld
 432765|Kaumberg
 432766|Kleinzell
 432767|Hohenberg
-432768|Sankt Aegyd am Neuwalde
+432768|St. Aegyd am Neuwalde
 432769|Türnitz
 432772|Neulengbach
 432773|Eichgraben
@@ -227,13 +226,13 @@
 432783|Traismauer
 432784|Perschling
 432786|Oberwölbling
-432812|Groß Gerungs
+432812|Gross Gerungs
 432813|Arbesbach
 432814|Langschlag
-432815|Großschönau
+432815|Grossschönau
 432816|Karlstift
-432822|Zwettl-Niederösterreich
-432823|Großglobnitz
+432822|Zwettl, Lower Austria
+432823|Grossglobnitz
 432824|Allentsteig
 432825|Göpfritz an der Wild
 432826|Rastenfeld
@@ -244,7 +243,7 @@
 432842|Waidhofen an der Thaya
 432843|Dobersberg
 432846|Raabs an der Thaya
-432847|Groß-Siegharts
+432847|Gross-Siegharts
 432848|Pfaffenschlag bei Waidhofen
 432849|Schwarzenau
 432852|Gmünd
@@ -252,7 +251,7 @@
 432854|Kirchberg am Walde
 432855|Waldenstein
 432856|Weitra
-432857|Bad Großpertholz
+432857|Bad Grosspertholz
 432858|Moorbad Harbach
 432859|Brand-Nagelberg
 432862|Heidenreichstein
@@ -283,7 +282,7 @@
 432952|Hollabrunn
 432953|Nappersdorf
 432954|Göllersdorf
-432955|Großweikersdorf
+432955|Grossweikersdorf
 432956|Ziersdorf
 432957|Hohenwarth
 432958|Maissau
@@ -293,7 +292,7 @@
 432984|Eggenburg
 432985|Gars am Kamp
 432986|Irnfritz
-432987|Sankt Leonhard am Hornerwald
+432987|St. Leonhard am Hornerwald
 432988|Neupölla
 432989|Brunn an der Wild
 433112|Gleisdorf
@@ -303,8 +302,8 @@
 433116|Kirchbach in Steiermark
 433117|Eggersdorf bei Graz
 433118|Sinabelkirchen
-433119|Sankt Marein bei Graz
-433123|Sankt Oswald bei Plankenwarth
+433119|St. Marein bei Graz
+433123|St. Oswald bei Plankenwarth
 433124|Gratkorn
 433125|Übelbach
 433126|Frohnleiten
@@ -315,7 +314,7 @@
 433135|Kalsdorf bei Graz
 433136|Dobl
 433137|Söding
-433140|Sankt Martin am Wöllmißberg
+433140|St. Martin am Wöllmissberg
 433141|Hirschegg
 433142|Voitsberg
 433143|Krottendorf
@@ -331,7 +330,7 @@
 433153|Riegersburg
 433155|Fehring
 433157|Kapfenstein
-433158|Sankt Anna am Aigen
+433158|St. Anna am Aigen
 433159|Bad Gleichenberg
 43316|Graz
 433170|Fischbach
@@ -342,10 +341,10 @@
 433175|Anger
 433176|Stubenberg
 433177|Puch bei Weiz
-433178|Sankt Ruprecht an der Raab
+433178|St. Ruprecht an der Raab
 433179|Passail
 433182|Wildon
-433183|Sankt Georgen an der Stiefing
+433183|St. Georgen an der Stiefing
 433184|Wolfsberg im Schwarzautal
 433185|Preding
 433322|Güssing
@@ -353,10 +352,10 @@
 433324|Strem
 433325|Heiligenkreuz im Lafnitztal
 433326|Stegersbach
-433327|Sankt Michael im Burgenland
+433327|St. Michael im Burgenland
 433328|Kukmirn
 433329|Jennersdorf
-433331|Sankt Lorenzen am Wechsel
+433331|St. Lorenzen am Wechsel
 433332|Hartberg
 433333|Sebersdorf
 433334|Kaindorf
@@ -373,7 +372,7 @@
 433357|Pinkafeld
 433358|Litzelsdorf
 433359|Loipersdorf-Kitzladen
-433362|Großpetersdorf
+433362|Grosspetersdorf
 433363|Rechnitz
 433364|Hannersdorf
 433365|Deutsch Schützen-Eisenberg
@@ -381,7 +380,7 @@
 433382|Fürstenfeld
 433383|Burgau
 433385|Ilz
-433386|Großsteinbach
+433386|Grosssteinbach
 433387|Söchau
 433452|Leibnitz
 433453|Ehrenhausen
@@ -393,34 +392,34 @@
 433461|Trahütten
 433462|Deutschlandsberg
 433463|Stainz
-433464|Groß Sankt Florian
+433464|Gross St. Florian
 433465|Pölfing-Brunn
 433466|Eibiswald
 433467|Schwanberg
-433468|Sankt Oswald ob Eibiswald
-433469|Sankt Oswald im Freiland
+433468|St. Oswald ob Eibiswald
+433469|St. Oswald im Freiland
 433472|Mureck
 433473|Straden
 433474|Deutsch Goritz
 433475|Hürth
 433476|Bad Radkersburg
-433477|Sankt Peter am Ottersbach
+433477|St. Peter am Ottersbach
 433512|Knittelfeld
 433513|Bischoffeld
 433514|Seckau
-433515|Sankt Lorenzen bei Knittelfeld
+433515|St. Lorenzen bei Knittelfeld
 433516|Kleinlobming
 433532|Murau
 433533|Turrach
 433534|Stadl an der Mur
 433535|Krakaudorf
-433536|Sankt Peter am Kammersberg
-433537|Sankt Georgen ob Murau
+433536|St. Peter am Kammersberg
+433537|St. Georgen ob Murau
 433571|Möderbrugg
 433572|Judenburg
 433573|Fohnsdorf
 433574|Pusterwald
-433575|Sankt Johann am Tauern
+433575|St. Johann am Tauern
 433576|Bretstein
 433577|Zeltweg
 433578|Obdach
@@ -429,7 +428,7 @@
 433582|Scheifling
 433583|Unzmarkt
 433584|Neumarkt in Steiermark
-433585|Sankt Lambrecht
+433585|St. Lambrecht
 433586|Mühlen
 433587|Schönberg-Lachtal
 433588|Katsch an der Mur
@@ -446,7 +445,7 @@
 433623|Bad Mitterndorf
 433624|Pichl-Kainisch
 433631|Unterlaussa
-433632|Sankt Gallen
+433632|St. Gallen
 433633|Landl
 433634|Hieflau
 433635|Radmer
@@ -456,17 +455,17 @@
 433680|Donnersbachwald
 433682|Stainach
 433683|Donnersbach
-433684|Sankt Martin am Grimming
+433684|St. Martin am Grimming
 433685|Gröbming
 433686|Haus
 433687|Schladming
 433688|Tauplitz
-433689|Sankt Nikolai im Sölktal
+433689|St. Nikolai im Sölktal
 433832|Kraubath an der Mur
 433833|Traboch
-433834|Wald am Schoberpaß
+433834|Wald am Schoberpass
 433842|Leoben
-433843|Sankt Michael in Obersteiermark
+433843|St. Michael in Obersteiermark
 433844|Kammern im Liesingtal
 433845|Mautern in Steiermark
 433846|Kalwang
@@ -484,18 +483,18 @@
 433861|Aflenz
 433862|Bruck an der Mur
 433863|Turnau
-433864|Sankt Marein im Mürztal
+433864|St. Marein im Mürztal
 433865|Kindberg
 433866|Breitenau am Hochlantsch
 433867|Pernegg an der Mur
-433868|Tragöß
-433869|Sankt Katharein an der Laming
+433868|Tragöss
+433869|St. Katharein an der Laming
 433882|Mariazell
 433883|Terz
 433884|Wegscheid
 433885|Greith
 433886|Weichselboden
-434212|Sankt Veit an der Glan
+434212|St. Veit an der Glan
 434213|Launsdorf
 434214|Brückl
 434215|Liebenfels
@@ -504,7 +503,7 @@
 434223|Maria Saal
 434224|Pischeldorf
 434225|Grafenstein
-434226|Sankt Margareten im Rosental
+434226|St. Margareten im Rosental
 434227|Ferlach
 434228|Feistritz im Rosental
 434229|Krumpendorf am Wörther See
@@ -517,7 +516,7 @@
 434236|Eberndorf
 434237|Miklauzhof
 434238|Eisenkappel-Vellach
-434239|Sankt Kanzian am Klopeiner See
+434239|St. Kanzian am Klopeiner See
 434240|Bad Kleinkirchheim
 434242|Villach
 434243|Bodensdorf
@@ -527,7 +526,7 @@
 434247|Afritz
 434248|Treffen
 434252|Wernberg
-434253|Sankt Jakob im Rosental
+434253|St. Jakob im Rosental
 434254|Faak am See
 434255|Arnoldstein
 434256|Nötsch im Gailtal
@@ -535,9 +534,9 @@
 434258|Gummern
 434262|Treibach
 434263|Hüttenberg
-434264|Klein Sankt Paul
+434264|Klein St. Paul
 434265|Weitensfeld im Gurktal
-434266|Straßburg
+434266|Strassburg
 434267|Metnitz
 434268|Friesach
 434269|Flattnitz
@@ -551,18 +550,18 @@
 434278|Gnesau
 434279|Sirnitz
 434282|Hermagor
-434283|Sankt Stefan im Gailtal
+434283|St. Stefan im Gailtal
 434284|Kirchbach
 434285|Tröpolach
-434286|Weißbriach
-434350|Bad Sankt Leonhard im Lavanttal
+434286|Weissbriach
+434350|Bad St. Leonhard im Lavanttal
 434352|Wolfsberg
 434353|Prebl
 434354|Preitenegg
 434355|Gemmersdorf
 434356|Lavamünd
-434357|Sankt Paul im Lavanttal
-434358|Sankt Andrä
+434357|St. Paul im Lavanttal
+434358|St. Andrä
 434359|Reichenfels
 43463|Klagenfurt
 434710|Oberdrauburg
@@ -585,16 +584,16 @@
 434768|Kleblach-Lind
 434769|Möllbrücke
 434782|Obervellach
-434783|Reißeck
+434783|Reisseck
 434784|Mallnitz
-434785|Außerfragant
+434785|Ausserfragant
 434822|Winklern
 434823|Tresdorf, Rangersdorf
 434824|Heiligenblut
-434825|Großkirchheim
+434825|Grosskirchheim
 434826|Mörtschach
 434842|Sillian
-434843|Außervillgraten
+434843|Ausservillgraten
 434846|Abfaltersbach
 434847|Obertilliach
 434848|Kartitsch
@@ -603,12 +602,12 @@
 434855|Assling
 434858|Nikolsdorf
 434872|Huben
-434873|Sankt Jakob in Defereggen
+434873|St. Jakob in Defereggen
 434874|Virgen
 434875|Matrei in Osttirol
-434876|Kals am Großglockner
-434877|Prägraten am Großvenediger
-434879|Sankt Veit in Defereggen
+434876|Kals am Grossglockner
+434877|Prägraten am Grossvenediger
+434879|St. Veit in Defereggen
 43512|Innsbruck
 435212|Seefeld in Tirol
 435213|Scharnitz
@@ -626,7 +625,7 @@
 435242|Schwaz
 435243|Maurach
 435244|Jenbach
-435245|Hinterriß
+435245|Hinterriss
 435246|Achenkirch
 435248|Steinberg am Rofan
 435252|Oetz
@@ -645,7 +644,7 @@
 435275|Trins
 435276|Gschnitz
 435278|Navis
-435279|Sankt Jodok am Brenner
+435279|St. Jodok am Brenner
 435280|Hochfügen
 435282|Zell am Ziller
 435283|Kaltenbach
@@ -664,7 +663,7 @@
 435337|Brixlegg
 435338|Kundl
 435339|Wildschönau
-435352|Sankt Johann in Tirol
+435352|St. Johann in Tirol
 435353|Waidring
 435354|Fieberbrunn
 435355|Jochberg
@@ -678,7 +677,7 @@
 435375|Kössen
 435376|Thiersee
 435412|Imst
-435413|Sankt Leonhard im Pitztal
+435413|St. Leonhard im Pitztal
 435414|Wenns
 435417|Roppen
 435418|Schönwies
@@ -687,10 +686,10 @@
 435443|Galtür
 435444|Ischgl
 435445|Kappl
-435446|Sankt Anton am Arlberg
+435446|St. Anton am Arlberg
 435447|Flirsch
 435448|Pettneu am Arlberg
-435449|Fließ
+435449|Fliess
 435472|Prutz
 435473|Nauders
 435474|Pfunds
@@ -716,7 +715,7 @@
 435553|Raggal
 435554|Sonntag
 435556|Schruns
-435557|Sankt Gallenkirch
+435557|St. Gallenkirch
 435558|Gaschurn
 435559|Brand
 435572|Dornbirn
@@ -740,7 +739,7 @@
 435675|Tannheim
 435676|Jungholz
 435677|Vils
-435678|Weißenbach am Lech
+435678|Weissenbach am Lech
 436131|Obertraun
 436132|Bad Ischl
 436133|Ebensee
@@ -748,11 +747,11 @@
 436135|Bad Goisern
 436136|Gosau
 436137|Strobl
-436138|Sankt Wolfgang im Salzkammergut
+436138|St. Wolfgang im Salzkammergut
 436212|Seekirchen am Wallersee
 436213|Oberhofen am Irrsee
 436214|Henndorf am Wallersee
-436215|Straßwalchen
+436215|Strasswalchen
 436216|Neumarkt am Wallersee
 436217|Mattsee
 436219|Obertrum am See
@@ -761,7 +760,7 @@
 436224|Hintersee
 436225|Eugendorf
 436226|Fuschl am See
-436227|Sankt Gilgen
+436227|St. Gilgen
 436228|Faistenau
 436229|Hof bei Salzburg
 436232|Mondsee
@@ -769,21 +768,21 @@
 436234|Zell am Moos
 436235|Thalgau
 436240|Krispl
-436241|Sankt Koloman
-436242|Rußbach am Paß Gschütt
+436241|St. Koloman
+436242|Russbach am Pass Gschütt
 436243|Abtenau
 436244|Golling an der Salzach
 436245|Hallein
 436246|Grödig
-436247|Großgmain
+436247|Grossgmain
 436272|Oberndorf bei Salzburg
 436274|Lamprechtshausen
-436276|Nußdorf am Haunsberg
-436277|Sankt Pantaleon
+436276|Nussdorf am Haunsberg
+436277|St. Pantaleon
 436278|Ostermiething
-436412|Sankt Johann im Pongau
+436412|St. Johann im Pongau
 436413|Wagrain
-436414|Großarl
+436414|Grossarl
 436415|Schwarzach im Pongau
 436416|Lend
 436417|Hüttschlag
@@ -810,8 +809,8 @@
 436473|Mariapfarr
 436474|Tamsweg
 436475|Ramingstein
-436476|Sankt Margarethen im Lungau
-436477|Sankt Michael im Lungau
+436476|St. Margarethen im Lungau
+436477|St. Michael im Lungau
 436478|Zederhaus
 436479|Muhr
 436483|Göriach
@@ -820,15 +819,15 @@
 436542|Zell am See
 436543|Taxenbach
 436544|Rauris
-436545|Bruck an der Großglocknerstraße
-436546|Fusch an der Großglocknerstraße
+436545|Bruck an der Grossglocknerstrasse
+436546|Fusch an der Grossglocknerstrasse
 436547|Kaprun
 436548|Niedernsill
 436549|Piesendorf
 436562|Mittersill
 436563|Uttendorf
 436564|Krimml
-436565|Neukirchen am Großvenediger
+436565|Neukirchen am Grossvenediger
 436566|Bramberg am Wildkogel
 436582|Saalfelden am Steinernen Meer
 436583|Leogang
@@ -842,12 +841,12 @@
 437214|Reichenthal
 437215|Hellmonsödt
 437216|Helfenberg
-437217|Sankt Veit im Mühlkreis
-437218|Großtraberg
-437219|Vorderweißenbach
+437217|St. Veit im Mühlkreis
+437218|Grosstraberg
+437219|Vorderweissenbach
 437221|Hörsching
 437223|Enns
-437224|Sankt Florian
+437224|St. Florian
 437225|Hargelsberg
 437226|Wilhering
 437227|Neuhofen an der Krems
@@ -855,12 +854,12 @@
 437229|Traun
 437230|Altenberg bei Linz
 437231|Herzogsdorf
-437232|Sankt Martin im Mühlkreis
+437232|St. Martin im Mühlkreis
 437233|Feldkirchen an der Donau
 437234|Ottensheim
 437235|Gallneukirchen
 437236|Pregarten
-437237|Sankt Georgen an der Gusen
+437237|St. Georgen an der Gusen
 437238|Mauthausen
 437239|Lichtenberg
 437240|Sipbachzell
@@ -877,7 +876,7 @@
 437251|Schiedlberg
 437252|Steyr
 437253|Wolfern
-437254|Großraming
+437254|Grossraming
 437255|Losenstein
 437256|Ternberg
 437257|Grünburg
@@ -922,7 +921,7 @@
 437432|Strengberg
 437433|Wallsee
 437434|Haag
-437435|Sankt Valentin
+437435|St. Valentin
 437442|Waidhofen an der Ybbs
 437443|Ybbsitz
 437444|Opponitz
@@ -934,7 +933,7 @@
 437474|Euratsfeld
 437475|Hausmening, Neuhofen an der Ybbs
 437476|Aschbach-Markt
-437477|Sankt Peter in der Au
+437477|St. Peter in der Au
 437478|Oed-Oehling
 437479|Ardagger
 437480|Langau, Gaming
@@ -949,8 +948,8 @@
 437562|Windischgarsten
 437563|Spital am Pyhrn
 437564|Hinterstoder
-437565|Sankt Pankraz
-437566|Rosenau am Hengstpaß
+437565|St. Pankraz
+437566|Rosenau am Hengstpass
 437582|Kirchdorf an der Krems
 437583|Kremsmünster
 437584|Molln
@@ -971,7 +970,7 @@
 437664|Weyregg am Attersee
 437665|Unterach am Attersee
 437666|Attersee
-437667|Sankt Georgen im Attergau
+437667|St. Georgen im Attergau
 437672|Vöcklabruck
 437673|Schwanenstadt
 437674|Attnang-Puchheim
@@ -985,7 +984,7 @@
 437713|Schardenberg
 437714|Esternberg
 437716|Münzkirchen
-437717|Sankt Aegidi
+437717|St. Aegidi
 437718|Waldkirchen am Wesen
 437719|Taufkirchen an der Pram
 437722|Braunau am Inn
@@ -1007,7 +1006,7 @@
 437747|Kirchberg bei Mattighofen
 437748|Eggelsberg
 437750|Andrichsfurt
-437751|Sankt Martin im Innkreis
+437751|St. Martin im Innkreis
 437752|Ried im Innkreis
 437753|Eberschwang
 437754|Waldzell
@@ -1025,13 +1024,13 @@
 437942|Freistadt
 437943|Windhaag bei Freistadt
 437944|Sandl
-437945|Sankt Oswald bei Freistadt
+437945|St. Oswald bei Freistadt
 437946|Gutau
 437947|Kefermarkt
 437948|Hirschbach im Mühlkreis
 437949|Rainbach im Mühlkreis
 437952|Weitersfelden
 437953|Liebenau
-437954|Sankt Georgen am Walde
+437954|St. Georgen am Walde
 437955|Königswiesen
-437956|Unterweißenbach
+437956|Unterweissenbach

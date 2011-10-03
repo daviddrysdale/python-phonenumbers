@@ -12,11 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Generated from:
-# http://www.itu.int/oth/T0202000026/en [2004-06-17]
-# http://en.wikipedia.org/wiki/+238 [408792965]
-# When a range is split between two islands, one takes 2x0 through 2x4,
-# while the other takes 2x5 through 2x9
+# Translated from pt/238.txt using Freebase and Wikipedia.
 
 238221|Ribeira Grande, Santo Antão
 238222|Porto Novo, Santo Antão

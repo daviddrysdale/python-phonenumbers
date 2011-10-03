@@ -12,19 +12,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-822|서울
-8231|경기
-8232|인천
-8233|강원
-8241|충남
-8242|대전
-8243|충북
-8251|부산
-8252|울산
-8253|대구
-8254|경북
-8255|경남
-8261|전남
-8262|광주
-8263|전북
-8264|제주
+# Translated from sr/381.txt using Wikipedia and Freebase.
+
+38110|Pirot
+38111|Belgrade
+38112|Pozarevac
+38113|Pancevo
+38114|Valjevo
+38115|Sabac
+38116|Leskovac
+38117|Vranje
+38118|Nis
+38119|Zajecar
+38120|Novi Pazar
+38121|Novi Sad
+38122|Sremska Mitrovica
+38123|Zrenjanin
+381230|Kikinda
+38124|Subotica
+38125|Sombor
+38126|Smederevo
+38127|Prokuplje
+38128|Kosovska Mitrovica
+381280|Gnjilane
+38129|Prizren
+381290|Urosevac
+38130|Bor
+38131|Uzice
+38132|Cacak
+38133|Prijepolje
+38134|Kragujevac
+38135|Jagodina
+38136|Kraljevo
+38137|Krusevac
+38138|Pristina
+38139|Pec
+381390|Dakovica

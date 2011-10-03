@@ -12,19 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-822|서울
-8231|경기
-8232|인천
-8233|강원
-8241|충남
-8242|대전
-8243|충북
-8251|부산
-8252|울산
-8253|대구
-8254|경북
-8255|경남
-8261|전남
-8262|광주
-8263|전북
-8264|제주
+# Translated from pt/245.txt using Freebase and Wikipedia.
+
+24522|S. Luzia
+24525|Brá
+24531|Mansoa/Manssabá
+24532|Bigene/Bissorã
+24533|Bula/Ingore
+24535|Farim
+24541|Bafatá/Bambadinca
+24551|Gabú
+24552|Sonaco
+24553|Pirada
+24561|Bedanda/Buba/Cacine/Catio/Fulacunda/Tite
+24562|Quebo
+24581|Bolama
+24582|Bubaque
+24583|Caravela
+24584|Uno
+24591|Canchungo
+24592|Cacheu
+24593|S. Domingos
