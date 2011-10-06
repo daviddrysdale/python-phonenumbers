@@ -121,4 +121,4 @@ Release Procedure
  - Upload the tarball and Debian package to Github downloads page at:
      https://github.com/daviddrysdale/python-phonenumbers/downloads
  - Push the package to PyPI with:
-     setup.py register
+     setup.py sdist upload
