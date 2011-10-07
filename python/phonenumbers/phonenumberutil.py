@@ -868,9 +868,9 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
         formatted_number = format_national_number_with_carrier_code(numobj,
                                                                     _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX)
     elif (region_code == "BR" and region_calling_from == "BR" and
-            ((numobj_type == PhoneNumberType.FIXED_LINE) or
-             (numobj_type == PhoneNumberType.MOBILE) or
-             (numobj_type == PhoneNumberType.FIXED_LINE_OR_MOBILE))):
+          ((numobj_type == PhoneNumberType.FIXED_LINE) or
+           (numobj_type == PhoneNumberType.MOBILE) or
+           (numobj_type == PhoneNumberType.FIXED_LINE_OR_MOBILE))):
         if numobj.preferred_domestic_carrier_code is not None:
             formatted_number = format_national_number_with_preferred_carrier_code(numobj, "")
         else:

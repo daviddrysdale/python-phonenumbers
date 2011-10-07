@@ -604,6 +604,12 @@ class PhoneNumberUtilTest(unittest.TestCase):
                           phonenumbers.format_number_for_mobile_dialing(US_NUMBER, "US", False))
         self.assertEquals("+16502530000",
                           phonenumbers.format_number_for_mobile_dialing(usNumberWithExtn, "US", False))
+        # Python version extra tests
+        number = PhoneNumber()
+        number.merge_from(XY_NUMBER)
+        self.assertEquals("", phonenumbers.format_number_for_mobile_dialing(number, "US", False))
+        number.raw_input = " 123-456-7890"
+        self.assertEquals(" 123-456-7890", phonenumbers.format_number_for_mobile_dialing(number, "US", False))
 
     def testFormatByPattern(self):
         newNumFormat = NumberFormat(pattern="(\\d{3})(\\d{3})(\\d{4})", format="(\\1) \\2-\\3")

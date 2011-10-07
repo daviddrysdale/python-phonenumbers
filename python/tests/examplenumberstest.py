@@ -24,7 +24,7 @@ import pathfix
 pathfix.fix()
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
-from phonenumbers import phonenumberutil
+from phonenumbers import phonenumberutil, PhoneNumber
 
 
 class ExampleNumbersTest(unittest.TestCase):
@@ -137,9 +137,30 @@ class ExampleNumbersTest(unittest.TestCase):
             self.assertTrue(exampleNumber is not None,
                             msg="None found for region %s" % regionCode)
 
+    # Extra tests that need access to the real metadata
     def testBlankMetadata(self):
         # Python version extra test
         # Some metadata is blank; check that we cope with this.
         # Example: MH (+692)
         number = phonenumberutil.parse("+6927654321", "US")
         self.assertEquals("Country Code: 692 National Number: 7654321 Leading Zero: False", str(number))
+
+    def testFormatNumberForMobile(self):
+        # Python version extra test.  Special cases for CO and BR in
+        # format_number_for_mobile_dialing()
+        coNumberFixed = PhoneNumber(country_code=57, national_number=12345678L)
+        brNumberFixed = PhoneNumber(country_code=55, national_number=1123456789L)
+        brNumberMobile = PhoneNumber(country_code=55, national_number=1161234567L,
+                                     preferred_domestic_carrier_code="303")
+        self.assertEquals("0312345678",
+                          phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", False))
+        self.assertEquals("03 1 2345678",
+                          phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", True))
+        self.assertEquals("",
+                          phonenumberutil.format_number_for_mobile_dialing(brNumberFixed, "BR", False))
+        self.assertEquals("",
+                          phonenumberutil.format_number_for_mobile_dialing(brNumberFixed, "BR", True))
+        self.assertEquals("03031161234567",
+                          phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", False))
+        self.assertEquals("0 303 (11) 6123-4567",
+                          phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", True))
