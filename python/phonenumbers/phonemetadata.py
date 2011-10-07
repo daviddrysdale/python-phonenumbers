@@ -210,6 +210,7 @@ class PhoneMetadata(object):
                  voip=None,
                  pager=None,
                  uan=None,
+                 emergency=None,
                  no_international_dialling=None,
                  country_code=None,
                  international_prefix=None,
@@ -243,6 +244,7 @@ class PhoneMetadata(object):
         self.voip = voip  # None or PhoneNumberDesc
         self.pager = pager  # None or PhoneNumberDesc
         self.uan = uan  # None or PhoneNumberDesc
+        self.emergency = emergency  # None or PhoneNumberDesc
 
         # The rules here distinguish the numbers that are only able to be
         # dialled nationally.
