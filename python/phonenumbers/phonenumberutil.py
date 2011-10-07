@@ -72,6 +72,9 @@ _MAX_LENGTH_COUNTRY_CODE = 3
 UNKNOWN_REGION = u"ZZ"
 # The set of regions that share country calling code 1.
 _NANPA_COUNTRY_CODE = 1
+# The prefix that needs to be inserted in front of a Colombian landline number
+# when dialed from a mobile phone in Colombia.
+_COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = "3"
 # The PLUS_SIGN signifies the international prefix.
 _PLUS_SIGN = u'+'
 _RFC3966_EXTN_PREFIX = u";ext="
@@ -665,7 +668,7 @@ def format_number(numobj, num_format):
 
     Returns the formatted phone number.
     """
-    if numobj.national_number==0 and numobj.raw_input is not None:
+    if numobj.national_number == 0 and numobj.raw_input is not None:
         if len(numobj.raw_input) > 0:
             return numobj.raw_input
     country_calling_code = numobj.country_code
@@ -831,6 +834,65 @@ def format_national_number_with_preferred_carrier_code(numobj, fallback_carrier_
     else:
         carrier_code = fallback_carrier_code
     return format_national_number_with_carrier_code(numobj, carrier_code)
+
+
+def format_number_for_mobile_dialing(numobj, region_calling_from, with_formatting):
+    """Returns a number formatted in such a way that it can be dialed from a
+     mobile phone in a specific region.
+
+    If the number cannot be reached from the region (e.g. some countries block
+    toll-free numbers from being called outside of the country), the method
+    returns an empty string.
+
+    Arguments:
+    numobj -- The phone number to be formatted
+    region_calling_from -- The region where the call is being placed.
+
+    with_formatting -- whether the number should be returned with formatting
+              symbols, such as spaces and dashes.
+
+    Returns the formatted phone number.
+    """
+    region_code = region_code_for_number(numobj)
+    if not _is_valid_region_code(region_code):
+        if numobj.raw_input is None:
+            return ""
+        else:
+            return numobj.raw_input
+
+    # Clear the extension, as that part cannot normally be dialed together with the main number.
+    numobj.extension = None
+    numobj_type = number_type(numobj)
+    if (region_code == "CO" and region_calling_from == "CO" and
+        numobj_type == PhoneNumberType.FIXED_LINE):
+        formatted_number = format_national_number_with_carrier_code(numobj,
+                                                                    _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX)
+    elif (region_code == "BR" and region_calling_from == "BR" and
+            ((numobj_type == PhoneNumberType.FIXED_LINE) or
+             (numobj_type == PhoneNumberType.MOBILE) or
+             (numobj_type == PhoneNumberType.FIXED_LINE_OR_MOBILE))):
+        if numobj.preferred_domestic_carrier_code is not None:
+            formatted_number = format_national_number_with_preferred_carrier_code(numobj, "")
+        else:
+            # Brazilian fixed line and mobile numbers need to be dialed with a
+            # carrier code when called within Brazil. Without that, most of
+            # the carriers won't connect the call.  Because of that, we return
+            # an empty string here.
+            formatted_number = ""
+    elif _can_be_internationally_dialled(numobj):
+        if with_formatting:
+            return format_number(numobj, PhoneNumberFormat.INTERNATIONAL)
+        else:
+            return format_number(numobj, PhoneNumberFormat.E164)
+    else:
+        if region_calling_from == region_code:
+            formatted_number = format_number(numobj, PhoneNumberFormat.NATIONAL)
+        else:
+            formatted_number = ""
+    if with_formatting:
+        return formatted_number
+    else:
+        return normalize_digits_only(formatted_number)
 
 
 def format_out_of_country_calling_number(numobj, region_calling_from):
@@ -1063,19 +1125,10 @@ def national_significant_number(numobj):
     Returns the national significant number of the PhoneNumber object passed
     in.
     """
-    # The leading zero in the national (significant) number of an Italian
-    # phone number has a special meaning. Unlike the rest of the world, it
-    # indicates the number is a landline number. There have been plans to
-    # migrate landline numbers to start with the digit two since December
-    # 2000, but it has not yet happened.  See
-    # http://en.wikipedia.org/wiki/%2B39 for more details.  Other regions such
-    # as Cote d'Ivoire and Gabon use this for their mobile numbers.
-
-    national_number = u""
-    if (numobj.italian_leading_zero is not None and
-        numobj.italian_leading_zero and
-        _is_leading_zero_possible(numobj.country_code)):
-        national_number = u"0"
+    # If a leading zero has been set, we prefix this now. Note this is not a national prefix.
+    national_number = ""
+    if numobj.italian_leading_zero is not None and numobj.italian_leading_zero:
+        national_number = "0"
     national_number += str(numobj.national_number)
     return national_number
 

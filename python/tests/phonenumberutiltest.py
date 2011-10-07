@@ -584,6 +584,27 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals("424 123 1234",
                           phonenumbers.format_national_number_with_preferred_carrier_code(usNumber, "15"))
 
+    def testFormatNumberForMobileDialing(self):
+        # US toll free numbers are marked as noInternationalDialling in the
+        # test metadata for testing purposes.
+        self.assertEquals("800 253 0000",
+                          phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "US", True))
+        self.assertEquals("", phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "CN", True))
+        self.assertEquals("+1 650 253 0000",
+                          phonenumbers.format_number_for_mobile_dialing(US_NUMBER, "US", True))
+        usNumberWithExtn = PhoneNumber()
+        usNumberWithExtn.merge_from(US_NUMBER)
+        usNumberWithExtn.extension = "1234"
+        self.assertEquals("+1 650 253 0000",
+                          phonenumbers.format_number_for_mobile_dialing(usNumberWithExtn, "US", True))
+        self.assertEquals("8002530000",
+                          phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "US", False))
+        self.assertEquals("", phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "CN", False))
+        self.assertEquals("+16502530000",
+                          phonenumbers.format_number_for_mobile_dialing(US_NUMBER, "US", False))
+        self.assertEquals("+16502530000",
+                          phonenumbers.format_number_for_mobile_dialing(usNumberWithExtn, "US", False))
+
     def testFormatByPattern(self):
         newNumFormat = NumberFormat(pattern="(\\d{3})(\\d{3})(\\d{4})", format="(\\1) \\2-\\3")
         newNumberFormats = [newNumFormat]
