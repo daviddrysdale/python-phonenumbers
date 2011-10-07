@@ -14,7 +14,7 @@ u'London'
 >>> print repr(area_description_for_number(gb_number, "en", region="US"))
 u'London'
 >>> print repr(area_description_for_number(de_number, "en"))
-u''
+u'Munich'
 >>> print repr(area_description_for_number(de_number, "de"))
 u'M\\xfcnchen'
 >>> print repr(area_description_for_number(ch_number, "de"))
