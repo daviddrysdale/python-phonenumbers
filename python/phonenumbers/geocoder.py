@@ -49,6 +49,14 @@ from geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
 from geodata.locale import LOCALE_DATA
 
 
+def _may_fall_back_to_english(lang):
+    # Don't fall back to English if the requested language is among the following:
+    # - Chinese
+    # - Japanese
+    # - Korean
+    return lang != "zh" and lang != "ja" and lang != "ko"
+
+
 def _find_lang(langdict, lang, script, region):
     """Return the entry in the dictionary for the given language information."""
     # First look for lang, script as a combination
@@ -60,7 +68,13 @@ def _find_lang(langdict, lang, script, region):
     if lang_region in langdict:
         return langdict[lang_region]
     # Fall back to bare language code lookup
-    return langdict.get(lang, None)
+    if lang in langdict:
+        return langdict[lang]
+    # Possibly fall back to english
+    if _may_fall_back_to_english(lang):
+        return langdict.get("en", None)
+    else:
+        return None
 
 
 def area_description_for_number(numobj, lang, script=None, region=None):

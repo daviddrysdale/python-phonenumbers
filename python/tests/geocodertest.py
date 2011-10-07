@@ -58,12 +58,13 @@ BS_NUMBER1 = PhoneNumber(country_code=1, national_number=2423651234L)
 AU_NUMBER = PhoneNumber(country_code=61, national_number=236618300L)
 NUMBER_WITH_INVALID_COUNTRY_CODE = PhoneNumber(country_code=999, national_number=2423651234L)
 
-# Language codes
+# Language/country codes
 _CHINA = "CN"
 _CHINESE = "zh"
 _ITALIAN = "it"
 _ENGLISH = "en"
 _KOREAN = "ko"
+_GERMAN = "de"
 _USA = "US"
 
 
@@ -81,8 +82,6 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         # a result, the country name of United States in simplified Chinese is returned.
         self.assertEquals(u"\u7F8E\u56FD",
                           geocoder.description_for_number(US_NUMBER1, _CHINESE, region=_CHINA))
-        self.assertEquals("Stati Uniti",
-                          geocoder.description_for_number(US_NUMBER1, _ITALIAN))
         self.assertEquals("Bahamas",
                           geocoder.description_for_number(BS_NUMBER1, _ENGLISH, region=_USA))
         self.assertEquals("Australia",
@@ -115,7 +114,20 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
                           geocoder.description_for_number(KO_NUMBER1, _KOREAN))
         self.assertEquals(u"\uC778\uCC9C",
                           geocoder.description_for_number(KO_NUMBER2, _KOREAN))
-        self.assertEquals(u"\uC81C\uC8FC",
+
+    def testGetDescriptionForFallBack(self):
+        # No fallback, as the location name for the given phone number is
+        # available in the requested language.
+        self.assertEquals("Kalifornien",
+                          geocoder.description_for_number(US_NUMBER1, _GERMAN))
+        # German falls back to English.
+        self.assertEquals("New York, NY",
+                          geocoder.description_for_number(US_NUMBER3, _GERMAN))
+        # Italian falls back to English.
+        self.assertEquals("CA",
+                          geocoder.description_for_number(US_NUMBER1, _ITALIAN))
+        # Korean doesn't fall back to English.
+        self.assertEquals(u"\uB300\uD55C\uBBFC\uAD6D",
                           geocoder.description_for_number(KO_NUMBER3, _KOREAN))
 
     def testGetDescriptionForInvalidNumber(self):
