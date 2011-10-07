@@ -18,11 +18,11 @@ Auto-generated file, do not edit by hand.
 # limitations under the License.
 
 GEOCODE_DATA = {
- '1201':{'en': u'NJ'},
+ '1201':{'de': u'New Jersey', 'en': u'NJ'},
  '1212':{'en': u'NY'},
  '1212812':{'en': u'New York, NY'},
  '1617423':{'en': u'Boston, MA'},
- '1650':{'en': u'CA'},
+ '1650':{'de': u'Kalifornien', 'en': u'CA'},
  '1650960':{'en': u'Mountain View, CA'},
  '1989':{'en': u'MA'},
  '822':{'en': u'Seoul', 'ko': u'\uc11c\uc6b8'},
@@ -40,6 +40,6 @@ GEOCODE_DATA = {
  '8261':{'en': u'Jeonnam', 'ko': u'\uc804\ub0a8'},
  '8262':{'en': u'Gwangju', 'ko': u'\uad11\uc8fc'},
  '8263':{'en': u'Jeonbuk', 'ko': u'\uc804\ubd81'},
- '8264':{'en': u'Jeju', 'ko': u'\uc81c\uc8fc'},
+ '8264':{'en': u'Jeju'},
 }
 GEOCODE_LONGEST_PREFIX = 7

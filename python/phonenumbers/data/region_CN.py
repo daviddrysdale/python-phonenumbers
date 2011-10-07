@@ -12,7 +12,7 @@ PHONE_METADATA_CN = PhoneMetadata(id='CN', country_code=86, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='400\\d{7}', possible_number_pattern='\\d{10}', example_number='4001234567'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:4|(?:10)?8)00\\d{7}', possible_number_pattern='\\d{10,12}', example_number='4001234567'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',
     number_format=[NumberFormat(pattern='(80\\d{2})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['80[2678]'], national_prefix_formatting_rule=u'0\\1'),

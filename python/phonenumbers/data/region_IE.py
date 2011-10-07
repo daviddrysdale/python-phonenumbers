@@ -12,7 +12,7 @@ PHONE_METADATA_IE = PhoneMetadata(id='IE', country_code=353, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='76\\d{7}', possible_number_pattern='\\d{9}', example_number='761234567'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='818\\d{6}', possible_number_pattern='\\d{9}', example_number='818123456'),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='18[59]0\\d{6}', possible_number_pattern='\\d{10}', example_number='1850123456'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',
     number_format=[NumberFormat(pattern='(1)(\\d{3,4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=u'(0\\1)'),
