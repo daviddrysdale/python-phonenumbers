@@ -108,6 +108,8 @@ Release Procedure
 
  - Ensure that HISTORY file is up-to-date.
  - Set the __version__ field in phonenumbers/__init__.py
+ - Check that the list of symbols in phonenumbers/__init__.py __all__ is
+   up to date.
  - Create a release-<version> branch and shift to it with:
      git checkout -b release-<version>
  - Push the branch to Github with:

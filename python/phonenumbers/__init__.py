@@ -83,10 +83,13 @@ from phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 from asyoutypeformatter import AsYouTypeFormatter
 from phonenumberutil import *
 from phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
+from geocoder import (area_description_for_number, country_name_for_number,
+                      description_for_number, description_for_valid_number)
 
-__all__ = ['PhoneNumber', 'CountryCodeSource'
-           'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata'
+__all__ = ['PhoneNumber', 'CountryCodeSource',
+           'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
            'AsYouTypeFormatter',
+           # items from phonenumberutil.py
            'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS', 'UNKNOWN_REGION',
            'MatchType', 'NumberParseException', 'PhoneNumberFormat',
            'PhoneNumberType', 'ValidationResult',
@@ -98,6 +101,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource'
            'format_in_original_format',
            'format_national_number_with_carrier_code',
            'format_national_number_with_preferred_carrier_code',
+           'format_number_for_mobile_dialing',
            'format_number',
            'format_out_of_country_calling_number',
            'format_out_of_country_keeping_alpha_chars',
@@ -119,8 +123,12 @@ __all__ = ['PhoneNumber', 'CountryCodeSource'
            'region_code_for_country_code',
            'region_code_for_number',
            'truncate_too_long_number',
-           'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency']
-
+           'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency',
+           'area_description_for_number',
+           'country_name_for_number',
+           'description_for_number',
+           'description_for_valid_number',
+           ]
 if __name__ == '__main__':  # pragma no cover
     import doctest
     doctest.testmod()
