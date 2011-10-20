@@ -402,6 +402,7 @@ class PhoneMetadata(object):
         result += ",\n    voip=%s" % self.voip
         result += ",\n    pager=%s" % self.pager
         result += ",\n    uan=%s" % self.uan
+        result += ",\n    emergency=%s" % self.emergency
         result += ",\n    no_international_dialling=%s" % self.no_international_dialling
 
         if self.preferred_international_prefix is not None:
