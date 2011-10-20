@@ -1,7 +1,7 @@
 """Auto-generated file, do not edit by hand. BR metadata"""
 from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix='00',
+PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix='0014',
     general_desc=PhoneNumberDesc(),
     fixed_line=PhoneNumberDesc(),
     mobile=PhoneNumberDesc(),
