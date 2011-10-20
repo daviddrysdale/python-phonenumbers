@@ -12,7 +12,7 @@ __init__.py and per-region data files will be created in the directory.
 # Based on original Java code and XML file:
 #     resources/PhoneNumberMetadata.xml
 #     java/resources/com/google/i18n/phonenumbers/BuildMetadataFromXml.java
-#   Copyright (C) 2010-2011 Google Inc.
+# Copyright (C) 2010-2011 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 '''
 
 # Copyright notice covering the XML metadata; include current year.
-COPYRIGHT_NOTICE = """# Copyright (C) 2010-%s Google Inc.
+COPYRIGHT_NOTICE = """# Copyright (C) 2010-%s The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

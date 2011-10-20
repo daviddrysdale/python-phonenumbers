@@ -10,7 +10,7 @@ generated Python code.
 
 # Based on original geocoding data files from libphonenumber:
 #     resources/geocoding/*/*.txt
-#   Copyright (C) 2011 Google Inc.
+# Copyright (C) 2011 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ Auto-generated file, do not edit by hand.
 '''
 
 # Copyright notice covering the XML metadata; include current year.
-COPYRIGHT_NOTICE = """# Copyright (C) 2011-%s Google Inc.
+COPYRIGHT_NOTICE = """# Copyright (C) 2011-%s The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

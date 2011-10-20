@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Original libphonenumber Java code:
-#   Copyright (C) 2009 Google Inc.
+#   Copyright (C) 2009-2011 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
