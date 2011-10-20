@@ -65,7 +65,9 @@ COUNTRY_CODE_TO_REGION_CODE = _COUNTRY_CODE_TO_REGION_CODE
 _REGEX_FLAGS = re.UNICODE | re.IGNORECASE
 # The minimum and maximum length of the national significant number.
 _MIN_LENGTH_FOR_NSN = 3
-_MAX_LENGTH_FOR_NSN = 15
+# The ITU says the maximum length should be 15, but we have found longer
+# numbers in Germany.
+_MAX_LENGTH_FOR_NSN = 16
 # The maximum length of the country calling code.
 _MAX_LENGTH_COUNTRY_CODE = 3
 # Region-code for the unknown region.
@@ -979,7 +981,8 @@ def format_in_original_format(numobj, region_calling_from):
 
     The original format is embedded in the country_code_source field of the
     PhoneNumber object passed in. If such information is missing, the number
-    will be formatted into the NATIONAL format by default.
+    will be formatted into the NATIONAL format by default.  When the number is
+    an invalid number, the function returns the raw input when it is available.
 
     Arguments:
     number -- The phone number that needs to be formatted in its original
@@ -989,6 +992,8 @@ def format_in_original_format(numobj, region_calling_from):
 
     Returns the formatted phone number in its original number format.
     """
+    if numobj.raw_input is not None and not is_valid_number(numobj):
+        return numobj.raw_input
     if numobj.country_code_source is None:
         return format_number(numobj, PhoneNumberFormat.NATIONAL)
 
@@ -1898,13 +1903,6 @@ def _maybe_strip_i18n_prefix_and_normalize(number, possible_idd_prefix):
 
     # Attempt to parse the first digits as an international prefix.
     idd_pattern = re.compile(possible_idd_prefix)
-    stripped, number = _parse_prefix_as_idd(idd_pattern, number)
-    if stripped:
-        return (CountryCodeSource.FROM_NUMBER_WITH_IDD, _normalize(number))
-
-    # If still not found, then try and normalize the number and then try
-    # again. This shouldn't be done before, since non-numeric characters (+
-    # and ~) may legally be in the international prefix.
     number = _normalize(number)
     stripped, number = _parse_prefix_as_idd(idd_pattern, number)
     if stripped:

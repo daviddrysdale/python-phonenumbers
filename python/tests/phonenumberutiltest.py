@@ -404,7 +404,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals("1 650 253 0000",
                           phonenumbers.format_out_of_country_calling_number(US_NUMBER, "BS"))
 
-        self.assertEquals("0~0 1 650 253 0000",
+        self.assertEquals("00 1 650 253 0000",
                           phonenumbers.format_out_of_country_calling_number(US_NUMBER, "PL"))
 
         self.assertEquals("011 44 7912 345 678",
@@ -703,9 +703,20 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
         number5 = phonenumbers.parse("+442087654321", "GB")
         self.assertEquals("(020) 8765 4321", phonenumbers.format_in_original_format(number5, "GB"))
+
+        # Invalid numbers should be formatted using its raw input when that is
+        # available. Note area codes starting with 7 are intentionally
+        # excluded in the test metadata for testing purposes.
+        number6 = phonenumbers.parse("7345678901", "US", keep_raw_input=True)
+        self.assertEquals("7345678901", phonenumbers.format_in_original_format(number6, "US"))
+
+        # When the raw input is unavailable, format as usual.
+        number7 = phonenumbers.parse("7345678901", "US")
+        self.assertEquals("734 567 8901", phonenumbers.format_in_original_format(number7, "US"))
+
         # Python version extra tests
-        number6 = phonenumbers.parse("87654321", None, keep_raw_input=True, _check_region=False)
-        self.assertEquals("87654321", phonenumbers.format_in_original_format(number6, "US"))
+        number8 = phonenumbers.parse("87654321", None, keep_raw_input=True, _check_region=False)
+        self.assertEquals("87654321", phonenumbers.format_in_original_format(number8, "US"))
 
     def testIsPremiumRate(self):
         self.assertEquals(PhoneNumberType.PREMIUM_RATE, phonenumbers.number_type(US_PREMIUM))
@@ -950,7 +961,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEquals(ValidationResult.TOO_SHORT,
                           phonenumbers.is_possible_number_with_reason(adNumber))
         adNumber.country_code = 376
-        adNumber.national_number = 1234567890123456L
+        adNumber.national_number = 12345678901234567L
         self.assertEquals(ValidationResult.TOO_LONG,
                           phonenumbers.is_possible_number_with_reason(adNumber))
 
@@ -1967,6 +1978,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
     voip=None,
     pager=None,
     uan=None,
+    emergency=None,
     no_international_dialling=None,
     preferred_international_prefix=u'9123',
     national_prefix=u'1',
@@ -1998,6 +2010,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix=u'0011',
     national_prefix=u'0',

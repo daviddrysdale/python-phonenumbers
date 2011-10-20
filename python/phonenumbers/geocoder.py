@@ -7,8 +7,8 @@
 >>> ch_number = phonenumbers.parse("0431234567", "CH")
 >>> print repr(area_description_for_number(gb_number, "en"))
 u'London'
->>> print repr(area_description_for_number(gb_number, "fr"))
-u''
+>>> print repr(area_description_for_number(gb_number, "fr"))  # fall back to English
+u'London'
 >>> print repr(area_description_for_number(gb_number, "en", region="GB"))
 u'London'
 >>> print repr(area_description_for_number(gb_number, "en", region="US"))
