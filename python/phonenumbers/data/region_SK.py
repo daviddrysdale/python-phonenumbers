@@ -12,6 +12,7 @@ PHONE_METADATA_SK = PhoneMetadata(id='SK', country_code=421, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='6(?:5[0-4]|9[0-6])\\d{6}', possible_number_pattern='\\d{9}', example_number='690123456'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='1(?:12|5[058])', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',

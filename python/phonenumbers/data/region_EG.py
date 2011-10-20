@@ -12,6 +12,7 @@ PHONE_METADATA_EG = PhoneMetadata(id='EG', country_code=20, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='1(?:2[23]|80)', possible_number_pattern='\\d{3}', example_number='122'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',

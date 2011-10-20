@@ -12,6 +12,7 @@ PHONE_METADATA_JP = PhoneMetadata(id='JP', country_code=81, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='50\\d{8}', possible_number_pattern='\\d{10}', example_number='5012345678'),
     pager=PhoneNumberDesc(national_number_pattern='20\\d{8}', possible_number_pattern='\\d{10}', example_number='2012345678'),
     uan=PhoneNumberDesc(national_number_pattern='570\\d{6}', possible_number_pattern='\\d{9}', example_number='570123456'),
+    emergency=PhoneNumberDesc(national_number_pattern='11[09]', possible_number_pattern='\\d{3}', example_number='110'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='0(?:777(?:[01]\\d{2}|5\\d{3})|882[1245]\\d{4})', possible_number_pattern='\\d{7,9}', example_number='0777012'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',

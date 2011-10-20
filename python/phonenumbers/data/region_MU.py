@@ -12,6 +12,7 @@ PHONE_METADATA_MU = PhoneMetadata(id='MU', country_code=230, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='3(?:20|9\\d)\\d{4}', possible_number_pattern='\\d{7}', example_number='3201234'),
     pager=PhoneNumberDesc(national_number_pattern='2(?:1[89]|2\\d)\\d{4}', possible_number_pattern='\\d{7}', example_number='2181234'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='11[45]|99\\d', possible_number_pattern='\\d{3}', example_number='999'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix=u'020',
     number_format=[NumberFormat(pattern='([2-9]\\d{2})(\\d{4})', format=u'\\1 \\2')])

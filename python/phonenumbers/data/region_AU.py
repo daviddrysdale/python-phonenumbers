@@ -12,6 +12,7 @@ PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='550\\d{6}', possible_number_pattern='\\d{9}', example_number='550123456'),
     pager=PhoneNumberDesc(national_number_pattern='16\\d{3,7}', possible_number_pattern='\\d{5,9}', example_number='1612345'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='000|112', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1(?:3(?:\\d{4}|00\\d{6})|80(?:0\\d{6}|2\\d{3}))', possible_number_pattern='\\d{6,10}', example_number='1300123456'),
     preferred_international_prefix=u'0011',
     national_prefix=u'0',

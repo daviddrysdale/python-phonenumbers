@@ -1,7 +1,7 @@
 """Auto-generated file, do not edit by hand. UA metadata"""
 from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_UA = PhoneMetadata(id='UA', country_code=380, international_prefix='0~0',
+PHONE_METADATA_UA = PhoneMetadata(id='UA', country_code=380, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[3-689]\\d{8}', possible_number_pattern='\\d{5,9}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:3[1-8]|4[13-8]|5[1-7]|6[12459])\\d{7}', possible_number_pattern='\\d{5,9}', example_number='311234567'),
     mobile=PhoneNumberDesc(national_number_pattern='(?:39|50|6[36-8]|9[1-9])\\d{7}', possible_number_pattern='\\d{9}', example_number='391234567'),
@@ -12,7 +12,9 @@ PHONE_METADATA_UA = PhoneMetadata(id='UA', country_code=380, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='1(?:0[123]|12)', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    preferred_international_prefix=u'0~0',
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',
     number_format=[NumberFormat(pattern='([3-69]\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['39|4(?:[45][0-5]|87)|5(?:0|6[37]|7[37])|6[36-8]|9[1-9]', '39|4(?:[45][0-5]|87)|5(?:0|6(?:3[14-7]|7)|7[37])|6[36-8]|9[1-9]'], national_prefix_formatting_rule=u'0\\1'),

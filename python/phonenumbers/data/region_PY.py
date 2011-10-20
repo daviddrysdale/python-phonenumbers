@@ -12,6 +12,7 @@ PHONE_METADATA_PY = PhoneMetadata(id='PY', country_code=595, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='8700[0-4]\\d{4}', possible_number_pattern='\\d{9}', example_number='870012345'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='[2-9]0\\d{4,7}', possible_number_pattern='\\d{6,9}', example_number='201234567'),
+    emergency=PhoneNumberDesc(national_number_pattern='128|911', possible_number_pattern='\\d{3}', example_number='911'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',

@@ -12,6 +12,7 @@ PHONE_METADATA_CR = PhoneMetadata(id='CR', country_code=506, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='40(?:00\\d{4}|10[0-3]\\d{3}|2(?:00\\d|900)\\d{2})', possible_number_pattern='\\d{8}', example_number='40001234'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='112|911', possible_number_pattern='\\d{3}', example_number='911'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix_for_parsing=u'(1900)',
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[245]|8[3-9]'], domestic_carrier_code_formatting_rule=u'$CC \\1'),

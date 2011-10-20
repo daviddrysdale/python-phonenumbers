@@ -12,6 +12,7 @@ PHONE_METADATA_MH = PhoneMetadata(id='MH', country_code=692, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='635\\d{4}', possible_number_pattern='\\d{7}', example_number='6351234'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'1',
     national_prefix_for_parsing=u'1',

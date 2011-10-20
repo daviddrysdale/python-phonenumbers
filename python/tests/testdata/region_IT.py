@@ -12,6 +12,7 @@ PHONE_METADATA_IT = PhoneMetadata(id='IT', country_code=39, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['0[26]']),
         NumberFormat(pattern='(\\d{3})(\\d{4})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['0[13-57-9]']),

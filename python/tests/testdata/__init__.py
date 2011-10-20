@@ -17,6 +17,7 @@ from region_AD import PHONE_METADATA_AD
 from region_AO import PHONE_METADATA_AO
 from region_AR import PHONE_METADATA_AR
 from region_AU import PHONE_METADATA_AU
+from region_BR import PHONE_METADATA_BR
 from region_BS import PHONE_METADATA_BS
 from region_DE import PHONE_METADATA_DE
 from region_GB import PHONE_METADATA_GB
@@ -44,6 +45,7 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     49: ("DE",),
     52: ("MX",),
     54: ("AR",),
+    55: ("BR",),
     61: ("AU",),
     64: ("NZ",),
     65: ("SG",),

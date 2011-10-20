@@ -12,6 +12,7 @@ PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='1(?:12|28|9[023])|911', possible_number_pattern='\\d{3}', example_number='190'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:400\\d|3003)\\d{4}', possible_number_pattern='\\d{8}', example_number='40041234'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0(?:(1[245]|2[135]|[34]1)(\d{10}))?',

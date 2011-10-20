@@ -12,6 +12,7 @@ PHONE_METADATA_SC = PhoneMetadata(id='SC', country_code=248, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='64\\d{5}', possible_number_pattern='\\d{7}', example_number='6412345'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix=u'00',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})', format=u'\\1 \\2', leading_digits_pattern=['[35789]|2[1-4689]|6[0-35-9]']),

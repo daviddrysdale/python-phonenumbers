@@ -12,6 +12,7 @@ PHONE_METADATA_IR = PhoneMetadata(id='IR', country_code=98, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='993[12]\\d{6}', possible_number_pattern='\\d{10}', example_number='9932123456'),
     pager=PhoneNumberDesc(national_number_pattern='943[24678]\\d{6}', possible_number_pattern='\\d{10}', example_number='9432123456'),
     uan=PhoneNumberDesc(national_number_pattern='9990\\d{6}', possible_number_pattern='\\d{10}', example_number='9990123456'),
+    emergency=PhoneNumberDesc(national_number_pattern='1(?:1[025]|25)', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',

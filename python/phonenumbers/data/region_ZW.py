@@ -12,6 +12,7 @@ PHONE_METADATA_ZW = PhoneMetadata(id='ZW', country_code=263, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='86(?:1[12]|22|30|44|8[367]|99)\\d{6}', possible_number_pattern='\\d{10}', example_number='8686123456'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='(?:112|99[3459])', possible_number_pattern='\\d{3}', example_number='999'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',

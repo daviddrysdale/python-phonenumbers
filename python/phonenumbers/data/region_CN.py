@@ -3,8 +3,8 @@ from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CN = PhoneMetadata(id='CN', country_code=86, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-79]\\d{7,11}|8[0-357-9]\\d{6,9}', possible_number_pattern='\\d{4,12}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='21\\d{8,10}|(?:10|2[02-57-9]|3(?:11|7[179])|4(?:[15]1|3[12])|5(?:1\\d|2[37]|3[12]|7[13-79]|9[15])|7(?:31|5[457]|6[09]|91)|898)\\d{8}|(?:3(?:1[02-9]|35|49|5\\d|7[02-68]|9[1-68])|4(?:1[02-9]|2[179]|3[3-9]|5[2-9]|6[4789]|7\\d|8[23])|5(?:3[03-9]|4[36]|5\\d|6[1-6]|7[028]|80|9[2-46-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[157]\\d|2[248]|3[04-9]|4[3-6]|6[2368]|9[02-9])|8(?:1[236-8]|2[5-7]|[37]\\d|5[1-9]|8[3678]|9[1-7])|9(?:0[1-3689]|1[1-79]|[379]\\d|4[13]|5[1-5]))\\d{7}|80(?:29|6[03578]|7[018]|81)\\d{4}', possible_number_pattern='\\d{4,12}', example_number='1012345678'),
-    mobile=PhoneNumberDesc(national_number_pattern='1(?:3\\d|4[57]|5[0-35-9]|8[025-9])\\d{8}', possible_number_pattern='\\d{11}', example_number='13123456789'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='21\\d{8,10}|(?:10|2[02-57-9]|3(?:11|7[179])|4(?:[15]1|3[12])|5(?:1\\d|2[37]|3[12]|7[13-79]|9[15])|7(?:31|5[457]|6[09]|91)|898)\\d{8}|(?:3(?:1[02-9]|35|49|5\\d|7[02-68]|9[1-68])|4(?:1[02-9]|2[179]|3[3-9]|5[2-9]|6[4789]|7\\d|8[23])|5(?:3[03-9]|4[36]|5\\d|6[1-6]|7[028]|80|9[2-46-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[17]\\d|2[248]|3[04-9]|4[3-6]|5[0-3689]|6[2368]|9[02-9])|8(?:1[236-8]|2[5-7]|[37]\\d|5[1-9]|8[3678]|9[1-7])|9(?:0[1-3689]|1[1-79]|[379]\\d|4[13]|5[1-5]))\\d{7}|80(?:29|6[03578]|7[018]|81)\\d{4}', possible_number_pattern='\\d{4,12}', example_number='1012345678'),
+    mobile=PhoneNumberDesc(national_number_pattern='1(?:3\\d|4[57]|5[0-35-9]|8[0235-9])\\d{8}', possible_number_pattern='\\d{11}', example_number='13123456789'),
     toll_free=PhoneNumberDesc(national_number_pattern='(?:10)?800\\d{7}', possible_number_pattern='\\d{10,12}', example_number='8001234567'),
     premium_rate=PhoneNumberDesc(national_number_pattern='16[08]\\d{5}', possible_number_pattern='\\d{8}', example_number='16812345'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
@@ -12,6 +12,7 @@ PHONE_METADATA_CN = PhoneMetadata(id='CN', country_code=86, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='400\\d{7}', possible_number_pattern='\\d{10}', example_number='4001234567'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='1(?:1[09]|20)', possible_number_pattern='\\d{3}', example_number='119'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:4|(?:10)?8)00\\d{7}', possible_number_pattern='\\d{10,12}', example_number='4001234567'),
     national_prefix=u'0',
     national_prefix_for_parsing=u'0',
