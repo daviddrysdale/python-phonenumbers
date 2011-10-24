@@ -43,8 +43,8 @@ u'Zurigo'
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from phonenumbers import format_number, PhoneNumberFormat, is_valid_number
-from phonenumbers import region_code_for_number
+from phonenumberutil import format_number, PhoneNumberFormat, is_valid_number
+from phonenumberutil import region_code_for_number
 from geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
 from geodata.locale import LOCALE_DATA
 
