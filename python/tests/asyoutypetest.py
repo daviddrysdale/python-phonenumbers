@@ -18,9 +18,6 @@
 # limitations under the License.
 import unittest
 
-import pathfix
-pathfix.fix()
-
 from phonenumbers import AsYouTypeFormatter
 from phonenumbers import PhoneMetadata, PhoneNumberDesc, NumberFormat
 # Access internal functions of phonenumberutil.py

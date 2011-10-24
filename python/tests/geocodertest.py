@@ -19,9 +19,6 @@
 
 import unittest
 
-import pathfix
-pathfix.fix()
-
 from phonenumbers import PhoneNumber
 from phonenumbers import geocoder
 

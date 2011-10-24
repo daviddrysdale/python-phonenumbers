@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 import unittest
 
+import pathfix
+pathfix.fix()
+
 from phonenumbertest import PhoneNumberTest
 from phonenumberutiltest import PhoneNumberUtilTest
 from shortnumberutiltest import ShortNumberUtilTest

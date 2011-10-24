@@ -19,9 +19,6 @@
 
 import unittest
 
-import pathfix
-pathfix.fix()
-
 from phonenumbers import connects_to_emergency_number
 from phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 

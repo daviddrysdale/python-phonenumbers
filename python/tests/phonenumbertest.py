@@ -18,9 +18,6 @@
 # limitations under the License.
 import unittest
 
-import pathfix
-pathfix.fix()
-
 from phonenumbers import PhoneNumber, CountryCodeSource
 
 

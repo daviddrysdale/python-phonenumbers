@@ -19,9 +19,6 @@
 
 import unittest
 
-import pathfix
-pathfix.fix()
-
 import phonenumbers
 from phonenumbers import PhoneNumber, PhoneMetadata, PhoneNumberDesc
 from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseException

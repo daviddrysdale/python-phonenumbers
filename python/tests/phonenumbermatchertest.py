@@ -20,9 +20,6 @@
 import sys
 import unittest
 
-import pathfix
-pathfix.fix()
-
 from phonenumbers import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 from phonenumbers import PhoneNumber, phonenumberutil
 from phonenumberutiltest import insert_test_metadata, reinstate_real_metadata

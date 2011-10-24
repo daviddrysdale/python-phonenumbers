@@ -20,9 +20,6 @@
 import sys
 import unittest
 
-import pathfix
-pathfix.fix()
-
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber
 
