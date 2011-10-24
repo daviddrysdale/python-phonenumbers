@@ -31,6 +31,7 @@ author: David Drysdale (Python version)
 import re
 
 from re_util import fullmatch   # Extra regexp function; see README
+from util import UnicodeMixin
 import unicode_util
 
 # Data class definitions
@@ -2331,7 +2332,7 @@ def _can_be_internationally_dialled(numobj):
     return not _is_number_matching_desc(nsn, metadata.no_international_dialling)
 
 
-class NumberParseException(Exception):
+class NumberParseException(UnicodeMixin, Exception):
     """Exception when attempting to parse a putative phone number"""
     # Invalid country code specified
     INVALID_COUNTRY_CODE = 0
@@ -2357,9 +2358,6 @@ class NumberParseException(Exception):
         Exception.__init__(self, msg)
         self.error_type = error_type
         self._msg = msg
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
 
     def __unicode__(self):
         return u"(%s) %s" % (self.error_type, self._msg)

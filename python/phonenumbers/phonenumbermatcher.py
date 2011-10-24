@@ -21,6 +21,7 @@ import re
 
 # Extra regexp function; see README
 from re_util import fullmatch
+from util import UnicodeMixin
 import unicode_util
 import phonenumberutil
 
@@ -546,7 +547,7 @@ class PhoneNumberMatcher(object):
         return None
 
 
-class PhoneNumberMatch(object):
+class PhoneNumberMatch(UnicodeMixin):
     """The immutable match of a phone number within a piece of text.
 
     Matches may be found using the find() method of PhoneNumberMatcher.
@@ -603,9 +604,6 @@ class PhoneNumberMatch(object):
                 (self.start,
                  self.raw_string,
                  self.number))
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
 
     def __unicode__(self):
         return u"PhoneNumberMatch [%s,%s) %s" % (self.start, self.end, self.raw_string)

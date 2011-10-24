@@ -44,6 +44,7 @@ from lxml import etree  # From http://lxml.de/, run 'easy_install lxml'
 
 # Pull in the data structure definitions
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.util import UnicodeMixin
 
 # Convention: variables beginning with 'x' are XML objects
 
@@ -131,7 +132,7 @@ def _expand_formatting_rule(rule, national_prefix):
     return rule
 
 
-class XNumberFormat(object):
+class XNumberFormat(UnicodeMixin):
     """Parsed NumberFormat objects from XML element"""
     def __init__(self, owning_xterr, xtag, national_prefix, national_prefix_formatting_rule, carrier_code_formatting_rule):
         if xtag is None:
@@ -200,14 +201,11 @@ class XNumberFormat(object):
                 # Add this international NumberFormat object into the owning metadata
                 owning_xterr.o.intl_number_format.append(self.io)
 
-    def __str__(self):
-        return unicode(self).encode('utf-8')
-
     def __unicode__(self):
         return unicode(self.o)
 
 
-class XPhoneNumberDesc(object):
+class XPhoneNumberDesc(UnicodeMixin):
     """Parse PhoneNumberDesc object from XML element"""
     def __init__(self, xtag,
                  template=None, fill_na=True):
@@ -237,14 +235,11 @@ class XPhoneNumberDesc(object):
             if example_number is not None:
                 self.o.example_number = example_number
 
-    def __str__(self):
-        return unicode(self).encode('utf-8')
-
     def __unicode__(self):
         return unicode(self.o)
 
 
-class XTerritory(object):
+class XTerritory(UnicodeMixin):
     """Parse PhoneMetadata from XML element (territory)"""
     def __init__(self, xterritory):
         # Retrieve the REQUIRED attributes
@@ -342,14 +337,11 @@ class XTerritory(object):
             # national formats.
             self.o.intl_number_format = []
 
-    def __str__(self):
-        return unicode(self).encode('utf-8')
-
     def __unicode__(self):
         return unicode(self.o)
 
 
-class XPhoneNumberMetadata(object):
+class XPhoneNumberMetadata(UnicodeMixin):
     """Entire collection of phone number metadata retrieved from XML"""
     def __init__(self, filename):
         # Load the XML data from the given filename
@@ -368,9 +360,6 @@ class XPhoneNumberMetadata(object):
                 self.territory[terrobj.o.id] = terrobj
             else:
                 raise Exception("Unexpected element %s found" % xterritory.tag)
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
 
     def __unicode__(self):
         return u'\n'.join([u"%s: %s" % (country_id, territory) for country_id, territory in self.territory.items()])

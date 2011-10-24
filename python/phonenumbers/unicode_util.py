@@ -65,6 +65,8 @@ True
 import bisect
 import unicodedata  # Python 2.5 onward
 
+from util import UnicodeMixin
+
 
 class Category(object):
     """General category of a Unicode character.
@@ -126,7 +128,7 @@ def is_letter(unichr):
             category == Category.OTHER_LETTER)
 
 
-class _BlockRange(object):
+class _BlockRange(UnicodeMixin):
     """Describe the range of characters encompassed by a Unicode block"""
     def __init__(self, start, end, regdict=None):
         self.start = start
@@ -142,9 +144,6 @@ class _BlockRange(object):
 
     def __hash__(self):
         return hash((self.start, self.end))
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
 
     def __unicode__(self):
         return u"Block[%04x, %04x]" % (self.start, self.end)

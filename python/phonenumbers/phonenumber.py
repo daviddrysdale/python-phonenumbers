@@ -16,6 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from util import UnicodeMixin
 
 
 class CountryCodeSource(object):
@@ -44,7 +45,7 @@ class CountryCodeSource(object):
     FROM_DEFAULT_COUNTRY = 20
 
 
-class PhoneNumber(object):
+class PhoneNumber(UnicodeMixin):
     """Class representing international telephone numbers.
 
     This class is hand-created based on phonenumber.proto. Please refer
@@ -187,9 +188,6 @@ class PhoneNumber(object):
                  self.italian_leading_zero,
                  self.country_code_source,
                  self.preferred_domestic_carrier_code))
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
 
     def __unicode__(self):
         result = ("Country Code: %s National Number: %s" %

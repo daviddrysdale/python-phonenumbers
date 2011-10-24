@@ -16,9 +16,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from util import UnicodeMixin
 
 
-class NumberFormat(object):
+class NumberFormat(UnicodeMixin):
     """Representation of way that a phone number can be formatted for output"""
     def __init__(self,
                  pattern=None,
@@ -107,9 +108,6 @@ class NumberFormat(object):
     def __repr__(self):
         return str(self)
 
-    def __str__(self):
-        return unicode(self).encode('utf-8')
-
     def __unicode__(self):
         # Generate a string that is valid Python input for the constructor.
         # Note that we use %r, which generates its own quotes.
@@ -125,7 +123,7 @@ class NumberFormat(object):
         return result
 
 
-class PhoneNumberDesc(object):
+class PhoneNumberDesc(UnicodeMixin):
     """Class representing the description of a set of phone numbers."""
 
     def __init__(self,
@@ -170,9 +168,6 @@ class PhoneNumberDesc(object):
     def __repr__(self):
         return str(self)
 
-    def __str__(self):
-        return unicode(self).encode('utf-8')
-
     def __unicode__(self):
         # Generate a string that is valid Python input for constructor
         result = u"PhoneNumberDesc("
@@ -190,7 +185,7 @@ class PhoneNumberDesc(object):
         return result
 
 
-class PhoneMetadata(object):
+class PhoneMetadata(UnicodeMixin):
     """Class representing metadata for international telephone numbers for a region.
 
     This class is hand created based on phonemetadata.proto. Please refer to that file
@@ -381,9 +376,6 @@ class PhoneMetadata(object):
 
     def __repr__(self):
         return str(self)
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
 
     def __unicode__(self):
         # Generate a string that is valid Python input for the constructor
