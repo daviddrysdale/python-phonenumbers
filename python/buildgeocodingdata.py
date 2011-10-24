@@ -68,7 +68,7 @@ def load_geodata_file(geodata, filename, locale, overall_prefix):
      - has data lines of the form '<prefix>|<location_name>'
      - contains only data for prefixes that are extensions of the filename.
     """
-    with open(filename) as infile:
+    with open(filename, "rb") as infile:
         lineno = 0
         for line in infile:
             uline = line.decode('utf-8')
@@ -120,7 +120,7 @@ def _stable_dict_repr(strdict):
 
 def output_geodata_code(geodata, outfilename):
     """Output the geocoding data in Python form to the given file """
-    with open(outfilename, "wb") as outfile:
+    with open(outfilename, "w") as outfile:
         longest_prefix = 0
         print >> outfile, GEODATA_FILE_PROLOG
         print >> outfile, COPYRIGHT_NOTICE

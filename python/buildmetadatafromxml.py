@@ -353,7 +353,7 @@ class XPhoneNumberMetadata(object):
     """Entire collection of phone number metadata retrieved from XML"""
     def __init__(self, filename):
         # Load the XML data from the given filename
-        with file(filename) as infile:
+        with open(filename, "r") as infile:
             xtree = etree.parse(infile)
         # Move to the top-level element of interest
         xterritories = xtree.xpath(TOP_XPATH)[0]
