@@ -22,7 +22,7 @@ import re
 # Extra regexp function; see README
 from re_util import fullmatch
 import unicode_util
-import phonenumberutil as pnu
+import phonenumberutil
 
 
 def _limit(lower, upper):
@@ -62,18 +62,18 @@ _PUNCTUATION_LIMIT = _limit(0, 4)
 # The maximum number of digits allowed in a digit-separated block. As we allow
 # all digits in a single block, set high enough to accommodate the entire
 # national number and the international country code.
-_DIGIT_BLOCK_LIMIT = (pnu._MAX_LENGTH_FOR_NSN +
-                      pnu._MAX_LENGTH_COUNTRY_CODE)
+_DIGIT_BLOCK_LIMIT = (phonenumberutil._MAX_LENGTH_FOR_NSN +
+                      phonenumberutil._MAX_LENGTH_COUNTRY_CODE)
 # Limit on the number of blocks separated by punctuation. Use _DIGIT_BLOCK_LIMIT
 # since some formats use spaces to separate each digit.
 _BLOCK_LIMIT = _limit(0, _DIGIT_BLOCK_LIMIT)
 
 # A punctuation sequence allowing white space.
-_PUNCTUATION = u"[" + pnu._VALID_PUNCTUATION + u"]" + _PUNCTUATION_LIMIT
+_PUNCTUATION = u"[" + phonenumberutil._VALID_PUNCTUATION + u"]" + _PUNCTUATION_LIMIT
 # A digits block without punctuation.
 _DIGIT_SEQUENCE = u"(?u)\\d" + _limit(1, _DIGIT_BLOCK_LIMIT)
 # Punctuation that may be at the start of a phone number - brackets and plus signs.
-_LEAD_CLASS_CHARS = _OPENING_PARENS + pnu._PLUS_CHARS
+_LEAD_CLASS_CHARS = _OPENING_PARENS + phonenumberutil._PLUS_CHARS
 _LEAD_CLASS = u"[" + _LEAD_CLASS_CHARS + u"]"
 _LEAD_PATTERN = re.compile(_LEAD_CLASS)
 
@@ -90,8 +90,8 @@ _LEAD_PATTERN = re.compile(_LEAD_CLASS)
 #   supported.
 _PATTERN = re.compile(u"(?:" + _LEAD_CLASS + _PUNCTUATION + u")" + _LEAD_LIMIT +
                       _DIGIT_SEQUENCE + u"(?:" + _PUNCTUATION + _DIGIT_SEQUENCE + u")" + _BLOCK_LIMIT +
-                      u"(?:" + pnu._EXTN_PATTERNS_FOR_MATCHING + u")?",
-                      pnu._REGEX_FLAGS)
+                      u"(?:" + phonenumberutil._EXTN_PATTERNS_FOR_MATCHING + u")?",
+                      phonenumberutil._REGEX_FLAGS)
 
 # Matches strings that look like publication pages. Example: "Computing
 # Complete Answers to Queries in the Presence of Limited Access Patterns.
@@ -151,9 +151,9 @@ def _verify(leniency, numobj, candidate):
     """Returns True if number is a verified number according to the
     leniency."""
     if leniency == Leniency.POSSIBLE:
-        return pnu.is_possible_number(numobj)
+        return phonenumberutil.is_possible_number(numobj)
     elif leniency == Leniency.VALID:
-        if not pnu.is_valid_number(numobj):
+        if not phonenumberutil.is_valid_number(numobj):
             return False
         return _contains_only_valid_x_chars(numobj, candidate)
     elif leniency == Leniency.STRICT_GROUPING:
@@ -165,14 +165,14 @@ def _verify(leniency, numobj, candidate):
 
 
 def _verify_strict_grouping(numobj, candidate):
-    if (not pnu.is_valid_number(numobj) or
+    if (not phonenumberutil.is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
         _contains_more_than_one_slash(candidate)):
         return False
     # TODO: Evaluate how this works for other locales (testing has been
     # limited to NANPA regions) and optimise if necessary.
     formatted_number_groups = _get_national_number_groups(numobj)
-    normalized_candidate = pnu.normalize_digits_only(candidate, keep_non_digits=True)
+    normalized_candidate = phonenumberutil.normalize_digits_only(candidate, keep_non_digits=True)
     from_index = 0
     # Check each group of consecutive digits are not broken into separate
     # groups in the candidate string.
@@ -191,7 +191,7 @@ def _verify_strict_grouping(numobj, candidate):
                 # this case, we only accept the number if there is no
                 # formatting symbol at all in the number, except for
                 # extensions.
-                nsn = pnu.national_significant_number(numobj)
+                nsn = phonenumberutil.national_significant_number(numobj)
                 return normalized_candidate[(from_index - len(formatted_number_group)):].startswith(nsn)
     # The check here makes sure that we haven't mistakenly already used the extension to
     # match the last group of the subscriber number. Note the extension cannot have
@@ -200,14 +200,14 @@ def _verify_strict_grouping(numobj, candidate):
 
 
 def _verify_exact_grouping(numobj, candidate):
-    if (not pnu.is_valid_number(numobj) or
+    if (not phonenumberutil.is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
         _contains_more_than_one_slash(candidate)):
         return False
     # TODO: Evaluate how this works for other locales (testing has been
     # limited to NANPA regions) and optimise if necessary.
-    normalized_candidate = pnu.normalize_digits_only(candidate, keep_non_digits=True)
-    candidate_groups = re.split(pnu._NON_DIGITS_PATTERN, normalized_candidate)
+    normalized_candidate = phonenumberutil.normalize_digits_only(candidate, keep_non_digits=True)
+    candidate_groups = re.split(phonenumberutil._NON_DIGITS_PATTERN, normalized_candidate)
     # Set this to the last group, skipping it if the number has an extension.
     if numobj.extension != None:
         candidate_number_group_index = len(candidate_groups) - 2
@@ -218,7 +218,7 @@ def _verify_exact_grouping(numobj, candidate):
     # number may be present with a prefix such as a national number prefix, or
     # the country code itself.
     if (len(candidate_groups) == 1 or
-        candidate_groups[candidate_number_group_index].find(pnu.national_significant_number(numobj)) != -1):
+        candidate_groups[candidate_number_group_index].find(phonenumberutil.national_significant_number(numobj)) != -1):
         return True
     formatted_number_groups = _get_national_number_groups(numobj)
     # Starting from the end, go through in reverse, excluding the first group,
@@ -240,7 +240,7 @@ def _get_national_number_groups(numobj):
     """Helper method to get the national-number part of a number, formatted without any national
     prefix, and return it as a set of digit blocks that would be formatted together."""
     # This will be in the format +CC-DG;ext=EXT where DG represents groups of digits.
-    rfc3966_format = pnu.format_number(numobj, pnu.PhoneNumberFormat.RFC3966)
+    rfc3966_format = phonenumberutil.format_number(numobj, phonenumberutil.PhoneNumberFormat.RFC3966)
     # We remove the extension part from the formatted string before splitting
     # it into different groups.
     end_index = rfc3966_format.find(u';')
@@ -274,12 +274,12 @@ def _contains_only_valid_x_chars(numobj, candidate):
                 # This is the carrier code case, in which the 'X's always
                 # precede the national significant number.
                 ii += 1
-                if (pnu.is_number_match(numobj, candidate[ii:]) !=
-                    pnu.MatchType.NSN_MATCH):
+                if (phonenumberutil.is_number_match(numobj, candidate[ii:]) !=
+                    phonenumberutil.MatchType.NSN_MATCH):
                     return False
             # This is the extension sign case, in which the 'x' or 'X' should
             # always precede the extension number.
-            elif (pnu.normalize_digits_only(candidate[ii:]) !=
+            elif (phonenumberutil.normalize_digits_only(candidate[ii:]) !=
                   numobj.extension):
                 return False
         ii += 1
@@ -381,7 +381,7 @@ class PhoneNumberMatcher(object):
             # TODO: This is the place to start when trying to support
             # extraction of multiple phone number from split notations (+41 79
             # 123 45 67 / 68).
-            candidate = self._trim_after_first_match(pnu._SECOND_NUMBER_START_PATTERN,
+            candidate = self._trim_after_first_match(phonenumberutil._SECOND_NUMBER_START_PATTERN,
                                                      candidate)
 
             match = self._extract_match(candidate, start)
@@ -461,7 +461,7 @@ class PhoneNumberMatcher(object):
         if group_match:
             # Try the first group by itself.
             first_group_only = candidate[:group_match.start()]
-            first_group_only = self._trim_after_first_match(pnu._UNWANTED_END_CHAR_PATTERN,
+            first_group_only = self._trim_after_first_match(phonenumberutil._UNWANTED_END_CHAR_PATTERN,
                                                             first_group_only)
             match = self._parse_and_verify(first_group_only, offset)
             if match is not None:
@@ -471,7 +471,7 @@ class PhoneNumberMatcher(object):
             without_first_group_start = group_match.end()
             # Try the rest of the candidate without the first group.
             without_first_group = candidate[without_first_group_start:]
-            without_first_group = self._trim_after_first_match(pnu._UNWANTED_END_CHAR_PATTERN,
+            without_first_group = self._trim_after_first_match(phonenumberutil._UNWANTED_END_CHAR_PATTERN,
                                                                without_first_group)
             match = self._parse_and_verify(without_first_group, offset + without_first_group_start)
             if match is not None:
@@ -486,7 +486,7 @@ class PhoneNumberMatcher(object):
                     last_group_start = group_match.start()
                     group_match = _GROUP_SEPARATOR.search(candidate, group_match.end())
                 without_last_group = candidate[:last_group_start]
-                without_last_group = self._trim_after_first_match(pnu._UNWANTED_END_CHAR_PATTERN,
+                without_last_group = self._trim_after_first_match(phonenumberutil._UNWANTED_END_CHAR_PATTERN,
                                                                   without_last_group)
                 if without_last_group == first_group_only:
                     # If there are only two groups, then the group "without
@@ -537,10 +537,10 @@ class PhoneNumberMatcher(object):
                         self._is_currency_symbol(next_char)):
                         return None
 
-            numobj = pnu.parse(candidate, self.preferred_region)
+            numobj = phonenumberutil.parse(candidate, self.preferred_region)
             if _verify(self.leniency, numobj, candidate):
                 return PhoneNumberMatch(offset, candidate, numobj)
-        except pnu.NumberParseException:
+        except phonenumberutil.NumberParseException:
             # ignore and continue
             pass
         return None
