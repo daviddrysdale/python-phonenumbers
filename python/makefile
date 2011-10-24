@@ -1,3 +1,4 @@
+PYTHON=python
 alldata: metadata geodata locale
 
 # Dump the JRE's Locale information
@@ -10,27 +11,27 @@ phonenumbers/geodata/locale.py: DumpLocale.class
 locale: phonenumbers/geodata/locale.py
 
 phonenumbers/geodata/__init__.py: buildgeocodingdata.py ../resources/geocoding
-	python buildgeocodingdata.py ../resources/geocoding $@
+	$(PYTHON) buildgeocodingdata.py ../resources/geocoding $@
 
 tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding
-	python buildgeocodingdata.py ../resources/test/geocoding $@
+	$(PYTHON) buildgeocodingdata.py ../resources/test/geocoding $@
 
 geodata: phonenumbers/geodata/__init__.py tests/testgeodata/__init__.py
 
 phonenumbers/data/__init__.py: ../resources/PhoneNumberMetaData.xml buildmetadatafromxml.py
-	python buildmetadatafromxml.py ../resources/PhoneNumberMetaData.xml phonenumbers/data
+	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaData.xml phonenumbers/data
 
 metadata: phonenumbers/data/__init__.py tests/testdata/__init__.py geodata
 
 tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
-	python buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata
+	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata
 
 test: alldata tests/testdata/__init__.py
-	python phonenumbers/__init__.py
-	python phonenumbers/re_util.py
-	python phonenumbers/unicode_util.py
-	python phonenumbers/geocoder.py
-	python tests/__init__.py
+	$(PYTHON) phonenumbers/__init__.py
+	$(PYTHON) phonenumbers/re_util.py
+	$(PYTHON) phonenumbers/unicode_util.py
+	$(PYTHON) phonenumbers/geocoder.py
+	$(PYTHON) tests/__init__.py
 
 # Coverage; requires coverage module
 COVERAGE=$(shell hash python-coverage 2>&- && echo python-coverage || echo coverage)
@@ -51,12 +52,12 @@ VERSION=$(shell grep __version__ phonenumbers/__init__.py | sed 's/__version__ =
 TARBALL=dist/phonenumbers-$(VERSION).tar.gz
 # Build setuptools packaged tarball $(TARBALL)
 sdist: alldata
-	python setup.py sdist
+	$(PYTHON) setup.py sdist
 $(TARBALL): sdist
 
 install: alldata
-	python setup.py build
-	sudo python setup.py install
+	$(PYTHON) setup.py build
+	sudo $(PYTHON) setup.py install
 
 clean:
 	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc phonenumbers/geodata/*.pyc
