@@ -156,4 +156,12 @@ class PhoneNumberTest(unittest.TestCase):
             self.fail("Should not be able to modify FrozenPhoneNubmer")
         except TypeError:
             pass
+        try:
+            del frozen_gb_mobile1.country_code
+            self.fail("Should not be able to modify FrozenPhoneNubmer")
+        except TypeError:
+            pass
+        # Coverage test
+        frozen_gb_mobile1._mutable = True
+        del frozen_gb_mobile1.country_code
 
