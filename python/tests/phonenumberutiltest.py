@@ -20,7 +20,7 @@
 import unittest
 
 import phonenumbers
-from phonenumbers import PhoneNumber, PhoneMetadata, PhoneNumberDesc, FrozenPhoneNumber
+from phonenumbers import PhoneNumber, PhoneMetadata, PhoneNumberDesc
 from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseException
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 # Access internal functions of phonenumberutil.py
@@ -2069,39 +2069,3 @@ class PhoneNumberUtilTest(unittest.TestCase):
                           phonenumberutil._maybe_strip_national_prefix_carrier_code("01412345",
                                                                                      metadataXY))
 
-    def testFrozenPhoneNumber(self):
-        # Python version extra tests
-        frozen_gb_mobile1 = FrozenPhoneNumber(country_code=44, national_number=7912345678L)
-        frozen_it_number1 = FrozenPhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
-        frozen_gb_mobile2 = FrozenPhoneNumber(GB_MOBILE)
-        frozen_it_number2 = FrozenPhoneNumber(IT_NUMBER)
-        self.assertEqual(frozen_gb_mobile1, GB_MOBILE)
-        self.assertEqual(frozen_gb_mobile2, GB_MOBILE)
-        self.assertEqual(frozen_gb_mobile1, frozen_gb_mobile2)
-        self.assertEqual(frozen_it_number1, IT_NUMBER)
-        self.assertEqual(frozen_it_number2, IT_NUMBER)
-        self.assertEqual(frozen_it_number1, frozen_it_number2)
-        self.assertEqual(hash(frozen_it_number1), hash(frozen_it_number2))
-        self.assertNotEqual(hash(frozen_it_number1), hash(frozen_gb_mobile1))
-        phonedict = {frozen_it_number1: 1, frozen_gb_mobile1: 2}
-        self.assertEqual(phonedict[frozen_it_number1], 1)
-        try:
-            frozen_gb_mobile1.country_code = 12
-            self.fail("Should not be able to modify FrozenPhoneNubmer")
-        except TypeError:
-            pass
-        try:
-            frozen_gb_mobile2.raw_input = ""
-            self.fail("Should not be able to modify FrozenPhoneNubmer")
-        except TypeError:
-            pass
-        try:
-            frozen_gb_mobile1.clear()
-            self.fail("Should not be able to modify FrozenPhoneNubmer")
-        except TypeError:
-            pass
-        try:
-            frozen_gb_mobile1.merge_from(frozen_it_number1)
-            self.fail("Should not be able to modify FrozenPhoneNubmer")
-        except TypeError:
-            pass
