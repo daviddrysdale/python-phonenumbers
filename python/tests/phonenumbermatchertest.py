@@ -44,12 +44,12 @@ class PhoneNumberMatchTest(unittest.TestCase):
         match2 = PhoneNumberMatch(10, "1 800 234 45 67", number)
         match3 = PhoneNumberMatch(10, "1 801 234 45 67", number)
 
-        self.assertEquals(match1, match2)
-        self.assertEquals(match1.start, match2.start)
-        self.assertEquals(match1.end, match2.end)
-        self.assertEquals(match1.number, match2.number)
-        self.assertEquals(match1.raw_string, match2.raw_string)
-        self.assertEquals("1 800 234 45 67", match1.raw_string)
+        self.assertEqual(match1, match2)
+        self.assertEqual(match1.start, match2.start)
+        self.assertEqual(match1.end, match2.end)
+        self.assertEqual(match1.number, match2.number)
+        self.assertEqual(match1.raw_string, match2.raw_string)
+        self.assertEqual("1 800 234 45 67", match1.raw_string)
         # Python-specific: check __ne__()
         self.assertNotEqual(match1, match3)
         self.assertTrue(match1 != match3)
@@ -90,9 +90,9 @@ class PhoneNumberMatchTest(unittest.TestCase):
         number = PhoneNumber()
         match = PhoneNumberMatch(10, "1 800 234 45 67", number)
 
-        self.assertEquals("PhoneNumberMatch [10,25) 1 800 234 45 67", str(match))
+        self.assertEqual("PhoneNumberMatch [10,25) 1 800 234 45 67", str(match))
         # Python version extra test
-        self.assertEquals("PhoneNumberMatch(start=10, raw_string='1 800 234 45 67', " +
+        self.assertEqual("PhoneNumberMatch(start=10, raw_string='1 800 234 45 67', " +
                           "numobj=PhoneNumber(country_code=None, national_number=None, extension=None, " +
                           "italian_leading_zero=False, country_code_source=None, preferred_domestic_carrier_code=None))", repr(match))
 
@@ -367,8 +367,8 @@ class PhoneNumberMatcherTest(unittest.TestCase):
             match = None
         self.assertTrue(match is not None,
                         msg="Did not find a number in '" + zipPreceding + "'; expected " + number)
-        self.assertEquals(expectedResult, match.number)
-        self.assertEquals(number, match.raw_string)
+        self.assertEqual(expectedResult, match.number)
+        self.assertEqual(number, match.raw_string)
 
         # Now repeat, but this time the phone number has spaces in it. It should still be found.
         number = "(415) 666 7777"
@@ -381,8 +381,8 @@ class PhoneNumberMatcherTest(unittest.TestCase):
             matchWithSpaces = None
         self.assertTrue(matchWithSpaces is not None,
                         msg="Did not find a number in '" + zipFollowing + "'; expected " + number)
-        self.assertEquals(expectedResult, matchWithSpaces.number)
-        self.assertEquals(number, matchWithSpaces.raw_string)
+        self.assertEqual(expectedResult, matchWithSpaces.number)
+        self.assertEqual(number, matchWithSpaces.raw_string)
 
     def testIsLatinLetter(self):
         self.assertTrue(PhoneNumberMatcher._is_latin_letter('c'))
@@ -483,8 +483,8 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         match2 = PhoneNumberMatch(21, "455-234-3451", number2)
 
         matches = PhoneNumberMatcher(text, region)
-        self.assertEquals(match1, matches.next())
-        self.assertEquals(match2, matches.next())
+        self.assertEqual(match1, matches.next())
+        self.assertEqual(match2, matches.next())
 
     def testDoesNotMatchMultiplePhoneNumbersSeparatedWithNoWhiteSpace(self):
         # No white-space found between numbers - neither is found.
@@ -524,8 +524,8 @@ class PhoneNumberMatcherTest(unittest.TestCase):
                 if test.rawString != match.raw_string:
                     wrongMatchFoundCount += 1
                     print >> sys.stderr, "Found wrong match in test %s. Found %s" % (test, match)
-        self.assertEquals(0, noMatchFoundCount)
-        self.assertEquals(0, wrongMatchFoundCount)
+        self.assertEqual(0, noMatchFoundCount)
+        self.assertEqual(0, wrongMatchFoundCount)
 
     def _doTestNumberNonMatchesForLeniency(self, testCases, leniency):
         matchFoundCount = 0
@@ -538,7 +538,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
             if match is not None:
                 matchFoundCount += 1
                 print >> sys.stderr, "Match found in %s for leniency: " % (test, leniency)
-        self.assertEquals(0, matchFoundCount)
+        self.assertEqual(0, matchFoundCount)
 
     def findMatchesInContexts(self, contexts, isValid, isPossible,
                               region="US", number="415-666-7777"):
@@ -608,8 +608,8 @@ class PhoneNumberMatcherTest(unittest.TestCase):
 
         matcher = PhoneNumberMatcher(text, region, Leniency.POSSIBLE, sys.maxint)
 
-        self.assertEquals(match1, matcher.next())
-        self.assertEquals(match2, matcher.next())
+        self.assertEqual(match1, matcher.next())
+        self.assertEqual(match2, matcher.next())
         self.assertFalse(matcher.has_next())
 
     def testNoneInput(self):
@@ -627,7 +627,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         matcher = PhoneNumberMatcher(numbers, "US", Leniency.VALID, 10)
         actual = [x.number for x in matcher]
 
-        self.assertEquals(expected, actual)
+        self.assertEqual(expected, actual)
 
     def testMaxMatchesInvalid(self):
         # Set up text with 10 invalid phone numbers followed by 100 valid.
@@ -647,7 +647,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         matcher = PhoneNumberMatcher(numbers, "US", Leniency.VALID, 10)
         actual = [x.number for x in matcher]
 
-        self.assertEquals(expected, actual)
+        self.assertEqual(expected, actual)
 
     def testEmptyIteration(self):
         matcher = PhoneNumberMatcher("", "ZZ")
@@ -728,9 +728,9 @@ class PhoneNumberMatcherTest(unittest.TestCase):
 
         self.assertTrue(matcher.has_next())
         match = matcher.next()
-        self.assertEquals(start - index, match.start)
-        self.assertEquals(end - index, match.end)
-        self.assertEquals(sub[match.start:match.end], match.raw_string)
+        self.assertEqual(start - index, match.start)
+        self.assertEqual(end - index, match.end)
+        self.assertEqual(sub[match.start:match.end], match.raw_string)
 
     def doTestFindInContext(self, number, defaultCountry):
         """Tests numbers found by PhoneNumberMatcher in various textual contexts"""
@@ -803,12 +803,12 @@ class PhoneNumberMatcherTest(unittest.TestCase):
                             msg="Did not find a number in '" + text + "'; expected '" + number + "'")
 
             extracted = text[match.start:match.end]
-            self.assertEquals(start, match.start,
+            self.assertEqual(start, match.start,
                               msg="Unexpected phone region in '" + text + "'; extracted '" + extracted + "'")
-            self.assertEquals(end, match.end,
+            self.assertEqual(end, match.end,
                               msg="Unexpected phone region in '" + text + "'; extracted '" + extracted + "'")
-            self.assertEquals(number, extracted)
-            self.assertEquals(match.raw_string, extracted)
+            self.assertEqual(number, extracted)
+            self.assertEqual(match.raw_string, extracted)
 
             self.ensureTermination(text, defaultCountry, leniency)
 

@@ -35,7 +35,7 @@ class PhoneNumberTest(unittest.TestCase):
         numberA.country_code = 1
         numberA.national_number = 6502530000L
         numberB = PhoneNumber(country_code=1, national_number=6502530000L)
-        self.assertEquals(numberA, numberB)
+        self.assertEqual(numberA, numberB)
 
     def test_equal_with_italian_leading_zero_set_to_default(self):
         numberA = PhoneNumber()
@@ -47,7 +47,7 @@ class PhoneNumberTest(unittest.TestCase):
         numberB.national_number = 6502530000L
         # These should still be equal, since the default value for this field
         # is false.
-        self.assertEquals(numberA, numberB)
+        self.assertEqual(numberA, numberB)
 
     def test_equal_with_country_code_source_set(self):
         numberA = PhoneNumber()
@@ -56,7 +56,7 @@ class PhoneNumberTest(unittest.TestCase):
         numberB = PhoneNumber()
         numberB.raw_input = "+1 650 253 00 00"
         numberB.country_code_source = CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN
-        self.assertEquals(numberA, numberB)
+        self.assertEqual(numberA, numberB)
 
     def test_non_equal_with_italian_leading_zero_set(self):
         numberA = PhoneNumber()
@@ -105,7 +105,7 @@ class PhoneNumberTest(unittest.TestCase):
         numberB.country_code = 1
         numberB.national_number = 6502530000L
         numberB.preferred_domestic_carrier_code = ""
-        self.assertEquals(numberA, numberB)
+        self.assertEqual(numberA, numberB)
 
     def test_equal_other_objects(self):
         # Python-specific extra tests for equality against other types

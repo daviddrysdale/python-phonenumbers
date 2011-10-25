@@ -64,50 +64,50 @@ class ExampleNumbersTest(unittest.TestCase):
     def testFixedLine(self):
         fixedLineTypes = set((PhoneNumberType.FIXED_LINE, PhoneNumberType.FIXED_LINE_OR_MOBILE))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.FIXED_LINE, fixedLineTypes)
-        self.assertEquals(0, len(self.invalid_cases))
-        self.assertEquals(0, len(self.wrong_type_cases))
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     def testMobile(self):
         mobileTypes = set((PhoneNumberType.MOBILE, PhoneNumberType.FIXED_LINE_OR_MOBILE,))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.MOBILE, mobileTypes)
-        self.assertEquals(0, len(self.invalid_cases))
-        self.assertEquals(0, len(self.wrong_type_cases))
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     def testTollFree(self):
         tollFreeTypes = set((PhoneNumberType.TOLL_FREE,))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.TOLL_FREE, tollFreeTypes)
-        self.assertEquals(0, len(self.invalid_cases))
-        self.assertEquals(0, len(self.wrong_type_cases))
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     def testPremiumRate(self):
         premiumRateTypes = set((PhoneNumberType.PREMIUM_RATE,))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.PREMIUM_RATE, premiumRateTypes)
-        self.assertEquals(0, len(self.invalid_cases))
-        self.assertEquals(0, len(self.wrong_type_cases))
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     def testVoip(self):
         voipTypes = set((PhoneNumberType.VOIP,))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.VOIP, voipTypes)
-        self.assertEquals(0, len(self.invalid_cases))
-        self.assertEquals(0, len(self.wrong_type_cases))
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     def testPager(self):
         pagerTypes = set((PhoneNumberType.PAGER,))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.PAGER, pagerTypes)
-        self.assertEquals(0, len(self.invalid_cases))
-        self.assertEquals(0, len(self.wrong_type_cases))
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     def testUan(self):
         uanTypes = set((PhoneNumberType.UAN,))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.UAN, uanTypes)
-        self.assertEquals(0, len(self.invalid_cases))
-        self.assertEquals(0, len(self.wrong_type_cases))
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     def testSharedCost(self):
         sharedCostTypes = set((PhoneNumberType.SHARED_COST,))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.SHARED_COST, sharedCostTypes)
-        self.assertEquals(0, len(self.invalid_cases))
-        self.assertEquals(0, len(self.wrong_type_cases))
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     def testCanBeInternationallyDialled(self):
         for regionCode in phonenumberutil.SUPPORTED_REGIONS:
@@ -126,7 +126,7 @@ class ExampleNumbersTest(unittest.TestCase):
             if (exampleNumber is not None and
                 phonenumberutil._can_be_internationally_dialled(exampleNumber)):
                 self.wrong_type_cases.append(exampleNumber)
-        self.assertEquals(0, len(self.wrong_type_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     def testEveryRegionHasAnExampleNumber(self):
         for regionCode in phonenumberutil.SUPPORTED_REGIONS:
@@ -140,7 +140,7 @@ class ExampleNumbersTest(unittest.TestCase):
         # Some metadata is blank; check that we cope with this.
         # Example: MH (+692)
         number = phonenumberutil.parse("+6927654321", "US")
-        self.assertEquals("Country Code: 692 National Number: 7654321 Leading Zero: False", str(number))
+        self.assertEqual("Country Code: 692 National Number: 7654321 Leading Zero: False", str(number))
 
     def testFormatNumberForMobile(self):
         # Python version extra test.  Special cases for CO and BR in
@@ -149,15 +149,15 @@ class ExampleNumbersTest(unittest.TestCase):
         brNumberFixed = PhoneNumber(country_code=55, national_number=1123456789L)
         brNumberMobile = PhoneNumber(country_code=55, national_number=1161234567L,
                                      preferred_domestic_carrier_code="303")
-        self.assertEquals("0312345678",
+        self.assertEqual("0312345678",
                           phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", False))
-        self.assertEquals("03 1 2345678",
+        self.assertEqual("03 1 2345678",
                           phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", True))
-        self.assertEquals("",
+        self.assertEqual("",
                           phonenumberutil.format_number_for_mobile_dialing(brNumberFixed, "BR", False))
-        self.assertEquals("",
+        self.assertEqual("",
                           phonenumberutil.format_number_for_mobile_dialing(brNumberFixed, "BR", True))
-        self.assertEquals("03031161234567",
+        self.assertEqual("03031161234567",
                           phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", False))
-        self.assertEquals("0 303 (11) 6123-4567",
+        self.assertEqual("0 303 (11) 6123-4567",
                           phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", True))
