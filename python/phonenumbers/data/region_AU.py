@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. AU metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix='(?:14(?:1[14]|34|4[17]|[56]6|7[47]|88))?001[14-689]',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-578]\\d{5,9}', possible_number_pattern='\\d{6,10}'),
@@ -14,9 +14,9 @@ PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='000|112', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1(?:3(?:\\d{4}|00\\d{6})|80(?:0\\d{6}|2\\d{3}))', possible_number_pattern='\\d{6,10}', example_number='1300123456'),
-    preferred_international_prefix=u'0011',
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0',
+    preferred_international_prefix='0011',
+    national_prefix='0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='([2378])(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2378]'], national_prefix_formatting_rule=u'(0\\1)'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[45]|14'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(16)(\\d{3})(\\d{2,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['16'], national_prefix_formatting_rule=u'0\\1'),

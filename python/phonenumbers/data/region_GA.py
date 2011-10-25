@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. GA metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_GA = PhoneMetadata(id='GA', country_code=241, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[4-9]\\d{5}|0\\d{7}', possible_number_pattern='\\d{6,8}'),

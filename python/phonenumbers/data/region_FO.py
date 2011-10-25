@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. FO metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_FO = PhoneMetadata(id='FO', country_code=298, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-9]\\d{5}', possible_number_pattern='\\d{6}'),
@@ -14,5 +14,5 @@ PHONE_METADATA_FO = PhoneMetadata(id='FO', country_code=298, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix_for_parsing=u'(10(?:01|[12]0|88))',
+    national_prefix_for_parsing='(10(?:01|[12]0|88))',
     number_format=[NumberFormat(pattern='(\\d{6})', format=u'\\1', domestic_carrier_code_formatting_rule=u'$CC \\1')])

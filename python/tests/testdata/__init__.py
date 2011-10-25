@@ -13,24 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from region_AD import PHONE_METADATA_AD
-from region_AO import PHONE_METADATA_AO
-from region_AR import PHONE_METADATA_AR
-from region_AU import PHONE_METADATA_AU
-from region_BR import PHONE_METADATA_BR
-from region_BS import PHONE_METADATA_BS
-from region_DE import PHONE_METADATA_DE
-from region_GB import PHONE_METADATA_GB
-from region_IT import PHONE_METADATA_IT
-from region_JP import PHONE_METADATA_JP
-from region_KR import PHONE_METADATA_KR
-from region_MX import PHONE_METADATA_MX
-from region_NZ import PHONE_METADATA_NZ
-from region_PL import PHONE_METADATA_PL
-from region_RE import PHONE_METADATA_RE
-from region_SG import PHONE_METADATA_SG
-from region_US import PHONE_METADATA_US
-from region_YT import PHONE_METADATA_YT
+from .region_AD import PHONE_METADATA_AD
+from .region_AO import PHONE_METADATA_AO
+from .region_AR import PHONE_METADATA_AR
+from .region_AU import PHONE_METADATA_AU
+from .region_BR import PHONE_METADATA_BR
+from .region_BS import PHONE_METADATA_BS
+from .region_DE import PHONE_METADATA_DE
+from .region_GB import PHONE_METADATA_GB
+from .region_IT import PHONE_METADATA_IT
+from .region_JP import PHONE_METADATA_JP
+from .region_KR import PHONE_METADATA_KR
+from .region_MX import PHONE_METADATA_MX
+from .region_NZ import PHONE_METADATA_NZ
+from .region_PL import PHONE_METADATA_PL
+from .region_RE import PHONE_METADATA_RE
+from .region_SG import PHONE_METADATA_SG
+from .region_US import PHONE_METADATA_US
+from .region_YT import PHONE_METADATA_YT
 
 # A mapping from a country code to the region codes which
 # denote the country/region represented by that country code.

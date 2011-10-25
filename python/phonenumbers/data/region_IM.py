@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. IM metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_IM = PhoneMetadata(id='IM', country_code=44, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[135789]\\d{6,9}', possible_number_pattern='\\d{6,10}'),
@@ -14,6 +14,6 @@ PHONE_METADATA_IM = PhoneMetadata(id='IM', country_code=44, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='3(?:08162\\d|3\\d{5}|4(?:40[49]06|5624\\d)|7(?:0624\\d|2299\\d))\\d{3}|55\\d{8}', possible_number_pattern='\\d{10}', example_number='5512345678'),
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix=u'0',
-    preferred_extn_prefix=u' x',
-    national_prefix_for_parsing=u'0')
+    national_prefix='0',
+    preferred_extn_prefix=' x',
+    national_prefix_for_parsing='0')

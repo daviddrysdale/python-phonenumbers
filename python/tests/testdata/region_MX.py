@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. MX metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{9,10}', possible_number_pattern='\\d{7,11}'),
@@ -14,8 +14,8 @@ PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix=u'01',
-    national_prefix_for_parsing=u'01|04[45](\d{10})',
+    national_prefix='01',
+    national_prefix_for_parsing='01|04[45](\\d{10})',
     national_prefix_transform_rule=u'1\\1',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]00'], national_prefix_formatting_rule=u'01 \\1'),
         NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['33|55|81'], national_prefix_formatting_rule=u'01 \\1'),

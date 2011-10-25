@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. UZ metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_UZ = PhoneMetadata(id='UZ', country_code=998, international_prefix='810',
     general_desc=PhoneNumberDesc(national_number_pattern='[679]\\d{8}', possible_number_pattern='\\d{7,9}'),
@@ -14,7 +14,7 @@ PHONE_METADATA_UZ = PhoneMetadata(id='UZ', country_code=998, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    preferred_international_prefix=u'8~10',
-    national_prefix=u'8',
-    national_prefix_for_parsing=u'8',
+    preferred_international_prefix='8~10',
+    national_prefix='8',
+    national_prefix_for_parsing='8',
     number_format=[NumberFormat(pattern='([679]\\d)(\\d{3})(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3 \\4', national_prefix_formatting_rule=u'8\\1')])

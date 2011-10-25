@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. IO metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_IO = PhoneMetadata(id='IO', country_code=246, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='3\\d{6}', possible_number_pattern='\\d{7}'),

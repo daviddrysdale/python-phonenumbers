@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. TJ metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_TJ = PhoneMetadata(id='TJ', country_code=992, international_prefix='810',
     general_desc=PhoneNumberDesc(national_number_pattern='[3-59]\\d{8}', possible_number_pattern='\\d{3,9}'),
@@ -14,9 +14,9 @@ PHONE_METADATA_TJ = PhoneMetadata(id='TJ', country_code=992, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:0[1-3]|12)', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    preferred_international_prefix=u'8~10',
-    national_prefix=u'8',
-    national_prefix_for_parsing=u'8',
+    preferred_international_prefix='8~10',
+    national_prefix='8',
+    national_prefix_for_parsing='8',
     number_format=[NumberFormat(pattern='([349]\\d{2})(\\d{2})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[34]7|91[78]'], national_prefix_formatting_rule=u'(8) \\1'),
         NumberFormat(pattern='([459]\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['4[48]|5|9(?:1[59]|[0235-9])'], national_prefix_formatting_rule=u'(8) \\1'),
         NumberFormat(pattern='(331700)(\\d)(\\d{2})', format=u'\\1 \\2 \\3', leading_digits_pattern=['331', '3317', '33170', '331700'], national_prefix_formatting_rule=u'(8) \\1'),

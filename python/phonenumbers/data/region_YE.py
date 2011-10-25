@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. YE metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_YE = PhoneMetadata(id='YE', country_code=967, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-7]\\d{6,8}', possible_number_pattern='\\d{6,9}'),
@@ -14,7 +14,7 @@ PHONE_METADATA_YE = PhoneMetadata(id='YE', country_code=967, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0',
+    national_prefix='0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='([1-7])(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[1-6]|7[24-68]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(7\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['7[0137]'], national_prefix_formatting_rule=u'0\\1')])
