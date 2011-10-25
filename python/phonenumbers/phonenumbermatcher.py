@@ -20,10 +20,10 @@ import sys
 import re
 
 # Extra regexp function; see README
-from re_util import fullmatch
-from util import UnicodeMixin
-import unicode_util
-import phonenumberutil
+from .re_util import fullmatch
+from .util import UnicodeMixin
+from . import unicode_util
+from . import phonenumberutil
 
 
 def _limit(lower, upper):

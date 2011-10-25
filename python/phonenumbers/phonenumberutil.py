@@ -30,17 +30,17 @@ author: David Drysdale (Python version)
 # limitations under the License.
 import re
 
-from re_util import fullmatch   # Extra regexp function; see README
-from util import UnicodeMixin
-import unicode_util
+from .re_util import fullmatch   # Extra regexp function; see README
+from .util import UnicodeMixin
+from .unicode_util import digit as unicode_digit
 
 # Data class definitions
-from phonenumber import PhoneNumber, CountryCodeSource
-from phonemetadata import NumberFormat, PhoneMetadata
+from .phonenumber import PhoneNumber, CountryCodeSource
+from .phonemetadata import NumberFormat, PhoneMetadata
 
 # Import auto-generated data structures
 try:
-    from data import _COUNTRY_CODE_TO_REGION_CODE
+    from .data import _COUNTRY_CODE_TO_REGION_CODE
 except ImportError:  # pragma no cover
     # Before the generated code exists, the data/ directory is empty.
     # The generation process imports this module, creating a circular
@@ -485,7 +485,7 @@ def normalize_digits_only(number, keep_non_digits=False):
     number_length = len(number)
     normalized_digits = u""
     for ii in xrange(number_length):
-        d = unicode_util.digit(number[ii], -1)
+        d = unicode_digit(number[ii], -1)
         if d != -1:
             normalized_digits += unicode(d)
         elif keep_non_digits:

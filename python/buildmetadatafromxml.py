@@ -64,7 +64,7 @@ _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
 
 # Boilerplate header for individual region data files
 _REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %s metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 '''
 
 # Copyright notice covering the XML metadata; include current year.
@@ -389,7 +389,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
             print >> outfile, METADATA_FILE_PROLOG
             print >> outfile, COPYRIGHT_NOTICE
             for country_id in sorted(self.territory.keys()):
-                print >> outfile, "from region_%s import PHONE_METADATA_%s" % (country_id, country_id)
+                print >> outfile, "from .region_%s import PHONE_METADATA_%s" % (country_id, country_id)
             # Emit the mapping from country code to region code
             print >> outfile, _COUNTRY_CODE_TO_REGION_CODE_PROLOG
             print >> outfile, "_COUNTRY_CODE_TO_REGION_CODE = {"

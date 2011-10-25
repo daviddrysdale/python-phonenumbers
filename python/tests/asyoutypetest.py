@@ -22,7 +22,7 @@ from phonenumbers import AsYouTypeFormatter
 from phonenumbers import PhoneMetadata, PhoneNumberDesc, NumberFormat
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil
-from phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
+from .phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 
 
 class AsYouTypeFormatterTest(unittest.TestCase):

@@ -22,7 +22,7 @@ import unittest
 
 from phonenumbers import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 from phonenumbers import PhoneNumber, phonenumberutil
-from phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
+from .phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 
 
 class PhoneNumberMatchTest(unittest.TestCase):

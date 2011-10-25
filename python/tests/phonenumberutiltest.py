@@ -35,7 +35,7 @@ phonenumberutil.COUNTRY_CODE_TO_REGION_CODE = {}
 
 # Import the test data; this will re-populate the
 # PhoneMetadata.region_metadata map
-from testdata import _COUNTRY_CODE_TO_REGION_CODE as TEST_CC_TO_RC
+from .testdata import _COUNTRY_CODE_TO_REGION_CODE as TEST_CC_TO_RC
 TEST_REGION_METADATA = PhoneMetadata.region_metadata
 
 

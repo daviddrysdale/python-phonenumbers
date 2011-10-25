@@ -27,11 +27,11 @@ tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buil
 	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata
 
 test: alldata tests/testdata/__init__.py
-	$(PYTHON) phonenumbers/__init__.py
-	$(PYTHON) phonenumbers/re_util.py
-	$(PYTHON) phonenumbers/unicode_util.py
-	$(PYTHON) phonenumbers/geocoder.py
-	$(PYTHON) tests/__init__.py
+	$(PYTHON) -m phonenumbers.__init__
+	$(PYTHON) -m phonenumbers.re_util
+	$(PYTHON) -m phonenumbers.unicode_util
+	$(PYTHON) -m phonenumbers.geocoder
+	$(PYTHON) -m tests.__init__
 
 # Coverage; requires coverage module
 COVERAGE=$(shell hash python-coverage 2>&- && echo python-coverage || echo coverage)

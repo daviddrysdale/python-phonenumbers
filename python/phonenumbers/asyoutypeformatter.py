@@ -26,13 +26,13 @@ See the unit tests for more details on how the formatter is to be used.
 # limitations under the License.
 import re
 
-import unicode_util
-from re_util import fullmatch
-from phonemetadata import PhoneMetadata
-from phonenumberutil import _VALID_PUNCTUATION
-from phonenumberutil import _PLUS_SIGN, _PLUS_CHARS_PATTERN
-from phonenumberutil import _extract_country_code, region_code_for_country_code
-from phonenumberutil import country_code_for_region
+from .unicode_util import digit as unicode_digit
+from .re_util import fullmatch
+from .phonemetadata import PhoneMetadata
+from .phonenumberutil import _VALID_PUNCTUATION
+from .phonenumberutil import _PLUS_SIGN, _PLUS_CHARS_PATTERN
+from .phonenumberutil import _extract_country_code, region_code_for_country_code
+from .phonenumberutil import country_code_for_region
 
 _EMPTY_METADATA = PhoneMetadata(id=u"", international_prefix=u"NA", register=False)
 
@@ -489,7 +489,7 @@ class AsYouTypeFormatter(object):
             normalized_char = next_char
             self._accrued_input_without_formatting += next_char
         else:
-            next_digit = unicode_util.digit(next_char, -1)
+            next_digit = unicode_digit(next_char, -1)
             if next_digit != -1:
                 normalized_char = unicode(next_digit)
             else:  # pragma no cover
