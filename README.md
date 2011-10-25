@@ -2,12 +2,16 @@ phonenumbers Python Library
 ===========================
 
 This is a Python port of libphonenumber, originally from:
-  http://code.google.com/p/libphonenumber/.
+  [http://code.google.com/p/libphonenumber/](http://code.google.com/p/libphonenumber/).
 
-Original Java code is Copyright (C) 2009-2011 Google Inc.
+Original Java code is Copyright (C) 2009-2011 The Libphonenumber Authors
 
 Example Usage
 -------------
+
+The main object that the library deals with is a `PhoneNumber` object.  You can create this from a string
+representing a phone number using the `parse` function, but you also need to specify the country that the
+phone number is from.
 
     >>> import phonenumbers
     >>> x = phonenumbers.parse("+442083661177", None)
@@ -15,18 +19,25 @@ Example Usage
     Country Code: 44 National Number: 2083661177 Leading Zero: False
     >>> type(x)
     <class 'phonenumbers.phonenumber.PhoneNumber'>
+    >>> y = phonenumbers.parse("020 8366 1177", "GB")
+    >>> print y
+    Country Code: 44 National Number: 2083661177 Leading Zero: False
+    >>> x == y
+    True
+
+Once you've got a phone number, a common task is to format it in a standardized format.  There are a few
+formats available (under `PhoneNumberFormat`), and the `format_number` function does the formatting.
+
     >>> phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.NATIONAL)
     u'020 8366 1177'
     >>> phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
     u'+44 20 8366 1177'
     >>> phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.E164)
     u'+442083661177'
-    >>> y = phonenumbers.parse("020 8366 1177", "GB")
-    >>> print y
-    Country Code: 44 National Number: 2083661177 Leading Zero: False
-    >>> x == y
-    True
-    >>>
+
+If your application has a UI that allows the user to type in a phone number, it's nice to get the formatting
+applied as the user types.   The `AsYouTypeFormatter` object allows this.
+
     >>> formatter = phonenumbers.AsYouTypeFormatter("US")
     >>> print formatter.input_digit("6")
     6
@@ -48,18 +59,26 @@ Example Usage
     (650) 253-222
     >>> print formatter.input_digit("2")
     (650) 253-2222
-    >>>
+
+Sometimes, you've got a larger block of text that may or may not have some phone numbers inside it.  For this,
+the `PhoneNumberMatcher` object provides the relevant functionality; you can iterate over it to retrieve a
+sequence of `PhoneNumberMatch` objects.
+
     >>> text = "Call me at 510-748-8230 if it's before 9:30, or on 703-4800500 after 10am."
     >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
     ...     print match
-    ... 
+    ...
     PhoneNumberMatch [11,23) 510-748-8230
     PhoneNumberMatch [51,62) 703-4800500
     >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
     ...     print phonenumbers.format_number(match.number, phonenumbers.PhoneNumberFormat.E164)
-    ... 
+    ...
     +15107488230
     +17034800500
+
+Finally, you might want to get some information about the location that corresponds to a phone number.  The
+`geocoder.area_description_for_number` does this, when possible.
+
     >>> from phonenumbers.geocoder import area_description_for_number
     >>> ch_number = phonenumbers.parse("0431234567", "CH")
     >>> print repr(area_description_for_number(ch_number, "de"))
@@ -70,13 +89,15 @@ Example Usage
     u'Zurich'
     >>> print repr(area_description_for_number(ch_number, "it"))
     u'Zurigo'
-    >>>
+
+For more information about the other functionality available from the library, look in the unit tests or in the original
+[libphonenumber project](http://code.google.com/p/libphonenumber/).
 
 Project Layout
 --------------
-* The python/ directory holds the Python code.
-* The resources/ directory is a copy of the resources/
-  directory from libphonenumber.  This is not needed
-  to run the Python code, but is needed when upstream
-  changes to the master XML metadata need to be 
-  incorporated.
+* The `python/` directory holds the Python code.
+* The `resources/` directory is a copy of the `resources/`
+  directory from
+  [libphonenumber](http://code.google.com/p/libphonenumber/source/browse/#svn%2Ftrunk%2Fresources).
+  This is not needed to run the Python code, but is needed when upstream
+  changes to the master XML metadata need to be incorporated.
