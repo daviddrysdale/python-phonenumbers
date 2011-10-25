@@ -1,0 +1,30 @@
+rm -rf python3
+cp -pR python python3
+
+cd python3
+
+2to3 --write *.py > /dev/null 2>&1
+rm -f *.bak *.pyc
+
+cd tests
+2to3 --write *.py > /dev/null 2>&1
+rm -f *.bak *.pyc
+rm -f testdata/* testgeodata/*
+cd ..
+
+cd phonenumbers
+2to3 --write *.py > /dev/null 2>&1
+2to3 --write --doctests_only *.py > /dev/null 2>&1
+rm -f *.bak *,cover *.pyc
+rm -f data/* geodata/__init__.py*
+cd geodata
+2to3 --write locale.py > /dev/null 2>&1
+rm -f *.bak
+cd ..
+cd ..
+
+sed 's/^PYTHON=python$/PYTHON=python3.2/' makefile > tmp
+mv tmp makefile
+
+make geodata
+make metadata
