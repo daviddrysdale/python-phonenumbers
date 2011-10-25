@@ -202,3 +202,40 @@ class PhoneNumber(UnicodeMixin):
             result += (" Preferred Domestic Carrier Code: %s" %
                        self.preferred_domestic_carrier_code)
         return result
+
+
+class FrozenPhoneNumber(PhoneNumber):
+    """Immutable version of PhoneNumber"""
+    _mutable = False
+
+    def __hash__(self):
+        return hash((self.country_code,
+                     self.national_number,
+                     self.extension,
+                     self.italian_leading_zero,
+                     self.raw_input,
+                     self.country_code_source,
+                     self.preferred_domestic_carrier_code))
+
+    def __setattr__(self, name, value):
+        if self._mutable or name == "_mutable":
+            super(FrozenPhoneNumber, self).__setattr__(name, value)
+        else:
+            raise TypeError("Can't modify immutable instance")
+
+    def __delattr__(self, name):
+        if self._mutable:
+            super(FrozenPhoneNumber, self).__delattr__(name)
+        else:
+            raise TypeError("Can't modify immutable instance")
+
+    def __init__(self, *args, **kwargs):
+        old_mutable = self._mutable
+        self._mutable = True
+        try:
+            if len(kwargs) == 0 and len(args) == 1 and isinstance(args[0], PhoneNumber):
+                super(FrozenPhoneNumber, self).__init__(**args[0].__dict__)
+            else:
+                super(FrozenPhoneNumber, self).__init__(*args, **kwargs)
+        finally:
+            self._mutable = old_mutable

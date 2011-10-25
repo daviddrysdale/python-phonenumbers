@@ -18,7 +18,7 @@
 # limitations under the License.
 import unittest
 
-from phonenumbers import PhoneNumber, CountryCodeSource
+from phonenumbers import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
 
 
 class PhoneNumberTest(unittest.TestCase):
@@ -117,3 +117,51 @@ class PhoneNumberTest(unittest.TestCase):
         self.assertNotEqual(numberA, "")
         self.assertNotEqual(numberA, "+16502530000")
         self.assertNotEqual(numberA, 6502530000L)
+
+    def testFrozenPhoneNumber(self):
+        # Python version extra tests
+        gb_mobile = PhoneNumber(country_code=44, national_number=7912345678L)
+        it_number = PhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+        frozen_gb_mobile1 = FrozenPhoneNumber(country_code=44, national_number=7912345678L)
+        frozen_it_number1 = FrozenPhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+        frozen_gb_mobile2 = FrozenPhoneNumber(gb_mobile)
+        frozen_it_number2 = FrozenPhoneNumber(it_number)
+        self.assertEqual(frozen_gb_mobile1, gb_mobile)
+        self.assertEqual(frozen_gb_mobile2, gb_mobile)
+        self.assertEqual(frozen_gb_mobile1, frozen_gb_mobile2)
+        self.assertEqual(frozen_it_number1, it_number)
+        self.assertEqual(frozen_it_number2, it_number)
+        self.assertEqual(frozen_it_number1, frozen_it_number2)
+        self.assertEqual(hash(frozen_it_number1), hash(frozen_it_number2))
+        self.assertNotEqual(hash(frozen_it_number1), hash(frozen_gb_mobile1))
+        phonedict = {frozen_it_number1: 1, frozen_gb_mobile1: 2}
+        self.assertEqual(phonedict[frozen_it_number1], 1)
+        try:
+            frozen_gb_mobile1.country_code = 12
+            self.fail("Should not be able to modify FrozenPhoneNubmer")
+        except TypeError:
+            pass
+        try:
+            frozen_gb_mobile2.raw_input = ""
+            self.fail("Should not be able to modify FrozenPhoneNubmer")
+        except TypeError:
+            pass
+        try:
+            frozen_gb_mobile1.clear()
+            self.fail("Should not be able to modify FrozenPhoneNubmer")
+        except TypeError:
+            pass
+        try:
+            frozen_gb_mobile1.merge_from(frozen_it_number1)
+            self.fail("Should not be able to modify FrozenPhoneNubmer")
+        except TypeError:
+            pass
+        try:
+            del frozen_gb_mobile1.country_code
+            self.fail("Should not be able to modify FrozenPhoneNubmer")
+        except TypeError:
+            pass
+        # Coverage test
+        frozen_gb_mobile1._mutable = True
+        del frozen_gb_mobile1.country_code
+

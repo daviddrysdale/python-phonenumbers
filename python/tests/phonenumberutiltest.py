@@ -2068,3 +2068,4 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(('', '01412345'),
                           phonenumberutil._maybe_strip_national_prefix_carrier_code("01412345",
                                                                                      metadataXY))
+
