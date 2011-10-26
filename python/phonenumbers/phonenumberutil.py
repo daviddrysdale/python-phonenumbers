@@ -862,7 +862,10 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             return ""
         else:
             return numobj.raw_input
-
+    # Make a copy of the PhoneNumber as we want to modify it
+    numobj_mutable = PhoneNumber()
+    numobj_mutable.merge_from(numobj)
+    numobj = numobj_mutable
     # Clear the extension, as that part cannot normally be dialed together with the main number.
     numobj.extension = None
     numobj_type = number_type(numobj)
