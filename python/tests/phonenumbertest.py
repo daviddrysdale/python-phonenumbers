@@ -164,4 +164,3 @@ class PhoneNumberTest(unittest.TestCase):
         # Coverage test
         frozen_gb_mobile1._mutable = True
         del frozen_gb_mobile1.country_code
-
