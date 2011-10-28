@@ -862,37 +862,35 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             return ""
         else:
             return numobj.raw_input
-    # Make a copy of the PhoneNumber as we want to modify it
-    numobj_mutable = PhoneNumber()
-    numobj_mutable.merge_from(numobj)
-    numobj = numobj_mutable
     # Clear the extension, as that part cannot normally be dialed together with the main number.
-    numobj.extension = None
-    numobj_type = number_type(numobj)
+    numobj_no_ext = PhoneNumber()
+    numobj_no_ext.merge_from(numobj)
+    numobj_no_ext.extension = None
+    numobj_type = number_type(numobj_no_ext)
     if (region_code == "CO" and region_calling_from == "CO" and
         numobj_type == PhoneNumberType.FIXED_LINE):
-        formatted_number = format_national_number_with_carrier_code(numobj,
+        formatted_number = format_national_number_with_carrier_code(numobj_no_ext,
                                                                     _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX)
     elif (region_code == "BR" and region_calling_from == "BR" and
           ((numobj_type == PhoneNumberType.FIXED_LINE) or
            (numobj_type == PhoneNumberType.MOBILE) or
            (numobj_type == PhoneNumberType.FIXED_LINE_OR_MOBILE))):
-        if numobj.preferred_domestic_carrier_code is not None:
-            formatted_number = format_national_number_with_preferred_carrier_code(numobj, "")
+        if numobj_no_ext.preferred_domestic_carrier_code is not None:
+            formatted_number = format_national_number_with_preferred_carrier_code(numobj_no_ext, "")
         else:
             # Brazilian fixed line and mobile numbers need to be dialed with a
             # carrier code when called within Brazil. Without that, most of
             # the carriers won't connect the call.  Because of that, we return
             # an empty string here.
             formatted_number = ""
-    elif _can_be_internationally_dialled(numobj):
+    elif _can_be_internationally_dialled(numobj_no_ext):
         if with_formatting:
-            return format_number(numobj, PhoneNumberFormat.INTERNATIONAL)
+            return format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
         else:
-            return format_number(numobj, PhoneNumberFormat.E164)
+            return format_number(numobj_no_ext, PhoneNumberFormat.E164)
     else:
         if region_calling_from == region_code:
-            formatted_number = format_number(numobj, PhoneNumberFormat.NATIONAL)
+            formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
         else:
             formatted_number = ""
     if with_formatting:
