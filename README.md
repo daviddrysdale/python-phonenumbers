@@ -10,8 +10,8 @@ Example Usage
 -------------
 
 The main object that the library deals with is a `PhoneNumber` object.  You can create this from a string
-representing a phone number using the `parse` function, but you also need to specify the country that the
-phone number is from.
+representing a phone number using the `parse` function, but you normally also need to specify the country
+that the phone number is from (unless the number is in E.164 format).
 
     >>> import phonenumbers
     >>> x = phonenumbers.parse("+442083661177", None)
@@ -62,7 +62,8 @@ applied as the user types.   The `AsYouTypeFormatter` object allows this.
 
 Sometimes, you've got a larger block of text that may or may not have some phone numbers inside it.  For this,
 the `PhoneNumberMatcher` object provides the relevant functionality; you can iterate over it to retrieve a
-sequence of `PhoneNumberMatch` objects.
+sequence of `PhoneNumberMatch` objects.  Each of these match objects holds a `PhoneNumber` object together
+with information about where the match occurred in the original string.
 
     >>> text = "Call me at 510-748-8230 if it's before 9:30, or on 703-4800500 after 10am."
     >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):

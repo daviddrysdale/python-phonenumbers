@@ -20,7 +20,8 @@
 import unittest
 
 import phonenumbers
-from phonenumbers import PhoneNumber, PhoneMetadata, PhoneNumberDesc
+from phonenumbers import PhoneNumber, PhoneMetadata
+from phonenumbers import FrozenPhoneNumber, PhoneNumberDesc
 from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseException
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 # Access internal functions of phonenumberutil.py
@@ -54,38 +55,38 @@ def insert_test_metadata():
 reinstate_real_metadata()
 
 # Set up some test numbers to re-use.
-ALPHA_NUMERIC_NUMBER = PhoneNumber(country_code=1, national_number=80074935247L)
-AR_MOBILE = PhoneNumber(country_code=54, national_number=91187654321L)
-AR_NUMBER = PhoneNumber(country_code=54, national_number=1187654321)
-AU_NUMBER = PhoneNumber(country_code=61, national_number=236618300L)
-BS_MOBILE = PhoneNumber(country_code=1, national_number=2423570000L)
-BS_NUMBER = PhoneNumber(country_code=1, national_number=2423651234L)
+ALPHA_NUMERIC_NUMBER = FrozenPhoneNumber(country_code=1, national_number=80074935247L)
+AR_MOBILE = FrozenPhoneNumber(country_code=54, national_number=91187654321L)
+AR_NUMBER = FrozenPhoneNumber(country_code=54, national_number=1187654321)
+AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300L)
+BS_MOBILE = FrozenPhoneNumber(country_code=1, national_number=2423570000L)
+BS_NUMBER = FrozenPhoneNumber(country_code=1, national_number=2423651234L)
 # Note that this is the same as the example number for DE in the metadata.
-DE_NUMBER = PhoneNumber(country_code=49, national_number=30123456L)
-DE_SHORT_NUMBER = PhoneNumber(country_code=49, national_number=1234L)
-GB_MOBILE = PhoneNumber(country_code=44, national_number=7912345678L)
-GB_NUMBER = PhoneNumber(country_code=44, national_number=2070313000L)
-IT_MOBILE = PhoneNumber(country_code=39, national_number=345678901L)
-IT_NUMBER = PhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+DE_NUMBER = FrozenPhoneNumber(country_code=49, national_number=30123456L)
+DE_SHORT_NUMBER = FrozenPhoneNumber(country_code=49, national_number=1234L)
+GB_MOBILE = FrozenPhoneNumber(country_code=44, national_number=7912345678L)
+GB_NUMBER = FrozenPhoneNumber(country_code=44, national_number=2070313000L)
+IT_MOBILE = FrozenPhoneNumber(country_code=39, national_number=345678901L)
+IT_NUMBER = FrozenPhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
 # Numbers to test the formatting rules from Mexico.
-MX_MOBILE1 = PhoneNumber(country_code=52, national_number=12345678900L)
-MX_MOBILE2 = PhoneNumber(country_code=52, national_number=15512345678L)
-MX_NUMBER1 = PhoneNumber(country_code=52, national_number=3312345678L)
-MX_NUMBER2 = PhoneNumber(country_code=52, national_number=8211234567L)
-NZ_NUMBER = PhoneNumber(country_code=64, national_number=33316005L)
-SG_NUMBER = PhoneNumber(country_code=65, national_number=65218000L)
+MX_MOBILE1 = FrozenPhoneNumber(country_code=52, national_number=12345678900L)
+MX_MOBILE2 = FrozenPhoneNumber(country_code=52, national_number=15512345678L)
+MX_NUMBER1 = FrozenPhoneNumber(country_code=52, national_number=3312345678L)
+MX_NUMBER2 = FrozenPhoneNumber(country_code=52, national_number=8211234567L)
+NZ_NUMBER = FrozenPhoneNumber(country_code=64, national_number=33316005L)
+SG_NUMBER = FrozenPhoneNumber(country_code=65, national_number=65218000L)
 # A too-long and hence invalid US number.
-US_LONG_NUMBER = PhoneNumber(country_code=1, national_number=65025300001L)
-US_NUMBER = PhoneNumber(country_code=1, national_number=6502530000L)
-US_PREMIUM = PhoneNumber(country_code=1, national_number=9002530000L)
+US_LONG_NUMBER = FrozenPhoneNumber(country_code=1, national_number=65025300001L)
+US_NUMBER = FrozenPhoneNumber(country_code=1, national_number=6502530000L)
+US_PREMIUM = FrozenPhoneNumber(country_code=1, national_number=9002530000L)
 # Too short, but still possible US numbers.
-US_LOCAL_NUMBER = PhoneNumber(country_code=1, national_number=2530000L)
-US_SHORT_BY_ONE_NUMBER = PhoneNumber(country_code=1, national_number=650253000L)
-US_TOLLFREE = PhoneNumber(country_code=1, national_number=8002530000L)
-US_SPOOF = PhoneNumber(country_code=1, national_number=0L)
-US_SPOOF_WITH_RAW_INPUT = PhoneNumber(country_code=1, national_number=0L, raw_input="000-000-0000")
+US_LOCAL_NUMBER = FrozenPhoneNumber(country_code=1, national_number=2530000L)
+US_SHORT_BY_ONE_NUMBER = FrozenPhoneNumber(country_code=1, national_number=650253000L)
+US_TOLLFREE = FrozenPhoneNumber(country_code=1, national_number=8002530000L)
+US_SPOOF = FrozenPhoneNumber(country_code=1, national_number=0L)
+US_SPOOF_WITH_RAW_INPUT = FrozenPhoneNumber(country_code=1, national_number=0L, raw_input="000-000-0000")
 # A number with an invalid region code
-XY_NUMBER = PhoneNumber(country_code=999, national_number=1234567890L)
+XY_NUMBER = FrozenPhoneNumber(country_code=999, national_number=1234567890L)
 
 
 class PhoneNumberUtilTest(unittest.TestCase):
@@ -2068,4 +2069,3 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(('', '01412345'),
                           phonenumberutil._maybe_strip_national_prefix_carrier_code("01412345",
                                                                                      metadataXY))
-
