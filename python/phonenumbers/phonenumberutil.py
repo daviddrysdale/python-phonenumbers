@@ -606,7 +606,7 @@ def length_of_national_destination_code(numobj):
     if len(number_groups) <= 3:
         return 0
 
-    if (region_code_for_number(numobj) == "AR" and
+    if (region_code_for_country_code(numobj.country_code) == "AR" and
         number_type(numobj) == PhoneNumberType.MOBILE):
         # Argentinian mobile numbers, when formatted in the international
         # format, are in the form of +54 9 NDC XXXX... As a result, we take the
