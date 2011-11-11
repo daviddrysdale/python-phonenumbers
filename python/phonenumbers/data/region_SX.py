@@ -1,10 +1,10 @@
-"""Auto-generated file, do not edit by hand. MP metadata"""
+"""Auto-generated file, do not edit by hand. SX metadata"""
 from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_MP = PhoneMetadata(id='MP', country_code=1, international_prefix='011',
-    general_desc=PhoneNumberDesc(national_number_pattern='[5689]\\d{9}', possible_number_pattern='\\d{7}(?:\\d{3})?'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='670(?:2(?:3[3-7]|56|8[5-8])|32[1238]|4(?:33|8[348])|5(?:32|55|88)|6(?:64|70|82)|78[589]|8[3-9]8|989)\\d{4}', possible_number_pattern='\\d{7}(?:\\d{3})?', example_number='6702345678'),
-    mobile=PhoneNumberDesc(national_number_pattern='670(?:2(?:3[3-7]|56|8[5-8])|32[1238]|4(?:33|8[348])|5(?:32|55|88)|6(?:64|70|82)|78[589]|8[3-9]8|989)\\d{4}', possible_number_pattern='\\d{7}(?:\\d{3})?', example_number='6702345678'),
+PHONE_METADATA_SX = PhoneMetadata(id='SX', country_code=1, international_prefix='011',
+    general_desc=PhoneNumberDesc(national_number_pattern='[5789]\\d{9}', possible_number_pattern='\\d{7}(?:\\d{3})?'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='72154[2-8]\\d{4}', possible_number_pattern='\\d{7}(?:\\d{3})?', example_number='7215425678'),
+    mobile=PhoneNumberDesc(national_number_pattern='7215(?:1[02]|2\\d|5[0346]|8[01678])\\d{4}', possible_number_pattern='\\d{10}', example_number='7215205678'),
     toll_free=PhoneNumberDesc(national_number_pattern='8(?:00|55|66|77|88)[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='8002123456'),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='9002123456'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
@@ -12,8 +12,8 @@ PHONE_METADATA_MP = PhoneMetadata(id='MP', country_code=1, international_prefix=
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='911', possible_number_pattern='\\d{3}', example_number='911'),
+    emergency=PhoneNumberDesc(national_number_pattern='919', possible_number_pattern='\\d{3}', example_number='919'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'1',
     national_prefix_for_parsing=u'1',
-    leading_digits='670')
+    leading_digits='721')

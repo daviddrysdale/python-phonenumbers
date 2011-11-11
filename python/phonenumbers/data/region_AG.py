@@ -12,7 +12,7 @@ PHONE_METADATA_AG = PhoneMetadata(id='AG', country_code=1, international_prefix=
     voip=PhoneNumberDesc(national_number_pattern='26848[01]\\d{4}', possible_number_pattern='\\d{10}', example_number='2684801234'),
     pager=PhoneNumberDesc(national_number_pattern='26840[69]\\d{4}', possible_number_pattern='\\d{10}', example_number='2684061234'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='9(?:11|99)', possible_number_pattern='\\d{3}', example_number='911'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix=u'1',
     national_prefix_for_parsing=u'1',

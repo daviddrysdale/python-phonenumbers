@@ -17,7 +17,7 @@ PHONE_METADATA_TJ = PhoneMetadata(id='TJ', country_code=992, international_prefi
     preferred_international_prefix=u'8~10',
     national_prefix=u'8',
     national_prefix_for_parsing=u'8',
-    number_format=[NumberFormat(pattern='([349]\\d{2})(\\d{2})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[34]7|91[78]'], national_prefix_formatting_rule=u'(8) \\1'),
-        NumberFormat(pattern='([459]\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['4[48]|5|9(?:1[59]|[0235-9])'], national_prefix_formatting_rule=u'(8) \\1'),
-        NumberFormat(pattern='(331700)(\\d)(\\d{2})', format=u'\\1 \\2 \\3', leading_digits_pattern=['331', '3317', '33170', '331700'], national_prefix_formatting_rule=u'(8) \\1'),
-        NumberFormat(pattern='(\\d{4})(\\d)(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['3[1-5]', '3(?:[1245]|3(?:[02-9]|1[0-589]))'], national_prefix_formatting_rule=u'(8) \\1')])
+    number_format=[NumberFormat(pattern='([349]\\d{2})(\\d{2})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[34]7|91[78]'], national_prefix_formatting_rule=u'(8) \\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='([459]\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['4[48]|5|9(?:1[59]|[0235-9])'], national_prefix_formatting_rule=u'(8) \\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(331700)(\\d)(\\d{2})', format=u'\\1 \\2 \\3', leading_digits_pattern=['331', '3317', '33170', '331700'], national_prefix_formatting_rule=u'(8) \\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(\\d{4})(\\d)(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['3[1-5]', '3(?:[1245]|3(?:[02-9]|1[0-589]))'], national_prefix_formatting_rule=u'(8) \\1', national_prefix_optional_when_formatting=True)])

@@ -12,7 +12,7 @@ PHONE_METADATA_TM = PhoneMetadata(id='TM', country_code=993, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='0[1-3]', possible_number_pattern='\\d{2}', example_number='03'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix=u'8~10',
     national_prefix=u'8',
