@@ -1717,7 +1717,7 @@ def truncate_too_long_number(numobj):
 
     while not is_valid_number(numobj_copy):
         # Strip a digit off the RHS
-        national_number = national_number / 10
+        national_number = national_number // 10
         numobj_copy.national_number = national_number
         validation_result = is_possible_number_with_reason(numobj_copy)
         if (validation_result == ValidationResult.TOO_SHORT or
