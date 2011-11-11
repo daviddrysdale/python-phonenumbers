@@ -845,3 +845,9 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         self.assertRaises(Exception, _verify, *(99, number, "12345678"))
         self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"leniency": None})
         self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"max_tries": -2})
+        # Invalid country looks like national prefix is present (no way to tell)
+        number2 = PhoneNumber(country_code=99, national_number=12345678L, country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
+        self.assertTrue(_is_national_prefix_present_if_required(number2))
+        # National prefix rule has no lead digits
+        number3 = PhoneNumber(country_code=61, national_number=1234567890L, country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
+        self.assertTrue(_is_national_prefix_present_if_required(number3))
