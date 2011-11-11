@@ -8,12 +8,12 @@ Examples of use:
 Country Code: 44 National Number: 2083661177 Leading Zero: False
 >>> type(x)
 <class 'phonenumbers.phonenumber.PhoneNumber'>
->>> phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.NATIONAL)
-u'020 8366 1177'
->>> phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
-u'+44 20 8366 1177'
->>> phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.E164)
-u'+442083661177'
+>>> str(phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.NATIONAL))
+'020 8366 1177'
+>>> str(phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.INTERNATIONAL))
+'+44 20 8366 1177'
+>>> str(phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.E164))
+'+442083661177'
 >>> y = phonenumbers.parse("020 8366 1177", "GB")
 >>> print y
 Country Code: 44 National Number: 2083661177 Leading Zero: False

@@ -5,26 +5,26 @@
 >>> gb_number = phonenumbers.parse("+442083612345", "GB")
 >>> de_number = phonenumbers.parse("0891234567", "DE")
 >>> ch_number = phonenumbers.parse("0431234567", "CH")
->>> print repr(area_description_for_number(gb_number, "en"))
-u'London'
->>> print repr(area_description_for_number(gb_number, "fr"))  # fall back to English
-u'London'
->>> print repr(area_description_for_number(gb_number, "en", region="GB"))
-u'London'
->>> print repr(area_description_for_number(gb_number, "en", region="US"))
-u'London'
->>> print repr(area_description_for_number(de_number, "en"))
-u'Munich'
->>> print repr(area_description_for_number(de_number, "de"))
-u'M\\xfcnchen'
->>> print repr(area_description_for_number(ch_number, "de"))
-u'Z\\xfcrich'
->>> print repr(area_description_for_number(ch_number, "en"))
-u'Zurich'
->>> print repr(area_description_for_number(ch_number, "fr"))
-u'Zurich'
->>> print repr(area_description_for_number(ch_number, "it"))
-u'Zurigo'
+>>> str(area_description_for_number(gb_number, "en"))
+'London'
+>>> str(area_description_for_number(gb_number, "fr"))  # fall back to English
+'London'
+>>> str(area_description_for_number(gb_number, "en", region="GB"))
+'London'
+>>> str(area_description_for_number(gb_number, "en", region="US"))
+'London'
+>>> str(area_description_for_number(de_number, "en"))
+'Munich'
+>>> u'M\xfcnchen' == area_description_for_number(de_number, "de")
+True
+>>> u'Z\xfcrich' == area_description_for_number(ch_number, "de")
+True
+>>> str(area_description_for_number(ch_number, "en"))
+'Zurich'
+>>> str(area_description_for_number(ch_number, "fr"))
+'Zurich'
+>>> str(area_description_for_number(ch_number, "it"))
+'Zurigo'
 
 """
 # Based very loosely on original Java code:
