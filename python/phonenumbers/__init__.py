@@ -74,7 +74,7 @@ PhoneNumberMatch [51,62) 703-4800500
 
 # Version number is taken from the upstream libphonenumber version
 # together with an indication of the version of the Python-specific code.
-__version__ = "4.1b1"
+__version__ = "4.2b1"
 
 # Data class definitions
 from phonenumber import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
@@ -82,7 +82,7 @@ from phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 # Functionality
 from asyoutypeformatter import AsYouTypeFormatter
 from phonenumberutil import *
-from shortnumberutil import connects_to_emergency_number
+from shortnumberutil import connects_to_emergency_number, is_emergency_number
 from phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 from geocoder import (area_description_for_number, country_name_for_number,
                       description_for_number, description_for_valid_number)
@@ -124,7 +124,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'region_code_for_country_code',
            'region_code_for_number',
            'truncate_too_long_number',
-           'connects_to_emergency_number',
+           'connects_to_emergency_number', 'is_emergency_number',
            'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency',
            'area_description_for_number',
            'country_name_for_number',

@@ -24,6 +24,8 @@ from .re_util import fullmatch
 from .util import UnicodeMixin
 from . import unicode_util
 from . import phonenumberutil
+from .phonenumber import CountryCodeSource
+from .phonemetadata import PhoneMetadata
 
 
 def _limit(lower, upper):
@@ -122,8 +124,10 @@ class Leniency(object):
     # Phone numbers accepted are possible (i.e. is_possible_number(number)) but
     # not necessarily valid (is_valid_number(number)).
     POSSIBLE = 0
-    # Phone numbers accepted are both possible (is_possible_number(number)) and
-    # valid (is_valid_number(PhoneNumber)).
+    # Phone numbers accepted are both possible (is_possible_number(number))
+    # and valid (is_valid_number(PhoneNumber)). Numbers written in national
+    # format must have their national-prefix present if it is usually written
+    # for a number of this type.
     VALID = 1
     # Phone numbers accepted are valid (i.e. is_valid_number(number)) and are
     # grouped in a possible way for this locale. For example, a US number
@@ -154,9 +158,10 @@ def _verify(leniency, numobj, candidate):
     if leniency == Leniency.POSSIBLE:
         return phonenumberutil.is_possible_number(numobj)
     elif leniency == Leniency.VALID:
-        if not phonenumberutil.is_valid_number(numobj):
+        if (not phonenumberutil.is_valid_number(numobj) or
+            not _contains_only_valid_x_chars(numobj, candidate)):
             return False
-        return _contains_only_valid_x_chars(numobj, candidate)
+        return _is_national_prefix_present_if_required(numobj)
     elif leniency == Leniency.STRICT_GROUPING:
         return _verify_strict_grouping(numobj, candidate)
     elif leniency == Leniency.EXACT_GROUPING:
@@ -168,7 +173,8 @@ def _verify(leniency, numobj, candidate):
 def _verify_strict_grouping(numobj, candidate):
     if (not phonenumberutil.is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
-        _contains_more_than_one_slash(candidate)):
+        _contains_more_than_one_slash(candidate) or
+        not _is_national_prefix_present_if_required(numobj)):
         return False
     # TODO: Evaluate how this works for other locales (testing has been
     # limited to NANPA regions) and optimise if necessary.
@@ -203,7 +209,8 @@ def _verify_strict_grouping(numobj, candidate):
 def _verify_exact_grouping(numobj, candidate):
     if (not phonenumberutil.is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
-        _contains_more_than_one_slash(candidate)):
+        _contains_more_than_one_slash(candidate) or
+        not _is_national_prefix_present_if_required(numobj)):
         return False
     # TODO: Evaluate how this works for other locales (testing has been
     # limited to NANPA regions) and optimise if necessary.
@@ -284,6 +291,45 @@ def _contains_only_valid_x_chars(numobj, candidate):
                   numobj.extension):
                 return False
         ii += 1
+    return True
+
+
+def _is_national_prefix_present_if_required(numobj):
+    # First, check how we deduced the country code. If it was written in
+    # international format, then the national prefix is not required.
+    if numobj.country_code_source != CountryCodeSource.FROM_DEFAULT_COUNTRY:
+        return True
+    phone_number_region = phonenumberutil.region_code_for_country_code(numobj.country_code)
+    metadata = PhoneMetadata.region_metadata.get(phone_number_region, None)
+    if metadata is None:
+        return True
+    # Check if a national prefix should be present when formatting this number.
+    national_number = phonenumberutil.national_significant_number(numobj)
+    format_rule = phonenumberutil._choose_formatting_pattern_for_number(metadata.number_format,
+                                                                        national_number)
+    # To do this, we check that a national prefix formatting rule was present
+    # and that it wasn't just the first-group symbol ($1) with punctuation.
+    if (format_rule is not None and
+        format_rule.national_prefix_formatting_rule is not None and
+        len(format_rule.national_prefix_formatting_rule) > 0):
+        if format_rule.national_prefix_optional_when_formatting:
+            # The national-prefix is optional in these cases, so we don't need
+            # to check if it was present.
+            return True
+        # Remove the first-group symbol.
+        candidate_national_prefix_rule = format_rule.national_prefix_formatting_rule
+        # We assume that the first-group symbol will never be _before_ the
+        # national prefix.
+        candidate_national_prefix_rule = candidate_national_prefix_rule[:candidate_national_prefix_rule.find("\\1")]
+        candidate_national_prefix_rule = phonenumberutil.normalize_digits_only(candidate_national_prefix_rule)
+        if len(candidate_national_prefix_rule) == 0:
+            # National Prefix not needed for this number.
+            return True
+        # Normalize the remainder.
+        raw_input = phonenumberutil.normalize_digits_only(numobj.raw_input)
+        # Check if we found a national prefix and/or carrier code at the start of the raw input,
+        # and return the result.
+        return phonenumberutil._maybe_strip_national_prefix_carrier_code(raw_input, metadata)[2]
     return True
 
 
@@ -405,7 +451,7 @@ class PhoneNumberMatcher(object):
     @classmethod
     def _is_latin_letter(cls, letter):
         """Helper method to determine if a character is a Latin-script letter
-        or not. For our purposes, combining marks should also return true
+        or not. For our purposes, combining marks should also return True
         since we assume they have been added to a preceding Latin character."""
         # Combining marks are a subset of non-spacing-mark
         if (not unicode_util.is_letter(letter) and
@@ -538,8 +584,16 @@ class PhoneNumberMatcher(object):
                         self._is_currency_symbol(next_char)):
                         return None
 
-            numobj = phonenumberutil.parse(candidate, self.preferred_region)
+            numobj = phonenumberutil.parse(candidate, self.preferred_region, keep_raw_input=True)
             if _verify(self.leniency, numobj, candidate):
+                # We used parse(keep_raw_input=True) to create this number,
+                # but for now we don't return the extra values parsed.
+                # TODO: stop clearing all values here and switch all users
+                # over to using raw_input rather than the raw_string of
+                # PhoneNumberMatch.
+                numobj.country_code_source = None
+                numobj.raw_input = None
+                numobj.preferred_domestic_carrier_code = None
                 return PhoneNumberMatch(offset, candidate, numobj)
         except phonenumberutil.NumberParseException:
             # ignore and continue

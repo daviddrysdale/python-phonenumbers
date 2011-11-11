@@ -26,6 +26,7 @@ class NumberFormat(UnicodeMixin):
                  format=None,
                  leading_digits_pattern=None,
                  national_prefix_formatting_rule=None,
+                 national_prefix_optional_when_formatting=False,
                  domestic_carrier_code_formatting_rule=None):
         # pattern is a regex that is used to match the national (significant)
         # number. For example, the pattern "(20)(\d{4})(\d{4})" will match
@@ -72,12 +73,23 @@ class NumberFormat(UnicodeMixin):
         # should always be present in this field, but $NP can be omitted. For
         # example, having "$FG" could indicate the number should be formatted
         # in NATIONAL format without the national prefix. This is commonly
-        # used to override the rule from general_desc.
+        # used to override the rule specified for the territory in the XML
+        # file.
         #
         # When this field is missing, a number will be formatted without
         # national prefix in NATIONAL format. This field does not affect how a
         # number is formatted in other formats, such as INTERNATIONAL.
         self.national_prefix_formatting_rule = national_prefix_formatting_rule  # None or Unicode string
+
+        # This field specifies whether the $NP can be omitted when formatting
+        # a number in national format, even though it usually wouldn't be. For
+        # example, a UK number would be formatted by our library as 020 XXXX
+        # XXXX. If we have commonly seen this number written by people without
+        # the leading 0, for example as (20) XXXX XXXX, this field would be
+        # set to true. This will be inherited from the value set for the
+        # territory in the XML file, unless a national_prefix_formatting_rule
+        # is defined specifically for this NumberFormat.
+        self.national_prefix_optional_when_formatting = national_prefix_optional_when_formatting  # bool
 
         # This field specifies how any carrier code ($CC) together with the
         # first group ($FG) in the national significant number should be
@@ -94,6 +106,7 @@ class NumberFormat(UnicodeMixin):
         self.leading_digits_pattern.extend(other.leading_digits_pattern)
         if other.national_prefix_formatting_rule is not None:
             self.national_prefix_formatting_rule = other.national_prefix_formatting_rule
+        self.national_prefix_optional_when_formatting = other.national_prefix_optional_when_formatting
         if other.domestic_carrier_code_formatting_rule is not None:
             self.domestic_carrier_code_formatting_rule = other.domestic_carrier_code_formatting_rule
 
@@ -117,6 +130,8 @@ class NumberFormat(UnicodeMixin):
                        ", ".join(["%r" % ld for ld in self.leading_digits_pattern]))
         if self.national_prefix_formatting_rule is not None:
             result += u", national_prefix_formatting_rule=%r" % self.national_prefix_formatting_rule
+        if self.national_prefix_optional_when_formatting:
+            result += u", national_prefix_optional_when_formatting=%r" % self.national_prefix_optional_when_formatting
         if self.domestic_carrier_code_formatting_rule is not None:
             result += u", domestic_carrier_code_formatting_rule=%r" % self.domestic_carrier_code_formatting_rule
         result += u")"
@@ -327,6 +342,23 @@ class PhoneMetadata(UnicodeMixin):
         # format. In this case, the prefix 9 is inserted when dialling from
         # overseas, but otherwise the prefix 0 and the carrier selection code
         # 15 (inserted after the area code of 343) is used.
+        # Note: this field is populated by setting a value for <intlFormat>
+        # inside the <numberFormat> tag in the XML file. If <intlFormat> is
+        # not set then it defaults to the same value as the <format> tag.
+        #
+        # Examples:
+        #   To set the <intlFormat> to a different value than the <format>:
+        #     <numberFormat pattern=....>
+        #       <format>$1 $2 $3</format>
+        #       <intlFormat>$1-$2-$3</intlFormat>
+        #     </numberFormat>
+        #
+        #   To have a format only used for national formatting, set <intlFormat> to
+        #   "NA":
+        #     <numberFormat pattern=....>
+        #       <format>$1 $2 $3</format>
+        #       <intlFormat>NA</intlFormat>
+        #     </numberFormat>
         self.intl_number_format = []  # List of NumberFormat objects
         if intl_number_format is not None:
             self.intl_number_format = intl_number_format

@@ -12,7 +12,7 @@ PHONE_METADATA_UZ = PhoneMetadata(id='UZ', country_code=998, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='0(?:0[123]|[123]|50)', possible_number_pattern='\\d{2,3}', example_number='01'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix='8~10',
     national_prefix='8',

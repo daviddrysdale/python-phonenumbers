@@ -109,6 +109,15 @@ def _get_unique_child_value(xtag, eltname):
         return xelt.text
 
 
+def get_true_attrib(xtag, aname):
+    if aname in xtag.attrib:
+        if xtag.attrib[aname] != 'true':
+            raise Exception("Unexpected value %s for %s attribute" % (xtag.attrib[aname], aname))
+        return True
+    else:
+        return False
+
+
 def _dews_re(re_str):
     """Remove all whitespace in given regular expression string"""
     if re_str is None:
@@ -134,7 +143,10 @@ def _expand_formatting_rule(rule, national_prefix):
 
 class XNumberFormat(UnicodeMixin):
     """Parsed NumberFormat objects from XML element"""
-    def __init__(self, owning_xterr, xtag, national_prefix, national_prefix_formatting_rule, carrier_code_formatting_rule):
+    def __init__(self, owning_xterr, xtag, national_prefix,
+                 national_prefix_formatting_rule,
+                 national_prefix_optional_when_formatting,
+                 carrier_code_formatting_rule):
         if xtag is None:
             self.o = None
             self.io = None
@@ -145,6 +157,7 @@ class XNumberFormat(UnicodeMixin):
             # Find the IMPLIED attribute(s)
             self.o.domestic_carrier_code_formatting_rule = xtag.get('carrierCodeFormattingRule', None)
             self.o.national_prefix_formatting_rule = xtag.get('nationalPrefixFormattingRule', None)
+            self.o.national_prefix_optional_when_formatting = get_true_attrib(xtag, 'nationalPrefixOptionalWhenFormatting')
 
             # Post-process formatting rules for expansions and defaults
             if self.o.national_prefix_formatting_rule is not None:
@@ -157,6 +170,10 @@ class XNumberFormat(UnicodeMixin):
             if self.o.national_prefix_formatting_rule is not None:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
                 self.o.national_prefix_formatting_rule = re.sub('\$', r'\\', self.o.national_prefix_formatting_rule)
+
+            if not self.o.national_prefix_optional_when_formatting:
+                # If attrib is False, it was missing and inherits territory-wide value
+                self.o.national_prefix_optional_when_formatting = national_prefix_optional_when_formatting
 
             if self.o.domestic_carrier_code_formatting_rule is not None:
                 # expand abbreviations
@@ -258,6 +275,7 @@ class XTerritory(UnicodeMixin):
             self.o.national_prefix_transform_rule = re.sub('\$', r'\\', self.o.national_prefix_transform_rule)
         self.o.preferred_extn_prefix = xterritory.get('preferredExtnPrefix', None)
         national_prefix_formatting_rule = xterritory.get('nationalPrefixFormattingRule', None)
+        national_prefix_optional_when_formatting = get_true_attrib(xterritory, 'nationalPrefixOptionalWhenFormatting')
         carrier_code_formatting_rule = xterritory.get('carrierCodeFormattingRule', None)
 
         # Post-processing for the territory-default formatting rules.  These are used
@@ -270,19 +288,9 @@ class XTerritory(UnicodeMixin):
                                                                   self.o.national_prefix)
         carrier_code_formatting_rule = _expand_formatting_rule(carrier_code_formatting_rule,
                                                                self.o.national_prefix)
+        self.o.main_country_for_code = get_true_attrib(xterritory, 'mainCountryForCode')
+        self.o.leading_zero_possible = get_true_attrib(xterritory, 'leadingZeroPossible')
 
-        if 'mainCountryForCode' in xterritory.attrib:
-            if xterritory.attrib['mainCountryForCode'] != 'true':
-                raise Exception("Unexpected value for mainCountryForCode attribute")
-            self.o.main_country_for_code = True
-        else:
-            self.o.main_country_for_code = False
-        if 'leadingZeroPossible' in xterritory.attrib:
-            if xterritory.attrib['leadingZeroPossible'] != 'true':
-                raise Exception("Unexpected value for leadingZeroPossible attribute")
-            self.o.leading_zero_possible = True
-        else:
-            self.o.leading_zero_possible = False
         # Retrieve the various PhoneNumberDesc elements.  The general_desc is
         # first and most important; it will be used to fill out missing fields in
         # many of the other PhoneNumberDesc elements.
@@ -325,6 +333,7 @@ class XTerritory(UnicodeMixin):
                               xelt,
                               self.o.national_prefix,
                               national_prefix_formatting_rule,
+                              national_prefix_optional_when_formatting,
                               carrier_code_formatting_rule)
             if len(self.o.number_format) == 0:
                 raise Exception("No number formats found in available formats")

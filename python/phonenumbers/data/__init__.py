@@ -216,6 +216,7 @@ from .region_SO import PHONE_METADATA_SO
 from .region_SR import PHONE_METADATA_SR
 from .region_ST import PHONE_METADATA_ST
 from .region_SV import PHONE_METADATA_SV
+from .region_SX import PHONE_METADATA_SX
 from .region_SY import PHONE_METADATA_SY
 from .region_SZ import PHONE_METADATA_SZ
 from .region_TC import PHONE_METADATA_TC
@@ -259,7 +260,7 @@ from .region_ZW import PHONE_METADATA_ZW
 # such as the NANPA countries, the one indicated with
 # "main_country_for_code" in the metadata should be first.
 _COUNTRY_CODE_TO_REGION_CODE = {
-    1: ("US", "AG", "AI", "AS", "BB", "BM", "BS", "CA", "DM", "DO", "GD", "GU", "JM", "KN", "KY", "LC", "MP", "MS", "PR", "TC", "TT", "VC", "VG", "VI",),
+    1: ("US", "AG", "AI", "AS", "BB", "BM", "BS", "CA", "DM", "DO", "GD", "GU", "JM", "KN", "KY", "LC", "MP", "MS", "PR", "SX", "TC", "TT", "VC", "VG", "VI",),
     7: ("RU", "KZ",),
     20: ("EG",),
     27: ("ZA",),
