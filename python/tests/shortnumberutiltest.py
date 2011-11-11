@@ -19,11 +19,13 @@
 
 import unittest
 
-from phonenumbers import connects_to_emergency_number
+from phonenumbers import connects_to_emergency_number, is_emergency_number
 from phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 
 
 class ShortNumberUtilTest(unittest.TestCase):
+    """Unit tests for shortnumberutil.py"""
+
     def setUp(self):
         insert_test_metadata()
 
@@ -62,3 +64,62 @@ class ShortNumberUtilTest(unittest.TestCase):
         self.assertFalse(connects_to_emergency_number("9111", "BR"))
         self.assertFalse(connects_to_emergency_number("1900", "BR"))
         self.assertFalse(connects_to_emergency_number("9996", "BR"))
+
+    def testConnectsToEmergencyNumber_AO(self):
+        # Angola doesn't have any metadata for emergency numbers in the test metadata.
+        self.assertFalse(connects_to_emergency_number("911", "AO"))
+        self.assertFalse(connects_to_emergency_number("222123456", "AO"))
+        self.assertFalse(connects_to_emergency_number("923123456", "AO"))
+
+    def testConnectsToEmergencyNumber_ZW(self):
+        # Zimbabwe doesn't have any metadata in the test metadata.
+        self.assertFalse(connects_to_emergency_number("911", "ZW"))
+        self.assertFalse(connects_to_emergency_number("01312345", "ZW"))
+        self.assertFalse(connects_to_emergency_number("0711234567", "ZW"))
+
+    def testIsEmergencyNumber_US(self):
+        self.assertTrue(is_emergency_number("911", "US"))
+        self.assertTrue(is_emergency_number("119", "US"))
+        self.assertFalse(is_emergency_number("999", "US"))
+
+    def testIsEmergencyNumberLongNumber_US(self):
+        self.assertFalse(is_emergency_number("9116666666", "US"))
+        self.assertFalse(is_emergency_number("1196666666", "US"))
+        self.assertFalse(is_emergency_number("9996666666", "US"))
+
+    def testIsEmergencyNumberWithFormatting_US(self):
+        self.assertTrue(is_emergency_number("9-1-1", "US"))
+        self.assertTrue(is_emergency_number("*911", "US"))
+        self.assertTrue(is_emergency_number("1-1-9", "US"))
+        self.assertTrue(is_emergency_number("*119", "US"))
+        self.assertFalse(is_emergency_number("9-9-9", "US"))
+        self.assertFalse(is_emergency_number("*999", "US"))
+
+    def testIsEmergencyNumberWithPlusSign_US(self):
+        self.assertFalse(is_emergency_number("+911", "US"))
+        self.assertFalse(is_emergency_number("\uFF0B911", "US"))
+        self.assertFalse(is_emergency_number(" +911", "US"))
+        self.assertFalse(is_emergency_number("+119", "US"))
+        self.assertFalse(is_emergency_number("+999", "US"))
+
+    def testIsEmergencyNumber_BR(self):
+        self.assertTrue(is_emergency_number("911", "BR"))
+        self.assertTrue(is_emergency_number("190", "BR"))
+        self.assertFalse(is_emergency_number("999", "BR"))
+
+    def testIsEmergencyNumberLongNumber_BR(self):
+        self.assertFalse(is_emergency_number("9111", "BR"))
+        self.assertFalse(is_emergency_number("1900", "BR"))
+        self.assertFalse(is_emergency_number("9996", "BR"))
+
+    def testIsEmergencyNumber_AO(self):
+        # Angola doesn't have any metadata for emergency numbers in the test metadata.
+        self.assertFalse(is_emergency_number("911", "AO"))
+        self.assertFalse(is_emergency_number("222123456", "AO"))
+        self.assertFalse(is_emergency_number("923123456", "AO"))
+
+    def testIsEmergencyNumber_ZW(self):
+        # Zimbabwe doesn't have any metadata in the test metadata.
+        self.assertFalse(is_emergency_number("911", "ZW"))
+        self.assertFalse(is_emergency_number("01312345", "ZW"))
+        self.assertFalse(is_emergency_number("0711234567", "ZW"))

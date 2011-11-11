@@ -1182,58 +1182,64 @@ def _format_national_number(number, region_code, num_format, carrier_code=None):
     return formatted_national_number
 
 
-def _format_according_to_formats(number, available_formats, num_format,
-                                 carrier_code=None):
-    """ """
-    # Note that carrier_code is optional - if None or an empty string, no
-    # carrier code replacement will take place.
-    for this_format in available_formats:
-        size = len(this_format.leading_digits_pattern)
+def _choose_formatting_pattern_for_number(available_formats, national_number):
+    for num_format in available_formats:
+        size = len(num_format.leading_digits_pattern)
         # We always use the last leading_digits_pattern, as it is the most detailed.
         if size > 0:
-            ld_pattern = re.compile(this_format.leading_digits_pattern[-1])
-            ld_match = ld_pattern.match(number)
+            ld_pattern = re.compile(num_format.leading_digits_pattern[-1])
+            ld_match = ld_pattern.match(national_number)
         if size == 0 or ld_match:
-            format_pattern = re.compile(this_format.pattern)
-            format_match = fullmatch(format_pattern, number)
-            if format_match:
-                number_format_rule = this_format.format
-                if (num_format == PhoneNumberFormat.NATIONAL and
-                    carrier_code is not None and len(carrier_code) > 0 and
-                    this_format.domestic_carrier_code_formatting_rule is not None and
-                    len(this_format.domestic_carrier_code_formatting_rule) > 0):
-                    # Replace the $CC in the formatting rule with the desired
-                    # carrier code.
-                    cc_format_rule = this_format.domestic_carrier_code_formatting_rule
-                    cc_format_rule = re.sub(_CC_PATTERN,
-                                            carrier_code,
-                                            cc_format_rule,
-                                            count=1)
+            format_pattern = re.compile(num_format.pattern)
+            if fullmatch(format_pattern, national_number):
+                return num_format
+    return None
 
-                    # Now replace the $FG in the formatting rule with the
-                    # first group and the carrier code combined in the
-                    # appropriate way.
-                    number_format_rule = re.sub(_FIRST_GROUP_PATTERN,
-                                                cc_format_rule,
-                                                number_format_rule,
-                                                count=1)
-                    return re.sub(format_pattern, number_format_rule, number)
-                else:
-                    # Use the national prefix formatting rule instead.
-                    national_prefix_formatting_rule = this_format.national_prefix_formatting_rule
-                    if (num_format == PhoneNumberFormat.NATIONAL and
-                        national_prefix_formatting_rule is not None and
-                        len(national_prefix_formatting_rule) > 0):
-                        first_group_rule = re.sub(_FIRST_GROUP_PATTERN,
-                                                  national_prefix_formatting_rule,
-                                                  number_format_rule,
-                                                  count=1)
-                        return re.sub(format_pattern, first_group_rule, number)
-                    else:
-                        return re.sub(format_pattern, number_format_rule, number)
 
-    # If no pattern above is matched, we format the number as a whole.
-    return number
+def _format_according_to_formats(national_number, available_formats, num_format,
+                                 carrier_code=None):
+    # Note that carrier_code is optional - if None or an empty string, no
+    # carrier code replacement will take place.
+    this_format = _choose_formatting_pattern_for_number(available_formats, national_number)
+    if this_format is None:
+        # If no pattern is matched, we format the number as a whole.
+        return national_number
+
+    number_format_rule = this_format.format
+    format_pattern = re.compile(this_format.pattern)
+    if (num_format == PhoneNumberFormat.NATIONAL and
+        carrier_code is not None and len(carrier_code) > 0 and
+        this_format.domestic_carrier_code_formatting_rule is not None and
+        len(this_format.domestic_carrier_code_formatting_rule) > 0):
+        # Replace the $CC in the formatting rule with the desired
+        # carrier code.
+        cc_format_rule = this_format.domestic_carrier_code_formatting_rule
+        cc_format_rule = re.sub(_CC_PATTERN,
+                                carrier_code,
+                                cc_format_rule,
+                                count=1)
+
+        # Now replace the $FG in the formatting rule with the
+        # first group and the carrier code combined in the
+        # appropriate way.
+        number_format_rule = re.sub(_FIRST_GROUP_PATTERN,
+                                    cc_format_rule,
+                                    number_format_rule,
+                                    count=1)
+        return re.sub(format_pattern, number_format_rule, national_number)
+    else:
+        # Use the national prefix formatting rule instead.
+        national_prefix_formatting_rule = this_format.national_prefix_formatting_rule
+        if (num_format == PhoneNumberFormat.NATIONAL and
+            national_prefix_formatting_rule is not None and
+            len(national_prefix_formatting_rule) > 0):
+            first_group_rule = re.sub(_FIRST_GROUP_PATTERN,
+                                      national_prefix_formatting_rule,
+                                      number_format_rule,
+                                      count=1)
+            return re.sub(format_pattern, first_group_rule, national_number)
+        else:
+            return re.sub(format_pattern, number_format_rule, national_number)
 
 
 def example_number(region_code):
@@ -1829,8 +1835,8 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
             potential_national_number = full_number[len(default_country_code_str):]
             general_desc = metadata.general_desc
             valid_pattern = re.compile(general_desc.national_number_pattern or "")
-            _, potential_national_number = _maybe_strip_national_prefix_carrier_code(potential_national_number,
-                                                                                     metadata)
+            _, potential_national_number, _ = _maybe_strip_national_prefix_carrier_code(potential_national_number,
+                                                                                        metadata)
             possible_pattern = re.compile(general_desc.possible_number_pattern or "")
 
             # If the number was not valid before but is valid now, or if it
@@ -1922,9 +1928,10 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
     metadata -- The metadata for the region that we think this number
               is from.
 
-    Returns a 2-tuple of
+    Returns a 3-tuple of
      - The carrier code extracted if it is present, otherwise an empty string.
-     - The number with the prefix stripped
+     - The number with the prefix stripped.
+     - Boolean indicating if a national prefix or carrier code (or both) could be extracted.
      """
     carrier_code = u""
     possible_national_prefix = metadata.national_prefix_for_parsing
@@ -1932,7 +1939,7 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
         possible_national_prefix is None or
         len(possible_national_prefix) == 0):
         # Early return for numbers of zero length.
-        return (u"", number)
+        return (u"", number, False)
 
     # Attempt to parse the first digits as a national prefix.
     prefix_pattern = re.compile(possible_national_prefix)
@@ -1954,12 +1961,12 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
             national_number_match = fullmatch(national_number_pattern,
                                               number[prefix_match.end():])
             if (is_viable_original_number and not national_number_match):
-                return (u"", number)
+                return (u"", number, False)
 
             if (num_groups > 0 and
                 prefix_match.groups(num_groups) is not None):
                 carrier_code = prefix_match.group(1)
-            return (carrier_code, number[prefix_match.end():])
+            return (carrier_code, number[prefix_match.end():], True)
         else:
             # Check that the resultant number is still viable. If not,
             # return. Check this by copying the number and making the
@@ -1968,12 +1975,12 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
             national_number_match = fullmatch(national_number_pattern,
                                               transformed_number)
             if (is_viable_original_number and not national_number_match):
-                return ("", number)
+                return ("", number, False)
             if num_groups > 1:
                 carrier_code = prefix_match.group(1)
-            return (carrier_code, transformed_number)
+            return (carrier_code, transformed_number, True)
     else:
-        return (carrier_code, number)
+        return (carrier_code, number, False)
 
 
 def _maybe_strip_extension(number):
@@ -2127,8 +2134,8 @@ def parse(number, region, keep_raw_input=False,
         raise NumberParseException(NumberParseException.TOO_SHORT_NSN,
                                    "The string supplied is too short to be a phone number.")
     if metadata is not None:
-        carrier_code, normalized_national_number = _maybe_strip_national_prefix_carrier_code(normalized_national_number,
-                                                                                             metadata)
+        carrier_code, normalized_national_number, _ = _maybe_strip_national_prefix_carrier_code(normalized_national_number,
+                                                                                                metadata)
         if keep_raw_input:
             numobj.preferred_domestic_carrier_code = carrier_code
     len_national_number = len(normalized_national_number)

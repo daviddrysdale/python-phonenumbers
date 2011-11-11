@@ -138,6 +138,7 @@ POSSIBLE_ONLY_CASES = [NumberTest("abc8002345678", "US"),
                        NumberTest("1650 x 253 - 1234", "US"),
                        NumberTest("650 x 253 - 1234", "US"),
                        NumberTest("650x2531234", "US"),
+                       NumberTest("(20) 3346 1234", "GB"),  # Non-optional NP omitted
                        ]
 
 # Strings with number-like things that should only be found up to and
@@ -164,7 +165,7 @@ STRICT_GROUPING_CASES = [NumberTest("(415) 6667777", "US"),
                          # Should be found by strict grouping but not exact
                          # grouping, as the last two groups are formatted
                          # together as a block.
-                         NumberTest("800-2491234", "DE"),
+                         NumberTest("0800-2491234", "DE"),
                          ]
 
 # Strings with number-like things that should found at all levels.
@@ -186,6 +187,8 @@ EXACT_GROUPING_CASES = [NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17\
                         NumberTest("+49494949 ext. 49", "DE"),
                         NumberTest("0494949", "DE"),
                         NumberTest("0494949 ext. 49", "DE"),
+                        NumberTest("01 (33) 3461 2234", "MX"),  # Optional NP present
+                        NumberTest("(33) 3461 2234", "MX"),  # Optional NP omitted
                         ]
 
 
@@ -206,7 +209,8 @@ class PhoneNumberMatcherTest(unittest.TestCase):
     def testFindNationalNumber(self):
         # same cases as in testParseNationalNumber
         self.doTestFindInContext("033316005", "NZ")
-        self.doTestFindInContext("33316005", "NZ")
+        # self.doTestFindInContext("33316005", "NZ") is omitted since the
+        # national prefix is obligatory for these types of numbers in New Zealand.
         # National prefix attached and some formatting present.
         self.doTestFindInContext("03-331 6005", "NZ")
         self.doTestFindInContext("03 331 6005", "NZ")
@@ -537,7 +541,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
                 match = None
             if match is not None:
                 matchFoundCount += 1
-                print >> sys.stderr, "Match found in %s for leniency: " % (test, leniency)
+                print >> sys.stderr, "Match found in %s for leniency: %s" % (test, leniency)
         self.assertEqual(0, matchFoundCount)
 
     def findMatchesInContexts(self, contexts, isValid, isPossible,
@@ -831,7 +835,8 @@ class PhoneNumberMatcherTest(unittest.TestCase):
 
     def testInternals(self):
         # Python-specific test: coverage of internals
-        from phonenumbers.phonenumbermatcher import _limit, _verify
+        from phonenumbers.phonenumbermatcher import _limit, _verify, _is_national_prefix_present_if_required
+        from phonenumbers import CountryCodeSource
         self.assertEqual("{1,2}", _limit(1, 2))
         self.assertRaises(Exception, _limit, *(-1, 2))
         self.assertRaises(Exception, _limit, *(1, 0))
