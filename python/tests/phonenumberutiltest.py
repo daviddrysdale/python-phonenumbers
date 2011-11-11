@@ -16,7 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+import sys
 import unittest
 
 import phonenumbers
@@ -38,6 +38,15 @@ phonenumberutil.COUNTRY_CODE_TO_REGION_CODE = {}
 # PhoneMetadata.region_metadata map
 from .testdata import _COUNTRY_CODE_TO_REGION_CODE as TEST_CC_TO_RC
 TEST_REGION_METADATA = PhoneMetadata.region_metadata
+
+if sys.version_info > (3, 0):
+    # Python 3 has unlimited-precision int, so no 'L' suffix
+    _LS = ''
+    # Python 3 has all strings unicode, so no 'u' prefix
+    _UP = ''
+else:
+    _LS = 'L'
+    _UP = 'u'
 
 
 def reinstate_real_metadata():
@@ -564,12 +573,12 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("01234 19 12-5678",
                           phonenumbers.format_national_number_with_preferred_carrier_code(arNumber, ""))
         # Python version extra test: check string conversion with preferred carrier code
-        self.assertEqual('Country Code: 54 National Number: 91234125678 ' +
-                          'Leading Zero: False Preferred Domestic Carrier Code: 19',
+        self.assertEqual('Country Code: 54 National Number: 91234125678 '
+                         'Leading Zero: False Preferred Domestic Carrier Code: 19',
                           str(arNumber))
-        self.assertEqual("PhoneNumber(country_code=54, national_number=91234125678L, extension=None, " +
-                          "italian_leading_zero=False, country_code_source=None, preferred_domestic_carrier_code='19')",
-                          repr(arNumber))
+        self.assertEqual("PhoneNumber(country_code=54, national_number=91234125678%s, extension=None, "
+                         "italian_leading_zero=False, country_code_source=None, preferred_domestic_carrier_code='19')" % _LS,
+                         repr(arNumber))
         # When the preferred_domestic_carrier_code is present (even when it
         # contains an empty string), use it instead of the default carrier
         # code passed in.
@@ -1943,28 +1952,28 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Python version extra tests for string conversions
         metadata = PhoneMetadata.region_metadata["AU"]
         self.assertEqual('\\' + 'd',
-                          metadata.number_format[0].pattern[1:3])
-        self.assertEqual(r"""NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=u'\\1')""",
-                          str(metadata.number_format[0]))
+                         metadata.number_format[0].pattern[1:3])
+        self.assertEqual(r"""NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=%(u)s'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=%(u)s'\\1')""" % {'u': _UP},
+                         str(metadata.number_format[0]))
         self.assertEqual(repr(metadata.number_format[0]),
-                          str(metadata.number_format[0]))
+                         str(metadata.number_format[0]))
         self.assertEqual(r"""PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}')""",
-                          str(metadata.general_desc))
+                         str(metadata.general_desc))
         self.assertEqual(repr(metadata.general_desc), str(metadata.general_desc))
 
         # Create some metadata, including an invalid example number
         metadataXX = PhoneMetadata("XX",
-                                  personal_number=PhoneNumberDesc(example_number='12'),
-                                  preferred_international_prefix='9123',
-                                  national_prefix='1',
-                                  preferred_extn_prefix='2',
-                                  national_prefix_for_parsing='1',
-                                  national_prefix_transform_rule='',
-                                  number_format=[NumberFormat()],
-                                  intl_number_format=[NumberFormat()],
-                                  leading_digits='123',
-                                  leading_zero_possible=True,
-                                  register=False)
+                                   personal_number=PhoneNumberDesc(example_number='12'),
+                                   preferred_international_prefix='9123',
+                                   national_prefix='1',
+                                   preferred_extn_prefix='2',
+                                   national_prefix_for_parsing='1',
+                                   national_prefix_transform_rule='',
+                                   number_format=[NumberFormat()],
+                                   intl_number_format=[NumberFormat()],
+                                   leading_digits='123',
+                                   leading_zero_possible=True,
+                                   register=False)
         self.assertEqual("""PhoneMetadata(id='XX', country_code=-1, international_prefix=None,
     general_desc=None,
     fixed_line=None,
@@ -2013,8 +2022,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
     preferred_international_prefix='0011',
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule='\\1'),
-        NumberFormat(pattern='(\\d{1})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-478]'], national_prefix_formatting_rule='0\\1')])""",
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=%(u)s'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=%(u)s'\\1'),
+        NumberFormat(pattern='(\\d{1})(\\d{4})(\\d{4})', format=%(u)s'\\1 \\2 \\3', leading_digits_pattern=['[2-478]'], national_prefix_formatting_rule=%(u)s'0\\1')])""" % {'u': _UP},
                           str(metadata))
 
     def testMetadataEval(self):
