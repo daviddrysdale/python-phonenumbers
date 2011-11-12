@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. CV metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CV = PhoneMetadata(id='CV', country_code=238, international_prefix='0',
     general_desc=PhoneNumberDesc(national_number_pattern='[259]\\d{6}', possible_number_pattern='\\d{7}'),

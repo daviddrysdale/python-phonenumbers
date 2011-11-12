@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. MX metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix='0[09]',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{9,10}', possible_number_pattern='\\d{7,11}'),

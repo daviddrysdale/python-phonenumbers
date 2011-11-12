@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. NI metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_NI = PhoneMetadata(id='NI', country_code=505, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[128]\\d{7}', possible_number_pattern='\\d{8}'),

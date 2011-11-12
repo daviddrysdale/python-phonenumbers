@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. UA metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_UA = PhoneMetadata(id='UA', country_code=380, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[3-689]\\d{8}', possible_number_pattern='\\d{5,9}'),

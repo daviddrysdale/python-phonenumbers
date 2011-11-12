@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. KR metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix='00(?:[124-68]|[37]\\d{2})',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-7]\\d{3,9}|8\\d{8}', possible_number_pattern='\\d{4,10}'),

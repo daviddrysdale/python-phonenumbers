@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. CL metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CL = PhoneMetadata(id='CL', country_code=56, international_prefix='(?:0|1(?:1[0-69]|2[0-57]|5[13-58]|69|7[0167]|8[018]))0',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:[2-9]|600|123)\\d{7,8}', possible_number_pattern='\\d{6,11}'),

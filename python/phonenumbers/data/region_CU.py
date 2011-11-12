@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. CU metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CU = PhoneMetadata(id='CU', country_code=53, international_prefix='119',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-57]\\d{5,7}', possible_number_pattern='\\d{4,8}'),

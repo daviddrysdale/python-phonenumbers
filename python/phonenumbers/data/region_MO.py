@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. MO metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MO = PhoneMetadata(id='MO', country_code=853, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[268]\\d{7}', possible_number_pattern='\\d{8}'),

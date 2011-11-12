@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. PE metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_PE = PhoneMetadata(id='PE', country_code=51, international_prefix='19(?:1[124]|77|90)00',
     general_desc=PhoneNumberDesc(national_number_pattern='[14-9]\\d{7,8}', possible_number_pattern='\\d{6,9}'),

@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. PY metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_PY = PhoneMetadata(id='PY', country_code=595, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='5[0-5]\\d{4,7}|[2-46-9]\\d{5,8}', possible_number_pattern='\\d{5,9}'),

@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. BO metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_BO = PhoneMetadata(id='BO', country_code=591, international_prefix='00(1\\d)?',
     general_desc=PhoneNumberDesc(national_number_pattern='[23467]\\d{7}', possible_number_pattern='\\d{7,8}'),

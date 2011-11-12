@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. CO metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CO = PhoneMetadata(id='CO', country_code=57, international_prefix='00[579]|#555|#999',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:[13]\\d{0,3}|[24-8])\\d{7}', possible_number_pattern='\\d{7,11}'),

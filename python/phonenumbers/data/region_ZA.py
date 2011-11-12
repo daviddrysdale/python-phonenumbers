@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. ZA metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_ZA = PhoneMetadata(id='ZA', country_code=27, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-5]\\d{8}|(?:7\\d{4,8}|8[1-5789]\\d{3,7})|8[06]\\d{7}', possible_number_pattern='\\d{5,9}'),

@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. SC metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_SC = PhoneMetadata(id='SC', country_code=248, international_prefix='0[0-2]',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-9]\\d{5,6}', possible_number_pattern='\\d{6,7}'),

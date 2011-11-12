@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. FI metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_FI = PhoneMetadata(id='FI', country_code=358, international_prefix='00|99[049]',
     general_desc=PhoneNumberDesc(national_number_pattern='1\\d{4,11}|[2-9]\\d{4,10}', possible_number_pattern='\\d{5,12}'),

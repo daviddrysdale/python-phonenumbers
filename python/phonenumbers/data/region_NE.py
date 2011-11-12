@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. NE metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_NE = PhoneMetadata(id='NE', country_code=227, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[029]\\d{7}', possible_number_pattern='\\d{8}'),

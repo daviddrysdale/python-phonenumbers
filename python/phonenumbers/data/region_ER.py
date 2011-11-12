@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. ER metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_ER = PhoneMetadata(id='ER', country_code=291, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[178]\\d{6}', possible_number_pattern='\\d{6,7}'),

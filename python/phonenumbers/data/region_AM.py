@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. AM metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AM = PhoneMetadata(id='AM', country_code=374, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-35-9]\\d{7}', possible_number_pattern='\\d{5,8}'),

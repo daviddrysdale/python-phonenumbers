@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. BZ metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_BZ = PhoneMetadata(id='BZ', country_code=501, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-8]\\d{6}|0\\d{10}', possible_number_pattern='\\d{7}(?:\\d{4})?'),

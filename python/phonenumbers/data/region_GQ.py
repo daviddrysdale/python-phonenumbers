@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. GQ metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_GQ = PhoneMetadata(id='GQ', country_code=240, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[23589]\\d{8}', possible_number_pattern='\\d{9}'),

@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. CD metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CD = PhoneMetadata(id='CD', country_code=243, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[89]\\d{8}|[1-6]\\d{6}', possible_number_pattern='\\d{7,9}'),

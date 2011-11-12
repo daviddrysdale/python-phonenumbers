@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. AU metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix='(?:14(?:1[14]|34|4[17]|[56]6|7[47]|88))?001[14-689]',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-578]\\d{5,9}', possible_number_pattern='\\d{6,10}'),

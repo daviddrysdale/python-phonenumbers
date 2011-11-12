@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. RU metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_RU = PhoneMetadata(id='RU', country_code=7, international_prefix='810',
     general_desc=PhoneNumberDesc(national_number_pattern='[3489]\\d{9}', possible_number_pattern='\\d{10}'),

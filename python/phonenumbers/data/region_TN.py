@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. TN metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_TN = PhoneMetadata(id='TN', country_code=216, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2457-9]\\d{7}', possible_number_pattern='\\d{8}'),

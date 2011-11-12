@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. NG metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_NG = PhoneMetadata(id='NG', country_code=234, international_prefix='009',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-69]\\d{5,8}|[78]\\d{5,13}', possible_number_pattern='\\d{5,14}'),

@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. KH metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_KH = PhoneMetadata(id='KH', country_code=855, international_prefix='00[178]',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{7,9}', possible_number_pattern='\\d{6,10}'),

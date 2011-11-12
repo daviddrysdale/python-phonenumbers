@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. RW metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_RW = PhoneMetadata(id='RW', country_code=250, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[027-9]\\d{7,8}', possible_number_pattern='\\d{8,9}'),

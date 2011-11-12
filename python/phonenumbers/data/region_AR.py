@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. AR metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AR = PhoneMetadata(id='AR', country_code=54, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-368]\\d{9}|9\\d{10}', possible_number_pattern='\\d{6,11}'),

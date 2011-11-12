@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. LS metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_LS = PhoneMetadata(id='LS', country_code=266, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2568]\\d{7}', possible_number_pattern='\\d{8}'),

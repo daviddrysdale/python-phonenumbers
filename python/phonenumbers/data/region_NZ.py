@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. NZ metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_NZ = PhoneMetadata(id='NZ', country_code=64, international_prefix='0(?:0|161)',
     general_desc=PhoneNumberDesc(national_number_pattern='6[235-9]\\d{6}|[2-57-9]\\d{7,10}', possible_number_pattern='\\d{7,11}'),

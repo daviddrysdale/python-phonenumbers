@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. GL metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_GL = PhoneMetadata(id='GL', country_code=299, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-689]\\d{5}', possible_number_pattern='\\d{6}'),

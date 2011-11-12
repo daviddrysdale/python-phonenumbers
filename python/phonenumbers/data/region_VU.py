@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. VU metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_VU = PhoneMetadata(id='VU', country_code=678, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-57-9]\\d{4,6}', possible_number_pattern='\\d{5,7}'),
