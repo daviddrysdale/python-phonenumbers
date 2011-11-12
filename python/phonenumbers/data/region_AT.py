@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. AT metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AT = PhoneMetadata(id='AT', country_code=43, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{3,12}', possible_number_pattern='\\d{3,13}'),
@@ -14,8 +14,8 @@ PHONE_METADATA_AT = PhoneMetadata(id='AT', country_code=43, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='5(?:(?:0[1-9]|17)\\d{2,10}|[79]\\d{3,11})|720\\d{6,10}', possible_number_pattern='\\d{5,13}', example_number='50123'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:[12]2|33|44)', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0',
+    national_prefix='0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='([15])(\\d{3,12})', format=u'\\1 \\2', leading_digits_pattern=['1|5[079]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3,10})', format=u'\\1 \\2', leading_digits_pattern=['316|46|51|732|6(?:44|5[0-3579]|[6-9])|7(?:1|[28]0)|[89]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{4})(\\d{3,9})', format=u'\\1 \\2', leading_digits_pattern=['2|3(?:1[1-578]|[3-8])|4[2378]|5[2-6]|6(?:[12]|4[1-35-9]|5[468])|7(?:2[1-8]|35|4[1-8]|[57-9])'], national_prefix_formatting_rule=u'0\\1')])

@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. AX metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AX = PhoneMetadata(id='AX', country_code=358, international_prefix='00|99[049]',
     general_desc=PhoneNumberDesc(national_number_pattern='[135]\\d{5,9}|[27]\\d{4,9}|4\\d{5,10}|6\\d{7,8}|8\\d{6,9}', possible_number_pattern='\\d{5,12}'),
@@ -14,5 +14,5 @@ PHONE_METADATA_AX = PhoneMetadata(id='AX', country_code=358, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='10[1-9]\\d{3,7}|2(?:0(?:[16-8]\\d{3,7}|2[14-9]\\d{1,6}|[3-5]\\d{2,7}|9[0-7]\\d{1,6})|9\\d{4,8})|30[1-9]\\d{3,7}|7(?:1\\d{7}|3\\d{8}|5[03-9]\\d{2,7})', possible_number_pattern='\\d{5,10}', example_number='10112345'),
     emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0')
+    national_prefix='0',
+    national_prefix_for_parsing='0')

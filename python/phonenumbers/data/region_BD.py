@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. BD metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_BD = PhoneMetadata(id='BD', country_code=880, international_prefix='00[12]?',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-79]\\d{5,9}|1\\d{9}|8[0-7]\\d{4,8}', possible_number_pattern='\\d{6,10}'),
@@ -14,9 +14,9 @@ PHONE_METADATA_BD = PhoneMetadata(id='BD', country_code=880, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='999', possible_number_pattern='\\d{3}', example_number='999'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    preferred_international_prefix=u'00',
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0',
+    preferred_international_prefix='00',
+    national_prefix='0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(2)(\\d{7})', format=u'\\1 \\2', leading_digits_pattern=['2'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{4,6})', format=u'\\1 \\2', leading_digits_pattern=['[3-79]1'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3,7})', format=u'\\1 \\2', leading_digits_pattern=['[3-79][2-9]|8'], national_prefix_formatting_rule=u'0\\1'),

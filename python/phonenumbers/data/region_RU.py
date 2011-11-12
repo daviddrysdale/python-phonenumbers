@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. RU metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_RU = PhoneMetadata(id='RU', country_code=7, international_prefix='810',
     general_desc=PhoneNumberDesc(national_number_pattern='[3489]\\d{9}', possible_number_pattern='\\d{10}'),
@@ -14,9 +14,9 @@ PHONE_METADATA_RU = PhoneMetadata(id='RU', country_code=7, international_prefix=
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='0[123]|112', possible_number_pattern='\\d{2,3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    preferred_international_prefix=u'8~10',
-    national_prefix=u'8',
-    national_prefix_for_parsing=u'8',
+    preferred_international_prefix='8~10',
+    national_prefix='8',
+    national_prefix_for_parsing='8',
     number_format=[NumberFormat(pattern='([3489]\\d{2})(\\d{3})(\\d{2})(\\d{2})', format=u'\\1 \\2-\\3-\\4', leading_digits_pattern=['[34689]'], national_prefix_formatting_rule=u'8 (\\1)', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(7\\d{2})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['7'], national_prefix_formatting_rule=u'8 (\\1)', national_prefix_optional_when_formatting=True)],
     main_country_for_code=True)

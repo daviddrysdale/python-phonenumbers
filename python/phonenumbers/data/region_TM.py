@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. TM metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_TM = PhoneMetadata(id='TM', country_code=993, international_prefix='810',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-6]\\d{7}', possible_number_pattern='\\d{8}'),
@@ -14,7 +14,7 @@ PHONE_METADATA_TM = PhoneMetadata(id='TM', country_code=993, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='0[1-3]', possible_number_pattern='\\d{2}', example_number='03'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    preferred_international_prefix=u'8~10',
-    national_prefix=u'8',
-    national_prefix_for_parsing=u'8',
+    preferred_international_prefix='8~10',
+    national_prefix='8',
+    national_prefix_for_parsing='8',
     number_format=[NumberFormat(pattern='([1-6]\\d)(\\d{2})(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3 \\4', national_prefix_formatting_rule=u'8 \\1')])

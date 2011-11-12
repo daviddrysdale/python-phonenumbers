@@ -20,7 +20,7 @@
 import unittest
 
 from phonenumbers import connects_to_emergency_number, is_emergency_number
-from phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
+from .phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 
 
 class ShortNumberUtilTest(unittest.TestCase):

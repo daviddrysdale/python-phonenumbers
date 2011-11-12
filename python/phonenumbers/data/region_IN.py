@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. IN metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_IN = PhoneMetadata(id='IN', country_code=91, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='1\\d{7,12}|[2-9]\\d{9,10}', possible_number_pattern='\\d{6,13}'),
@@ -14,8 +14,8 @@ PHONE_METADATA_IN = PhoneMetadata(id='IN', country_code=91, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='1860\\d{7}', possible_number_pattern='\\d{11}', example_number='18603451234'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:0[0128]|12|298)|2611', possible_number_pattern='\\d{3,4}', example_number='108'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1(?:600\\d{6}|8(?:0(?:0\\d{4,8}|3\\d{9})|6(?:0\\d{7}|[12]\\d{9})))', possible_number_pattern='\\d{8,13}', example_number='1800123456'),
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0',
+    national_prefix='0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{6})', format=u'\\1 \\2 \\3', leading_digits_pattern=['7(?:2[0579]|3[057-9]|4[0-389]|5[024-9]|6[0-35-9]|7[03469]|8[0-4679])|8(?:0[01589]|1[0-479]|2[236-9]|3[0479]|4[0-68]|5[0-579]6[05789]7[12569]|8[0124-9]|9[02-9])|9', '7(?:2(?:0[04-9]|5[09]|7[5-8]|9[389])|3(?:0[13-9]|5[0-4789]|7[3679]|8[1-9]|9[689])|4(?:0[245789]|1[15-9]|[29][89]|39|8[389])|5(?:0[0-5789]|[47]9|[25]0|6[6-9]|[89][7-9])|6(?:0[027]|12|20|3[19]|5[45]|6[5-9]|7[679]|9[6-9])|7(?:0[27-9]|3[5-9]|42|60|9[5-9])|8(?:[03][07-9]|14|2[7-9]|4[25]|6[09]|7|9[013-9]))|8(?:0[01589]|1(?:[024]|1[56]|30|7[19]|97)|2(?:[2369]|7[01357]|8[567])|3(?:0[235-8]|4[14789]|74|90)|4(?:[02-58]|10|6[09])|5(?:0[079]|11|2|30|4[47]|53|7[45]|9[015])|6(?:[0589]|70)|7(?:1[24]|[2569])|8(?:[07-9]|17|2[024-8]|44|5[389]|6[0167])|9(?:[057-9]|2[35-9]|3[09]|4[03678]|6[0-46-9]))|9'], national_prefix_formatting_rule=u'0\\1', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['11|2[02]|33|4[04]|79|80[2-46]'], national_prefix_formatting_rule=u'0\\1', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1(?:2[0-249]|3[0-25]|4[145]|[569][14]|7[1257]|8[1346]|[68][1-9])|2(?:1[257]|3[013]|4[01]|5[0137]|6[0158]|78|8[1568]|9[14])|3(?:26|4[1-3]|5[34]|6[01489]|7[02-46]|8[159])|4(?:1[36]|2[1-47]|3[15]|5[12]|6[126-9]|7[0-24-9]|8[013-57]|9[014-7])|5(?:[136][25]|22|4[28]|5[12]|[78]1|9[15])|6(?:12|[2345]1|57|6[13]|7[14]|80)'], national_prefix_formatting_rule=u'0\\1', national_prefix_optional_when_formatting=True),

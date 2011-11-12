@@ -25,8 +25,8 @@ from phonenumbers import geocoder
 # Allow override library geocoding metadata with the test metadata.
 REAL_GEOCODE_DATA = geocoder.GEOCODE_DATA
 REAL_GEOCODE_LONGEST_PREFIX = geocoder.GEOCODE_LONGEST_PREFIX
-from testgeodata import GEOCODE_DATA as TEST_GEOCODE_DATA
-from testgeodata import GEOCODE_LONGEST_PREFIX as TEST_GEOCODE_LONGEST_PREFIX
+from .testgeodata import GEOCODE_DATA as TEST_GEOCODE_DATA
+from .testgeodata import GEOCODE_LONGEST_PREFIX as TEST_GEOCODE_LONGEST_PREFIX
 
 
 def reinstate_real_geodata():

@@ -19,10 +19,10 @@ Note most commercial short numbers are not handled here, but by phonenumberutil.
 # limitations under the License.
 import re
 
-from re_util import fullmatch
-from phonemetadata import PhoneMetadata
-from phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
-from phonenumberutil import normalize_digits_only
+from .re_util import fullmatch
+from .phonemetadata import PhoneMetadata
+from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
+from .phonenumberutil import normalize_digits_only
 
 
 def connects_to_emergency_number(number, region_code):

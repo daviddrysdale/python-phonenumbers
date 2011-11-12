@@ -1,4 +1,5 @@
 PYTHON=python
+PACKAGE=phonenumbers
 alldata: metadata geodata locale
 
 # Dump the JRE's Locale information
@@ -27,11 +28,11 @@ tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buil
 	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata
 
 test: alldata tests/testdata/__init__.py
-	$(PYTHON) phonenumbers/__init__.py
-	$(PYTHON) phonenumbers/re_util.py
-	$(PYTHON) phonenumbers/unicode_util.py
-	$(PYTHON) phonenumbers/geocoder.py
-	$(PYTHON) tests/__init__.py
+	$(PYTHON) -m phonenumbers.__init__
+	$(PYTHON) -m phonenumbers.re_util
+	$(PYTHON) -m phonenumbers.unicode_util
+	$(PYTHON) -m phonenumbers.geocoder
+	$(PYTHON) -m tests.__init__
 
 # Coverage; requires coverage module
 COVERAGE=$(shell hash python-coverage 2>&- && echo python-coverage || echo coverage)
@@ -49,7 +50,7 @@ coverage_annotate:
 	$(COVERAGE) annotate $(COVERAGE_FILES)
 
 VERSION=$(shell grep __version__ phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
-TARBALL=dist/phonenumbers-$(VERSION).tar.gz
+TARBALL=dist/$(PACKAGE)-$(VERSION).tar.gz
 # Build setuptools packaged tarball $(TARBALL)
 sdist: alldata
 	$(PYTHON) setup.py sdist
@@ -66,14 +67,15 @@ clean:
 
 distclean: clean
 	rm -rf phonenumbers/data tests/testdata
-	rm -rf phonenumbers.egg-info
+	rm -rf $(PACKAGE).egg-info
 	rm -rf build
 	rm -f DumpLocale.class
 
 # Create Debian package.  Requires py2dsc, included in the python-stdeb package.
+DEB_PACKAGE=python-$(PACKAGE)
 DEB_VERSION=$(VERSION)-1_all
-deb: deb_dist/python-phonenumbers_$(DEB_VERSION).deb
+deb: deb_dist/$(DEB_PACKAGE)_$(DEB_VERSION).deb
 
-deb_dist/python-phonenumbers_$(VERSION)-1_all.deb: $(TARBALL)
+deb_dist/$(DEB_PACKAGE)_$(VERSION)-1_all.deb: $(TARBALL)
 	py2dsc $(TARBALL)
-	cd deb_dist/phonenumbers-$(VERSION) && dpkg-buildpackage -us -uc -nc
+	cd deb_dist/$(PACKAGE)-$(VERSION) && dpkg-buildpackage -us -uc -nc

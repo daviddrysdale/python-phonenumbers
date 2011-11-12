@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. CL metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CL = PhoneMetadata(id='CL', country_code=56, international_prefix='(?:0|1(?:1[0-69]|2[0-57]|5[13-58]|69|7[0167]|8[018]))0',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:[2-9]|600|123)\\d{7,8}', possible_number_pattern='\\d{6,11}'),
@@ -14,8 +14,8 @@ PHONE_METADATA_CL = PhoneMetadata(id='CL', country_code=56, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='13[123]', possible_number_pattern='\\d{3}', example_number='133'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='600\\d{7,8}', possible_number_pattern='\\d{10,11}', example_number='6001234567'),
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0|(1(?:1[0-69]|2[0-57]|5[13-58]|69|7[0167]|8[018]))',
+    national_prefix='0',
+    national_prefix_for_parsing='0|(1(?:1[0-69]|2[0-57]|5[13-58]|69|7[0167]|8[018]))',
     number_format=[NumberFormat(pattern='(2)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2'], national_prefix_formatting_rule=u'(\\1)', domestic_carrier_code_formatting_rule=u'$CC (\\1)'),
         NumberFormat(pattern='(\\d{2})(\\d{2,3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[357]|4[1-35]|6[13-57]'], national_prefix_formatting_rule=u'(\\1)', domestic_carrier_code_formatting_rule=u'$CC (\\1)'),
         NumberFormat(pattern='(9)([6-9]\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['9'], national_prefix_formatting_rule=u'0\\1'),

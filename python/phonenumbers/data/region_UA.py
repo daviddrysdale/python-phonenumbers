@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. UA metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_UA = PhoneMetadata(id='UA', country_code=380, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[3-689]\\d{8}', possible_number_pattern='\\d{5,9}'),
@@ -14,9 +14,9 @@ PHONE_METADATA_UA = PhoneMetadata(id='UA', country_code=380, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:0[123]|12)', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    preferred_international_prefix=u'0~0',
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0',
+    preferred_international_prefix='0~0',
+    national_prefix='0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='([3-69]\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['39|4(?:[45][0-5]|87)|5(?:0|6[37]|7[37])|6[36-8]|9[1-9]', '39|4(?:[45][0-5]|87)|5(?:0|6(?:3[14-7]|7)|7[37])|6[36-8]|9[1-9]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([3-689]\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['3[1-8]2|4[1378]2|5(?:[12457]2|6[24])|6(?:[49]2|[12][29]|5[24])|8|90', '3(?:[1-46-8]2[013-9]|52)|4[1378]2|5(?:[12457]2|6[24])|6(?:[49]2|[12][29]|5[24])|8|90'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([3-6]\\d{3})(\\d{5})', format=u'\\1 \\2', leading_digits_pattern=['3(?:5[013-9]|[1-46-8])|4(?:[137][013-9]|6|[45][6-9]|8[4-6])|5(?:[1245][013-9]|6[0135-9]|3|7[4-6])|6(?:[49][013-9]|5[0135-9]|[12][13-8])', '3(?:5[013-9]|[1-46-8](?:22|[013-9]))|4(?:[137][013-9]|6|[45][6-9]|8[4-6])|5(?:[1245][013-9]|6(?:3[02389]|[015689])|3|7[4-6])|6(?:[49][013-9]|5[0135-9]|[12][13-8])'], national_prefix_formatting_rule=u'0\\1')])

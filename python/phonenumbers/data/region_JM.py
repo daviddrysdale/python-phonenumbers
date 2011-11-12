@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. JM metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_JM = PhoneMetadata(id='JM', country_code=1, international_prefix='011',
     general_desc=PhoneNumberDesc(national_number_pattern='[589]\\d{9}', possible_number_pattern='\\d{7}(?:\\d{3})?'),
@@ -14,6 +14,6 @@ PHONE_METADATA_JM = PhoneMetadata(id='JM', country_code=1, international_prefix=
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='11[09]', possible_number_pattern='\\d{3}', example_number='119'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix=u'1',
-    national_prefix_for_parsing=u'1',
+    national_prefix='1',
+    national_prefix_for_parsing='1',
     leading_digits='876')

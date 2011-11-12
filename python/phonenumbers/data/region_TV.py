@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. TV metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_TV = PhoneMetadata(id='TV', country_code=688, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[29]\\d{4,5}', possible_number_pattern='\\d{5,6}'),

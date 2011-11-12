@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. BR metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix='0014',
     general_desc=PhoneNumberDesc(),
@@ -14,5 +14,5 @@ PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='19[023]|911', possible_number_pattern='\\d{3}', example_number='190'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0')
+    national_prefix='0',
+    national_prefix_for_parsing='0')

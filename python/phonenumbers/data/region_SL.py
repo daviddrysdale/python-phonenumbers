@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. SL metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_SL = PhoneMetadata(id='SL', country_code=232, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-578]\\d{7}', possible_number_pattern='\\d{6,8}'),
@@ -14,6 +14,6 @@ PHONE_METADATA_SL = PhoneMetadata(id='SL', country_code=232, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='(?:01|99)9', possible_number_pattern='\\d{3}', example_number='999'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0',
+    national_prefix='0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{6})', format=u'\\1 \\2', national_prefix_formatting_rule=u'(0\\1)')])

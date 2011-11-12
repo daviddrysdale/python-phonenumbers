@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. TR metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_TR = PhoneMetadata(id='TR', country_code=90, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-589]\\d{9}|444\\d{4}', possible_number_pattern='\\d{7,10}'),
@@ -14,8 +14,8 @@ PHONE_METADATA_TR = PhoneMetadata(id='TR', country_code=90, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='444\\d{4}|850\\d{7}', possible_number_pattern='\\d{7,10}', example_number='4441444'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:1[02]|55)', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='444\\d{4}', possible_number_pattern='\\d{7}', example_number='4441444'),
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0',
+    national_prefix='0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[23]|4(?:[0-35-9]|4[0-35-9])'], national_prefix_formatting_rule=u'(0\\1)', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[589]'], national_prefix_formatting_rule=u'0\\1', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(444)(\\d{1})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['444'])])

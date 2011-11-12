@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. JP metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_JP = PhoneMetadata(id='JP', country_code=81, international_prefix='010',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{8,9}|0(?:7\\d{5,6}|8\\d{7})', possible_number_pattern='\\d{7,10}'),
@@ -14,8 +14,8 @@ PHONE_METADATA_JP = PhoneMetadata(id='JP', country_code=81, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='570\\d{6}', possible_number_pattern='\\d{9}', example_number='570123456'),
     emergency=PhoneNumberDesc(national_number_pattern='11[09]', possible_number_pattern='\\d{3}', example_number='110'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='0(?:777(?:[01]\\d{2}|5\\d{3})|882[1245]\\d{4})', possible_number_pattern='\\d{7,9}', example_number='0777012'),
-    national_prefix=u'0',
-    national_prefix_for_parsing=u'0',
+    national_prefix='0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format=u'\\1-\\2-\\3', leading_digits_pattern=['(?:12|57|99)0'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['800'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{4,5})', format=u'\\1-\\2', leading_digits_pattern=['077'], national_prefix_formatting_rule=u'0\\1'),

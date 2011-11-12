@@ -16,7 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from util import UnicodeMixin
+from .util import UnicodeMixin
 
 
 class NumberFormat(UnicodeMixin):
@@ -430,13 +430,13 @@ class PhoneMetadata(UnicodeMixin):
         result += ",\n    no_international_dialling=%s" % self.no_international_dialling
 
         if self.preferred_international_prefix is not None:
-            result += ",\n    preferred_international_prefix=u'%s'" % self.preferred_international_prefix
+            result += ",\n    preferred_international_prefix=%r" % self.preferred_international_prefix
         if self.national_prefix is not None:
-            result += ",\n    national_prefix=u'%s'" % self.national_prefix
+            result += ",\n    national_prefix=%r" % self.national_prefix
         if self.preferred_extn_prefix is not None:
-            result += ",\n    preferred_extn_prefix=u'%s'" % self.preferred_extn_prefix
+            result += ",\n    preferred_extn_prefix=%r" % self.preferred_extn_prefix
         if self.national_prefix_for_parsing is not None:
-            result += ",\n    national_prefix_for_parsing=u'%s'" % self.national_prefix_for_parsing
+            result += ",\n    national_prefix_for_parsing=%r" % self.national_prefix_for_parsing
         if self.national_prefix_transform_rule is not None:
             # Note that we use %r on self.national_prefix_transform_rule, which generates its own quotes
             result += ",\n    national_prefix_transform_rule=%r" % self.national_prefix_transform_rule

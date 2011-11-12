@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand. MU metadata"""
-from phonenumbers import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MU = PhoneMetadata(id='MU', country_code=230, international_prefix='0(?:[2-7]0|33)',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-9]\\d{6}', possible_number_pattern='\\d{7}'),
@@ -14,5 +14,5 @@ PHONE_METADATA_MU = PhoneMetadata(id='MU', country_code=230, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='11[45]|99\\d', possible_number_pattern='\\d{3}', example_number='999'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    preferred_international_prefix=u'020',
+    preferred_international_prefix='020',
     number_format=[NumberFormat(pattern='([2-9]\\d{2})(\\d{4})', format=u'\\1 \\2')])
