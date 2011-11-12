@@ -39,8 +39,7 @@ import sys
 import os
 import re
 import datetime
-
-from lxml import etree  # From http://lxml.de/, run 'easy_install lxml'
+from xml.etree import ElementTree as etree
 
 # Pull in the data structure definitions
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
@@ -49,7 +48,7 @@ from phonenumbers.util import UnicodeMixin
 # Convention: variables beginning with 'x' are XML objects
 
 # Top-level XML element containing data
-TOP_XPATH = "/phoneNumberMetadata/territories"
+TOP_XPATH = "territories"
 # XML element name for the territory element
 TERRITORY_TAG = "territory"
 
@@ -89,11 +88,11 @@ COPYRIGHT_NOTICE = """# Copyright (C) 2010-%s The Libphonenumber Authors
 def _get_unique_child(xtag, eltname):
     """Get the unique child element under xtag with name eltname"""
     try:
-        results = xtag.xpath(eltname)
+        results = xtag.findall(eltname)
         if len(results) > 1:
             raise Exception("Multiple elements found where 0/1 expected")
         elif len(results) == 1:
-            return xtag.xpath(eltname)[0]
+            return results[0]
         else:
             return None
     except Exception:
@@ -192,7 +191,7 @@ class XNumberFormat(UnicodeMixin):
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
                 self.o.format = re.sub('\$', ur'\\', self.o.format)
-            xleading_digits = xtag.xpath("leadingDigits")
+            xleading_digits = xtag.findall("leadingDigits")
             for xleading_digit in xleading_digits:
                 self.o.leading_digits_pattern.append(_dews_re(xleading_digit.text))
 
@@ -326,7 +325,7 @@ class XTerritory(UnicodeMixin):
         self.has_explicit_intl_format = False
         formats = _get_unique_child(xterritory, "availableFormats")
         if formats is not None:
-            for xelt in formats.xpath("numberFormat"):
+            for xelt in formats.findall("numberFormat"):
                 # Create an XNumberFormat object, which contains a NumberFormat object
                 # or two, and which self-registers them with self.o
                 XNumberFormat(self,
@@ -357,11 +356,11 @@ class XPhoneNumberMetadata(UnicodeMixin):
         with open(filename, "r") as infile:
             xtree = etree.parse(infile)
         # Move to the top-level element of interest
-        xterritories = xtree.xpath(TOP_XPATH)[0]
+        xterritories = xtree.find(TOP_XPATH)
         # Iterate over the child elements, as there isn't any complex nesting or
         # tree structures in the XML DTD.
         self.territory = {}
-        for xterritory in xterritories.iterchildren(tag=etree.Element):
+        for xterritory in xterritories:
             if xterritory.tag == TERRITORY_TAG:
                 terrobj = XTerritory(xterritory)
                 if terrobj.o.id in self.territory:
