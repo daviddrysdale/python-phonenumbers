@@ -31,8 +31,10 @@ if not python_25:
 python_3x = (major >= 3)
 if python_3x:
     package_name = 'phonenumbers3k'
+    dev_status = 'Development Status :: 3 - Alpha'
 else:
     package_name = 'phonenumbers'
+    dev_status = 'Development Status :: 4 - Beta'
 
 # Discover version of phonenumbers package
 from phonenumbers import __version__
@@ -47,7 +49,7 @@ distutils.core.setup(name=package_name,
                      packages=['phonenumbers', 'phonenumbers.data', 'phonenumbers.geodata'],
                      test_suite="tests",
                      platforms='Posix; MacOS X; Windows',
-                     classifiers=['Development Status :: 4 - Beta',
+                     classifiers=[dev_status,
                                   'Intended Audience :: Developers',
                                   'License :: OSI Approved :: Apache Software License',
                                   'Operating System :: OS Independent',
