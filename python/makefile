@@ -32,7 +32,7 @@ test: alldata tests/testdata/__init__.py
 	$(PYTHON) -m phonenumbers.re_util
 	$(PYTHON) -m phonenumbers.unicode_util
 	$(PYTHON) -m phonenumbers.geocoder
-	$(PYTHON) -m tests.__init__
+	$(PYTHON) -m testwrapper
 
 # Coverage; requires coverage module
 COVERAGE=$(shell hash python-coverage 2>&- && echo python-coverage || echo coverage)
@@ -43,7 +43,7 @@ coverage_clean:
 coverage_generate:
 	$(COVERAGE) -x phonenumbers/re_util.py
 	$(COVERAGE) -x phonenumbers/unicode_util.py
-	$(COVERAGE) -x tests/__init__.py
+	$(COVERAGE) -x testwrapper.py
 coverage_report:
 	$(COVERAGE) -m -r $(COVERAGE_FILES)
 coverage_annotate:
