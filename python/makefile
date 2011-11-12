@@ -62,7 +62,7 @@ install: alldata
 
 clean:
 	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc phonenumbers/geodata/*.pyc
-	rm -f tests/*.pyc tests/data/*.pyc tests/geodata/*.pyc
+	rm -f tests/*.pyc tests/testdata/*.pyc tests/testgeodata/*.pyc
 	rm -rf build deb_dist dist
 
 distclean: clean
