@@ -22,8 +22,17 @@ import re
 # Extra regexp function; see README
 from .re_util import fullmatch
 from .util import UnicodeMixin
-from . import unicode_util
-from . import phonenumberutil
+from .unicode_util import Category, Block, is_letter
+from .phonenumberutil import _MAX_LENGTH_FOR_NSN, _MAX_LENGTH_COUNTRY_CODE
+from .phonenumberutil import _VALID_PUNCTUATION, _PLUS_CHARS, _NON_DIGITS_PATTERN
+from .phonenumberutil import _EXTN_PATTERNS_FOR_MATCHING, _REGEX_FLAGS
+from .phonenumberutil import _SECOND_NUMBER_START_PATTERN, _UNWANTED_END_CHAR_PATTERN
+from .phonenumberutil import MatchType, NumberParseException, PhoneNumberFormat
+from .phonenumberutil import is_possible_number, is_valid_number, parse
+from .phonenumberutil import normalize_digits_only, national_significant_number
+from .phonenumberutil import format_number, is_number_match, region_code_for_country_code
+from .phonenumberutil import _maybe_strip_national_prefix_carrier_code
+from .phonenumberutil import _choose_formatting_pattern_for_number
 from .phonenumber import CountryCodeSource
 from .phonemetadata import PhoneMetadata
 
@@ -65,18 +74,17 @@ _PUNCTUATION_LIMIT = _limit(0, 4)
 # The maximum number of digits allowed in a digit-separated block. As we allow
 # all digits in a single block, set high enough to accommodate the entire
 # national number and the international country code.
-_DIGIT_BLOCK_LIMIT = (phonenumberutil._MAX_LENGTH_FOR_NSN +
-                      phonenumberutil._MAX_LENGTH_COUNTRY_CODE)
+_DIGIT_BLOCK_LIMIT = (_MAX_LENGTH_FOR_NSN + _MAX_LENGTH_COUNTRY_CODE)
 # Limit on the number of blocks separated by punctuation. Use _DIGIT_BLOCK_LIMIT
 # since some formats use spaces to separate each digit.
 _BLOCK_LIMIT = _limit(0, _DIGIT_BLOCK_LIMIT)
 
 # A punctuation sequence allowing white space.
-_PUNCTUATION = u"[" + phonenumberutil._VALID_PUNCTUATION + u"]" + _PUNCTUATION_LIMIT
+_PUNCTUATION = u"[" + _VALID_PUNCTUATION + u"]" + _PUNCTUATION_LIMIT
 # A digits block without punctuation.
 _DIGIT_SEQUENCE = u"(?u)\\d" + _limit(1, _DIGIT_BLOCK_LIMIT)
 # Punctuation that may be at the start of a phone number - brackets and plus signs.
-_LEAD_CLASS_CHARS = _OPENING_PARENS + phonenumberutil._PLUS_CHARS
+_LEAD_CLASS_CHARS = _OPENING_PARENS + _PLUS_CHARS
 _LEAD_CLASS = u"[" + _LEAD_CLASS_CHARS + u"]"
 _LEAD_PATTERN = re.compile(_LEAD_CLASS)
 
@@ -93,8 +101,8 @@ _LEAD_PATTERN = re.compile(_LEAD_CLASS)
 #   supported.
 _PATTERN = re.compile(u"(?:" + _LEAD_CLASS + _PUNCTUATION + u")" + _LEAD_LIMIT +
                       _DIGIT_SEQUENCE + u"(?:" + _PUNCTUATION + _DIGIT_SEQUENCE + u")" + _BLOCK_LIMIT +
-                      u"(?:" + phonenumberutil._EXTN_PATTERNS_FOR_MATCHING + u")?",
-                      phonenumberutil._REGEX_FLAGS)
+                      u"(?:" + _EXTN_PATTERNS_FOR_MATCHING + u")?",
+                      _REGEX_FLAGS)
 
 # Matches strings that look like publication pages. Example: "Computing
 # Complete Answers to Queries in the Presence of Limited Access Patterns.
@@ -156,9 +164,9 @@ def _verify(leniency, numobj, candidate):
     """Returns True if number is a verified number according to the
     leniency."""
     if leniency == Leniency.POSSIBLE:
-        return phonenumberutil.is_possible_number(numobj)
+        return is_possible_number(numobj)
     elif leniency == Leniency.VALID:
-        if (not phonenumberutil.is_valid_number(numobj) or
+        if (not is_valid_number(numobj) or
             not _contains_only_valid_x_chars(numobj, candidate)):
             return False
         return _is_national_prefix_present_if_required(numobj)
@@ -171,7 +179,7 @@ def _verify(leniency, numobj, candidate):
 
 
 def _verify_strict_grouping(numobj, candidate):
-    if (not phonenumberutil.is_valid_number(numobj) or
+    if (not is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
         _contains_more_than_one_slash(candidate) or
         not _is_national_prefix_present_if_required(numobj)):
@@ -179,7 +187,7 @@ def _verify_strict_grouping(numobj, candidate):
     # TODO: Evaluate how this works for other locales (testing has been
     # limited to NANPA regions) and optimise if necessary.
     formatted_number_groups = _get_national_number_groups(numobj)
-    normalized_candidate = phonenumberutil.normalize_digits_only(candidate, keep_non_digits=True)
+    normalized_candidate = normalize_digits_only(candidate, keep_non_digits=True)
     from_index = 0
     # Check each group of consecutive digits are not broken into separate
     # groups in the candidate string.
@@ -198,7 +206,7 @@ def _verify_strict_grouping(numobj, candidate):
                 # this case, we only accept the number if there is no
                 # formatting symbol at all in the number, except for
                 # extensions.
-                nsn = phonenumberutil.national_significant_number(numobj)
+                nsn = national_significant_number(numobj)
                 return normalized_candidate[(from_index - len(formatted_number_group)):].startswith(nsn)
     # The check here makes sure that we haven't mistakenly already used the extension to
     # match the last group of the subscriber number. Note the extension cannot have
@@ -207,15 +215,15 @@ def _verify_strict_grouping(numobj, candidate):
 
 
 def _verify_exact_grouping(numobj, candidate):
-    if (not phonenumberutil.is_valid_number(numobj) or
+    if (not is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
         _contains_more_than_one_slash(candidate) or
         not _is_national_prefix_present_if_required(numobj)):
         return False
     # TODO: Evaluate how this works for other locales (testing has been
     # limited to NANPA regions) and optimise if necessary.
-    normalized_candidate = phonenumberutil.normalize_digits_only(candidate, keep_non_digits=True)
-    candidate_groups = re.split(phonenumberutil._NON_DIGITS_PATTERN, normalized_candidate)
+    normalized_candidate = normalize_digits_only(candidate, keep_non_digits=True)
+    candidate_groups = re.split(_NON_DIGITS_PATTERN, normalized_candidate)
     # Set this to the last group, skipping it if the number has an extension.
     if numobj.extension != None:
         candidate_number_group_index = len(candidate_groups) - 2
@@ -226,7 +234,7 @@ def _verify_exact_grouping(numobj, candidate):
     # number may be present with a prefix such as a national number prefix, or
     # the country code itself.
     if (len(candidate_groups) == 1 or
-        candidate_groups[candidate_number_group_index].find(phonenumberutil.national_significant_number(numobj)) != -1):
+        candidate_groups[candidate_number_group_index].find(national_significant_number(numobj)) != -1):
         return True
     formatted_number_groups = _get_national_number_groups(numobj)
     # Starting from the end, go through in reverse, excluding the first group,
@@ -248,7 +256,7 @@ def _get_national_number_groups(numobj):
     """Helper method to get the national-number part of a number, formatted without any national
     prefix, and return it as a set of digit blocks that would be formatted together."""
     # This will be in the format +CC-DG;ext=EXT where DG represents groups of digits.
-    rfc3966_format = phonenumberutil.format_number(numobj, phonenumberutil.PhoneNumberFormat.RFC3966)
+    rfc3966_format = format_number(numobj, PhoneNumberFormat.RFC3966)
     # We remove the extension part from the formatted string before splitting
     # it into different groups.
     end_index = rfc3966_format.find(u';')
@@ -282,13 +290,11 @@ def _contains_only_valid_x_chars(numobj, candidate):
                 # This is the carrier code case, in which the 'X's always
                 # precede the national significant number.
                 ii += 1
-                if (phonenumberutil.is_number_match(numobj, candidate[ii:]) !=
-                    phonenumberutil.MatchType.NSN_MATCH):
+                if is_number_match(numobj, candidate[ii:]) != MatchType.NSN_MATCH:
                     return False
             # This is the extension sign case, in which the 'x' or 'X' should
             # always precede the extension number.
-            elif (phonenumberutil.normalize_digits_only(candidate[ii:]) !=
-                  numobj.extension):
+            elif normalize_digits_only(candidate[ii:]) != numobj.extension:
                 return False
         ii += 1
     return True
@@ -299,14 +305,14 @@ def _is_national_prefix_present_if_required(numobj):
     # international format, then the national prefix is not required.
     if numobj.country_code_source != CountryCodeSource.FROM_DEFAULT_COUNTRY:
         return True
-    phone_number_region = phonenumberutil.region_code_for_country_code(numobj.country_code)
+    phone_number_region = region_code_for_country_code(numobj.country_code)
     metadata = PhoneMetadata.region_metadata.get(phone_number_region, None)
     if metadata is None:
         return True
     # Check if a national prefix should be present when formatting this number.
-    national_number = phonenumberutil.national_significant_number(numobj)
-    format_rule = phonenumberutil._choose_formatting_pattern_for_number(metadata.number_format,
-                                                                        national_number)
+    national_number = national_significant_number(numobj)
+    format_rule = _choose_formatting_pattern_for_number(metadata.number_format,
+                                                        national_number)
     # To do this, we check that a national prefix formatting rule was present
     # and that it wasn't just the first-group symbol ($1) with punctuation.
     if (format_rule is not None and
@@ -321,15 +327,15 @@ def _is_national_prefix_present_if_required(numobj):
         # We assume that the first-group symbol will never be _before_ the
         # national prefix.
         candidate_national_prefix_rule = candidate_national_prefix_rule[:candidate_national_prefix_rule.find("\\1")]
-        candidate_national_prefix_rule = phonenumberutil.normalize_digits_only(candidate_national_prefix_rule)
+        candidate_national_prefix_rule = normalize_digits_only(candidate_national_prefix_rule)
         if len(candidate_national_prefix_rule) == 0:
             # National Prefix not needed for this number.
             return True
         # Normalize the remainder.
-        raw_input = phonenumberutil.normalize_digits_only(numobj.raw_input)
+        raw_input = normalize_digits_only(numobj.raw_input)
         # Check if we found a national prefix and/or carrier code at the start of the raw input,
         # and return the result.
-        return phonenumberutil._maybe_strip_national_prefix_carrier_code(raw_input, metadata)[2]
+        return _maybe_strip_national_prefix_carrier_code(raw_input, metadata)[2]
     return True
 
 
@@ -428,7 +434,7 @@ class PhoneNumberMatcher(object):
             # TODO: This is the place to start when trying to support
             # extraction of multiple phone number from split notations (+41 79
             # 123 45 67 / 68).
-            candidate = self._trim_after_first_match(phonenumberutil._SECOND_NUMBER_START_PATTERN,
+            candidate = self._trim_after_first_match(_SECOND_NUMBER_START_PATTERN,
                                                      candidate)
 
             match = self._extract_match(candidate, start)
@@ -454,20 +460,20 @@ class PhoneNumberMatcher(object):
         or not. For our purposes, combining marks should also return True
         since we assume they have been added to a preceding Latin character."""
         # Combining marks are a subset of non-spacing-mark
-        if (not unicode_util.is_letter(letter) and
-            unicode_util.Category.get(letter) != unicode_util.Category.NON_SPACING_MARK):
+        if (not is_letter(letter) and
+            Category.get(letter) != Category.NON_SPACING_MARK):
             return False
-        block = unicode_util.Block.get(letter)
-        return (block == unicode_util.Block.BASIC_LATIN or
-                block == unicode_util.Block.LATIN_1_SUPPLEMENT or
-                block == unicode_util.Block.LATIN_EXTENDED_A or
-                block == unicode_util.Block.LATIN_EXTENDED_ADDITIONAL or
-                block == unicode_util.Block.LATIN_EXTENDED_B or
-                block == unicode_util.Block.COMBINING_DIACRITICAL_MARKS)
+        block = Block.get(letter)
+        return (block == Block.BASIC_LATIN or
+                block == Block.LATIN_1_SUPPLEMENT or
+                block == Block.LATIN_EXTENDED_A or
+                block == Block.LATIN_EXTENDED_ADDITIONAL or
+                block == Block.LATIN_EXTENDED_B or
+                block == Block.COMBINING_DIACRITICAL_MARKS)
 
     @classmethod
     def _is_currency_symbol(cls, character):
-        return unicode_util.Category.get(character) == unicode_util.Category.CURRENCY_SYMBOL
+        return Category.get(character) == Category.CURRENCY_SYMBOL
 
     def _extract_match(self, candidate, offset):
         """Attempts to extract a match from a candidate string.
@@ -508,7 +514,7 @@ class PhoneNumberMatcher(object):
         if group_match:
             # Try the first group by itself.
             first_group_only = candidate[:group_match.start()]
-            first_group_only = self._trim_after_first_match(phonenumberutil._UNWANTED_END_CHAR_PATTERN,
+            first_group_only = self._trim_after_first_match(_UNWANTED_END_CHAR_PATTERN,
                                                             first_group_only)
             match = self._parse_and_verify(first_group_only, offset)
             if match is not None:
@@ -518,7 +524,7 @@ class PhoneNumberMatcher(object):
             without_first_group_start = group_match.end()
             # Try the rest of the candidate without the first group.
             without_first_group = candidate[without_first_group_start:]
-            without_first_group = self._trim_after_first_match(phonenumberutil._UNWANTED_END_CHAR_PATTERN,
+            without_first_group = self._trim_after_first_match(_UNWANTED_END_CHAR_PATTERN,
                                                                without_first_group)
             match = self._parse_and_verify(without_first_group, offset + without_first_group_start)
             if match is not None:
@@ -533,7 +539,7 @@ class PhoneNumberMatcher(object):
                     last_group_start = group_match.start()
                     group_match = _GROUP_SEPARATOR.search(candidate, group_match.end())
                 without_last_group = candidate[:last_group_start]
-                without_last_group = self._trim_after_first_match(phonenumberutil._UNWANTED_END_CHAR_PATTERN,
+                without_last_group = self._trim_after_first_match(_UNWANTED_END_CHAR_PATTERN,
                                                                   without_last_group)
                 if without_last_group == first_group_only:
                     # If there are only two groups, then the group "without
@@ -584,7 +590,7 @@ class PhoneNumberMatcher(object):
                         self._is_currency_symbol(next_char)):
                         return None
 
-            numobj = phonenumberutil.parse(candidate, self.preferred_region, keep_raw_input=True)
+            numobj = parse(candidate, self.preferred_region, keep_raw_input=True)
             if _verify(self.leniency, numobj, candidate):
                 # We used parse(keep_raw_input=True) to create this number,
                 # but for now we don't return the extra values parsed.
@@ -595,7 +601,7 @@ class PhoneNumberMatcher(object):
                 numobj.raw_input = None
                 numobj.preferred_domestic_carrier_code = None
                 return PhoneNumberMatch(offset, candidate, numobj)
-        except phonenumberutil.NumberParseException:
+        except NumberParseException:
             # ignore and continue
             pass
         return None
