@@ -2,7 +2,7 @@
 """Script to read the libphonenumber XML metadata and generate Python code.
 
 Invocation:
-  buildmetadatafromxml.py infile.xml outdir
+  buildmetadatafromxml.py infile.xml outdir module_prefix
 
 Processes the given XML metadata file and emit generated Python code.
 The output directory will be created if it does not exist, and
@@ -63,7 +63,7 @@ _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
 
 # Boilerplate header for individual region data files
 _REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %s metadata"""
-from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from %s.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 '''
 
 # Copyright notice covering the XML metadata; include current year.
@@ -372,14 +372,14 @@ class XPhoneNumberMetadata(UnicodeMixin):
     def __unicode__(self):
         return u'\n'.join([u"%s: %s" % (country_id, territory) for country_id, territory in self.territory.items()])
 
-    def emit_metadata_for_region_py(self, region, region_filename):
+    def emit_metadata_for_region_py(self, region, region_filename, module_prefix):
         """Emit Python code generating the metadata for the given region"""
         terrobj = self.territory[region]
         with open(region_filename, "w") as outfile:
-            print >> outfile, _REGION_METADATA_PROLOG % terrobj.o.id
+            print >> outfile, _REGION_METADATA_PROLOG % (terrobj.o.id, module_prefix)
             print >> outfile, "PHONE_METADATA_%s = %s" % (terrobj.o.id, terrobj)
 
-    def emit_metadata_py(self, datadir):
+    def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
         to a data/ subdirectory in the same directory as that file."""
 
@@ -390,7 +390,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
         # First, generate all of the individual per-region files in that directory
         for country_id in sorted(self.territory.keys()):
             filename = os.path.join(datadir, "region_%s.py" % country_id)
-            self.emit_metadata_for_region_py(country_id, filename)
+            self.emit_metadata_for_region_py(country_id, filename, module_prefix)
 
         # Now build a module file that includes them all
         with open(modulefilename, "w") as outfile:
@@ -421,11 +421,11 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
 def _standalone(argv):
     """Parse the given XML file and emit generated code."""
-    if len(argv) != 2:
+    if len(argv) != 3:
         print >> sys.stderr, __doc__
         sys.exit(1)
     pmd = XPhoneNumberMetadata(argv[0])
-    pmd.emit_metadata_py(argv[1])
+    pmd.emit_metadata_py(argv[1], argv[2])
 
 
 if __name__ == "__main__":

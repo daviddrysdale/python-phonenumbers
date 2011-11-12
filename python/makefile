@@ -20,12 +20,12 @@ tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding
 geodata: phonenumbers/geodata/__init__.py tests/testgeodata/__init__.py
 
 phonenumbers/data/__init__.py: ../resources/PhoneNumberMetaData.xml buildmetadatafromxml.py
-	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaData.xml phonenumbers/data
+	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaData.xml phonenumbers/data .
 
 metadata: phonenumbers/data/__init__.py tests/testdata/__init__.py geodata
 
 tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
-	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata
+	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata phonenumbers
 
 test: alldata tests/testdata/__init__.py
 	$(PYTHON) -m phonenumbers.__init__
