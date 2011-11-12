@@ -106,10 +106,13 @@ re_util.py.
 Release Procedure
 ===========================
 
+Standard Python v2.x version:
  - Ensure that HISTORY file is up-to-date.
  - Set the __version__ field in phonenumbers/__init__.py
  - Check that the list of symbols in phonenumbers/__init__.py __all__ is
    up to date.
+ - Check that the unit tests all run successfully:
+     cd python && make test
  - Create a release-<version> branch and shift to it with:
      git checkout -b release-<version>
  - Push the branch to Github with:
@@ -124,3 +127,24 @@ Release Procedure
      https://github.com/daviddrysdale/python-phonenumbers/downloads
  - Push the package to PyPI with:
      setup.py sdist upload
+
+Experimental Python v3.x version:
+ - Perform the v2.x release procedure above.
+ - Run the do3 script, which re-creates the python3/ directory from scratch,
+   based on the contents of the python/ directory.
+ - Check that the unit tests run:
+     cd python3 && make test
+ - Create a py3k-release-<version> branch and shift to it with:
+     git checkout -b py3k-release-<version>
+ - Push the branch to Github with:
+     git push origin py3k-release-<version>
+ - Create a setup-tools packaged tarball dist/phonenumbers3k-<version>.tar.gz
+   with:
+     make sdist  # runs python3 setup.py sdist
+ - Create a Debian package deb_dist/python-phonenumbers3k-<version>-1_all.deb
+   on a Linux machine with:
+     make deb
+ - Upload the tarball and Debian package to Github downloads page at:
+     https://github.com/daviddrysdale/python-phonenumbers/downloads
+ - Push the package to PyPI with:
+     python3 setup.py sdist upload
