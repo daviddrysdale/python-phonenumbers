@@ -25,8 +25,11 @@ cd ..
 cd ..
 
 # Alter this line to use the local invocation command for Python 3k
-sed -i '' 's/^PYTHON=python$/PYTHON=python3.2/' makefile
-sed -i '' 's/^PACKAGE=phonenumbers$/PACKAGE=phonenumbers3k/' makefile
-sed -i '' 's/python3 = false/python3 = true/' DumpLocale.java
+sed 's/^PYTHON=python$/PYTHON=python3/' makefile > makefile.tmp$$
+mv makefile.tmp$$ makefile
+sed 's/^PACKAGE=phonenumbers$/PACKAGE=phonenumbers3k/' makefile > makefile.tmp$$
+mv makefile.tmp$$ makefile
+sed 's/python3 = false/python3 = true/' DumpLocale.java > DumpLocale.java.tmp$$
+mv DumpLocale.java.tmp$$ DumpLocale.java
 
 make geodata metadata locale
