@@ -1,3 +1,4 @@
+#!/bin/sh
 rm -rf python3
 cp -pR python python3
 
@@ -23,7 +24,9 @@ rm -f *.bak
 cd ..
 cd ..
 
+# Alter this line to use the local invocation command for Python 3k
 sed -i '' 's/^PYTHON=python$/PYTHON=python3.2/' makefile
+sed -i '' 's/^PACKAGE=phonenumbers$/PACKAGE=phonenumbers3k/' makefile
 sed -i '' 's/python3 = false/python3 = true/' DumpLocale.java
 
 make geodata metadata locale
