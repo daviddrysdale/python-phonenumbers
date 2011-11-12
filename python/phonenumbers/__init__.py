@@ -77,15 +77,15 @@ PhoneNumberMatch [51,62) 703-4800500
 __version__ = "4.2b1"
 
 # Data class definitions
-from phonenumber import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
-from phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from .phonenumber import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
+from .phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 # Functionality
-from asyoutypeformatter import AsYouTypeFormatter
-from phonenumberutil import *
-from shortnumberutil import connects_to_emergency_number, is_emergency_number
-from phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
-from geocoder import (area_description_for_number, country_name_for_number,
-                      description_for_number, description_for_valid_number)
+from .asyoutypeformatter import AsYouTypeFormatter
+from .phonenumberutil import *
+from .shortnumberutil import connects_to_emergency_number, is_emergency_number
+from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
+from .geocoder import (area_description_for_number, country_name_for_number,
+                       description_for_number, description_for_valid_number)
 
 __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
