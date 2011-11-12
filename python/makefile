@@ -37,7 +37,7 @@ test: alldata tests/testdata/__init__.py
 # Coverage; requires coverage module
 COVERAGE=$(shell hash python-coverage 2>&- && echo python-coverage || echo coverage)
 COVERAGE_FILES=phonenumbers/*.py
-coverage: coverage_clean coverage_generate coverage_report
+coverage: alldata tests/testdata/__init__.py coverage_clean coverage_generate coverage_report
 coverage_clean:
 	$(COVERAGE) -e
 coverage_generate:
