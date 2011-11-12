@@ -141,10 +141,3 @@ Experimental Python v3.x version:
  - Create a setup-tools packaged tarball dist/phonenumbers3k-<version>.tar.gz
    with:
      make sdist  # runs python3 setup.py sdist
- - Create a Debian package deb_dist/python-phonenumbers3k-<version>-1_all.deb
-   on a Linux machine with:
-     make deb
- - Upload the tarball and Debian package to Github downloads page at:
-     https://github.com/daviddrysdale/python-phonenumbers/downloads
- - Push the package to PyPI with:
-     python3 setup.py sdist upload
