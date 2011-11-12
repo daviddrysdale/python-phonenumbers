@@ -23,8 +23,7 @@ rm -f *.bak
 cd ..
 cd ..
 
-sed 's/^PYTHON=python$/PYTHON=python3.2/' makefile > tmp
-mv tmp makefile
+sed -i '' 's/^PYTHON=python$/PYTHON=python3.2/' makefile
+sed -i '' 's/python3 = false/python3 = true/' DumpLocale.java
 
-make geodata
-make metadata
+make geodata metadata locale

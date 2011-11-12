@@ -9,10 +9,15 @@ import java.util.HashMap;
 class DumpLocale {
   private static final char SINGLE_QUOTE = 39;
   private static final char[] hexChar = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+  private static boolean python3 = false;
 
   /* Print a Unicode name suitably escaped */
   private static void printName(String name) {
-    System.out.print("u'");
+    if (python3) {
+      System.out.print("'");
+    } else {
+      System.out.print("u'");
+    }
     // Need to escape unicode data
     for (int ii=0; ii<name.length(); ii++) {
       char c = name.charAt(ii);
