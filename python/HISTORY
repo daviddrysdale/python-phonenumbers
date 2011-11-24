@@ -1,5 +1,13 @@
 
 =====================
+ What's new in 4.3b1
+=====================
+
+Merge up to upstream Subversion revision 396.
+Adjust codebase to allow 2to3 generation of Python 3.x version.
+
+
+=====================
  What's new in 4.2b1
 =====================
 
