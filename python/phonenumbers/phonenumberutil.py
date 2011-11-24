@@ -1010,7 +1010,7 @@ def format_in_original_format(numobj, region_calling_from):
     Returns the formatted phone number in its original number format.
     """
     if (numobj.raw_input is not None and
-        (not has_formatting_pattern_for_number(numobj) or not is_valid_number(numobj))):
+        (not _has_formatting_pattern_for_number(numobj) or not is_valid_number(numobj))):
         # We check if we have the formatting pattern because without that, we
         # might format the number as a group without national prefix. We also
         # want to check the validity of the number because we don't want to
@@ -1031,7 +1031,7 @@ def format_in_original_format(numobj, region_calling_from):
         return format_number(numobj, PhoneNumberFormat.NATIONAL)
 
 
-def has_formatting_pattern_for_number(numobj):
+def _has_formatting_pattern_for_number(numobj):
     phone_number_region = region_code_for_country_code(numobj.country_code)
     metadata = PhoneMetadata.region_metadata.get(phone_number_region, None)
     if metadata is None:
