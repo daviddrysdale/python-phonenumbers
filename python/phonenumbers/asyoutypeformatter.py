@@ -327,8 +327,8 @@ class AsYouTypeFormatter(object):
             if self._able_to_format:
                 self._current_output = self._prefix_before_national_number + temp_national_number
                 return self._current_output
-            else:  # pragma no cover
-                self._current_output = temp_national_number
+            else:
+                self._current_output = self._accrued_input
                 return self._current_output
         else:
             self._current_output = self._attempt_to_choose_formatting_pattern()
@@ -392,8 +392,10 @@ class AsYouTypeFormatter(object):
         # number (excluding national prefix) have been entered.
         if len(self._national_number) >= _MIN_LEADING_DIGITS_LENGTH:
             self._get_available_formats(self._national_number[:_MIN_LEADING_DIGITS_LENGTH])
-            self._maybe_create_new_template()
-            return self._input_accrued_national_number()
+            if self._maybe_create_new_template():
+                return self._input_accrued_national_number()
+            else:
+                return self._accrued_input
         else:
             return self._prefix_before_national_number + self._national_number
 
@@ -408,7 +410,7 @@ class AsYouTypeFormatter(object):
             if self._able_to_format:
                 return self._prefix_before_national_number + temp_national_number
             else:
-                return temp_national_number
+                return self.accrued_input
         else:
             return self._prefix_before_national_number
 

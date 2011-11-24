@@ -472,8 +472,9 @@ class PhoneNumberMatcher(object):
                 block == Block.COMBINING_DIACRITICAL_MARKS)
 
     @classmethod
-    def _is_currency_symbol(cls, character):
-        return Category.get(character) == Category.CURRENCY_SYMBOL
+    def _is_invalid_punctuation_symbol(cls, character):
+        return (character == '%' or
+                Category.get(character) == Category.CURRENCY_SYMBOL)
 
     def _extract_match(self, candidate, offset):
         """Attempts to extract a match from a candidate string.
@@ -579,15 +580,16 @@ class PhoneNumberMatcher(object):
                 if (offset > 0 and
                     not _LEAD_PATTERN.match(candidate)):
                     previous_char = self.text[offset - 1]
-                    # We return None if it is a latin letter or a currency symbol
-                    if (self._is_latin_letter(previous_char) or
-                        self._is_currency_symbol(previous_char)):
+                    # We return None if it is a latin letter or an invalid
+                    # punctuation symbol
+                    if (self._is_invalid_punctuation_symbol(previous_char) or
+                        self._is_latin_letter(previous_char)):
                         return None
                 last_char_index = offset + len(candidate)
                 if last_char_index < len(self.text):
                     next_char = self.text[last_char_index]
-                    if (self._is_latin_letter(next_char) or
-                        self._is_currency_symbol(next_char)):
+                    if (self._is_invalid_punctuation_symbol(next_char) or
+                        self._is_latin_letter(next_char)):
                         return None
 
             numobj = parse(candidate, self.preferred_region, keep_raw_input=True)

@@ -98,6 +98,7 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEqual("+81 90 1234 5678", formatter.input_digit('8'))
         self.assertEqual("+81 90 12 345 6789", formatter.input_digit('9'))
         self.assertEqual("+81901234567890", formatter.input_digit('0'))
+        self.assertEqual("+819012345678901", formatter.input_digit('1'))
 
     def testAYTFUS(self):
         formatter = AsYouTypeFormatter("US")
@@ -716,6 +717,15 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEqual("+81 222 12 56", formatter.input_digit('6'))
         self.assertEqual("+81 222 12 567", formatter.input_digit('7'))
         self.assertEqual("+81 222 12 5678", formatter.input_digit('8'))
+
+        # 011113
+        formatter.clear()
+        self.assertEqual("0", formatter.input_digit('0'))
+        self.assertEqual("01", formatter.input_digit('1'))
+        self.assertEqual("011", formatter.input_digit('1'))
+        self.assertEqual("011 1", formatter.input_digit('1'))
+        self.assertEqual("011 11", formatter.input_digit('1'))
+        self.assertEqual("011113", formatter.input_digit('3'))
 
         # +81 3332 2 5678
         formatter.clear()

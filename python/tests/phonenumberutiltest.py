@@ -77,6 +77,7 @@ GB_MOBILE = FrozenPhoneNumber(country_code=44, national_number=7912345678L)
 GB_NUMBER = FrozenPhoneNumber(country_code=44, national_number=2070313000L)
 IT_MOBILE = FrozenPhoneNumber(country_code=39, national_number=345678901L)
 IT_NUMBER = FrozenPhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+JP_STAR_NUMBER = FrozenPhoneNumber(country_code=81, national_number=2345L)
 # Numbers to test the formatting rules from Mexico.
 MX_MOBILE1 = FrozenPhoneNumber(country_code=52, national_number=12345678900L)
 MX_MOBILE2 = FrozenPhoneNumber(country_code=52, national_number=15512345678L)
@@ -594,7 +595,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # US toll free numbers are marked as noInternationalDialling in the
         # test metadata for testing purposes.
         self.assertEqual("800 253 0000",
-                         phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "US", True))
+                         phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "US",
+                                                                       True))  # Keep formatting
         self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "CN", True))
         self.assertEqual("+1 650 253 0000",
                          phonenumbers.format_number_for_mobile_dialing(US_NUMBER, "US", True))
@@ -604,12 +606,27 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("+1 650 253 0000",
                          phonenumbers.format_number_for_mobile_dialing(usNumberWithExtn, "US", True))
         self.assertEqual("8002530000",
-                         phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "US", False))
+                         phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "US",
+                                                                       False))  # Remove formatting
         self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "CN", False))
         self.assertEqual("+16502530000",
                          phonenumbers.format_number_for_mobile_dialing(US_NUMBER, "US", False))
         self.assertEqual("+16502530000",
                          phonenumbers.format_number_for_mobile_dialing(usNumberWithExtn, "US", False))
+
+        # An invalid US number, which is one digit too long.
+        self.assertEqual("+165025300001",
+                         phonenumbers.format_number_for_mobile_dialing(US_LONG_NUMBER, "US", False))
+        self.assertEqual("+1 65025300001",
+                         phonenumbers.format_number_for_mobile_dialing(US_LONG_NUMBER, "US", True))
+
+        # Star numbers. In real life they appear in Israel, but we have them
+        # in JP in our test metadata.
+        self.assertEqual("*2345",
+                         phonenumbers.format_number_for_mobile_dialing(JP_STAR_NUMBER, "JP", False))
+        self.assertEqual("*2345",
+                         phonenumbers.format_number_for_mobile_dialing(JP_STAR_NUMBER, "JP", True))
+
         # Python version extra tests
         number = PhoneNumber()
         number.merge_from(XY_NUMBER)
@@ -719,6 +736,11 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # When the raw input is unavailable, format as usual.
         number7 = phonenumbers.parse("7345678901", "US")
         self.assertEqual("734 567 8901", phonenumbers.format_in_original_format(number7, "US"))
+
+        # This number is valid, but we don't have a formatting pattern for
+        # it. Fall back to the raw input.
+        number8 = phonenumbers.parse("02-4567-8900", "KR", keep_raw_input=True)
+        self.assertEqual("02-4567-8900", phonenumbers.format_in_original_format(number8, "KR"))
 
         # Python version extra tests
         number8 = phonenumbers.parse("87654321", None, keep_raw_input=True, _check_region=False)

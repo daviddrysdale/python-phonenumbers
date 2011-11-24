@@ -62,6 +62,7 @@ _ITALIAN = "it"
 _ENGLISH = "en"
 _KOREAN = "ko"
 _GERMAN = "de"
+_FRENCH = "fr"
 _USA = "US"
 
 
@@ -127,6 +128,24 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         self.assertEqual(u"\uB300\uD55C\uBBFC\uAD6D",
                           geocoder.description_for_number(KO_NUMBER3, _KOREAN))
 
+    def testGetDescriptionForNumberWithUserRegion(self):
+        # User in Italy, American number. We should just show United States, in
+        # German, and not more detailed information.
+        self.assertEqual("Vereinigte Staaten von Amerika",
+                     geocoder.description_for_number(US_NUMBER1, _GERMAN, region="IT"))
+        # Unknown region - should just show country name.
+        self.assertEqual("Vereinigte Staaten von Amerika",
+                         geocoder.description_for_number(US_NUMBER1, _GERMAN, region="ZZ"))
+        # User in the States, language German, should show detailed data.
+        self.assertEqual("Kalifornien",
+                         geocoder.description_for_number(US_NUMBER1, _GERMAN, region="US"))
+        # User in the States, language French, no data for French, so we fallback
+        # to English detailed data.
+        self.assertEqual("CA",
+                         geocoder.description_for_number(US_NUMBER1, _FRENCH, region="US"))
+        # Invalid number - return an empty string.
+        self.assertEqual("", geocoder.description_for_number(US_INVALID_NUMBER, _ENGLISH, region="US"))
+
     def testGetDescriptionForInvalidNumber(self):
         self.assertEqual("", geocoder.description_for_number(KO_INVALID_NUMBER, _ENGLISH))
         self.assertEqual("", geocoder.description_for_number(US_INVALID_NUMBER, _ENGLISH))
@@ -139,10 +158,12 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         TEST_GEOCODE_DATA['1650960'] = {'en': u'Mountain View, CA',
                                         "en_GB": u'Mountain View California',
                                         "en_Latn": u'MountainView'}
-        self.assertEqual("Mountain View California",
+        # The following test might one day return "Mountain View California"
+        self.assertEqual("United States",
                           geocoder.description_for_number(US_NUMBER2, _ENGLISH, region="GB"))
         self.assertEqual("MountainView",
                           geocoder.description_for_number(US_NUMBER2, _ENGLISH, script="Latn"))
-        self.assertEqual("MountainView",
+        # The following test might one day return "MountainView"
+        self.assertEqual("United States",
                           geocoder.description_for_number(US_NUMBER2, _ENGLISH, script="Latn", region="GB"))
         TEST_GEOCODE_DATA['1650960'] = {'en': u'Mountain View, CA'}

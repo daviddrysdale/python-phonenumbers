@@ -137,12 +137,26 @@ def country_name_for_number(numobj, lang, script=None, region=None):
 
 
 def description_for_valid_number(numobj, lang, script=None, region=None):
-    """Return a text description of a PhoneNumber object for the given language.
+    """Return a text description of a PhoneNumber object, in the language
+    provided.
 
     The description might consist of the name of the country where the phone
     number is from and/or the name of the geographical area the phone number
-    is from.  This function assumes the validity of the number passed in has
-    already been checked.
+    is from if more detailed information is available.
+
+    If the phone number is from the same region as the user, only a
+    lower-level description will be returned, if one exists. Otherwise, the
+    phone number's region will be returned, with optionally some more detailed
+    information.
+
+    For example, for a user from the region "US" (United States), we would
+    show "Mountain View, CA" for a particular number, omitting the United
+    States from the description. For a user from the United Kingdom (region
+    "GB"), for the same number we may show "Mountain View, CA, United States"
+    or even just "United States".
+
+    This function assumes the validity of the number passed in has already
+    been checked.
 
     Arguments:
     numobj -- A valid PhoneNumber object for which we want to get a text
@@ -152,16 +166,26 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
     script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
                   ISO script code as defined in ISO 15924, separated by an
                   underscore (e.g. "Hant")
-    region --  A 2-letter uppercase ISO 3166-1 country code (e.g. "GB")
+    region -- The region code for a given user. This region will be omitted
+                  from the description if the phone number comes from this
+                  region. It is a two-letter uppercase ISO country code as
+                  defined by ISO 3166-1.
 
     Returns a text description in the given language code, for the given phone
     number, or an empty string if no description is available."""
-    area_description = area_description_for_number(numobj, lang, script, region)
-    if area_description != "":
-        return area_description
+    number_region = region_code_for_number(numobj)
+    if region is None or region == number_region:
+        area_description = area_description_for_number(numobj, lang, script, region)
+        if area_description != "":
+            return area_description
+        else:
+            # Fall back to the description of the number's region
+            return country_name_for_number(numobj, lang, script, region)
     else:
-        # Fall back to the description of the number's region
+        # Otherwise, we just show the region(country) name for now.
         return country_name_for_number(numobj, lang, script, region)
+        # TODO: Concatenate the lower-level and country-name information in an
+        # appropriate way for each language.
 
 
 def description_for_number(numobj, lang, script=None, region=None):

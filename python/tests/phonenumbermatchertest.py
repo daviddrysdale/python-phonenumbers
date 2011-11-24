@@ -423,6 +423,12 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         possibleOnlyContexts.append(NumberContext(u"\u00A5", ""))  # Yen sign
         self.findMatchesInContexts(possibleOnlyContexts, False, True)
 
+    def testPercentageNotSeenAsPhoneNumber(self):
+        possibleOnlyContexts = []
+        possibleOnlyContexts.append(NumberContext("", "%"))
+        # Numbers followed by % should be dropped.
+        self.findMatchesInContexts(possibleOnlyContexts, False, True)
+
     def testPhoneNumberWithLeadingOrTrailingMoneyMatches(self):
         # Because of the space after the 20 (or before the 100) these dollar
         # amounts should not stop the actual number from being found.

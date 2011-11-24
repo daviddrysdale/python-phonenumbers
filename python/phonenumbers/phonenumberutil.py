@@ -120,6 +120,12 @@ _ALPHA_MAPPINGS = {u'A': u'2',
 # For performance reasons, amalgamate both into one map.
 _ALPHA_PHONE_MAPPINGS = dict(_ALPHA_MAPPINGS, **_ASCII_DIGITS_MAP)
 
+# A map that contains characters that are essential when dialling. That means
+# any of the characters in this map must not be removed from a number when
+# dialing, otherwise the call will not reach the intended destination.
+_DIALLABLE_CHAR_MAPPINGS = dict({u'+': u'+', u'*': u'*'},
+                                **_ASCII_DIGITS_MAP)
+
 # Separate map of all symbols that we wish to retain when formatting alpha
 # numbers. This includes digits, ASCII letters and number grouping symbols
 # such as "-" and " ".
@@ -856,7 +862,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
 
     Returns the formatted phone number.
     """
-    region_code = region_code_for_number(numobj)
+    region_code = region_code_for_country_code(numobj.country_code)
     if not _is_valid_region_code(region_code):
         if numobj.raw_input is None:
             return ""
@@ -867,10 +873,18 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
     numobj_no_ext.merge_from(numobj)
     numobj_no_ext.extension = None
     numobj_type = number_type(numobj_no_ext)
-    if (region_code == "CO" and region_calling_from == "CO" and
-        numobj_type == PhoneNumberType.FIXED_LINE):
-        formatted_number = format_national_number_with_carrier_code(numobj_no_ext,
-                                                                    _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX)
+    if region_code == "CO" and region_calling_from == "CO":
+        if numobj_type == PhoneNumberType.FIXED_LINE:
+            formatted_number = format_national_number_with_carrier_code(numobj_no_ext,
+                                                                        _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX)
+        else:
+            # E164 doesn't work at all when dialling within Colombia
+            formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
+    elif region_code == "PE" and region_calling_from == "PE":
+        # In Peru, numbers cannot be dialled using E164 format from a mobile
+        # phone for Movistar.  Instead they must be dialled in national
+        # format.
+        formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
     elif (region_code == "BR" and region_calling_from == "BR" and
           ((numobj_type == PhoneNumberType.FIXED_LINE) or
            (numobj_type == PhoneNumberType.MOBILE) or
@@ -896,7 +910,8 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
     if with_formatting:
         return formatted_number
     else:
-        return normalize_digits_only(formatted_number)
+        return _normalize_helper(formatted_number, _DIALLABLE_CHAR_MAPPINGS,
+                                 True)  # remove non matches
 
 
 def format_out_of_country_calling_number(numobj, region_calling_from):
@@ -994,7 +1009,12 @@ def format_in_original_format(numobj, region_calling_from):
 
     Returns the formatted phone number in its original number format.
     """
-    if numobj.raw_input is not None and not is_valid_number(numobj):
+    if (numobj.raw_input is not None and
+        (not has_formatting_pattern_for_number(numobj) or not is_valid_number(numobj))):
+        # We check if we have the formatting pattern because without that, we
+        # might format the number as a group without national prefix. We also
+        # want to check the validity of the number because we don't want to
+        # risk formatting the number if we don't really understand it.
         return numobj.raw_input
     if numobj.country_code_source is None:
         return format_number(numobj, PhoneNumberFormat.NATIONAL)
@@ -1009,6 +1029,16 @@ def format_in_original_format(numobj, region_calling_from):
         return format_number(numobj, PhoneNumberFormat.INTERNATIONAL)[1:]
     else:
         return format_number(numobj, PhoneNumberFormat.NATIONAL)
+
+
+def has_formatting_pattern_for_number(numobj):
+    phone_number_region = region_code_for_country_code(numobj.country_code)
+    metadata = PhoneMetadata.region_metadata.get(phone_number_region, None)
+    if metadata is None:
+        return False
+    national_number = national_significant_number(numobj)
+    format_rule = _choose_formatting_pattern_for_number(metadata.number_format, national_number)
+    return format_rule != None
 
 
 def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
