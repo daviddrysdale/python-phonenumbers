@@ -63,6 +63,7 @@ _ENGLISH = "en"
 _KOREAN = "ko"
 _GERMAN = "de"
 _FRENCH = "fr"
+_SPANISH = "es"
 _USA = "US"
 
 
@@ -130,12 +131,12 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
 
     def testGetDescriptionForNumberWithUserRegion(self):
         # User in Italy, American number. We should just show United States, in
-        # German, and not more detailed information.
-        self.assertEqual("Vereinigte Staaten von Amerika",
-                     geocoder.description_for_number(US_NUMBER1, _GERMAN, region="IT"))
+        # Spanish, and not more detailed information.
+        self.assertEqual("Estados Unidos",
+                         geocoder.description_for_number(US_NUMBER1, _SPANISH, region="IT"))
         # Unknown region - should just show country name.
-        self.assertEqual("Vereinigte Staaten von Amerika",
-                         geocoder.description_for_number(US_NUMBER1, _GERMAN, region="ZZ"))
+        self.assertEqual("Estados Unidos",
+                         geocoder.description_for_number(US_NUMBER1, _SPANISH, region="ZZ"))
         # User in the States, language German, should show detailed data.
         self.assertEqual("Kalifornien",
                          geocoder.description_for_number(US_NUMBER1, _GERMAN, region="US"))
