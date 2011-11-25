@@ -410,7 +410,7 @@ class AsYouTypeFormatter(object):
             if self._able_to_format:
                 return self._prefix_before_national_number + temp_national_number
             else:
-                return self.accrued_input
+                return self._accrued_input
         else:
             return self._prefix_before_national_number
 
