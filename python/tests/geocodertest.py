@@ -158,13 +158,18 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         # Add in some script and region specific fictional names
         TEST_GEOCODE_DATA['1650960'] = {'en': u'Mountain View, CA',
                                         "en_GB": u'Mountain View California',
+                                        "en_US": u'Mountain View, Sunny California',
                                         "en_Latn": u'MountainView'}
         # The following test might one day return "Mountain View California"
         self.assertEqual("United States",
-                          geocoder.description_for_number(US_NUMBER2, _ENGLISH, region="GB"))
+                         geocoder.description_for_number(US_NUMBER2, _ENGLISH, region="GB"))
+        self.assertEqual("Mountain View, Sunny California",
+                         geocoder.description_for_number(US_NUMBER2, _ENGLISH, region="US"))
         self.assertEqual("MountainView",
-                          geocoder.description_for_number(US_NUMBER2, _ENGLISH, script="Latn"))
-        # The following test might one day return "MountainView"
+                         geocoder.description_for_number(US_NUMBER2, _ENGLISH, script="Latn"))
         self.assertEqual("United States",
-                          geocoder.description_for_number(US_NUMBER2, _ENGLISH, script="Latn", region="GB"))
+                         geocoder.description_for_number(US_NUMBER2, _ENGLISH, script="Latn", region="GB"))
+        # Get a different result when there is a script-specific variant
+        self.assertEqual("MountainView",
+                         geocoder.description_for_number(US_NUMBER2, _ENGLISH, script="Latn", region="US"))
         TEST_GEOCODE_DATA['1650960'] = {'en': u'Mountain View, CA'}

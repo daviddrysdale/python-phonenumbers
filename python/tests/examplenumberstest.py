@@ -144,20 +144,30 @@ class ExampleNumbersTest(unittest.TestCase):
 
     def testFormatNumberForMobile(self):
         # Python version extra test.  Special cases for CO and BR in
-        # format_number_for_mobile_dialing()
+        # format_number_for_mobile_dialing(), included here so that real metadata is used
         coNumberFixed = PhoneNumber(country_code=57, national_number=12345678L)
+        coNumberMobile = PhoneNumber(country_code=57, national_number=3211234567L)
+        peNumberFixed = PhoneNumber(country_code=51, national_number=11234567L)
         brNumberFixed = PhoneNumber(country_code=55, national_number=1123456789L)
         brNumberMobile = PhoneNumber(country_code=55, national_number=1161234567L,
                                      preferred_domestic_carrier_code="303")
         self.assertEqual("0312345678",
-                          phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", False))
+                         phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", False))
         self.assertEqual("03 1 2345678",
-                          phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", True))
+                         phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", True))
+        self.assertEqual("3211234567",
+                         phonenumberutil.format_number_for_mobile_dialing(coNumberMobile, "CO", False))
+        self.assertEqual("321 1234567",
+                         phonenumberutil.format_number_for_mobile_dialing(coNumberMobile, "CO", True))
+        self.assertEqual("011234567",
+                         phonenumberutil.format_number_for_mobile_dialing(peNumberFixed, "PE", False))
+        self.assertEqual("(01) 1234567",
+                         phonenumberutil.format_number_for_mobile_dialing(peNumberFixed, "PE", True))
         self.assertEqual("",
-                          phonenumberutil.format_number_for_mobile_dialing(brNumberFixed, "BR", False))
+                         phonenumberutil.format_number_for_mobile_dialing(brNumberFixed, "BR", False))
         self.assertEqual("",
-                          phonenumberutil.format_number_for_mobile_dialing(brNumberFixed, "BR", True))
+                         phonenumberutil.format_number_for_mobile_dialing(brNumberFixed, "BR", True))
         self.assertEqual("03031161234567",
-                          phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", False))
+                         phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", False))
         self.assertEqual("0 303 (11) 6123-4567",
-                          phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", True))
+                         phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", True))

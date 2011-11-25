@@ -892,6 +892,7 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         del phonenumberutil.COUNTRY_CODE_TO_REGION_CODE[384]
         phonenumberutil.SUPPORTED_REGIONS.remove('XX')
         del PhoneMetadata.region_metadata['XX']
-        # Hit internal error arm
+        # Hit internal error arms
+        self.assertEqual("1234", formatter._input_accrued_national_number())
         formatter._national_number = ""
         self.assertEqual("", formatter._input_accrued_national_number())
