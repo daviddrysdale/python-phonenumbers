@@ -31,7 +31,7 @@ author: David Drysdale (Python version)
 import re
 
 from .re_util import fullmatch   # Extra regexp function; see README
-from .util import UnicodeMixin, u, prnt
+from .util import UnicodeMixin, u, prnt, to_long
 from .unicode_util import digit as unicode_digit
 
 # Data class definitions
@@ -2178,7 +2178,7 @@ def parse(number, region, keep_raw_input=False,
                                    "The string supplied is too long to be a phone number.")
     if normalized_national_number[0] == '0':
         numobj.italian_leading_zero = True
-    numobj.national_number = long(normalized_national_number)
+    numobj.national_number = to_long(normalized_national_number)
     return numobj
 
 

@@ -27,6 +27,7 @@ if sys.version_info >= (3, 0):  # pragma no cover
     u = str
     unicode = str
     unichr = chr
+    to_long = int
 
     def prnt(*args, **kwargs):
         sep = kwargs.get('sep', ' ')
@@ -54,6 +55,7 @@ else:  # pragma no cover
         return us
 
     unichr = unichr
+    to_long = long
 
     def prnt(*args, **kwargs):
         sep = kwargs.get('sep', ' ')
