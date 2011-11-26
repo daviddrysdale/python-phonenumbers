@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Python 2.x/3.x compatibility utilities.
 
->>> from .util import prnt, u, unichr
+>>> from .util import prnt, u, uchr
 >>> prnt("hello")
 hello
 >>> prnt("hello", "world")
@@ -10,7 +10,7 @@ hello world
 hello:world
 >>> prnt("hello", "world", sep=":", end='!\\n')
 hello:world!
->>> u('\u0101') == unichr(0x0101)
+>>> u('\u0101') == uchr(0x0101)
 True
 >>> u('\u0101') == u('\U00000101')
 True
@@ -26,7 +26,7 @@ if sys.version_info >= (3, 0):  # pragma no cover
 
     u = str
     unicode = str
-    unichr = chr
+    uchr = chr
     to_long = int
 
     def prnt(*args, **kwargs):
@@ -54,7 +54,7 @@ else:  # pragma no cover
         us = re.sub(_UNAME_RE, lambda m: unicodedata.lookup(m.group('name')), us)
         return us
 
-    unichr = unichr
+    uchr = unichr
     to_long = long
 
     def prnt(*args, **kwargs):
