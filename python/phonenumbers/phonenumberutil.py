@@ -28,6 +28,7 @@ author: David Drysdale (Python version)
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
 import re
 
 from .re_util import fullmatch   # Extra regexp function; see README
@@ -2129,7 +2130,8 @@ def parse(number, region, keep_raw_input=False,
                                                                                metadata,
                                                                                keep_raw_input,
                                                                                numobj)
-    except NumberParseException, e:
+    except NumberParseException:
+        _, e, _ = sys.exc_info()
         matchobj = _PLUS_CHARS_PATTERN.match(national_number)
         if (e.error_type == NumberParseException.INVALID_COUNTRY_CODE and
             matchobj is not None):
@@ -2258,12 +2260,14 @@ def _is_number_match_SS(number1, number2):
     try:
         numobj1 = parse(number1, UNKNOWN_REGION)
         return _is_number_match_OS(numobj1, number2)
-    except NumberParseException, exc:
+    except NumberParseException:
+        _, exc, _ = sys.exc_info()
         if exc.error_type == NumberParseException.INVALID_COUNTRY_CODE:
             try:
                 numobj2 = parse(number2, UNKNOWN_REGION)
                 return _is_number_match_OS(numobj2, number1)
-            except NumberParseException, exc2:
+            except NumberParseException:
+                _, exc2, _ = sys.exc_info()
                 if exc2.error_type == NumberParseException.INVALID_COUNTRY_CODE:
                     try:
                         numobj1 = parse(number1, None, keep_raw_input=False,
@@ -2287,7 +2291,8 @@ def _is_number_match_OS(numobj1, number2):
     try:
         numobj2 = parse(number2, UNKNOWN_REGION)
         return _is_number_match_OO(numobj1, numobj2)
-    except NumberParseException, exc:
+    except NumberParseException:
+        _, exc, _ = sys.exc_info()
         if exc.error_type == NumberParseException.INVALID_COUNTRY_CODE:
             # The second number has no country calling code. EXACT_MATCH is no
             # longer possible.  We parse it as if the region was the same as
