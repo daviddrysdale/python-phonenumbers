@@ -66,7 +66,7 @@ True
 import bisect
 import unicodedata  # Python 2.5 onward
 
-from util import UnicodeMixin, u
+from .util import UnicodeMixin, u
 
 
 class Category(object):
@@ -114,13 +114,13 @@ class Category(object):
     @classmethod
     def get(cls, uni_char):
         """Return the general category code for the given Unicode character"""
-        uni_char = unicode(uni_char)
+        uni_char = u(uni_char)
         return unicodedata.category(uni_char)
 
 
 def is_letter(uni_char):
     """Determine whether the given Unicode character is a Unicode letter"""
-    uni_char = unicode(uni_char)
+    uni_char = u(uni_char)
     category = unicodedata.category(uni_char)
     return (category == Category.UPPERCASE_LETTER or
             category == Category.LOWERCASE_LETTER or
@@ -371,7 +371,7 @@ class Block(object):
     @classmethod
     def get(cls, uni_char):
         """Return the Unicode block of the given Unicode character"""
-        uni_char = unicode(uni_char)
+        uni_char = u(uni_char)
         code_point = ord(uni_char)
         if Block._RANGE_KEYS is None:
             Block._RANGE_KEYS = sorted(Block._RANGES.keys())
@@ -392,7 +392,7 @@ def digit(uni_char, default_value=None):
     """Returns the digit value assigned to the Unicode character uni_char as
     integer. If no such value is defined, default is returned, or, if not
     given, ValueError is raised."""
-    uni_char = unicode(uni_char)
+    uni_char = u(uni_char)
     if default_value is not None:
         return unicodedata.digit(uni_char, default_value)
     else:
