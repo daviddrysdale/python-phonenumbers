@@ -79,72 +79,72 @@ _NANPA_COUNTRY_CODE = 1
 # when dialed from a mobile phone in Colombia.
 _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = "3"
 # The PLUS_SIGN signifies the international prefix.
-_PLUS_SIGN = u'+'
+_PLUS_SIGN = u("+")
 _RFC3966_EXTN_PREFIX = u(";ext=")
 
 # Simple ASCII digits map used to populate _ALPHA_PHONE_MAPPINGS and
 # _ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
-_ASCII_DIGITS_MAP = {u'0': u'0', u'1': u'1',
-                     u'2': u'2', u'3': u'3',
-                     u'4': u'4', u'5': u'5',
-                     u'6': u'6', u'7': u'7',
-                     u'8': u'8', u'9': u'9'}
+_ASCII_DIGITS_MAP = {u("0"): u("0"), u("1"): u("1"),
+                     u("2"): u("2"), u("3"): u("3"),
+                     u("4"): u("4"), u("5"): u("5"),
+                     u("6"): u("6"), u("7"): u("7"),
+                     u("8"): u("8"), u("9"): u("9")}
 
 # Only upper-case variants of alpha characters are stored.
-_ALPHA_MAPPINGS = {u'A': u'2',
-                   u'B': u'2',
-                   u'C': u'2',
-                   u'D': u'3',
-                   u'E': u'3',
-                   u'F': u'3',
-                   u'G': u'4',
-                   u'H': u'4',
-                   u'I': u'4',
-                   u'J': u'5',
-                   u'K': u'5',
-                   u'L': u'5',
-                   u'M': u'6',
-                   u'N': u'6',
-                   u'O': u'6',
-                   u'P': u'7',
-                   u'Q': u'7',
-                   u'R': u'7',
-                   u'S': u'7',
-                   u'T': u'8',
-                   u'U': u'8',
-                   u'V': u'8',
-                   u'W': u'9',
-                   u'X': u'9',
-                   u'Y': u'9',
-                   u'Z': u'9', }
+_ALPHA_MAPPINGS = {u("A"): u("2"),
+                   u("B"): u("2"),
+                   u("C"): u("2"),
+                   u("D"): u("3"),
+                   u("E"): u("3"),
+                   u("F"): u("3"),
+                   u("G"): u("4"),
+                   u("H"): u("4"),
+                   u("I"): u("4"),
+                   u("J"): u("5"),
+                   u("K"): u("5"),
+                   u("L"): u("5"),
+                   u("M"): u("6"),
+                   u("N"): u("6"),
+                   u("O"): u("6"),
+                   u("P"): u("7"),
+                   u("Q"): u("7"),
+                   u("R"): u("7"),
+                   u("S"): u("7"),
+                   u("T"): u("8"),
+                   u("U"): u("8"),
+                   u("V"): u("8"),
+                   u("W"): u("9"),
+                   u("X"): u("9"),
+                   u("Y"): u("9"),
+                   u("Z"): u("9"), }
 # For performance reasons, amalgamate both into one map.
 _ALPHA_PHONE_MAPPINGS = dict(_ALPHA_MAPPINGS, **_ASCII_DIGITS_MAP)
 
 # A map that contains characters that are essential when dialling. That means
 # any of the characters in this map must not be removed from a number when
 # dialing, otherwise the call will not reach the intended destination.
-_DIALLABLE_CHAR_MAPPINGS = dict({u'+': u'+', u'*': u'*'},
+_DIALLABLE_CHAR_MAPPINGS = dict({u("+"): u("+"), u("*"): u("*")},
                                 **_ASCII_DIGITS_MAP)
 
 # Separate map of all symbols that we wish to retain when formatting alpha
 # numbers. This includes digits, ASCII letters and number grouping symbols
 # such as "-" and " ".
-_ALL_PLUS_NUMBER_GROUPING_SYMBOLS = dict({u'-': u'-',  # Put grouping symbols.
-                                          u'\uFF0D': u'-',
-                                          u'\u2010': u'-',
-                                          u'\u2011': u'-',
-                                          u'\u2012': u'-',
-                                          u'\u2013': u'-',
-                                          u'\u2014': u'-',
-                                          u'\u2015': u'-',
-                                          u'\u2212': u'-',
-                                          u'/': u'/',
-                                          u'\uFF0F': u'/',
-                                          u' ': u' ',
-                                          u'\u3000': u' ',
-                                          u'\u2060': u' ',
-                                          u'.': u'.',
-                                          u'\uFF0E': u'.'},
+_ALL_PLUS_NUMBER_GROUPING_SYMBOLS = dict({u("-"): u("-"),  # Put grouping symbols.
+                                          u("\uFF0D"): u("-"),
+                                          u("\u2010"): u("-"),
+                                          u("\u2011"): u("-"),
+                                          u("\u2012"): u("-"),
+                                          u("\u2013"): u("-"),
+                                          u("\u2014"): u("-"),
+                                          u("\u2015"): u("-"),
+                                          u("\u2212"): u("-"),
+                                          u("/"): u("/"),
+                                          u("\uFF0F"): u("/"),
+                                          u(" "): u(" "),
+                                          u("\u3000"): u(" "),
+                                          u("\u2060"): u(" "),
+                                          u("."): u("."),
+                                          u("\uFF0E"): u(".")},
                                          # Put (lower letter -> upper letter) and
                                          # (upper letter -> upper letter) mappings.
                                          **dict([(_c.lower(), _c) for _c in _ALPHA_MAPPINGS.keys()] +
@@ -648,7 +648,7 @@ def _normalize_helper(number, replacements, remove_non_matches):
         elif not remove_non_matches:
             normalized_number.append(char)
         # If neither of the above are true, we remove this character
-    return u''.join(normalized_number)
+    return u("").join(normalized_number)
 
 
 def _is_valid_region_code(region_code):
@@ -1772,7 +1772,7 @@ def _extract_country_code(number):
     number) if number doesn't start with a valid country calling code.
     """
 
-    if len(number) == 0 or number[0] == u'0':
+    if len(number) == 0 or number[0] == u("0"):
         # Country codes do not begin with a '0'.
         return (0, number)
     for ii in range(1, min(len(number), _MAX_LENGTH_COUNTRY_CODE) + 1):

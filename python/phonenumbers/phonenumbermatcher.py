@@ -259,19 +259,19 @@ def _get_national_number_groups(numobj):
     rfc3966_format = format_number(numobj, PhoneNumberFormat.RFC3966)
     # We remove the extension part from the formatted string before splitting
     # it into different groups.
-    end_index = rfc3966_format.find(u';')
+    end_index = rfc3966_format.find(u(";"))
     if end_index < 0:
         end_index = len(rfc3966_format)
 
     # The country-code will have a '-' following it.
-    start_index = rfc3966_format.find(u'-') + 1
-    return rfc3966_format[start_index:end_index].split(u'-')
+    start_index = rfc3966_format.find(u("-")) + 1
+    return rfc3966_format[start_index:end_index].split(u("-"))
 
 
 def _contains_more_than_one_slash(candidate):
-    first_slash_index = candidate.find(u'/')
+    first_slash_index = candidate.find(u("/"))
     return (first_slash_index > 0 and
-            (candidate.find(u'/', (first_slash_index + 1)) != -1))
+            (candidate.find(u("/"), (first_slash_index + 1)) != -1))
 
 
 def _contains_only_valid_x_chars(numobj, candidate):

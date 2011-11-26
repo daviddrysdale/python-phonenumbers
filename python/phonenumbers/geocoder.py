@@ -2,6 +2,7 @@
 
 >>> import phonenumbers
 >>> from phonenumbers.geocoder import area_description_for_number
+>>> from phonenumbers.util import u
 >>> gb_number = phonenumbers.parse("+442083612345", "GB")
 >>> de_number = phonenumbers.parse("0891234567", "DE")
 >>> ch_number = phonenumbers.parse("0431234567", "CH")
@@ -15,9 +16,9 @@
 'London'
 >>> str(area_description_for_number(de_number, "en"))
 'Munich'
->>> u'M\xfcnchen' == area_description_for_number(de_number, "de")
+>>> u('M\xfcnchen') == area_description_for_number(de_number, "de")
 True
->>> u'Z\xfcrich' == area_description_for_number(ch_number, "de")
+>>> u('Z\xfcrich') == area_description_for_number(ch_number, "de")
 True
 >>> str(area_description_for_number(ch_number, "en"))
 'Zurich'
