@@ -1,10 +1,11 @@
 """Unicode utility functions
 
 >>> import unicode_util
+>>> from .util import u
 >>> u1 = '1'  # DIGIT ONE
->>> u2 = u'a'  # LATIN SMALL LETTER A
->>> u3 = u'\uFF12'  # FULLWIDTH DIGIT TWO
->>> u4 = u'\u0100'  # LATIN CAPITAL LETTER A WITH MACRON
+>>> u2 = u('a')  # LATIN SMALL LETTER A
+>>> u3 = u('\uFF12')  # FULLWIDTH DIGIT TWO
+>>> u4 = u('\u0100')  # LATIN CAPITAL LETTER A WITH MACRON
 >>> unicode_util.Category.get(u1)
 'Nd'
 >>> unicode_util.Category.get(u2)
@@ -15,7 +16,7 @@
 'Lu'
 >>> unicode_util.Category.get(u2) == unicode_util.Category.LOWERCASE_LETTER
 True
->>> beyond_bmp = u'\U00010100'  # AEGEAN WORD SEPARATOR LINE
+>>> beyond_bmp = u('\U00010100')  # AEGEAN WORD SEPARATOR LINE
 >>> if len(beyond_bmp) == 1:  # We have a UCS4 build of Python
 ...     unicode_util.Category.get(beyond_bmp)
 ... else:  # UCS2 build of Python; no non-BMP chars available
@@ -45,11 +46,11 @@ True
 >>> b4 = unicode_util.Block.get(u4)
 >>> b4 == unicode_util.Block.LATIN_EXTENDED_A
 True
->>> unicode_util.Block.get(u'\u0860') == unicode_util.Block.UNKNOWN
+>>> unicode_util.Block.get(u('\u0860')) == unicode_util.Block.UNKNOWN
 True
->>> beyond_bmp = u'\U00013430'
+>>> beyond_bmp = u('\U00013430')
 >>> if len(beyond_bmp) == 1:  # We have a UCS4 build of Python
-...     unicode_util.Block.get(u'\U00013430') == unicode_util.Block.UNKNOWN
+...     unicode_util.Block.get(u('\U00013430')) == unicode_util.Block.UNKNOWN
 ... else:  # UCS2 build of Python; no unknown characters available
 ...     True
 True

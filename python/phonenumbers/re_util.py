@@ -3,6 +3,7 @@ with Java regular expression code.
 
 >>> import re
 >>> from re_util import fullmatch
+>>> from .util import u
 >>> string = 'abcd'
 >>> r1 = re.compile('abcd')
 >>> r2 = re.compile('bc')
@@ -15,8 +16,8 @@ with Java regular expression code.
 >>> m = fullmatch(r, '1234567890')
 >>> m.end()
 10
->>> r = re.compile(u'[+\uff0b\\d]', re.UNICODE)
->>> m = fullmatch(r, u'\uff10')
+>>> r = re.compile(u('[+\uff0b\\d]'), re.UNICODE)
+>>> m = fullmatch(r, u('\uff10'))
 >>> m.end()
 1
 """

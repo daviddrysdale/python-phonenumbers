@@ -1113,7 +1113,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
             new_format.pattern = u("(\\d+)(.*)")
             # Here we just concatenate them back together after the national
             # prefix has been fixed.
-            new_format.format = ur"\1\2"
+            new_format.format = u(r"\1\2")
             available_formats.append(new_format)
 
         # Now we format using these patterns instead of the default pattern,
