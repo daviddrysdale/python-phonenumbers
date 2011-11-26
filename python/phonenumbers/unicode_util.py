@@ -16,7 +16,10 @@
 'Lu'
 >>> unicode_util.Category.get(u2) == unicode_util.Category.LOWERCASE_LETTER
 True
->>> beyond_bmp = u('\U00010100')  # AEGEAN WORD SEPARATOR LINE
+>>> try:
+...     beyond_bmp = u('\U00010100')  # AEGEAN WORD SEPARATOR LINE
+... except Exception:
+...     beyond_bmp = u('')
 >>> if len(beyond_bmp) == 1:  # We have a UCS4 build of Python
 ...     unicode_util.Category.get(beyond_bmp)
 ... else:  # UCS2 build of Python; no non-BMP chars available
@@ -48,8 +51,11 @@ True
 True
 >>> unicode_util.Block.get(u('\u0860')) == unicode_util.Block.UNKNOWN
 True
->>> beyond_bmp = u('\U00013430')
->>> if len(beyond_bmp) == 1:  # We have a UCS4 build of Python
+>>> try:
+...     unknown_block = u('\U00013430')
+... except Exception:
+...     unknown_block = u('')
+>>> if len(unknown_block) == 1:  # We have a UCS4 build of Python
 ...     unicode_util.Block.get(u('\U00013430')) == unicode_util.Block.UNKNOWN
 ... else:  # UCS2 build of Python; no unknown characters available
 ...     True

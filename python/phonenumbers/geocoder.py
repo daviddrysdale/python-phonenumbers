@@ -16,9 +16,9 @@
 'London'
 >>> str(area_description_for_number(de_number, "en"))
 'Munich'
->>> u('M\xfcnchen') == area_description_for_number(de_number, "de")
+>>> u('M\u00fcnchen') == area_description_for_number(de_number, "de")
 True
->>> u('Z\xfcrich') == area_description_for_number(ch_number, "de")
+>>> u('Z\u00fcrich') == area_description_for_number(ch_number, "de")
 True
 >>> str(area_description_for_number(ch_number, "en"))
 'Zurich'
