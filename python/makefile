@@ -29,6 +29,7 @@ tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buil
 
 test: alldata tests/testdata/__init__.py
 	$(PYTHON) -m phonenumbers.__init__
+	$(PYTHON) -m phonenumbers.util
 	$(PYTHON) -m phonenumbers.re_util
 	$(PYTHON) -m phonenumbers.unicode_util
 	$(PYTHON) -m phonenumbers.geocoder
