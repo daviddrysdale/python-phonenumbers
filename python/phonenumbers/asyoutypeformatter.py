@@ -494,7 +494,7 @@ class AsYouTypeFormatter(object):
         else:
             next_digit = unicode_digit(next_char, -1)
             if next_digit != -1:
-                normalized_char = unicode(next_digit)
+                normalized_char = u(next_digit)
             else:  # pragma no cover
                 normalized_char = next_char
             self._accrued_input_without_formatting += normalized_char

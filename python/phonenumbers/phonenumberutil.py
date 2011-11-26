@@ -487,13 +487,13 @@ def normalize_digits_only(number, keep_non_digits=False):
 
     Returns the normalized string version of the phone number.
     """
-    number = unicode(number)
+    number = u(number)
     number_length = len(number)
     normalized_digits = u("")
     for ii in range(number_length):
         d = unicode_digit(number[ii], -1)
         if d != -1:
-            normalized_digits += unicode(d)
+            normalized_digits += u(d)
         elif keep_non_digits:
             normalized_digits += number[ii]
     return normalized_digits
@@ -949,7 +949,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
         if is_nanpa_country(region_calling_from):
             # For NANPA regions, return the national format for these regions
             # but prefix it with the country calling code.
-            return (unicode(country_code) + u(" ") +
+            return (u(country_code) + u(" ") +
                     format_number(numobj, PhoneNumberFormat.NATIONAL))
     elif country_code == country_code_for_region(region_calling_from):
         # For regions that share a country calling code, the country calling
@@ -985,7 +985,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
                                                       formatted_national_number)
     if len(i18n_prefix_for_formatting) > 0:
         formatted_number = (i18n_prefix_for_formatting + u(" ") +
-                            unicode(country_code) + u(" ") + formatted_number)
+                            u(country_code) + u(" ") + formatted_number)
     else:
         formatted_number = _format_number_by_format(country_code,
                                                     PhoneNumberFormat.INTERNATIONAL,
@@ -1100,7 +1100,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
     metadata = PhoneMetadata.region_metadata.get(region_calling_from.upper(), None)
     if country_code == _NANPA_COUNTRY_CODE:
         if is_nanpa_country(region_calling_from):
-            return unicode(country_code) + u(" ") + raw_input
+            return u(country_code) + u(" ") + raw_input
     elif country_code == country_code_for_region(region_calling_from):
         # Here we copy the formatting rules so we can modify the pattern we
         # expect to match against.
@@ -1141,7 +1141,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
                                                       raw_input)
     if i18n_prefix_for_formatting and len(i18n_prefix_for_formatting) > 0:
         formatted_number = (i18n_prefix_for_formatting + u(" ") +
-                            unicode(country_code) + u(" ") + formatted_number)
+                            u(country_code) + u(" ") + formatted_number)
     else:
         formatted_number = _format_number_by_format(country_code,
                                                     PhoneNumberFormat.INTERNATIONAL,
@@ -1173,11 +1173,11 @@ def national_significant_number(numobj):
 def _format_number_by_format(country_code, num_format, formatted_number):
     """A helper function that is used by format_number and format_by_pattern."""
     if num_format == PhoneNumberFormat.E164:
-        return _PLUS_SIGN + unicode(country_code) + formatted_number
+        return _PLUS_SIGN + u(country_code) + formatted_number
     elif num_format == PhoneNumberFormat.INTERNATIONAL:
-        return _PLUS_SIGN + unicode(country_code) + u(" ") + formatted_number
+        return _PLUS_SIGN + u(country_code) + u(" ") + formatted_number
     elif num_format == PhoneNumberFormat.RFC3966:
-        return _PLUS_SIGN + unicode(country_code) + u("-") + formatted_number
+        return _PLUS_SIGN + u(country_code) + u("-") + formatted_number
     else:
         return formatted_number
 
