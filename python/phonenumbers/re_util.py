@@ -2,7 +2,7 @@
 with Java regular expression code.
 
 >>> import re
->>> from re_util import fullmatch
+>>> from .re_util import fullmatch
 >>> from .util import u
 >>> string = 'abcd'
 >>> r1 = re.compile('abcd')

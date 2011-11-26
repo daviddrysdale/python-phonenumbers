@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Python 2.x/3.x compatibility utilities.
 
->>> from util import prnt, u, unichr
+>>> from .util import prnt, u, unichr
 >>> prnt("hello")
 hello
 >>> prnt("hello", "world")

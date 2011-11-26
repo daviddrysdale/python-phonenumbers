@@ -1,6 +1,6 @@
 """Unicode utility functions
 
->>> import unicode_util
+>>> from .import unicode_util
 >>> from .util import u
 >>> u1 = '1'  # DIGIT ONE
 >>> u2 = u('a')  # LATIN SMALL LETTER A
