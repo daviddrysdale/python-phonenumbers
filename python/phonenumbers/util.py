@@ -61,7 +61,7 @@ else:  # pragma no cover
         file = kwargs.get('file', None)
         if file is None:
             file = sys.stdout
-        print >> file, sep.join(args) + end,
+        print >> file, sep.join([str(arg) for arg in args]) + end,
 
     class UnicodeMixin(object):  # pragma no cover
         __str__ = lambda x: unicode(x).encode('utf-8')
