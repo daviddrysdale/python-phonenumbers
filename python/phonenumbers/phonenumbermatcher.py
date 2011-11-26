@@ -16,7 +16,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import sys
 import re
 
 # Extra regexp function; see README
@@ -353,7 +352,7 @@ class PhoneNumberMatcher(object):
     _DONE = 2
 
     def __init__(self, text, region,
-                 leniency=Leniency.VALID, max_tries=sys.maxint):
+                 leniency=Leniency.VALID, max_tries=65535):
         """Creates a new instance.
 
         Arguments:
