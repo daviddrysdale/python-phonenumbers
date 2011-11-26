@@ -406,7 +406,7 @@ class AsYouTypeFormatter(object):
         length_of_national_number = len(self._national_number)
         if length_of_national_number > 0:
             temp_national_number = ""
-            for ii in xrange(length_of_national_number):
+            for ii in range(length_of_national_number):
                 temp_national_number = self._input_digit_helper(self._national_number[ii])
             if self._able_to_format:
                 return self._prefix_before_national_number + temp_national_number

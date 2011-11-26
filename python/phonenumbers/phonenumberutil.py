@@ -490,7 +490,7 @@ def normalize_digits_only(number, keep_non_digits=False):
     number = unicode(number)
     number_length = len(number)
     normalized_digits = u("")
-    for ii in xrange(number_length):
+    for ii in range(number_length):
         d = unicode_digit(number[ii], -1)
         if d != -1:
             normalized_digits += unicode(d)
@@ -1775,7 +1775,7 @@ def _extract_country_code(number):
     if len(number) == 0 or number[0] == u'0':
         # Country codes do not begin with a '0'.
         return (0, number)
-    for ii in xrange(1, min(len(number), _MAX_LENGTH_COUNTRY_CODE) + 1):
+    for ii in range(1, min(len(number), _MAX_LENGTH_COUNTRY_CODE) + 1):
         try:
             country_code = int(number[:ii])
             if country_code in COUNTRY_CODE_TO_REGION_CODE:
