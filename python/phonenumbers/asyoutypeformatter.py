@@ -26,6 +26,7 @@ See the unit tests for more details on how the formatter is to be used.
 # limitations under the License.
 import re
 
+from .util import u
 from .unicode_util import digit as unicode_digit
 from .re_util import fullmatch
 from .phonemetadata import PhoneMetadata
@@ -34,17 +35,17 @@ from .phonenumberutil import _PLUS_SIGN, _PLUS_CHARS_PATTERN
 from .phonenumberutil import _extract_country_code, region_code_for_country_code
 from .phonenumberutil import country_code_for_region
 
-_EMPTY_METADATA = PhoneMetadata(id=u"", international_prefix=u"NA", register=False)
+_EMPTY_METADATA = PhoneMetadata(id=u(""), international_prefix=u("NA"), register=False)
 
 # A pattern that is used to match character classes in regular expressions. An
 # example of a character class is [1-4].
-_CHARACTER_CLASS_PATTERN = re.compile(u"\\[([^\\[\\]])*\\]")
+_CHARACTER_CLASS_PATTERN = re.compile(u("\\[([^\\[\\]])*\\]"))
 # Any digit in a regular expression that actually denotes a digit. For
 # example, in the regular expression 80[0-2]\d{6,10}, the first 2 digits (8
 # and 0) are standalone digits, but the rest are not.
 # Two look-aheads are needed because the number following \\d could be a
 # two-digit number, since the phone number can be as long as 15 digits.
-_STANDALONE_DIGIT_PATTERN = re.compile(u"\\d(?=[^,}][^,}])")
+_STANDALONE_DIGIT_PATTERN = re.compile(u("\\d(?=[^,}][^,}])"))
 
 # A pattern that is used to determine if a number_format under
 # available_formats is eligible to be used by the AYTF. It is eligible when
@@ -52,8 +53,8 @@ _STANDALONE_DIGIT_PATTERN = re.compile(u"\\d(?=[^,}][^,}])")
 # followed by a single digit, separated by valid phone number
 # punctuation. This prevents invalid punctuation (such as the star sign in
 # Israeli star numbers) getting into the output of the AYTF.
-_ELIGIBLE_FORMAT_PATTERN = re.compile(u"[" + _VALID_PUNCTUATION + u"]*" +
-                                      u"(\\\\\\d" + u"[" + _VALID_PUNCTUATION + u"]*)+")
+_ELIGIBLE_FORMAT_PATTERN = re.compile(u("[") + _VALID_PUNCTUATION + u("]*") +
+                                      u("(\\\\\\d") + u("[") + _VALID_PUNCTUATION + u("]*)+"))
 
 # This is the minimum length of national number accrued that is required to
 # trigger the formatter. The first element of the leading_digits_pattern of each
@@ -62,7 +63,7 @@ _ELIGIBLE_FORMAT_PATTERN = re.compile(u"[" + _VALID_PUNCTUATION + u"]*" +
 _MIN_LEADING_DIGITS_LENGTH = 3
 # The digits that have not been entered yet will be represented by a \u2008,
 # the punctuation space.
-_DIGIT_PLACEHOLDER = u"\u2008"
+_DIGIT_PLACEHOLDER = u("\u2008")
 _DIGIT_PATTERN = re.compile(_DIGIT_PLACEHOLDER)
 
 
@@ -184,7 +185,7 @@ class AsYouTypeFormatter(object):
         # entered so far is longer than the maximum the current formatting
         # rule can accommodate.
         if len(a_phone_number) < len(self._national_number):
-            return u""
+            return u("")
         # Formats the number according to number_format
         template = re.sub(number_pattern, number_format, a_phone_number)
         # Replaces each digit with character _DIGIT_PLACEHOLDER

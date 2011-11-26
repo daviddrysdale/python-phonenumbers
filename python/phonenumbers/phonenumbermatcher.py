@@ -21,7 +21,7 @@ import re
 
 # Extra regexp function; see README
 from .re_util import fullmatch
-from .util import UnicodeMixin
+from .util import UnicodeMixin, u
 from .unicode_util import Category, Block, is_letter
 from .phonenumberutil import _MAX_LENGTH_FOR_NSN, _MAX_LENGTH_COUNTRY_CODE
 from .phonenumberutil import _VALID_PUNCTUATION, _PLUS_CHARS, _NON_DIGITS_PATTERN
@@ -41,14 +41,14 @@ def _limit(lower, upper):
     """Returns a regular expression quantifier with an upper and lower limit."""
     if ((lower < 0) or (upper <= 0) or (upper < lower)):
         raise Exception("Illegal argument to _limit")
-    return u"{%d,%d}" % (lower, upper)
+    return u("{%d,%d}") % (lower, upper)
 
 # Build the MATCHING_BRACKETS and PATTERN regular expression patterns. The
 # building blocks below exist to make the patterns more easily understood.
 
-_OPENING_PARENS = u"(\\[\uFF08\uFF3B"
-_CLOSING_PARENS = u")\\]\uFF09\uFF3D"
-_NON_PARENS = u"[^" + _OPENING_PARENS + _CLOSING_PARENS + u"]"
+_OPENING_PARENS = u("(\\[\uFF08\uFF3B")
+_CLOSING_PARENS = u(")\\]\uFF09\uFF3D")
+_NON_PARENS = u("[^") + _OPENING_PARENS + _CLOSING_PARENS + u("]")
 # Limit on the number of pairs of brackets in a phone number.
 _BRACKET_PAIR_LIMIT = _limit(0, 3)
 
@@ -60,12 +60,12 @@ _BRACKET_PAIR_LIMIT = _limit(0, 3)
 # should be.  It's also possible that the leading bracket was dropped, so we
 # shouldn't be surprised if we see a closing bracket first. We limit the sets
 # of brackets in a phone number to four.
-_MATCHING_BRACKETS = re.compile(u"(?:[" + _OPENING_PARENS + u"])?" + u"(?:" + _NON_PARENS + u"+" +
-                                u"[" + _CLOSING_PARENS + u"])?" +
-                                _NON_PARENS + u"+" +
-                                u"(?:[" + _OPENING_PARENS + u"]" + _NON_PARENS +
-                                u"+[" + _CLOSING_PARENS + u"])" + _BRACKET_PAIR_LIMIT +
-                                _NON_PARENS + u"*")
+_MATCHING_BRACKETS = re.compile(u("(?:[") + _OPENING_PARENS + u("])?") + u("(?:") + _NON_PARENS + u("+") +
+                                u("[") + _CLOSING_PARENS + u("])?") +
+                                _NON_PARENS + u("+") +
+                                u("(?:[") + _OPENING_PARENS + u("]") + _NON_PARENS +
+                                u("+[") + _CLOSING_PARENS + u("])") + _BRACKET_PAIR_LIMIT +
+                                _NON_PARENS + u("*"))
 
 # Limit on the number of leading (plus) characters.
 _LEAD_LIMIT = _limit(0, 2)
@@ -80,12 +80,12 @@ _DIGIT_BLOCK_LIMIT = (_MAX_LENGTH_FOR_NSN + _MAX_LENGTH_COUNTRY_CODE)
 _BLOCK_LIMIT = _limit(0, _DIGIT_BLOCK_LIMIT)
 
 # A punctuation sequence allowing white space.
-_PUNCTUATION = u"[" + _VALID_PUNCTUATION + u"]" + _PUNCTUATION_LIMIT
+_PUNCTUATION = u("[") + _VALID_PUNCTUATION + u("]") + _PUNCTUATION_LIMIT
 # A digits block without punctuation.
-_DIGIT_SEQUENCE = u"(?u)\\d" + _limit(1, _DIGIT_BLOCK_LIMIT)
+_DIGIT_SEQUENCE = u("(?u)\\d") + _limit(1, _DIGIT_BLOCK_LIMIT)
 # Punctuation that may be at the start of a phone number - brackets and plus signs.
 _LEAD_CLASS_CHARS = _OPENING_PARENS + _PLUS_CHARS
-_LEAD_CLASS = u"[" + _LEAD_CLASS_CHARS + u"]"
+_LEAD_CLASS = u("[") + _LEAD_CLASS_CHARS + u("]")
 _LEAD_PATTERN = re.compile(_LEAD_CLASS)
 
 # Phone number pattern allowing optional punctuation.
@@ -99,9 +99,9 @@ _LEAD_PATTERN = re.compile(_LEAD_CLASS)
 # - No whitespace is allowed at the start or end.
 # - No alpha digits (vanity numbers such as 1-800-SIX-FLAGS) are currently
 #   supported.
-_PATTERN = re.compile(u"(?:" + _LEAD_CLASS + _PUNCTUATION + u")" + _LEAD_LIMIT +
-                      _DIGIT_SEQUENCE + u"(?:" + _PUNCTUATION + _DIGIT_SEQUENCE + u")" + _BLOCK_LIMIT +
-                      u"(?:" + _EXTN_PATTERNS_FOR_MATCHING + u")?",
+_PATTERN = re.compile(u("(?:") + _LEAD_CLASS + _PUNCTUATION + u(")") + _LEAD_LIMIT +
+                      _DIGIT_SEQUENCE + u("(?:") + _PUNCTUATION + _DIGIT_SEQUENCE + u(")") + _BLOCK_LIMIT +
+                      u("(?:") + _EXTN_PATTERNS_FOR_MATCHING + u(")?"),
                       _REGEX_FLAGS)
 
 # Matches strings that look like publication pages. Example: "Computing
@@ -109,20 +109,20 @@ _PATTERN = re.compile(u"(?:" + _LEAD_CLASS + _PUNCTUATION + u")" + _LEAD_LIMIT +
 # Chen Li. VLDB J. 12(3): 211-227 (2003)."
 #
 # The string "211-227 (2003)" is not a telephone number.
-_PUB_PAGES = re.compile(u"\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}")
+_PUB_PAGES = re.compile(u("\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}"))
 
 # Matches strings that look like dates using "/" as a separator. Examples:
 # 3/10/2011, 31/10/96 or 08/31/95.
-_SLASH_SEPARATED_DATES = re.compile(u"(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}")
+_SLASH_SEPARATED_DATES = re.compile(u("(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}"))
 
 
 # Matches white-space, which may indicate the end of a phone number and the
 # start of something else (such as a neighbouring zip-code). If white-space is
 # found, continues to match all characters that are not typically used to
 # start a phone number.
-_GROUP_SEPARATOR = re.compile(u"(?u)\\s" +  # Unicode Separator, \p{Z}
-                              u"[^" + _LEAD_CLASS_CHARS +
-                              u"\\d]*")  # Unicode Decimal Digit Number, \p{Nd}
+_GROUP_SEPARATOR = re.compile(u("(?u)\\s") +  # Unicode Separator, \p{Z}
+                              u("[^") + _LEAD_CLASS_CHARS +
+                              u("\\d]*"))  # Unicode Decimal Digit Number, \p{Nd}
 
 
 class Leniency(object):
@@ -376,7 +376,7 @@ class PhoneNumberMatcher(object):
         # The text searched for phone numbers.
         self.text = text
         if self.text is None:
-            self.text = u""
+            self.text = u("")
         # The region (country) to assume for phone numbers without an
         # international prefix, possibly None.
         self.preferred_region = region
@@ -668,4 +668,4 @@ class PhoneNumberMatch(UnicodeMixin):
                  self.number))
 
     def __unicode__(self):
-        return u"PhoneNumberMatch [%s,%s) %s" % (self.start, self.end, self.raw_string)
+        return u("PhoneNumberMatch [%s,%s) %s") % (self.start, self.end, self.raw_string)

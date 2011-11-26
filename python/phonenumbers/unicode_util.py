@@ -65,7 +65,7 @@ True
 import bisect
 import unicodedata  # Python 2.5 onward
 
-from util import UnicodeMixin
+from util import UnicodeMixin, u
 
 
 class Category(object):
@@ -146,7 +146,7 @@ class _BlockRange(UnicodeMixin):
         return hash((self.start, self.end))
 
     def __unicode__(self):
-        return u"Block[%04x, %04x]" % (self.start, self.end)
+        return u("Block[%04x, %04x]") % (self.start, self.end)
 
 
 class Block(object):

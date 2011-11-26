@@ -16,7 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin
+from .util import UnicodeMixin, u
 
 
 class NumberFormat(UnicodeMixin):
@@ -124,17 +124,17 @@ class NumberFormat(UnicodeMixin):
     def __unicode__(self):
         # Generate a string that is valid Python input for the constructor.
         # Note that we use %r, which generates its own quotes.
-        result = u"NumberFormat(pattern=%r, format=%r" % (self.pattern, self.format)
+        result = u("NumberFormat(pattern=%r, format=%r") % (self.pattern, self.format)
         if len(self.leading_digits_pattern) > 0:
-            result += (u", leading_digits_pattern=[%s]" %
+            result += (u(", leading_digits_pattern=[%s]") %
                        ", ".join(["%r" % ld for ld in self.leading_digits_pattern]))
         if self.national_prefix_formatting_rule is not None:
-            result += u", national_prefix_formatting_rule=%r" % self.national_prefix_formatting_rule
+            result += u(", national_prefix_formatting_rule=%r") % self.national_prefix_formatting_rule
         if self.national_prefix_optional_when_formatting:
-            result += u", national_prefix_optional_when_formatting=%r" % self.national_prefix_optional_when_formatting
+            result += u(", national_prefix_optional_when_formatting=%r") % self.national_prefix_optional_when_formatting
         if self.domestic_carrier_code_formatting_rule is not None:
-            result += u", domestic_carrier_code_formatting_rule=%r" % self.domestic_carrier_code_formatting_rule
-        result += u")"
+            result += u(", domestic_carrier_code_formatting_rule=%r") % self.domestic_carrier_code_formatting_rule
+        result += u(")")
         return result
 
 
@@ -185,18 +185,18 @@ class PhoneNumberDesc(UnicodeMixin):
 
     def __unicode__(self):
         # Generate a string that is valid Python input for constructor
-        result = u"PhoneNumberDesc("
-        sep = u""
+        result = u("PhoneNumberDesc(")
+        sep = u("")
         if self.national_number_pattern is not None:
-            result += u"%snational_number_pattern=%r" % (sep, self.national_number_pattern)
-            sep = u", "
+            result += u("%snational_number_pattern=%r") % (sep, self.national_number_pattern)
+            sep = u(", ")
         if self.possible_number_pattern is not None:
-            result += u"%spossible_number_pattern=%r" % (sep, self.possible_number_pattern)
-            sep = u", "
+            result += u("%spossible_number_pattern=%r") % (sep, self.possible_number_pattern)
+            sep = u(", ")
         if self.example_number is not None:
-            result += u"%sexample_number=%r" % (sep, self.example_number)
-            sep = u", "
-        result += u")"
+            result += u("%sexample_number=%r") % (sep, self.example_number)
+            sep = u(", ")
+        result += u(")")
         return result
 
 
@@ -414,7 +414,7 @@ class PhoneMetadata(UnicodeMixin):
         country_code = self.country_code
         if country_code is None:
             country_code = -1
-        result = (u"PhoneMetadata(id='%s', country_code=%d, international_prefix=%r" %
+        result = (u("PhoneMetadata(id='%s', country_code=%d, international_prefix=%r") %
                   (self.id, country_code, self.international_prefix))
         result += ",\n    general_desc=%s" % self.general_desc
         result += ",\n    fixed_line=%s" % self.fixed_line
@@ -450,5 +450,5 @@ class PhoneMetadata(UnicodeMixin):
             result += ",\n    leading_digits='%s'" % self.leading_digits
         if self.leading_zero_possible:
             result += ",\n    leading_zero_possible=True"
-        result += u")"
+        result += u(")")
         return result

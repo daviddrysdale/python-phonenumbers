@@ -43,6 +43,7 @@ True
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from .util import u
 from .phonenumberutil import format_number, PhoneNumberFormat, is_valid_number
 from .phonenumberutil import region_code_for_number
 from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
@@ -103,8 +104,8 @@ def area_description_for_number(numobj, lang, script=None, region=None):
             if name is not None:
                 return name
             else:
-                return u""
-    return u""
+                return u("")
+    return u("")
 
 
 def country_name_for_number(numobj, lang, script=None, region=None):
@@ -137,7 +138,7 @@ def region_display_name(region_code, lang, script=None, region=None):
             other_lang = name[1:]
             name = LOCALE_DATA[region_code].get(other_lang, "")
         return name
-    return u""
+    return u("")
 
 
 def description_for_valid_number(numobj, lang, script=None, region=None):

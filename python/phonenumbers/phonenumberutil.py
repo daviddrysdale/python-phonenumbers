@@ -31,7 +31,7 @@ author: David Drysdale (Python version)
 import re
 
 from .re_util import fullmatch   # Extra regexp function; see README
-from .util import UnicodeMixin
+from .util import UnicodeMixin, u
 from .unicode_util import digit as unicode_digit
 
 # Data class definitions
@@ -72,7 +72,7 @@ _MAX_LENGTH_FOR_NSN = 16
 # The maximum length of the country calling code.
 _MAX_LENGTH_COUNTRY_CODE = 3
 # Region-code for the unknown region.
-UNKNOWN_REGION = u"ZZ"
+UNKNOWN_REGION = u("ZZ")
 # The set of regions that share country calling code 1.
 _NANPA_COUNTRY_CODE = 1
 # The prefix that needs to be inserted in front of a Colombian landline number
@@ -80,7 +80,7 @@ _NANPA_COUNTRY_CODE = 1
 _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = "3"
 # The PLUS_SIGN signifies the international prefix.
 _PLUS_SIGN = u'+'
-_RFC3966_EXTN_PREFIX = u";ext="
+_RFC3966_EXTN_PREFIX = u(";ext=")
 
 # Simple ASCII digits map used to populate _ALPHA_PHONE_MAPPINGS and
 # _ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
@@ -158,7 +158,7 @@ _ALL_PLUS_NUMBER_GROUPING_SYMBOLS = dict({u'-': u'-',  # Put grouping symbols.
 # prefixes in a region, they will be represented as a regex string that always
 # contains character(s) other than ASCII digits.  Note this regex also
 # includes tilde, which signals waiting for the tone.
-_UNIQUE_INTERNATIONAL_PREFIX = re.compile(u"[\\d]+(?:[~\u2053\u223C\uFF5E][\\d]+)?")
+_UNIQUE_INTERNATIONAL_PREFIX = re.compile(u("[\\d]+(?:[~\u2053\u223C\uFF5E][\\d]+)?"))
 
 # Regular expression of acceptable punctuation found in phone numbers. This
 # excludes punctuation found as a leading character only.  This consists of
@@ -166,18 +166,18 @@ _UNIQUE_INTERNATIONAL_PREFIX = re.compile(u"[\\d]+(?:[~\u2053\u223C\uFF5E][\\d]+
 # brackets, parentheses and tildes. It also includes the letter 'x' as that is
 # found as a placeholder for carrier information in some phone numbers. Full-width
 # variants are also present.
-_VALID_PUNCTUATION = (u"-x\u2010-\u2015\u2212\u30FC\uFF0D-\uFF0F " +
-                      u"\u00A0\u200B\u2060\u3000()\uFF08\uFF09\uFF3B\uFF3D.\\[\\]/~\u2053\u223C\uFF5E")
+_VALID_PUNCTUATION = (u("-x\u2010-\u2015\u2212\u30FC\uFF0D-\uFF0F ") +
+                      u("\u00A0\u200B\u2060\u3000()\uFF08\uFF09\uFF3B\uFF3D.\\[\\]/~\u2053\u223C\uFF5E"))
 
 _DIGITS = '\\d'  # Java "\\p{Nd}", so need "(?u)" or re.UNICODE wherever this is used
 # We accept alpha characters in phone numbers, ASCII only, upper and lower
 # case.
 _VALID_ALPHA = (''.join(_ALPHA_MAPPINGS.keys()) +
                 ''.join([_k.lower() for _k in _ALPHA_MAPPINGS.keys()]))
-_PLUS_CHARS = u"+\uFF0B"
-_PLUS_CHARS_PATTERN = re.compile(u"[" + _PLUS_CHARS + u"]+")
-_SEPARATOR_PATTERN = re.compile(u"[" + _VALID_PUNCTUATION + u"]+")
-_CAPTURING_DIGIT_PATTERN = re.compile(u"(" + _DIGITS + u")", re.UNICODE)
+_PLUS_CHARS = u("+\uFF0B")
+_PLUS_CHARS_PATTERN = re.compile(u("[") + _PLUS_CHARS + u("]+"))
+_SEPARATOR_PATTERN = re.compile(u("[") + _VALID_PUNCTUATION + u("]+"))
+_CAPTURING_DIGIT_PATTERN = re.compile(u("(") + _DIGITS + u(")"), re.UNICODE)
 
 # Regular expression of acceptable characters that may start a phone number
 # for the purposes of parsing. This allows us to strip away meaningless
@@ -186,7 +186,7 @@ _CAPTURING_DIGIT_PATTERN = re.compile(u"(" + _DIGITS + u")", re.UNICODE)
 # alpha characters, although they may be used later in the number. It also
 # does not include other punctuation, as this will be stripped later during
 # parsing and is of no information value when parsing a number.
-_VALID_START_CHAR = u"[" + _PLUS_CHARS + _DIGITS + u"]"
+_VALID_START_CHAR = u("[") + _PLUS_CHARS + _DIGITS + u("]")
 _VALID_START_CHAR_PATTERN = re.compile(_VALID_START_CHAR, re.UNICODE)
 
 # Regular expression of characters typically used to start a second phone
@@ -195,7 +195,7 @@ _VALID_START_CHAR_PATTERN = re.compile(_VALID_START_CHAR, re.UNICODE)
 # 583-6985 x302/x2303 -> the second extension here makes this actually two
 # phone numbers, (530) 583-6985 x302 and (530) 583-6985 x2303. We remove the
 # second extension so that the first number is parsed correctly.
-_SECOND_NUMBER_START = u"[\\\\/] *x"
+_SECOND_NUMBER_START = u("[\\\\/] *x")
 _SECOND_NUMBER_START_PATTERN = re.compile(_SECOND_NUMBER_START)
 
 # Regular expression of trailing characters that we want to remove. We remove
@@ -221,7 +221,7 @@ _UNWANTED_END_CHAR_PATTERN = re.compile(_UNWANTED_END_CHARS)
 # We use this pattern to check if the phone number has at least three letters
 # in it - if so, then we treat it as a number where some phone-number digits
 # are represented by letters.
-_VALID_ALPHA_PHONE_PATTERN = re.compile(u"(?:.*?[A-Za-z]){3}.*")
+_VALID_ALPHA_PHONE_PATTERN = re.compile(u("(?:.*?[A-Za-z]){3}.*"))
 
 # Regular expression of viable phone numbers. This is location
 # independent. Checks we have at least three leading digits, and only valid
@@ -232,26 +232,26 @@ _VALID_ALPHA_PHONE_PATTERN = re.compile(u"(?:.*?[A-Za-z]){3}.*")
 # Corresponds to the following:
 # plus_sign*([punctuation]*[digits]){3,}([punctuation]|[digits]|[alpha])*
 # Note VALID_PUNCTUATION starts with a -, so must be the first in the range.
-_VALID_PHONE_NUMBER = (u"[" + _PLUS_CHARS + u"]*(?:[" + _VALID_PUNCTUATION + u"]*" + _DIGITS + u"){3,}[" +
-                       _VALID_PUNCTUATION + _VALID_ALPHA + _DIGITS + u"]*")
+_VALID_PHONE_NUMBER = (u("[") + _PLUS_CHARS + u("]*(?:[") + _VALID_PUNCTUATION + u("]*") + _DIGITS + u("){3,}[") +
+                       _VALID_PUNCTUATION + _VALID_ALPHA + _DIGITS + u("]*"))
 
 # Default extension prefix to use when formatting. This will be put in front
 # of any extension component of the number, after the main national number is
 # formatted. For example, if you wish the default extension formatting to be
 # " extn: 3456", then you should specify " extn: " here as the default
 # extension prefix. This can be overridden by region-specific preferences.
-_DEFAULT_EXTN_PREFIX = u" ext. "
+_DEFAULT_EXTN_PREFIX = u(" ext. ")
 
 # Pattern to capture digits used in an extension. Places a maximum length of
 # "7" for an extension.
-_CAPTURING_EXTN_DIGITS = u"(" + _DIGITS + u"{1,7})"
+_CAPTURING_EXTN_DIGITS = u("(") + _DIGITS + u("{1,7})")
 
 # Regexp of all possible ways to write extensions, for use when parsing. This
 # will be run as a case-insensitive regexp match. Wide character versions are
 # also provided after each ASCII version.
 
 # One-character symbols that can be used to indicate an extension.
-_SINGLE_EXTN_SYMBOLS_FOR_MATCHING = u"x\uFF58#\uFF03~\uFF5E"
+_SINGLE_EXTN_SYMBOLS_FOR_MATCHING = u("x\uFF58#\uFF03~\uFF5E")
 # For parsing, we are slightly more lenient in our interpretation than for
 # matching. Here we allow a "comma" as a possible extension indicator. When
 # matching, this is hardly ever used to indicate this.
@@ -274,23 +274,23 @@ def _create_extn_pattern(single_extn_symbols):
     # we allow two options for representing the accented o - the character
     # itself, and one in the unicode decomposed form with the combining acute
     # accent.
-    return (_RFC3966_EXTN_PREFIX + _CAPTURING_EXTN_DIGITS + u"|" +
-            u"[ \u00A0\\t,]*(?:ext(?:ensi(?:o\u0301?|\u00F3))?n?|" +
-            u"\uFF45\uFF58\uFF54\uFF4E?|" +
-            u"[" + single_extn_symbols + u"]|int|anexo|\uFF49\uFF4E\uFF54)" +
-            u"[:\\.\uFF0E]?[ \u00A0\\t,-]*" + _CAPTURING_EXTN_DIGITS + u"#?|" +
-            u"[- ]+(" + _DIGITS + u"{1,5})#")
+    return (_RFC3966_EXTN_PREFIX + _CAPTURING_EXTN_DIGITS + u("|") +
+            u("[ \u00A0\\t,]*(?:ext(?:ensi(?:o\u0301?|\u00F3))?n?|") +
+            u("\uFF45\uFF58\uFF54\uFF4E?|") +
+            u("[") + single_extn_symbols + u("]|int|anexo|\uFF49\uFF4E\uFF54)") +
+            u("[:\\.\uFF0E]?[ \u00A0\\t,-]*") + _CAPTURING_EXTN_DIGITS + u("#?|") +
+            u("[- ]+(") + _DIGITS + u("{1,5})#"))
 
 _EXTN_PATTERNS_FOR_PARSING = _create_extn_pattern(_SINGLE_EXTN_SYMBOLS_FOR_PARSING)
 _EXTN_PATTERNS_FOR_MATCHING = _create_extn_pattern(_SINGLE_EXTN_SYMBOLS_FOR_MATCHING)
 
 # Regexp of all known extension prefixes used by different regions followed by
 # 1 or more valid digits, for use when parsing.
-_EXTN_PATTERN = re.compile(u"(?:" + _EXTN_PATTERNS_FOR_PARSING + u")$", _REGEX_FLAGS)
+_EXTN_PATTERN = re.compile(u("(?:") + _EXTN_PATTERNS_FOR_PARSING + u(")$"), _REGEX_FLAGS)
 
 # We append optionally the extension pattern to the end here, as a valid phone
 # number may have an extension prefix appended, followed by 1 or more digits.
-_VALID_PHONE_NUMBER_PATTERN = re.compile(_VALID_PHONE_NUMBER + u"(?:" + _EXTN_PATTERNS_FOR_PARSING + u")?", _REGEX_FLAGS)
+_VALID_PHONE_NUMBER_PATTERN = re.compile(_VALID_PHONE_NUMBER + u("(?:") + _EXTN_PATTERNS_FOR_PARSING + u(")?"), _REGEX_FLAGS)
 
 # We use a non-capturing group because Python's re.split() returns any capturing
 # groups interspersed with the other results (unlike Java's Pattern.split()).
@@ -424,7 +424,7 @@ def _extract_possible_number(number):
             number = number[:second_number_match.start()]
         return number
     else:
-        return u""
+        return u("")
 
 
 def _is_viable_phone_number(number):
@@ -489,7 +489,7 @@ def normalize_digits_only(number, keep_non_digits=False):
     """
     number = unicode(number)
     number_length = len(number)
-    normalized_digits = u""
+    normalized_digits = u("")
     for ii in xrange(number_length):
         d = unicode_digit(number[ii], -1)
         if d != -1:
@@ -750,7 +750,7 @@ def format_by_pattern(numobj, num_format, user_defined_formats):
                                             np_formatting_rule,
                                             count=1)
                 np_formatting_rule = re.sub(_FG_PATTERN,
-                                            u"\\\\1",
+                                            u("\\\\1"),
                                             np_formatting_rule,
                                             count=1)
                 this_format_copy.national_prefix_formatting_rule = np_formatting_rule
@@ -949,7 +949,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
         if is_nanpa_country(region_calling_from):
             # For NANPA regions, return the national format for these regions
             # but prefix it with the country calling code.
-            return (unicode(country_code) + u" " +
+            return (unicode(country_code) + u(" ") +
                     format_number(numobj, PhoneNumberFormat.NATIONAL))
     elif country_code == country_code_for_region(region_calling_from):
         # For regions that share a country calling code, the country calling
@@ -972,7 +972,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
     # For regions that have multiple international prefixes, the international
     # format of the number is returned, unless there is a preferred
     # international prefix.
-    i18n_prefix_for_formatting = u""
+    i18n_prefix_for_formatting = u("")
     i18n_match = fullmatch(_UNIQUE_INTERNATIONAL_PREFIX, international_prefix)
     if i18n_match:
         i18n_prefix_for_formatting = international_prefix
@@ -984,8 +984,8 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
                                                       PhoneNumberFormat.INTERNATIONAL,
                                                       formatted_national_number)
     if len(i18n_prefix_for_formatting) > 0:
-        formatted_number = (i18n_prefix_for_formatting + u" " +
-                            unicode(country_code) + u" " + formatted_number)
+        formatted_number = (i18n_prefix_for_formatting + u(" ") +
+                            unicode(country_code) + u(" ") + formatted_number)
     else:
         formatted_number = _format_number_by_format(country_code,
                                                     PhoneNumberFormat.INTERNATIONAL,
@@ -1100,7 +1100,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
     metadata = PhoneMetadata.region_metadata.get(region_calling_from.upper(), None)
     if country_code == _NANPA_COUNTRY_CODE:
         if is_nanpa_country(region_calling_from):
-            return unicode(country_code) + u" " + raw_input
+            return unicode(country_code) + u(" ") + raw_input
     elif country_code == country_code_for_region(region_calling_from):
         # Here we copy the formatting rules so we can modify the pattern we
         # expect to match against.
@@ -1110,7 +1110,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
             new_format.merge_from(this_format)
             # The first group is the first group of digits that the user
             # determined.
-            new_format.pattern = u"(\\d+)(.*)"
+            new_format.pattern = u("(\\d+)(.*)")
             # Here we just concatenate them back together after the national
             # prefix has been fixed.
             new_format.format = ur"\1\2"
@@ -1140,8 +1140,8 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
                                                       PhoneNumberFormat.INTERNATIONAL,
                                                       raw_input)
     if i18n_prefix_for_formatting and len(i18n_prefix_for_formatting) > 0:
-        formatted_number = (i18n_prefix_for_formatting + u" " +
-                            unicode(country_code) + u" " + formatted_number)
+        formatted_number = (i18n_prefix_for_formatting + u(" ") +
+                            unicode(country_code) + u(" ") + formatted_number)
     else:
         formatted_number = _format_number_by_format(country_code,
                                                     PhoneNumberFormat.INTERNATIONAL,
@@ -1175,9 +1175,9 @@ def _format_number_by_format(country_code, num_format, formatted_number):
     if num_format == PhoneNumberFormat.E164:
         return _PLUS_SIGN + unicode(country_code) + formatted_number
     elif num_format == PhoneNumberFormat.INTERNATIONAL:
-        return _PLUS_SIGN + unicode(country_code) + u" " + formatted_number
+        return _PLUS_SIGN + unicode(country_code) + u(" ") + formatted_number
     elif num_format == PhoneNumberFormat.RFC3966:
-        return _PLUS_SIGN + unicode(country_code) + u"-" + formatted_number
+        return _PLUS_SIGN + unicode(country_code) + u("-") + formatted_number
     else:
         return formatted_number
 
@@ -1207,7 +1207,7 @@ def _format_national_number(number, region_code, num_format, carrier_code=None):
                                                              num_format,
                                                              carrier_code)
     if num_format == PhoneNumberFormat.RFC3966:
-        formatted_national_number = re.sub(_SEPARATOR_PATTERN, u"-",
+        formatted_national_number = re.sub(_SEPARATOR_PATTERN, u("-"),
                                            formatted_national_number)
     return formatted_national_number
 
@@ -1569,7 +1569,7 @@ def ndd_prefix_for_region(region_code, strip_non_digits):
     if strip_non_digits:
         # Note: if any other non-numeric symbols are ever used in national
         # prefixes, these would have to be removed here as well.
-        national_prefix = re.sub(u"~", u"", national_prefix)
+        national_prefix = re.sub(u("~"), u(""), national_prefix)
     return national_prefix
 
 
@@ -1828,10 +1828,10 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
         was extracted, this will be empty.
     """
     if len(number) == 0:
-        return (0, u"")
+        return (0, u(""))
     full_number = number
     # Set the default prefix to be something that will never match.
-    possible_country_idd_prefix = u"NonMatch"
+    possible_country_idd_prefix = u("NonMatch")
     if metadata is not None:
         possible_country_idd_prefix = metadata.international_prefix
 
@@ -1884,7 +1884,7 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
 
     # No country calling code present.
     numobj.country_code = 0
-    return (0, u"")
+    return (0, u(""))
 
 
 def _parse_prefix_as_idd(idd_pattern, number):
@@ -1904,7 +1904,7 @@ def _parse_prefix_as_idd(idd_pattern, number):
         digit_match = _CAPTURING_DIGIT_PATTERN.search(number[match_end:])
         if digit_match:
             normalized_group = normalize_digits_only(digit_match.group(1))
-            if normalized_group == u"0":
+            if normalized_group == u("0"):
                 return (False, number)
         return (True, number[match_end:])
     return (False, number)
@@ -1963,13 +1963,13 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
      - The number with the prefix stripped.
      - Boolean indicating if a national prefix or carrier code (or both) could be extracted.
      """
-    carrier_code = u""
+    carrier_code = u("")
     possible_national_prefix = metadata.national_prefix_for_parsing
     if (len(number) == 0 or
         possible_national_prefix is None or
         len(possible_national_prefix) == 0):
         # Early return for numbers of zero length.
-        return (u"", number, False)
+        return (u(""), number, False)
 
     # Attempt to parse the first digits as a national prefix.
     prefix_pattern = re.compile(possible_national_prefix)
@@ -1991,7 +1991,7 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
             national_number_match = fullmatch(national_number_pattern,
                                               number[prefix_match.end():])
             if (is_viable_original_number and not national_number_match):
-                return (u"", number, False)
+                return (u(""), number, False)
 
             if (num_groups > 0 and
                 prefix_match.groups(num_groups) is not None):
@@ -2398,4 +2398,4 @@ class NumberParseException(UnicodeMixin, Exception):
         self._msg = msg
 
     def __unicode__(self):
-        return u"(%s) %s" % (self.error_type, self._msg)
+        return u("(%s) %s") % (self.error_type, self._msg)
