@@ -43,7 +43,7 @@ from xml.etree import ElementTree as etree
 
 # Pull in the data structure definitions
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
-from phonenumbers.util import UnicodeMixin
+from phonenumbers.util import UnicodeMixin, u, prnt
 
 # Convention: variables beginning with 'x' are XML objects
 
@@ -134,9 +134,9 @@ def _expand_formatting_rule(rule, national_prefix):
     if rule is None:
         return None
     if national_prefix is None:
-        national_prefix = u""
-    rule = re.sub(u'\$NP', national_prefix, rule)
-    rule = re.sub(u'\$FG', u'$1', rule)
+        national_prefix = u("")
+    rule = re.sub(u("\$NP"), national_prefix, rule)
+    rule = re.sub(u("\$FG"), u("$1"), rule)
     return rule
 
 
@@ -370,14 +370,14 @@ class XPhoneNumberMetadata(UnicodeMixin):
                 raise Exception("Unexpected element %s found" % xterritory.tag)
 
     def __unicode__(self):
-        return u'\n'.join([u"%s: %s" % (country_id, territory) for country_id, territory in self.territory.items()])
+        return u("\n").join([u("%s: %s") % (country_id, territory) for country_id, territory in self.territory.items()])
 
     def emit_metadata_for_region_py(self, region, region_filename, module_prefix):
         """Emit Python code generating the metadata for the given region"""
         terrobj = self.territory[region]
         with open(region_filename, "w") as outfile:
-            print >> outfile, _REGION_METADATA_PROLOG % (terrobj.o.id, module_prefix)
-            print >> outfile, "PHONE_METADATA_%s = %s" % (terrobj.o.id, terrobj)
+            prnt(_REGION_METADATA_PROLOG % (terrobj.o.id, module_prefix), file=outfile)
+            prnt("PHONE_METADATA_%s = %s" % (terrobj.o.id, terrobj), file=outfile)
 
     def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
@@ -394,13 +394,13 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
         # Now build a module file that includes them all
         with open(modulefilename, "w") as outfile:
-            print >> outfile, METADATA_FILE_PROLOG
-            print >> outfile, COPYRIGHT_NOTICE
+            prnt(METADATA_FILE_PROLOG, file=outfile)
+            prnt(COPYRIGHT_NOTICE, file=outfile)
             for country_id in sorted(self.territory.keys()):
-                print >> outfile, "from .region_%s import PHONE_METADATA_%s" % (country_id, country_id)
+                prnt("from .region_%s import PHONE_METADATA_%s" % (country_id, country_id), file=outfile)
             # Emit the mapping from country code to region code
-            print >> outfile, _COUNTRY_CODE_TO_REGION_CODE_PROLOG
-            print >> outfile, "_COUNTRY_CODE_TO_REGION_CODE = {"
+            prnt(_COUNTRY_CODE_TO_REGION_CODE_PROLOG, file=outfile)
+            prnt("_COUNTRY_CODE_TO_REGION_CODE = {", file=outfile)
             # Build up the map
             country_code_to_region_code = {}
             for country_id in sorted(self.territory.keys()):
@@ -415,8 +415,8 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
             for country_code in sorted(country_code_to_region_code.keys()):
                 country_ids = country_code_to_region_code[country_code]
-                print >> outfile, '    %d: ("%s",),' % (country_code, '", "'.join(country_ids))
-            print >> outfile, "}"
+                prnt('    %d: ("%s",),' % (country_code, '", "'.join(country_ids)), file=outfile)
+            prnt("}", file=outfile)
 
 
 def _standalone(argv):

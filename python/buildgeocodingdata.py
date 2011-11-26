@@ -30,10 +30,12 @@ import glob
 import re
 import datetime
 
+from phonenumbers.util import prnt
+
 GEODATA_SUFFIX = ".txt"
-BLANK_LINE_RE = re.compile(ur'^\s*$', re.UNICODE)
-COMMENT_LINE_RE = re.compile(ur'^\s*#.*$', re.UNICODE)
-DATA_LINE_RE = re.compile(ur'^(?P<prefix>\d+)\|(?P<location>.*)$', re.UNICODE)
+BLANK_LINE_RE = re.compile(r'^\s*$', re.UNICODE)
+COMMENT_LINE_RE = re.compile(r'^\s*#.*$', re.UNICODE)
+DATA_LINE_RE = re.compile(r'^(?P<prefix>\d+)\|(?P<location>.*)$', re.UNICODE)
 
 # Boilerplate header
 GEODATA_FILE_PROLOG = '''"""Geocoding data, mapping each prefix to a dict of locale:locationname.
@@ -111,7 +113,6 @@ def load_geodata(indir):
 
 def _stable_dict_repr(strdict):
     """Return a repr() for a dict keyed by a string, in sorted key order"""
-    # '4143':{'fr': u'Zurich', 'de': u'Z\xfcrich', 'en': u'Zurich', 'it': u'Zurigo'},
     lines = []
     for key in sorted(strdict.keys()):
         lines.append("%r: %r" % (key, strdict[key]))
@@ -122,15 +123,15 @@ def output_geodata_code(geodata, outfilename):
     """Output the geocoding data in Python form to the given file """
     with open(outfilename, "w") as outfile:
         longest_prefix = 0
-        print >> outfile, GEODATA_FILE_PROLOG
-        print >> outfile, COPYRIGHT_NOTICE
-        print >> outfile, "GEOCODE_DATA = {"
+        prnt(GEODATA_FILE_PROLOG, file=outfile)
+        prnt(COPYRIGHT_NOTICE, file=outfile)
+        prnt("GEOCODE_DATA = {", file=outfile)
         for prefix in sorted(geodata.keys()):
             if len(prefix) > longest_prefix:
                 longest_prefix = len(prefix)
-            print >> outfile, " '%s':%s," % (prefix, _stable_dict_repr(geodata[prefix]))
-        print >> outfile, "}"
-        print >> outfile, "GEOCODE_LONGEST_PREFIX = %d" % longest_prefix
+            prnt(" '%s':%s," % (prefix, _stable_dict_repr(geodata[prefix])), file=outfile)
+        prnt("}", file=outfile)
+        prnt("GEOCODE_LONGEST_PREFIX = %d" % longest_prefix, file=outfile)
 
 
 def _standalone(argv):
