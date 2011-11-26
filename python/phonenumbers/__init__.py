@@ -3,8 +3,9 @@
 Examples of use:
 
 >>> import phonenumbers
+>>> from phonenumbers.util import prnt  # equivalent to Py3k print()
 >>> x = phonenumbers.parse("+442083661177", None)
->>> print x
+>>> prnt(x)
 Country Code: 44 National Number: 2083661177 Leading Zero: False
 >>> type(x)
 <class 'phonenumbers.phonenumber.PhoneNumber'>
@@ -15,41 +16,41 @@ Country Code: 44 National Number: 2083661177 Leading Zero: False
 >>> str(phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.E164))
 '+442083661177'
 >>> y = phonenumbers.parse("020 8366 1177", "GB")
->>> print y
+>>> prnt(y)
 Country Code: 44 National Number: 2083661177 Leading Zero: False
 >>> x == y
 True
 >>>
 >>> formatter = phonenumbers.AsYouTypeFormatter("US")
->>> print formatter.input_digit("6")
+>>> prnt(formatter.input_digit("6"))
 6
->>> print formatter.input_digit("5")
+>>> prnt(formatter.input_digit("5"))
 65
->>> print formatter.input_digit("0")
+>>> prnt(formatter.input_digit("0"))
 650
->>> print formatter.input_digit("2")
+>>> prnt(formatter.input_digit("2"))
 650-2
->>> print formatter.input_digit("5")
+>>> prnt(formatter.input_digit("5"))
 650-25
->>> print formatter.input_digit("3")
+>>> prnt(formatter.input_digit("3"))
 650-253
->>> print formatter.input_digit("2")
+>>> prnt(formatter.input_digit("2"))
 650-2532
->>> print formatter.input_digit("2")
+>>> prnt(formatter.input_digit("2"))
 (650) 253-22
->>> print formatter.input_digit("2")
+>>> prnt(formatter.input_digit("2"))
 (650) 253-222
->>> print formatter.input_digit("2")
+>>> prnt(formatter.input_digit("2"))
 (650) 253-2222
 >>>
 >>> text = "Call me at 510-748-8230 if it's before 9:30, or on 703-4800500 after 10am."
 >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
-...     print match
+...     prnt(match)
 ...
 PhoneNumberMatch [11,23) 510-748-8230
 PhoneNumberMatch [51,62) 703-4800500
 >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
-...     print phonenumbers.format_number(match.number, phonenumbers.PhoneNumberFormat.E164)
+...     prnt(phonenumbers.format_number(match.number, phonenumbers.PhoneNumberFormat.E164))
 ...
 +15107488230
 +17034800500

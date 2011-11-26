@@ -31,7 +31,7 @@ author: David Drysdale (Python version)
 import re
 
 from .re_util import fullmatch   # Extra regexp function; see README
-from .util import UnicodeMixin, u
+from .util import UnicodeMixin, u, prnt
 from .unicode_util import digit as unicode_digit
 
 # Data class definitions
@@ -48,7 +48,7 @@ except ImportError:  # pragma no cover
     import os
     import sys
     if os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py":
-        print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
+        prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
     else:
         raise
