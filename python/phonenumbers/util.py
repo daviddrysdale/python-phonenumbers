@@ -25,7 +25,6 @@ if sys.version_info >= (3, 0):  # pragma no cover
     print3 = builtins.__dict__['print']
 
     u = str
-    unicode = str
     uchr = chr
     to_long = int
 
