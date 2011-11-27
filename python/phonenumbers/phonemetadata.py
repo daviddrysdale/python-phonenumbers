@@ -16,7 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin, u
+from .util import UnicodeMixin, u, rpr
 
 
 class NumberFormat(UnicodeMixin):
@@ -123,17 +123,17 @@ class NumberFormat(UnicodeMixin):
 
     def __unicode__(self):
         # Generate a string that is valid Python input for the constructor.
-        # Note that we use %r, which generates its own quotes.
-        result = u("NumberFormat(pattern=%r, format=%r") % (self.pattern, self.format)
+        # Note that we use rpr (variant of repr), which generates its own quotes.
+        result = u("NumberFormat(pattern=%s, format=%s") % (rpr(self.pattern), rpr(self.format))
         if len(self.leading_digits_pattern) > 0:
             result += (u(", leading_digits_pattern=[%s]") %
-                       ", ".join(["%r" % ld for ld in self.leading_digits_pattern]))
+                       ", ".join([rpr(ld) for ld in self.leading_digits_pattern]))
         if self.national_prefix_formatting_rule is not None:
-            result += u(", national_prefix_formatting_rule=%r") % self.national_prefix_formatting_rule
+            result += u(", national_prefix_formatting_rule=%s") % rpr(self.national_prefix_formatting_rule)
         if self.national_prefix_optional_when_formatting:
-            result += u(", national_prefix_optional_when_formatting=%r") % self.national_prefix_optional_when_formatting
+            result += u(", national_prefix_optional_when_formatting=%s") % rpr(self.national_prefix_optional_when_formatting)
         if self.domestic_carrier_code_formatting_rule is not None:
-            result += u(", domestic_carrier_code_formatting_rule=%r") % self.domestic_carrier_code_formatting_rule
+            result += u(", domestic_carrier_code_formatting_rule=%s") % rpr(self.domestic_carrier_code_formatting_rule)
         result += u(")")
         return result
 
@@ -188,13 +188,13 @@ class PhoneNumberDesc(UnicodeMixin):
         result = u("PhoneNumberDesc(")
         sep = u("")
         if self.national_number_pattern is not None:
-            result += u("%snational_number_pattern=%r") % (sep, self.national_number_pattern)
+            result += u("%snational_number_pattern=%s") % (sep, rpr(self.national_number_pattern))
             sep = u(", ")
         if self.possible_number_pattern is not None:
-            result += u("%spossible_number_pattern=%r") % (sep, self.possible_number_pattern)
+            result += u("%spossible_number_pattern=%s") % (sep, rpr(self.possible_number_pattern))
             sep = u(", ")
         if self.example_number is not None:
-            result += u("%sexample_number=%r") % (sep, self.example_number)
+            result += u("%sexample_number=%s") % (sep, rpr(self.example_number))
             sep = u(", ")
         result += u(")")
         return result
@@ -414,8 +414,8 @@ class PhoneMetadata(UnicodeMixin):
         country_code = self.country_code
         if country_code is None:
             country_code = -1
-        result = (u("PhoneMetadata(id='%s', country_code=%d, international_prefix=%r") %
-                  (self.id, country_code, self.international_prefix))
+        result = (u("PhoneMetadata(id='%s', country_code=%d, international_prefix=%s") %
+                  (self.id, country_code, rpr(self.international_prefix)))
         result += ",\n    general_desc=%s" % self.general_desc
         result += ",\n    fixed_line=%s" % self.fixed_line
         result += ",\n    mobile=%s" % self.mobile
@@ -430,16 +430,16 @@ class PhoneMetadata(UnicodeMixin):
         result += ",\n    no_international_dialling=%s" % self.no_international_dialling
 
         if self.preferred_international_prefix is not None:
-            result += ",\n    preferred_international_prefix=%r" % self.preferred_international_prefix
+            result += ",\n    preferred_international_prefix=%s" % rpr(self.preferred_international_prefix)
         if self.national_prefix is not None:
-            result += ",\n    national_prefix=%r" % self.national_prefix
+            result += ",\n    national_prefix=%s" % rpr(self.national_prefix)
         if self.preferred_extn_prefix is not None:
-            result += ",\n    preferred_extn_prefix=%r" % self.preferred_extn_prefix
+            result += ",\n    preferred_extn_prefix=%s" % rpr(self.preferred_extn_prefix)
         if self.national_prefix_for_parsing is not None:
-            result += ",\n    national_prefix_for_parsing=%r" % self.national_prefix_for_parsing
+            result += ",\n    national_prefix_for_parsing=%s" % rpr(self.national_prefix_for_parsing)
         if self.national_prefix_transform_rule is not None:
-            # Note that we use %r on self.national_prefix_transform_rule, which generates its own quotes
-            result += ",\n    national_prefix_transform_rule=%r" % self.national_prefix_transform_rule
+            # Note that we use rpr() on self.national_prefix_transform_rule, which generates its own quotes
+            result += ",\n    national_prefix_transform_rule=%s" % rpr(self.national_prefix_transform_rule)
         if len(self.number_format) > 0:
             result += ",\n    number_format=[%s]" % ',\n        '.join(map(u, self.number_format))
         if len(self.intl_number_format) > 0:

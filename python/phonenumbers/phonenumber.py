@@ -16,7 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin
+from .util import UnicodeMixin, rpr
 
 
 class CountryCodeSource(object):
@@ -180,14 +180,14 @@ class PhoneNumber(UnicodeMixin):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return (("PhoneNumber(country_code=%r, national_number=%r, extension=%r, " +
-                 "italian_leading_zero=%r, country_code_source=%r, preferred_domestic_carrier_code=%r)") %
-                (self.country_code,
-                 self.national_number,
-                 self.extension,
-                 self.italian_leading_zero,
-                 self.country_code_source,
-                 self.preferred_domestic_carrier_code))
+        return (("PhoneNumber(country_code=%s, national_number=%s, extension=%s, " +
+                 "italian_leading_zero=%s, country_code_source=%s, preferred_domestic_carrier_code=%s)") %
+                (rpr(self.country_code),
+                 rpr(self.national_number),
+                 rpr(self.extension),
+                 rpr(self.italian_leading_zero),
+                 rpr(self.country_code_source),
+                 rpr(self.preferred_domestic_carrier_code)))
 
     def __unicode__(self):
         result = ("Country Code: %s National Number: %s" %

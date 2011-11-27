@@ -62,8 +62,9 @@ _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
 # "main_country_for_code" in the metadata should be first.'''
 
 # Boilerplate header for individual region data files
-_REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %s metadata"""
-from %s.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+_REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %(region)s metadata"""
+from %(module)s.util import u
+from %(module)s.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 '''
 
 # Copyright notice covering the XML metadata; include current year.
@@ -376,7 +377,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
         """Emit Python code generating the metadata for the given region"""
         terrobj = self.territory[region]
         with open(region_filename, "w") as outfile:
-            prnt(_REGION_METADATA_PROLOG % (terrobj.o.id, module_prefix), file=outfile)
+            prnt(_REGION_METADATA_PROLOG % {'region': terrobj.o.id, 'module': module_prefix}, file=outfile)
             prnt("PHONE_METADATA_%s = %s" % (terrobj.o.id, terrobj), file=outfile)
 
     def emit_metadata_py(self, datadir, module_prefix):

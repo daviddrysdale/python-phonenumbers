@@ -27,6 +27,9 @@ if sys.version_info >= (3, 0):  # pragma no cover
     u = str
     uchr = chr
     to_long = int
+    # TODO create a Py3k repr-equivalent that produces something
+    # parsable in Python 2 (with the assistance of this module)
+    rpr = repr
 
     def prnt(*args, **kwargs):
         sep = kwargs.get('sep', ' ')
@@ -55,6 +58,11 @@ else:  # pragma no cover
 
     uchr = unichr
     to_long = long
+
+    _U_RE = re.compile("^u('[^']*')")
+    def rpr(obj):
+        s = repr(obj)
+        return re.sub(_U_RE, r'u(\1)', s)
 
     def prnt(*args, **kwargs):
         sep = kwargs.get('sep', ' ')
