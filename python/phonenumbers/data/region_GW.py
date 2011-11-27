@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. GW metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_GW = PhoneMetadata(id='GW', country_code=245, international_prefix='00',
@@ -14,4 +15,4 @@ PHONE_METADATA_GW = PhoneMetadata(id='GW', country_code=245, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='11[378]', possible_number_pattern='\\d{3}', example_number='113'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format=u'\\1 \\2')])
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format=u('\\1 \\2'))])

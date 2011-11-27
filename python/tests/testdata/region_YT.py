@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. YT metadata"""
+from phonenumbers.util import u
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_YT = PhoneMetadata(id='YT', country_code=262, international_prefix='00',

@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. CX metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CX = PhoneMetadata(id='CX', country_code=61, international_prefix='(?:14(?:1[14]|34|4[17]|[56]6|7[47]|88))?001[14-689]',

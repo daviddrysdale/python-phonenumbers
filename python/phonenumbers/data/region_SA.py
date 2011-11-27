@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. SA metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_SA = PhoneMetadata(id='SA', country_code=966, international_prefix='00',
@@ -16,8 +17,8 @@ PHONE_METADATA_SA = PhoneMetadata(id='SA', country_code=966, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([1-467])(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[1-467]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(9200)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['9'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(5\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['5'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(800)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['80'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(8111)(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['81'], national_prefix_formatting_rule=u'0\\1')])
+    number_format=[NumberFormat(pattern='([1-467])(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[1-467]'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(9200)(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['9'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(5\\d)(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['5'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(800)(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['80'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(8111)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['81'], national_prefix_formatting_rule=u('0\\1'))])

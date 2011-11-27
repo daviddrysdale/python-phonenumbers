@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. KR metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix='00(?:[124-68]|[37]\\d{2})',
@@ -16,13 +17,13 @@ PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0(8[1-46-8]|85\\d{2})?',
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['1(?:0|1[19]|[69]9|5[458])|[57]0', '1(?:0|1[19]|[69]9|5(?:44|59|8))|[57]0'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3,4})(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['1(?:[169][2-8]|[78]|5[1-4])|[68]0|[3-6][1-9][2-9]', '1(?:[169][2-8]|[78]|5(?:[1-3]|4[56]))|[68]0|[3-6][1-9][2-9]'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d)(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['131', '1312'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['131', '131[13-9]'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['13[2-9]'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{3})(\\d{4})', format=u'\\1-\\2-\\3-\\4', leading_digits_pattern=['30'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d)(\\d{3,4})(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['2[2-9]'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d)(\\d{3,4})', format=u'\\1-\\2', leading_digits_pattern=['21[0-46-9]'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3,4})', format=u'\\1-\\2', leading_digits_pattern=['[3-6][1-9]1', '[3-6][1-9]1(?:[0-46-9])'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1-\\2', leading_digits_pattern=['1(?:5[46-9]|6[04678])', '1(?:5(?:44|66|77|88|99)|6(?:00|44|6[16]|70|88))'], national_prefix_formatting_rule=u'\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1')])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u('\\1-\\2-\\3'), leading_digits_pattern=['1(?:0|1[19]|[69]9|5[458])|[57]0', '1(?:0|1[19]|[69]9|5(?:44|59|8))|[57]0'], national_prefix_formatting_rule=u('0\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1')),
+        NumberFormat(pattern='(\\d{2})(\\d{3,4})(\\d{4})', format=u('\\1-\\2-\\3'), leading_digits_pattern=['1(?:[169][2-8]|[78]|5[1-4])|[68]0|[3-6][1-9][2-9]', '1(?:[169][2-8]|[78]|5(?:[1-3]|4[56]))|[68]0|[3-6][1-9][2-9]'], national_prefix_formatting_rule=u('0\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1')),
+        NumberFormat(pattern='(\\d{3})(\\d)(\\d{4})', format=u('\\1-\\2-\\3'), leading_digits_pattern=['131', '1312'], national_prefix_formatting_rule=u('0\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1')),
+        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{4})', format=u('\\1-\\2-\\3'), leading_digits_pattern=['131', '131[13-9]'], national_prefix_formatting_rule=u('0\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1')),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u('\\1-\\2-\\3'), leading_digits_pattern=['13[2-9]'], national_prefix_formatting_rule=u('0\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1')),
+        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{3})(\\d{4})', format=u('\\1-\\2-\\3-\\4'), leading_digits_pattern=['30'], national_prefix_formatting_rule=u('0\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1')),
+        NumberFormat(pattern='(\\d)(\\d{3,4})(\\d{4})', format=u('\\1-\\2-\\3'), leading_digits_pattern=['2[2-9]'], national_prefix_formatting_rule=u('0\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1')),
+        NumberFormat(pattern='(\\d)(\\d{3,4})', format=u('\\1-\\2'), leading_digits_pattern=['21[0-46-9]'], national_prefix_formatting_rule=u('0\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1')),
+        NumberFormat(pattern='(\\d{2})(\\d{3,4})', format=u('\\1-\\2'), leading_digits_pattern=['[3-6][1-9]1', '[3-6][1-9]1(?:[0-46-9])'], national_prefix_formatting_rule=u('0\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1')),
+        NumberFormat(pattern='(\\d{4})(\\d{4})', format=u('\\1-\\2'), leading_digits_pattern=['1(?:5[46-9]|6[04678])', '1(?:5(?:44|66|77|88|99)|6(?:00|44|6[16]|70|88))'], national_prefix_formatting_rule=u('\\1'), domestic_carrier_code_formatting_rule=u('0$CC-\\1'))])

@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. KH metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_KH = PhoneMetadata(id='KH', country_code=855, international_prefix='00[178]',
@@ -16,5 +17,5 @@ PHONE_METADATA_KH = PhoneMetadata(id='KH', country_code=855, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1\\d[1-9]|[2-9]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(1[89]00)(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1[89]0'])])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1\\d[1-9]|[2-9]'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(1[89]00)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1[89]0'])])

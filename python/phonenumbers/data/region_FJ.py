@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. FJ metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_FJ = PhoneMetadata(id='FJ', country_code=679, international_prefix='0(?:0|52)',
@@ -15,6 +16,6 @@ PHONE_METADATA_FJ = PhoneMetadata(id='FJ', country_code=679, international_prefi
     emergency=PhoneNumberDesc(national_number_pattern='91[17]', possible_number_pattern='\\d{3}', example_number='911'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix='00',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[36-9]']),
-        NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['0'])],
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format=u('\\1 \\2'), leading_digits_pattern=['[36-9]']),
+        NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['0'])],
     leading_zero_possible=True)

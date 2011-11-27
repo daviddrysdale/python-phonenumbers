@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. TK metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_TK = PhoneMetadata(id='TK', country_code=690, international_prefix='00',

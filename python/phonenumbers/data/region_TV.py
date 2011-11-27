@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. TV metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_TV = PhoneMetadata(id='TV', country_code=688, international_prefix='00',

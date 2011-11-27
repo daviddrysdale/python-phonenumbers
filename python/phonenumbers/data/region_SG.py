@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. SG metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_SG = PhoneMetadata(id='SG', country_code=65, international_prefix='0[0-3][0-9]',
@@ -14,7 +15,7 @@ PHONE_METADATA_SG = PhoneMetadata(id='SG', country_code=65, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='7000\\d{7}', possible_number_pattern='\\d{11}', example_number='70001234567'),
     emergency=PhoneNumberDesc(national_number_pattern='99[59]', possible_number_pattern='\\d{3}', example_number='999'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='([3689]\\d{3})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[369]|8[1-9]']),
-        NumberFormat(pattern='(1[89]00)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1[89]']),
-        NumberFormat(pattern='(7000)(\\d{4})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['70']),
-        NumberFormat(pattern='(800)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['80'])])
+    number_format=[NumberFormat(pattern='([3689]\\d{3})(\\d{4})', format=u('\\1 \\2'), leading_digits_pattern=['[369]|8[1-9]']),
+        NumberFormat(pattern='(1[89]00)(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1[89]']),
+        NumberFormat(pattern='(7000)(\\d{4})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['70']),
+        NumberFormat(pattern='(800)(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['80'])])

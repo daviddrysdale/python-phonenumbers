@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. KE metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_KE = PhoneMetadata(id='KE', country_code=254, international_prefix='000',
@@ -16,6 +17,6 @@ PHONE_METADATA_KE = PhoneMetadata(id='KE', country_code=254, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{4,7})', format=u'\\1 \\2', leading_digits_pattern=['[24-6]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{6,7})', format=u'\\1 \\2', leading_digits_pattern=['7'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u'0\\1')])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{4,7})', format=u('\\1 \\2'), leading_digits_pattern=['[24-6]'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(\\d{3})(\\d{6,7})', format=u('\\1 \\2'), leading_digits_pattern=['7'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3,4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u('0\\1'))])

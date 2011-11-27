@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. OM metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_OM = PhoneMetadata(id='OM', country_code=968, international_prefix='00',
@@ -14,6 +15,6 @@ PHONE_METADATA_OM = PhoneMetadata(id='OM', country_code=968, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='9999', possible_number_pattern='\\d{4}', example_number='9999'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(2\\d)(\\d{6})', format=u'\\1 \\2', leading_digits_pattern=['2']),
-        NumberFormat(pattern='(9\\d{3})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['9']),
-        NumberFormat(pattern='([58]00)(\\d{4,6})', format=u'\\1 \\2', leading_digits_pattern=['[58]'])])
+    number_format=[NumberFormat(pattern='(2\\d)(\\d{6})', format=u('\\1 \\2'), leading_digits_pattern=['2']),
+        NumberFormat(pattern='(9\\d{3})(\\d{4})', format=u('\\1 \\2'), leading_digits_pattern=['9']),
+        NumberFormat(pattern='([58]00)(\\d{4,6})', format=u('\\1 \\2'), leading_digits_pattern=['[58]'])])

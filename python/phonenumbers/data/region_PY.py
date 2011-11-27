@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. PY metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_PY = PhoneMetadata(id='PY', country_code=595, international_prefix='00',
@@ -16,8 +17,8 @@ PHONE_METADATA_PY = PhoneMetadata(id='PY', country_code=595, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{5,7})', format=u'\\1 \\2', leading_digits_pattern=['(?:[26]1|3[289]|4[124678]|7[123]|8[1236])'], national_prefix_formatting_rule=u'(\\1)'),
-        NumberFormat(pattern='(\\d{3})(\\d{3,6})', format=u'\\1 \\2', leading_digits_pattern=['[2-9]0'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{6})', format=u'\\1 \\2', leading_digits_pattern=['9[1-9]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['8700']),
-        NumberFormat(pattern='(\\d{3})(\\d{4,6})', format=u'\\1 \\2', leading_digits_pattern=['[2-8][1-9]'], national_prefix_formatting_rule=u'(\\1)')])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{5,7})', format=u('\\1 \\2'), leading_digits_pattern=['(?:[26]1|3[289]|4[124678]|7[123]|8[1236])'], national_prefix_formatting_rule=u('(\\1)')),
+        NumberFormat(pattern='(\\d{3})(\\d{3,6})', format=u('\\1 \\2'), leading_digits_pattern=['[2-9]0'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(\\d{3})(\\d{6})', format=u('\\1 \\2'), leading_digits_pattern=['9[1-9]'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['8700']),
+        NumberFormat(pattern='(\\d{3})(\\d{4,6})', format=u('\\1 \\2'), leading_digits_pattern=['[2-8][1-9]'], national_prefix_formatting_rule=u('(\\1)'))])

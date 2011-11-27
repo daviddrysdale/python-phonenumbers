@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. AD metadata"""
+from phonenumbers.util import u
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AD = PhoneMetadata(id='AD', country_code=376, international_prefix='00',

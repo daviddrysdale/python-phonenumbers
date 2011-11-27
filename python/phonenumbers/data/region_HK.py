@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. HK metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_HK = PhoneMetadata(id='HK', country_code=852, international_prefix='00',
@@ -14,6 +15,6 @@ PHONE_METADATA_HK = PhoneMetadata(id='HK', country_code=852, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='112|99[29]', possible_number_pattern='\\d{3}', example_number='999'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[235-7]|[89](?:0[1-9]|[1-9])']),
-        NumberFormat(pattern='(800)(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['800']),
-        NumberFormat(pattern='(900)(\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['900'])])
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u('\\1 \\2'), leading_digits_pattern=['[235-7]|[89](?:0[1-9]|[1-9])']),
+        NumberFormat(pattern='(800)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['800']),
+        NumberFormat(pattern='(900)(\\d{2})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['900'])])

@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. PS metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_PS = PhoneMetadata(id='PS', country_code=970, international_prefix='00',
@@ -16,6 +17,6 @@ PHONE_METADATA_PS = PhoneMetadata(id='PS', country_code=970, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([2489])(2\\d{2})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2489]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(5[69]\\d)(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['5'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(1[78]00)(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1[78]'], national_prefix_formatting_rule=u'\\1')])
+    number_format=[NumberFormat(pattern='([2489])(2\\d{2})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[2489]'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(5[69]\\d)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['5'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(1[78]00)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1[78]'], national_prefix_formatting_rule=u('\\1'))])

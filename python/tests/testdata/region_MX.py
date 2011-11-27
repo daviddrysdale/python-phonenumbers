@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. MX metadata"""
+from phonenumbers.util import u
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix='00',
@@ -16,14 +17,14 @@ PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='01',
     national_prefix_for_parsing='01|04[45](\\d{10})',
-    national_prefix_transform_rule=u'1\\1',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]00'], national_prefix_formatting_rule=u'01 \\1', national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['33|55|81'], national_prefix_formatting_rule=u'01 \\1', national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2467]|3[0-24-9]|5[0-46-9]|8[2-9]|9[1-9]'], national_prefix_formatting_rule=u'01 \\1', national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(1)(\\d{2})(\\d{4})(\\d{4})', format=u'045 \\2 \\3 \\4', leading_digits_pattern=['1(?:33|55|81)'], national_prefix_formatting_rule=u'\\1', national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(1)(\\d{3})(\\d{3})(\\d{4})', format=u'045 \\2 \\3 \\4', leading_digits_pattern=['1(?:[124579]|3[0-24-9]|5[0-46-9]|8[02-9])'], national_prefix_formatting_rule=u'\\1', national_prefix_optional_when_formatting=True)],
-    intl_number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[89]00']),
-        NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['33|55|81']),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2467]|3[0-24-9]|5[0-46-9]|8[2-9]|9[1-9]']),
-        NumberFormat(pattern='(1)(\\d{2})(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:33|55|81)']),
-        NumberFormat(pattern='(1)(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:[124579]|3[0-24-9]|5[0-46-9]|8[02-9])'])])
+    national_prefix_transform_rule=u('1\\1'),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[89]00'], national_prefix_formatting_rule=u('01 \\1'), national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['33|55|81'], national_prefix_formatting_rule=u('01 \\1'), national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[2467]|3[0-24-9]|5[0-46-9]|8[2-9]|9[1-9]'], national_prefix_formatting_rule=u('01 \\1'), national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(1)(\\d{2})(\\d{4})(\\d{4})', format=u('045 \\2 \\3 \\4'), leading_digits_pattern=['1(?:33|55|81)'], national_prefix_formatting_rule=u('\\1'), national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(1)(\\d{3})(\\d{3})(\\d{4})', format=u('045 \\2 \\3 \\4'), leading_digits_pattern=['1(?:[124579]|3[0-24-9]|5[0-46-9]|8[02-9])'], national_prefix_formatting_rule=u('\\1'), national_prefix_optional_when_formatting=True)],
+    intl_number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[89]00']),
+        NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['33|55|81']),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[2467]|3[0-24-9]|5[0-46-9]|8[2-9]|9[1-9]']),
+        NumberFormat(pattern='(1)(\\d{2})(\\d{4})(\\d{4})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['1(?:33|55|81)']),
+        NumberFormat(pattern='(1)(\\d{3})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['1(?:[124579]|3[0-24-9]|5[0-46-9]|8[02-9])'])])

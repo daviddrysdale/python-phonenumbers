@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. UY metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_UY = PhoneMetadata(id='UY', country_code=598, international_prefix='0(?:1[3-9]\\d|0)',
@@ -18,6 +19,6 @@ PHONE_METADATA_UY = PhoneMetadata(id='UY', country_code=598, international_prefi
     national_prefix='0',
     preferred_extn_prefix=' int. ',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[24]']),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['9[1-9]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[89]0'], national_prefix_formatting_rule=u'0\\1')])
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u('\\1 \\2'), leading_digits_pattern=['[24]']),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['9[1-9]'], national_prefix_formatting_rule=u('0\\1')),
+        NumberFormat(pattern='(\\d{3})(\\d{4})', format=u('\\1 \\2'), leading_digits_pattern=['[89]0'], national_prefix_formatting_rule=u('0\\1'))])

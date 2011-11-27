@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. JM metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_JM = PhoneMetadata(id='JM', country_code=1, international_prefix='011',

@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. BO metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_BO = PhoneMetadata(id='BO', country_code=591, international_prefix='00(1\\d)?',
@@ -16,5 +17,5 @@ PHONE_METADATA_BO = PhoneMetadata(id='BO', country_code=591, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0(1\\d)?',
-    number_format=[NumberFormat(pattern='([234])(\\d{7})', format=u'\\1 \\2', leading_digits_pattern=['[234]'], domestic_carrier_code_formatting_rule=u'0$CC \\1'),
-        NumberFormat(pattern='([67]\\d{7})', format=u'\\1', leading_digits_pattern=['[67]'], domestic_carrier_code_formatting_rule=u'0$CC \\1')])
+    number_format=[NumberFormat(pattern='([234])(\\d{7})', format=u('\\1 \\2'), leading_digits_pattern=['[234]'], domestic_carrier_code_formatting_rule=u('0$CC \\1')),
+        NumberFormat(pattern='([67]\\d{7})', format=u('\\1'), leading_digits_pattern=['[67]'], domestic_carrier_code_formatting_rule=u('0$CC \\1'))])

@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. BR metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix='00(?:1[45]|2[135]|[34]1|43)',
@@ -16,7 +17,7 @@ PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:400\\d|3003)\\d{4}', possible_number_pattern='\\d{8}', example_number='40041234'),
     national_prefix='0',
     national_prefix_for_parsing='0(?:(1[245]|2[135]|[34]1)(\\d{10}))?',
-    national_prefix_transform_rule=u'\\2',
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u'\\1 \\2-\\3', leading_digits_pattern=['[1-9][1-9]'], national_prefix_formatting_rule=u'(\\1)', domestic_carrier_code_formatting_rule=u'0 $CC (\\1)'),
-        NumberFormat(pattern='([34]00\\d)(\\d{4})', format=u'\\1-\\2', leading_digits_pattern=['[34]00', '400|3003']),
-        NumberFormat(pattern='([3589]00)(\\d{2,3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[3589]00'], national_prefix_formatting_rule=u'0\\1')])
+    national_prefix_transform_rule=u('\\2'),
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format=u('\\1 \\2-\\3'), leading_digits_pattern=['[1-9][1-9]'], national_prefix_formatting_rule=u('(\\1)'), domestic_carrier_code_formatting_rule=u('0 $CC (\\1)')),
+        NumberFormat(pattern='([34]00\\d)(\\d{4})', format=u('\\1-\\2'), leading_digits_pattern=['[34]00', '400|3003']),
+        NumberFormat(pattern='([3589]00)(\\d{2,3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[3589]00'], national_prefix_formatting_rule=u('0\\1'))])

@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. KZ metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_KZ = PhoneMetadata(id='KZ', country_code=7, international_prefix='810',

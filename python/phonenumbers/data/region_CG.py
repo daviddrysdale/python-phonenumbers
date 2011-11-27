@@ -1,4 +1,5 @@
 """Auto-generated file, do not edit by hand. CG metadata"""
+from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CG = PhoneMetadata(id='CG', country_code=242, international_prefix='00',
@@ -14,6 +15,6 @@ PHONE_METADATA_CG = PhoneMetadata(id='CG', country_code=242, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[02]']),
-        NumberFormat(pattern='(\\d)(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['8'])],
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[02]']),
+        NumberFormat(pattern='(\\d)(\\d{4})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['8'])],
     leading_zero_possible=True)
