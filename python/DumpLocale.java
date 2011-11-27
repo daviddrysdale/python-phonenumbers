@@ -9,15 +9,10 @@ import java.util.HashMap;
 class DumpLocale {
   private static final char SINGLE_QUOTE = 39;
   private static final char[] hexChar = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
-  private static boolean python3 = false;
 
   /* Print a Unicode name suitably escaped */
   private static void printName(String name) {
-    if (python3) {
-      System.out.print("'");
-    } else {
-      System.out.print("u'");
-    }
+    System.out.print("u('");
     // Need to escape unicode data
     for (int ii=0; ii<name.length(); ii++) {
       char c = name.charAt(ii);
@@ -36,7 +31,7 @@ class DumpLocale {
         System.out.print(hexChar[c & 0xF]);
       }
     }
-    System.out.print("'");
+    System.out.print("')");
   }
 
   private static void printProperty(String propName) {
@@ -60,6 +55,7 @@ class DumpLocale {
     System.out.println("");
     System.out.println("Auto-generated file, do not edit by hand.");
     System.out.println("\"\"\"");
+    System.out.println("from ..util import u");
   }
 
   public static void main(String[] args) {
