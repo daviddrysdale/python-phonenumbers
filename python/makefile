@@ -73,8 +73,11 @@ clean:
 	rm -f tests/*.pyc tests/testdata/*.pyc tests/testgeodata/*.pyc
 	rm -rf build deb_dist dist
 
-distclean: clean
+metaclean: clean
 	rm -rf phonenumbers/data tests/testdata
+	rm -rf phonenumbers/geodata/* tests/testgeodata/*
+
+distclean: metaclean
 	rm -rf $(PACKAGE).egg-info
 	rm -rf build
 	rm -f DumpLocale.class
