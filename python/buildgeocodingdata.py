@@ -2,7 +2,7 @@
 """Script to read the libphonenumber geocoding metadata and generate Python code.
 
 Invocation:
-  buildgeocodingdata.py indir outfile
+  buildgeocodingdata.py indir outfile module_prefix
 
 Processes all of the geocoding data under the given input directory and emit
 generated Python code.
@@ -30,7 +30,7 @@ import glob
 import re
 import datetime
 
-from phonenumbers.util import prnt
+from phonenumbers.util import prnt, rpr
 
 GEODATA_SUFFIX = ".txt"
 BLANK_LINE_RE = re.compile(r'^\s*$', re.UNICODE)
@@ -42,6 +42,7 @@ GEODATA_FILE_PROLOG = '''"""Geocoding data, mapping each prefix to a dict of loc
 
 Auto-generated file, do not edit by hand.
 """
+from %(module)s.util import u
 '''
 
 # Copyright notice covering the XML metadata; include current year.
@@ -115,15 +116,15 @@ def _stable_dict_repr(strdict):
     """Return a repr() for a dict keyed by a string, in sorted key order"""
     lines = []
     for key in sorted(strdict.keys()):
-        lines.append("%r: %r" % (key, strdict[key]))
+        lines.append("%s: %s" % (rpr(key), rpr(strdict[key])))
     return "{%s}" % ", ".join(lines)
 
 
-def output_geodata_code(geodata, outfilename):
+def output_geodata_code(geodata, outfilename, module_prefix):
     """Output the geocoding data in Python form to the given file """
     with open(outfilename, "w") as outfile:
         longest_prefix = 0
-        prnt(GEODATA_FILE_PROLOG, file=outfile)
+        prnt(GEODATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
         prnt(COPYRIGHT_NOTICE, file=outfile)
         prnt("GEOCODE_DATA = {", file=outfile)
         for prefix in sorted(geodata.keys()):
@@ -136,11 +137,11 @@ def output_geodata_code(geodata, outfilename):
 
 def _standalone(argv):
     """Parse the given input directory and emit generated code."""
-    if len(argv) != 2:
+    if len(argv) != 3:
         print >> sys.stderr, __doc__
         sys.exit(1)
     geodata = load_geodata(argv[0])
-    output_geodata_code(geodata, argv[1])
+    output_geodata_code(geodata, argv[1], argv[2])
 
 
 if __name__ == "__main__":
