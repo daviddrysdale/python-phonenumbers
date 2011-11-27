@@ -16,7 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin, rpr
+from .util import UnicodeMixin, rpr, to_long
 
 
 class CountryCodeSource(object):
@@ -79,7 +79,10 @@ class PhoneNumber(UnicodeMixin):
         # None if not set, of type long otherwise (and so it will never
         # contain any formatting (hypens, spaces, parentheses), nor any
         # alphanumeric spellings).
-        self.national_number = national_number  # None or long
+        if national_number is None:
+            self.national_number = None
+        else:
+            self.national_number = to_long(national_number)
 
         # Extension is not standardized in ITU recommendations, except for
         # being defined as a series of numbers with a maximum length of 40
