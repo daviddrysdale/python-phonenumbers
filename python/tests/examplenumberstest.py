@@ -22,7 +22,7 @@ import unittest
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber
-
+from phonenumbers.util import prnt
 
 class ExampleNumbersTest(unittest.TestCase):
     """Verifies all of the example numbers in the metadata are valid and of
@@ -50,16 +50,16 @@ class ExampleNumbersTest(unittest.TestCase):
             if exampleNumber is not None:
                 if not phonenumberutil.is_valid_number(exampleNumber):
                     self.invalid_cases.append(exampleNumber)
-                    print >> sys.stderr, "Failed validation for %s" % exampleNumber
+                    prnt("Failed validation for %s" % exampleNumber, file=sys.stderr)
                 else:
                     # We know the number is valid, now we check the type.
                     exampleNumberType = phonenumberutil.number_type(exampleNumber)
                     if exampleNumberType not in possibleExpectedTypes:
                         self.wrong_type_cases.append(exampleNumber)
-                        print >> sys.stderr, "Wrong type for %s: got %s" % (exampleNumber, exampleNumberType)
-                        print >> sys.stderr, "Expected types: "
+                        prnt("Wrong type for %s: got %s" % (exampleNumber, exampleNumberType), file=sys.stderr)
+                        prnt("Expected types: ", file=sys.stderr)
                         for phone_type in possibleExpectedTypes:
-                            print >> sys.stderr, "  %s" % phone_type
+                            prnt("  %s" % phone_type, file=sys.stderr)
 
     def testFixedLine(self):
         fixedLineTypes = set((PhoneNumberType.FIXED_LINE, PhoneNumberType.FIXED_LINE_OR_MOBILE))
@@ -120,8 +120,9 @@ class ExampleNumbersTest(unittest.TestCase):
                 if desc.example_number is not None:
                     exampleNumber = phonenumberutil.parse(desc.example_number, regionCode)
 
-            except NumberParseException, e:
-                print >> sys.stderr, "Failed parse: %s" % e
+            except NumberParseException:
+                _, e, _ = sys.exc_info()
+                prnt("Failed parse: %s" % e, file=sys.stderr)
 
             if (exampleNumber is not None and
                 phonenumberutil._can_be_internationally_dialled(exampleNumber)):
@@ -145,11 +146,11 @@ class ExampleNumbersTest(unittest.TestCase):
     def testFormatNumberForMobile(self):
         # Python version extra test.  Special cases for CO and BR in
         # format_number_for_mobile_dialing(), included here so that real metadata is used
-        coNumberFixed = PhoneNumber(country_code=57, national_number=12345678L)
-        coNumberMobile = PhoneNumber(country_code=57, national_number=3211234567L)
-        peNumberFixed = PhoneNumber(country_code=51, national_number=11234567L)
-        brNumberFixed = PhoneNumber(country_code=55, national_number=1123456789L)
-        brNumberMobile = PhoneNumber(country_code=55, national_number=1161234567L,
+        coNumberFixed = PhoneNumber(country_code=57, national_number=12345678)
+        coNumberMobile = PhoneNumber(country_code=57, national_number=3211234567)
+        peNumberFixed = PhoneNumber(country_code=51, national_number=11234567)
+        brNumberFixed = PhoneNumber(country_code=55, national_number=1123456789)
+        brNumberMobile = PhoneNumber(country_code=55, national_number=1161234567,
                                      preferred_domestic_carrier_code="303")
         self.assertEqual("0312345678",
                          phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", False))

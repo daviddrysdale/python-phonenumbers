@@ -22,6 +22,7 @@ import unittest
 
 from phonenumbers import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 from phonenumbers import PhoneNumber, phonenumberutil
+from phonenumbers.util import u
 from .phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 
 
@@ -153,7 +154,7 @@ VALID_CASES = [NumberTest("65 02 53 00 00.", "US"),
                NumberTest("1979-2011 100%", "US"),
                NumberTest("800 234 1 111x1111", "US"),
                NumberTest("+494949-4-94", "DE"),  # National number in wrong format
-               NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17", "US"),
+               NumberTest(u("\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17"), "US"),
                # Python version extra test - multiple x for extension marker
                NumberTest("800 234 1 111 xx 1111", "US"),
                ]
@@ -169,8 +170,8 @@ STRICT_GROUPING_CASES = [NumberTest("(415) 6667777", "US"),
                          ]
 
 # Strings with number-like things that should found at all levels.
-EXACT_GROUPING_CASES = [NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17\uFF17\uFF17\uFF17", "US"),
-                        NumberTest(u"\uFF14\uFF11\uFF15-\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17", "US"),
+EXACT_GROUPING_CASES = [NumberTest(u("\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17\uFF17\uFF17\uFF17"), "US"),
+                        NumberTest(u("\uFF14\uFF11\uFF15-\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17"), "US"),
                         NumberTest("4156667777", "US"),
                         NumberTest("4156667777 x 123", "US"),
                         NumberTest("415-666-7777", "US"),
@@ -244,11 +245,11 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         # Using "++" at the start.
         self.doTestFindInContext("++1 (650) 333-6000", "PL")
         # Using a full-width plus sign.
-        self.doTestFindInContext(u"\uFF0B1 (650) 333-6000", "SG")
+        self.doTestFindInContext(u("\uFF0B1 (650) 333-6000"), "SG")
         # The whole number, including punctuation, is here represented in
         # full-width form.
-        self.doTestFindInContext(u"\uFF0B\uFF11\u3000\uFF08\uFF16\uFF15\uFF10\uFF09" +
-                                 u"\u3000\uFF13\uFF13\uFF13\uFF0D\uFF16\uFF10\uFF10\uFF10",
+        self.doTestFindInContext(u("\uFF0B\uFF11\u3000\uFF08\uFF16\uFF15\uFF10\uFF09") +
+                                 u("\u3000\uFF13\uFF13\uFF13\uFF0D\uFF16\uFF10\uFF10\uFF10"),
                                  "SG")
 
     # See PhoneNumberUtilTest.testParseWithLeadingZero().
@@ -349,14 +350,14 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         #       0    5   10   15   20   25
 
         # Iterate over all possible indices.
-        for ii in xrange(6):
+        for ii in range(6):
             self.assertEqualRange(text, ii, 5, 14)
 
         # 7 and 8 digits in a row are still parsed as number.
         self.assertEqualRange(text, 6, 6, 14)
         self.assertEqualRange(text, 7, 7, 14)
         # Anything smaller is skipped to the second instance.
-        for ii in xrange(8, 20):
+        for ii in range(8, 20):
             self.assertEqualRange(text, ii, 19, 28)
 
     def testMatchWithSurroundingZipcodes(self):
@@ -391,15 +392,15 @@ class PhoneNumberMatcherTest(unittest.TestCase):
     def testIsLatinLetter(self):
         self.assertTrue(PhoneNumberMatcher._is_latin_letter('c'))
         self.assertTrue(PhoneNumberMatcher._is_latin_letter('C'))
-        self.assertTrue(PhoneNumberMatcher._is_latin_letter(u'\u00C9'))
-        self.assertTrue(PhoneNumberMatcher._is_latin_letter(u'\u0301'))  # Combining acute accent
+        self.assertTrue(PhoneNumberMatcher._is_latin_letter(u("\u00C9")))
+        self.assertTrue(PhoneNumberMatcher._is_latin_letter(u("\u0301")))  # Combining acute accent
         # Punctuation, digits and white-space are not considered "latin letters".
         self.assertFalse(PhoneNumberMatcher._is_latin_letter(':'))
         self.assertFalse(PhoneNumberMatcher._is_latin_letter('5'))
         self.assertFalse(PhoneNumberMatcher._is_latin_letter('-'))
         self.assertFalse(PhoneNumberMatcher._is_latin_letter('.'))
         self.assertFalse(PhoneNumberMatcher._is_latin_letter(' '))
-        self.assertFalse(PhoneNumberMatcher._is_latin_letter(u'\u6211'))  # Chinese character
+        self.assertFalse(PhoneNumberMatcher._is_latin_letter(u("\u6211")))  # Chinese character
 
     def testMatchesWithSurroundingLatinChars(self):
         possibleOnlyContexts = []
@@ -407,9 +408,9 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         possibleOnlyContexts.append(NumberContext("abc", ""))
         possibleOnlyContexts.append(NumberContext("", "def"))
         # Latin capital letter e with an acute accent.
-        possibleOnlyContexts.append(NumberContext(u"\u00C9", ""))
+        possibleOnlyContexts.append(NumberContext(u("\u00C9"), ""))
         # e with an acute accent decomposed (with combining mark).
-        possibleOnlyContexts.append(NumberContext(u"e\u0301", ""))
+        possibleOnlyContexts.append(NumberContext(u("e\u0301"), ""))
 
         # Numbers should not be considered valid, if they are surrounded by
         # Latin characters, but should be considered possible.
@@ -419,8 +420,8 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         possibleOnlyContexts = []
         possibleOnlyContexts.append(NumberContext("$", ""))
         possibleOnlyContexts.append(NumberContext("", "$"))
-        possibleOnlyContexts.append(NumberContext(u"\u00A3", ""))  # Pound sign
-        possibleOnlyContexts.append(NumberContext(u"\u00A5", ""))  # Yen sign
+        possibleOnlyContexts.append(NumberContext(u("\u00A3"), ""))  # Pound sign
+        possibleOnlyContexts.append(NumberContext(u("\u00A5"), ""))  # Yen sign
         self.findMatchesInContexts(possibleOnlyContexts, False, True)
 
     def testPercentageNotSeenAsPhoneNumber(self):
@@ -444,7 +445,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         possibleOnlyContexts = []
         possibleOnlyContexts.append(NumberContext("abc", "def"))
         possibleOnlyContexts.append(NumberContext("", "def"))
-        possibleOnlyContexts.append(NumberContext("", u"\u00C9"))
+        possibleOnlyContexts.append(NumberContext("", u("\u00C9")))
 
         # Numbers should not be considered valid, if they have trailing Latin
         # characters, but should be considered possible.
@@ -455,9 +456,9 @@ class PhoneNumberMatcherTest(unittest.TestCase):
 
         validContexts = []
         validContexts.append(NumberContext("abc", ""))
-        validContexts.append(NumberContext(u"\u00C9", ""))
-        validContexts.append(NumberContext(u"\u00C9", "."))  # Trailing punctuation.
-        validContexts.append(NumberContext(u"\u00C9", " def"))  # Trailing white-space.
+        validContexts.append(NumberContext(u("\u00C9"), ""))
+        validContexts.append(NumberContext(u("\u00C9"), "."))  # Trailing punctuation.
+        validContexts.append(NumberContext(u("\u00C9"), " def"))  # Trailing white-space.
 
         # Numbers should be considered valid, since they start with punctuation.
         self.findMatchesInContexts(validContexts, True, True, "US", numberWithPlus)
@@ -465,9 +466,9 @@ class PhoneNumberMatcherTest(unittest.TestCase):
 
     def testMatchesWithSurroundingChineseChars(self):
         validContexts = []
-        validContexts.append(NumberContext(u"\u6211\u7684\u7535\u8BDD\u53F7\u7801\u662F", ""))
-        validContexts.append(NumberContext("", u"\u662F\u6211\u7684\u7535\u8BDD\u53F7\u7801"))
-        validContexts.append(NumberContext(u"\u8BF7\u62E8\u6253", u"\u6211\u5728\u660E\u5929"))
+        validContexts.append(NumberContext(u("\u6211\u7684\u7535\u8BDD\u53F7\u7801\u662F"), ""))
+        validContexts.append(NumberContext("", u("\u662F\u6211\u7684\u7535\u8BDD\u53F7\u7801")))
+        validContexts.append(NumberContext(u("\u8BF7\u62E8\u6253"), u("\u6211\u5728\u660E\u5929")))
 
         # Numbers should be considered valid, since they are surrounded by Chinese.
         self.findMatchesInContexts(validContexts, True, True)
@@ -486,10 +487,10 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         text = "Call 650-253-4561 -- 455-234-3451"
         region = "US"
         number1 = PhoneNumber(country_code=phonenumberutil.country_code_for_region(region),
-                              national_number=6502534561L)
+                              national_number=6502534561)
         match1 = PhoneNumberMatch(5, "650-253-4561", number1)
         number2 = PhoneNumber(country_code=phonenumberutil.country_code_for_region(region),
-                              national_number=4552343451L)
+                              national_number=4552343451)
         match2 = PhoneNumberMatch(21, "455-234-3451", number2)
 
         matches = PhoneNumberMatcher(text, region)
@@ -529,11 +530,11 @@ class PhoneNumberMatcherTest(unittest.TestCase):
                 match = None
             if match is None:
                 noMatchFoundCount += 1
-                print >> sys.stderr, "No match found in  %s for leniency: %s" % (test, leniency)
+                prnt("No match found in  %s for leniency: %s" % (test, leniency), file=sys.stderr)
             else:
                 if test.rawString != match.raw_string:
                     wrongMatchFoundCount += 1
-                    print >> sys.stderr, "Found wrong match in test %s. Found %s" % (test, match)
+                    prnt("Found wrong match in test %s. Found %s" % (test, match), file=sys.stderr)
         self.assertEqual(0, noMatchFoundCount)
         self.assertEqual(0, wrongMatchFoundCount)
 
@@ -547,7 +548,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
                 match = None
             if match is not None:
                 matchFoundCount += 1
-                print >> sys.stderr, "Match found in %s for leniency: %s" % (test, leniency)
+                prnt("Match found in %s for leniency: %s" % (test, leniency), file=sys.stderr)
         self.assertEqual(0, matchFoundCount)
 
     def findMatchesInContexts(self, contexts, isValid, isPossible,
@@ -573,7 +574,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
             for context in contexts:
                 text = context.leadingText + number + context.trailingText
                 self.assertTrue(self.hasNoMatches(PhoneNumberMatcher(text, region,
-                                                                     leniency=Leniency.POSSIBLE, max_tries=sys.maxint)),
+                                                                     leniency=Leniency.POSSIBLE, max_tries=65535)),
                                 msg="Should not have found a number in " + text)
 
     def testNonMatchingBracketsAreInvalid(self):
@@ -616,7 +617,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         number2.national_number = 32316005
         match2 = PhoneNumberMatch(19, "032316005", number2)
 
-        matcher = PhoneNumberMatcher(text, region, Leniency.POSSIBLE, sys.maxint)
+        matcher = PhoneNumberMatcher(text, region, Leniency.POSSIBLE, 65535)
 
         self.assertEqual(match1, matcher.next())
         self.assertEqual(match2, matcher.next())
@@ -734,7 +735,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         its corresponding range is [start, end).
         """
         sub = text[index:]
-        matcher = PhoneNumberMatcher(sub, "NZ", Leniency.POSSIBLE, sys.maxint)
+        matcher = PhoneNumberMatcher(sub, "NZ", Leniency.POSSIBLE, 65535)
 
         self.assertTrue(matcher.has_next())
         match = matcher.next()
@@ -803,7 +804,7 @@ class PhoneNumberMatcherTest(unittest.TestCase):
 
             start = len(prefix)
             end = start + len(number)
-            matcher = PhoneNumberMatcher(text, defaultCountry, leniency, sys.maxint)
+            matcher = PhoneNumberMatcher(text, defaultCountry, leniency, 65535)
 
             if matcher.has_next():
                 match = matcher.next()
@@ -825,15 +826,15 @@ class PhoneNumberMatcherTest(unittest.TestCase):
     # Exhaustively searches for phone numbers from each index within text to
     # test that finding matches always terminates.
     def ensureTermination(self, text, defaultCountry, leniency):
-        for index in xrange(len(text) + 1):
+        for index in range(len(text) + 1):
             sub = text[index:]
             matches = ""
             # Iterates over all matches.
-            for match in PhoneNumberMatcher(sub, defaultCountry, leniency, sys.maxint):
+            for match in PhoneNumberMatcher(sub, defaultCountry, leniency, 65535):
                 matches += ", " + str(match)
 
     def findNumbersForLeniency(self, text, defaultCountry, leniency):
-        return PhoneNumberMatcher(text, defaultCountry, leniency, sys.maxint)
+        return PhoneNumberMatcher(text, defaultCountry, leniency, 65535)
 
     def hasNoMatches(self, matcher):
         """Returns True if there were no matches found."""
@@ -847,13 +848,13 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         self.assertRaises(Exception, _limit, *(-1, 2))
         self.assertRaises(Exception, _limit, *(1, 0))
         self.assertRaises(Exception, _limit, *(2, 1))
-        number = PhoneNumber(country_code=44, national_number=7912345678L)
+        number = PhoneNumber(country_code=44, national_number=7912345678)
         self.assertRaises(Exception, _verify, *(99, number, "12345678"))
         self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"leniency": None})
         self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"max_tries": -2})
         # Invalid country looks like national prefix is present (no way to tell)
-        number2 = PhoneNumber(country_code=99, national_number=12345678L, country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
+        number2 = PhoneNumber(country_code=99, national_number=12345678, country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
         self.assertTrue(_is_national_prefix_present_if_required(number2))
         # National prefix rule has no lead digits
-        number3 = PhoneNumber(country_code=61, national_number=1234567890L, country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
+        number3 = PhoneNumber(country_code=61, national_number=1234567890, country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
         self.assertTrue(_is_national_prefix_present_if_required(number3))

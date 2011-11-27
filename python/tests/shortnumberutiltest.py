@@ -20,6 +20,7 @@
 import unittest
 
 from phonenumbers import connects_to_emergency_number, is_emergency_number
+from phonenumbers.util import u
 from .phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 
 
@@ -49,7 +50,7 @@ class ShortNumberUtilTest(unittest.TestCase):
 
     def testConnectsToEmergencyNumberWithPlusSign_US(self):
         self.assertFalse(connects_to_emergency_number("+911", "US"))
-        self.assertFalse(connects_to_emergency_number(u"\uFF0B911", "US"))
+        self.assertFalse(connects_to_emergency_number(u("\uFF0B911"), "US"))
         self.assertFalse(connects_to_emergency_number(" +911", "US"))
         self.assertFalse(connects_to_emergency_number("+119", "US"))
         self.assertFalse(connects_to_emergency_number("+999", "US"))

@@ -22,6 +22,7 @@ from phonenumbers import AsYouTypeFormatter
 from phonenumbers import PhoneMetadata, PhoneNumberDesc, NumberFormat
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil
+from phonenumbers.util import u
 from .phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
 
 
@@ -207,16 +208,16 @@ class AsYouTypeFormatterTest(unittest.TestCase):
 
     def testAYTFUSFullWidthCharacters(self):
         formatter = AsYouTypeFormatter("US")
-        self.assertEqual(u"\uFF16", formatter.input_digit(u'\uFF16'))
-        self.assertEqual(u"\uFF16\uFF15", formatter.input_digit(u'\uFF15'))
-        self.assertEqual("650", formatter.input_digit(u'\uFF10'))
-        self.assertEqual("650 2", formatter.input_digit(u'\uFF12'))
-        self.assertEqual("650 25", formatter.input_digit(u'\uFF15'))
-        self.assertEqual("650 253", formatter.input_digit(u'\uFF13'))
-        self.assertEqual("650 2532", formatter.input_digit(u'\uFF12'))
-        self.assertEqual("650 253 22", formatter.input_digit(u'\uFF12'))
-        self.assertEqual("650 253 222", formatter.input_digit(u'\uFF12'))
-        self.assertEqual("650 253 2222", formatter.input_digit(u'\uFF12'))
+        self.assertEqual(u("\uFF16"), formatter.input_digit(u("\uFF16")))
+        self.assertEqual(u("\uFF16\uFF15"), formatter.input_digit(u("\uFF15")))
+        self.assertEqual("650", formatter.input_digit(u("\uFF10")))
+        self.assertEqual("650 2", formatter.input_digit(u("\uFF12")))
+        self.assertEqual("650 25", formatter.input_digit(u("\uFF15")))
+        self.assertEqual("650 253", formatter.input_digit(u("\uFF13")))
+        self.assertEqual("650 2532", formatter.input_digit(u("\uFF12")))
+        self.assertEqual("650 253 22", formatter.input_digit(u("\uFF12")))
+        self.assertEqual("650 253 222", formatter.input_digit(u("\uFF12")))
+        self.assertEqual("650 253 2222", formatter.input_digit(u("\uFF12")))
 
     def testAYTFUSMobileShortCode(self):
         formatter = AsYouTypeFormatter("US")
@@ -877,9 +878,9 @@ class AsYouTypeFormatterTest(unittest.TestCase):
                                    general_desc=PhoneNumberDesc(national_number_pattern='\\d{10}', possible_number_pattern='\\d{6,10}'),
                                    fixed_line=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
                                    mobile=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-                                   national_prefix=u'0',
-                                   national_prefix_for_parsing=u'0',
-                                   number_format=[NumberFormat(pattern='([135][246]|[246][123])(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[1-59]|[78]0'], national_prefix_formatting_rule=u'(0\\1)')])
+                                   national_prefix=u("0"),
+                                   national_prefix_for_parsing=u("0"),
+                                   number_format=[NumberFormat(pattern='([135][246]|[246][123])(\\d{4})(\\d{4})', format=u("\\1 \\2 \\3"), leading_digits_pattern=['[1-59]|[78]0'], national_prefix_formatting_rule=u("(0\\1)"))])
         PhoneMetadata.region_metadata['XX'] = metadataXX
         phonenumberutil.SUPPORTED_REGIONS.add("XX")
         phonenumberutil.COUNTRY_CODE_TO_REGION_CODE[384] = ("XX",)

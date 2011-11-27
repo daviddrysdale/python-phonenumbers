@@ -26,7 +26,7 @@ from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseExceptio
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil
-from phonenumbers.util import u
+from phonenumbers.util import u, to_long
 
 # Override library metadata with the test metadata.
 REAL_REGION_METADATA = PhoneMetadata.region_metadata
@@ -43,11 +43,8 @@ TEST_REGION_METADATA = PhoneMetadata.region_metadata
 if sys.version_info >= (3, 0):
     # Python 3 has unlimited-precision int, so no 'L' suffix
     _LS = ''
-    # Python 3 has all strings unicode, so no 'u' prefix
-    _UP = ''
 else:
     _LS = 'L'
-    _UP = 'u'
 
 
 def reinstate_real_metadata():
@@ -65,39 +62,39 @@ def insert_test_metadata():
 reinstate_real_metadata()
 
 # Set up some test numbers to re-use.
-ALPHA_NUMERIC_NUMBER = FrozenPhoneNumber(country_code=1, national_number=80074935247L)
-AR_MOBILE = FrozenPhoneNumber(country_code=54, national_number=91187654321L)
+ALPHA_NUMERIC_NUMBER = FrozenPhoneNumber(country_code=1, national_number=80074935247)
+AR_MOBILE = FrozenPhoneNumber(country_code=54, national_number=91187654321)
 AR_NUMBER = FrozenPhoneNumber(country_code=54, national_number=1187654321)
-AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300L)
-BS_MOBILE = FrozenPhoneNumber(country_code=1, national_number=2423570000L)
-BS_NUMBER = FrozenPhoneNumber(country_code=1, national_number=2423651234L)
+AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300)
+BS_MOBILE = FrozenPhoneNumber(country_code=1, national_number=2423570000)
+BS_NUMBER = FrozenPhoneNumber(country_code=1, national_number=2423651234)
 # Note that this is the same as the example number for DE in the metadata.
-DE_NUMBER = FrozenPhoneNumber(country_code=49, national_number=30123456L)
-DE_SHORT_NUMBER = FrozenPhoneNumber(country_code=49, national_number=1234L)
-GB_MOBILE = FrozenPhoneNumber(country_code=44, national_number=7912345678L)
-GB_NUMBER = FrozenPhoneNumber(country_code=44, national_number=2070313000L)
-IT_MOBILE = FrozenPhoneNumber(country_code=39, national_number=345678901L)
-IT_NUMBER = FrozenPhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
-JP_STAR_NUMBER = FrozenPhoneNumber(country_code=81, national_number=2345L)
+DE_NUMBER = FrozenPhoneNumber(country_code=49, national_number=30123456)
+DE_SHORT_NUMBER = FrozenPhoneNumber(country_code=49, national_number=1234)
+GB_MOBILE = FrozenPhoneNumber(country_code=44, national_number=7912345678)
+GB_NUMBER = FrozenPhoneNumber(country_code=44, national_number=2070313000)
+IT_MOBILE = FrozenPhoneNumber(country_code=39, national_number=345678901)
+IT_NUMBER = FrozenPhoneNumber(country_code=39, national_number=236618300, italian_leading_zero=True)
+JP_STAR_NUMBER = FrozenPhoneNumber(country_code=81, national_number=2345)
 # Numbers to test the formatting rules from Mexico.
-MX_MOBILE1 = FrozenPhoneNumber(country_code=52, national_number=12345678900L)
-MX_MOBILE2 = FrozenPhoneNumber(country_code=52, national_number=15512345678L)
-MX_NUMBER1 = FrozenPhoneNumber(country_code=52, national_number=3312345678L)
-MX_NUMBER2 = FrozenPhoneNumber(country_code=52, national_number=8211234567L)
-NZ_NUMBER = FrozenPhoneNumber(country_code=64, national_number=33316005L)
-SG_NUMBER = FrozenPhoneNumber(country_code=65, national_number=65218000L)
+MX_MOBILE1 = FrozenPhoneNumber(country_code=52, national_number=12345678900)
+MX_MOBILE2 = FrozenPhoneNumber(country_code=52, national_number=15512345678)
+MX_NUMBER1 = FrozenPhoneNumber(country_code=52, national_number=3312345678)
+MX_NUMBER2 = FrozenPhoneNumber(country_code=52, national_number=8211234567)
+NZ_NUMBER = FrozenPhoneNumber(country_code=64, national_number=33316005)
+SG_NUMBER = FrozenPhoneNumber(country_code=65, national_number=65218000)
 # A too-long and hence invalid US number.
-US_LONG_NUMBER = FrozenPhoneNumber(country_code=1, national_number=65025300001L)
-US_NUMBER = FrozenPhoneNumber(country_code=1, national_number=6502530000L)
-US_PREMIUM = FrozenPhoneNumber(country_code=1, national_number=9002530000L)
+US_LONG_NUMBER = FrozenPhoneNumber(country_code=1, national_number=65025300001)
+US_NUMBER = FrozenPhoneNumber(country_code=1, national_number=6502530000)
+US_PREMIUM = FrozenPhoneNumber(country_code=1, national_number=9002530000)
 # Too short, but still possible US numbers.
-US_LOCAL_NUMBER = FrozenPhoneNumber(country_code=1, national_number=2530000L)
-US_SHORT_BY_ONE_NUMBER = FrozenPhoneNumber(country_code=1, national_number=650253000L)
-US_TOLLFREE = FrozenPhoneNumber(country_code=1, national_number=8002530000L)
-US_SPOOF = FrozenPhoneNumber(country_code=1, national_number=0L)
-US_SPOOF_WITH_RAW_INPUT = FrozenPhoneNumber(country_code=1, national_number=0L, raw_input="000-000-0000")
+US_LOCAL_NUMBER = FrozenPhoneNumber(country_code=1, national_number=2530000)
+US_SHORT_BY_ONE_NUMBER = FrozenPhoneNumber(country_code=1, national_number=650253000)
+US_TOLLFREE = FrozenPhoneNumber(country_code=1, national_number=8002530000)
+US_SPOOF = FrozenPhoneNumber(country_code=1, national_number=0)
+US_SPOOF_WITH_RAW_INPUT = FrozenPhoneNumber(country_code=1, national_number=0, raw_input="000-000-0000")
 # A number with an invalid region code
-XY_NUMBER = FrozenPhoneNumber(country_code=999, national_number=1234567890L)
+XY_NUMBER = FrozenPhoneNumber(country_code=999, national_number=1234567890)
 
 
 class PhoneNumberUtilTest(unittest.TestCase):
@@ -222,7 +219,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(0, phonenumbers.length_of_national_destination_code(US_SHORT_BY_ONE_NUMBER))
 
         # A number containing an invalid country calling code, which shouldn't have any NDC.
-        number = PhoneNumber(country_code=123, national_number=6502530000L)
+        number = PhoneNumber(country_code=123, national_number=6502530000)
         self.assertEqual(0, phonenumbers.length_of_national_destination_code(number))
 
         # A number with an extension; still has NDC "7912"
@@ -276,13 +273,13 @@ class PhoneNumberUtilTest(unittest.TestCase):
                          msg="Conversion did not correctly replace alpha characters")
 
     def testNormaliseOtherDigits(self):
-        inputNumber = u"\uFF125\u0665"
+        inputNumber = u("\uFF125\u0665")
         expectedOutput = "255"
         self.assertEqual(expectedOutput,
                          phonenumberutil._normalize(inputNumber),
                          msg="Conversion did not correctly replace non-latin digits")
         # Eastern-Arabic digits.
-        inputNumber = u"\u06F52\u06F0"
+        inputNumber = u("\u06F52\u06F0")
         expectedOutput = "520"
         self.assertEqual(expectedOutput,
                          phonenumberutil._normalize(inputNumber),
@@ -323,31 +320,31 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("+44 7912 345 678", phonenumbers.format_number(GB_MOBILE, PhoneNumberFormat.INTERNATIONAL))
 
     def testFormatDENumber(self):
-        deNumber = PhoneNumber(country_code=49, national_number=301234L)
+        deNumber = PhoneNumber(country_code=49, national_number=301234)
         self.assertEqual("030/1234", phonenumbers.format_number(deNumber, PhoneNumberFormat.NATIONAL))
         self.assertEqual("+49 30/1234", phonenumbers.format_number(deNumber, PhoneNumberFormat.INTERNATIONAL))
         self.assertEqual("+49-30-1234", phonenumbers.format_number(deNumber, PhoneNumberFormat.RFC3966))
 
         deNumber.clear()
         deNumber.country_code = 49
-        deNumber.national_number = 291123L
+        deNumber.national_number = to_long(291123)
         self.assertEqual("0291 123", phonenumbers.format_number(deNumber, PhoneNumberFormat.NATIONAL))
         self.assertEqual("+49 291 123", phonenumbers.format_number(deNumber, PhoneNumberFormat.INTERNATIONAL))
 
         deNumber.clear()
         deNumber.country_code = 49
-        deNumber.national_number = 29112345678L
+        deNumber.national_number = to_long(29112345678)
         self.assertEqual("0291 12345678", phonenumbers.format_number(deNumber, PhoneNumberFormat.NATIONAL))
         self.assertEqual("+49 291 12345678", phonenumbers.format_number(deNumber, PhoneNumberFormat.INTERNATIONAL))
 
         deNumber.clear()
         deNumber.country_code = 49
-        deNumber.national_number = 912312345L
+        deNumber.national_number = to_long(912312345)
         self.assertEqual("09123 12345", phonenumbers.format_number(deNumber, PhoneNumberFormat.NATIONAL))
         self.assertEqual("+49 9123 12345", phonenumbers.format_number(deNumber, PhoneNumberFormat.INTERNATIONAL))
         deNumber.clear()
         deNumber.country_code = 49
-        deNumber.national_number = 80212345L
+        deNumber.national_number = to_long(80212345)
         self.assertEqual("08021 2345", phonenumbers.format_number(deNumber, PhoneNumberFormat.NATIONAL))
         self.assertEqual("+49 8021 2345", phonenumbers.format_number(deNumber, PhoneNumberFormat.INTERNATIONAL))
         # Note this number is correctly formatted without national prefix. Most of the numbers that
@@ -375,7 +372,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("+61 2 3661 8300", phonenumbers.format_number(AU_NUMBER, PhoneNumberFormat.INTERNATIONAL))
         self.assertEqual("+61236618300", phonenumbers.format_number(AU_NUMBER, PhoneNumberFormat.E164))
 
-        auNumber = PhoneNumber(country_code=61, national_number=1800123456L)
+        auNumber = PhoneNumber(country_code=61, national_number=1800123456)
         self.assertEqual("1800 123 456", phonenumbers.format_number(auNumber, PhoneNumberFormat.NATIONAL))
         self.assertEqual("+61 1800 123 456", phonenumbers.format_number(auNumber, PhoneNumberFormat.INTERNATIONAL))
         self.assertEqual("+611800123456", phonenumbers.format_number(auNumber, PhoneNumberFormat.E164))
@@ -462,7 +459,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
                          phonenumbers.format_out_of_country_calling_number(IT_NUMBER, "AU"))
 
     def testFormatOutOfCountryKeepingAlphaChars(self):
-        alphaNumericNumber = PhoneNumber(country_code=1, national_number=8007493524L)
+        alphaNumericNumber = PhoneNumber(country_code=1, national_number=8007493524)
         alphaNumericNumber.raw_input = "1800 six-flag"
         self.assertEqual("0011 1 800 SIX-FLAG",
                          phonenumbers.format_out_of_country_keeping_alpha_chars(alphaNumericNumber, "AU"))
@@ -494,7 +491,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
         # Testing AU alpha number formatted from Australia.
         alphaNumericNumber.country_code = 61
-        alphaNumericNumber.national_number = 827493524L
+        alphaNumericNumber.national_number = to_long(827493524)
         alphaNumericNumber.raw_input = "+61 82749-FLAG"
         # This number should have the national prefix fixed.
         self.assertEqual("082749-FLAG",
@@ -504,7 +501,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("082749-FLAG",
                          phonenumbers.format_out_of_country_keeping_alpha_chars(alphaNumericNumber, "AU"))
 
-        alphaNumericNumber.national_number = 18007493524L
+        alphaNumericNumber.national_number = to_long(18007493524)
         alphaNumericNumber.raw_input = "1-800-SIX-flag"
         # This number should not have the national prefix prefixed, in
         # accordance with the override for this specific formatting rule.
@@ -513,7 +510,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
         # The metadata should not be permanently changed, since we copied it
         # before modifying patterns.  Here we check this.
-        alphaNumericNumber.national_number = 1800749352L
+        alphaNumericNumber.national_number = to_long(1800749352)
         self.assertEqual("1800 749 352",
                          phonenumbers.format_out_of_country_calling_number(alphaNumericNumber, "AU"))
 
@@ -523,7 +520,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
         # Testing the case with an invalid country calling code.
         alphaNumericNumber.country_code = 0
-        alphaNumericNumber.national_number = 18007493524L
+        alphaNumericNumber.national_number = to_long(18007493524)
         alphaNumericNumber.raw_input = "1-800-SIX-flag"
         # Uses the raw input only.
         self.assertEqual("1-800-SIX-flag",
@@ -531,7 +528,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
         # Testing the case of an invalid alpha number.
         alphaNumericNumber.country_code = 1
-        alphaNumericNumber.national_number = 80749L
+        alphaNumericNumber.national_number = to_long(80749)
         alphaNumericNumber.raw_input = "180-SIX"
         # No country-code stripping can be done.
         self.assertEqual("00 1 180-SIX",
@@ -540,7 +537,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
     def testFormatWithCarrierCode(self):
         # We only support this for AR in our test metadata, and only for mobile numbers starting with
         # certain values.
-        arMobile = PhoneNumber(country_code=54, national_number=92234654321L)
+        arMobile = PhoneNumber(country_code=54, national_number=92234654321)
         self.assertEqual("02234 65-4321", phonenumbers.format_number(arMobile, PhoneNumberFormat.NATIONAL))
         # Here we force 14 as the carrier code.
         self.assertEqual("02234 14 65-4321",
@@ -560,7 +557,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # We only support this for AR in our test metadata.
         arNumber = PhoneNumber()
         arNumber.country_code = 54
-        arNumber.national_number = 91234125678L
+        arNumber.national_number = to_long(91234125678)
         # Test formatting with no preferred carrier code stored in the number itself.
         self.assertEqual("01234 15 12-5678",
                          phonenumbers.format_national_number_with_preferred_carrier_code(arNumber, "15"))
@@ -587,7 +584,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("01234 12-5678",
                          phonenumbers.format_national_number_with_preferred_carrier_code(arNumber, "15"))
         # We don't support this for the US so there should be no change.
-        usNumber = PhoneNumber(country_code=1, national_number=4241231234L, preferred_domestic_carrier_code="99")
+        usNumber = PhoneNumber(country_code=1, national_number=4241231234, preferred_domestic_carrier_code="99")
         self.assertEqual("424 123 1234", phonenumbers.format_number(usNumber, PhoneNumberFormat.NATIONAL))
         self.assertEqual("424 123 1234",
                          phonenumbers.format_national_number_with_preferred_carrier_code(usNumber, "15"))
@@ -750,48 +747,48 @@ class PhoneNumberUtilTest(unittest.TestCase):
     def testIsPremiumRate(self):
         self.assertEqual(PhoneNumberType.PREMIUM_RATE, phonenumbers.number_type(US_PREMIUM))
 
-        premiumRateNumber = PhoneNumber(country_code=39, national_number=892123L)
+        premiumRateNumber = PhoneNumber(country_code=39, national_number=892123)
         self.assertEqual(PhoneNumberType.PREMIUM_RATE,
                          phonenumbers.number_type(premiumRateNumber))
 
         premiumRateNumber.clear()
         premiumRateNumber.country_code = 44
-        premiumRateNumber.national_number = 9187654321L
+        premiumRateNumber.national_number = to_long(9187654321)
         self.assertEqual(PhoneNumberType.PREMIUM_RATE,
                          phonenumbers.number_type(premiumRateNumber))
 
         premiumRateNumber.clear()
         premiumRateNumber.country_code = 49
-        premiumRateNumber.national_number = 9001654321L
+        premiumRateNumber.national_number = to_long(9001654321)
         self.assertEqual(PhoneNumberType.PREMIUM_RATE,
                          phonenumbers.number_type(premiumRateNumber))
 
         premiumRateNumber.clear()
         premiumRateNumber.country_code = 49
-        premiumRateNumber.national_number = 90091234567L
+        premiumRateNumber.national_number = to_long(90091234567)
         self.assertEqual(PhoneNumberType.PREMIUM_RATE,
                          phonenumbers.number_type(premiumRateNumber))
 
     def testIsTollFree(self):
-        tollFreeNumber = PhoneNumber(country_code=1, national_number=8881234567L)
+        tollFreeNumber = PhoneNumber(country_code=1, national_number=8881234567)
         self.assertEqual(PhoneNumberType.TOLL_FREE,
                          phonenumbers.number_type(tollFreeNumber))
 
         tollFreeNumber.clear()
         tollFreeNumber.country_code = 39
-        tollFreeNumber.national_number = 803123L
+        tollFreeNumber.national_number = to_long(803123)
         self.assertEqual(PhoneNumberType.TOLL_FREE,
                          phonenumbers.number_type(tollFreeNumber))
 
         tollFreeNumber.clear()
         tollFreeNumber.country_code = 44
-        tollFreeNumber.national_number = 8012345678L
+        tollFreeNumber.national_number = to_long(8012345678)
         self.assertEqual(PhoneNumberType.TOLL_FREE,
                          phonenumbers.number_type(tollFreeNumber))
 
         tollFreeNumber.clear()
         tollFreeNumber.country_code = 49
-        tollFreeNumber.national_number = 8001234567L
+        tollFreeNumber.national_number = to_long(8001234567)
         self.assertEqual(PhoneNumberType.TOLL_FREE,
                          phonenumbers.number_type(tollFreeNumber))
 
@@ -801,7 +798,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(PhoneNumberType.MOBILE, phonenumbers.number_type(IT_MOBILE))
         self.assertEqual(PhoneNumberType.MOBILE, phonenumbers.number_type(AR_MOBILE))
 
-        mobileNumber = PhoneNumber(country_code=49, national_number=15123456789L)
+        mobileNumber = PhoneNumber(country_code=49, national_number=15123456789)
         self.assertEqual(PhoneNumberType.MOBILE, phonenumbers.number_type(mobileNumber))
 
     def testIsFixedLine(self):
@@ -814,20 +811,20 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(PhoneNumberType.FIXED_LINE_OR_MOBILE,
                          phonenumbers.number_type(US_NUMBER))
 
-        fixedLineAndMobileNumber = PhoneNumber(country_code=54, national_number=1987654321L)
+        fixedLineAndMobileNumber = PhoneNumber(country_code=54, national_number=1987654321)
         self.assertEqual(PhoneNumberType.FIXED_LINE_OR_MOBILE,
                          phonenumbers.number_type(fixedLineAndMobileNumber))
 
     def testIsSharedCost(self):
-        gbNumber = PhoneNumber(country_code=44, national_number=8431231234L)
+        gbNumber = PhoneNumber(country_code=44, national_number=8431231234)
         self.assertEqual(PhoneNumberType.SHARED_COST, phonenumbers.number_type(gbNumber))
 
     def testIsVoip(self):
-        gbNumber = PhoneNumber(country_code=44, national_number=5631231234L)
+        gbNumber = PhoneNumber(country_code=44, national_number=5631231234)
         self.assertEqual(PhoneNumberType.VOIP, phonenumbers.number_type(gbNumber))
 
     def testIsPersonalNumber(self):
-        gbNumber = PhoneNumber(country_code=44, national_number=7031231234L)
+        gbNumber = PhoneNumber(country_code=44, national_number=7031231234)
         self.assertEqual(PhoneNumberType.PERSONAL_NUMBER,
                          phonenumbers.number_type(gbNumber))
 
@@ -840,7 +837,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertTrue(phonenumbers.is_valid_number(IT_NUMBER))
         self.assertTrue(phonenumbers.is_valid_number(GB_MOBILE))
 
-        nzNumber = PhoneNumber(country_code=64, national_number=21387835L)
+        nzNumber = PhoneNumber(country_code=64, national_number=21387835)
         self.assertTrue(phonenumbers.is_valid_number(nzNumber))
 
     def testIsValidForRegion(self):
@@ -848,28 +845,28 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertTrue(phonenumbers.is_valid_number(BS_NUMBER))
         self.assertTrue(phonenumbers.is_valid_number_for_region(BS_NUMBER, "BS"))
         self.assertFalse(phonenumbers.is_valid_number_for_region(BS_NUMBER, "US"))
-        bsInvalidNumber = PhoneNumber(country_code=1, national_number=2421232345L)
+        bsInvalidNumber = PhoneNumber(country_code=1, national_number=2421232345)
         # This number is no longer valid.
         self.assertFalse(phonenumbers.is_valid_number(bsInvalidNumber))
 
         # La Mayotte and Reunion use 'leadingDigits' to differentiate them.
-        reNumber = PhoneNumber(country_code=262, national_number=262123456L)
+        reNumber = PhoneNumber(country_code=262, national_number=262123456)
         self.assertTrue(phonenumbers.is_valid_number(reNumber))
         self.assertTrue(phonenumbers.is_valid_number_for_region(reNumber, "RE"))
         self.assertFalse(phonenumbers.is_valid_number_for_region(reNumber, "YT"))
         # Now change the number to be a number for La Mayotte.
-        reNumber.national_number = 269601234L
+        reNumber.national_number = to_long(269601234)
         self.assertTrue(phonenumbers.is_valid_number_for_region(reNumber, "YT"))
         self.assertFalse(phonenumbers.is_valid_number_for_region(reNumber, "RE"))
         # This number is no longer valid for La Reunion.
-        reNumber.national_number = 269123456L
+        reNumber.national_number = to_long(269123456)
         self.assertFalse(phonenumbers.is_valid_number_for_region(reNumber, "YT"))
         self.assertFalse(phonenumbers.is_valid_number_for_region(reNumber, "RE"))
         self.assertFalse(phonenumbers.is_valid_number(reNumber))
         # However, it should be recognised as from La Mayotte, since it is valid for this region.
         self.assertEqual("YT", phonenumbers.region_code_for_number(reNumber))
         # This number is valid in both places.
-        reNumber.national_number = 800123456L
+        reNumber.national_number = to_long(800123456)
         self.assertTrue(phonenumbers.is_valid_number_for_region(reNumber, "YT"))
         self.assertTrue(phonenumbers.is_valid_number_for_region(reNumber, "RE"))
         # Python version extra test
@@ -878,22 +875,22 @@ class PhoneNumberUtilTest(unittest.TestCase):
     def testIsNotValidNumber(self):
         self.assertFalse(phonenumbers.is_valid_number(US_LOCAL_NUMBER))
 
-        invalidNumber = PhoneNumber(country_code=39, national_number=23661830000L, italian_leading_zero=True)
+        invalidNumber = PhoneNumber(country_code=39, national_number=23661830000, italian_leading_zero=True)
         self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
 
         invalidNumber.clear()
         invalidNumber.country_code = 44
-        invalidNumber.national_number = 791234567L
+        invalidNumber.national_number = to_long(791234567)
         self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
 
         invalidNumber.clear()
         invalidNumber.country_code = 49
-        invalidNumber.national_number = 1234L
+        invalidNumber.national_number = to_long(1234)
         self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
 
         invalidNumber.clear()
         invalidNumber.country_code = 64
-        invalidNumber.national_number = 3316005L
+        invalidNumber.national_number = to_long(3316005)
         self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
 
     def testGetRegionCodeForCountryCode(self):
@@ -965,44 +962,44 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(ValidationResult.TOO_LONG,
                          phonenumbers.is_possible_number_with_reason(US_LONG_NUMBER))
 
-        number = PhoneNumber(country_code=0, national_number=2530000L)
+        number = PhoneNumber(country_code=0, national_number=2530000)
         self.assertEqual(ValidationResult.INVALID_COUNTRY_CODE,
                          phonenumbers.is_possible_number_with_reason(number))
 
         number.clear()
         number.country_code = 1
-        number.national_number = 253000L
+        number.national_number = to_long(253000)
         self.assertEqual(ValidationResult.TOO_SHORT,
                          phonenumbers.is_possible_number_with_reason(number))
 
         number.clear()
         number.country_code = 65
-        number.national_number = 1234567890L
+        number.national_number = to_long(1234567890)
         self.assertEqual(ValidationResult.IS_POSSIBLE,
                          phonenumbers.is_possible_number_with_reason(number))
 
         # Try with number that we don't have metadata for.
-        adNumber = PhoneNumber(country_code=376, national_number=12345L)
+        adNumber = PhoneNumber(country_code=376, national_number=12345)
         self.assertEqual(ValidationResult.IS_POSSIBLE,
                          phonenumbers.is_possible_number_with_reason(adNumber))
         adNumber.country_code = 376
-        adNumber.national_number = 13L
+        adNumber.national_number = to_long(13)
         self.assertEqual(ValidationResult.TOO_SHORT,
                          phonenumbers.is_possible_number_with_reason(adNumber))
         adNumber.country_code = 376
-        adNumber.national_number = 12345678901234567L
+        adNumber.national_number = to_long(12345678901234567)
         self.assertEqual(ValidationResult.TOO_LONG,
                          phonenumbers.is_possible_number_with_reason(adNumber))
 
     def testIsNotPossibleNumber(self):
         self.assertFalse(phonenumbers.is_possible_number(US_LONG_NUMBER))
 
-        number = PhoneNumber(country_code=1, national_number=253000L)
+        number = PhoneNumber(country_code=1, national_number=253000)
         self.assertFalse(phonenumbers.is_possible_number(number))
 
         number.clear()
         number.country_code = 44
-        number.national_number = 300L
+        number.national_number = to_long(300)
         self.assertFalse(phonenumbers.is_possible_number(number))
 
         self.assertFalse(phonenumbers.is_possible_number_string("+1 650 253 00000", "US"))
@@ -1020,19 +1017,19 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(US_NUMBER, us_long_number)
 
         # GB number 080 1234 5678, but entered with 4 extra digits at the end.
-        tooLongNumber = PhoneNumber(country_code=44, national_number=80123456780123L)
-        validNumber = PhoneNumber(country_code=44, national_number=8012345678L)
+        tooLongNumber = PhoneNumber(country_code=44, national_number=80123456780123)
+        validNumber = PhoneNumber(country_code=44, national_number=8012345678)
         self.assertTrue(phonenumbers.truncate_too_long_number(tooLongNumber))
         self.assertEqual(validNumber, tooLongNumber)
 
         # IT number 022 3456 7890, but entered with 3 extra digits at the end.
         tooLongNumber.clear()
         tooLongNumber.country_code = 39
-        tooLongNumber.national_number = 2234567890123L
+        tooLongNumber.national_number = to_long(2234567890123)
         tooLongNumber.italian_leading_zero = True
         validNumber.clear()
         validNumber.country_code = 39
-        validNumber.national_number = 2234567890L
+        validNumber.national_number = to_long(2234567890)
         validNumber.italian_leading_zero = True
         self.assertTrue(phonenumbers.truncate_too_long_number(tooLongNumber))
         self.assertEqual(validNumber, tooLongNumber)
@@ -1046,7 +1043,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
         # Tests what happens when a number with invalid prefix is passed in.
         # The test metadata says US numbers cannot have prefix 240.
-        numberWithInvalidPrefix = PhoneNumber(country_code=1, national_number=2401234567L)
+        numberWithInvalidPrefix = PhoneNumber(country_code=1, national_number=2401234567)
         invalidNumberCopy = PhoneNumber()
         invalidNumberCopy.merge_from(numberWithInvalidPrefix)
         self.assertFalse(phonenumbers.truncate_too_long_number(numberWithInvalidPrefix))
@@ -1054,7 +1051,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(invalidNumberCopy, numberWithInvalidPrefix)
 
         # Tests what happens when a too short number is passed in.
-        tooShortNumber = PhoneNumber(country_code=1, national_number=1234L)
+        tooShortNumber = PhoneNumber(country_code=1, national_number=1234)
         tooShortNumberCopy = PhoneNumber()
         tooShortNumberCopy.merge_from(tooShortNumber)
         self.assertFalse(phonenumbers.truncate_too_long_number(tooShortNumber))
@@ -1075,12 +1072,12 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
     def testIsViablePhoneNumberNonAscii(self):
         # Only one or two digits before possible punctuation followed by more digits.
-        self.assertTrue(phonenumberutil._is_viable_phone_number(u"1\u300034"))
-        self.assertFalse(phonenumberutil._is_viable_phone_number(u"1\u30003+4"))
+        self.assertTrue(phonenumberutil._is_viable_phone_number(u("1\u300034")))
+        self.assertFalse(phonenumberutil._is_viable_phone_number(u("1\u30003+4")))
         # Unicode variants of possible starting character and other allowed punctuation/digits.
-        self.assertTrue(phonenumberutil._is_viable_phone_number(u"\uFF081\uFF09\u30003456789"))
+        self.assertTrue(phonenumberutil._is_viable_phone_number(u("\uFF081\uFF09\u30003456789")))
         # Testing a leading + is okay.
-        self.assertTrue(phonenumberutil._is_viable_phone_number(u"+1\uFF09\u30003456789"))
+        self.assertTrue(phonenumberutil._is_viable_phone_number(u("+1\uFF09\u30003456789")))
 
     def testExtractPossibleNumber(self):
         # Removes preceding funky punctuation and letters but leaves the rest untouched.
@@ -1089,11 +1086,11 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Should not remove plus sign
         self.assertEqual("+800-345-600", phonenumberutil._extract_possible_number("Tel:+800-345-600"))
         # Should recognise wide digits as possible start values.
-        self.assertEqual(u"\uFF10\uFF12\uFF13",
-                         phonenumberutil._extract_possible_number(u"\uFF10\uFF12\uFF13"))
+        self.assertEqual(u("\uFF10\uFF12\uFF13"),
+                         phonenumberutil._extract_possible_number(u("\uFF10\uFF12\uFF13")))
         # Dashes are not possible start values and should be removed.
-        self.assertEqual(u"\uFF11\uFF12\uFF13",
-                         phonenumberutil._extract_possible_number(u"Num-\uFF11\uFF12\uFF13"))
+        self.assertEqual(u("\uFF11\uFF12\uFF13"),
+                         phonenumberutil._extract_possible_number(u("Num-\uFF11\uFF12\uFF13")))
         # If not possible number present, return empty string.
         self.assertEqual("", phonenumberutil._extract_possible_number("Num-...."))
         # Leading brackets are stripped - these are not used when parsing.
@@ -1103,7 +1100,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("650) 253-0000", phonenumberutil._extract_possible_number("(650) 253-0000..- .."))
         self.assertEqual("650) 253-0000", phonenumberutil._extract_possible_number("(650) 253-0000."))
         # This case has a trailing RTL char.
-        self.assertEqual("650) 253-0000", phonenumberutil._extract_possible_number(u"(650) 253-0000\u200F"))
+        self.assertEqual("650) 253-0000", phonenumberutil._extract_possible_number(u("(650) 253-0000\u200F")))
 
     def testMaybeStripNationalPrefix(self):
         metadata = PhoneMetadata(id="Test", national_prefix_for_parsing="34", register=False)
@@ -1222,7 +1219,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
             # Python version extra test covering string conversion with country_code_source present
             self.assertEqual("Country Code: 1 National Number: None Leading Zero: False Country Code Source: 5",
                              str(number))
-        except NumberParseException, e:
+        except NumberParseException:
+            e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
 
         number.clear()
@@ -1234,7 +1232,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
                              msg="Did not extract country calling code %s correctly." % countryCallingCode)
             self.assertEqual(CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN, number.country_code_source,
                              msg="Did not figure out CountryCodeSource correctly")
-        except NumberParseException, e:
+        except NumberParseException:
+            e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
 
         number.clear()
@@ -1245,7 +1244,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
                              msg="Should not have extracted a country calling code - no international prefix present.")
             self.assertEqual(CountryCodeSource.FROM_DEFAULT_COUNTRY, number.country_code_source,
                              msg="Did not figure out CountryCodeSource correctly")
-        except NumberParseException, e:
+        except NumberParseException:
+            e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
 
         number.clear()
@@ -1253,8 +1253,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             phoneNumber = "0119991123456789"
             ccc, numberToFill = phonenumberutil._maybe_extract_country_code(phoneNumber, metadata, True, number)
             self.fail("Should have thrown an exception, no valid country calling code present.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.INVALID_COUNTRY_CODE,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1271,7 +1272,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
             self.assertEqual(CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN,
                              number.country_code_source,
                              msg="Did not figure out CountryCodeSource correctly")
-        except NumberParseException, e:
+        except NumberParseException:
+            e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
 
         number.clear()
@@ -1283,7 +1285,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
                              msg="Should have extracted the country calling code of the region passed in")
             self.assertFalse(number.country_code_source is not None,
                              msg="Should not contain CountryCodeSource.")
-        except NumberParseException, e:
+        except NumberParseException:
+            e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
 
         number.clear()
@@ -1295,7 +1298,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
                                   "extraction of uncertain country calling code."))
             self.assertFalse(number.country_code_source is not None,
                              msg="Should not contain CountryCodeSource.")
-        except NumberParseException, e:
+        except NumberParseException:
+            e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
 
         number.clear()
@@ -1307,7 +1311,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
                                   "before and after extraction of uncertain country calling code."))
             self.assertEqual(CountryCodeSource.FROM_DEFAULT_COUNTRY, number.country_code_source,
                              msg="Did not figure out CountryCodeSource correctly")
-        except NumberParseException, e:
+        except NumberParseException:
+            e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
 
     def testParseNationalNumber(self):
@@ -1331,21 +1336,21 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("+0064 3 331 6005", "NZ"))
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("+ 00 64 3 331 6005", "NZ"))
 
-        nzNumber = PhoneNumber(country_code=64, national_number=64123456L)
+        nzNumber = PhoneNumber(country_code=64, national_number=64123456)
         self.assertEqual(nzNumber, phonenumbers.parse("64(0)64123456", "NZ"))
         # Check that using a "/" is fine in a phone number.
         self.assertEqual(DE_NUMBER, phonenumbers.parse("301/23456", "DE"))
 
         # Check it doesn't use the '1' as a country calling code when parsing if the phone number was
         # already possible.
-        usNumber = PhoneNumber(country_code=1, national_number=1234567890L)
+        usNumber = PhoneNumber(country_code=1, national_number=1234567890)
         self.assertEqual(usNumber, phonenumbers.parse("123-456-7890", "US"))
 
     def testParseNumberWithAlphaCharacters(self):
         # Test case with alpha characters.
-        tollfreeNumber = PhoneNumber(country_code=64, national_number=800332005L)
+        tollfreeNumber = PhoneNumber(country_code=64, national_number=800332005)
         self.assertEqual(tollfreeNumber, phonenumbers.parse("0800 DDA 005", "NZ"))
-        premiumNumber = PhoneNumber(country_code=64, national_number=9003326005L)
+        premiumNumber = PhoneNumber(country_code=64, national_number=9003326005)
         self.assertEqual(premiumNumber, phonenumbers.parse("0900 DDA 6005", "NZ"))
         # Not enough alpha characters for them to be considered intentional, so they are stripped.
         self.assertEqual(premiumNumber, phonenumbers.parse("0900 332 6005a", "NZ"))
@@ -1370,20 +1375,20 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
     def testParseNonAscii(self):
         # Using a full-width plus sign.
-        self.assertEqual(US_NUMBER, phonenumbers.parse(u"\uFF0B1 (650) 253-0000", "SG"))
+        self.assertEqual(US_NUMBER, phonenumbers.parse(u("\uFF0B1 (650) 253-0000"), "SG"))
         # The whole number, including punctuation, is here represented in full-width form.
-        self.assertEqual(US_NUMBER, phonenumbers.parse(u"\uFF0B\uFF11\u3000\uFF08\uFF16\uFF15\uFF10\uFF09" +
-                                                       u"\u3000\uFF12\uFF15\uFF13\uFF0D\uFF10\uFF10\uFF10" +
-                                                       u"\uFF10",
+        self.assertEqual(US_NUMBER, phonenumbers.parse(u("\uFF0B\uFF11\u3000\uFF08\uFF16\uFF15\uFF10\uFF09") +
+                                                       u("\u3000\uFF12\uFF15\uFF13\uFF0D\uFF10\uFF10\uFF10") +
+                                                       u("\uFF10"),
                                                        "SG"))
         # Using U+30FC dash instead.
-        self.assertEqual(US_NUMBER, phonenumbers.parse(u"\uFF0B\uFF11\u3000\uFF08\uFF16\uFF15\uFF10\uFF09" +
-                                                       u"\u3000\uFF12\uFF15\uFF13\u30FC\uFF10\uFF10\uFF10" +
-                                                       u"\uFF10",
+        self.assertEqual(US_NUMBER, phonenumbers.parse(u("\uFF0B\uFF11\u3000\uFF08\uFF16\uFF15\uFF10\uFF09") +
+                                                       u("\u3000\uFF12\uFF15\uFF13\u30FC\uFF10\uFF10\uFF10") +
+                                                       u("\uFF10"),
                                                        "SG"))
         # Using a very strange decimal digit range (Mongolian digits).
-        self.assertEqual(US_NUMBER, phonenumbers.parse(u"\u1811 \u1816\u1815\u1810 " +
-                                                       u"\u1812\u1815\u1813 \u1810\u1810\u1810\u1810",
+        self.assertEqual(US_NUMBER, phonenumbers.parse(u("\u1811 \u1816\u1815\u1810 ") +
+                                                       u("\u1812\u1815\u1813 \u1810\u1810\u1810\u1810"),
                                                        "US"))
 
     def testParseWithLeadingZero(self):
@@ -1394,13 +1399,13 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
     def testParseNationalNumberArgentina(self):
         # Test parsing mobile numbers of Argentina.
-        arNumber = PhoneNumber(country_code=54, national_number=93435551212L)
+        arNumber = PhoneNumber(country_code=54, national_number=93435551212)
         self.assertEqual(arNumber, phonenumbers.parse("+54 9 343 555 1212", "AR"))
         self.assertEqual(arNumber, phonenumbers.parse("0343 15 555 1212", "AR"))
 
         arNumber.clear()
         arNumber.country_code = 54
-        arNumber.national_number = 93715654320L
+        arNumber.national_number = to_long(93715654320)
         self.assertEqual(arNumber, phonenumbers.parse("+54 9 3715 65 4320", "AR"))
         self.assertEqual(arNumber, phonenumbers.parse("03715 15 65 4320", "AR"))
         self.assertEqual(AR_MOBILE, phonenumbers.parse("911 876 54321", "AR"))
@@ -1411,13 +1416,13 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
         arNumber.clear()
         arNumber.country_code = 54
-        arNumber.national_number = 3715654321L
+        arNumber.national_number = to_long(3715654321)
         self.assertEqual(arNumber, phonenumbers.parse("+54 3715 65 4321", "AR"))
         self.assertEqual(arNumber, phonenumbers.parse("03715 65 4321", "AR"))
 
         arNumber.clear()
         arNumber.country_code = 54
-        arNumber.national_number = 2312340000L
+        arNumber.national_number = to_long(2312340000)
         self.assertEqual(arNumber, phonenumbers.parse("+54 23 1234 0000", "AR"))
         self.assertEqual(arNumber, phonenumbers.parse("023 1234 0000", "AR"))
 
@@ -1432,7 +1437,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(AR_NUMBER, phonenumbers.parse("(0) 1187654321", "AR"))
         self.assertEqual(AR_NUMBER, phonenumbers.parse("0 1187654321", "AR"))
         self.assertEqual(AR_NUMBER, phonenumbers.parse("(0xx) 1187654321", "AR"))
-        arFromUs = PhoneNumber(country_code=54, national_number=81429712L)
+        arFromUs = PhoneNumber(country_code=54, national_number=81429712)
         # This test is intentionally constructed such that the number of digit
         # after xx is larger than 7, so that the number won't be mistakenly
         # treated as an extension, as we allow extensions up to 7 digits. This
@@ -1443,7 +1448,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
     def testParseNumbersMexico(self):
         # Test parsing fixed-line numbers of Mexico.
-        mxNumber = PhoneNumber(country_code=52, national_number=4499780001L)
+        mxNumber = PhoneNumber(country_code=52, national_number=4499780001)
         self.assertEqual(mxNumber, phonenumbers.parse("+52 (449)978-0001", "MX"))
         self.assertEqual(mxNumber, phonenumbers.parse("01 (449)978-0001", "MX"))
         self.assertEqual(mxNumber, phonenumbers.parse("(449)978-0001", "MX"))
@@ -1451,7 +1456,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Test parsing mobile numbers of Mexico.
         mxNumber.clear()
         mxNumber.country_code = 52
-        mxNumber.national_number = 13312345678L
+        mxNumber.national_number = to_long(13312345678)
         self.assertEqual(mxNumber, phonenumbers.parse("+52 1 33 1234-5678", "MX"))
         self.assertEqual(mxNumber, phonenumbers.parse("044 (33) 1234-5678", "MX"))
         self.assertEqual(mxNumber, phonenumbers.parse("045 33 1234-5678", "MX"))
@@ -1461,8 +1466,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             sentencePhoneNumber = "This is not a phone number"
             phonenumbers.parse(sentencePhoneNumber, "NZ")
             self.fail("This should not parse without throwing an exception " + sentencePhoneNumber)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1471,8 +1477,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             tooLongPhoneNumber = "01495 72553301873 810104"
             phonenumbers.parse(tooLongPhoneNumber, "GB")
             self.fail("This should not parse without throwing an exception " + tooLongPhoneNumber)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.TOO_LONG,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1481,8 +1488,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             plusMinusPhoneNumber = "+---"
             phonenumbers.parse(plusMinusPhoneNumber, "DE")
             self.fail("This should not parse without throwing an exception " + plusMinusPhoneNumber)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1491,8 +1499,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             tooShortPhoneNumber = "+49 0"
             phonenumbers.parse(tooShortPhoneNumber, "DE")
             self.fail("This should not parse without throwing an exception " + tooShortPhoneNumber)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.TOO_SHORT_NSN,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1501,8 +1510,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             invalidCountryCode = "+210 3456 56789"
             phonenumbers.parse(invalidCountryCode, "NZ")
             self.fail("This is not a recognised region code: should fail: " + invalidCountryCode)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.INVALID_COUNTRY_CODE,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1511,8 +1521,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             plusAndIddAndInvalidCountryCode = "+ 00 210 3 331 6005"
             phonenumbers.parse(plusAndIddAndInvalidCountryCode, "NZ")
             self.fail("This should not parse without throwing an exception.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception. 00 is a correct IDD, but 210 is not a valid country code.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.INVALID_COUNTRY_CODE,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1521,8 +1532,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             someNumber = "123 456 7890"
             phonenumbers.parse(someNumber, "ZZ")
             self.fail("'Unknown' region code not allowed: should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.INVALID_COUNTRY_CODE,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1531,8 +1543,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             someNumber = "123 456 7890"
             phonenumbers.parse(someNumber, "CS")
             self.fail("Deprecated region code not allowed: should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.INVALID_COUNTRY_CODE,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1541,8 +1554,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             someNumber = "123 456 7890"
             phonenumbers.parse(someNumber, None)
             self.fail("Null region code not allowed: should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.INVALID_COUNTRY_CODE,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1551,8 +1565,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             someNumber = "0044------"
             phonenumbers.parse(someNumber, "GB")
             self.fail("No number provided, only region code: should fail")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.TOO_SHORT_AFTER_IDD,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1561,8 +1576,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             someNumber = "0044"
             phonenumbers.parse(someNumber, "GB")
             self.fail("No number provided, only region code: should fail")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.TOO_SHORT_AFTER_IDD,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1571,8 +1587,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             someNumber = "011"
             phonenumbers.parse(someNumber, "US")
             self.fail("Only IDD provided - should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.TOO_SHORT_AFTER_IDD,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1581,8 +1598,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             someNumber = "0119"
             phonenumbers.parse(someNumber, "US")
             self.fail("Only IDD provided and then 9 - should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.TOO_SHORT_AFTER_IDD,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1592,8 +1610,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             # Invalid region.
             phonenumbers.parse(emptyNumber, "ZZ")
             self.fail("Empty string - should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1603,8 +1622,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             # Invalid region.
             phonenumbers.parse(nullNumber, "ZZ")
             self.fail("Null string - should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1615,8 +1635,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             nullNumber = None
             phonenumbers.parse(nullNumber, "US")
             self.fail("Null string - should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1628,7 +1649,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # can be calculated.
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("+64 3 331 6005", "ZZ"))
         # Test with full-width plus.
-        self.assertEqual(NZ_NUMBER, phonenumbers.parse(u"\uFF0B64 3 331 6005", "ZZ"))
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse(u("\uFF0B64 3 331 6005"), "ZZ"))
         # Test with normal plus but leading characters that need to be stripped.
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("Tel: +64 3 331 6005", "ZZ"))
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("+64 3 331 6005", None))
@@ -1645,7 +1666,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(nzNumberWithRawInput, phonenumbers.parse("+64 3 331 6005", None, keep_raw_input=True))
 
     def testParseExtensions(self):
-        nzNumber = PhoneNumber(country_code=64, national_number=33316005L, extension="3456")
+        nzNumber = PhoneNumber(country_code=64, national_number=33316005, extension="3456")
         self.assertEqual(nzNumber, phonenumbers.parse("03 331 6005 ext 3456", "NZ"))
         self.assertEqual(nzNumber, phonenumbers.parse("03-3316005x3456", "NZ"))
         self.assertEqual(nzNumber, phonenumbers.parse("03-3316005 int.3456", "NZ"))
@@ -1662,7 +1683,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(extnNumber, phonenumbers.parse("0~0 1800 7493 5247 ~1234", "PL"))
         # Verifying bug-fix where the last digit of a number was previously omitted if it was a 0 when
         # extracting the extension. Also verifying a few different cases of extensions.
-        ukNumber = PhoneNumber(country_code=44, national_number=2034567890L, extension="456")
+        ukNumber = PhoneNumber(country_code=44, national_number=2034567890, extension="456")
         self.assertEqual(ukNumber, phonenumbers.parse("+44 2034567890x456", "NZ"))
         self.assertEqual(ukNumber, phonenumbers.parse("+44 2034567890x456", "GB"))
         self.assertEqual(ukNumber, phonenumbers.parse("+44 2034567890 x456", "GB"))
@@ -1673,21 +1694,21 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(ukNumber, phonenumbers.parse("+44 2034567890    X 456", "GB"))
         self.assertEqual(ukNumber, phonenumbers.parse("+44-2034567890;ext=456", "GB"))
 
-        usWithExtension = PhoneNumber(country_code=1, national_number=8009013355L, extension="7246433")
+        usWithExtension = PhoneNumber(country_code=1, national_number=8009013355, extension="7246433")
         self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 x 7246433", "US"))
         self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 , ext 7246433", "US"))
         self.assertEqual(usWithExtension,
                          phonenumbers.parse("(800) 901-3355 ,extension 7246433", "US"))
         self.assertEqual(usWithExtension,
-                         phonenumbers.parse(u"(800) 901-3355 ,extensi\u00F3n 7246433", "US"))
+                         phonenumbers.parse(u("(800) 901-3355 ,extensi\u00F3n 7246433"), "US"))
         # Repeat with the small letter o with acute accent created by combining characters.
         self.assertEqual(usWithExtension,
-                         phonenumbers.parse(u"(800) 901-3355 ,extensio\u0301n 7246433", "US"))
+                         phonenumbers.parse(u("(800) 901-3355 ,extensio\u0301n 7246433"), "US"))
         self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 , 7246433", "US"))
         self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 ext: 7246433", "US"))
 
         # Test that if a number has two extensions specified, we ignore the second.
-        usWithTwoExtensionsNumber = PhoneNumber(country_code=1, national_number=2121231234L, extension="508")
+        usWithTwoExtensionsNumber = PhoneNumber(country_code=1, national_number=2121231234, extension="508")
         self.assertEqual(usWithTwoExtensionsNumber, phonenumbers.parse("(212)123-1234 x508/x1234", "US"))
         self.assertEqual(usWithTwoExtensionsNumber, phonenumbers.parse("(212)123-1234 x508/ x1234", "US"))
         self.assertEqual(usWithTwoExtensionsNumber, phonenumbers.parse("(212)123-1234 x508\\x1234", "US"))
@@ -1696,7 +1717,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # the # are an extension.
         usWithExtension.clear()
         usWithExtension.country_code = 1
-        usWithExtension.national_number = 6451231234L
+        usWithExtension.national_number = to_long(6451231234)
         usWithExtension.extension = "910"
         self.assertEqual(usWithExtension, phonenumbers.parse("+1 (645) 123 1234-910#", "US"))
         # Retry with the same number in a slightly different format.
@@ -1711,7 +1732,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(alphaNumericNumber,
                          phonenumbers.parse("800 six-flags", "US", keep_raw_input=True))
 
-        shorterAlphaNumber = PhoneNumber(country_code=1, national_number=8007493524L,
+        shorterAlphaNumber = PhoneNumber(country_code=1, national_number=8007493524,
                                          raw_input="1800 six-flag",
                                          country_code_source=CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN,
                                          preferred_domestic_carrier_code="")
@@ -1732,8 +1753,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
         try:
             phonenumbers.parse("123 456 7890", "CS", keep_raw_input=True)
             self.fail("Deprecated region code not allowed: should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.INVALID_COUNTRY_CODE,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1745,7 +1767,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
     def testCountryWithNoNumberDesc(self):
         # Andorra is a country where we don't have PhoneNumberDesc info in the metadata.
-        adNumber = PhoneNumber(country_code=376, national_number=12345L)
+        adNumber = PhoneNumber(country_code=376, national_number=12345)
         self.assertEqual("+376 12345", phonenumbers.format_number(adNumber, PhoneNumberFormat.INTERNATIONAL))
         self.assertEqual("+37612345", phonenumbers.format_number(adNumber, PhoneNumberFormat.E164))
         self.assertEqual("12345", phonenumbers.format_number(adNumber, PhoneNumberFormat.NATIONAL))
@@ -1757,7 +1779,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
                          phonenumbers.format_out_of_country_calling_number(US_NUMBER, "AD"))
 
     def testUnknownCountryCallingCodeForValidation(self):
-        invalidNumber = PhoneNumber(country_code=0, national_number=1234L)
+        invalidNumber = PhoneNumber(country_code=0, national_number=1234)
         self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
 
     def testIsNumberMatchMatches(self):
@@ -1798,10 +1820,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
                          msg="Number " + str(nzNumber) + " did not match " + str(NZ_NUMBER))
 
         # Check raw_input, country_code_source and preferred_domestic_carrier_code are ignored.
-        brNumberOne = PhoneNumber(country_code=55, national_number=3121286979L,
+        brNumberOne = PhoneNumber(country_code=55, national_number=3121286979,
                                   country_code_source=CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN,
                                   preferred_domestic_carrier_code="12", raw_input="012 3121286979")
-        brNumberTwo = PhoneNumber(country_code=55, national_number=3121286979L,
+        brNumberTwo = PhoneNumber(country_code=55, national_number=3121286979,
                                   country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY,
                                   preferred_domestic_carrier_code="14", raw_input="143121286979")
         self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
@@ -1874,7 +1896,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
                          phonenumbers.is_number_match("1 650-253 0000", "+1 650 253 0000"))
         # For this case, the match will be a short NSN match, because we cannot assume that the 1 might
         # be a national prefix, so don't remove it when parsing.
-        randomNumber = PhoneNumber(country_code=41, national_number=6502530000L)
+        randomNumber = PhoneNumber(country_code=41, national_number=6502530000)
         self.assertEqual(phonenumbers.MatchType.SHORT_NSN_MATCH,
                          phonenumbers.is_number_match(randomNumber, "1-650-253-0000"))
 
@@ -1901,8 +1923,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(phonenumbers.MatchType.SHORT_NSN_MATCH,
                          phonenumbers.is_number_match("+64 3 331-6005", "3 331 6005#1234"))
         # One has Italian leading zero, one does not.
-        italianNumberOne = PhoneNumber(country_code=39, national_number=1234L, italian_leading_zero=True)
-        italianNumberTwo = PhoneNumber(country_code=39, national_number=1234L)
+        italianNumberOne = PhoneNumber(country_code=39, national_number=1234, italian_leading_zero=True)
+        italianNumberTwo = PhoneNumber(country_code=39, national_number=1234)
         self.assertEqual(phonenumbers.MatchType.SHORT_NSN_MATCH,
                          phonenumbers.is_number_match(italianNumberOne, italianNumberTwo))
         # One has an extension, the other has an extension of "".
@@ -1966,9 +1988,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Still not equal because the leading digits are combined not overwritten
         self.assertNotEqual(nf1, nf3)
 
-        metadata1 = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=False)
-        metadata2 = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=False)
-        metadata3 = PhoneMetadata("XY", preferred_international_prefix=u'9100', register=False)
+        metadata1 = PhoneMetadata("XY", preferred_international_prefix=u('9123'), register=False)
+        metadata2 = PhoneMetadata("XY", preferred_international_prefix=u('9123'), register=False)
+        metadata3 = PhoneMetadata("XY", preferred_international_prefix=u('9100'), register=False)
         self.assertEqual(metadata1, metadata2)
         self.assertNotEqual(metadata1, metadata3)
         self.assertTrue(metadata1 != metadata3)
@@ -2071,7 +2093,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
                       personal_number=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
                                                       possible_number_pattern='\\d{4,10}',
                                                       example_number='123'),
-                      preferred_international_prefix=u'9123',
+                      preferred_international_prefix=u('9123'),
                       register=True)
         self.assertRaises(Exception, PhoneMetadata, *("XY",),
                           **{'preferred_international_prefix': '9999',
@@ -2085,7 +2107,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
                           phonenumberutil._extract_country_code("abcdef"))
         metadata = PhoneMetadata.region_metadata["AU"]
         number = PhoneNumber()
-        self.assertEqual((0, u""),
+        self.assertEqual((0, u("")),
                          phonenumberutil._maybe_extract_country_code("",
                                                                      metadata,
                                                                      False,
@@ -2097,8 +2119,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         metadataXY = PhoneMetadata("XY",
                                    general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
                                                                 possible_number_pattern='\\d{4,10}'),
-                                   national_prefix_for_parsing=u'0(1|2|3)(4|5|6)',
-                                   national_prefix_transform_rule=u'\\2',
+                                   national_prefix_for_parsing=u('0(1|2|3)(4|5|6)'),
+                                   national_prefix_transform_rule=u('\\2'),
                                    register=False)
         self.assertEqual(('1', '41234567', True),
                          phonenumberutil._maybe_strip_national_prefix_carrier_code("0141234567",

@@ -19,6 +19,7 @@
 import unittest
 
 from phonenumbers import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
+from phonenumbers.util import to_long
 
 
 class PhoneNumberTest(unittest.TestCase):
@@ -33,18 +34,18 @@ class PhoneNumberTest(unittest.TestCase):
     def test_equal_simple_number(self):
         numberA = PhoneNumber()
         numberA.country_code = 1
-        numberA.national_number = 6502530000L
-        numberB = PhoneNumber(country_code=1, national_number=6502530000L)
+        numberA.national_number = to_long(6502530000)
+        numberB = PhoneNumber(country_code=1, national_number=6502530000)
         self.assertEqual(numberA, numberB)
 
     def test_equal_with_italian_leading_zero_set_to_default(self):
         numberA = PhoneNumber()
         numberA.country_code = 1
-        numberA.national_number = 6502530000L
+        numberA.national_number = to_long(6502530000)
         numberA.italian_leading_zero = False
         numberB = PhoneNumber()
         numberB.country_code = 1
-        numberB.national_number = 6502530000L
+        numberB.national_number = to_long(6502530000)
         # These should still be equal, since the default value for this field
         # is false.
         self.assertEqual(numberA, numberB)
@@ -61,17 +62,17 @@ class PhoneNumberTest(unittest.TestCase):
     def test_non_equal_with_italian_leading_zero_set(self):
         numberA = PhoneNumber()
         numberA.country_code = 1
-        numberA.national_number = 6502530000L
+        numberA.national_number = to_long(6502530000)
         numberA.italian_leading_zero = True
         numberB = PhoneNumber()
         numberB.country_code = 1
-        numberB.national_number = 6502530000L
+        numberB.national_number = to_long(6502530000)
         self.assertNotEqual(numberA, numberB)
 
     def test_non_equal_with_differing_raw_input(self):
         numberA = PhoneNumber()
         numberA.country_code = 1
-        numberA.national_number = 6502530000L
+        numberA.national_number = to_long(6502530000)
         numberA.raw_input = "+1 650 253 00 00"
         numberA.country_code_source = CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN
         numberB = PhoneNumber()
@@ -79,7 +80,7 @@ class PhoneNumberTest(unittest.TestCase):
         # not considered "equal" as objects, since their raw input is
         # different.
         numberB.country_code = 1
-        numberB.national_number = 6502530000L
+        numberB.national_number = to_long(6502530000)
         numberB.raw_input = "+1-650-253-00-00"
         numberB.country_code_source = CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN
         self.assertNotEqual(numberA, numberB)
@@ -89,21 +90,21 @@ class PhoneNumberTest(unittest.TestCase):
     def test_non_equal_with_preferred_dcc_default(self):
         numberA = PhoneNumber()
         numberA.country_code = 1
-        numberA.national_number = 6502530000L
+        numberA.national_number = to_long(6502530000)
         numberA.preferred_domestic_carrier_code = ""
         numberB = PhoneNumber()
         numberB.country_code = 1
-        numberB.national_number = 6502530000L
+        numberB.national_number = to_long(6502530000)
         self.assertNotEqual(numberA, numberB)
 
     def test_equal_with_preferred_dcc_set(self):
         numberA = PhoneNumber()
         numberA.country_code = 1
-        numberA.national_number = 6502530000L
+        numberA.national_number = to_long(6502530000)
         numberA.preferred_domestic_carrier_code = ""
         numberB = PhoneNumber()
         numberB.country_code = 1
-        numberB.national_number = 6502530000L
+        numberB.national_number = to_long(6502530000)
         numberB.preferred_domestic_carrier_code = ""
         self.assertEqual(numberA, numberB)
 
@@ -111,19 +112,19 @@ class PhoneNumberTest(unittest.TestCase):
         # Python-specific extra tests for equality against other types
         numberA = PhoneNumber()
         numberA.country_code = 1
-        numberA.national_number = 6502530000L
+        numberA.national_number = to_long(6502530000)
         numberA.preferred_domestic_carrier_code = ""
         self.assertNotEqual(numberA, None)
         self.assertNotEqual(numberA, "")
         self.assertNotEqual(numberA, "+16502530000")
-        self.assertNotEqual(numberA, 6502530000L)
+        self.assertNotEqual(numberA, to_long(6502530000))
 
     def testFrozenPhoneNumber(self):
         # Python version extra tests
-        gb_mobile = PhoneNumber(country_code=44, national_number=7912345678L)
-        it_number = PhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
-        frozen_gb_mobile1 = FrozenPhoneNumber(country_code=44, national_number=7912345678L)
-        frozen_it_number1 = FrozenPhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+        gb_mobile = PhoneNumber(country_code=44, national_number=7912345678)
+        it_number = PhoneNumber(country_code=39, national_number=236618300, italian_leading_zero=True)
+        frozen_gb_mobile1 = FrozenPhoneNumber(country_code=44, national_number=7912345678)
+        frozen_it_number1 = FrozenPhoneNumber(country_code=39, national_number=236618300, italian_leading_zero=True)
         frozen_gb_mobile2 = FrozenPhoneNumber(gb_mobile)
         frozen_it_number2 = FrozenPhoneNumber(it_number)
         self.assertEqual(frozen_gb_mobile1, gb_mobile)
