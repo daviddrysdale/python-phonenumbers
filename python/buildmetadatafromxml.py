@@ -191,7 +191,7 @@ class XNumberFormat(UnicodeMixin):
                 raise Exception("No format pattern found")
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
-                self.o.format = re.sub('\$', ur'\\', self.o.format)
+                self.o.format = re.sub('\$', u(r'\\'), self.o.format)
             xleading_digits = xtag.findall("leadingDigits")
             for xleading_digit in xleading_digits:
                 self.o.leading_digits_pattern.append(_dews_re(xleading_digit.text))
@@ -210,7 +210,7 @@ class XNumberFormat(UnicodeMixin):
                 self.io.format = self.o.format
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
-                intl_format = re.sub('\$', ur'\\', intl_format)
+                intl_format = re.sub('\$', u(r'\\'), intl_format)
                 if intl_format != "NA":
                     self.io.format = intl_format
                 owning_xterr.has_explicit_intl_format = True
@@ -219,7 +219,7 @@ class XNumberFormat(UnicodeMixin):
                 owning_xterr.o.intl_number_format.append(self.io)
 
     def __unicode__(self):
-        return unicode(self.o)
+        return u(self.o)
 
 
 class XPhoneNumberDesc(UnicodeMixin):
@@ -253,7 +253,7 @@ class XPhoneNumberDesc(UnicodeMixin):
                 self.o.example_number = example_number
 
     def __unicode__(self):
-        return unicode(self.o)
+        return u(self.o)
 
 
 class XTerritory(UnicodeMixin):
@@ -347,7 +347,7 @@ class XTerritory(UnicodeMixin):
             self.o.intl_number_format = []
 
     def __unicode__(self):
-        return unicode(self.o)
+        return u(self.o)
 
 
 class XPhoneNumberMetadata(UnicodeMixin):
@@ -423,7 +423,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
 def _standalone(argv):
     """Parse the given XML file and emit generated code."""
     if len(argv) != 3:
-        print >> sys.stderr, __doc__
+        prnt(__doc__, file=sys.stderr)
         sys.exit(1)
     pmd = XPhoneNumberMetadata(argv[0])
     pmd.emit_metadata_py(argv[1], argv[2])

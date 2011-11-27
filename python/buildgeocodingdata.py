@@ -138,7 +138,7 @@ def output_geodata_code(geodata, outfilename, module_prefix):
 def _standalone(argv):
     """Parse the given input directory and emit generated code."""
     if len(argv) != 3:
-        print >> sys.stderr, __doc__
+        prnt(__doc__, file=sys.stderr)
         sys.exit(1)
     geodata = load_geodata(argv[0])
     output_geodata_code(geodata, argv[1], argv[2])
