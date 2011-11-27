@@ -11,14 +11,16 @@ rm -f *.bak *.pyc
 cd tests
 2to3 $OPTS --write *.py > /dev/null 2>&1
 rm -f *.bak *.pyc
-rm -f testdata/* testgeodata/*
+rm -rf testdata/* testgeodata/*
 cd ..
 
 cd phonenumbers
 2to3 $OPTS --write *.py > /dev/null 2>&1
+# reinstate util.py as it is version-aware
+cp ../../python/phonenumbers/util.py .
 2to3 $OPTS --write --doctests_only *.py > /dev/null 2>&1
 rm -f *.bak *,cover *.pyc
-rm -f data/* geodata/__init__.py*
+rm -rf data/* geodata/__init__.py*
 cd geodata
 2to3 $OPTS --write locale.py > /dev/null 2>&1
 rm -f *.bak
@@ -29,4 +31,4 @@ cd ..
 sed 's/^PYTHON=python$/PYTHON=python3/' makefile > makefile.tmp$$
 mv makefile.tmp$$ makefile
 
-make geodata metadata locale
+make alldata
