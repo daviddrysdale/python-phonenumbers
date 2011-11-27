@@ -2,6 +2,7 @@
 
 Auto-generated file, do not edit by hand.
 """
+from phonenumbers.util import u
 
 # Copyright (C) 2011-2011 The Libphonenumber Authors
 #
@@ -18,28 +19,28 @@ Auto-generated file, do not edit by hand.
 # limitations under the License.
 
 GEOCODE_DATA = {
- '1201':{'de': u'New Jersey', 'en': u'NJ'},
- '1212':{'en': u'NY'},
- '1212812':{'en': u'New York, NY'},
- '1617423':{'en': u'Boston, MA'},
- '1650':{'de': u'Kalifornien', 'en': u'CA'},
- '1650960':{'en': u'Mountain View, CA'},
- '1989':{'en': u'MA'},
- '822':{'en': u'Seoul', 'ko': u'\uc11c\uc6b8'},
- '8231':{'en': u'Gyeonggi', 'ko': u'\uacbd\uae30'},
- '8232':{'en': u'Incheon', 'ko': u'\uc778\ucc9c'},
- '8233':{'en': u'Gangwon', 'ko': u'\uac15\uc6d0'},
- '8241':{'en': u'Chungnam', 'ko': u'\ucda9\ub0a8'},
- '8242':{'en': u'Daejeon', 'ko': u'\ub300\uc804'},
- '8243':{'en': u'Chungbuk', 'ko': u'\ucda9\ubd81'},
- '8251':{'en': u'Busan', 'ko': u'\ubd80\uc0b0'},
- '8252':{'en': u'Ulsan', 'ko': u'\uc6b8\uc0b0'},
- '8253':{'en': u'Daegu', 'ko': u'\ub300\uad6c'},
- '8254':{'en': u'Gyeongbuk', 'ko': u'\uacbd\ubd81'},
- '8255':{'en': u'Gyeongnam', 'ko': u'\uacbd\ub0a8'},
- '8261':{'en': u'Jeonnam', 'ko': u'\uc804\ub0a8'},
- '8262':{'en': u'Gwangju', 'ko': u'\uad11\uc8fc'},
- '8263':{'en': u'Jeonbuk', 'ko': u'\uc804\ubd81'},
- '8264':{'en': u'Jeju'},
+ '1201':{'de': u('New Jersey'), 'en': u('NJ')},
+ '1212':{'en': u('NY')},
+ '1212812':{'en': u('New York, NY')},
+ '1617423':{'en': u('Boston, MA')},
+ '1650':{'de': u('Kalifornien'), 'en': u('CA')},
+ '1650960':{'en': u('Mountain View, CA')},
+ '1989':{'en': u('MA')},
+ '822':{'en': u('Seoul'), 'ko': u('\uc11c\uc6b8')},
+ '8231':{'en': u('Gyeonggi'), 'ko': u('\uacbd\uae30')},
+ '8232':{'en': u('Incheon'), 'ko': u('\uc778\ucc9c')},
+ '8233':{'en': u('Gangwon'), 'ko': u('\uac15\uc6d0')},
+ '8241':{'en': u('Chungnam'), 'ko': u('\ucda9\ub0a8')},
+ '8242':{'en': u('Daejeon'), 'ko': u('\ub300\uc804')},
+ '8243':{'en': u('Chungbuk'), 'ko': u('\ucda9\ubd81')},
+ '8251':{'en': u('Busan'), 'ko': u('\ubd80\uc0b0')},
+ '8252':{'en': u('Ulsan'), 'ko': u('\uc6b8\uc0b0')},
+ '8253':{'en': u('Daegu'), 'ko': u('\ub300\uad6c')},
+ '8254':{'en': u('Gyeongbuk'), 'ko': u('\uacbd\ubd81')},
+ '8255':{'en': u('Gyeongnam'), 'ko': u('\uacbd\ub0a8')},
+ '8261':{'en': u('Jeonnam'), 'ko': u('\uc804\ub0a8')},
+ '8262':{'en': u('Gwangju'), 'ko': u('\uad11\uc8fc')},
+ '8263':{'en': u('Jeonbuk'), 'ko': u('\uc804\ubd81')},
+ '8264':{'en': u('Jeju')},
 }
 GEOCODE_LONGEST_PREFIX = 7
