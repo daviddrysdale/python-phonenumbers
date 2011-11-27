@@ -26,6 +26,7 @@ from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseExceptio
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil
+from phonenumbers.util import u
 
 # Override library metadata with the test metadata.
 REAL_REGION_METADATA = PhoneMetadata.region_metadata
