@@ -1981,7 +1981,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         metadata = PhoneMetadata.region_metadata["AU"]
         self.assertEqual('\\' + 'd',
                          metadata.number_format[0].pattern[1:3])
-        self.assertEqual(r"""NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=%(u)s'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=%(u)s'\\1')""" % {'u': _UP},
+        self.assertEqual(r"""NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1'], national_prefix_formatting_rule=u('\\1'))""",
                          str(metadata.number_format[0]))
         self.assertEqual(repr(metadata.number_format[0]),
                          str(metadata.number_format[0]))
@@ -2050,8 +2050,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
     preferred_international_prefix='0011',
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=%(u)s'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=%(u)s'\\1'),
-        NumberFormat(pattern='(\\d{1})(\\d{4})(\\d{4})', format=%(u)s'\\1 \\2 \\3', leading_digits_pattern=['[2-478]'], national_prefix_formatting_rule=%(u)s'0\\1')])""" % {'u': _UP},
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1'], national_prefix_formatting_rule=u('\\1')),
+        NumberFormat(pattern='(\\d{1})(\\d{4})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[2-478]'], national_prefix_formatting_rule=u('0\\1'))])""",
                           str(metadata))
 
     def testMetadataEval(self):
