@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. AI metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AI = PhoneMetadata(id='AI', country_code=1, international_prefix='011',

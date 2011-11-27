@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. CY metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CY = PhoneMetadata(id='CY', country_code=357, international_prefix='00',
@@ -15,4 +14,4 @@ PHONE_METADATA_CY = PhoneMetadata(id='CY', country_code=357, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='(?:50|77)\\d{6}', possible_number_pattern='\\d{8}', example_number='77123456'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:12|99)', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{6})', format=u('\\1 \\2'))])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{6})', format='\\1 \\2')])

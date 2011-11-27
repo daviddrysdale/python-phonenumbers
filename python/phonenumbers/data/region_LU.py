@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. LU metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_LU = PhoneMetadata(id='LU', country_code=352, international_prefix='00',
@@ -16,12 +15,12 @@ PHONE_METADATA_LU = PhoneMetadata(id='LU', country_code=352, international_prefi
     emergency=PhoneNumberDesc(national_number_pattern='11[23]', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix_for_parsing='(15(?:0[06]|1[12]|35|4[04]|55|6[26]|77|88|99)\\d)',
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})', format=u('\\1 \\2'), leading_digits_pattern=['[23-5]|7[1-9]|[89](?:[1-9]|0[2-9])'], domestic_carrier_code_formatting_rule=u('$CC \\1')),
-        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[23-5]|7[1-9]|[89](?:[1-9]|0[2-9])'], domestic_carrier_code_formatting_rule=u('$CC \\1')),
-        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['20'], domestic_carrier_code_formatting_rule=u('$CC \\1')),
-        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{1,2})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['2(?:[0367]|4[3-8])'], domestic_carrier_code_formatting_rule=u('$CC \\1')),
-        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{3})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['20'], domestic_carrier_code_formatting_rule=u('$CC \\1')),
-        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{1,2})', format=u('\\1 \\2 \\3 \\4 \\5'), leading_digits_pattern=['2(?:[0367]|4[3-8])'], domestic_carrier_code_formatting_rule=u('$CC \\1')),
-        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{1,4})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['2(?:[12589]|4[12])|[3-5]|7[1-9]|[89](?:[1-9]|0[2-9])'], domestic_carrier_code_formatting_rule=u('$CC \\1')),
-        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[89]0[01]|70'], domestic_carrier_code_formatting_rule=u('$CC \\1')),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['6'], domestic_carrier_code_formatting_rule=u('$CC \\1'))])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['[23-5]|7[1-9]|[89](?:[1-9]|0[2-9])'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['[23-5]|7[1-9]|[89](?:[1-9]|0[2-9])'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['20'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{1,2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['2(?:[0367]|4[3-8])'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['20'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{1,2})', format='\\1 \\2 \\3 \\4 \\5', leading_digits_pattern=['2(?:[0367]|4[3-8])'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{1,4})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['2(?:[12589]|4[12])|[3-5]|7[1-9]|[89](?:[1-9]|0[2-9])'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[89]0[01]|70'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6'], domestic_carrier_code_formatting_rule='$CC \\1')])

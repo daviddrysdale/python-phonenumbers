@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. KW metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_KW = PhoneMetadata(id='KW', country_code=965, international_prefix='00',
@@ -15,5 +14,5 @@ PHONE_METADATA_KW = PhoneMetadata(id='KW', country_code=965, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{3,4})', format=u('\\1 \\2'), leading_digits_pattern=['[1269]']),
-        NumberFormat(pattern='(5[05]\\d)(\\d{5})', format=u('\\1 \\2'), leading_digits_pattern=['5'])])
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['[1269]']),
+        NumberFormat(pattern='(5[05]\\d)(\\d{5})', format='\\1 \\2', leading_digits_pattern=['5'])])

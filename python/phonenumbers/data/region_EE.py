@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. EE metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_EE = PhoneMetadata(id='EE', country_code=372, international_prefix='00',
@@ -15,7 +14,7 @@ PHONE_METADATA_EE = PhoneMetadata(id='EE', country_code=372, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='11[02]', possible_number_pattern='\\d{3}', example_number='112'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='800[2-9]\\d{3}', possible_number_pattern='\\d{7}', example_number='8002123'),
-    number_format=[NumberFormat(pattern='([34-79]\\d{2})(\\d{4})', format=u('\\1 \\2'), leading_digits_pattern=['[369]|4[3-8]|5(?:[0-2]|5[0-478]|6[45])|7[1-9]', '[369]|4[3-8]|5(?:[02]|1(?:[0-8]|95)|5[0-478]|6(?:4[0-4]|5[1-589]))|7[1-9]']),
-        NumberFormat(pattern='(70)(\\d{2})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['70']),
-        NumberFormat(pattern='(8000)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['800', '8000']),
-        NumberFormat(pattern='([458]\\d{3})(\\d{3,4})', format=u('\\1 \\2'), leading_digits_pattern=['40|5|8(?:00|[1-5])', '40|5|8(?:00[1-9]|[1-5])'])])
+    number_format=[NumberFormat(pattern='([34-79]\\d{2})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[369]|4[3-8]|5(?:[0-2]|5[0-478]|6[45])|7[1-9]', '[369]|4[3-8]|5(?:[02]|1(?:[0-8]|95)|5[0-478]|6(?:4[0-4]|5[1-589]))|7[1-9]']),
+        NumberFormat(pattern='(70)(\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['70']),
+        NumberFormat(pattern='(8000)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['800', '8000']),
+        NumberFormat(pattern='([458]\\d{3})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['40|5|8(?:00|[1-5])', '40|5|8(?:00[1-9]|[1-5])'])])

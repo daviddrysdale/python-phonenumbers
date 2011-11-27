@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. LA metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_LA = PhoneMetadata(id='LA', country_code=856, international_prefix='00',
@@ -17,5 +16,5 @@ PHONE_METADATA_LA = PhoneMetadata(id='LA', country_code=856, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(20)(\\d{2})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['20'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([2-57]\\d)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['21|[3-57]'], national_prefix_formatting_rule=u('0\\1'))])
+    number_format=[NumberFormat(pattern='(20)(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['20'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([2-57]\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['21|[3-57]'], national_prefix_formatting_rule='0\\1')])

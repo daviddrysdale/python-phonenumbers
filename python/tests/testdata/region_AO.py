@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. AO metadata"""
-from phonenumbers.util import u
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AO = PhoneMetadata(id='AO', country_code=244, international_prefix='00',
@@ -17,4 +16,4 @@ PHONE_METADATA_AO = PhoneMetadata(id='AO', country_code=244, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0~0',
     national_prefix_for_parsing='0~0',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'))])
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3')])

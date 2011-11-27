@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. RS metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_RS = PhoneMetadata(id='RS', country_code=381, international_prefix='00',
@@ -17,9 +16,9 @@ PHONE_METADATA_RS = PhoneMetadata(id='RS', country_code=381, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([23]\\d{2})(\\d{4,9})', format=u('\\1 \\2'), leading_digits_pattern=['(?:2[389]|39)0'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([1-3]\\d)(\\d{5,10})', format=u('\\1 \\2'), leading_digits_pattern=['1|2(?:[0-24-7]|[389][1-9])|3(?:[0-8]|9[1-9])'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(6\\d)(\\d{6,8})', format=u('\\1 \\2'), leading_digits_pattern=['6'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([89]\\d{2})(\\d{3,9})', format=u('\\1 \\2'), leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(7[26])(\\d{4,9})', format=u('\\1 \\2'), leading_digits_pattern=['7[26]'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(7[08]\\d)(\\d{4,9})', format=u('\\1 \\2'), leading_digits_pattern=['7[08]'], national_prefix_formatting_rule=u('0\\1'))])
+    number_format=[NumberFormat(pattern='([23]\\d{2})(\\d{4,9})', format='\\1 \\2', leading_digits_pattern=['(?:2[389]|39)0'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([1-3]\\d)(\\d{5,10})', format='\\1 \\2', leading_digits_pattern=['1|2(?:[0-24-7]|[389][1-9])|3(?:[0-8]|9[1-9])'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(6\\d)(\\d{6,8})', format='\\1 \\2', leading_digits_pattern=['6'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([89]\\d{2})(\\d{3,9})', format='\\1 \\2', leading_digits_pattern=['[89]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(7[26])(\\d{4,9})', format='\\1 \\2', leading_digits_pattern=['7[26]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(7[08]\\d)(\\d{4,9})', format='\\1 \\2', leading_digits_pattern=['7[08]'], national_prefix_formatting_rule='0\\1')])

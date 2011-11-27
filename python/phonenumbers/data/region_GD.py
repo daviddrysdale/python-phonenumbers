@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. GD metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_GD = PhoneMetadata(id='GD', country_code=1, international_prefix='011',

@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. SO metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_SO = PhoneMetadata(id='SO', country_code=252, international_prefix='00',
@@ -17,8 +16,8 @@ PHONE_METADATA_SO = PhoneMetadata(id='SO', country_code=252, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d)(\\d{6})', format=u('\\1 \\2'), leading_digits_pattern=['[1-5]']),
-        NumberFormat(pattern='(\\d)(\\d{7})', format=u('\\1 \\2'), leading_digits_pattern=['[267]']),
-        NumberFormat(pattern='([19]\\d)(\\d{6})', format=u('\\1 \\2'), leading_digits_pattern=['15|9']),
-        NumberFormat(pattern='(6\\d)(\\d{7})', format=u('\\1 \\2'), leading_digits_pattern=['6[17]']),
-        NumberFormat(pattern='(69\\d)(\\d{6})', format=u('\\1 \\2'), leading_digits_pattern=['69'])])
+    number_format=[NumberFormat(pattern='(\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['[1-5]']),
+        NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['[267]']),
+        NumberFormat(pattern='([19]\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['15|9']),
+        NumberFormat(pattern='(6\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['6[17]']),
+        NumberFormat(pattern='(69\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['69'])])

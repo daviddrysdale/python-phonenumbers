@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. VN metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_VN = PhoneMetadata(id='VN', country_code=84, international_prefix='00',
@@ -17,11 +16,11 @@ PHONE_METADATA_VN = PhoneMetadata(id='VN', country_code=84, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([48])(\\d{4})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[48]'], national_prefix_formatting_rule=u('0\\1'), national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='([235-7]\\d)(\\d{4})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['2[025-79]|3[0136-9]|5[2-9]|6[0-46-9]|7[02-79]'], national_prefix_formatting_rule=u('0\\1'), national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(80)(\\d{5})', format=u('\\1 \\2'), leading_digits_pattern=['80'], national_prefix_formatting_rule=u('0\\1'), national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(69\\d)(\\d{4,5})', format=u('\\1 \\2'), leading_digits_pattern=['69'], national_prefix_formatting_rule=u('0\\1'), national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='([235-7]\\d{2})(\\d{4})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['2[1348]|3[25]|5[01]|65|7[18]'], national_prefix_formatting_rule=u('0\\1'), national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(9\\d)(\\d{3})(\\d{2})(\\d{2})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['9'], national_prefix_formatting_rule=u('0\\1'), national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(1[2689]\\d)(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1(?:[26]|88|99)'], national_prefix_formatting_rule=u('0\\1'), national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(1[89]00)(\\d{4,6})', format=u('\\1 \\2'), leading_digits_pattern=['1[89]0'], national_prefix_formatting_rule=u('\\1'), national_prefix_optional_when_formatting=True)])
+    number_format=[NumberFormat(pattern='([48])(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[48]'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='([235-7]\\d)(\\d{4})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['2[025-79]|3[0136-9]|5[2-9]|6[0-46-9]|7[02-79]'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(80)(\\d{5})', format='\\1 \\2', leading_digits_pattern=['80'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(69\\d)(\\d{4,5})', format='\\1 \\2', leading_digits_pattern=['69'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='([235-7]\\d{2})(\\d{4})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['2[1348]|3[25]|5[01]|65|7[18]'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(9\\d)(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['9'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(1[2689]\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1(?:[26]|88|99)'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(1[89]00)(\\d{4,6})', format='\\1 \\2', leading_digits_pattern=['1[89]0'], national_prefix_formatting_rule='\\1', national_prefix_optional_when_formatting=True)])

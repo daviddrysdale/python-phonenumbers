@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. GE metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_GE = PhoneMetadata(id='GE', country_code=995, international_prefix='810',
@@ -18,5 +17,5 @@ PHONE_METADATA_GE = PhoneMetadata(id='GE', country_code=995, international_prefi
     preferred_international_prefix='8~10',
     national_prefix='8',
     national_prefix_for_parsing='8',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['[348]'], national_prefix_formatting_rule=u('8 \\1')),
-        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['5'], national_prefix_formatting_rule=u('\\1'))])
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[348]'], national_prefix_formatting_rule='8 \\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['5'], national_prefix_formatting_rule='\\1')])

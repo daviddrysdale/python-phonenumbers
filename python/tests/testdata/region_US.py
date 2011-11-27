@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. US metadata"""
-from phonenumbers.util import u
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_US = PhoneMetadata(id='US', country_code=1, international_prefix='011',
@@ -18,7 +17,7 @@ PHONE_METADATA_US = PhoneMetadata(id='US', country_code=1, international_prefix=
     national_prefix='1',
     preferred_extn_prefix=' extn. ',
     national_prefix_for_parsing='1',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format=u('\\1 \\2')),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'))],
-    intl_number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u('\\1 \\2 \\3'))],
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2'),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3')],
+    intl_number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3')],
     main_country_for_code=True)

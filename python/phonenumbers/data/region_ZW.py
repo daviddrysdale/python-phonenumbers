@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. ZW metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_ZW = PhoneMetadata(id='ZW', country_code=263, international_prefix='00',
@@ -17,12 +16,12 @@ PHONE_METADATA_ZW = PhoneMetadata(id='ZW', country_code=263, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([49])(\\d{3})(\\d{2,5})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['4|9[2-9]'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([179]\\d)(\\d{3})(\\d{3,4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[19]1|7'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([1-356]\\d)(\\d{3,5})', format=u('\\1 \\2'), leading_digits_pattern=['1[3-9]|2(?:[1-469]|0[0-35-9]|[45][0-79])|3(?:0[0-79]|1[0-689]|[24-69]|3[0-69])|5(?:[02-46-9]|[15][0-69])|6(?:[0145]|[29][0-79]|3[0-689]|[68][0-69])'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([1-356]\\d)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1[3-9]|2(?:[1-469]|0[0-35-9]|[45][0-79])|3(?:0[0-79]|1[0-689]|[24-69]|3[0-69])|5(?:[02-46-9]|[15][0-69])|6(?:[0145]|[29][0-79]|3[0-689]|[68][0-69])'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([2356]\\d{2})(\\d{3,5})', format=u('\\1 \\2'), leading_digits_pattern=['2(?:[278]|0[45]|48)|3(?:08|17|3[78]|[78])|5[15][78]|6(?:[29]8|37|[68][78])'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([2356]\\d{2})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['2(?:[278]|0[45]|48)|3(?:08|17|3[78]|[78])|5[15][78]|6(?:[29]8|37|[68][78])'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([25]\\d{3})(\\d{3,5})', format=u('\\1 \\2'), leading_digits_pattern=['(?:25|54)8', '258[23]|5483'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([25]\\d{3})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['(?:25|54)8', '258[23]|5483'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(8\\d{3})(\\d{6})', format=u('\\1 \\2'), leading_digits_pattern=['8'], national_prefix_formatting_rule=u('0\\1'))])
+    number_format=[NumberFormat(pattern='([49])(\\d{3})(\\d{2,5})', format='\\1 \\2 \\3', leading_digits_pattern=['4|9[2-9]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([179]\\d)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['[19]1|7'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([1-356]\\d)(\\d{3,5})', format='\\1 \\2', leading_digits_pattern=['1[3-9]|2(?:[1-469]|0[0-35-9]|[45][0-79])|3(?:0[0-79]|1[0-689]|[24-69]|3[0-69])|5(?:[02-46-9]|[15][0-69])|6(?:[0145]|[29][0-79]|3[0-689]|[68][0-69])'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([1-356]\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1[3-9]|2(?:[1-469]|0[0-35-9]|[45][0-79])|3(?:0[0-79]|1[0-689]|[24-69]|3[0-69])|5(?:[02-46-9]|[15][0-69])|6(?:[0145]|[29][0-79]|3[0-689]|[68][0-69])'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([2356]\\d{2})(\\d{3,5})', format='\\1 \\2', leading_digits_pattern=['2(?:[278]|0[45]|48)|3(?:08|17|3[78]|[78])|5[15][78]|6(?:[29]8|37|[68][78])'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([2356]\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['2(?:[278]|0[45]|48)|3(?:08|17|3[78]|[78])|5[15][78]|6(?:[29]8|37|[68][78])'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([25]\\d{3})(\\d{3,5})', format='\\1 \\2', leading_digits_pattern=['(?:25|54)8', '258[23]|5483'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([25]\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['(?:25|54)8', '258[23]|5483'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(8\\d{3})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['8'], national_prefix_formatting_rule='0\\1')])

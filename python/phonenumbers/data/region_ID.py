@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. ID metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_ID = PhoneMetadata(id='ID', country_code=62, international_prefix='0(?:0[1789]|10(?:00|1[67]))',
@@ -17,9 +16,9 @@ PHONE_METADATA_ID = PhoneMetadata(id='ID', country_code=62, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{7,8})', format=u('\\1 \\2'), leading_digits_pattern=['2[124]|[36]1'], national_prefix_formatting_rule=u('(0\\1)')),
-        NumberFormat(pattern='(\\d{3})(\\d{5,7})', format=u('\\1 \\2'), leading_digits_pattern=['[4579]|2[035-9]|[36][02-9]'], national_prefix_formatting_rule=u('(0\\1)')),
-        NumberFormat(pattern='(8\\d{2})(\\d{3,4})(\\d{3,4})', format=u('\\1-\\2-\\3'), leading_digits_pattern=['8[1-35-9]'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(177)(\\d{6,8})', format=u('\\1 \\2'), leading_digits_pattern=['1'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(800)(\\d{5,7})', format=u('\\1 \\2'), leading_digits_pattern=['800'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(809)(\\d)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3 \\4'), leading_digits_pattern=['809'], national_prefix_formatting_rule=u('0\\1'))])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{7,8})', format='\\1 \\2', leading_digits_pattern=['2[124]|[36]1'], national_prefix_formatting_rule='(0\\1)'),
+        NumberFormat(pattern='(\\d{3})(\\d{5,7})', format='\\1 \\2', leading_digits_pattern=['[4579]|2[035-9]|[36][02-9]'], national_prefix_formatting_rule='(0\\1)'),
+        NumberFormat(pattern='(8\\d{2})(\\d{3,4})(\\d{3,4})', format='\\1-\\2-\\3', leading_digits_pattern=['8[1-35-9]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(177)(\\d{6,8})', format='\\1 \\2', leading_digits_pattern=['1'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(800)(\\d{5,7})', format='\\1 \\2', leading_digits_pattern=['800'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(809)(\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['809'], national_prefix_formatting_rule='0\\1')])

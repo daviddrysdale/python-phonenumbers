@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. MZ metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MZ = PhoneMetadata(id='MZ', country_code=258, international_prefix='00',
@@ -15,5 +14,5 @@ PHONE_METADATA_MZ = PhoneMetadata(id='MZ', country_code=258, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:1[79]|9[78])', possible_number_pattern='\\d{3}', example_number='119'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='([28]\\d)(\\d{3})(\\d{3,4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['2|8[24]']),
-        NumberFormat(pattern='(80\\d)(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['80'])])
+    number_format=[NumberFormat(pattern='([28]\\d)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['2|8[24]']),
+        NumberFormat(pattern='(80\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['80'])])

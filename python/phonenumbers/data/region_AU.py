@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. AU metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix='(?:14(?:1[14]|34|4[17]|[56]6|7[47]|88))?001[14-689]',
@@ -18,12 +17,12 @@ PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix
     preferred_international_prefix='0011',
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([2378])(\\d{4})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[2378]'], national_prefix_formatting_rule=u('(0\\1)')),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[45]|14'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(16)(\\d{3})(\\d{2,4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['16'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(1[389]\\d{2})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1(?:[38]0|90)', '1(?:[38]00|90)'], national_prefix_formatting_rule=u('\\1')),
-        NumberFormat(pattern='(180)(2\\d{3})', format=u('\\1 \\2'), leading_digits_pattern=['180', '1802'], national_prefix_formatting_rule=u('\\1')),
-        NumberFormat(pattern='(19\\d)(\\d{3})', format=u('\\1 \\2'), leading_digits_pattern=['19[13]'], national_prefix_formatting_rule=u('\\1')),
-        NumberFormat(pattern='(19\\d{2})(\\d{4})', format=u('\\1 \\2'), leading_digits_pattern=['19[67]'], national_prefix_formatting_rule=u('\\1')),
-        NumberFormat(pattern='(13)(\\d{2})(\\d{2})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['13[1-9]'], national_prefix_formatting_rule=u('\\1'))],
+    number_format=[NumberFormat(pattern='([2378])(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2378]'], national_prefix_formatting_rule='(0\\1)'),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[45]|14'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(16)(\\d{3})(\\d{2,4})', format='\\1 \\2 \\3', leading_digits_pattern=['16'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(1[389]\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1(?:[38]0|90)', '1(?:[38]00|90)'], national_prefix_formatting_rule='\\1'),
+        NumberFormat(pattern='(180)(2\\d{3})', format='\\1 \\2', leading_digits_pattern=['180', '1802'], national_prefix_formatting_rule='\\1'),
+        NumberFormat(pattern='(19\\d)(\\d{3})', format='\\1 \\2', leading_digits_pattern=['19[13]'], national_prefix_formatting_rule='\\1'),
+        NumberFormat(pattern='(19\\d{2})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['19[67]'], national_prefix_formatting_rule='\\1'),
+        NumberFormat(pattern='(13)(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['13[1-9]'], national_prefix_formatting_rule='\\1')],
     main_country_for_code=True)

@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. BL metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_BL = PhoneMetadata(id='BL', country_code=590, international_prefix='00',

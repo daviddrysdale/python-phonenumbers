@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. PW metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_PW = PhoneMetadata(id='PW', country_code=680, international_prefix='01[12]',
@@ -15,4 +14,4 @@ PHONE_METADATA_PW = PhoneMetadata(id='PW', country_code=680, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='911', possible_number_pattern='\\d{3}', example_number='911'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format=u('\\1 \\2'))])
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2')])

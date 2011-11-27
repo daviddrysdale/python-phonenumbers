@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. NG metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_NG = PhoneMetadata(id='NG', country_code=234, international_prefix='009',
@@ -17,9 +16,9 @@ PHONE_METADATA_NG = PhoneMetadata(id='NG', country_code=234, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([129])(\\d{3})(\\d{3,4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[129]'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([3-8]\\d)(\\d{3})(\\d{2,3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[3-6]|7(?:[1-79]|0[1-9])|8[2-9]'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([78]\\d{2})(\\d{3})(\\d{3,4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['70|8[01]'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([78]00)(\\d{4})(\\d{4,5})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[78]00'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='([78]00)(\\d{5})(\\d{5,6})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[78]00'], national_prefix_formatting_rule=u('0\\1')),
-        NumberFormat(pattern='(78)(\\d{2})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['78'], national_prefix_formatting_rule=u('0\\1'))])
+    number_format=[NumberFormat(pattern='([129])(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['[129]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([3-8]\\d)(\\d{3})(\\d{2,3})', format='\\1 \\2 \\3', leading_digits_pattern=['[3-6]|7(?:[1-79]|0[1-9])|8[2-9]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([78]\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['70|8[01]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([78]00)(\\d{4})(\\d{4,5})', format='\\1 \\2 \\3', leading_digits_pattern=['[78]00'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([78]00)(\\d{5})(\\d{5,6})', format='\\1 \\2 \\3', leading_digits_pattern=['[78]00'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(78)(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['78'], national_prefix_formatting_rule='0\\1')])

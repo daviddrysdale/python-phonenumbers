@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. RE metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_RE = PhoneMetadata(id='RE', country_code=262, international_prefix='00',
@@ -17,6 +16,6 @@ PHONE_METADATA_RE = PhoneMetadata(id='RE', country_code=262, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([268]\\d{2})(\\d{2})(\\d{2})(\\d{2})', format=u('\\1 \\2 \\3 \\4'), national_prefix_formatting_rule=u('0\\1'))],
+    number_format=[NumberFormat(pattern='([268]\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', national_prefix_formatting_rule='0\\1')],
     main_country_for_code=True,
     leading_digits='262|6[49]|8')

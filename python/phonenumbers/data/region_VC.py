@@ -1,5 +1,4 @@
 """Auto-generated file, do not edit by hand. VC metadata"""
-from ..util import u
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_VC = PhoneMetadata(id='VC', country_code=1, international_prefix='011',
