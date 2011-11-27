@@ -16,7 +16,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin, rpr, to_long
+from .util import UnicodeMixin, to_long, unicod, rpr
+
+
+def _force_unicode(s):
+    if s is None:
+        return None
+    else:
+        return unicod(s)
 
 
 class CountryCodeSource(object):
@@ -65,7 +72,10 @@ class PhoneNumber(UnicodeMixin):
         # be 1 for NANPA countries, and 33 for France.
         #
         # None if not set, of type int otherwise.
-        self.country_code = country_code  # None or int
+        if country_code is None:
+            self.country_code = None
+        else:
+            self.country_code = int(country_code)
 
         # National (significant) Number is defined in International
         # Telecommunication Union Recommendation E.164. It is a
@@ -92,7 +102,7 @@ class PhoneNumber(UnicodeMixin):
         # possible use of a leading zero in the extension (organizations
         # have complete freedom to do so, as there is no standard defined).
         # However, only ASCII digits should be stored here.
-        self.extension = extension  # None or u'[0-9]+'
+        self.extension = _force_unicode(extension)  # None or Unicode '[0-9]+'
 
         # In some countries, the national (significant) number starts with
         # a "0" without this being a national prefix or trunk code of some
@@ -110,7 +120,7 @@ class PhoneNumber(UnicodeMixin):
         #
         # Clients who use the parsing functionality of the phonenumbers
         # library will have this field set if necessary automatically.
-        self.italian_leading_zero = italian_leading_zero  # bool
+        self.italian_leading_zero = bool(italian_leading_zero)
 
         # The next few fields are non-essential fields for a phone number.
         # They retain extra information about the form the phone number was
@@ -121,7 +131,7 @@ class PhoneNumber(UnicodeMixin):
         # numbers before it was canonicalized by the library. For example, it
         # could be used to store alphanumerical numbers such as
         # "1-800-GOOG-411".
-        self.raw_input = raw_input  # None or Unicode string
+        self.raw_input = _force_unicode(raw_input)  # None or Unicode string
 
         # The source from which the country_code is derived. This is not set
         # in the general parsing method, but in the method that parses and
@@ -138,7 +148,7 @@ class PhoneNumber(UnicodeMixin):
         #
         # Note this is the "preferred" code, which means other codes may work
         # as well.
-        self.preferred_domestic_carrier_code = preferred_domestic_carrier_code
+        self.preferred_domestic_carrier_code = _force_unicode(preferred_domestic_carrier_code)
         # None or Unicode string
 
     def clear(self):

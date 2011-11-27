@@ -16,7 +16,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin, u, rpr
+from .util import UnicodeMixin, u, unicod, rpr
+
+
+def _force_unicode(s):
+    if s is None:
+        return None
+    else:
+        return unicod(s)
 
 
 class NumberFormat(UnicodeMixin):
@@ -33,14 +40,14 @@ class NumberFormat(UnicodeMixin):
         # number "2070313000", which is the national (significant) number for
         # Google London. Note the presence of the parentheses, which are
         # capturing groups what specifies the grouping of numbers.
-        self.pattern = pattern  # None or Unicode string holding regexp
+        self.pattern = _force_unicode(pattern)  # Unicode string holding regexp
 
         # format specifies how the national (significant) number matched by
         # pattern should be formatted. Using the same example as above, format
         # could contain "$1 $2 $3", meaning that the number should be
         # formatted as "20 7031 3000". Each $x is replaced by the numbers
         # captured by group x in the regex specified by pattern.
-        self.format = format  # None or Unicode string
+        self.format = _force_unicode(format)  # None or Unicode string
 
         # This field is a regex that is used to match a certain number of
         # digits at the beginning of the national (significant) number. When
@@ -60,7 +67,7 @@ class NumberFormat(UnicodeMixin):
         # leading_digits_pattern is needed.
         self.leading_digits_pattern = []  # list of Unicode strings holding regexps
         if leading_digits_pattern is not None:
-            self.leading_digits_pattern = leading_digits_pattern
+            self.leading_digits_pattern = [_force_unicode(p) for p in leading_digits_pattern]
 
         # This field specifies how the national prefix ($NP) together with the
         # first group ($FG) in the national significant number should be
@@ -79,7 +86,7 @@ class NumberFormat(UnicodeMixin):
         # When this field is missing, a number will be formatted without
         # national prefix in NATIONAL format. This field does not affect how a
         # number is formatted in other formats, such as INTERNATIONAL.
-        self.national_prefix_formatting_rule = national_prefix_formatting_rule  # None or Unicode string
+        self.national_prefix_formatting_rule = _force_unicode(national_prefix_formatting_rule)  # None or Unicode string
 
         # This field specifies whether the $NP can be omitted when formatting
         # a number in national format, even though it usually wouldn't be. For
@@ -89,13 +96,13 @@ class NumberFormat(UnicodeMixin):
         # set to true. This will be inherited from the value set for the
         # territory in the XML file, unless a national_prefix_formatting_rule
         # is defined specifically for this NumberFormat.
-        self.national_prefix_optional_when_formatting = national_prefix_optional_when_formatting  # bool
+        self.national_prefix_optional_when_formatting = bool(national_prefix_optional_when_formatting)
 
         # This field specifies how any carrier code ($CC) together with the
         # first group ($FG) in the national significant number should be
         # formatted when format_with_carrier_code is called, if carrier codes
         # are used for a certain country.
-        self.domestic_carrier_code_formatting_rule = domestic_carrier_code_formatting_rule  # None or Unicode string
+        self.domestic_carrier_code_formatting_rule = _force_unicode(domestic_carrier_code_formatting_rule)  # None or Unicode string
 
     def merge_from(self, other):
         """Merge information from another NumberFormat object into this one."""
@@ -148,7 +155,7 @@ class PhoneNumberDesc(UnicodeMixin):
         # The national_number_pattern is the pattern that a valid national
         # significant number would match. This specifies information such as
         # its total length and leading digits.
-        self.national_number_pattern = national_number_pattern  # None or Unicode string holding regexp
+        self.national_number_pattern = _force_unicode(national_number_pattern)  # None or Unicode string holding regexp
 
         # The possible_number_pattern represents what a potentially valid
         # phone number for this region may be written as. This is a superset
@@ -157,11 +164,11 @@ class PhoneNumberDesc(UnicodeMixin):
         # the number of digits.  This could be used to highlight tokens in a
         # text that may be a phone number, or to quickly prune numbers that
         # could not possibly be a phone number for this locale.
-        self.possible_number_pattern = possible_number_pattern  # None or Unicode string holding regexp
+        self.possible_number_pattern = _force_unicode(possible_number_pattern)  # None or Unicode string holding regexp
 
         # An example national significant number for the specific type. It
         # should not contain any formatting information.
-        self.example_number = example_number  # None or Unicode string
+        self.example_number = _force_unicode(example_number)  # None or Unicode string
 
     def merge_from(self, other):
         """Merge information from another PhoneNumberDesc object into this one."""
@@ -261,7 +268,7 @@ class PhoneMetadata(UnicodeMixin):
         self.no_international_dialling = no_international_dialling  # None or PhoneNumberDesc
 
         # The ISO 3166-1 alpha-2 representation of a country/region
-        self.id = id  # None or Unicode string
+        self.id = _force_unicode(id)  # None or Unicode string
 
         # The country calling code that one would dial from overseas when
         # trying to dial a phone number in this country. For example, this
@@ -274,13 +281,13 @@ class PhoneMetadata(UnicodeMixin):
         # may have more than one international prefix, and for those cases, a
         # regular expression matching the international prefixes will be
         # stored in this field.
-        self.international_prefix = international_prefix  # None or Unicode string
+        self.international_prefix = _force_unicode(international_prefix)  # None or Unicode string
 
         # If more than one international prefix is present, a preferred prefix
         # can be specified here for out-of-country formatting purposes. If
         # this field is not present, and multiple international prefixes are
         # present, then "+" will be used instead.
-        self.preferred_international_prefix = preferred_international_prefix  # None or Unicode string
+        self.preferred_international_prefix = _force_unicode(preferred_international_prefix)  # None or Unicode string
 
         # The national prefix of country A is the number that needs to be
         # dialled before the national significant number when dialling
@@ -288,7 +295,7 @@ class PhoneMetadata(UnicodeMixin):
         # internationally. For example, in New Zealand, the number that would
         # be locally dialled as 09 345 3456 would be dialled from overseas as
         # +64 9 345 3456. In this case, 0 is the national prefix.
-        self.national_prefix = national_prefix  # None or Unicode string
+        self.national_prefix = _force_unicode(national_prefix)  # None or Unicode string
 
         # The preferred prefix when specifying an extension in this
         # country. This is used for formatting only, and if this is not
@@ -296,7 +303,7 @@ class PhoneMetadata(UnicodeMixin):
         # if you wanted extensions to be formatted in the following way: 1
         # (365) 345 445 ext. 2345 " ext. "  should be the preferred extension
         # prefix.
-        self.preferred_extn_prefix = preferred_extn_prefix  # None or Unicode string
+        self.preferred_extn_prefix = _force_unicode(preferred_extn_prefix)  # None or Unicode string
 
         # This field is used for cases where the national prefix of a country
         # contains a carrier selection code, and is written in the form of a
@@ -308,7 +315,7 @@ class PhoneMetadata(UnicodeMixin):
         #
         # When it is missing, this field inherits the value of national_prefix,
         # if that is present.
-        self.national_prefix_for_parsing = national_prefix_for_parsing  # None or Unicode string holding regexp
+        self.national_prefix_for_parsing = _force_unicode(national_prefix_for_parsing)  # None or Unicode string holding regexp
 
         # This field is only populated and used under very rare situations.
         # For example, mobile numbers in Argentina are written in two
@@ -317,7 +324,7 @@ class PhoneMetadata(UnicodeMixin):
         # 1212).  This field is used together with national_prefix_for_parsing
         # to transform the number into a particular representation for storing
         # in the PhoneNumber class in those rare cases.
-        self.national_prefix_transform_rule = national_prefix_transform_rule  # None or Unicode string
+        self.national_prefix_transform_rule = _force_unicode(national_prefix_transform_rule)  # None or Unicode string
 
         # Specifies whether the mobile and fixed-line patterns are the same or
         # not.  This is used to speed up determining phone number type in
@@ -369,7 +376,7 @@ class PhoneMetadata(UnicodeMixin):
         # countries with a unique calling code. This can be used to indicate
         # that "GB" is the main country for the calling code "44" for example,
         # rather than Jersey or the Isle of Man.
-        self.main_country_for_code = main_country_for_code  # bool
+        self.main_country_for_code = bool(main_country_for_code)
 
         # This field is populated only for countries or regions that share a
         # country calling code. If a number matches this pattern, it could
@@ -378,7 +385,7 @@ class PhoneMetadata(UnicodeMixin):
         # region (for example, 800 numbers are valid for all NANPA countries.)
         # This field should be a regular expression of the expected prefix
         # match.
-        self.leading_digits = leading_digits  # None or Unicode string holding regexp
+        self.leading_digits = _force_unicode(leading_digits)  # None or Unicode string holding regexp
 
         # The leading zero in a phone number is meaningful in some countries
         # (e.g.  Italy). This means they cannot be dropped from the national
@@ -387,7 +394,7 @@ class PhoneMetadata(UnicodeMixin):
         # then set this to true.  This only needs to be set for the region
         # that is the main_country_for_code and all regions associated with
         # that calling code will use the same setting.
-        self.leading_zero_possible = leading_zero_possible  # bool
+        self.leading_zero_possible = bool(leading_zero_possible)
 
         if register:
             # Register this instance with the class-wide map
