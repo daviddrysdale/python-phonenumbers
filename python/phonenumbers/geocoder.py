@@ -44,12 +44,28 @@ True
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .util import u
+from .util import prnt, u
 from .phonenumberutil import format_number, PhoneNumberFormat, is_valid_number
 from .phonenumberutil import region_code_for_number
-from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
-from .geodata.locale import LOCALE_DATA
 
+# Import auto-generated data structures
+try:
+    from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
+    from .geodata.locale import LOCALE_DATA
+except ImportError:  # pragma no cover
+    # Before the generated code exists, the geodata/ directory is empty.
+    # The generation process imports this module, creating a circular
+    # dependency.  The hack below works around this.
+    import os
+    import sys
+    if (os.path.basename(sys.argv[0]) == "buildgeocodingdata.py" or
+        os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py"):
+        prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
+        GEOCODE_DATA = {}
+        GEOCODE_LONGEST_PREFIX = 3
+        LOCALE_DATA = {}
+    else:
+        raise
 
 def _may_fall_back_to_english(lang):
     # Don't fall back to English if the requested language is among the following:
