@@ -59,10 +59,17 @@ else:  # pragma no cover
     uchr = unichr
     to_long = long
 
-    _U_RE = re.compile("^u('[^']*')")
+    _U_SQ_RE = re.compile("^u('[^']*')")
+    _U_DQ_RE = re.compile('^u("[^"]*")')
+    _X_LATIN1_RE = re.compile(r"(?P<x>\\x)(?P<hexval>[0-9a-fA-Z]{2})")
     def rpr(obj):
         s = repr(obj)
-        return re.sub(_U_RE, r'u(\1)', s)
+        # Assume any \xYY sequences are taking advantage of Python 2's default
+        # Latin-1 string encoding
+        s = re.sub(_X_LATIN1_RE, '\\u00\g<hexval>', s)
+        s = re.sub(_U_SQ_RE, r'u(\1)', s)
+        s = re.sub(_U_DQ_RE, r'u(\1)', s)
+        return s
 
     def prnt(*args, **kwargs):
         sep = kwargs.get('sep', ' ')
