@@ -574,8 +574,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual('Country Code: 54 National Number: 91234125678 '
                          'Leading Zero: False Preferred Domestic Carrier Code: 19',
                           str(arNumber))
-        self.assertEqual("PhoneNumber(country_code=54, national_number=91234125678%s, extension=None, "
-                         "italian_leading_zero=False, country_code_source=None, preferred_domestic_carrier_code='19')" % _LS,
+        self.assertEqual("PhoneNumber(country_code=54, national_number=91234125678, extension=None, "
+                         "italian_leading_zero=False, country_code_source=None, preferred_domestic_carrier_code='19')",
                          repr(arNumber))
         # When the preferred_domestic_carrier_code is present (even when it
         # contains an empty string), use it instead of the default carrier
@@ -2003,7 +2003,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         metadata = PhoneMetadata.region_metadata["AU"]
         self.assertEqual('\\' + 'd',
                          metadata.number_format[0].pattern[1:3])
-        self.assertEqual(r"""NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1'], national_prefix_formatting_rule=u('\\1'))""",
+        self.assertEqual(r"""NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule='\\1')""",
                          str(metadata.number_format[0]))
         self.assertEqual(repr(metadata.number_format[0]),
                          str(metadata.number_format[0]))
@@ -2072,8 +2072,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
     preferred_international_prefix='0011',
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['1'], national_prefix_formatting_rule=u('\\1')),
-        NumberFormat(pattern='(\\d{1})(\\d{4})(\\d{4})', format=u('\\1 \\2 \\3'), leading_digits_pattern=['[2-478]'], national_prefix_formatting_rule=u('0\\1'))])""",
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule='\\1'),
+        NumberFormat(pattern='(\\d{1})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-478]'], national_prefix_formatting_rule='0\\1')])""",
                           str(metadata))
 
     def testMetadataEval(self):

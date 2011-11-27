@@ -63,7 +63,6 @@ _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
 
 # Boilerplate header for individual region data files
 _REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %(region)s metadata"""
-from %(module)s.util import u
 from %(module)s.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 '''
 

@@ -131,7 +131,7 @@ class NumberFormat(UnicodeMixin):
         if self.national_prefix_formatting_rule is not None:
             result += u(", national_prefix_formatting_rule=%s") % rpr(self.national_prefix_formatting_rule)
         if self.national_prefix_optional_when_formatting:
-            result += u(", national_prefix_optional_when_formatting=%s") % rpr(self.national_prefix_optional_when_formatting)
+            result += u(", national_prefix_optional_when_formatting=%s") % str(self.national_prefix_optional_when_formatting)
         if self.domestic_carrier_code_formatting_rule is not None:
             result += u(", domestic_carrier_code_formatting_rule=%s") % rpr(self.domestic_carrier_code_formatting_rule)
         result += u(")")

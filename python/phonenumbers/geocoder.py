@@ -67,6 +67,7 @@ except ImportError:  # pragma no cover
     else:
         raise
 
+
 def _may_fall_back_to_english(lang):
     # Don't fall back to English if the requested language is among the following:
     # - Chinese

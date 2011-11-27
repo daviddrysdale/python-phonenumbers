@@ -24,12 +24,10 @@ if sys.version_info >= (3, 0):  # pragma no cover
     import builtins
     print3 = builtins.__dict__['print']
 
+    unicod = str
     u = str
     uchr = chr
     to_long = int
-    # TODO create a Py3k repr-equivalent that produces something
-    # parsable in Python 2 (with the assistance of this module)
-    rpr = repr
 
     def prnt(*args, **kwargs):
         sep = kwargs.get('sep', ' ')
@@ -41,6 +39,8 @@ if sys.version_info >= (3, 0):  # pragma no cover
         __str__ = lambda x: x.__unicode__()
 
 else:  # pragma no cover
+    unicod = unicode
+
     import unicodedata
     import re
     # \N{name} = character named name in the Unicode database
@@ -59,18 +59,6 @@ else:  # pragma no cover
     uchr = unichr
     to_long = long
 
-    _U_SQ_RE = re.compile("^u('[^']*')")
-    _U_DQ_RE = re.compile('^u("[^"]*")')
-    _X_LATIN1_RE = re.compile(r"(?P<x>\\x)(?P<hexval>[0-9a-fA-Z]{2})")
-    def rpr(obj):
-        s = repr(obj)
-        # Assume any \xYY sequences are taking advantage of Python 2's default
-        # Latin-1 string encoding
-        s = re.sub(_X_LATIN1_RE, '\\u00\g<hexval>', s)
-        s = re.sub(_U_SQ_RE, r'u(\1)', s)
-        s = re.sub(_U_DQ_RE, r'u(\1)', s)
-        return s
-
     def prnt(*args, **kwargs):
         sep = kwargs.get('sep', ' ')
         end = kwargs.get('end', '\n')
@@ -81,6 +69,39 @@ else:  # pragma no cover
 
     class UnicodeMixin(object):  # pragma no cover
         __str__ = lambda x: unicode(x).encode('utf-8')
+
+
+def rpr(s):
+    """Create a representation of a Unicode string that can be used in both
+    Python 2 and Python 3k, allowing for use of the u() function"""
+    if s is None:
+        return 'None'
+    seen_unicode = False
+    results = []
+    for cc in s:
+        ccn = ord(cc)
+        if ccn >= 32 and ccn < 127:
+            if cc == "'":  # escape single quote
+                results.append('\\')
+                results.append(cc)
+            elif cc == "\\":  # escape backslash
+                results.append('\\')
+                results.append(cc)
+            else:
+                results.append(cc)
+        else:
+            seen_unicode = True
+            if ccn <= 0xFFFF:
+                results.append('\\u')
+                results.append("%04x" % ccn)
+            else:
+                results.append('\\U')
+                results.append("%08x" % ccn)
+    result = "'" + "".join(results) + "'"
+    if seen_unicode:
+        return "u(" + result + ")"
+    else:
+        return result
 
 
 if __name__ == '__main__':  # pragma no cover

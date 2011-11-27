@@ -185,11 +185,11 @@ class PhoneNumber(UnicodeMixin):
     def __repr__(self):
         return (("PhoneNumber(country_code=%s, national_number=%s, extension=%s, " +
                  "italian_leading_zero=%s, country_code_source=%s, preferred_domestic_carrier_code=%s)") %
-                (rpr(self.country_code),
-                 rpr(self.national_number),
+                (self.country_code,
+                 self.national_number,
                  rpr(self.extension),
-                 rpr(self.italian_leading_zero),
-                 rpr(self.country_code_source),
+                 self.italian_leading_zero,
+                 self.country_code_source,
                  rpr(self.preferred_domestic_carrier_code)))
 
     def __unicode__(self):

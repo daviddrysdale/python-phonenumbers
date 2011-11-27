@@ -116,7 +116,7 @@ def _stable_dict_repr(strdict):
     """Return a repr() for a dict keyed by a string, in sorted key order"""
     lines = []
     for key in sorted(strdict.keys()):
-        lines.append("%s: %s" % (rpr(key), rpr(strdict[key])))
+        lines.append("'%s': %s" % (key, rpr(strdict[key])))
     return "{%s}" % ", ".join(lines)
 
 

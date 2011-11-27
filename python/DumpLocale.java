@@ -8,30 +8,43 @@ import java.util.HashMap;
 
 class DumpLocale {
   private static final char SINGLE_QUOTE = 39;
+  private static final char BACKSLASH = 92;
   private static final char[] hexChar = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
 
   /* Print a Unicode name suitably escaped */
   private static void printName(String name) {
-    System.out.print("u('");
-    // Need to escape unicode data
+    // Need to escape Unicode data if we find it.
+    boolean seenUnicode = false;
+    StringBuilder sb = new StringBuilder();
     for (int ii=0; ii<name.length(); ii++) {
       char c = name.charAt(ii);
       if ((c >= 32) && (c < 127)) {
         if (c == SINGLE_QUOTE) {
-          System.out.print("\\'");
+          sb.append("\\'");
+        } else if (c == BACKSLASH) {
+          sb.append("\\\\");
         } else {
-          System.out.print(c);
+          sb.append(c);
         }
       } else {
-        // non-ASCII
-        System.out.print("\\u");
-        System.out.print(hexChar[(c >> 12) & 0xF]);
-        System.out.print(hexChar[(c >> 8) & 0xF]);
-        System.out.print(hexChar[(c >> 4) & 0xF]);
-        System.out.print(hexChar[c & 0xF]);
+        // Non-ASCII.  Assume nothing outside of the BMP
+        seenUnicode = true;
+        sb.append("\\u");
+        sb.append(hexChar[(c >> 12) & 0xF]);
+        sb.append(hexChar[(c >> 8) & 0xF]);
+        sb.append(hexChar[(c >> 4) & 0xF]);
+        sb.append(hexChar[c & 0xF]);
       }
     }
-    System.out.print("')");
+    if (seenUnicode) {
+      System.out.print("u('");
+      System.out.print(sb.toString());
+      System.out.print("')");
+    } else {
+      System.out.print("'");
+      System.out.print(sb.toString());
+      System.out.print("'");
+    }
   }
 
   private static void printProperty(String propName) {
