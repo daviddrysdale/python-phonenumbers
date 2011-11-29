@@ -30,16 +30,14 @@ if not python_25:
     raise RuntimeError("Python 2.5 or newer is required")
 python_3x = (major >= 3)
 if python_3x:
-    package_name = 'phonenumbers3k'
     dev_status = 'Development Status :: 3 - Alpha'
 else:
-    package_name = 'phonenumbers'
     dev_status = 'Development Status :: 4 - Beta'
 
 # Discover version of phonenumbers package
 from phonenumbers import __version__
 
-distutils.core.setup(name=package_name,
+distutils.core.setup(name='phonenumbers',
                      version=__version__,
                      description="Python version of Google's common library for parsing, formatting, storing and validating international phone numbers.",
                      author='David Drysdale',

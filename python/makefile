@@ -1,10 +1,6 @@
 PYTHON=python
 PYTHON_VERSION=$(shell $(PYTHON) -c 'import sys;sys.stdout.write(str(sys.version_info[0]))')
-ifeq ($(PYTHON_VERSION),3)
-PACKAGE=phonenumbers3k
-else
 PACKAGE=phonenumbers
-endif
 alldata: metadata geodata locale
 
 # Dump the JRE's Locale information
