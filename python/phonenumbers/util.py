@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Python 2.x/3.x compatibility utilities.
 
->>> from .util import prnt, u, uchr
+>>> from .util import prnt, u, uchr, rpr
 >>> prnt("hello")
 hello
 >>> prnt("hello", "world")
@@ -16,6 +16,13 @@ True
 True
 >>> u('\u0101') == u('\N{LATIN SMALL LETTER A WITH MACRON}')
 True
+>>> a_macron = u('\u0101')
+>>> rpr(a_macron)
+"u('\\\\u0101')"
+>>> rpr(u('abc')) == "'abc'"  # In Python 2, LHS is Unicode but RHS is string
+True
+>>> rpr("'")
+"'\\\\''"
 """
 import sys
 
@@ -94,7 +101,7 @@ def rpr(s):
             if ccn <= 0xFFFF:
                 results.append('\\u')
                 results.append("%04x" % ccn)
-            else:
+            else:  # pragma no cover
                 results.append('\\U')
                 results.append("%08x" % ccn)
     result = "'" + "".join(results) + "'"

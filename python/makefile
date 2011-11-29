@@ -34,10 +34,6 @@ metadata: phonenumbers/data/__init__.py tests/testdata/__init__.py geodata
 
 test: alldata tests/testdata/__init__.py
 	$(PYTHON) -m phonenumbers.__init__
-	$(PYTHON) -m phonenumbers.util
-	$(PYTHON) -m phonenumbers.re_util
-	$(PYTHON) -m phonenumbers.unicode_util
-	$(PYTHON) -m phonenumbers.geocoder
 	$(PYTHON) -m testwrapper
 
 # Coverage; requires coverage module
@@ -47,8 +43,6 @@ coverage: alldata tests/testdata/__init__.py coverage_clean coverage_generate co
 coverage_clean:
 	$(COVERAGE) -e
 coverage_generate:
-	$(COVERAGE) -x phonenumbers/re_util.py
-	$(COVERAGE) -x phonenumbers/unicode_util.py
 	$(COVERAGE) -x testwrapper.py
 coverage_report:
 	$(COVERAGE) -m -r $(COVERAGE_FILES)
