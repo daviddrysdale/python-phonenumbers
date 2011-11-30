@@ -61,6 +61,7 @@ clean:
 	rm -rf phonenumbers/__pycache__ phonenumbers/data/__pycache__ phonenumbers/geodata/__pycache__
 	rm -f phonenumbers/*.py,cover
 	rm -f tests/*.pyc tests/testdata/*.pyc tests/testgeodata/*.pyc
+	rm -rf tests/__pycache__ tests/testdata/__pycache__ tests/testgeodata/__pycache__
 	rm -rf build deb_dist dist
 
 metaclean: clean
