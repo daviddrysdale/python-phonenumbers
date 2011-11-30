@@ -40,12 +40,6 @@ phonenumberutil.COUNTRY_CODE_TO_REGION_CODE = {}
 from .testdata import _COUNTRY_CODE_TO_REGION_CODE as TEST_CC_TO_RC
 TEST_REGION_METADATA = PhoneMetadata.region_metadata
 
-if sys.version_info >= (3, 0):
-    # Python 3 has unlimited-precision int, so no 'L' suffix
-    _LS = ''
-else:
-    _LS = 'L'
-
 
 def reinstate_real_metadata():
     """Reinstate real phone number metadata"""
