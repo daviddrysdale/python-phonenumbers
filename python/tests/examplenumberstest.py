@@ -24,6 +24,7 @@ from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber
 from phonenumbers.util import prnt
 
+
 class ExampleNumbersTest(unittest.TestCase):
     """Verifies all of the example numbers in the metadata are valid and of
     the correct type. If no example number exists for a particular type, the

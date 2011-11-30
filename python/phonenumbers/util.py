@@ -1,6 +1,17 @@
 #!/usr/bin/env python
 """Python 2.x/3.x compatibility utilities.
 
+This module defines a collection of functions that allow the same Python
+source code to be used in both Python 2.x and Python 3.x.
+
+ - prnt() prints its arguments to a file, with given separator and ending.
+ - to_long() creates a (long) integer object from its input parameter.
+ - u() allows string literals involving non-ASCII characters to be
+   used in both Python 2.x / 3.x, e.g. u("\u0101 is a-with-macron")
+ - uchr() generates a single character Unicode string whose point code
+   is the given (integer) argument, e.g. uchr(257).
+ - unicod() forces its argument to a Unicode string.
+
 >>> from .util import prnt, u, uchr, rpr
 >>> prnt("hello")
 hello
@@ -43,6 +54,7 @@ if sys.version_info >= (3, 0):  # pragma no cover
         print3(*args, sep=sep, end=end, file=file)
 
     class UnicodeMixin(object):
+        """Mixin class to define a __str__ method in terms of __unicode__ method"""
         __str__ = lambda x: x.__unicode__()
 
 else:  # pragma no cover
@@ -58,6 +70,12 @@ else:  # pragma no cover
     _U32_RE = re.compile(r'\\U(?P<hexval>[0-9a-fA-F]{8})')
 
     def u(s):
+        """Generate Unicode string from a string input, encoding Unicode characters.
+
+        This is expected to work in the same way as u'<string>' would work in Python
+        2.x (although it is not completely robust as it is based on a simple set of
+        regexps).
+        """
         us = re.sub(_U16_RE, lambda m: unichr(int(m.group('hexval'), 16)), unicode(s))
         us = re.sub(_U32_RE, lambda m: unichr(int(m.group('hexval'), 16)), us)
         us = re.sub(_UNAME_RE, lambda m: unicodedata.lookup(m.group('name')), us)
@@ -75,6 +93,7 @@ else:  # pragma no cover
         print >> file, sep.join([str(arg) for arg in args]) + end,
 
     class UnicodeMixin(object):  # pragma no cover
+        """Mixin class to define a __str__ method in terms of __unicode__ method"""
         __str__ = lambda x: unicode(x).encode('utf-8')
 
 
