@@ -1,5 +1,4 @@
 PYTHON=python
-PYTHON_VERSION=$(shell $(PYTHON) -c 'import sys;sys.stdout.write(str(sys.version_info[0]))')
 PACKAGE=phonenumbers
 alldata: metadata geodata locale
 
