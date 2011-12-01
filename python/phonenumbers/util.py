@@ -11,6 +11,8 @@ source code to be used in both Python 2.x and Python 3.x.
  - uchr() generates a single character Unicode string whose point code
    is the given (integer) argument, e.g. uchr(257).
  - unicod() forces its argument to a Unicode string.
+ - rpr() generates a representation of a string that can be parsed in either
+   Python 2.x or 3.x, assuming use of the u() function above.
 
 >>> from .util import prnt, u, uchr, rpr
 >>> prnt("hello")
