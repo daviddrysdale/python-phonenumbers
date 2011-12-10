@@ -221,6 +221,7 @@ class PhoneMetadata(UnicodeMixin):
                  pager=None,
                  uan=None,
                  emergency=None,
+                 voicemail=None,
                  no_international_dialling=None,
                  country_code=None,
                  international_prefix=None,
@@ -255,6 +256,7 @@ class PhoneMetadata(UnicodeMixin):
         self.pager = pager  # None or PhoneNumberDesc
         self.uan = uan  # None or PhoneNumberDesc
         self.emergency = emergency  # None or PhoneNumberDesc
+        self.voicemail = voicemail  # None or PhoneNumberDesc
 
         # The rules here distinguish the numbers that are only able to be
         # dialled nationally.
@@ -427,6 +429,7 @@ class PhoneMetadata(UnicodeMixin):
         result += ",\n    pager=%s" % self.pager
         result += ",\n    uan=%s" % self.uan
         result += ",\n    emergency=%s" % self.emergency
+        result += ",\n    voicemail=%s" % self.voicemail
         result += ",\n    no_international_dialling=%s" % self.no_international_dialling
 
         if self.preferred_international_prefix is not None:

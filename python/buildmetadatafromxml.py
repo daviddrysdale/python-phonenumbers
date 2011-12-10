@@ -321,6 +321,8 @@ class XTerritory(UnicodeMixin):
                                              template=self.o.general_desc.o)
         self.o.emergency = XPhoneNumberDesc(_get_unique_child(xterritory, 'emergency'),
                                             template=self.o.general_desc.o)
+        self.o.voicemail = XPhoneNumberDesc(_get_unique_child(xterritory, 'voicemail'),
+                                            template=self.o.general_desc.o)
         # Look for available formats
         self.has_explicit_intl_format = False
         formats = _get_unique_child(xterritory, "availableFormats")

@@ -354,9 +354,11 @@ class PhoneNumberType(object):
     # further routed to specific offices, but allow one number to be used for
     # a company.
     UAN = 9
+    # Used for "Voice Mail Access Numbers".
+    VOICEMAIL = 10
     # A phone number is of type UNKNOWN when it does not fit any of the known
     # patterns for a specific region.
-    UNKNOWN = 10
+    UNKNOWN = 99
 
 
 class MatchType(object):
