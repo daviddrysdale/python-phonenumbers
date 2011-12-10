@@ -727,15 +727,16 @@ class PhoneNumberUtilTest(unittest.TestCase):
         number5 = phonenumbers.parse("+442087654321", "GB")
         self.assertEqual("(020) 8765 4321", phonenumbers.format_in_original_format(number5, "GB"))
 
-        # Invalid numbers should be formatted using its raw input when that is
-        # available. Note area codes starting with 7 are intentionally
-        # excluded in the test metadata for testing purposes.
+        # Invalid numbers that we have a formatting pattern for should be
+        # formatted properly. Note area codes starting with 7 are
+        # intentionally excluded in the test metadata for testing purposes.
         number6 = phonenumbers.parse("7345678901", "US", keep_raw_input=True)
-        self.assertEqual("7345678901", phonenumbers.format_in_original_format(number6, "US"))
+        self.assertEqual("734 567 8901", phonenumbers.format_in_original_format(number6, "US"))
 
-        # When the raw input is unavailable, format as usual.
-        number7 = phonenumbers.parse("7345678901", "US")
-        self.assertEqual("734 567 8901", phonenumbers.format_in_original_format(number7, "US"))
+        # US is not a leading zero country, and the presence of the leading zero leads us to format the
+        # number using raw_input.
+        number7 = phonenumbers.parse("07345678901", "US", keep_raw_input=True)
+        self.assertEqual("07345678901", phonenumbers.format_in_original_format(number7, "US"))
 
         # This number is valid, but we don't have a formatting pattern for
         # it. Fall back to the raw input.
@@ -745,6 +746,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Python version extra tests
         number8 = phonenumbers.parse("87654321", None, keep_raw_input=True, _check_region=False)
         self.assertEqual("87654321", phonenumbers.format_in_original_format(number8, "US"))
+
+        # US local numbers are formatted correctly, as we have formatting patterns for them.
+        localNumberUS = phonenumbers.parse("2530000", "US", keep_raw_input=True)
+        self.assertEqual("253 0000", phonenumbers.format_in_original_format(localNumberUS, "US"))
 
     def testIsPremiumRate(self):
         self.assertEqual(PhoneNumberType.PREMIUM_RATE, phonenumbers.number_type(US_PREMIUM))
@@ -1671,6 +1676,12 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(ukNumber, phonenumbers.parse("+44 2034567890 x 456    ", "GB"))
         self.assertEqual(ukNumber, phonenumbers.parse("+44 2034567890    X 456", "GB"))
         self.assertEqual(ukNumber, phonenumbers.parse("+44-2034567890;ext=456", "GB"))
+        # Full-width extension, "extn" only.
+        self.assertEqual(ukNumber, phonenumbers.parse(u"+442034567890\uFF45\uFF58\uFF54\uFF4E456", "GB"))
+        # "xtn" only.
+        self.assertEqual(ukNumber, phonenumbers.parse(u"+442034567890\uFF58\uFF54\uFF4E456", "GB"))
+        # "xt" only.
+        self.assertEqual(ukNumber, phonenumbers.parse(u"+442034567890\uFF58\uFF54456", "GB"))
 
         usWithExtension = PhoneNumber(country_code=1, national_number=8009013355L, extension="7246433")
         self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 x 7246433", "US"))
