@@ -13,6 +13,7 @@ PHONE_METADATA_JO = PhoneMetadata(id='JO', country_code=962, international_prefi
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='8(?:10|[78]\\d)\\d{5}', possible_number_pattern='\\d{8}', example_number='87101234'),
     emergency=PhoneNumberDesc(national_number_pattern='112|911', possible_number_pattern='\\d{3}', example_number='112'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',

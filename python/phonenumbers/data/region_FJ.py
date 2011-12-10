@@ -13,6 +13,7 @@ PHONE_METADATA_FJ = PhoneMetadata(id='FJ', country_code=679, international_prefi
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='91[17]', possible_number_pattern='\\d{3}', example_number='911'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix='00',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[36-9]']),

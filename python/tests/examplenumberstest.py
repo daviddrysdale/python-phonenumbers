@@ -104,6 +104,13 @@ class ExampleNumbersTest(unittest.TestCase):
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
 
+    def testVoicemail(self):
+        # Python version extra test
+        voicemailTypes = set((PhoneNumberType.VOICEMAIL,))
+        self._checkNumbersValidAndCorrectType(PhoneNumberType.VOICEMAIL, voicemailTypes)
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
+
     def testSharedCost(self):
         sharedCostTypes = set((PhoneNumberType.SHARED_COST,))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.SHARED_COST, sharedCostTypes)

@@ -13,6 +13,7 @@ PHONE_METADATA_TR = PhoneMetadata(id='TR', country_code=90, international_prefix
     pager=PhoneNumberDesc(national_number_pattern='512\\d{7}', possible_number_pattern='\\d{10}', example_number='5123456789'),
     uan=PhoneNumberDesc(national_number_pattern='444\\d{4}|850\\d{7}', possible_number_pattern='\\d{7,10}', example_number='4441444'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:1[02]|55)', possible_number_pattern='\\d{3}', example_number='112'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='444\\d{4}', possible_number_pattern='\\d{7}', example_number='4441444'),
     national_prefix='0',
     national_prefix_for_parsing='0',

@@ -13,5 +13,6 @@ PHONE_METADATA_LV = PhoneMetadata(id='LV', country_code=371, international_prefi
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='0[123]|112', possible_number_pattern='\\d{2,3}', example_number='112'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='([2689]\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3')])

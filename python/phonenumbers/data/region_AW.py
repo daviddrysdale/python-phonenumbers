@@ -13,5 +13,6 @@ PHONE_METADATA_AW = PhoneMetadata(id='AW', country_code=297, international_prefi
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='100|911', possible_number_pattern='\\d{3}', example_number='911'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2')])

@@ -13,5 +13,6 @@ PHONE_METADATA_MT = PhoneMetadata(id='MT', country_code=356, international_prefi
     pager=PhoneNumberDesc(national_number_pattern='7117\\d{4}', possible_number_pattern='\\d{8}', example_number='71171234'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3}', example_number='112'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2')])

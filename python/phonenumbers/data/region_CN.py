@@ -13,6 +13,7 @@ PHONE_METADATA_CN = PhoneMetadata(id='CN', country_code=86, international_prefix
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:1[09]|20)', possible_number_pattern='\\d{3}', example_number='119'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:4|(?:10)?8)00\\d{7}', possible_number_pattern='\\d{10,12}', example_number='4001234567'),
     national_prefix='0',
     national_prefix_for_parsing='0',
