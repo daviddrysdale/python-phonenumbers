@@ -13,6 +13,7 @@ PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefi
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='[2-689]\\d{3}', possible_number_pattern='\\d{4}', example_number='2250'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:0[012]|12)', possible_number_pattern='\\d{3}', example_number='112'),
+    voicemail=PhoneNumberDesc(national_number_pattern='1599\\d{6}', possible_number_pattern='\\d{10}', example_number='1599123456'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1700\\d{6}|[2-689]\\d{3}', possible_number_pattern='\\d{4,10}', example_number='1700123456'),
     national_prefix='0',
     national_prefix_for_parsing='0',
@@ -22,4 +23,5 @@ PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefi
         NumberFormat(pattern='(1255)(\\d{3})', format=u'\\1-\\2', leading_digits_pattern=['125'], national_prefix_formatting_rule=u'\\1'),
         NumberFormat(pattern='(1200)(\\d{3})(\\d{3})', format=u'\\1-\\2-\\3', leading_digits_pattern=['120'], national_prefix_formatting_rule=u'\\1'),
         NumberFormat(pattern='(1212)(\\d{2})(\\d{2})', format=u'\\1-\\2-\\3', leading_digits_pattern=['121'], national_prefix_formatting_rule=u'\\1'),
+        NumberFormat(pattern='(1599)(\\d{6})', format=u'\\1-\\2', leading_digits_pattern=['15'], national_prefix_formatting_rule=u'\\1'),
         NumberFormat(pattern='(\\d{4})', format=u'*\\1', leading_digits_pattern=['[2-689]'], national_prefix_formatting_rule=u'\\1')])

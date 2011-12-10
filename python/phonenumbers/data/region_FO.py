@@ -13,6 +13,7 @@ PHONE_METADATA_FO = PhoneMetadata(id='FO', country_code=298, international_prefi
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3}', example_number='112'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix_for_parsing='(10(?:01|[12]0|88))',
     number_format=[NumberFormat(pattern='(\\d{6})', format=u'\\1', domestic_carrier_code_formatting_rule=u'$CC \\1')])

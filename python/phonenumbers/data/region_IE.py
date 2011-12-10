@@ -13,6 +13,7 @@ PHONE_METADATA_IE = PhoneMetadata(id='IE', country_code=353, international_prefi
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='818\\d{6}', possible_number_pattern='\\d{9}', example_number='818123456'),
     emergency=PhoneNumberDesc(national_number_pattern='112|999', possible_number_pattern='\\d{3}', example_number='112'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='18[59]0\\d{6}', possible_number_pattern='\\d{10}', example_number='1850123456'),
     national_prefix='0',
     national_prefix_for_parsing='0',

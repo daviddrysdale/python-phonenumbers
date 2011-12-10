@@ -13,6 +13,7 @@ PHONE_METADATA_JP = PhoneMetadata(id='JP', country_code=81, international_prefix
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='[23]\\d{3}', possible_number_pattern='\\d{4}'),
     national_prefix='0',
     national_prefix_for_parsing='0',
