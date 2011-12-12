@@ -1018,7 +1018,7 @@ def format_in_original_format(numobj, region_calling_from):
     Returns the formatted phone number in its original number format.
     """
     if (numobj.raw_input is not None and
-        (has_unexpected_italian_leading_zero(numobj) or not _has_formatting_pattern_for_number(numobj))):
+        (_has_unexpected_italian_leading_zero(numobj) or not _has_formatting_pattern_for_number(numobj))):
         # We check if we have the formatting pattern because without that, we
         # might format the number as a group without national prefix.
         return numobj.raw_input
@@ -1037,7 +1037,7 @@ def format_in_original_format(numobj, region_calling_from):
         return format_number(numobj, PhoneNumberFormat.NATIONAL)
 
 
-def has_unexpected_italian_leading_zero(numobj):
+def _has_unexpected_italian_leading_zero(numobj):
     """Returns true if a number is from a region whose national significant number couldn't contain a
     leading zero, but has the italian_leading_zero field set to true."""
     return (numobj.italian_leading_zero and
