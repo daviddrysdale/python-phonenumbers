@@ -10,8 +10,8 @@ phonenumbers Installation
 ===========================
 
 Install using setup.py:
-  $ tar xfz phonenumbers-3.1a1.tar.gz
-  $ cd phonenumbers-3.1a1
+  $ tar xfz phonenumbers-<version>.tar.gz
+  $ cd phonenumbers-<version>
   $ python setup.py build
   $ sudo python setup.py install # or su first
 
