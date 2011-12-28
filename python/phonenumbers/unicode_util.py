@@ -6,14 +6,14 @@
 >>> u2 = u('a')  # LATIN SMALL LETTER A
 >>> u3 = u('\uFF12')  # FULLWIDTH DIGIT TWO
 >>> u4 = u('\u0100')  # LATIN CAPITAL LETTER A WITH MACRON
->>> unicode_util.Category.get(u1)
-'Nd'
->>> unicode_util.Category.get(u2)
-'Ll'
->>> unicode_util.Category.get(u3)
-'Nd'
->>> unicode_util.Category.get(u4)
-'Lu'
+>>> unicode_util.Category.get(u1) == u('Nd')
+True
+>>> unicode_util.Category.get(u2) == u('Ll')
+True
+>>> unicode_util.Category.get(u3) == u('Nd')
+True
+>>> unicode_util.Category.get(u4) == u('Lu')
+True
 >>> unicode_util.Category.get(u2) == unicode_util.Category.LOWERCASE_LETTER
 True
 >>> try:
@@ -21,10 +21,11 @@ True
 ... except Exception:
 ...     beyond_bmp = u('')
 >>> if len(beyond_bmp) == 1:  # We have a UCS4 build of Python
-...     unicode_util.Category.get(beyond_bmp)
+...     cat_po = unicode_util.Category.get(beyond_bmp)
 ... else:  # UCS2 build of Python; no non-BMP chars available
-...     unicode_util.Category.OTHER_PUNCTUATION
-'Po'
+...     cat_po = unicode_util.Category.OTHER_PUNCTUATION
+>>> cat_po == u('Po')
+True
 >>> unicode_util.is_letter(u1)
 False
 >>> unicode_util.is_letter(u2)
@@ -72,62 +73,61 @@ True
 import bisect
 import unicodedata  # Python 2.5 onward
 
-from .util import UnicodeMixin, u
+from .util import UnicodeMixin, unicod, u
 
 
 class Category(object):
     """General category of a Unicode character.
 
     See http://www.unicode.org/reports/tr18/#Categories"""
-    LETTER = "L"
-    UPPERCASE_LETTER = "Lu"
-    LOWERCASE_LETTER = "Ll"
-    TITLECASE_LETTER = "Lt"
-    MODIFIER_LETTER = "Lm"
-    OTHER_LETTER = "Lo"
-    MARK = "M"
-    NON_SPACING_MARK = "Mn"
-    SPACING_COMBINING_MARK = "Mc"
-    ENCLOSING_MARK = "Me"
-    NUMBER = "N"
-    DECIMAL_DIGIT_NUMBER = "Nd"
-    LETTER_NUMBER = "Nl"
-    OTHER_NUMBER = "No"
-    SYMBOL = "S"
-    MATH_SYMBOL = "Sm"
-    CURRENCY_SYMBOL = "Sc"
-    MODIFIER_SYMBOL = "Sk"
-    OTHER_SYMBOL = "So"
-    PUNCTUATION = "P"
-    CONNECTOR_PUNCTUATION = "Pc"
-    DASH_PUNCTUATION = "Pd"
-    OPEN_PUNCTUATION = "Ps"
-    CLOSE_PUNCTUATION = "Pe"
-    INITIAL_PUNCTUATION = "Pi"
-    FINAL_PUNCTUATION = "Pf"
-    OTHER_PUNCTUATION = "Po"
-    SEPARATOR = "Z"
-    SPACE_SEPARATOR = "Zs"
-    LINE_SEPARATOR = "Zl"
-    PARAGRAPH_SEPARATOR = "Zp"
-    OTHER = "C"
-    CONTROL = "Cc"
-    FORMAT = "Cf"
-    SURROGATE = "Cs"
-    PRIVATE_USE = "Co"
-    NOT_ASSIGNED = "Cn"
+    LETTER = u("L")
+    UPPERCASE_LETTER = u("Lu")
+    LOWERCASE_LETTER = u("Ll")
+    TITLECASE_LETTER = u("Lt")
+    MODIFIER_LETTER = u("Lm")
+    OTHER_LETTER = u("Lo")
+    MARK = u("M")
+    NON_SPACING_MARK = u("Mn")
+    SPACING_COMBINING_MARK = u("Mc")
+    ENCLOSING_MARK = u("Me")
+    NUMBER = u("N")
+    DECIMAL_DIGIT_NUMBER = u("Nd")
+    LETTER_NUMBER = u("Nl")
+    OTHER_NUMBER = u("No")
+    SYMBOL = u("S")
+    MATH_SYMBOL = u("Sm")
+    CURRENCY_SYMBOL = u("Sc")
+    MODIFIER_SYMBOL = u("Sk")
+    OTHER_SYMBOL = u("So")
+    PUNCTUATION = u("P")
+    CONNECTOR_PUNCTUATION = u("Pc")
+    DASH_PUNCTUATION = u("Pd")
+    OPEN_PUNCTUATION = u("Ps")
+    CLOSE_PUNCTUATION = u("Pe")
+    INITIAL_PUNCTUATION = u("Pi")
+    FINAL_PUNCTUATION = u("Pf")
+    OTHER_PUNCTUATION = u("Po")
+    SEPARATOR = u("Z")
+    SPACE_SEPARATOR = u("Zs")
+    LINE_SEPARATOR = u("Zl")
+    PARAGRAPH_SEPARATOR = u("Zp")
+    OTHER = u("C")
+    CONTROL = u("Cc")
+    FORMAT = u("Cf")
+    SURROGATE = u("Cs")
+    PRIVATE_USE = u("Co")
+    NOT_ASSIGNED = u("Cn")
 
     @classmethod
     def get(cls, uni_char):
-        """Return the general category code for the given Unicode character"""
-        uni_char = u(uni_char)
-        return unicodedata.category(uni_char)
+        """Return the general category code (as Unicode string) for the given Unicode character"""
+        uni_char = unicod(uni_char)  # Force to Unicode
+        return unicod(unicodedata.category(uni_char))
 
 
 def is_letter(uni_char):
     """Determine whether the given Unicode character is a Unicode letter"""
-    uni_char = u(uni_char)
-    category = unicodedata.category(uni_char)
+    category = Category.get(uni_char)
     return (category == Category.UPPERCASE_LETTER or
             category == Category.LOWERCASE_LETTER or
             category == Category.TITLECASE_LETTER or
@@ -153,7 +153,7 @@ class _BlockRange(UnicodeMixin):
         return hash((self.start, self.end))
 
     def __unicode__(self):
-        return u("Block[%04x, %04x]") % (self.start, self.end)
+        return unicod("Block[%04x, %04x]") % (self.start, self.end)
 
 
 class Block(object):
@@ -377,7 +377,7 @@ class Block(object):
     @classmethod
     def get(cls, uni_char):
         """Return the Unicode block of the given Unicode character"""
-        uni_char = u(uni_char)
+        uni_char = unicod(uni_char)  # Force to Unicode
         code_point = ord(uni_char)
         if Block._RANGE_KEYS is None:
             Block._RANGE_KEYS = sorted(Block._RANGES.keys())
@@ -398,7 +398,7 @@ def digit(uni_char, default_value=None):
     """Returns the digit value assigned to the Unicode character uni_char as
     integer. If no such value is defined, default is returned, or, if not
     given, ValueError is raised."""
-    uni_char = u(uni_char)
+    uni_char = unicod(uni_char)  # Force to Unicode.
     if default_value is not None:
         return unicodedata.digit(uni_char, default_value)
     else:
