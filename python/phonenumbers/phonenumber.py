@@ -187,7 +187,7 @@ class PhoneNumber(UnicodeMixin):
 
     def __repr__(self):
         return (unicod("PhoneNumber(country_code=%s, national_number=%s, extension=%s, " +
-                 "italian_leading_zero=%s, country_code_source=%s, preferred_domestic_carrier_code=%s)") %
+                       "italian_leading_zero=%s, country_code_source=%s, preferred_domestic_carrier_code=%s)") %
                 (self.country_code,
                  self.national_number,
                  rpr(self.extension),

@@ -26,7 +26,7 @@ See the unit tests for more details on how the formatter is to be used.
 # limitations under the License.
 import re
 
-from .util import u, unicod, U_EMPTY_STRING
+from .util import u, unicod, U_EMPTY_STRING, U_SPACE
 from .unicode_util import digit as unicode_digit
 from .re_util import fullmatch
 from .phonemetadata import PhoneMetadata
@@ -163,11 +163,11 @@ class AsYouTypeFormatter(object):
             return False
 
         # Replace anything in the form of [..] with \d
-        number_pattern = re.sub(_CHARACTER_CLASS_PATTERN, "\\\\d", number_pattern)
+        number_pattern = re.sub(_CHARACTER_CLASS_PATTERN, unicod("\\\\d"), number_pattern)
 
         # Replace any standalone digit (not the one in d{}) with \d
-        number_pattern = re.sub(_STANDALONE_DIGIT_PATTERN, "\\\\d", number_pattern)
-        self.formatting_template = ""
+        number_pattern = re.sub(_STANDALONE_DIGIT_PATTERN, unicod("\\\\d"), number_pattern)
+        self.formatting_template = U_EMPTY_STRING
         temp_template = self._get_formatting_template(number_pattern, num_format.format)
         if len(temp_template) > 0:
             self._formatting_template = temp_template
@@ -179,7 +179,7 @@ class AsYouTypeFormatter(object):
         format a partial number where digits are added one by one."""
         # Create a phone number consisting only of the digit 9 that matches the
         # number_pattern by applying the pattern to the longest_phone_number string.
-        longest_phone_number = "999999999999999"
+        longest_phone_number = unicod("999999999999999")
         number_re = re.compile(number_pattern)
         m = number_re.search(longest_phone_number)  # this will always succeed
         a_phone_number = m.group(0)
@@ -196,24 +196,24 @@ class AsYouTypeFormatter(object):
 
     def _clear(self):
         """Clears the internal state of the formatter, so it can be reused."""
-        self._current_output = ""
-        self._accrued_input = ""
-        self._accrued_input_without_formatting = ""
-        self._formatting_template = ""
+        self._current_output = U_EMPTY_STRING
+        self._accrued_input = U_EMPTY_STRING
+        self._accrued_input_without_formatting = U_EMPTY_STRING
+        self._formatting_template = U_EMPTY_STRING
         self._last_match_position = 0
 
         # The pattern from number_format that is currently used to create
         # formatting_template.
-        self._current_formatting_pattern = ""
+        self._current_formatting_pattern = U_EMPTY_STRING
         # This contains anything that has been entered so far preceding the
         # national significant number, and it is formatted (e.g. with space
         # inserted). For example, this can contain IDD, country code, and/or
         # NDD, etc.
-        self._prefix_before_national_number = ""
+        self._prefix_before_national_number = U_EMPTY_STRING
         # This contains the national prefix that has been extracted. It
         # contains only digits without formatting.
-        self._national_prefix_extracted = ""
-        self._national_number = ""
+        self._national_prefix_extracted = U_EMPTY_STRING
+        self._national_number = U_EMPTY_STRING
         # This indicates whether AsYouTypeFormatter is currently doing the
         # formatting.
         self._able_to_format = True
@@ -285,7 +285,7 @@ class AsYouTypeFormatter(object):
             elif self._able_to_extract_longer_ndd():
                 # Add an additional space to separate long NDD and national
                 # significant number for readability.
-                self._prefix_before_national_number += " "
+                self._prefix_before_national_number += U_SPACE
                 self._current_output = self._attempt_to_choose_pattern_with_prefix_extracted()
                 return self._current_output
 
@@ -370,7 +370,7 @@ class AsYouTypeFormatter(object):
             if fullmatch(num_re, self._national_number):
                 formatted_number = re.sub(num_re, num_format.format, self._national_number)
                 return self._prefix_before_national_number + formatted_number
-        return ""
+        return U_EMPTY_STRING
 
     def get_remembered_position(self):
         """Returns the current position in the partially formatted phone
@@ -407,7 +407,7 @@ class AsYouTypeFormatter(object):
         accrued, and returns a formatted string in the end."""
         length_of_national_number = len(self._national_number)
         if length_of_national_number > 0:
-            temp_national_number = ""
+            temp_national_number = U_EMPTY_STRING
             for ii in range(length_of_national_number):
                 temp_national_number = self._input_digit_helper(self._national_number[ii])
             if self._able_to_format:
@@ -419,9 +419,9 @@ class AsYouTypeFormatter(object):
 
     def _remove_national_prefix_from_national_number(self):
         start_of_national_number = 0
-        if self._current_metadata.country_code == 1 and self._national_number[0] == '1':
+        if self._current_metadata.country_code == 1 and self._national_number[0] == unicod('1'):
             start_of_national_number = 1
-            self._prefix_before_national_number += "1 "
+            self._prefix_before_national_number += unicod("1 ")
             self._is_international_formatting = True
         elif self._current_metadata.national_prefix_for_parsing is not None:
             npp_re = re.compile(self._current_metadata.national_prefix_for_parsing)
@@ -446,7 +446,8 @@ class AsYouTypeFormatter(object):
         Returns True when accrued_input_without_formatting begins with the plus sign or valid IDD for
         default_country.
         """
-        international_prefix = re.compile("\\" + _PLUS_SIGN + "|" + self._current_metadata.international_prefix)
+        international_prefix = re.compile(unicod("\\") + _PLUS_SIGN +
+                                          unicod("|") + self._current_metadata.international_prefix)
         idd_match = international_prefix.match(self._accrued_input_without_formatting)
         if idd_match:
             self._is_international_formatting = True
@@ -454,7 +455,7 @@ class AsYouTypeFormatter(object):
             self._national_number = self._accrued_input_without_formatting[start_of_country_calling_code:]
             self._prefix_before_national_number = self._accrued_input_without_formatting[:start_of_country_calling_code]
             if self._accrued_input_without_formatting[0] != _PLUS_SIGN:
-                self._prefix_before_national_number += " "
+                self._prefix_before_national_number += U_SPACE
             return True
         return False
 
@@ -468,7 +469,7 @@ class AsYouTypeFormatter(object):
         if len(self._national_number) == 0:
             return False
 
-        number_without_ccc = ""
+        number_without_ccc = U_EMPTY_STRING
         country_code, number_without_ccc = _extract_country_code(self._national_number)
         if country_code == 0:
             return False
@@ -479,7 +480,7 @@ class AsYouTypeFormatter(object):
             self._current_metadata = _get_metadata_for_region(new_region_code)
 
         self._prefix_before_national_number += str(country_code)
-        self._prefix_before_national_number += " "
+        self._prefix_before_national_number += U_SPACE
         return True
 
     def _normalize_and_accrue_digits_and_plus_sign(self, next_char, remember_position):
@@ -523,5 +524,5 @@ class AsYouTypeFormatter(object):
                 # no other valid patterns to try.
                 self._able_to_format = False
             # else, we just reset the formatting pattern.
-            self._current_formatting_pattern = ""
+            self._current_formatting_pattern = U_EMPTY_STRING
             return self._accrued_input

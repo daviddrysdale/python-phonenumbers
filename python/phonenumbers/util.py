@@ -108,6 +108,7 @@ U_SLASH = unicod("/")
 U_SEMICOLON = unicod(";")
 U_X_LOWER = unicod("x")
 U_X_UPPER = unicod("X")
+U_PERCENT = unicod("%")
 
 
 def rpr(s):

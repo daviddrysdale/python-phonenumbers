@@ -21,7 +21,7 @@ import re
 # Extra regexp function; see README
 from .re_util import fullmatch
 from .util import UnicodeMixin, u, unicod
-from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER
+from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER, U_PERCENT
 from .unicode_util import Category, Block, is_letter
 from .phonenumberutil import _MAX_LENGTH_FOR_NSN, _MAX_LENGTH_COUNTRY_CODE
 from .phonenumberutil import _VALID_PUNCTUATION, _PLUS_CHARS, _NON_DIGITS_PATTERN
@@ -473,7 +473,7 @@ class PhoneNumberMatcher(object):
 
     @classmethod
     def _is_invalid_punctuation_symbol(cls, character):
-        return (character == '%' or
+        return (character == U_PERCENT or
                 Category.get(character) == Category.CURRENCY_SYMBOL)
 
     def _extract_match(self, candidate, offset):

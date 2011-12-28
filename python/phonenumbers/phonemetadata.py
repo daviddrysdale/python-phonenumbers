@@ -444,9 +444,9 @@ class PhoneMetadata(UnicodeMixin):
             # Note that we use rpr() on self.national_prefix_transform_rule, which generates its own quotes
             result += unicod(",\n    national_prefix_transform_rule=%s") % rpr(self.national_prefix_transform_rule)
         if len(self.number_format) > 0:
-            result += unicod(",\n    number_format=[%s]") % ',\n        '.join(map(u, self.number_format))
+            result += unicod(",\n    number_format=[%s]") % unicod(',\n        ').join(map(u, self.number_format))
         if len(self.intl_number_format) > 0:
-            result += unicod(",\n    intl_number_format=[%s]") % ',\n        '.join(map(u, self.intl_number_format))
+            result += unicod(",\n    intl_number_format=[%s]") % unicod(',\n        ').join(map(u, self.intl_number_format))
         if self.main_country_for_code:
             result += unicod(",\n    main_country_for_code=True")
         if self.leading_digits is not None:
