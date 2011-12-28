@@ -44,7 +44,7 @@ True
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .util import prnt, U_EMPTY_STRING
+from .util import prnt, unicod, U_EMPTY_STRING
 from .phonenumberutil import format_number, PhoneNumberFormat, is_valid_number
 from .phonenumberutil import region_code_for_number
 
@@ -120,7 +120,7 @@ def area_description_for_number(numobj, lang, script=None, region=None):
             # mapping language info to location name.
             name = _find_lang(GEOCODE_DATA[prefix], lang, script, region)
             if name is not None:
-                return name
+                return unicod(name)
             else:
                 return U_EMPTY_STRING
     return U_EMPTY_STRING
@@ -155,7 +155,7 @@ def region_display_name(region_code, lang, script=None, region=None):
             # name is held elsewhere, specifically in the [other_lang] entry
             other_lang = name[1:]
             name = LOCALE_DATA[region_code].get(other_lang, "")
-        return name
+        return unicod(name)
     return U_EMPTY_STRING
 
 
