@@ -132,6 +132,13 @@ def rpr(s):
         return result
 
 
+def force_unicode(s):
+    """Force the argument to be a Unicode string, preserving None"""
+    if s is None:
+        return None
+    else:
+        return unicod(s)
+
 if __name__ == '__main__':  # pragma no cover
     import doctest
     doctest.testmod()
