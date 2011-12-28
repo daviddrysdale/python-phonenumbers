@@ -44,7 +44,7 @@ True
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .util import prnt, u
+from .util import prnt, U_EMPTY_STRING
 from .phonenumberutil import format_number, PhoneNumberFormat, is_valid_number
 from .phonenumberutil import region_code_for_number
 
@@ -122,8 +122,8 @@ def area_description_for_number(numobj, lang, script=None, region=None):
             if name is not None:
                 return name
             else:
-                return u("")
-    return u("")
+                return U_EMPTY_STRING
+    return U_EMPTY_STRING
 
 
 def country_name_for_number(numobj, lang, script=None, region=None):
@@ -156,7 +156,7 @@ def region_display_name(region_code, lang, script=None, region=None):
             other_lang = name[1:]
             name = LOCALE_DATA[region_code].get(other_lang, "")
         return name
-    return u("")
+    return U_EMPTY_STRING
 
 
 def description_for_valid_number(numobj, lang, script=None, region=None):

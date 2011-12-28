@@ -186,7 +186,7 @@ class PhoneNumber(UnicodeMixin):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return (("PhoneNumber(country_code=%s, national_number=%s, extension=%s, " +
+        return (unicod("PhoneNumber(country_code=%s, national_number=%s, extension=%s, " +
                  "italian_leading_zero=%s, country_code_source=%s, preferred_domestic_carrier_code=%s)") %
                 (self.country_code,
                  self.national_number,
@@ -196,16 +196,16 @@ class PhoneNumber(UnicodeMixin):
                  rpr(self.preferred_domestic_carrier_code)))
 
     def __unicode__(self):
-        result = ("Country Code: %s National Number: %s" %
+        result = (unicod("Country Code: %s National Number: %s") %
                   (self.country_code, self.national_number))
         if self.italian_leading_zero is not None:
-            result += " Leading Zero: %s" % self.italian_leading_zero
+            result += unicod(" Leading Zero: %s") % self.italian_leading_zero
         if self.extension is not None:
-            result += " Extension: %s" % self.extension
+            result += unicod(" Extension: %s") % self.extension
         if self.country_code_source is not None:
-            result += " Country Code Source: %s" % self.country_code_source
+            result += unicod(" Country Code Source: %s") % self.country_code_source
         if self.preferred_domestic_carrier_code is not None:
-            result += (" Preferred Domestic Carrier Code: %s" %
+            result += (unicod(" Preferred Domestic Carrier Code: %s") %
                        self.preferred_domestic_carrier_code)
         return result
 

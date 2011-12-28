@@ -98,6 +98,17 @@ else:  # pragma no cover
         """Mixin class to define a __str__ method in terms of __unicode__ method"""
         __str__ = lambda x: unicode(x).encode('utf-8')
 
+# Constants for Unicode strings
+U_EMPTY_STRING = unicod("")
+U_SPACE = unicod(" ")
+U_DASH = unicod("-")
+U_TILDE = unicod("~")
+U_ZERO = unicod("0")
+U_SLASH = unicod("/")
+U_SEMICOLON = unicod(";")
+U_X_LOWER = unicod("x")
+U_X_UPPER = unicod("X")
+
 
 def rpr(s):
     """Create a representation of a Unicode string that can be used in both

@@ -20,7 +20,8 @@ import re
 
 # Extra regexp function; see README
 from .re_util import fullmatch
-from .util import UnicodeMixin, u
+from .util import UnicodeMixin, u, unicod
+from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER
 from .unicode_util import Category, Block, is_letter
 from .phonenumberutil import _MAX_LENGTH_FOR_NSN, _MAX_LENGTH_COUNTRY_CODE
 from .phonenumberutil import _VALID_PUNCTUATION, _PLUS_CHARS, _NON_DIGITS_PATTERN
@@ -40,7 +41,7 @@ def _limit(lower, upper):
     """Returns a regular expression quantifier with an upper and lower limit."""
     if ((lower < 0) or (upper <= 0) or (upper < lower)):
         raise Exception("Illegal argument to _limit")
-    return u("{%d,%d}") % (lower, upper)
+    return unicod("{%d,%d}") % (lower, upper)
 
 # Build the MATCHING_BRACKETS and PATTERN regular expression patterns. The
 # building blocks below exist to make the patterns more easily understood.
@@ -210,7 +211,7 @@ def _verify_strict_grouping(numobj, candidate):
     # The check here makes sure that we haven't mistakenly already used the extension to
     # match the last group of the subscriber number. Note the extension cannot have
     # formatting in-between digits.
-    return (normalized_candidate[from_index:].find(numobj.extension or "") != -1)
+    return (normalized_candidate[from_index:].find(numobj.extension or U_EMPTY_STRING) != -1)
 
 
 def _verify_exact_grouping(numobj, candidate):
@@ -258,19 +259,19 @@ def _get_national_number_groups(numobj):
     rfc3966_format = format_number(numobj, PhoneNumberFormat.RFC3966)
     # We remove the extension part from the formatted string before splitting
     # it into different groups.
-    end_index = rfc3966_format.find(u(";"))
+    end_index = rfc3966_format.find(U_SEMICOLON)
     if end_index < 0:
         end_index = len(rfc3966_format)
 
     # The country-code will have a '-' following it.
-    start_index = rfc3966_format.find(u("-")) + 1
-    return rfc3966_format[start_index:end_index].split(u("-"))
+    start_index = rfc3966_format.find(U_DASH) + 1
+    return rfc3966_format[start_index:end_index].split(U_DASH)
 
 
 def _contains_more_than_one_slash(candidate):
-    first_slash_index = candidate.find(u("/"))
+    first_slash_index = candidate.find(U_SLASH)
     return (first_slash_index > 0 and
-            (candidate.find(u("/"), (first_slash_index + 1)) != -1))
+            (candidate.find(U_SLASH, (first_slash_index + 1)) != -1))
 
 
 def _contains_only_valid_x_chars(numobj, candidate):
@@ -283,9 +284,9 @@ def _contains_only_valid_x_chars(numobj, candidate):
     # character of the string.
     ii = 0
     while ii < (len(candidate) - 1):
-        if (candidate[ii] == 'x' or candidate[ii] == 'X'):
+        if (candidate[ii] == U_X_LOWER or candidate[ii] == U_X_UPPER):
             next_char = candidate[ii + 1]
-            if (next_char == 'x' or next_char == 'X'):
+            if (next_char == U_X_LOWER or next_char == U_X_UPPER):
                 # This is the carrier code case, in which the 'X's always
                 # precede the national significant number.
                 ii += 1
@@ -375,7 +376,7 @@ class PhoneNumberMatcher(object):
         # The text searched for phone numbers.
         self.text = text
         if self.text is None:
-            self.text = u("")
+            self.text = U_EMPTY_STRING
         # The region (country) to assume for phone numbers without an
         # international prefix, possibly None.
         self.preferred_region = region
@@ -661,10 +662,10 @@ class PhoneNumberMatch(UnicodeMixin):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return ("PhoneNumberMatch(start=%r, raw_string=%r, numobj=%r)" %
+        return (unicod("PhoneNumberMatch(start=%r, raw_string=%r, numobj=%r)") %
                 (self.start,
                  self.raw_string,
                  self.number))
 
     def __unicode__(self):
-        return u("PhoneNumberMatch [%s,%s) %s") % (self.start, self.end, self.raw_string)
+        return unicod("PhoneNumberMatch [%s,%s) %s") % (self.start, self.end, self.raw_string)

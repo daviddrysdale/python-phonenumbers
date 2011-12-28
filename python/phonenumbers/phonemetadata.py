@@ -124,17 +124,17 @@ class NumberFormat(UnicodeMixin):
     def __unicode__(self):
         # Generate a string that is valid Python input for the constructor.
         # Note that we use rpr (variant of repr), which generates its own quotes.
-        result = u("NumberFormat(pattern=%s, format=%s") % (rpr(self.pattern), rpr(self.format))
+        result = unicod("NumberFormat(pattern=%s, format=%s") % (rpr(self.pattern), rpr(self.format))
         if len(self.leading_digits_pattern) > 0:
-            result += (u(", leading_digits_pattern=[%s]") %
-                       ", ".join([rpr(ld) for ld in self.leading_digits_pattern]))
+            result += (unicod(", leading_digits_pattern=[%s]") %
+                       unicod(", ").join([rpr(ld) for ld in self.leading_digits_pattern]))
         if self.national_prefix_formatting_rule is not None:
-            result += u(", national_prefix_formatting_rule=%s") % rpr(self.national_prefix_formatting_rule)
+            result += unicod(", national_prefix_formatting_rule=%s") % rpr(self.national_prefix_formatting_rule)
         if self.national_prefix_optional_when_formatting:
-            result += u(", national_prefix_optional_when_formatting=%s") % str(self.national_prefix_optional_when_formatting)
+            result += unicod(", national_prefix_optional_when_formatting=%s") % str(self.national_prefix_optional_when_formatting)
         if self.domestic_carrier_code_formatting_rule is not None:
-            result += u(", domestic_carrier_code_formatting_rule=%s") % rpr(self.domestic_carrier_code_formatting_rule)
-        result += u(")")
+            result += unicod(", domestic_carrier_code_formatting_rule=%s") % rpr(self.domestic_carrier_code_formatting_rule)
+        result += unicod(")")
         return result
 
 
@@ -185,18 +185,18 @@ class PhoneNumberDesc(UnicodeMixin):
 
     def __unicode__(self):
         # Generate a string that is valid Python input for constructor
-        result = u("PhoneNumberDesc(")
-        sep = u("")
+        result = unicod("PhoneNumberDesc(")
+        sep = unicod("")
         if self.national_number_pattern is not None:
-            result += u("%snational_number_pattern=%s") % (sep, rpr(self.national_number_pattern))
-            sep = u(", ")
+            result += unicod("%snational_number_pattern=%s") % (sep, rpr(self.national_number_pattern))
+            sep = unicod(", ")
         if self.possible_number_pattern is not None:
-            result += u("%spossible_number_pattern=%s") % (sep, rpr(self.possible_number_pattern))
-            sep = u(", ")
+            result += unicod("%spossible_number_pattern=%s") % (sep, rpr(self.possible_number_pattern))
+            sep = unicod(", ")
         if self.example_number is not None:
-            result += u("%sexample_number=%s") % (sep, rpr(self.example_number))
-            sep = u(", ")
-        result += u(")")
+            result += unicod("%sexample_number=%s") % (sep, rpr(self.example_number))
+            sep = unicod(", ")
+        result += unicod(")")
         return result
 
 
@@ -416,42 +416,42 @@ class PhoneMetadata(UnicodeMixin):
         country_code = self.country_code
         if country_code is None:
             country_code = -1
-        result = (u("PhoneMetadata(id='%s', country_code=%d, international_prefix=%s") %
+        result = (unicod("PhoneMetadata(id='%s', country_code=%d, international_prefix=%s") %
                   (self.id, country_code, rpr(self.international_prefix)))
-        result += ",\n    general_desc=%s" % self.general_desc
-        result += ",\n    fixed_line=%s" % self.fixed_line
-        result += ",\n    mobile=%s" % self.mobile
-        result += ",\n    toll_free=%s" % self.toll_free
-        result += ",\n    premium_rate=%s" % self.premium_rate
-        result += ",\n    shared_cost=%s" % self.shared_cost
-        result += ",\n    personal_number=%s" % self.personal_number
-        result += ",\n    voip=%s" % self.voip
-        result += ",\n    pager=%s" % self.pager
-        result += ",\n    uan=%s" % self.uan
-        result += ",\n    emergency=%s" % self.emergency
-        result += ",\n    voicemail=%s" % self.voicemail
-        result += ",\n    no_international_dialling=%s" % self.no_international_dialling
+        result += unicod(",\n    general_desc=%s") % self.general_desc
+        result += unicod(",\n    fixed_line=%s") % self.fixed_line
+        result += unicod(",\n    mobile=%s") % self.mobile
+        result += unicod(",\n    toll_free=%s") % self.toll_free
+        result += unicod(",\n    premium_rate=%s") % self.premium_rate
+        result += unicod(",\n    shared_cost=%s") % self.shared_cost
+        result += unicod(",\n    personal_number=%s") % self.personal_number
+        result += unicod(",\n    voip=%s") % self.voip
+        result += unicod(",\n    pager=%s") % self.pager
+        result += unicod(",\n    uan=%s") % self.uan
+        result += unicod(",\n    emergency=%s") % self.emergency
+        result += unicod(",\n    voicemail=%s") % self.voicemail
+        result += unicod(",\n    no_international_dialling=%s") % self.no_international_dialling
 
         if self.preferred_international_prefix is not None:
-            result += ",\n    preferred_international_prefix=%s" % rpr(self.preferred_international_prefix)
+            result += unicod(",\n    preferred_international_prefix=%s") % rpr(self.preferred_international_prefix)
         if self.national_prefix is not None:
-            result += ",\n    national_prefix=%s" % rpr(self.national_prefix)
+            result += unicod(",\n    national_prefix=%s") % rpr(self.national_prefix)
         if self.preferred_extn_prefix is not None:
-            result += ",\n    preferred_extn_prefix=%s" % rpr(self.preferred_extn_prefix)
+            result += unicod(",\n    preferred_extn_prefix=%s") % rpr(self.preferred_extn_prefix)
         if self.national_prefix_for_parsing is not None:
-            result += ",\n    national_prefix_for_parsing=%s" % rpr(self.national_prefix_for_parsing)
+            result += unicod(",\n    national_prefix_for_parsing=%s") % rpr(self.national_prefix_for_parsing)
         if self.national_prefix_transform_rule is not None:
             # Note that we use rpr() on self.national_prefix_transform_rule, which generates its own quotes
-            result += ",\n    national_prefix_transform_rule=%s" % rpr(self.national_prefix_transform_rule)
+            result += unicod(",\n    national_prefix_transform_rule=%s") % rpr(self.national_prefix_transform_rule)
         if len(self.number_format) > 0:
-            result += ",\n    number_format=[%s]" % ',\n        '.join(map(u, self.number_format))
+            result += unicod(",\n    number_format=[%s]") % ',\n        '.join(map(u, self.number_format))
         if len(self.intl_number_format) > 0:
-            result += ",\n    intl_number_format=[%s]" % ',\n        '.join(map(u, self.intl_number_format))
+            result += unicod(",\n    intl_number_format=[%s]") % ',\n        '.join(map(u, self.intl_number_format))
         if self.main_country_for_code:
-            result += ",\n    main_country_for_code=True"
+            result += unicod(",\n    main_country_for_code=True")
         if self.leading_digits is not None:
-            result += ",\n    leading_digits='%s'" % self.leading_digits
+            result += unicod(",\n    leading_digits='%s'") % self.leading_digits
         if self.leading_zero_possible:
-            result += ",\n    leading_zero_possible=True"
-        result += u(")")
+            result += unicod(",\n    leading_zero_possible=True")
+        result += unicod(")")
         return result
