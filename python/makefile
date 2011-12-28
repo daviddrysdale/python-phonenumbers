@@ -44,6 +44,15 @@ coverage_report:
 coverage_annotate:
 	$(COVERAGE) annotate $(COVERAGE_FILES)
 
+# Profile
+profile: alldata tests/testdata/__init__.py profile_clean profile_report
+profile_clean:
+	rm -f phonenumbers.pstats
+phonenumbers.pstats:
+	python -m cProfile -o phonenumbers.pstats testwrapper.py
+profile_report: phonenumbers.pstats
+	python -c "import pstats; p = pstats.Stats('phonenumbers.pstats');p.sort_stats('time').print_stats(50)" | grep -v "test.py" | grep -v testwrapper.py
+
 VERSION=$(shell grep __version__ phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
 TARBALL=dist/$(PACKAGE)-$(VERSION).tar.gz
 # Build setuptools packaged tarball $(TARBALL)
@@ -55,7 +64,7 @@ install: alldata
 	$(PYTHON) setup.py build
 	sudo $(PYTHON) setup.py install
 
-clean:
+clean: coverage_clean profile_clean
 	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc phonenumbers/geodata/*.pyc
 	rm -rf phonenumbers/__pycache__ phonenumbers/data/__pycache__ phonenumbers/geodata/__pycache__
 	rm -f phonenumbers/*.py,cover

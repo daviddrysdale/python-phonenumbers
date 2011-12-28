@@ -6,3 +6,4 @@ deb_dist
 MANIFEST
 phonenumbers.egg-info
 build
+phonenumbers.pstats
