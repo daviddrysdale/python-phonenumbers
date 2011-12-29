@@ -2074,7 +2074,7 @@ def _check_region_for_parsing(number, default_region):
     return True
 
 
-def parse(number, region, keep_raw_input=False,
+def parse(number, region=None, keep_raw_input=False,
           numobj=None, _check_region=True):
     """Parse a string and return a corresponding PhoneNumber object.
 
