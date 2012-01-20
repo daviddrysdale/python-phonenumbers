@@ -78,7 +78,7 @@ __version__ = "4.4b1"
 
 # Data class definitions
 from .phonenumber import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
-from .phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from .phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY, NumberFormat, PhoneNumberDesc, PhoneMetadata
 # Functionality
 from .asyoutypeformatter import AsYouTypeFormatter
 from .phonenumberutil import *
@@ -88,7 +88,7 @@ from .geocoder import (area_description_for_number, country_name_for_number,
                        description_for_number, description_for_valid_number)
 
 __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
-           'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
+           'REGION_CODE_FOR_NON_GEO_ENTITY', 'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
            'AsYouTypeFormatter',
            # items from phonenumberutil.py
            'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS', 'UNKNOWN_REGION',
@@ -98,6 +98,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'country_code_for_region',
            'example_number',
            'example_number_for_type',
+           'example_number_for_non_geo_entity',
            'format_by_pattern',
            'format_in_original_format',
            'format_national_number_with_carrier_code',

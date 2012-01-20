@@ -29,7 +29,7 @@ import re
 from .unicode_util import digit as unicode_digit
 from .re_util import fullmatch
 from .phonemetadata import PhoneMetadata
-from .phonenumberutil import _VALID_PUNCTUATION
+from .phonenumberutil import _VALID_PUNCTUATION, REGION_CODE_FOR_NON_GEO_ENTITY
 from .phonenumberutil import _PLUS_SIGN, _PLUS_CHARS_PATTERN
 from .phonenumberutil import _extract_country_code, region_code_for_country_code
 from .phonenumberutil import country_code_for_region
@@ -472,7 +472,9 @@ class AsYouTypeFormatter(object):
 
         self._national_number = number_without_ccc
         new_region_code = region_code_for_country_code(country_code)
-        if new_region_code != self._default_country:
+        if new_region_code == REGION_CODE_FOR_NON_GEO_ENTITY:
+            self._current_metadata = PhoneMetadata.country_code_metadata[country_code]
+        elif new_region_code != self._default_country:
             self._current_metadata = _get_metadata_for_region(new_region_code)
 
         self._prefix_before_national_number += str(country_code)

@@ -686,6 +686,23 @@ class AsYouTypeFormatterTest(unittest.TestCase):
         self.assertEqual("+52 1 541 234 567", formatter.input_digit('7'))
         self.assertEqual("+52 1 541 234 5678", formatter.input_digit('8'))
 
+    def testAYTF_International_Toll_Free(self):
+        formatter = AsYouTypeFormatter("US")
+        # +800 1234 5678
+        self.assertEqual("+", formatter.input_digit('+'))
+        self.assertEqual("+8", formatter.input_digit('8'))
+        self.assertEqual("+80", formatter.input_digit('0'))
+        self.assertEqual("+800 ", formatter.input_digit('0'))
+        self.assertEqual("+800 1", formatter.input_digit('1'))
+        self.assertEqual("+800 12", formatter.input_digit('2'))
+        self.assertEqual("+800 123", formatter.input_digit('3'))
+        self.assertEqual("+800 1234", formatter.input_digit('4'))
+        self.assertEqual("+800 1234 5", formatter.input_digit('5'))
+        self.assertEqual("+800 1234 56", formatter.input_digit('6'))
+        self.assertEqual("+800 1234 567", formatter.input_digit('7'))
+        self.assertEqual("+800 1234 5678", formatter.input_digit('8'))
+        self.assertEqual("+800123456789", formatter.input_digit('9'))
+
     def testAYTFMultipleLeadingDigitPatterns(self):
         # +81 50 2345 6789
         formatter = AsYouTypeFormatter("JP")

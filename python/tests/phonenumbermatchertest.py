@@ -127,33 +127,33 @@ IMPOSSIBLE_CASES = [NumberTest("12345", "US"),
                     NumberTest("31/8/2011", "US"),
                     NumberTest("1/12/2011", "US"),
                     NumberTest("10/12/82", "DE"),
+                    NumberTest("650x2531234", "US"),
                     ]
 
 # Strings with number-like things that should only be found under "possible".
-POSSIBLE_ONLY_CASES = [NumberTest("abc8002345678", "US"),
-                       # US numbers cannot start with 7 in the test metadata to be valid.
+POSSIBLE_ONLY_CASES = [  # US numbers cannot start with 7 in the test metadata to be valid.
                        NumberTest("7121115678", "US"),
                        # 'X' should not be found in numbers at leniencies stricter than POSSIBLE, unless it represents
                        # a carrier code or extension.
                        NumberTest("1650 x 253 - 1234", "US"),
                        NumberTest("650 x 253 - 1234", "US"),
-                       NumberTest("650x2531234", "US"),
+                       NumberTest("6502531x234", "US"),
                        NumberTest("(20) 3346 1234", "GB"),  # Non-optional NP omitted
                        ]
 
 # Strings with number-like things that should only be found up to and
 # including the "valid" leniency level.
-VALID_CASES = [NumberTest("65 02 53 00 00.", "US"),
+VALID_CASES = [NumberTest("65 02 53 00 00", "US"),
                NumberTest("6502 538365", "US"),
                NumberTest("650//253-1234", "US"),  # 2 slashes are illegal at higher levels
                NumberTest("650/253/1234", "US"),
                NumberTest("9002309. 158", "US"),
-               NumberTest("21 7/8 - 14 12/34 - 5", "US"),
+               NumberTest("12 7/8 - 14 12/34 - 5", "US"),
                NumberTest("12.1 - 23.71 - 23.45", "US"),
-               NumberTest("1979-2011 100%", "US"),
                NumberTest("800 234 1 111x1111", "US"),
+               NumberTest("1979-2011 100", "US"),
                NumberTest("+494949-4-94", "DE"),  # National number in wrong format
-               NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17", "US"),
+               NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17", "US"),
                # Python version extra test - multiple x for extension marker
                NumberTest("800 234 1 111 xx 1111", "US"),
                ]
@@ -501,6 +501,22 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         text = "Call 650-253-4561--455-234-3451"
         region = "US"
         self.assertTrue(self.hasNoMatches(PhoneNumberMatcher(text, region)))
+
+    def testMatchesWithPossibleLeniency(self):
+        testCases = STRICT_GROUPING_CASES + EXACT_GROUPING_CASES + VALID_CASES + POSSIBLE_ONLY_CASES
+        self._doTestNumberMatchesForLeniency(testCases, Leniency.POSSIBLE)
+
+    def testNonMatchesWithPossibleLeniency(self):
+        testCases = IMPOSSIBLE_CASES
+        self._doTestNumberNonMatchesForLeniency(testCases, Leniency.POSSIBLE)
+
+    def testMatchesWithValidLeniency(self):
+        testCases = STRICT_GROUPING_CASES + EXACT_GROUPING_CASES + VALID_CASES
+        self._doTestNumberMatchesForLeniency(testCases, Leniency.VALID)
+
+    def testNonMatchesWithValidLeniency(self):
+        testCases = IMPOSSIBLE_CASES + POSSIBLE_ONLY_CASES
+        self._doTestNumberNonMatchesForLeniency(testCases, Leniency.VALID)
 
     def testMatchesWithStrictGroupingLeniency(self):
         testCases = STRICT_GROUPING_CASES + EXACT_GROUPING_CASES
