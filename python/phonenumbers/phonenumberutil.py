@@ -662,7 +662,7 @@ def _is_valid_region_code(region_code):
 
 
 def _has_valid_country_calling_code(country_calling_code):
-    return (country_calling_code in PhoneMetadata.country_code_metadata)
+    return (country_calling_code in _COUNTRY_CODE_TO_REGION_CODE)
 
 
 def format_number(numobj, num_format):
@@ -1227,7 +1227,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
                                                       metadata_for_region,
                                                       PhoneNumberFormat.INTERNATIONAL,
                                                       raw_input)
-    if len(i18n_prefix_for_formatting) > 0:
+    if i18n_prefix_for_formatting is not None and len(i18n_prefix_for_formatting) > 0:
         formatted_number = (i18n_prefix_for_formatting + u" " +
                             unicode(country_code) + u" " + formatted_number)
     else:
@@ -1416,7 +1416,7 @@ def example_number_for_non_geo_entity(country_calling_code):
         desc = metadata.general_desc
         try:
             if desc.example_number is not None:
-                return parse(u"+" + country_calling_code + desc.example_number, "ZZ")
+                return parse(u"+" + unicode(country_calling_code) + desc.example_number, "ZZ")
         except NumberParseException:
             pass
     return None

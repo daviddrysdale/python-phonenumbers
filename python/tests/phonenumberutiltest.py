@@ -282,10 +282,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # RegionCode 001 is reserved for supporting non-geographical country
         # calling code. We don't support getting an example number for it with
         # this method.
-        self.assertTrue(None, phonenumbers.example_numbger_for_type("001") is None)
+        self.assertTrue(None, phonenumbers.example_number("001") is None)
 
     def testGetExampleNumberForNonGeoEntity(self):
-        self.assertEqual(PhoneNumberType.INTERNATIONAL_TOLL_FREE, phonenumbers.example_number_for_non_geo_entity(800))
+        self.assertEqual(PhoneNumberType.TOLL_FREE, phonenumbers.example_number_for_non_geo_entity(800))
 
     def testConvertAlphaCharactersInNumber(self):
         input = "1800-ABC-DEF"
