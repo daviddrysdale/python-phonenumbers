@@ -409,6 +409,8 @@ class XPhoneNumberMetadata(UnicodeMixin):
             for country_id in sorted(self.territory.keys()):
                 terrobj = self.territory[country_id]
                 country_code = int(terrobj.o.country_code)
+                if terrobj.o.id == "001":
+                    continue
                 if country_code not in country_code_to_region_code:
                     country_code_to_region_code[country_code] = []
                 if terrobj.o.main_country_for_code:

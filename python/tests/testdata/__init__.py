@@ -55,5 +55,4 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     244: ("AO",),
     262: ("RE", "YT",),
     376: ("AD",),
-    800: ("800",),
 }
