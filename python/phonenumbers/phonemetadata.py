@@ -393,12 +393,22 @@ class PhoneMetadata(UnicodeMixin):
 
         if register:
             # Register this instance with the class-wide map
-            if self.id in PhoneMetadata.region_metadata:
-                other = PhoneMetadata.region_metadata[self.id]
+            id = self.identifier()
+            if id in PhoneMetadata.region_metadata:
+                other = PhoneMetadata.region_metadata[id]
                 if self != other:
-                    raise Exception("Duplicate PhoneMetadata for %s" % self.id)
+                    raise Exception("Duplicate PhoneMetadata for %s" % id)
             else:
-                PhoneMetadata.region_metadata[self.id] = self
+                PhoneMetadata.region_metadata[id] = self
+
+    def identifier(self):
+        if self.id == "001":
+            # For non-geographical country calling codes (e.g. +800), use the
+            # country calling codes instead of the region code to form the
+            # file name.
+            return str(self.country_code)
+        else:
+            return self.id
 
     def __eq__(self, other):
         if not isinstance(other, PhoneMetadata):

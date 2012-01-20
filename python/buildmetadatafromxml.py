@@ -262,8 +262,8 @@ class XTerritory(UnicodeMixin):
         id = xterritory.attrib['id']
         self.o = PhoneMetadata(id, register=False)
         self.o.country_code = int(xterritory.attrib['countryCode'])
-        self.o.international_prefix = xterritory.attrib['internationalPrefix']
         # Retrieve the IMPLIED attributes
+        self.o.international_prefix = xterritory.get('internationalPrefix', None)
         self.o.leading_digits = xterritory.get('leadingDigits', None)
         self.o.preferred_international_prefix = xterritory.get('preferredInternationalPrefix', None)
         self.o.national_prefix = xterritory.get('nationalPrefix', None)
@@ -365,9 +365,10 @@ class XPhoneNumberMetadata(UnicodeMixin):
         for xterritory in xterritories:
             if xterritory.tag == TERRITORY_TAG:
                 terrobj = XTerritory(xterritory)
-                if terrobj.o.id in self.territory:
-                    raise Exception("Duplicate entry for %s" % terrobj.o.id)
-                self.territory[terrobj.o.id] = terrobj
+                id = terrobj.o.identifier()
+                if id in self.territory:
+                    raise Exception("Duplicate entry for %s" % id)
+                self.territory[id] = terrobj
             else:
                 raise Exception("Unexpected element %s found" % xterritory.tag)
 
@@ -378,8 +379,8 @@ class XPhoneNumberMetadata(UnicodeMixin):
         """Emit Python code generating the metadata for the given region"""
         terrobj = self.territory[region]
         with open(region_filename, "w") as outfile:
-            print >> outfile, _REGION_METADATA_PROLOG % (terrobj.o.id, module_prefix)
-            print >> outfile, "PHONE_METADATA_%s = %s" % (terrobj.o.id, terrobj)
+            print >> outfile, _REGION_METADATA_PROLOG % (terrobj.o.identifier(), module_prefix)
+            print >> outfile, "PHONE_METADATA_%s = %s" % (terrobj.o.identifier(), terrobj)
 
     def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
