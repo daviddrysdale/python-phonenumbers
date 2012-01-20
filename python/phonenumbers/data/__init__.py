@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand."""
-# Copyright (C) 2010-2011 The Libphonenumber Authors
+# Copyright (C) 2010-2012 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from .region_800 import PHONE_METADATA_800
+from .region_808 import PHONE_METADATA_808
+from .region_883 import PHONE_METADATA_883
+from .region_888 import PHONE_METADATA_888
+from .region_979 import PHONE_METADATA_979
 from .region_AC import PHONE_METADATA_AC
 from .region_AD import PHONE_METADATA_AD
 from .region_AE import PHONE_METADATA_AE
@@ -435,13 +440,17 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     690: ("TK",),
     691: ("FM",),
     692: ("MH",),
+    800: ("800",),
+    808: ("808",),
     850: ("KP",),
     852: ("HK",),
     853: ("MO",),
     855: ("KH",),
     856: ("LA",),
     880: ("BD",),
+    883: ("883",),
     886: ("TW",),
+    888: ("888",),
     960: ("MV",),
     961: ("LB",),
     962: ("JO",),
@@ -459,6 +468,7 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     975: ("BT",),
     976: ("MN",),
     977: ("NP",),
+    979: ("979",),
     992: ("TJ",),
     993: ("TM",),
     994: ("AZ",),

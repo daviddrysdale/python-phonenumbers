@@ -1,5 +1,5 @@
 """Auto-generated file, do not edit by hand."""
-# Copyright (C) 2010-2011 The Libphonenumber Authors
+# Copyright (C) 2010-2012 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from .region_800 import PHONE_METADATA_800
 from .region_AD import PHONE_METADATA_AD
 from .region_AO import PHONE_METADATA_AO
 from .region_AR import PHONE_METADATA_AR
@@ -54,4 +55,5 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     244: ("AO",),
     262: ("RE", "YT",),
     376: ("AD",),
+    800: ("800",),
 }
