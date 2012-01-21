@@ -180,7 +180,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         metadata = PhoneMetadata.country_code_metadata[800]
         self.assertEqual("001", metadata.id)
         self.assertEqual(800, metadata.country_code)
-        self.assertEqual("$1 $2", metadata.number_format[0].format)
+        self.assertEqual("\\1 \\2", metadata.number_format[0].format)
         self.assertEqual("(\\d{4})(\\d{4})", metadata.number_format[0].pattern)
         self.assertEqual("12345678", metadata.general_desc.example_number)
         self.assertEqual("12345678", metadata.toll_free.example_number)
@@ -282,10 +282,10 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # RegionCode 001 is reserved for supporting non-geographical country
         # calling code. We don't support getting an example number for it with
         # this method.
-        self.assertTrue(None, phonenumbers.example_number("001") is None)
+        self.assertTrue(phonenumbers.example_number("001") is None)
 
     def testGetExampleNumberForNonGeoEntity(self):
-        self.assertEqual(PhoneNumberType.TOLL_FREE, phonenumbers.example_number_for_non_geo_entity(800))
+        self.assertEqual(INTERNATIONAL_TOLL_FREE, phonenumbers.example_number_for_non_geo_entity(800))
 
     def testConvertAlphaCharactersInNumber(self):
         input = "1800-ABC-DEF"
@@ -999,7 +999,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertTrue(phonenumbers.is_valid_number_for_region(reNumber, "YT"))
         self.assertTrue(phonenumbers.is_valid_number_for_region(reNumber, "RE"))
         self.assertTrue(phonenumbers.is_valid_number_for_region(INTERNATIONAL_TOLL_FREE, "001"))
-        self.assertTrue(phonenumbers.is_valid_number_for_region(INTERNATIONAL_TOLL_FREE, "US"))
+        self.assertFalse(phonenumbers.is_valid_number_for_region(INTERNATIONAL_TOLL_FREE, "US"))
         # Python version extra test
         self.assertFalse(phonenumbers.is_valid_number_for_region(reNumber, "US"))
 

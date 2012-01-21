@@ -390,6 +390,7 @@ class ValidationResult(object):
 
 # Derived data structures
 SUPPORTED_REGIONS = set([_item for _sublist in COUNTRY_CODE_TO_REGION_CODE.values() for _item in _sublist])
+SUPPORTED_REGIONS.remove(REGION_CODE_FOR_NON_GEO_ENTITY)
 _NANPA_REGIONS = set(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
 
 
@@ -986,7 +987,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
     elif metadata_for_region_calling_from.preferred_international_prefix is not None:
         i18n_prefix_for_formatting = metadata_for_region_calling_from.preferred_international_prefix
 
-    metadata_for_region = PhoneMetadata.region_metadata[region_code.upper()]
+    metadata_for_region = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code.upper())
     formatted_national_number = _format_national_number(nsn,
                                                         metadata_for_region,
                                                         PhoneNumberFormat.INTERNATIONAL)
@@ -1076,6 +1077,8 @@ def _format_original_allow_mods(numobj, region_calling_from):
         # TODO: Refactor the code below with the code in isNationalPrefixPresentIfRequired.
         candidate_national_prefix_rule = format_rule.national_prefix_formatting_rule
         # We assume that the first-group symbol will never be _before_ the national prefix.
+        if candidate_national_prefix_rule is None:
+            return national_format
         index_of_first_group = candidate_national_prefix_rule.find("\\1")
         if (index_of_first_group <= 0):
             return national_format
@@ -1117,7 +1120,7 @@ def _has_unexpected_italian_leading_zero(numobj):
 def _has_formatting_pattern_for_number(numobj):
     country_code = numobj.country_code
     phone_number_region = region_code_for_country_code(country_code)
-    metadata = PhoneMetadata.metadata_for_region_or_calling_code(phone_number_region, country_code)
+    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, phone_number_region)
     if metadata is None:
         return False
     national_number = national_significant_number(numobj)
