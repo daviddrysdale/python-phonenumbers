@@ -853,6 +853,18 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         """Returns True if there were no matches found."""
         return not matcher.has_next()
 
+    def testDoubleExtensionX(self):
+        # Python version extra test - multiple x for extension marker
+        xx_ext = "800 234 1 111 xx 1111"
+        # This gives different results for different leniency values (and so
+        # can't be used in a NumberTest).
+        m0 = PhoneNumberMatcher(xx_ext, "US", leniency=Leniency.POSSIBLE).next()
+        self.assertEqual(xx_ext, m0.raw_string)
+        m1 = PhoneNumberMatcher(xx_ext, "US", leniency=Leniency.VALID).next()
+        self.assertEqual("800 234 1 111", m1.raw_string)
+        matcher2 = PhoneNumberMatcher(xx_ext, "US", leniency=Leniency.STRICT_GROUPING)
+        self.assertFalse(matcher2.has_next())
+
     def testInternals(self):
         # Python-specific test: coverage of internals
         from phonenumbers.phonenumbermatcher import _limit, _verify, _is_national_prefix_present_if_required
