@@ -19,7 +19,7 @@
 
 import unittest
 
-from phonenumbers import PhoneNumber
+from phonenumbers import PhoneNumber, FrozenPhoneNumber
 from phonenumbers import geocoder
 
 # Allow override library geocoding metadata with the test metadata.
@@ -54,6 +54,7 @@ US_INVALID_NUMBER = PhoneNumber(country_code=1, national_number=123456789L)
 BS_NUMBER1 = PhoneNumber(country_code=1, national_number=2423651234L)
 AU_NUMBER = PhoneNumber(country_code=61, national_number=236618300L)
 NUMBER_WITH_INVALID_COUNTRY_CODE = PhoneNumber(country_code=999, national_number=2423651234L)
+INTERNATIONAL_TOLL_FREE = FrozenPhoneNumber(country_code=800, national_number=12345678L)
 
 # Language/country codes
 _CHINA = "CN"
@@ -87,6 +88,8 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
                           geocoder.description_for_number(AU_NUMBER, _ENGLISH, region=_USA))
         self.assertEqual("",
                           geocoder.description_for_number(NUMBER_WITH_INVALID_COUNTRY_CODE, _ENGLISH, region=_USA))
+        self.assertEqual("",
+                          geocoder.description_for_number(INTERNATIONAL_TOLL_FREE, _ENGLISH, region=_USA))
 
     def testGetDescriptionForNumberWithMissingPrefix(self):
         # Test that the name of the country is returned when the number passed in
