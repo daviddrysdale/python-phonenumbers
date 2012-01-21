@@ -10,7 +10,7 @@ rm -f *.bak *.pyc
 cd tests
 2to3 --write *.py > /dev/null 2>&1
 rm -f *.bak *.pyc
-rm -f testdata/* testgeodata/*
+rm -rf testdata/* testgeodata/*
 cd ..
 
 cd phonenumbers
