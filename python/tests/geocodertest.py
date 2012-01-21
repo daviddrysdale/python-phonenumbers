@@ -19,7 +19,7 @@
 
 import unittest
 
-from phonenumbers import PhoneNumber
+from phonenumbers import PhoneNumber, FrozenPhoneNumber
 from phonenumbers import geocoder
 from phonenumbers.util import u
 
@@ -43,18 +43,19 @@ def insert_test_geodata():
 
 
 # Set up some test numbers to re-use.
-KO_NUMBER1 = PhoneNumber(country_code=82, national_number=22123456)
-KO_NUMBER2 = PhoneNumber(country_code=82, national_number=322123456)
-KO_NUMBER3 = PhoneNumber(country_code=82, national_number=6421234567)
-KO_INVALID_NUMBER = PhoneNumber(country_code=82, national_number=1234)
-US_NUMBER1 = PhoneNumber(country_code=1, national_number=6502530000)
-US_NUMBER2 = PhoneNumber(country_code=1, national_number=6509600000)
-US_NUMBER3 = PhoneNumber(country_code=1, national_number=2128120000)
-US_NUMBER4 = PhoneNumber(country_code=1, national_number=6174240000)
-US_INVALID_NUMBER = PhoneNumber(country_code=1, national_number=123456789)
-BS_NUMBER1 = PhoneNumber(country_code=1, national_number=2423651234)
-AU_NUMBER = PhoneNumber(country_code=61, national_number=236618300)
-NUMBER_WITH_INVALID_COUNTRY_CODE = PhoneNumber(country_code=999, national_number=2423651234)
+KO_NUMBER1 = FrozenPhoneNumber(country_code=82, national_number=22123456)
+KO_NUMBER2 = FrozenPhoneNumber(country_code=82, national_number=322123456)
+KO_NUMBER3 = FrozenPhoneNumber(country_code=82, national_number=6421234567)
+KO_INVALID_NUMBER = FrozenPhoneNumber(country_code=82, national_number=1234)
+US_NUMBER1 = FrozenPhoneNumber(country_code=1, national_number=6502530000)
+US_NUMBER2 = FrozenPhoneNumber(country_code=1, national_number=6509600000)
+US_NUMBER3 = FrozenPhoneNumber(country_code=1, national_number=2128120000)
+US_NUMBER4 = FrozenPhoneNumber(country_code=1, national_number=6174240000)
+US_INVALID_NUMBER = FrozenPhoneNumber(country_code=1, national_number=123456789)
+BS_NUMBER1 = FrozenPhoneNumber(country_code=1, national_number=2423651234)
+AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300)
+NUMBER_WITH_INVALID_COUNTRY_CODE = FrozenPhoneNumber(country_code=999, national_number=2423651234)
+INTERNATIONAL_TOLL_FREE = FrozenPhoneNumber(country_code=800, national_number=12345678)
 
 # Language/country codes
 _CHINA = "CN"
@@ -88,6 +89,8 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
                           geocoder.description_for_number(AU_NUMBER, _ENGLISH, region=_USA))
         self.assertEqual("",
                           geocoder.description_for_number(NUMBER_WITH_INVALID_COUNTRY_CODE, _ENGLISH, region=_USA))
+        self.assertEqual("",
+                          geocoder.description_for_number(INTERNATIONAL_TOLL_FREE, _ENGLISH, region=_USA))
 
     def testGetDescriptionForNumberWithMissingPrefix(self):
         # Test that the name of the country is returned when the number passed in

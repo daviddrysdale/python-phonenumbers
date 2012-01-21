@@ -20,6 +20,7 @@ PHONE_METADATA_NZ = PhoneMetadata(id='NZ', country_code=64, international_prefix
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='([34679])(\\d{3})(\\d{4})', format='\\1-\\2 \\3', leading_digits_pattern=['[3467]|9[1-9]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(21)(\\d{4})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['21'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(22)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['22'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='([2589]\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['2[0247-9]|5|[89]00'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['2[0169]|86'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(24099)(\\d{3})', format='\\1 \\2', leading_digits_pattern=['240', '2409', '24099'], national_prefix_formatting_rule='0\\1')])

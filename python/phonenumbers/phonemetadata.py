@@ -18,6 +18,8 @@
 # limitations under the License.
 from .util import UnicodeMixin, u, unicod, rpr, force_unicode
 
+REGION_CODE_FOR_NON_GEO_ENTITY = u"001"
+
 
 class NumberFormat(UnicodeMixin):
     """Representation of way that a phone number can be formatted for output"""
@@ -206,7 +208,19 @@ class PhoneMetadata(UnicodeMixin):
     This class is hand created based on phonemetadata.proto. Please refer to that file
     for detailed descriptions of the meaning of each field.
     """
-    region_metadata = {}  # country code => PhoneMetadata
+    region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
+    # A mapping from a country calling code for a non-geographical entity to
+    # the PhoneMetadata for that country calling code. Examples of the country
+    # calling codes include 800 (International Toll Free Service) and 808
+    # (International Shared Cost Service).
+    country_code_metadata = {}
+
+    @classmethod
+    def metadata_for_region_or_calling_code(kls, country_calling_code, region_code):
+        if region_code == REGION_CODE_FOR_NON_GEO_ENTITY:
+            return kls.country_code_metadata.get(country_calling_code, None)
+        else:
+            return kls.region_metadata.get(region_code, None)
 
     def __init__(self,
                  id,
@@ -392,13 +406,19 @@ class PhoneMetadata(UnicodeMixin):
         self.leading_zero_possible = bool(leading_zero_possible)
 
         if register:
-            # Register this instance with the class-wide map
-            if self.id in PhoneMetadata.region_metadata:
-                other = PhoneMetadata.region_metadata[self.id]
-                if self != other:
-                    raise Exception("Duplicate PhoneMetadata for %s" % self.id)
+            # Register this instance with the relevant class-wide map
+            if self.id == REGION_CODE_FOR_NON_GEO_ENTITY:
+                kls_map = PhoneMetadata.country_code_metadata
+                id = self.country_code
             else:
-                PhoneMetadata.region_metadata[self.id] = self
+                kls_map = PhoneMetadata.region_metadata
+                id = self.id
+            if id in kls_map:
+                other = kls_map[id]
+                if self != other:
+                    raise Exception("Duplicate PhoneMetadata for %s (from %s:%s)" % (id, self.id, self.country_code))
+            else:
+                kls_map[id] = self
 
     def __eq__(self, other):
         if not isinstance(other, PhoneMetadata):

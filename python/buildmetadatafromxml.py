@@ -47,6 +47,8 @@ from phonenumbers.util import UnicodeMixin, u, prnt
 
 # Convention: variables beginning with 'x' are XML objects
 
+REGION_CODE_FOR_NON_GEO_ENTITY = "001"
+
 # Top-level XML element containing data
 TOP_XPATH = "territories"
 # XML element name for the territory element
@@ -262,8 +264,8 @@ class XTerritory(UnicodeMixin):
         id = xterritory.attrib['id']
         self.o = PhoneMetadata(id, register=False)
         self.o.country_code = int(xterritory.attrib['countryCode'])
-        self.o.international_prefix = xterritory.attrib['internationalPrefix']
         # Retrieve the IMPLIED attributes
+        self.o.international_prefix = xterritory.get('internationalPrefix', None)
         self.o.leading_digits = xterritory.get('leadingDigits', None)
         self.o.preferred_international_prefix = xterritory.get('preferredInternationalPrefix', None)
         self.o.national_prefix = xterritory.get('nationalPrefix', None)
@@ -347,6 +349,15 @@ class XTerritory(UnicodeMixin):
             # national formats.
             self.o.intl_number_format = []
 
+    def identifier(self):
+        if self.o.id == REGION_CODE_FOR_NON_GEO_ENTITY:
+            # For non-geographical country calling codes (e.g. +800), use the
+            # country calling codes instead of the region code to form the
+            # file name.
+            return str(self.o.country_code)
+        else:
+            return self.o.id
+
     def __unicode__(self):
         return u(self.o)
 
@@ -365,9 +376,10 @@ class XPhoneNumberMetadata(UnicodeMixin):
         for xterritory in xterritories:
             if xterritory.tag == TERRITORY_TAG:
                 terrobj = XTerritory(xterritory)
-                if terrobj.o.id in self.territory:
-                    raise Exception("Duplicate entry for %s" % terrobj.o.id)
-                self.territory[terrobj.o.id] = terrobj
+                id = terrobj.identifier()  # like "US" for countries, "800" for non-geo
+                if id in self.territory:
+                    raise Exception("Duplicate entry for %s" % id)
+                self.territory[id] = terrobj
             else:
                 raise Exception("Unexpected element %s found" % xterritory.tag)
 
@@ -378,8 +390,8 @@ class XPhoneNumberMetadata(UnicodeMixin):
         """Emit Python code generating the metadata for the given region"""
         terrobj = self.territory[region]
         with open(region_filename, "w") as outfile:
-            prnt(_REGION_METADATA_PROLOG % {'region': terrobj.o.id, 'module': module_prefix}, file=outfile)
-            prnt("PHONE_METADATA_%s = %s" % (terrobj.o.id, terrobj), file=outfile)
+            prnt(_REGION_METADATA_PROLOG % {'region': terrobj.identifier(), 'module': module_prefix}, file=outfile)
+            prnt("PHONE_METADATA_%s = %s" % (terrobj.identifier(), terrobj), file=outfile)
 
     def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
@@ -411,9 +423,9 @@ class XPhoneNumberMetadata(UnicodeMixin):
                 if country_code not in country_code_to_region_code:
                     country_code_to_region_code[country_code] = []
                 if terrobj.o.main_country_for_code:
-                    country_code_to_region_code[country_code].insert(0, country_id)
+                    country_code_to_region_code[country_code].insert(0, terrobj.o.id)
                 else:
-                    country_code_to_region_code[country_code].append(country_id)
+                    country_code_to_region_code[country_code].append(terrobj.o.id)
 
             for country_code in sorted(country_code_to_region_code.keys()):
                 country_ids = country_code_to_region_code[country_code]

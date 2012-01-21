@@ -38,7 +38,7 @@ from .unicode_util import digit as unicode_digit
 
 # Data class definitions
 from .phonenumber import PhoneNumber, CountryCodeSource
-from .phonemetadata import NumberFormat, PhoneMetadata
+from .phonemetadata import NumberFormat, PhoneMetadata, REGION_CODE_FOR_NON_GEO_ENTITY
 
 # Import auto-generated data structures
 try:
@@ -392,6 +392,8 @@ class ValidationResult(object):
 
 # Derived data structures
 SUPPORTED_REGIONS = set([_item for _sublist in COUNTRY_CODE_TO_REGION_CODE.values() for _item in _sublist])
+if REGION_CODE_FOR_NON_GEO_ENTITY in SUPPORTED_REGIONS:
+    SUPPORTED_REGIONS.remove(REGION_CODE_FOR_NON_GEO_ENTITY)
 _NANPA_REGIONS = set(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
 
 
@@ -541,7 +543,8 @@ def length_of_geographical_area_code(numobj):
      - subscriber numbers may not be diallable from all devices (notably
        mobile devices, which typically require the full national_number to be
        dialled in most countries).
-     - most non-geographical numbers have no area codes.
+     - most non-geographical numbers have no area codes, including numbers
+       from non-geographical entities.
      - some geographical numbers have no area codes.
 
     Arguments:
@@ -662,6 +665,10 @@ def _is_valid_region_code(region_code):
     return (region_code in SUPPORTED_REGIONS)
 
 
+def _has_valid_country_calling_code(country_calling_code):
+    return (country_calling_code in _COUNTRY_CODE_TO_REGION_CODE)
+
+
 def format_number(numobj, num_format):
     """Formats a phone number in the specified format using default rules.
 
@@ -696,10 +703,10 @@ def format_number(numobj, num_format):
     # by only one region for performance reasons. For example, for NANPA
     # regions it will be contained in the metadata for US.
     region_code = region_code_for_country_code(country_calling_code)
-    if not _is_valid_region_code(region_code):
+    if not _has_valid_country_calling_code(country_calling_code):
         return nsn
 
-    metadata = PhoneMetadata.region_metadata.get(region_code.upper(), None)
+    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_calling_code, region_code.upper())
     formatted_number = _format_national_number(nsn, metadata, num_format)
     formatted_number = _maybe_get_formatted_extension(numobj,
                                                       metadata,
@@ -733,9 +740,9 @@ def format_by_pattern(numobj, num_format, user_defined_formats):
     # by only one region for performance reasons. For example, for NANPA
     # regions it will be contained in the metadata for US.
     region_code = region_code_for_country_code(country_code)
-    if not _is_valid_region_code(region_code):
+    if not _has_valid_country_calling_code(country_code):
         return nsn
-    metadata = PhoneMetadata.region_metadata[region_code]
+    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
     user_defined_formats_copy = []
     for this_format in user_defined_formats:
         np_formatting_rule = this_format.national_prefix_formatting_rule
@@ -804,10 +811,10 @@ def format_national_number_with_carrier_code(numobj, carrier_code):
     # by only one region for performance reasons. For example, for NANPA
     # regions it will be contained in the metadata for US.
     region_code = region_code_for_country_code(country_code)
-    if not _is_valid_region_code(region_code):
+    if not _has_valid_country_calling_code(country_code):
         return nsn
 
-    metadata = PhoneMetadata.region_metadata[region_code]
+    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
     formatted_number = _format_national_number(nsn,
                                                metadata,
                                                PhoneNumberFormat.NATIONAL,
@@ -868,8 +875,8 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
 
     Returns the formatted phone number.
     """
-    region_code = region_code_for_country_code(numobj.country_code)
-    if not _is_valid_region_code(region_code):
+    country_calling_code = numobj.country_code
+    if not _has_valid_country_calling_code(country_calling_code):
         if numobj.raw_input is None:
             return U_EMPTY_STRING
         else:
@@ -879,6 +886,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
     numobj_no_ext.merge_from(numobj)
     numobj_no_ext.extension = None
     numobj_type = number_type(numobj_no_ext)
+    region_code = region_code_for_country_code(country_calling_code)
     if region_code == unicod("CO") and region_calling_from == unicod("CO"):
         if numobj_type == PhoneNumberType.FIXED_LINE:
             formatted_number = format_national_number_with_carrier_code(numobj_no_ext,
@@ -947,9 +955,8 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
     if not _is_valid_region_code(region_calling_from):
         return format_number(numobj, PhoneNumberFormat.INTERNATIONAL)
     country_code = numobj.country_code
-    region_code = region_code_for_country_code(country_code)
     nsn = national_significant_number(numobj)
-    if not _is_valid_region_code(region_code):
+    if not _has_valid_country_calling_code(country_code):
         return nsn
     if country_code == _NANPA_COUNTRY_CODE:
         if is_nanpa_country(region_calling_from):
@@ -969,7 +976,8 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
         # http://www.petitfute.com/voyage/225-info-pratiques-reunion
         return format_number(numobj, PhoneNumberFormat.NATIONAL)
 
-    metadata_for_region_calling_from = PhoneMetadata.region_metadata[region_calling_from.upper()]
+    region_code = region_code_for_country_code(country_code)
+    metadata_for_region_calling_from = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_calling_from.upper())
     international_prefix = metadata_for_region_calling_from.international_prefix
 
     # For regions that have multiple international prefixes, the international
@@ -982,7 +990,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
     elif metadata_for_region_calling_from.preferred_international_prefix is not None:
         i18n_prefix_for_formatting = metadata_for_region_calling_from.preferred_international_prefix
 
-    metadata_for_region = PhoneMetadata.region_metadata[region_code.upper()]
+    metadata_for_region = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code.upper())
     formatted_national_number = _format_national_number(nsn,
                                                         metadata_for_region,
                                                         PhoneNumberFormat.INTERNATIONAL)
@@ -1011,6 +1019,9 @@ def format_in_original_format(numobj, region_calling_from):
     country, or we don't have a formatting pattern for the number, the method
     returns the raw input when it is available.
 
+    Note this method guarantees no digit will be inserted, removed or modified
+    as a result of formatting.
+
     Arguments:
     number -- The phone number that needs to be formatted in its original
               number format
@@ -1027,16 +1038,81 @@ def format_in_original_format(numobj, region_calling_from):
     if numobj.country_code_source is None:
         return format_number(numobj, PhoneNumberFormat.NATIONAL)
 
-    if (numobj.country_code_source ==
-        CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN):
+    formatted_number = _format_original_allow_mods(numobj, region_calling_from)
+    raw_input = numobj.raw_input
+    # If no digit is inserted/removed/modified as a result of our formatting,
+    # we return the formatted phone number; otherwise we return the raw input
+    # the user entered.
+    if (formatted_number is not None and
+        normalize_digits_only(formatted_number) == normalize_digits_only(raw_input)):
+        return formatted_number
+    else:
+        return raw_input
+
+
+def _format_original_allow_mods(numobj, region_calling_from):
+    if (numobj.country_code_source == CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN):
         return format_number(numobj, PhoneNumberFormat.INTERNATIONAL)
     elif numobj.country_code_source == CountryCodeSource.FROM_NUMBER_WITH_IDD:
         return format_out_of_country_calling_number(numobj, region_calling_from)
-    elif (numobj.country_code_source ==
-          CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN):
+    elif (numobj.country_code_source == CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN):
         return format_number(numobj, PhoneNumberFormat.INTERNATIONAL)[1:]
     else:
-        return format_number(numobj, PhoneNumberFormat.NATIONAL)
+        region_code = region_code_for_country_code(numobj.country_code)
+        # We strip non-digits from the NDD here, and from the raw input later, so that we can
+        # compare them easily.
+        national_prefix = ndd_prefix_for_region(region_code, True)  # strip non-digits
+        national_format = format_number(numobj, PhoneNumberFormat.NATIONAL)
+        if (national_prefix is None or len(national_prefix) == 0):
+            # If the region doesn't have a national prefix at all, we can
+            # safely return the national format without worrying about a
+            # national prefix being added.
+            return national_format
+        # Otherwise, we check if the original number was entered with a national prefix.
+        if (_raw_input_contains_national_prefix(numobj.raw_input, national_prefix, region_code)):
+            # If so, we can safely return the national format.
+            return national_format
+        metadata = PhoneMetadata.region_metadata[region_code]
+        national_number = national_significant_number(numobj)
+        format_rule = _choose_formatting_pattern_for_number(metadata.number_format, national_number)
+        # When the format we apply to this number doesn't contain national
+        # prefix, we can just return the national format.
+        # TODO: Refactor the code below with the code in isNationalPrefixPresentIfRequired.
+        candidate_national_prefix_rule = format_rule.national_prefix_formatting_rule
+        # We assume that the first-group symbol will never be _before_ the national prefix.
+        if candidate_national_prefix_rule is None:
+            return national_format
+        index_of_first_group = candidate_national_prefix_rule.find("\\1")
+        if (index_of_first_group <= 0):
+            return national_format
+        candidate_national_prefix_rule = candidate_national_prefix_rule[:index_of_first_group]
+        candidate_national_prefix_rule = normalize_digits_only(candidate_national_prefix_rule)
+        if len(candidate_national_prefix_rule) == 0:
+            # National prefix not used when formatting this number.
+            return national_format
+        # Otherwise, we need to remove the national prefix from our output.
+        new_format_rule = NumberFormat()
+        new_format_rule.merge_from(format_rule)
+        new_format_rule.national_prefix_formatting_rule = None
+        return format_by_pattern(numobj, PhoneNumberFormat.NATIONAL, [new_format_rule])
+
+
+def _raw_input_contains_national_prefix(raw_input, national_prefix, region_code):
+    """Check if raw_input, which is assumed to be in the national format, has a
+    national prefix. The national prefix is assumed to be in digits-only
+    form."""
+    nnn = normalize_digits_only(raw_input)
+    if nnn.startswith(national_prefix):
+        try:
+            # Some Japanese numbers (e.g. 00777123) might be mistaken to
+            # contain the national prefix when written without it
+            # (e.g. 0777123) if we just do prefix matching. To tackle that, we
+            # check the validity of the number if the assumed national prefix
+            # is removed (777123 won't be valid in Japan).
+            return is_valid_number(parse(nnn[len(national_prefix):], region_code))
+        except NumberParseException:
+            return False
+    return False
 
 
 def _has_unexpected_italian_leading_zero(numobj):
@@ -1047,8 +1123,9 @@ def _has_unexpected_italian_leading_zero(numobj):
 
 
 def _has_formatting_pattern_for_number(numobj):
-    phone_number_region = region_code_for_country_code(numobj.country_code)
-    metadata = PhoneMetadata.region_metadata.get(phone_number_region, None)
+    country_code = numobj.country_code
+    phone_number_region = region_code_for_country_code(country_code)
+    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, phone_number_region)
     if metadata is None:
         return False
     national_number = national_significant_number(numobj)
@@ -1091,8 +1168,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
     if raw_input is None or len(raw_input) == 0:
         return format_out_of_country_calling_number(numobj, region_calling_from)
     country_code = numobj.country_code
-    region_code = region_code_for_country_code(country_code)
-    if not _is_valid_region_code(region_code):
+    if not _has_valid_country_calling_code(country_code):
         return raw_input
     # Strip any prefix such as country calling code, IDD, that was present. We
     # do this by comparing the number in raw_input with the parsed number.  To
@@ -1112,7 +1188,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
         if first_national_number_digit != -1:
             raw_input = raw_input[first_national_number_digit:]
 
-    metadata = PhoneMetadata.region_metadata.get(region_calling_from.upper(), None)
+    metadata_for_region_calling_from = PhoneMetadata.region_metadata.get(region_calling_from.upper(), None)
     if country_code == _NANPA_COUNTRY_CODE:
         if is_nanpa_country(region_calling_from):
             return unicod(country_code) + U_SPACE + raw_input
@@ -1120,7 +1196,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
         # Here we copy the formatting rules so we can modify the pattern we
         # expect to match against.
         available_formats = []
-        for this_format in metadata.number_format:
+        for this_format in metadata_for_region_calling_from.number_format:
             new_format = NumberFormat()
             new_format.merge_from(this_format)
             # The first group is the first group of digits that the user
@@ -1141,23 +1217,31 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
         return _format_according_to_formats(raw_input,
                                             available_formats,
                                             PhoneNumberFormat.NATIONAL)
-    international_prefix = metadata.international_prefix
-    # For countries that have multiple international prefixes, the
-    # international format of the number is returned, unless there is a
-    # preferred international prefix.
-    i18n_match = fullmatch(_UNIQUE_INTERNATIONAL_PREFIX, international_prefix)
-    if i18n_match:
-        i18n_prefix_for_formatting = international_prefix
-    else:
-        i18n_prefix_for_formatting = metadata.preferred_international_prefix
+    i18n_prefix_for_formatting = ""
+    # If an unsupported region-calling-from is entered, or a country with
+    # multiple international prefixes, the international format of the number
+    # is returned, unless there is a preferred international prefix.
+    if metadata_for_region_calling_from is not None:
+        international_prefix = metadata_for_region_calling_from.international_prefix
+        i18n_match = fullmatch(_UNIQUE_INTERNATIONAL_PREFIX, international_prefix)
+        if i18n_match:
+            i18n_prefix_for_formatting = international_prefix
+        else:
+            i18n_prefix_for_formatting = metadata_for_region_calling_from.preferred_international_prefix
+
+    region_code = region_code_for_country_code(country_code)
+    metadata_for_region = PhoneMetadata.metadata_for_region_or_calling_code(region_code, country_code)
     formatted_number = _maybe_get_formatted_extension(numobj,
-                                                      PhoneMetadata.region_metadata[region_code],
+                                                      metadata_for_region,
                                                       PhoneNumberFormat.INTERNATIONAL,
                                                       raw_input)
-    if i18n_prefix_for_formatting and len(i18n_prefix_for_formatting) > 0:
+    if i18n_prefix_for_formatting is not None and len(i18n_prefix_for_formatting) > 0:
         formatted_number = (i18n_prefix_for_formatting + U_SPACE +
                             unicod(country_code) + U_SPACE + formatted_number)
     else:
+        # Invalid region entered as country-calling-from (so no metadata was
+        # found for it) or the region chosen has multiple international
+        # dialling prefixes.
         formatted_number = _format_number_by_format(country_code,
                                                     PhoneNumberFormat.INTERNATIONAL,
                                                     formatted_number)
@@ -1293,7 +1377,9 @@ def example_number(region_code):
     region_code -- The region for which an example number is needed.
 
     Returns a valid fixed-line number for the specified region. Returns None
-    when the metadata does not contain such information.
+    when the metadata does not contain such information, or the region 001 is
+    passed in.  For 001 (representing non-geographical numbers), call
+    example_number_for_non_geo_entity instead.
     """
     return example_number_for_type(region_code, PhoneNumberType.FIXED_LINE)
 
@@ -1307,7 +1393,8 @@ def example_number_for_type(region_code, num_type):
 
     Returns a valid number for the specified region and type. Returns None
     when the metadata does not contain such information or if an invalid
-    region was specified.
+    region or region 001 was specified.  For 001 (representing
+    non-geographical numbers), call example_number_for_non_geo_entity instead.
     """
     # Check the region code is valid.
     if not _is_valid_region_code(region_code):
@@ -1317,6 +1404,27 @@ def example_number_for_type(region_code, num_type):
     if desc.example_number is not None:
         try:
             return parse(desc.example_number, region_code)
+        except NumberParseException:
+            pass
+    return None
+
+
+def example_number_for_non_geo_entity(country_calling_code):
+    """Gets a valid number for the specified country calling code for a non-geographical entity.
+
+    Arguments:
+    country_calling_code -- The country calling code for a non-geographical entity.
+
+    Returns a valid number for the non-geographical entity. Returns null when
+    the metadata does not contain such information, or the country calling
+    code passed in does not belong to a non-geographical entity.
+    """
+    metadata = PhoneMetadata.country_code_metadata.get(country_calling_code, None)
+    if metadata is not None:
+        desc = metadata.general_desc
+        try:
+            if desc.example_number is not None:
+                return parse(u"+" + unicode(country_calling_code) + desc.example_number, "ZZ")
         except NumberParseException:
             pass
     return None
@@ -1381,11 +1489,11 @@ def number_type(numobj):
     Returns the type of the phone number.
     """
     region_code = region_code_for_number(numobj)
-    if not _is_valid_region_code(region_code):
+    if not _is_valid_region_code(region_code) and region_code != REGION_CODE_FOR_NON_GEO_ENTITY:
         return PhoneNumberType.UNKNOWN
     national_number = national_significant_number(numobj)
-    return _number_type_helper(national_number,
-                               PhoneMetadata.region_metadata[region_code])
+    metadata = PhoneMetadata.metadata_for_region_or_calling_code(numobj.country_code, region_code)
+    return _number_type_helper(national_number, metadata)
 
 
 def _number_type_helper(national_number, metadata):
@@ -1448,8 +1556,7 @@ def is_valid_number(numobj):
     Returns a boolean that indicates whether the number is of a valid pattern.
     """
     region_code = region_code_for_number(numobj)
-    return (_is_valid_region_code(region_code) and
-            is_valid_number_for_region(numobj, region_code))
+    return is_valid_number_for_region(numobj, region_code)
 
 
 def is_valid_number_for_region(numobj, region_code):
@@ -1469,9 +1576,12 @@ def is_valid_number_for_region(numobj, region_code):
 
     Returns a boolean that indicates whether the number is of a valid pattern.
     """
-    if numobj.country_code != country_code_for_region(region_code):
+    country_code = numobj.country_code
+    if (country_code == 0 or
+        (region_code != REGION_CODE_FOR_NON_GEO_ENTITY and
+         country_code != country_code_for_region(region_code))):
         return False
-    metadata = PhoneMetadata.region_metadata[region_code.upper()]
+    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code.upper())
     general_desc = metadata.general_desc
     nsn = national_significant_number(numobj)
 
@@ -1697,11 +1807,10 @@ def is_possible_number_with_reason(numobj):
     # not work if the number is possible but not valid. This would need to be
     # revisited if the possible number pattern ever differed between various
     # regions within those plans.
-    region_code = region_code_for_country_code(country_code)
-    if not _is_valid_region_code(region_code):
+    if not _has_valid_country_calling_code(country_code):
         return ValidationResult.INVALID_COUNTRY_CODE
-
-    metadata = PhoneMetadata.region_metadata.get(region_code, None)
+    region_code = region_code_for_country_code(country_code)
+    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
     general_desc = metadata.general_desc
 
     # Handling case of numbers with no metadata.
@@ -2165,7 +2274,7 @@ def parse(number, region=None, keep_raw_input=False,
     if country_code != 0:
         number_region = region_code_for_country_code(country_code)
         if number_region != region:
-            metadata = PhoneMetadata.region_metadata[number_region]
+            metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, number_region)
     else:
         # If no extracted country calling code, use the region supplied
         # instead. The national number is just the normalized version of the
@@ -2371,23 +2480,27 @@ def is_number_match(num1, num2):
 
 
 def _can_be_internationally_dialled(numobj):
-    """Returns True if the number can only be dialled from within the region.
+    """Returns True if the number can only be dialled from outside the region,
+    or unknown.
 
-    If unknown, or the number can be dialled from outside the region
-    as well, returns false. Does not check the number is a valid number.
+    If the number can only be dialled from within the region
+    as well, returns False. Does not check the number is a valid number.
 
     TODO: Make this method public when we have enough metadata to make it
-    worthwhile. Currently visible for testing purposes only.
+    worthwhile.
 
     Arguments:
-    numobj -- the phone number objectfor which we want to know whether it is only diallable from
-              within the region.
+    numobj -- the phone number objectfor which we want to know whether it is
+              diallable from outside the region.
     """
     region_code = region_code_for_number(numobj)
-    nsn = national_significant_number(numobj)
     if not _is_valid_region_code(region_code):
+        # Note numbers belonging to non-geographical entities (e.g. +800
+        # numbers) are always internationally diallable, and will be caught
+        # here.
         return True
     metadata = PhoneMetadata.region_metadata[region_code]
+    nsn = national_significant_number(numobj)
     return not _is_number_matching_desc(nsn, metadata.no_international_dialling)
 
 
