@@ -42,18 +42,18 @@ def insert_test_geodata():
 
 
 # Set up some test numbers to re-use.
-KO_NUMBER1 = PhoneNumber(country_code=82, national_number=22123456L)
-KO_NUMBER2 = PhoneNumber(country_code=82, national_number=322123456L)
-KO_NUMBER3 = PhoneNumber(country_code=82, national_number=6421234567L)
-KO_INVALID_NUMBER = PhoneNumber(country_code=82, national_number=1234L)
-US_NUMBER1 = PhoneNumber(country_code=1, national_number=6502530000L)
-US_NUMBER2 = PhoneNumber(country_code=1, national_number=6509600000L)
-US_NUMBER3 = PhoneNumber(country_code=1, national_number=2128120000L)
-US_NUMBER4 = PhoneNumber(country_code=1, national_number=6174240000L)
-US_INVALID_NUMBER = PhoneNumber(country_code=1, national_number=123456789L)
-BS_NUMBER1 = PhoneNumber(country_code=1, national_number=2423651234L)
-AU_NUMBER = PhoneNumber(country_code=61, national_number=236618300L)
-NUMBER_WITH_INVALID_COUNTRY_CODE = PhoneNumber(country_code=999, national_number=2423651234L)
+KO_NUMBER1 = FrozenPhoneNumber(country_code=82, national_number=22123456L)
+KO_NUMBER2 = FrozenPhoneNumber(country_code=82, national_number=322123456L)
+KO_NUMBER3 = FrozenPhoneNumber(country_code=82, national_number=6421234567L)
+KO_INVALID_NUMBER = FrozenPhoneNumber(country_code=82, national_number=1234L)
+US_NUMBER1 = FrozenPhoneNumber(country_code=1, national_number=6502530000L)
+US_NUMBER2 = FrozenPhoneNumber(country_code=1, national_number=6509600000L)
+US_NUMBER3 = FrozenPhoneNumber(country_code=1, national_number=2128120000L)
+US_NUMBER4 = FrozenPhoneNumber(country_code=1, national_number=6174240000L)
+US_INVALID_NUMBER = FrozenPhoneNumber(country_code=1, national_number=123456789L)
+BS_NUMBER1 = FrozenPhoneNumber(country_code=1, national_number=2423651234L)
+AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300L)
+NUMBER_WITH_INVALID_COUNTRY_CODE = FrozenPhoneNumber(country_code=999, national_number=2423651234L)
 INTERNATIONAL_TOLL_FREE = FrozenPhoneNumber(country_code=800, national_number=12345678L)
 
 # Language/country codes
