@@ -47,6 +47,8 @@ from phonenumbers.util import UnicodeMixin
 
 # Convention: variables beginning with 'x' are XML objects
 
+REGION_CODE_FOR_NON_GEO_ENTITY = "001"
+
 # Top-level XML element containing data
 TOP_XPATH = "territories"
 # XML element name for the territory element
@@ -347,6 +349,15 @@ class XTerritory(UnicodeMixin):
             # national formats.
             self.o.intl_number_format = []
 
+    def identifier(self):
+        if self.o.id == REGION_CODE_FOR_NON_GEO_ENTITY:
+            # For non-geographical country calling codes (e.g. +800), use the
+            # country calling codes instead of the region code to form the
+            # file name.
+            return str(self.o.country_code)
+        else:
+            return self.o.id
+
     def __unicode__(self):
         return unicode(self.o)
 
@@ -365,7 +376,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
         for xterritory in xterritories:
             if xterritory.tag == TERRITORY_TAG:
                 terrobj = XTerritory(xterritory)
-                id = terrobj.o.identifier()
+                id = terrobj.identifier()  # like "US" for countries, "800" for non-geo
                 if id in self.territory:
                     raise Exception("Duplicate entry for %s" % id)
                 self.territory[id] = terrobj
@@ -379,8 +390,8 @@ class XPhoneNumberMetadata(UnicodeMixin):
         """Emit Python code generating the metadata for the given region"""
         terrobj = self.territory[region]
         with open(region_filename, "w") as outfile:
-            print >> outfile, _REGION_METADATA_PROLOG % (terrobj.o.identifier(), module_prefix)
-            print >> outfile, "PHONE_METADATA_%s = %s" % (terrobj.o.identifier(), terrobj)
+            print >> outfile, _REGION_METADATA_PROLOG % (terrobj.identifier(), module_prefix)
+            print >> outfile, "PHONE_METADATA_%s = %s" % (terrobj.identifier(), terrobj)
 
     def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
@@ -409,14 +420,12 @@ class XPhoneNumberMetadata(UnicodeMixin):
             for country_id in sorted(self.territory.keys()):
                 terrobj = self.territory[country_id]
                 country_code = int(terrobj.o.country_code)
-                if terrobj.o.id == "001":
-                    continue
                 if country_code not in country_code_to_region_code:
                     country_code_to_region_code[country_code] = []
                 if terrobj.o.main_country_for_code:
-                    country_code_to_region_code[country_code].insert(0, country_id)
+                    country_code_to_region_code[country_code].insert(0, terrobj.o.id)
                 else:
-                    country_code_to_region_code[country_code].append(country_id)
+                    country_code_to_region_code[country_code].append(terrobj.o.id)
 
             for country_code in sorted(country_code_to_region_code.keys()):
                 country_ids = country_code_to_region_code[country_code]

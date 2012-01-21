@@ -420,15 +420,6 @@ class PhoneMetadata(UnicodeMixin):
             else:
                 kls_map[id] = self
 
-    def identifier(self):
-        if self.id == REGION_CODE_FOR_NON_GEO_ENTITY:
-            # For non-geographical country calling codes (e.g. +800), use the
-            # country calling codes instead of the region code to form the
-            # file name.
-            return str(self.country_code)
-        else:
-            return self.id
-
     def __eq__(self, other):
         if not isinstance(other, PhoneMetadata):
             return False
