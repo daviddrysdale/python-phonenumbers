@@ -2281,3 +2281,21 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(('', '01412345', False),
                          phonenumberutil._maybe_strip_national_prefix_carrier_code("01412345",
                                                                                    metadataXY))
+
+        # Temporarily insert invalid example number
+        metadata800 = PhoneMetadata.country_code_metadata[800]
+        saved_example = metadata800.general_desc.example_number
+        metadata800.general_desc.example_number = '01'
+        self.assertTrue(phonenumbers.example_number_for_non_geo_entity(800) is None)
+        metadata800.general_desc.example_number = saved_example
+
+        self.assertFalse(phonenumbers.phonenumberutil._raw_input_contains_national_prefix("077", "0", "JP"))
+
+        # Temporarily change formatting rule
+        metadataGB = PhoneMetadata.region_metadata["GB"]
+        saved_rule = metadataGB.number_format[0].national_prefix_formatting_rule
+        metadataGB.number_format[0].national_prefix_formatting_rule = u'(\\1)'
+        numberWithoutNationalPrefixGB = phonenumbers.parse("2087654321", "GB", keep_raw_input=True)
+        self.assertEqual("(20) 8765 4321",
+                         phonenumbers.format_in_original_format(numberWithoutNationalPrefixGB, "GB"))
+        metadataGB.number_format[0].national_prefix_formatting_rule = saved_rule

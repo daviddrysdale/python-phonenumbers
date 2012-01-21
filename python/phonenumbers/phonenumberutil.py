@@ -1096,7 +1096,7 @@ def _format_original_allow_mods(numobj, region_calling_from):
 
 
 def _raw_input_contains_national_prefix(raw_input, national_prefix, region_code):
-    """Check if rawInput, which is assumed to be in the national format, has a
+    """Check if raw_input, which is assumed to be in the national format, has a
     national prefix. The national prefix is assumed to be in digits-only
     form."""
     nnn = normalize_digits_only(raw_input)
