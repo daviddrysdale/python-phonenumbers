@@ -1088,8 +1088,10 @@ def _format_original_allow_mods(numobj, region_calling_from):
             # National prefix not used when formatting this number.
             return national_format
         # Otherwise, we need to remove the national prefix from our output.
-        format_rule.national_prefix_formatting_rule = None
-        return format_by_pattern(numobj, PhoneNumberFormat.NATIONAL, [format_rule])
+        new_format_rule = NumberFormat()
+        new_format_rule.merge_from(format_rule)
+        new_format_rule.national_prefix_formatting_rule = None
+        return format_by_pattern(numobj, PhoneNumberFormat.NATIONAL, [new_format_rule])
 
 
 def _raw_input_contains_national_prefix(raw_input, national_prefix, region_code):
