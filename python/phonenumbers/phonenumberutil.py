@@ -1424,7 +1424,7 @@ def example_number_for_non_geo_entity(country_calling_code):
         desc = metadata.general_desc
         try:
             if desc.example_number is not None:
-                return parse(u"+" + unicode(country_calling_code) + desc.example_number, "ZZ")
+                return parse(_PLUS_SIGN + unicod(country_calling_code) + desc.example_number, "ZZ")
         except NumberParseException:
             pass
     return None

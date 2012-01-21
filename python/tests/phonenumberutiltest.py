@@ -575,7 +575,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
         # Testing the case of calling from a non-supported region.
         alphaNumericNumber.country_code = 1
-        alphaNumericNumber.national_number = 80749L
+        alphaNumericNumber.national_number = to_long(80749)
         alphaNumericNumber.raw_input = "180-SIX"
         # No country-code stripping can be done since the number is invalid.
         self.assertEqual("+1 180-SIX",
@@ -1386,7 +1386,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
                              msg="Did not extract country calling code %s correctly." % countryCallingCode)
             self.assertEqual(CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN, number.country_code_source,
                              msg="Did not figure out CountryCodeSource correctly")
-        except NumberParseException, e:
+        except NumberParseException:
+            e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
 
         number.clear()
@@ -2311,7 +2312,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Temporarily change formatting rule
         metadataGB = PhoneMetadata.region_metadata["GB"]
         saved_rule = metadataGB.number_format[0].national_prefix_formatting_rule
-        metadataGB.number_format[0].national_prefix_formatting_rule = u'(\\1)'
+        metadataGB.number_format[0].national_prefix_formatting_rule = u('(\\1)')
         numberWithoutNationalPrefixGB = phonenumbers.parse("2087654321", "GB", keep_raw_input=True)
         self.assertEqual("(20) 8765 4321",
                          phonenumbers.format_in_original_format(numberWithoutNationalPrefixGB, "GB"))

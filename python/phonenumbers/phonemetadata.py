@@ -18,7 +18,7 @@
 # limitations under the License.
 from .util import UnicodeMixin, u, unicod, rpr, force_unicode
 
-REGION_CODE_FOR_NON_GEO_ENTITY = u"001"
+REGION_CODE_FOR_NON_GEO_ENTITY = u("001")
 
 
 class NumberFormat(UnicodeMixin):
