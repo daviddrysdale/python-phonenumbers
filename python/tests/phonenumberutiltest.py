@@ -810,6 +810,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         numberWithoutNationalPrefixGB = phonenumbers.parse("2087654321", "GB", keep_raw_input=True)
         self.assertEqual("20 8765 4321",
                          phonenumbers.format_in_original_format(numberWithoutNationalPrefixGB, "GB"))
+        # Make sure no metadata is modified as a result of the previous function call.
+        self.assertEqual("(020) 8765 4321", phonenumbers.format_in_original_format(number5, "GB"))
 
         numberWithNationalPrefixMX = phonenumbers.parse("013312345678", "MX", keep_raw_input=True)
         self.assertEqual("01 33 1234 5678",
