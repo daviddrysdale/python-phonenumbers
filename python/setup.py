@@ -25,9 +25,9 @@ except ImportError:
     pass
 
 major, minor = sys.version_info[:2]
-python_26 = (major > 2 or (major == 2 and minor >= 6))
-if not python_26:
-    raise RuntimeError("Python 2.6 or newer is required")
+python_25 = (major > 2 or (major == 2 and minor >= 5))
+if not python_25:
+    raise RuntimeError("Python 2.5 or newer is required")
 python_3x = (major >= 3)
 if python_3x:
     package_name = 'phonenumbers3k'
