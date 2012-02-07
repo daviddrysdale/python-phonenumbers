@@ -17,7 +17,7 @@ cd phonenumbers
 2to3 --write *.py > /dev/null 2>&1
 2to3 --write --doctests_only *.py > /dev/null 2>&1
 rm -f *.bak *,cover *.pyc
-rm -f data/* geodata/__init__.py*
+rm -rf data/* geodata/__init__.py*
 cd geodata
 2to3 --write locale.py > /dev/null 2>&1
 rm -f *.bak
