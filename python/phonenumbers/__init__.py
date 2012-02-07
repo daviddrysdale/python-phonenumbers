@@ -72,20 +72,54 @@ PhoneNumberMatch [51,62) 703-4800500
 # I'll use regular expressions."  Now they have two problems.'
 #                                                   -- jwz 1997-08-12
 
-# Version number is taken from the upstream libphonenumber version
-# together with an indication of the version of the Python-specific code.
-__version__ = "4.5b1"
-
 # Data class definitions
 from .phonenumber import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
 from .phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY, NumberFormat, PhoneNumberDesc, PhoneMetadata
 # Functionality
 from .asyoutypeformatter import AsYouTypeFormatter
-from .phonenumberutil import *
+from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, UNKNOWN_REGION,
+                              MatchType, NumberParseException, PhoneNumberFormat,
+                              PhoneNumberType, ValidationResult,
+                              convert_alpha_characters_in_number,
+                              country_code_for_region,
+                              example_number,
+                              example_number_for_type,
+                              example_number_for_non_geo_entity,
+                              format_by_pattern,
+                              format_in_original_format,
+                              format_national_number_with_carrier_code,
+                              format_national_number_with_preferred_carrier_code,
+                              format_number_for_mobile_dialing,
+                              format_number,
+                              format_out_of_country_calling_number,
+                              format_out_of_country_keeping_alpha_chars,
+                              is_alpha_number,
+                              is_nanpa_country,
+                              is_number_match,
+                              is_possible_number,
+                              is_possible_number_string,
+                              is_possible_number_with_reason,
+                              is_valid_number,
+                              is_valid_number_for_region,
+                              length_of_geographical_area_code,
+                              length_of_national_destination_code,
+                              national_significant_number,
+                              ndd_prefix_for_region,
+                              normalize_digits_only,
+                              number_type,
+                              parse,
+                              region_code_for_country_code,
+                              region_code_for_number,
+                              truncate_too_long_number,)
 from .shortnumberutil import connects_to_emergency_number, is_emergency_number
 from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 from .geocoder import (area_description_for_number, country_name_for_number,
                        description_for_number, description_for_valid_number)
+
+
+# Version number is taken from the upstream libphonenumber version
+# together with an indication of the version of the Python-specific code.
+__version__ = "4.5b1"
 
 __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'REGION_CODE_FOR_NON_GEO_ENTITY', 'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
@@ -125,6 +159,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'region_code_for_country_code',
            'region_code_for_number',
            'truncate_too_long_number',
+           # end of items from phonenumberutil.py
            'connects_to_emergency_number', 'is_emergency_number',
            'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency',
            'area_description_for_number',
