@@ -53,7 +53,7 @@ if sys.version_info >= (3, 0):  # pragma no cover
         sep = kwargs.get('sep', ' ')
         end = kwargs.get('end', '\n')
         file = kwargs.get('file', None)
-        print3(*args, sep=sep, end=end, file=file)
+        print3(*args, **{'sep': sep, 'end': end, 'file': file})
 
     class UnicodeMixin(object):
         """Mixin class to define a __str__ method in terms of __unicode__ method"""
