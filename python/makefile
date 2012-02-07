@@ -28,7 +28,6 @@ tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buil
 metadata: phonenumbers/data/__init__.py tests/testdata/__init__.py geodata
 
 test: alldata tests/testdata/__init__.py
-	$(PYTHON) -m phonenumbers.__init__
 	$(PYTHON) -m testwrapper
 
 # Coverage; requires coverage module
