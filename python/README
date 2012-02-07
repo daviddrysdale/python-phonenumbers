@@ -113,6 +113,8 @@ Standard Python v2.x version:
    up to date.
  - Check that the unit tests all run successfully:
      cd python && make test
+ - Check that Python 2.5 is still supported:
+     cd python && make PYTHON=python2.5 test
  - Create a release-<version> branch and shift to it with:
      git checkout -b release-<version>
  - Push the branch to Github with:
