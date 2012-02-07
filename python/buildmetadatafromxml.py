@@ -35,6 +35,9 @@ __init__.py and per-region data files will be created in the directory.
 #    elements, which are PhoneNumberDesc instances; these do not
 #    appear to be used in the libphonenumber Java source code.
 
+# import to allow this code to work with Python2.5
+from __future__ import with_statement
+
 import sys
 import os
 import re
