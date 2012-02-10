@@ -115,6 +115,10 @@ _PUB_PAGES = re.compile(u"\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}")
 # 3/10/2011, 31/10/96 or 08/31/95.
 _SLASH_SEPARATED_DATES = re.compile(u"(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}")
 
+# Matches timestamps. Examples: "2012-01-02 08:00". Note that the reg-ex does
+# not include the trailing ":\d\d" -- that is covered by TIME_STAMPS_SUFFIX.
+TIME_STAMPS = re.compile(u"[12]\\d{3}[-/]?[01]\\d[-/]?[0-3]\\d [0-2]\\d$")
+TIME_STAMPS_SUFFIX = re.compile(u":[0-5]\\d")
 
 # Matches white-space, which may indicate the end of a phone number and the
 # start of something else (such as a neighbouring zip-code). If white-space is
@@ -489,6 +493,12 @@ class PhoneNumberMatcher(object):
         if (_PUB_PAGES.search(candidate) or
             _SLASH_SEPARATED_DATES.search(candidate)):
             return None
+
+        # Skip potential time-stamps.
+        if TIME_STAMPS.search(candidate):
+            following_text = self.text[offset + len(candidate):]
+            if TIME_STAMPS_SUFFIX.match(following_text):
+                return None
 
         # Try to come up with a valid match given the entire candidate.
         match = self._parse_and_verify(candidate, offset)
