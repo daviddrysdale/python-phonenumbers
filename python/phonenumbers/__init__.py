@@ -83,6 +83,7 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, UN
                               PhoneNumberType, ValidationResult,
                               convert_alpha_characters_in_number,
                               country_code_for_region,
+                              country_code_for_valid_region,
                               example_number,
                               example_number_for_type,
                               example_number_for_non_geo_entity,
@@ -120,7 +121,7 @@ from .geocoder import (area_description_for_number, country_name_for_number,
 
 # Version number is taken from the upstream libphonenumber version
 # together with an indication of the version of the Python-specific code.
-__version__ = "4.5b1"
+__version__ = "4.6b1"
 
 __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'REGION_CODE_FOR_NON_GEO_ENTITY', 'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
@@ -131,6 +132,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'PhoneNumberType', 'ValidationResult',
            'convert_alpha_characters_in_number',
            'country_code_for_region',
+           'country_code_for_valid_region',
            'example_number',
            'example_number_for_type',
            'example_number_for_non_geo_entity',

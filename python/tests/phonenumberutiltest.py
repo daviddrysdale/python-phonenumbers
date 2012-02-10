@@ -692,6 +692,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("+1 (650) 253-0000", phonenumbers.format_by_pattern(US_NUMBER,
                                                                              PhoneNumberFormat.INTERNATIONAL,
                                                                              newNumberFormats))
+        self.assertEqual("+1-650-253-0000", phonenumbers.format_by_pattern(US_NUMBER,
+                                                                           PhoneNumberFormat.RFC3966,
+                                                                           newNumberFormats))
 
         # $NP is set to '1' for the US. Here we check that for other NANPA
         # countries the US rules are followed.
@@ -736,10 +739,12 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("+44 20 7031 3000",
                          phonenumbers.format_by_pattern(GB_NUMBER, PhoneNumberFormat.INTERNATIONAL,
                                                         newNumberFormats))
-        # Python version extra test
+        # Python version extra tests
         self.assertEqual("1234567890",
                          phonenumbers.format_by_pattern(XY_NUMBER, PhoneNumberFormat.E164,
                                                         newNumberFormats))
+        # None of the patterns in the list match (because it's an empty list)
+        self.assertEqual("6502530000", phonenumbers.format_by_pattern(US_NUMBER, PhoneNumberFormat.NATIONAL, []))
 
     def testFormatE164Number(self):
         self.assertEqual("+16502530000", phonenumbers.format_number(US_NUMBER, PhoneNumberFormat.E164))
@@ -994,6 +999,22 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertTrue(phonenumbers.is_valid_number_for_region(reNumber, "RE"))
         self.assertTrue(phonenumbers.is_valid_number_for_region(INTERNATIONAL_TOLL_FREE, "001"))
         self.assertFalse(phonenumbers.is_valid_number_for_region(INTERNATIONAL_TOLL_FREE, "US"))
+        self.assertFalse(phonenumbers.is_valid_number_for_region(INTERNATIONAL_TOLL_FREE, "ZZ"))
+
+        invalidNumber = PhoneNumber()
+        # Invalid country calling codes.
+        invalidNumber.country_code = 3923
+        invalidNumber.national_number = 2366L
+        self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "ZZ"))
+        invalidNumber.country_code = 3923
+        invalidNumber.national_number = 2366L
+        self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "001"))
+        invalidNumber.country_code = 0
+        invalidNumber.national_number = 2366L
+        self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "001"))
+        invalidNumber.country_code = 0
+        self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "ZZ"))
+
         # Python version extra test
         self.assertFalse(phonenumbers.is_valid_number_for_region(reNumber, "US"))
 
@@ -1016,6 +1037,14 @@ class PhoneNumberUtilTest(unittest.TestCase):
         invalidNumber.clear()
         invalidNumber.country_code = 64
         invalidNumber.national_number = to_long(3316005)
+        self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
+
+        invalidNumber.clear()
+        # Invalid country calling codes.
+        invalidNumber.country_code = 3923
+        invalidNumber.national_number = 2366L
+        self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
+        invalidNumber.country_code = 0
         self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
 
         self.assertFalse(phonenumbers.is_valid_number(INTERNATIONAL_TOLL_FREE_TOO_LONG))
@@ -1502,6 +1531,11 @@ class PhoneNumberUtilTest(unittest.TestCase):
         usNumber = PhoneNumber(country_code=1, national_number=1234567890)
         self.assertEqual(usNumber, phonenumbers.parse("123-456-7890", "US"))
 
+        # Test star numbers. Although this is not strictly valid, we would
+        # like to make sure we can parse the output we produce when formatting
+        # the number.
+        self.assertEqual(JP_STAR_NUMBER, phonenumbers.parse("+81 *2345", "JP"))
+
     def testParseNumberWithAlphaCharacters(self):
         # Test case with alpha characters.
         tollfreeNumber = PhoneNumber(country_code=64, national_number=800332005)
@@ -1648,6 +1682,26 @@ class PhoneNumberUtilTest(unittest.TestCase):
         except NumberParseException:
             # Expected this exception.
             e = sys.exc_info()[1]
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+
+        try:
+            plusStar = "+***"
+            phonenumbers.parse(plusStar, "DE")
+            self.fail("This should not parse without throwing an exception " + plusMinusPhoneNumber)
+        except NumberParseException, e:
+            # Expected this exception.
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+
+        try:
+            plusStarPhoneNumber = "+*******91"
+            phonenumbers.parse(plusStarPhoneNumber, "DE")
+            self.fail("This should not parse without throwing an exception " + plusMinusPhoneNumber)
+        except NumberParseException, e:
+            # Expected this exception.
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")

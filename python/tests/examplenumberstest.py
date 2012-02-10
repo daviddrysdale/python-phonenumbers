@@ -18,11 +18,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys
+import re
 import unittest
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber
 from phonenumbers.util import prnt
+from phonenumbers.re_util import fullmatch
 
 
 class ExampleNumbersTest(unittest.TestCase):
@@ -105,7 +107,6 @@ class ExampleNumbersTest(unittest.TestCase):
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testVoicemail(self):
-        # Python version extra test
         voicemailTypes = set((PhoneNumberType.VOICEMAIL,))
         self._checkNumbersValidAndCorrectType(PhoneNumberType.VOICEMAIL, voicemailTypes)
         self.assertEqual(0, len(self.invalid_cases))
@@ -135,7 +136,32 @@ class ExampleNumbersTest(unittest.TestCase):
             if (exampleNumber is not None and
                 phonenumberutil._can_be_internationally_dialled(exampleNumber)):
                 self.wrong_type_cases.append(exampleNumber)
+                print >> sys.stderr, "Number %s should not be internationally diallable" % exampleNumber
         self.assertEqual(0, len(self.wrong_type_cases))
+
+    # TODO: Update this to use connectsToEmergencyNumber or similar once that
+    # is implemented.
+    def testEmergency(self):
+        wrongTypeCounter = 0
+        for regionCode in phonenumberutil.SUPPORTED_REGIONS:
+            metadata = PhoneMetadata.region_metadata.get(regionCode, None)
+            desc = metadata.emergency
+            if desc.example_number is not None:
+                exampleNumber = desc.example_number
+                if (not fullmatch(re.compile(desc.possible_number_pattern), exampleNumber) or
+                    not fullmatch(re.compile(desc.national_number_pattern), exampleNumber)):
+                    wrongTypeCounter += 1
+                    print >> sys.stderr, "Emergency example number test failed for %s" % regionCode
+        self.assertEqual(0, wrongTypeCounter)
+
+    def testGlobalNetworkNumbers(self):
+        for callingCode in PhoneMetadata.country_code_metadata.keys():
+            exampleNumber = phonenumberutil.example_number_for_non_geo_entity(callingCode)
+            self.assertTrue(exampleNumber is not None,
+                            msg="No example phone number for calling code %s" % callingCode)
+            if not phonenumberutil.is_valid_number(exampleNumber):
+                self.invalidCases.append(exampleNumber)
+                print >> sys.stderr, "Failed validation for %s" % exampleNumber
 
     def testEveryRegionHasAnExampleNumber(self):
         for regionCode in phonenumberutil.SUPPORTED_REGIONS:

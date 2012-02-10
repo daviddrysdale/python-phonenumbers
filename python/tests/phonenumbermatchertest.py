@@ -129,6 +129,9 @@ IMPOSSIBLE_CASES = [NumberTest("12345", "US"),
                     NumberTest("1/12/2011", "US"),
                     NumberTest("10/12/82", "DE"),
                     NumberTest("650x2531234", "US"),
+                    NumberTest("2012-01-02 08:00", "US"),
+                    NumberTest("2012/01/02 08:00", "US"),
+                    NumberTest("20120102 08:00", "US"),
                     ]
 
 # Strings with number-like things that should only be found under "possible".
@@ -155,6 +158,9 @@ VALID_CASES = [NumberTest("65 02 53 00 00", "US"),
                NumberTest("1979-2011 100", "US"),
                NumberTest("+494949-4-94", "DE"),  # National number in wrong format
                NumberTest(u("\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17"), "US"),
+               NumberTest("2012-0102 08", "US"),  # Very strange formatting.
+               NumberTest("2012-01-02 08", "US"),
+               NumberTest("1800-10-10 22", "AU"),  # Breakdown assistance number.
                ]
 
 # Strings with number-like things that should only be found up to and
