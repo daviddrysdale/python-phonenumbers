@@ -745,7 +745,7 @@ def format_by_pattern(numobj, number_format, user_defined_formats):
         return nsn
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
 
-    formatted_number = ""
+    formatted_number = U_EMPTY_STRING
     formatting_pattern = _choose_formatting_pattern_for_number(user_defined_formats, nsn)
     if formatting_pattern is None:
         # If no pattern above is matched, we format the number as a whole.
@@ -1214,7 +1214,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
         return _format_nsn_using_pattern(raw_input,
                                          new_format,
                                          PhoneNumberFormat.NATIONAL)
-    i18n_prefix_for_formatting = ""
+    i18n_prefix_for_formatting = U_EMPTY_STRING
     # If an unsupported region-calling-from is entered, or a country with
     # multiple international prefixes, the international format of the number
     # is returned, unless there is a preferred international prefix.
@@ -1323,7 +1323,7 @@ def _format_nsn_using_pattern(national_number, formatting_pattern, number_format
     # carrier code replacement will take place.
     number_format_rule = formatting_pattern.format
     m_re = re.compile(formatting_pattern.pattern)
-    formatted_national_number = u""
+    formatted_national_number = U_EMPTY_STRING
 
     if (number_format == PhoneNumberFormat.NATIONAL and
         carrier_code is not None and len(carrier_code) > 0 and
@@ -1363,9 +1363,9 @@ def _format_nsn_using_pattern(national_number, formatting_pattern, number_format
         # Strip any leading punctuation.
         m = _SEPARATOR_PATTERN.match(formatted_national_number)
         if m:
-            formatted_national_number = re.sub(_SEPARATOR_PATTERN, u"", formatted_national_number, count=1)
+            formatted_national_number = re.sub(_SEPARATOR_PATTERN, U_EMPTY_STRING, formatted_national_number, count=1)
         # Replace the rest with a dash between each number group
-        formatted_national_number = re.sub(_SEPARATOR_PATTERN, u"-", formatted_national_number)
+        formatted_national_number = re.sub(_SEPARATOR_PATTERN, U_DASH, formatted_national_number)
 
     return formatted_national_number
 

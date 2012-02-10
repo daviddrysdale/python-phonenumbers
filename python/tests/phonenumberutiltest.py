@@ -1004,13 +1004,13 @@ class PhoneNumberUtilTest(unittest.TestCase):
         invalidNumber = PhoneNumber()
         # Invalid country calling codes.
         invalidNumber.country_code = 3923
-        invalidNumber.national_number = 2366L
+        invalidNumber.national_number = to_long(2366)
         self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "ZZ"))
         invalidNumber.country_code = 3923
-        invalidNumber.national_number = 2366L
+        invalidNumber.national_number = to_long(2366)
         self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "001"))
         invalidNumber.country_code = 0
-        invalidNumber.national_number = 2366L
+        invalidNumber.national_number = to_long(2366)
         self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "001"))
         invalidNumber.country_code = 0
         self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "ZZ"))
@@ -1042,7 +1042,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
         invalidNumber.clear()
         # Invalid country calling codes.
         invalidNumber.country_code = 3923
-        invalidNumber.national_number = 2366L
+        invalidNumber.national_number = to_long(2366)
         self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
         invalidNumber.country_code = 0
         self.assertFalse(phonenumbers.is_valid_number(invalidNumber))
@@ -1690,8 +1690,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             plusStar = "+***"
             phonenumbers.parse(plusStar, "DE")
             self.fail("This should not parse without throwing an exception " + plusMinusPhoneNumber)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1700,8 +1701,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
             plusStarPhoneNumber = "+*******91"
             phonenumbers.parse(plusStarPhoneNumber, "DE")
             self.fail("This should not parse without throwing an exception " + plusMinusPhoneNumber)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
