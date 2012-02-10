@@ -143,10 +143,10 @@ def country_name_for_number(numobj, lang, script=None, region=None):
     Returns a text description in the given language code, for the given phone
     number's region, or an empty string if no description is available."""
     number_region = region_code_for_number(numobj)
-    return region_display_name(number_region, lang, script, region)
+    return _region_display_name(number_region, lang, script, region)
 
 
-def region_display_name(region_code, lang, script=None, region=None):
+def _region_display_name(region_code, lang, script=None, region=None):
     if region_code in LOCALE_DATA:
         # The Locale data has a set of names for this region, in various languages.
         name = LOCALE_DATA[region_code].get(lang, "")
@@ -206,7 +206,7 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
             return country_name_for_number(numobj, lang, script, region)
     else:
         # Otherwise, we just show the region(country) name for now.
-        return region_display_name(number_region, lang, script, region)
+        return _region_display_name(number_region, lang, script, region)
         # TODO: Concatenate the lower-level and country-name information in an
         # appropriate way for each language.
 
