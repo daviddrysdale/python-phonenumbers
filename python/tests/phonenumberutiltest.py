@@ -747,10 +747,12 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual("+44 20 7031 3000",
                          phonenumbers.format_by_pattern(GB_NUMBER, PhoneNumberFormat.INTERNATIONAL,
                                                         newNumberFormats))
-        # Python version extra test
+        # Python version extra tests
         self.assertEqual("1234567890",
                          phonenumbers.format_by_pattern(XY_NUMBER, PhoneNumberFormat.E164,
                                                         newNumberFormats))
+        # None of the patterns in the list match (because it's an empty list)
+        self.assertEqual("6502530000", phonenumbers.format_by_pattern(US_NUMBER, PhoneNumberFormat.NATIONAL, []))
 
     def testFormatE164Number(self):
         self.assertEqual("+16502530000", phonenumbers.format_number(US_NUMBER, PhoneNumberFormat.E164))
