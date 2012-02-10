@@ -110,7 +110,7 @@ Standard Python v2.x version:
  - Ensure that HISTORY file is up-to-date.
  - Set the __version__ field in phonenumbers/__init__.py
  - Check that the list of symbols in phonenumbers/__init__.py __all__ is
-   up to date.
+   up to date.  The allcheck.py script helps with this.
  - Check that the unit tests all run successfully:
      cd python && make test
  - Check that Python 2.5 is still supported:
