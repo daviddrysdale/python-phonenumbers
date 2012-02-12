@@ -93,6 +93,8 @@ def area_description_for_number(numobj, lang, script=None, region=None):
     number's area, or an empty string if no description is available."""
     e164_num = format_number(numobj, PhoneNumberFormat.E164)
     if not e164_num.startswith('+'):  # pragma no cover
+        # Can only hit this arm if there's an internal error in the rest of
+        # the library
         raise Exception("Expect E164 number to start with +")
     for prefix_len in xrange(GEOCODE_LONGEST_PREFIX, 0, -1):
         prefix = e164_num[1:(1 + prefix_len)]
