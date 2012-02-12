@@ -16,7 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin
+from .util import UnicodeMixin, ImmutableMixin
 
 
 class CountryCodeSource(object):
@@ -204,10 +204,8 @@ class PhoneNumber(UnicodeMixin):
         return result
 
 
-class FrozenPhoneNumber(PhoneNumber):
+class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
     """Immutable version of PhoneNumber"""
-    _mutable = False
-
     def __hash__(self):
         return hash((self.country_code,
                      self.national_number,
@@ -216,18 +214,6 @@ class FrozenPhoneNumber(PhoneNumber):
                      self.raw_input,
                      self.country_code_source,
                      self.preferred_domestic_carrier_code))
-
-    def __setattr__(self, name, value):
-        if self._mutable or name == "_mutable":
-            super(FrozenPhoneNumber, self).__setattr__(name, value)
-        else:
-            raise TypeError("Can't modify immutable instance")
-
-    def __delattr__(self, name):
-        if self._mutable:
-            super(FrozenPhoneNumber, self).__delattr__(name)
-        else:
-            raise TypeError("Can't modify immutable instance")
 
     def __init__(self, *args, **kwargs):
         old_mutable = self._mutable

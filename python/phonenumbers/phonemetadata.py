@@ -16,15 +16,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin
+from .util import UnicodeMixin, ImmutableMixin
 
 REGION_CODE_FOR_NON_GEO_ENTITY = u"001"
 
 
-class NumberFormat(UnicodeMixin):
+class NumberFormat(UnicodeMixin, ImmutableMixin):
     """Representation of way that a phone number can be formatted for output"""
-    _mutable = False
-
     def __init__(self,
                  pattern=None,
                  format=None,
@@ -143,23 +141,9 @@ class NumberFormat(UnicodeMixin):
         result += u")"
         return result
 
-    def __setattr__(self, name, value):  # pragma no cover
-        if self._mutable or name == "_mutable":
-            super(NumberFormat, self).__setattr__(name, value)
-        else:
-            raise TypeError("Can't modify immutable instance")
 
-    def __delattr__(self, name):  # pragma no cover
-        if self._mutable:
-            super(NumberFormat, self).__delattr__(name)
-        else:
-            raise TypeError("Can't modify immutable instance")
-
-
-class PhoneNumberDesc(UnicodeMixin):
+class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
     """Class representing the description of a set of phone numbers."""
-    _mutable = False
-
     def __init__(self,
                  national_number_pattern=None,
                  possible_number_pattern=None,
@@ -220,26 +204,13 @@ class PhoneNumberDesc(UnicodeMixin):
         result += u")"
         return result
 
-    def __setattr__(self, name, value):  # pragma no cover
-        if self._mutable or name == "_mutable":
-            super(PhoneNumberDesc, self).__setattr__(name, value)
-        else:
-            raise TypeError("Can't modify immutable instance")
 
-    def __delattr__(self, name):  # pragma no cover
-        if self._mutable:
-            super(PhoneNumberDesc, self).__delattr__(name)
-        else:
-            raise TypeError("Can't modify immutable instance")
-
-
-class PhoneMetadata(UnicodeMixin):
+class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     """Class representing metadata for international telephone numbers for a region.
 
     This class is hand created based on phonemetadata.proto. Please refer to that file
     for detailed descriptions of the meaning of each field.
     """
-    _mutable = False
     region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
     # A mapping from a country calling code for a non-geographical entity to
     # the PhoneMetadata for that country calling code. Examples of the country
@@ -510,15 +481,3 @@ class PhoneMetadata(UnicodeMixin):
             result += ",\n    leading_zero_possible=True"
         result += u")"
         return result
-
-    def __setattr__(self, name, value):  # pragma no cover
-        if self._mutable or name == "_mutable":
-            super(PhoneMetadata, self).__setattr__(name, value)
-        else:
-            raise TypeError("Can't modify immutable instance")
-
-    def __delattr__(self, name):  # pragma no cover
-        if self._mutable:
-            super(PhoneMetadata, self).__delattr__(name)
-        else:
-            raise TypeError("Can't modify immutable instance")
