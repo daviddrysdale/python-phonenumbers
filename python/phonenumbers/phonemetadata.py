@@ -16,13 +16,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin, ImmutableMixin
+from .util import UnicodeMixin, ImmutableMixin, mutating_method
 
 REGION_CODE_FOR_NON_GEO_ENTITY = u"001"
 
 
 class NumberFormat(UnicodeMixin, ImmutableMixin):
     """Representation of way that a phone number can be formatted for output"""
+    @mutating_method
     def __init__(self,
                  pattern=None,
                  format=None,
@@ -30,7 +31,6 @@ class NumberFormat(UnicodeMixin, ImmutableMixin):
                  national_prefix_formatting_rule=None,
                  national_prefix_optional_when_formatting=False,
                  domestic_carrier_code_formatting_rule=None):
-        self._mutable = True
         # pattern is a regex that is used to match the national (significant)
         # number. For example, the pattern "(20)(\d{4})(\d{4})" will match
         # number "2070313000", which is the national (significant) number for
@@ -99,7 +99,6 @@ class NumberFormat(UnicodeMixin, ImmutableMixin):
         # formatted when format_with_carrier_code is called, if carrier codes
         # are used for a certain country.
         self.domestic_carrier_code_formatting_rule = domestic_carrier_code_formatting_rule  # None or Unicode string
-        self._mutable = False
 
     def merge_from(self, other):
         """Merge information from another NumberFormat object into this one."""
@@ -144,11 +143,11 @@ class NumberFormat(UnicodeMixin, ImmutableMixin):
 
 class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
     """Class representing the description of a set of phone numbers."""
+    @mutating_method
     def __init__(self,
                  national_number_pattern=None,
                  possible_number_pattern=None,
                  example_number=None):
-        self._mutable = True
         # The national_number_pattern is the pattern that a valid national
         # significant number would match. This specifies information such as
         # its total length and leading digits.
@@ -166,7 +165,6 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         # An example national significant number for the specific type. It
         # should not contain any formatting information.
         self.example_number = example_number  # None or Unicode string
-        self._mutable = False
 
     def merge_from(self, other):
         """Merge information from another PhoneNumberDesc object into this one."""
@@ -225,6 +223,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         else:
             return kls.region_metadata.get(region_code, None)
 
+    @mutating_method
     def __init__(self,
                  id,
                  general_desc=None,
@@ -253,8 +252,6 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
                  leading_digits=None,
                  leading_zero_possible=False,
                  register=True):
-        self._mutable = True
-
         # The general_desc contains information which is a superset of
         # descriptions for all types of phone numbers. If any element is
         # missing in the description of a specific type of number, the element
@@ -424,7 +421,6 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
                     raise Exception("Duplicate PhoneMetadata for %s (from %s:%s)" % (id, self.id, self.country_code))
             else:
                 kls_map[id] = self
-        self._mutable = False
 
     def __eq__(self, other):
         if not isinstance(other, PhoneMetadata):
