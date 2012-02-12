@@ -118,7 +118,7 @@ Standard Python v2.x version:
  - Create a release-<version> branch and shift to it with:
      git checkout -b release-<version>
  - Push the branch to Github with:
-     git push origin release-<version>
+     git push <github-remote> release-<version>
  - Create a setup-tools packaged tarball dist/phonenumbers-<version>.tar.gz 
    with:
      make sdist  # runs setup.py sdist
