@@ -2217,6 +2217,60 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertNotEqual(metadata1, "")
         self.assertNotEqual(metadata1, 123)
 
+    def testFrozenPhoneNumberImmutable(self):
+        number = PhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+        frozen1 = FrozenPhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+        frozen2 = FrozenPhoneNumber(number)
+        self.assertEqual(number, frozen1)
+        self.assertEqual(frozen1, frozen2)
+        number.country_code = 999
+        self.assertNotEqual(number, frozen1)
+        try:
+            frozen1.country_code = 999
+            self.fail("Expected exception on __setattr__")
+        except TypeError:
+            pass
+        try:
+            del frozen2.country_code
+            self.fail("Expected exception on __delattr__")
+        except TypeError:
+            pass
+
+    def testMetadataImmutable(self):
+        desc = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
+        nf = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
+        metadata = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=False)
+        try:
+            desc.national_number_pattern = ""
+            self.fail("Expected exception on __setattr__")
+        except TypeError:
+            pass
+        try:
+            del desc.national_number_pattern
+            self.fail("Expected exception on __delattr__")
+        except TypeError:
+            pass
+        try:
+            nf.pattern = ""
+            self.fail("Expected exception on __setattr__")
+        except TypeError:
+            pass
+        try:
+            del nf.pattern
+            self.fail("Expected exception on __delattr__")
+        except TypeError:
+            pass
+        try:
+            metadata.id = None
+            self.fail("Expected exception on __setattr__")
+        except TypeError:
+            pass
+        try:
+            del metadata.id
+            self.fail("Expected exception on __delattr__")
+        except TypeError:
+            pass
+
     def testMetadataAsString(self):
         # Python version extra tests for string conversions
         metadata = PhoneMetadata.region_metadata["AU"]
