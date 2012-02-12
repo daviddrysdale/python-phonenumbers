@@ -2238,8 +2238,8 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertNotEqual(metadata1, 123)
 
     def testFrozenPhoneNumberImmutable(self):
-        number = PhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
-        frozen1 = FrozenPhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+        number = PhoneNumber(country_code=39, national_number=236618300, italian_leading_zero=True)
+        frozen1 = FrozenPhoneNumber(country_code=39, national_number=236618300, italian_leading_zero=True)
         frozen2 = FrozenPhoneNumber(number)
         self.assertEqual(number, frozen1)
         self.assertEqual(frozen1, frozen2)
@@ -2259,7 +2259,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
     def testMetadataImmutable(self):
         desc = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
         nf = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
-        metadata = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=False)
+        metadata = PhoneMetadata("XY", preferred_international_prefix='9123', register=False)
         try:
             desc.national_number_pattern = ""
             self.fail("Expected exception on __setattr__")
