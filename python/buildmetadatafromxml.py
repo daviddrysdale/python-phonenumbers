@@ -156,6 +156,7 @@ class XNumberFormat(UnicodeMixin):
             self.io = None
         else:
             self.o = NumberFormat()
+            self.o._mutable = True
             # Find the REQUIRED attribute
             self.o.pattern = xtag.attrib['pattern']
             # Find the IMPLIED attribute(s)
@@ -207,6 +208,7 @@ class XNumberFormat(UnicodeMixin):
             # If the intlFormat is set to "NA" the intlFormat should be ignored.
             self.io = NumberFormat(pattern=self.o.pattern,
                                    leading_digits_pattern=self.o.leading_digits_pattern)
+            self.io._mutable = True
 
             intl_format = _get_unique_child_value(xtag, "intlFormat")
             if intl_format is None:
@@ -231,6 +233,7 @@ class XPhoneNumberDesc(UnicodeMixin):
     def __init__(self, xtag,
                  template=None, fill_na=True):
         self.o = PhoneNumberDesc()
+        self.o._mutable = True
         self.o.national_number_pattern = None
         self.o.possible_number_pattern = None
         self.o.example_number = None
@@ -266,6 +269,7 @@ class XTerritory(UnicodeMixin):
         # Retrieve the REQUIRED attributes
         id = xterritory.attrib['id']
         self.o = PhoneMetadata(id, register=False)
+        self.o._mutable = True
         self.o.country_code = int(xterritory.attrib['countryCode'])
         # Retrieve the IMPLIED attributes
         self.o.international_prefix = xterritory.get('internationalPrefix', None)

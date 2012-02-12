@@ -16,13 +16,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin, u, unicod, rpr, force_unicode
+from .util import UnicodeMixin, ImmutableMixin, mutating_method
+from .util import u, unicod, rpr, force_unicode
 
 REGION_CODE_FOR_NON_GEO_ENTITY = u("001")
 
 
-class NumberFormat(UnicodeMixin):
+class NumberFormat(UnicodeMixin, ImmutableMixin):
     """Representation of way that a phone number can be formatted for output"""
+    @mutating_method
     def __init__(self,
                  pattern=None,
                  format=None,
@@ -140,9 +142,9 @@ class NumberFormat(UnicodeMixin):
         return result
 
 
-class PhoneNumberDesc(UnicodeMixin):
+class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
     """Class representing the description of a set of phone numbers."""
-
+    @mutating_method
     def __init__(self,
                  national_number_pattern=None,
                  possible_number_pattern=None,
@@ -202,7 +204,7 @@ class PhoneNumberDesc(UnicodeMixin):
         return result
 
 
-class PhoneMetadata(UnicodeMixin):
+class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     """Class representing metadata for international telephone numbers for a region.
 
     This class is hand created based on phonemetadata.proto. Please refer to that file
@@ -222,6 +224,7 @@ class PhoneMetadata(UnicodeMixin):
         else:
             return kls.region_metadata.get(region_code, None)
 
+    @mutating_method
     def __init__(self,
                  id,
                  general_desc=None,

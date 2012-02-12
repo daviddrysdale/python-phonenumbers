@@ -685,6 +685,7 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
     def testFormatByPattern(self):
         newNumFormat = NumberFormat(pattern="(\\d{3})(\\d{3})(\\d{4})", format="(\\1) \\2-\\3")
+        newNumFormat._mutable = True
         newNumberFormats = [newNumFormat]
 
         self.assertEqual("(650) 253-0000", phonenumbers.format_by_pattern(US_NUMBER, PhoneNumberFormat.NATIONAL,
@@ -1276,7 +1277,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
 
     def testMaybeStripNationalPrefix(self):
         metadata = PhoneMetadata(id="Test", national_prefix_for_parsing="34", register=False)
+        metadata._mutable = True
         metadata.general_desc = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
+        metadata.general_desc._mutable = True
         numberToStrip = "34356778"
         strippedNumber = "356778"
         cc, numberToStrip, rc = phonenumberutil._maybe_strip_national_prefix_carrier_code(numberToStrip, metadata)
@@ -2186,10 +2189,13 @@ class PhoneNumberUtilTest(unittest.TestCase):
     def testMetadataEquality(self):
         # Python version extra tests for equality against other types
         desc1 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
+        desc1._mutable = True
         desc2 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
+        desc2._mutable = True
         desc3 = PhoneNumberDesc(national_number_pattern="\\d{4,7}",
                                 possible_number_pattern="\\d{7}",
                                 example_number="1234567")
+        desc3._mutable = True
         self.assertNotEqual(desc1, None)
         self.assertNotEqual(desc1, "")
         self.assertEqual(desc1, desc2)
@@ -2201,10 +2207,13 @@ class PhoneNumberUtilTest(unittest.TestCase):
                          r"possible_number_pattern='\\d{7}', example_number='1234567')",
                          str(desc3))
         nf1 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
+        nf1._mutable = True
         nf2 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
+        nf2._mutable = True
         nf3 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['2'],
                            national_prefix_formatting_rule='$NP',
                            domestic_carrier_code_formatting_rule='$NP')
+        nf3._mutable = True
         self.assertEqual(nf1, nf2)
         self.assertNotEqual(nf1, nf3)
         self.assertNotEqual(nf1, None)
@@ -2216,14 +2225,71 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertNotEqual(nf1, nf3)
 
         metadata1 = PhoneMetadata("XY", preferred_international_prefix=u('9123'), register=False)
+        metadata1._mutable = True
         metadata2 = PhoneMetadata("XY", preferred_international_prefix=u('9123'), register=False)
+        metadata2._mutable = True
         metadata3 = PhoneMetadata("XY", preferred_international_prefix=u('9100'), register=False)
+        metadata3._mutable = True
         self.assertEqual(metadata1, metadata2)
         self.assertNotEqual(metadata1, metadata3)
         self.assertTrue(metadata1 != metadata3)
         self.assertNotEqual(metadata1, None)
         self.assertNotEqual(metadata1, "")
         self.assertNotEqual(metadata1, 123)
+
+    def testFrozenPhoneNumberImmutable(self):
+        number = PhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+        frozen1 = FrozenPhoneNumber(country_code=39, national_number=236618300L, italian_leading_zero=True)
+        frozen2 = FrozenPhoneNumber(number)
+        self.assertEqual(number, frozen1)
+        self.assertEqual(frozen1, frozen2)
+        number.country_code = 999
+        self.assertNotEqual(number, frozen1)
+        try:
+            frozen1.country_code = 999
+            self.fail("Expected exception on __setattr__")
+        except TypeError:
+            pass
+        try:
+            del frozen2.country_code
+            self.fail("Expected exception on __delattr__")
+        except TypeError:
+            pass
+
+    def testMetadataImmutable(self):
+        desc = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
+        nf = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
+        metadata = PhoneMetadata("XY", preferred_international_prefix=u'9123', register=False)
+        try:
+            desc.national_number_pattern = ""
+            self.fail("Expected exception on __setattr__")
+        except TypeError:
+            pass
+        try:
+            del desc.national_number_pattern
+            self.fail("Expected exception on __delattr__")
+        except TypeError:
+            pass
+        try:
+            nf.pattern = ""
+            self.fail("Expected exception on __setattr__")
+        except TypeError:
+            pass
+        try:
+            del nf.pattern
+            self.fail("Expected exception on __delattr__")
+        except TypeError:
+            pass
+        try:
+            metadata.id = None
+            self.fail("Expected exception on __setattr__")
+        except TypeError:
+            pass
+        try:
+            del metadata.id
+            self.fail("Expected exception on __delattr__")
+        except TypeError:
+            pass
 
     def testMetadataAsString(self):
         # Python version extra tests for string conversions
@@ -2361,17 +2427,21 @@ class PhoneNumberUtilTest(unittest.TestCase):
         # Temporarily insert invalid example number
         metadata800 = PhoneMetadata.country_code_metadata[800]
         saved_example = metadata800.general_desc.example_number
+        metadata800.general_desc._mutable = True
         metadata800.general_desc.example_number = '01'
         self.assertTrue(phonenumbers.example_number_for_non_geo_entity(800) is None)
         metadata800.general_desc.example_number = saved_example
+        metadata800.general_desc._mutable = False
 
         self.assertFalse(phonenumbers.phonenumberutil._raw_input_contains_national_prefix("077", "0", "JP"))
 
         # Temporarily change formatting rule
         metadataGB = PhoneMetadata.region_metadata["GB"]
         saved_rule = metadataGB.number_format[0].national_prefix_formatting_rule
+        metadataGB.number_format[0]._mutable = True
         metadataGB.number_format[0].national_prefix_formatting_rule = u('(\\1)')
         numberWithoutNationalPrefixGB = phonenumbers.parse("2087654321", "GB", keep_raw_input=True)
         self.assertEqual("(20) 8765 4321",
                          phonenumbers.format_in_original_format(numberWithoutNationalPrefixGB, "GB"))
         metadataGB.number_format[0].national_prefix_formatting_rule = saved_rule
+        metadataGB.number_format[0]._mutable = False

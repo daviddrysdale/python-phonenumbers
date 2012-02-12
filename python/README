@@ -109,7 +109,7 @@ Release Procedure
  - Ensure that HISTORY file is up-to-date.
  - Set the __version__ field in phonenumbers/__init__.py
  - Check that the list of symbols in phonenumbers/__init__.py __all__ is
-   up to date.
+   up to date.  The allcheck.py script helps with this.
  - Optionally, force metadata regeneration:
      cd python && make metaclean alldata
  - Check that the unit tests all run successfully:
@@ -123,7 +123,7 @@ Release Procedure
  - Create a release-<version> branch and shift to it with:
      git checkout -b release-<version>
  - Push the branch to Github with:
-     git push origin release-<version>
+     git push <github-remote> release-<version>
  - Create a setup-tools packaged tarball dist/phonenumbers-<version>.tar.gz 
    with:
      make sdist  # runs setup.py sdist

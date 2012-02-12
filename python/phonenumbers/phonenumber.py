@@ -16,7 +16,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin, to_long, unicod, rpr, force_unicode
+from .util import UnicodeMixin, ImmutableMixin, mutating_method
+from .util import to_long, unicod, rpr, force_unicode
 
 
 class CountryCodeSource(object):
@@ -210,10 +211,8 @@ class PhoneNumber(UnicodeMixin):
         return result
 
 
-class FrozenPhoneNumber(PhoneNumber):
+class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
     """Immutable version of PhoneNumber"""
-    _mutable = False
-
     def __hash__(self):
         return hash((self.country_code,
                      self.national_number,
@@ -223,25 +222,10 @@ class FrozenPhoneNumber(PhoneNumber):
                      self.country_code_source,
                      self.preferred_domestic_carrier_code))
 
-    def __setattr__(self, name, value):
-        if self._mutable or name == "_mutable":
-            super(FrozenPhoneNumber, self).__setattr__(name, value)
-        else:
-            raise TypeError("Can't modify immutable instance")
-
-    def __delattr__(self, name):
-        if self._mutable:
-            super(FrozenPhoneNumber, self).__delattr__(name)
-        else:
-            raise TypeError("Can't modify immutable instance")
-
+    @mutating_method
     def __init__(self, *args, **kwargs):
-        old_mutable = self._mutable
-        self._mutable = True
-        try:
-            if len(kwargs) == 0 and len(args) == 1 and isinstance(args[0], PhoneNumber):
-                super(FrozenPhoneNumber, self).__init__(**args[0].__dict__)
-            else:
-                super(FrozenPhoneNumber, self).__init__(*args, **kwargs)
-        finally:
-            self._mutable = old_mutable
+        if len(kwargs) == 0 and len(args) == 1 and isinstance(args[0], PhoneNumber):
+            # Copy constructor
+            super(FrozenPhoneNumber, self).__init__(**args[0].__dict__)
+        else:
+            super(FrozenPhoneNumber, self).__init__(*args, **kwargs)
