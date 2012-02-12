@@ -16,7 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import UnicodeMixin, ImmutableMixin
+from .util import UnicodeMixin, ImmutableMixin, mutating_method
 
 
 class CountryCodeSource(object):
@@ -215,13 +215,10 @@ class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
                      self.country_code_source,
                      self.preferred_domestic_carrier_code))
 
+    @mutating_method
     def __init__(self, *args, **kwargs):
-        old_mutable = self._mutable
-        self._mutable = True
-        try:
-            if len(kwargs) == 0 and len(args) == 1 and isinstance(args[0], PhoneNumber):
-                super(FrozenPhoneNumber, self).__init__(**args[0].__dict__)
-            else:
-                super(FrozenPhoneNumber, self).__init__(*args, **kwargs)
-        finally:
-            self._mutable = old_mutable
+        if len(kwargs) == 0 and len(args) == 1 and isinstance(args[0], PhoneNumber):
+            # Copy constructor
+            super(FrozenPhoneNumber, self).__init__(**args[0].__dict__)
+        else:
+            super(FrozenPhoneNumber, self).__init__(*args, **kwargs)
