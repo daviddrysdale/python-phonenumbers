@@ -57,7 +57,7 @@ install: alldata
 clean:
 	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc phonenumbers/geodata/*.pyc
 	rm -rf phonenumbers/__pycache__ phonenumbers/data/__pycache__ phonenumbers/geodata/__pycache__
-	rm -f phonenumbers/*.py,cover
+	rm -f phonenumbers/*.py,cover .coverage*
 	rm -f tests/*.pyc tests/testdata/*.pyc tests/testgeodata/*.pyc
 	rm -rf build deb_dist dist
 
