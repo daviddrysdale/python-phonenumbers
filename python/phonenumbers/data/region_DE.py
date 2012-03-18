@@ -11,7 +11,7 @@ PHONE_METADATA_DE = PhoneMetadata(id='DE', country_code=49, international_prefix
     personal_number=PhoneNumberDesc(national_number_pattern='700\\d{8}', possible_number_pattern='\\d{11}', example_number='70012345678'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='16(?:4\\d{1,10}|[89]\\d{1,11})', possible_number_pattern='\\d{4,14}', example_number='16412345'),
-    uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    uan=PhoneNumberDesc(national_number_pattern='18(?:1\\d{5,11}|[2-9]\\d{8})', possible_number_pattern='\\d{8,14}', example_number='18500123456'),
     emergency=PhoneNumberDesc(national_number_pattern='11[02]', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
@@ -23,4 +23,8 @@ PHONE_METADATA_DE = PhoneMetadata(id='DE', country_code=49, international_prefix
         NumberFormat(pattern='(\\d{5})(\\d{1,10})', format=u'\\1/\\2', leading_digits_pattern=['3'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([18]\\d{2})(\\d{7,9})', format=u'\\1 \\2', leading_digits_pattern=['1[5-7]|800'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d)(\\d{4,10})', format=u'\\1 \\2 \\3', leading_digits_pattern=['(?:18|90)0', '180|900[1359]'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='(1\\d{2})(\\d{5,11})', format=u'\\1 \\2', leading_digits_pattern=['181'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='(18\\d{3})(\\d{6})', format=u'\\1 \\2', leading_digits_pattern=['18500'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='(18\\d{2})(\\d{7})', format=u'\\1 \\2', leading_digits_pattern=['18[68]'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='(18\\d)(\\d{8})', format=u'\\1 \\2', leading_digits_pattern=['18[2-579]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(700)(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['700'], national_prefix_formatting_rule=u'0\\1')])
