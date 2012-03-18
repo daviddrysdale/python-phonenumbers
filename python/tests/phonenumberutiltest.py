@@ -17,7 +17,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys
-import unittest
 
 import phonenumbers
 from phonenumbers import PhoneNumber, PhoneMetadata
@@ -26,18 +25,8 @@ from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseExceptio
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil
+from .testmetadatatest import TestMetadataTestCase
 
-# Override library metadata with the test metadata.
-REAL_REGION_METADATA = PhoneMetadata.region_metadata
-REAL_CC_TO_RC = phonenumberutil.COUNTRY_CODE_TO_REGION_CODE
-
-PhoneMetadata.region_metadata = {}
-phonenumberutil.COUNTRY_CODE_TO_REGION_CODE = {}
-
-# Import the test data; this will re-populate the
-# PhoneMetadata.region_metadata map
-from .testdata import _COUNTRY_CODE_TO_REGION_CODE as TEST_CC_TO_RC
-TEST_REGION_METADATA = PhoneMetadata.region_metadata
 
 if sys.version_info >= (3, 0):
     # Python 3 has unlimited-precision int, so no 'L' suffix
@@ -48,20 +37,6 @@ else:
     _LS = 'L'
     _UP = 'u'
 
-
-def reinstate_real_metadata():
-    """Reinstate real phone number metadata"""
-    phonenumberutil.COUNTRY_CODE_TO_REGION_CODE = REAL_CC_TO_RC
-    PhoneMetadata.region_metadata = REAL_REGION_METADATA
-
-
-def insert_test_metadata():
-    """Insert test metadata into library"""
-    phonenumberutil.COUNTRY_CODE_TO_REGION_CODE = TEST_CC_TO_RC
-    PhoneMetadata.region_metadata = TEST_REGION_METADATA
-
-# Reinstate the real metadata so any importers of this module are not affected
-reinstate_real_metadata()
 
 # Set up some test numbers to re-use.
 ALPHA_NUMERIC_NUMBER = FrozenPhoneNumber(country_code=1, national_number=80074935247L)
@@ -101,20 +76,13 @@ INTERNATIONAL_TOLL_FREE_TOO_LONG = FrozenPhoneNumber(country_code=800, national_
 XY_NUMBER = FrozenPhoneNumber(country_code=999, national_number=1234567890L)
 
 
-class PhoneNumberUtilTest(unittest.TestCase):
+class PhoneNumberUtilTest(TestMetadataTestCase):
     """Unit tests for phonenumbers/__init__.py
 
-    Note that these tests use the metadata contained in the files in
-    tests/data, not the normal metadata files, so should not be used for
-    regression test purposes - these tests are illustrative only and test
-    functionality.
+    Note that these tests use the test metadata, not the normal metadata file,
+    so should not be used for regression test purposes - these tests are
+    illustrative only and test functionality.
     """
-    def setUp(self):
-        insert_test_metadata()
-
-    def tearDown(self):
-        reinstate_real_metadata()
-
     def testSupportedRegions(self):
         self.assertTrue(len(phonenumbers.SUPPORTED_REGIONS) > 0)
         # Python version extra test
@@ -1015,13 +983,9 @@ class PhoneNumberUtilTest(unittest.TestCase):
         invalidNumber.country_code = 3923
         invalidNumber.national_number = 2366L
         self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "ZZ"))
-        invalidNumber.country_code = 3923
-        invalidNumber.national_number = 2366L
         self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "001"))
         invalidNumber.country_code = 0
-        invalidNumber.national_number = 2366L
         self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "001"))
-        invalidNumber.country_code = 0
         self.assertFalse(phonenumbers.is_valid_number_for_region(invalidNumber, "ZZ"))
 
         # Python version extra test
@@ -1549,6 +1513,28 @@ class PhoneNumberUtilTest(unittest.TestCase):
         self.assertEqual(premiumNumber, phonenumbers.parse("0900 332 600a5", "NZ"))
         self.assertEqual(premiumNumber, phonenumbers.parse("0900 332 600A5", "NZ"))
         self.assertEqual(premiumNumber, phonenumbers.parse("0900 a332 600A5", "NZ"))
+
+    def testParseMaliciousInput(self):
+        # Lots of leading + signs before the possible number.
+        maliciousNumber = '+' * 6000 + "12222-33-244 extensioB 343+"
+        try:
+            phonenumbers.parse(maliciousNumber, "US")
+            self.fail("This should not parse without throwing an exception %s" % maliciousNumber)
+        except NumberParseException, e:
+            # Expected this exception.
+            self.assertEqual(e.error_type,
+                             NumberParseException.TOO_LONG,
+                             msg="Wrong error type stored in exception.")
+
+        maliciousNumberWithAlmostExt = "200" * 350 + " extensiOB 345"
+        try:
+            phonenumbers.parse(maliciousNumberWithAlmostExt, "US")
+            self.fail("This should not parse without throwing an exception %s" % maliciousNumberWithAlmostExt)
+        except NumberParseException, e:
+            # Expected this exception.
+            self.assertEqual(e.error_type,
+                             NumberParseException.TOO_LONG,
+                             msg="Wrong error type stored in exception.")
 
     def testParseWithInternationalPrefixes(self):
         self.assertEqual(US_NUMBER, phonenumbers.parse("+1 (650) 253-0000", "NZ"))

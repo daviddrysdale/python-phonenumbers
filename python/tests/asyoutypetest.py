@@ -16,29 +16,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import unittest
-
 from phonenumbers import AsYouTypeFormatter
 from phonenumbers import PhoneMetadata, PhoneNumberDesc, NumberFormat
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil
-from .phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
+from .testmetadatatest import TestMetadataTestCase
 
 
-class AsYouTypeFormatterTest(unittest.TestCase):
+class AsYouTypeFormatterTest(TestMetadataTestCase):
     """Unit tests for AsYouTypeFormatter.java
 
-    Note that these tests use the metadata contained in the files in
-    tests/data, not the normal metadata files, so should not be used for
-    regression test purposes - these tests are illustrative only and test
-    functionality.
+    Note that these tests use the test metadata, not the normal metadata file,
+    so should not be used for regression test purposes - these tests are
+    illustrative only and test functionality.
     """
-
-    def setUp(self):
-        insert_test_metadata()
-
-    def tearDown(self):
-        reinstate_real_metadata()
 
     def testInvalidRegion(self):
         formatter = AsYouTypeFormatter("ZZ")
