@@ -2,11 +2,11 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_KE = PhoneMetadata(id='KE', country_code=254, international_prefix='000',
-    general_desc=PhoneNumberDesc(national_number_pattern='20\\d{4,7}|[4-9]\\d{5,9}', possible_number_pattern='\\d{4,10}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:20|4[0-6]|5\\d|6[0-24-9])\\d{4,7}', possible_number_pattern='\\d{4,9}', example_number='202012345'),
-    mobile=PhoneNumberDesc(national_number_pattern='7(?:0[0-5]|[123]\\d|5[0-4]|7[0-5]|8[6-9])\\d{6}', possible_number_pattern='\\d{9}', example_number='712123456'),
-    toll_free=PhoneNumberDesc(national_number_pattern='800[245-8]\\d{5,6}', possible_number_pattern='\\d{9,10}', example_number='800223456'),
-    premium_rate=PhoneNumberDesc(national_number_pattern='9(?:00[2-578]|11\\d)\\d{5}', possible_number_pattern='\\d{9}', example_number='900223456'),
+    general_desc=PhoneNumberDesc(national_number_pattern='20\\d{6,7}|[4-9]\\d{6,9}', possible_number_pattern='\\d{5,10}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='20\\d{6,7}|4(?:[013]\\d{7}|[24-6]\\d{5,7})|5(?:[0-36-8]\\d{5,7}|[459]\\d{5})|6(?:[08]\\d{5}|[14-79]\\d{5,7}|2\\d{7})', possible_number_pattern='\\d{5,9}', example_number='202012345'),
+    mobile=PhoneNumberDesc(national_number_pattern='7(?:0[0-8]|[123]\\d|5[0-5]|7[0-5]|8[5-9])\\d{6}', possible_number_pattern='\\d{9}', example_number='712123456'),
+    toll_free=PhoneNumberDesc(national_number_pattern='800[24-8]\\d{5,6}', possible_number_pattern='\\d{9,10}', example_number='800223456'),
+    premium_rate=PhoneNumberDesc(national_number_pattern='900[02-578]\\d{5}', possible_number_pattern='\\d{9}', example_number='900223456'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

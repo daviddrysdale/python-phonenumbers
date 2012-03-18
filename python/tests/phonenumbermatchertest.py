@@ -23,7 +23,7 @@ import unittest
 from phonenumbers import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 from phonenumbers import PhoneNumber, phonenumberutil
 from phonenumbers.util import u
-from .phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
+from .testmetadatatest import TestMetadataTestCase
 
 
 class PhoneNumberMatchTest(unittest.TestCase):
@@ -197,18 +197,12 @@ EXACT_GROUPING_CASES = [NumberTest(u("\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17
                         ]
 
 
-class PhoneNumberMatcherTest(unittest.TestCase):
+class PhoneNumberMatcherTest(TestMetadataTestCase):
     """Tests for PhoneNumberMatcher.
 
     This only tests basic functionality based on test metadata.  See
     testphonenumberutil.py for the origin of the test data.
     """
-
-    def setUp(self):
-        insert_test_metadata()
-
-    def tearDown(self):
-        reinstate_real_metadata()
 
     # See PhoneNumberUtilTest.testParseNationalNumber().
     def testFindNationalNumber(self):
@@ -679,6 +673,18 @@ class PhoneNumberMatcherTest(unittest.TestCase):
         actual = [x.number for x in matcher]
 
         self.assertEqual(expected, actual)
+
+    def testNonPlusPrefixedNumbersNotFoundForInvalidRegion(self):
+        # Does not start with a "+", we won't match it.
+        matcher = PhoneNumberMatcher("1 456 764 156", "ZZ")
+        self.assertFalse(matcher.has_next())
+        try:
+            matcher.next()
+            self.fail("Violation of the Iterator contract.")
+        except Exception:
+            # Success
+            pass
+        self.assertFalse(matcher.has_next())
 
     def testEmptyIteration(self):
         matcher = PhoneNumberMatcher("", "ZZ")

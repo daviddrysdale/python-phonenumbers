@@ -73,6 +73,9 @@ _MIN_LENGTH_FOR_NSN = 3
 _MAX_LENGTH_FOR_NSN = 16
 # The maximum length of the country calling code.
 _MAX_LENGTH_COUNTRY_CODE = 3
+# We don't allow input strings for parsing to be longer than 250 chars. This
+# prevents malicious input from overflowing the regular-expression engine.
+_MAX_INPUT_STRING_LENGTH = 250
 # Region-code for the unknown region.
 UNKNOWN_REGION = u("ZZ")
 # The set of regions that share country calling code 1.
@@ -2236,6 +2239,9 @@ def parse(number, region=None, keep_raw_input=False,
     if number is None:
         raise NumberParseException(NumberParseException.NOT_A_NUMBER,
                                    "The phone number supplied was None.")
+    elif len(number) > _MAX_INPUT_STRING_LENGTH:
+        raise NumberParseException(NumberParseException.TOO_LONG,
+                                   "The string supplied was too long to parse.")
     raw_number = number
     # Extract a possible number from the string passed in (this strips leading
     # characters that could not be the start of a phone number.)

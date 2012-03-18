@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_GA = PhoneMetadata(id='GA', country_code=241, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[12]\\d{6}|0\\d{7}', possible_number_pattern='\\d{6,8}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:1(?:4[4-8]|7\\d)|2(?:4[02]|5[04-689]|6[024-79]|8[236]|9[02368]))\\d{4}', possible_number_pattern='\\d{6,7}', example_number='1441234'),
-    mobile=PhoneNumberDesc(national_number_pattern='0(?:5(?:0[89]|3[0-4]|8[0-26]|9[238])|6(?:0[3-7]|1[01]|2[0-7]|6[0-589]|71|83|9[57])|7(?:1[2-5]|2[89]|3[35-9]|4[01]|5[0-347-9]|[67]\\d|8[457-9]|9[0146]))\\d{4}', possible_number_pattern='\\d{8}', example_number='06031234'),
+    mobile=PhoneNumberDesc(national_number_pattern='0(?:5(?:0[89]|3[0-4]|8[0-26]|9[238])|6(?:0[3-7]|1[01]|2[0-7]|6[0-589]|71|83|9[57])|7(?:1[2-5]|2[89]|3[35-9]|4[01]|5[0-47-9]|[67]\\d|8[457-9]|9[0146]))\\d{4}', possible_number_pattern='\\d{8}', example_number='06031234'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

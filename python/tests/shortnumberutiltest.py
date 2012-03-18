@@ -17,21 +17,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
-
 from phonenumbers import connects_to_emergency_number, is_emergency_number
 from phonenumbers.util import u
-from .phonenumberutiltest import insert_test_metadata, reinstate_real_metadata
+from .testmetadatatest import TestMetadataTestCase
 
 
-class ShortNumberUtilTest(unittest.TestCase):
+class ShortNumberUtilTest(TestMetadataTestCase):
     """Unit tests for shortnumberutil.py"""
-
-    def setUp(self):
-        insert_test_metadata()
-
-    def tearDown(self):
-        reinstate_real_metadata()
 
     def testConnectsToEmergencyNumber_US(self):
         self.assertTrue(connects_to_emergency_number("911", "US"))
