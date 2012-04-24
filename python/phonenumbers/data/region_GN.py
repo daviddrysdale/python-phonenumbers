@@ -2,9 +2,9 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_GN = PhoneMetadata(id='GN', country_code=224, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[3567]\\d{7}', possible_number_pattern='\\d{8}'),
+    general_desc=PhoneNumberDesc(national_number_pattern='[23567]\\d{7,8}', possible_number_pattern='\\d{8,9}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='30(?:24|3[12]|4[1-35-7]|5[13]|6[189]|[78]1|9[1478])\\d{4}', possible_number_pattern='\\d{8}', example_number='30241234'),
-    mobile=PhoneNumberDesc(national_number_pattern='55\\d{6}|6(?:0(?:2[0-35-9]|3[3467]|5[2457-9])|[24578]\\d{2}|3(?:[14]0|35))\\d{4}', possible_number_pattern='\\d{8}', example_number='60201234'),
+    mobile=PhoneNumberDesc(national_number_pattern='(?:24|55)\\d{6}|6(?:0(?:2[0-35-9]|3[3467]|5[2457-9])|2\\d{2,3}|[4-9]\\d{2}|3(?:[14]0|35))\\d{4}', possible_number_pattern='\\d{8,9}', example_number='60201234'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
@@ -15,4 +15,5 @@ PHONE_METADATA_GN = PhoneMetadata(id='GN', country_code=224, international_prefi
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3 \\4')])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['[23567]']),
+        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['62'])])

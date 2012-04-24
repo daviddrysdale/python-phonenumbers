@@ -14,7 +14,7 @@ PHONE_METADATA_IT = PhoneMetadata(id='IT', country_code=39, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='11[2358]', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='848\\d{6,7}', possible_number_pattern='\\d{9,10}', example_number='8481234567'),
     number_format=[NumberFormat(pattern='(0[26])(\\d{3,4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['0[26]']),
         NumberFormat(pattern='(0[26])(\\d{4})(\\d{5})', format=u'\\1 \\2 \\3', leading_digits_pattern=['0[26]']),
         NumberFormat(pattern='(0[26])(\\d{4,6})', format=u'\\1 \\2', leading_digits_pattern=['0[26]']),

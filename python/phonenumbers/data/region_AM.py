@@ -9,7 +9,7 @@ PHONE_METADATA_AM = PhoneMetadata(id='AM', country_code=374, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='90[016]\\d{5}', possible_number_pattern='\\d{8}', example_number='90012345'),
     shared_cost=PhoneNumberDesc(national_number_pattern='80[1-4]\\d{5}', possible_number_pattern='\\d{8}', example_number='80112345'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    voip=PhoneNumberDesc(national_number_pattern='6027\\d{4}', possible_number_pattern='\\d{8}', example_number='60271234'),
+    voip=PhoneNumberDesc(national_number_pattern='60[2-6]\\d{5}', possible_number_pattern='\\d{8}', example_number='60271234'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='10[123]', possible_number_pattern='\\d{3}', example_number='102'),
