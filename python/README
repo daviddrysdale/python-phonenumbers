@@ -21,7 +21,7 @@ Running Tests
 ===========================
 
 With phonenumbers on the Python path, run:
-  $ python tests/__init__.py
+  $ python -m testwrapper
 
 
 ===========================
@@ -29,14 +29,13 @@ Auto-Generating Python Code
 ===========================
 
 The code within the phonenumbers/data subdirectory is automatically
-generated from the master XML metadata file 
-(resources/PhoneNumberMetadata.xml). 
+generated from the master XML metadata file (../resources/PhoneNumberMetadata.xml).
+Similarly, the code in the phonenumbers/geodata subdirectory is automatically
+generated from the files in ../resources/geocoding/
 
-The script buildmetadatafromxml.py performs this autogeneration. 
+The script buildmetadatafromxml.py performs the first autogeneration.
 Run it with:
-  python buildmetadatafromxml.py resources/PhoneNumberMetadata.xml phonenumbers/data/
-
-This script requires the lxml Python package to be installed.
+  python buildmetadatafromxml.py ../resources/PhoneNumberMetaData.xml phonenumbers/data .
 
 This will:
  - Create the phonenumbers/data/ directory if not present.
@@ -46,6 +45,9 @@ This will:
    region.
  - Create a file phonenumbers/data/__init__.py which 
    accumulates all of the per-region files.
+
+The script buildgeocodingdata.py performs the second autogeneration.
+  python buildgeocodingdata.py ../resources/geocoding phonenumbers/geodata/__init__.py
 
 This approach results in a large set of Python files, but makes it easy
 to apply local fixes to the formatting metadata.
