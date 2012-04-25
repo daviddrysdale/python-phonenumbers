@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_VN = PhoneMetadata(id='VN', country_code=84, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[17]\\d{6,9}|[2-69]\\d{7,9}|8\\d{6,8}', possible_number_pattern='\\d{7,10}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:2(?:[025-79]|1[0189]|[348][01])|3(?:[0136-9]|[25][01])|4\\d|5(?:[01][01]|[2-9])|6(?:[0-46-8]|5[01])|7(?:[02-79]|[18][01])|8[1-9])\\d{7}', possible_number_pattern='\\d{9,10}', example_number='2101234567'),
-    mobile=PhoneNumberDesc(national_number_pattern='(?:9\\d|1(?:2\\d|6[3-9]|8[68]|99))\\d{7}', possible_number_pattern='\\d{9,10}', example_number='912345678'),
+    mobile=PhoneNumberDesc(national_number_pattern='(?:9\\d|1(?:2\\d|6[2-9]|8[68]|99))\\d{7}', possible_number_pattern='\\d{9,10}', example_number='912345678'),
     toll_free=PhoneNumberDesc(national_number_pattern='1800\\d{4,6}', possible_number_pattern='\\d{8,10}', example_number='1800123456'),
     premium_rate=PhoneNumberDesc(national_number_pattern='1900\\d{4,6}', possible_number_pattern='\\d{8,10}', example_number='1900123456'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

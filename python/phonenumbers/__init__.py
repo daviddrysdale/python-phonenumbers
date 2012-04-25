@@ -121,15 +121,16 @@ from .geocoder import (area_description_for_number, country_name_for_number,
 
 # Version number is taken from the upstream libphonenumber version
 # together with an indication of the version of the Python-specific code.
-__version__ = "4.7b1"
+__version__ = "4.8b1"
 
 __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'REGION_CODE_FOR_NON_GEO_ENTITY', 'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
            'AsYouTypeFormatter',
            # items from phonenumberutil.py
-           'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS', 'UNKNOWN_REGION',
+           'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS', 'UNKNOWN_REGION', 'NON_DIGITS_PATTERN',
            'MatchType', 'NumberParseException', 'PhoneNumberFormat',
            'PhoneNumberType', 'ValidationResult',
+           'choose_formatting_pattern_for_number',
            'convert_alpha_characters_in_number',
            'country_code_for_region',
            'country_code_for_valid_region',
@@ -140,6 +141,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'format_in_original_format',
            'format_national_number_with_carrier_code',
            'format_national_number_with_preferred_carrier_code',
+           'format_nsn_using_pattern',
            'format_number_for_mobile_dialing',
            'format_number',
            'format_out_of_country_calling_number',

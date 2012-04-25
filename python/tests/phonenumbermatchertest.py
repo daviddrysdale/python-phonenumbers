@@ -21,7 +21,7 @@ import sys
 import unittest
 
 from phonenumbers import PhoneNumberMatch, PhoneNumberMatcher, Leniency
-from phonenumbers import PhoneNumber, phonenumberutil
+from phonenumbers import PhoneNumber, NumberFormat, phonenumberutil
 from phonenumbers.util import u
 from .testmetadatatest import TestMetadataTestCase
 
@@ -173,7 +173,7 @@ STRICT_GROUPING_CASES = [NumberTest("(415) 6667777", "US"),
                          NumberTest("0800-2491234", "DE"),
                          ]
 
-# Strings with number-like things that should found at all levels.
+# Strings with number-like things that should be found at all levels.
 EXACT_GROUPING_CASES = [NumberTest(u("\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17\uFF17\uFF17\uFF17"), "US"),
                         NumberTest(u("\uFF14\uFF11\uFF15-\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17"), "US"),
                         NumberTest("4156667777", "US"),
@@ -399,6 +399,7 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
         self.assertFalse(PhoneNumberMatcher._is_latin_letter('.'))
         self.assertFalse(PhoneNumberMatcher._is_latin_letter(' '))
         self.assertFalse(PhoneNumberMatcher._is_latin_letter(u("\u6211")))  # Chinese character
+        self.assertFalse(PhoneNumberMatcher._is_latin_letter(u("\u306E")))  # Hiragana letter no
 
     def testMatchesWithSurroundingLatinChars(self):
         possibleOnlyContexts = []
@@ -880,7 +881,7 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
 
     def testInternals(self):
         # Python-specific test: coverage of internals
-        from phonenumbers.phonenumbermatcher import _limit, _verify, _is_national_prefix_present_if_required
+        from phonenumbers.phonenumbermatcher import _limit, _verify, _is_national_prefix_present_if_required, _get_national_number_groups
         from phonenumbers import CountryCodeSource
         self.assertEqual("{1,2}", _limit(1, 2))
         self.assertRaises(Exception, _limit, *(-1, 2))
@@ -896,3 +897,8 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
         # National prefix rule has no lead digits
         number3 = PhoneNumber(country_code=61, national_number=1234567890, country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
         self.assertTrue(_is_national_prefix_present_if_required(number3))
+        # Coverage for _get_national_number_groups() with a formatting pattern provided
+        us_number = PhoneNumber(country_code=1, national_number=6502530000L)
+        num_format = NumberFormat(pattern="(\\d{3})(\\d{3})(\\d{4})", format="\\1-\\2-\\3")
+        self.assertEqual(["650", "253", "0000"],
+                         _get_national_number_groups(us_number, num_format))
