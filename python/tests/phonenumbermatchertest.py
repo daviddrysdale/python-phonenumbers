@@ -21,7 +21,7 @@ import sys
 import unittest
 
 from phonenumbers import PhoneNumberMatch, PhoneNumberMatcher, Leniency
-from phonenumbers import PhoneNumber, phonenumberutil
+from phonenumbers import PhoneNumber, NumberFormat, phonenumberutil
 from .testmetadatatest import TestMetadataTestCase
 
 
@@ -880,7 +880,7 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
 
     def testInternals(self):
         # Python-specific test: coverage of internals
-        from phonenumbers.phonenumbermatcher import _limit, _verify, _is_national_prefix_present_if_required
+        from phonenumbers.phonenumbermatcher import _limit, _verify, _is_national_prefix_present_if_required, _get_national_number_groups
         from phonenumbers import CountryCodeSource
         self.assertEqual("{1,2}", _limit(1, 2))
         self.assertRaises(Exception, _limit, *(-1, 2))
@@ -896,3 +896,8 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
         # National prefix rule has no lead digits
         number3 = PhoneNumber(country_code=61, national_number=1234567890L, country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
         self.assertTrue(_is_national_prefix_present_if_required(number3))
+        # Coverage for _get_national_number_groups() with a formatting pattern provided
+        us_number = PhoneNumber(country_code=1, national_number=6502530000L)
+        num_format = NumberFormat(pattern="(\\d{3})(\\d{3})(\\d{4})", format="\\1-\\2-\\3")
+        self.assertEqual(["650", "253", "0000"],
+                         _get_national_number_groups(us_number, num_format))
