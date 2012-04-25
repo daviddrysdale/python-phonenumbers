@@ -24,7 +24,7 @@ from .re_util import fullmatch
 from .util import UnicodeMixin
 from .unicode_util import Category, Block, is_letter
 from .phonenumberutil import _MAX_LENGTH_FOR_NSN, _MAX_LENGTH_COUNTRY_CODE
-from .phonenumberutil import _VALID_PUNCTUATION, _PLUS_CHARS, _NON_DIGITS_PATTERN
+from .phonenumberutil import _VALID_PUNCTUATION, _PLUS_CHARS, NON_DIGITS_PATTERN
 from .phonenumberutil import _EXTN_PATTERNS_FOR_MATCHING, _REGEX_FLAGS
 from .phonenumberutil import _SECOND_NUMBER_START_PATTERN, _UNWANTED_END_CHAR_PATTERN
 from .phonenumberutil import MatchType, NumberParseException, PhoneNumberFormat
@@ -32,7 +32,7 @@ from .phonenumberutil import is_possible_number, is_valid_number, parse
 from .phonenumberutil import normalize_digits_only, national_significant_number
 from .phonenumberutil import format_number, is_number_match, region_code_for_country_code
 from .phonenumberutil import _maybe_strip_national_prefix_carrier_code
-from .phonenumberutil import _choose_formatting_pattern_for_number
+from .phonenumberutil import choose_formatting_pattern_for_number
 from .phonenumber import CountryCodeSource
 from .phonemetadata import PhoneMetadata
 
@@ -188,16 +188,29 @@ def _verify_strict_grouping(numobj, candidate):
         _contains_more_than_one_slash(candidate) or
         not _is_national_prefix_present_if_required(numobj)):
         return False
-    # TODO: Evaluate how this works for other locales (testing has been
-    # limited to NANPA regions) and optimise if necessary.
-    formatted_number_groups = _get_national_number_groups(numobj)
-    normalized_candidate = normalize_digits_only(candidate, keep_non_digits=True)
+    return _check_number_grouping_is_valid(numobj, candidate,
+                                           _all_number_groups_remain_grouped)
+
+
+def _all_number_groups_remain_grouped(numobj, normalized_candidate, formatted_number_groups):
+    """Returns True if the groups of digits found in our candidate phone number match our
+    expectations.
+
+    Arguments:
+    numobj -- the original number we found when parsing
+    normalized_candidate -- the candidate number, normalized to only contain ASCII digits,
+          but with non-digits (spaces etc) retained
+    expected_number_groups -- the groups of digits that we would expect to see if we
+          formatted this number
+    Returns True if expectations matched.
+    """
     from_index = 0
     # Check each group of consecutive digits are not broken into separate
-    # groups in the candidate string.
+    # groupings in the candidate string.
     for ii, formatted_number_group in enumerate(formatted_number_groups):
-        # Fails if the substring of candidate starting from from_index doesn't
-        # contain the consecutive digits in formatted_number_group.
+        # Fails if the substring of normalized_candidate starting from
+        # from_index doesn't contain the consecutive digits in
+        # formatted_number_group.
         from_index = normalized_candidate.find(formatted_number_group, from_index)
         if from_index < 0:
             return False
@@ -224,10 +237,23 @@ def _verify_exact_grouping(numobj, candidate):
         _contains_more_than_one_slash(candidate) or
         not _is_national_prefix_present_if_required(numobj)):
         return False
-    # TODO: Evaluate how this works for other locales (testing has been
-    # limited to NANPA regions) and optimise if necessary.
-    normalized_candidate = normalize_digits_only(candidate, keep_non_digits=True)
-    candidate_groups = re.split(_NON_DIGITS_PATTERN, normalized_candidate)
+    return _check_number_grouping_is_valid(numobj, candidate,
+                                           _all_number_groups_are_exactly_present)
+
+
+def _all_number_groups_are_exactly_present(numobj, normalized_candidate, formatted_number_groups):
+    """Returns True if the groups of digits found in our candidate phone number match our
+    expectations.
+
+    Arguments:
+    numobj -- the original number we found when parsing
+    normalized_candidate -- the candidate number, normalized to only contain ASCII digits,
+          but with non-digits (spaces etc) retained
+    expected_number_groups -- the groups of digits that we would expect to see if we
+          formatted this number
+    Returns True if expectations matched.
+    """
+    candidate_groups = re.split(NON_DIGITS_PATTERN, normalized_candidate)
     # Set this to the last group, skipping it if the number has an extension.
     if numobj.extension != None:
         candidate_number_group_index = len(candidate_groups) - 2
@@ -240,7 +266,6 @@ def _verify_exact_grouping(numobj, candidate):
     if (len(candidate_groups) == 1 or
         candidate_groups[candidate_number_group_index].find(national_significant_number(numobj)) != -1):
         return True
-    formatted_number_groups = _get_national_number_groups(numobj)
     # Starting from the end, go through in reverse, excluding the first group,
     # and check the candidate and number groups are the same.
     formatted_number_group_index = len(formatted_number_groups) - 1
@@ -256,20 +281,36 @@ def _verify_exact_grouping(numobj, candidate):
             candidate_groups[candidate_number_group_index].endswith(formatted_number_groups[0]))
 
 
-def _get_national_number_groups(numobj):
+def _get_national_number_groups(numobj, formatting_pattern=None):
     """Helper method to get the national-number part of a number, formatted without any national
     prefix, and return it as a set of digit blocks that would be formatted together."""
-    # This will be in the format +CC-DG;ext=EXT where DG represents groups of digits.
-    rfc3966_format = format_number(numobj, PhoneNumberFormat.RFC3966)
-    # We remove the extension part from the formatted string before splitting
-    # it into different groups.
-    end_index = rfc3966_format.find(u';')
-    if end_index < 0:
-        end_index = len(rfc3966_format)
+    if formatting_pattern is None:
+        # This will be in the format +CC-DG;ext=EXT where DG represents groups of digits.
+        rfc3966_format = format_number(numobj, PhoneNumberFormat.RFC3966)
+        # We remove the extension part from the formatted string before splitting
+        # it into different groups.
+        end_index = rfc3966_format.find(u';')
+        if end_index < 0:
+            end_index = len(rfc3966_format)
 
-    # The country-code will have a '-' following it.
-    start_index = rfc3966_format.find(u'-') + 1
-    return rfc3966_format[start_index:end_index].split(u'-')
+        # The country-code will have a '-' following it.
+        start_index = rfc3966_format.find(u'-') + 1
+        return rfc3966_format[start_index:end_index].split(u'-')
+    else:
+        # We format the NSN only, and split that according to the separator.
+        nsn = national_significant_number(numobj)
+        return format_nsn_using_pattern(nsn, formatting_pattern,
+                                        PhoneNumberFormat.RFC3966).split(u'-')
+
+
+def _check_number_grouping_is_valid(numobj, candidate, checker):
+    # TODO: Evaluate how this works for other locales (testing has been
+    # limited to NANPA regions) and optimise if necessary.
+    normalized_candidate = normalize_digits_only(candidate, True)  # keep non-digits
+    formatted_number_groups = _get_national_number_groups(numobj, None)
+    if checker(numobj, normalized_candidate, formatted_number_groups):
+        return True
+    return False
 
 
 def _contains_more_than_one_slash(candidate):
@@ -315,8 +356,8 @@ def _is_national_prefix_present_if_required(numobj):
         return True
     # Check if a national prefix should be present when formatting this number.
     national_number = national_significant_number(numobj)
-    format_rule = _choose_formatting_pattern_for_number(metadata.number_format,
-                                                        national_number)
+    format_rule = choose_formatting_pattern_for_number(metadata.number_format,
+                                                       national_number)
     # To do this, we check that a national prefix formatting rule was present
     # and that it wasn't just the first-group symbol ($1) with punctuation.
     if (format_rule is not None and
@@ -394,32 +435,6 @@ class PhoneNumberMatcher(object):
         self._last_match = None
         # The next index to start searching at. Undefined in state _DONE
         self._search_index = 0
-
-    def has_next(self):
-        """Indicates whether there is another match available"""
-        if self._state == PhoneNumberMatcher._NOT_READY:
-            self._last_match = self._find(self._search_index)
-            if self._last_match is None:
-                self._state = PhoneNumberMatcher._DONE
-            else:
-                self._search_index = self._last_match.end
-                self._state = PhoneNumberMatcher._READY
-        return (self._state == PhoneNumberMatcher._READY)
-
-    def next(self):
-        """Return the next match; raises Exception if no next match available"""
-        # Check the state and find the next match as a side-effect if necessary.
-        if not self.has_next():
-            raise StopIteration("No next match")
-        # Don't retain that memory any longer than necessary.
-        result = self._last_match
-        self._last_match = None
-        self._state = PhoneNumberMatcher._NOT_READY
-        return result
-
-    def __iter__(self):
-        while self.has_next():
-            yield self.next()
 
     def _find(self, index):
         """Attempts to find the next subsequence in the searched sequence on or after index
@@ -617,6 +632,32 @@ class PhoneNumberMatcher(object):
             # ignore and continue
             pass
         return None
+
+    def has_next(self):
+        """Indicates whether there is another match available"""
+        if self._state == PhoneNumberMatcher._NOT_READY:
+            self._last_match = self._find(self._search_index)
+            if self._last_match is None:
+                self._state = PhoneNumberMatcher._DONE
+            else:
+                self._search_index = self._last_match.end
+                self._state = PhoneNumberMatcher._READY
+        return (self._state == PhoneNumberMatcher._READY)
+
+    def next(self):
+        """Return the next match; raises Exception if no next match available"""
+        # Check the state and find the next match as a side-effect if necessary.
+        if not self.has_next():
+            raise StopIteration("No next match")
+        # Don't retain that memory any longer than necessary.
+        result = self._last_match
+        self._last_match = None
+        self._state = PhoneNumberMatcher._NOT_READY
+        return result
+
+    def __iter__(self):
+        while self.has_next():
+            yield self.next()
 
 
 class PhoneNumberMatch(UnicodeMixin):

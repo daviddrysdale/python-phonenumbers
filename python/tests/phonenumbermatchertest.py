@@ -172,7 +172,7 @@ STRICT_GROUPING_CASES = [NumberTest("(415) 6667777", "US"),
                          NumberTest("0800-2491234", "DE"),
                          ]
 
-# Strings with number-like things that should found at all levels.
+# Strings with number-like things that should be found at all levels.
 EXACT_GROUPING_CASES = [NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17\uFF17\uFF17\uFF17", "US"),
                         NumberTest(u"\uFF14\uFF11\uFF15-\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17\uFF17", "US"),
                         NumberTest("4156667777", "US"),
@@ -398,6 +398,7 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
         self.assertFalse(PhoneNumberMatcher._is_latin_letter('.'))
         self.assertFalse(PhoneNumberMatcher._is_latin_letter(' '))
         self.assertFalse(PhoneNumberMatcher._is_latin_letter(u'\u6211'))  # Chinese character
+        self.assertFalse(PhoneNumberMatcher._is_latin_letter(u'\u306E'))  # Hiragana letter no
 
     def testMatchesWithSurroundingLatinChars(self):
         possibleOnlyContexts = []
