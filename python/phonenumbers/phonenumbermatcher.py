@@ -30,6 +30,7 @@ from .phonenumberutil import _SECOND_NUMBER_START_PATTERN, _UNWANTED_END_CHAR_PA
 from .phonenumberutil import MatchType, NumberParseException, PhoneNumberFormat
 from .phonenumberutil import is_possible_number, is_valid_number, parse
 from .phonenumberutil import normalize_digits_only, national_significant_number
+from .phonenumberutil import format_nsn_using_pattern
 from .phonenumberutil import format_number, is_number_match, region_code_for_country_code
 from .phonenumberutil import _maybe_strip_national_prefix_carrier_code
 from .phonenumberutil import choose_formatting_pattern_for_number
