@@ -1857,12 +1857,13 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             domainRfcPhoneContext = "tel:555-1234;phone-context:www.google.com"
             phonenumbers.parse(domainRfcPhoneContext, "US")
             self.fail("Domain provided for phone context - should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
-        except NullPointerException, e:
+        except NullPointerException:
             self.fail("Domain provided for phone context - but should not throw a null pointer exception.")
 
         try:
@@ -1871,12 +1872,13 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             invalidRfcPhoneContext = "tel:555-1234;phone-context:1-331"
             phonenumbers.parse(invalidRfcPhoneContext, "US")
             self.fail("No leading plus provided in phone context - should fail.")
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
-        except NullPointerException, e:
+        except NullPointerException:
             self.fail("No leading plus provided in phone context - but should not throw a null pointer " +
                       "exception.")
 
