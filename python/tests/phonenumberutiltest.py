@@ -1839,9 +1839,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             self.fail("Domain provided for phone context - should fail.")
         except NumberParseException, e:
             # Expected this exception.
-            self.assertEquals(NumberParseException.NOT_A_NUMBER,
-                              e.error_type,
-                              msg="Wrong error type stored in exception.")
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
         except NullPointerException, e:
             self.fail("Domain provided for phone context - but should not throw a null pointer exception.")
 
@@ -1853,9 +1853,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             self.fail("No leading plus provided in phone context - should fail.")
         except NumberParseException, e:
             # Expected this exception.
-            self.assertEquals(NumberParseException.NOT_A_NUMBER,
-                              e.error_type,
-                              msg="Wrong error type stored in exception.")
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
         except NullPointerException, e:
             self.fail("No leading plus provided in phone context - but should not throw a null pointer " +
                       "exception.")
