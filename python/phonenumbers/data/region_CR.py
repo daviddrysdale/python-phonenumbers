@@ -9,7 +9,7 @@ PHONE_METADATA_CR = PhoneMetadata(id='CR', country_code=506, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='90[059]\\d{7}', possible_number_pattern='\\d{10}', example_number='9001234567'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    voip=PhoneNumberDesc(national_number_pattern='210[0-6]\\d{4}|40(?:[04]0\\d{4}|10[0-3]\\d{3}|2(?:00\\d|900)\\d{2}|3[01]\\d{4}|5\\d{5}|70[01]\\d{3})|5100\\d{4}', possible_number_pattern='\\d{8}', example_number='40001234'),
+    voip=PhoneNumberDesc(national_number_pattern='210[0-6]\\d{4}|4(?:0(?:[04]0\\d{4}|10[0-3]\\d{3}|2(?:00\\d|900)\\d{2}|3[01]\\d{4}|5\\d{5}|70[01]\\d{3})|1[01]\\d{5})|5100\\d{4}', possible_number_pattern='\\d{8}', example_number='40001234'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='112|911', possible_number_pattern='\\d{3}', example_number='911'),
