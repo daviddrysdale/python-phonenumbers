@@ -2211,7 +2211,7 @@ def parse(number, region=None, keep_raw_input=False,
           numobj=None, _check_region=True):
     """Parse a string and return a corresponding PhoneNumber object.
 
-    This method with throw a NumberParseException if the number is not
+    This method will throw a NumberParseException if the number is not
     considered to be a possible number. Note that validation of whether the
     number is actually a valid number for a particular region is not
     performed. This can be done separately with is_valid_number.
@@ -2232,7 +2232,7 @@ def parse(number, region=None, keep_raw_input=False,
               country_code_source field).
     numobj -- An optional existing PhoneNumber object to receive the
               parsing results
-    _check_region -- Whether the check the supplied region parameter;
+    _check_region -- Whether to check the supplied region parameter;
               should always be True for external callers.
 
     Returns a PhoneNumber object filled with the parse number.
