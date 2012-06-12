@@ -7,7 +7,7 @@ http://groups.google.com/group/libphonenumber-discuss/about.
 NOTE: A lot of methods in this module require Region Code strings. These must
 be provided using ISO 3166-1 two-letter country-code format. These should be
 in upper-case. The list of the codes can be found here:
-http://www.iso.org/iso/english_country_names_and_code_elements
+http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm
 
 author: Shaopeng Jia (original Java version)
 author: Lara Rennie (original Java Version)
