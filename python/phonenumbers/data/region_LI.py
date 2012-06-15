@@ -11,7 +11,7 @@ PHONE_METADATA_LI = PhoneMetadata(id='LI', country_code=423, international_prefi
     personal_number=PhoneNumberDesc(national_number_pattern='701\\d{4}', possible_number_pattern='\\d{7}', example_number='7011234'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    uan=PhoneNumberDesc(national_number_pattern='87(?:0[1289]|70)\\d{3}', possible_number_pattern='\\d{7,9}'),
+    uan=PhoneNumberDesc(national_number_pattern='87(?:0[1289]|70)\\d{3}', possible_number_pattern='\\d{7}', example_number='8770123'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:1[278]|44)', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='697(?:[35]6|4[25]|[7-9]\\d)\\d{4}', possible_number_pattern='\\d{9}', example_number='697361234'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
