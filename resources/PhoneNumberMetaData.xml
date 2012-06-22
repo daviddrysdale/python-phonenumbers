@@ -24923,7 +24923,7 @@
       <generalDesc>
         <nationalNumberPattern>[13]\d{6,11}</nationalNumberPattern>
         <possibleNumberPattern>\d{7,12}</possibleNumberPattern>
-        <exampleNumber>32123456</exampleNumber>
+        <exampleNumber>321234567</exampleNumber>
       </generalDesc>
       <fixedLine>
         <nationalNumberPattern>NA</nationalNumberPattern>
