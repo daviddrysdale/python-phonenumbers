@@ -156,7 +156,7 @@ class ExampleNumbersTest(unittest.TestCase):
             self.assertTrue(exampleNumber is not None,
                             msg="No example phone number for calling code %s" % callingCode)
             if not phonenumberutil.is_valid_number(exampleNumber):
-                self.invalidCases.append(exampleNumber)
+                self.invalid_cases.append(exampleNumber)
                 print >> sys.stderr, "Failed validation for %s" % exampleNumber
 
     def testEveryRegionHasAnExampleNumber(self):
