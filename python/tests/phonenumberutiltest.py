@@ -2481,7 +2481,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         metadata800 = PhoneMetadata.country_code_metadata[800]
         saved_example = metadata800.general_desc.example_number
         metadata800.general_desc._mutable = True
-        metadata800.general_desc.example_number = '01'
+        metadata800.general_desc.example_number = ''
         self.assertTrue(phonenumbers.example_number_for_non_geo_entity(800) is None)
         metadata800.general_desc.example_number = saved_example
         metadata800.general_desc._mutable = False
