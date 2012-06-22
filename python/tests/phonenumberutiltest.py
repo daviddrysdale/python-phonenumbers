@@ -1141,7 +1141,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(ValidationResult.IS_POSSIBLE,
                          phonenumbers.is_possible_number_with_reason(adNumber))
         adNumber.country_code = 376
-        adNumber.national_number = 13L
+        adNumber.national_number = 1L
         self.assertEqual(ValidationResult.TOO_SHORT,
                          phonenumbers.is_possible_number_with_reason(adNumber))
         adNumber.country_code = 376
