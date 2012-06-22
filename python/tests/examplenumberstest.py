@@ -22,7 +22,7 @@ import re
 import unittest
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
-from phonenumbers import phonenumberutil, PhoneNumber
+from phonenumbers import phonenumberutil, PhoneNumber, is_emergency_number
 from phonenumbers.re_util import fullmatch
 
 
@@ -137,8 +137,6 @@ class ExampleNumbersTest(unittest.TestCase):
                 print >> sys.stderr, "Number %s should not be internationally diallable" % exampleNumber
         self.assertEqual(0, len(self.wrong_type_cases))
 
-    # TODO: Update this to use connectsToEmergencyNumber or similar once that
-    # is implemented.
     def testEmergency(self):
         wrongTypeCounter = 0
         for regionCode in phonenumberutil.SUPPORTED_REGIONS:
@@ -147,7 +145,7 @@ class ExampleNumbersTest(unittest.TestCase):
             if desc.example_number is not None:
                 exampleNumber = desc.example_number
                 if (not fullmatch(re.compile(desc.possible_number_pattern), exampleNumber) or
-                    not fullmatch(re.compile(desc.national_number_pattern), exampleNumber)):
+                    not is_emergency_number(exampleNumber, regionCode)):
                     wrongTypeCounter += 1
                     print >> sys.stderr, "Emergency example number test failed for %s" % regionCode
         self.assertEqual(0, wrongTypeCounter)
