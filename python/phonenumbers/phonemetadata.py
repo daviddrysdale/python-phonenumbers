@@ -279,7 +279,12 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # dialled nationally.
         self.no_international_dialling = no_international_dialling  # None or PhoneNumberDesc
 
-        # The ISO 3166-1 alpha-2 representation of a country/region
+        # The ISO 3166-1 alpha-2 representation of a country/region, with the
+        # exception of "country calling codes" used for non-geographical
+        # entities, such as Universal International Toll Free Number
+        # (+800). These are all given the ID "001", since this is the numeric
+        # region code for the world according to UN M.49:
+        # http://en.wikipedia.org/wiki/UN_M.49
         self.id = force_unicode(id)  # None or Unicode string
 
         # The country calling code that one would dial from overseas when

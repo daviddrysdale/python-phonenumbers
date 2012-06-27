@@ -18,6 +18,5 @@ PHONE_METADATA_TH = PhoneMetadata(id='TH', country_code=66, international_prefix
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(2)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['2'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='([3-7]\\d)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['[3-7]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='([89])(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[89]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='([3-9]\\d)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['[3-9]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(1[89]00)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule='\\1')])

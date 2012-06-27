@@ -14,6 +14,7 @@
 # limitations under the License.
 
 from .region_800 import PHONE_METADATA_800
+from .region_979 import PHONE_METADATA_979
 from .region_AD import PHONE_METADATA_AD
 from .region_AO import PHONE_METADATA_AO
 from .region_AR import PHONE_METADATA_AR
@@ -56,4 +57,5 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     262: ("RE", "YT",),
     376: ("AD",),
     800: ("001",),
+    979: ("001",),
 }

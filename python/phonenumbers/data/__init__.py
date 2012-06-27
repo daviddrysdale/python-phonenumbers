@@ -15,6 +15,10 @@
 
 from .region_800 import PHONE_METADATA_800
 from .region_808 import PHONE_METADATA_808
+from .region_870 import PHONE_METADATA_870
+from .region_878 import PHONE_METADATA_878
+from .region_881 import PHONE_METADATA_881
+from .region_882 import PHONE_METADATA_882
 from .region_883 import PHONE_METADATA_883
 from .region_888 import PHONE_METADATA_888
 from .region_979 import PHONE_METADATA_979
@@ -451,7 +455,11 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     853: ("MO",),
     855: ("KH",),
     856: ("LA",),
+    870: ("001",),
+    878: ("001",),
     880: ("BD",),
+    881: ("001",),
+    882: ("001",),
     883: ("001",),
     886: ("TW",),
     888: ("001",),

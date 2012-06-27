@@ -7,7 +7,7 @@ http://groups.google.com/group/libphonenumber-discuss/about.
 NOTE: A lot of methods in this module require Region Code strings. These must
 be provided using ISO 3166-1 two-letter country-code format. These should be
 in upper-case. The list of the codes can be found here:
-http://www.iso.org/iso/english_country_names_and_code_elements
+http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm
 
 author: Shaopeng Jia (original Java version)
 author: Lara Rennie (original Java Version)
@@ -67,7 +67,7 @@ COUNTRY_CODE_TO_REGION_CODE = _COUNTRY_CODE_TO_REGION_CODE
 # Flags to use when compiling regular expressions for phone numbers.
 _REGEX_FLAGS = re.UNICODE | re.IGNORECASE
 # The minimum and maximum length of the national significant number.
-_MIN_LENGTH_FOR_NSN = 3
+_MIN_LENGTH_FOR_NSN = 2
 # The ITU says the maximum length should be 15, but we have found longer
 # numbers in Germany.
 _MAX_LENGTH_FOR_NSN = 16
@@ -88,9 +88,8 @@ _PLUS_SIGN = u("+")
 _STAR_SIGN = u('*')
 _RFC3966_EXTN_PREFIX = u(";ext=")
 _RFC3966_PREFIX = u("tel:")
-# We include the "+" here since RFC3966 format specifies that the context must
-# be specified in international format.
 _RFC3966_PHONE_CONTEXT = u(";phone-context=+")
+_RFC3966_ISDN_SUBADDRESS = u(";isub=")
 
 # Simple ASCII digits map used to populate _ALPHA_PHONE_MAPPINGS and
 # _ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
@@ -133,7 +132,8 @@ _ALPHA_PHONE_MAPPINGS = dict(_ALPHA_MAPPINGS, **_ASCII_DIGITS_MAP)
 # A map that contains characters that are essential when dialling. That means
 # any of the characters in this map must not be removed from a number when
 # dialing, otherwise the call will not reach the intended destination.
-_DIALLABLE_CHAR_MAPPINGS = dict({u("+"): u("+"), u("*"): u("*")},
+_DIALLABLE_CHAR_MAPPINGS = dict({_PLUS_SIGN: _PLUS_SIGN,
+                                 u('*'): u('*')},
                                 **_ASCII_DIGITS_MAP)
 
 # Separate map of all symbols that we wish to retain when formatting alpha
@@ -177,7 +177,7 @@ _UNIQUE_INTERNATIONAL_PREFIX = re.compile(u("[\\d]+(?:[~\u2053\u223C\uFF5E][\\d]
 # found as a placeholder for carrier information in some phone numbers. Full-width
 # variants are also present.
 _VALID_PUNCTUATION = (u("-x\u2010-\u2015\u2212\u30FC\uFF0D-\uFF0F ") +
-                      u("\u00A0\u200B\u2060\u3000()\uFF08\uFF09\uFF3B\uFF3D.\\[\\]/~\u2053\u223C\uFF5E"))
+                      u("\u00A0\u00AD\u200B\u2060\u3000()\uFF08\uFF09\uFF3B\uFF3D.\\[\\]/~\u2053\u223C\uFF5E"))
 
 _DIGITS = unicod('\\d')  # Java "\\p{Nd}", so need "(?u)" or re.UNICODE wherever this is used
 # We accept alpha characters in phone numbers, ASCII only, upper and lower
@@ -445,7 +445,7 @@ def _extract_possible_number(number):
 def _is_viable_phone_number(number):
     """Checks to see if a string could possibly be a phone number.
 
-    At the moment, checks to see that the string begins with at least 3
+    At the moment, checks to see that the string begins with at least 2
     digits, ignoring any punctuation commonly found in phone numbers.  This
     method does not require the number to be normalized in advance - but does
     assume that leading non-number symbols have been removed, such as by the
@@ -1056,7 +1056,8 @@ def format_in_original_format(numobj, region_calling_from):
     # we return the formatted phone number; otherwise we return the raw input
     # the user entered.
     if (formatted_number is not None and
-        normalize_digits_only(formatted_number) == normalize_digits_only(raw_input)):
+        _normalize_helper(formatted_number, _DIALLABLE_CHAR_MAPPINGS, True) ==
+        _normalize_helper(raw_input, _DIALLABLE_CHAR_MAPPINGS, True)):
         return formatted_number
     else:
         return raw_input
@@ -1993,7 +1994,7 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
         numobj.country_code_source = country_code_source
 
     if country_code_source != CountryCodeSource.FROM_DEFAULT_COUNTRY:
-        if len(full_number) < _MIN_LENGTH_FOR_NSN:
+        if len(full_number) <= _MIN_LENGTH_FOR_NSN:
             raise NumberParseException(NumberParseException.TOO_SHORT_AFTER_IDD,
                                        "Phone number had an IDD, but after this was not " +
                                        "long enough to be a viable phone number.")
@@ -2213,7 +2214,7 @@ def parse(number, region=None, keep_raw_input=False,
           numobj=None, _check_region=True):
     """Parse a string and return a corresponding PhoneNumber object.
 
-    This method with throw a NumberParseException if the number is not
+    This method will throw a NumberParseException if the number is not
     considered to be a possible number. Note that validation of whether the
     number is actually a valid number for a particular region is not
     performed. This can be done separately with is_valid_number.
@@ -2221,7 +2222,7 @@ def parse(number, region=None, keep_raw_input=False,
     Arguments:
     number -- The number that we are attempting to parse. This can
               contain formatting such as +, ( and -, as well as a phone
-              number extension.
+              number extension. It can also be provided in RFC3966 format.
     region -- The region that we are expecting the number to be from. This
               is only used if the number being parsed is not written in
               international format. The country_code for the number in
@@ -2234,7 +2235,7 @@ def parse(number, region=None, keep_raw_input=False,
               country_code_source field).
     numobj -- An optional existing PhoneNumber object to receive the
               parsing results
-    _check_region -- Whether the check the supplied region parameter;
+    _check_region -- Whether to check the supplied region parameter;
               should always be True for external callers.
 
     Returns a PhoneNumber object filled with the parse number.
@@ -2252,20 +2253,9 @@ def parse(number, region=None, keep_raw_input=False,
     elif len(number) > _MAX_INPUT_STRING_LENGTH:
         raise NumberParseException(NumberParseException.TOO_LONG,
                                    "The string supplied was too long to parse.")
-    index_of_phone_context = number.find(_RFC3966_PHONE_CONTEXT)
-    if index_of_phone_context > 0:
-        # Prefix the number with the phone context. The offset here is because
-        # the context we are expecting to match should start with a "+" sign,
-        # and we want to include this at the start of the number.
-        national_number = number[index_of_phone_context + len(_RFC3966_PHONE_CONTEXT) - 1:]
-        # Now append everything between the "tel:" prefix and the phone-context.
-        national_number += number[number.find(_RFC3966_PREFIX) + len(_RFC3966_PREFIX):index_of_phone_context]
-        # Note that phone-contexts that are URLs will not be parsed -
-        # isViablePhoneNumber will throw an exception below.
-    else:
-        # Extract a possible number from the string passed in (this strips leading characters that
-        # could not be the start of a phone number.)
-        national_number = _extract_possible_number(number)
+
+    national_number = _build_national_number_for_parsing(number)
+
     if not _is_viable_phone_number(national_number):
         raise NumberParseException(NumberParseException.NOT_A_NUMBER,
                                    "The string supplied did not seem to be a phone number.")
@@ -2347,6 +2337,48 @@ def parse(number, region=None, keep_raw_input=False,
         numobj.italian_leading_zero = True
     numobj.national_number = to_long(normalized_national_number)
     return numobj
+
+
+def _build_national_number_for_parsing(number):
+    """Converts number to a form that we can parse and return it if it is
+    written in RFC3966; otherwise extract a possible number out of it and return it."""
+    index_of_phone_context = number.find(_RFC3966_PHONE_CONTEXT)
+    if index_of_phone_context > 0:
+        phone_context_start = index_of_phone_context + len(_RFC3966_PHONE_CONTEXT)
+        # If the phone context contains a phone number prefix, we need to
+        # capture it, whereas domains will be ignored.
+        if number[phone_context_start] == _PLUS_SIGN:
+            # Additional parameters might follow the phone context. If so, we
+            # will remove them here because the parameters after phone context
+            # are not important for parsing the phone number.
+            phone_context_end = number.find(u';', phone_context_start)
+            if phone_context_end > 0:
+                national_number = number[phone_context_start:phone_context_end]
+            else:
+                national_number = number[phone_context_start:]
+        else:
+            national_number = ""
+        # Now append everything between the "tel:" prefix and the
+        # phone-context. This should include the national number, an optional
+        # extension or isdn-subaddress component.
+        national_number += number[number.find(_RFC3966_PREFIX) + len(_RFC3966_PREFIX):index_of_phone_context]
+    else:
+        # Extract a possible number from the string passed in (this strips leading characters that
+        # could not be the start of a phone number.)
+        national_number = _extract_possible_number(number)
+
+    # Delete the isdn-subaddress and everything after it if it is
+    # present. Note extension won't appear at the same time with
+    # isdn-subaddress according to paragraph 5.3 of the RFC3966 spec,
+    index_of_isdn = national_number.find(_RFC3966_ISDN_SUBADDRESS)
+    if index_of_isdn > 0:
+        national_number = national_number[:index_of_isdn]
+    # If both phone context and isdn-subaddress are absent but other
+    # parameters are present, the parameters are left in national_number. This
+    # is because we are concerned about deleting content from a potential
+    # number string when there is no strong evidence that the number is
+    # actually written in RFC3966.
+    return national_number
 
 
 def _is_number_match_OO(numobj1_in, numobj2_in):
