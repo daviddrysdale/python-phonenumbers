@@ -88,7 +88,7 @@ _PLUS_SIGN = u("+")
 _STAR_SIGN = u('*')
 _RFC3966_EXTN_PREFIX = u(";ext=")
 _RFC3966_PREFIX = u("tel:")
-_RFC3966_PHONE_CONTEXT = u(";phone-context=+")
+_RFC3966_PHONE_CONTEXT = u(";phone-context=")
 _RFC3966_ISDN_SUBADDRESS = u(";isub=")
 
 # Simple ASCII digits map used to populate _ALPHA_PHONE_MAPPINGS and
