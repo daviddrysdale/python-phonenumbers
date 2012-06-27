@@ -260,7 +260,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(expectedOutput, phonenumberutil.convert_alpha_characters_in_number(input))
 
     def testNormaliseRemovePunctuation(self):
-        inputNumber = u"034-56&+#2\u00AD34"
+        inputNumber = u("034-56&+#2\u00AD34")
         expectedOutput = "03456234"
         self.assertEqual(expectedOutput,
                          phonenumberutil._normalize(inputNumber),

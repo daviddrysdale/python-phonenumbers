@@ -33,7 +33,7 @@ import re
 
 from .re_util import fullmatch   # Extra regexp function; see README
 from .util import UnicodeMixin, u, unicod, prnt, to_long
-from .util import U_EMPTY_STRING, U_SPACE, U_DASH, U_TILDE, U_ZERO
+from .util import U_EMPTY_STRING, U_SPACE, U_DASH, U_TILDE, U_ZERO, U_SEMICOLON
 from .unicode_util import digit as unicode_digit
 
 # Data class definitions
@@ -2351,13 +2351,13 @@ def _build_national_number_for_parsing(number):
             # Additional parameters might follow the phone context. If so, we
             # will remove them here because the parameters after phone context
             # are not important for parsing the phone number.
-            phone_context_end = number.find(u';', phone_context_start)
+            phone_context_end = number.find(U_SEMICOLON, phone_context_start)
             if phone_context_end > 0:
                 national_number = number[phone_context_start:phone_context_end]
             else:
                 national_number = number[phone_context_start:]
         else:
-            national_number = ""
+            national_number = U_EMPTY_STRING
         # Now append everything between the "tel:" prefix and the
         # phone-context. This should include the national number, an optional
         # extension or isdn-subaddress component.
