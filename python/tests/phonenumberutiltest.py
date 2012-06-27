@@ -1595,7 +1595,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     def testParseNonAscii(self):
         # Using a full-width plus sign.
         self.assertEqual(US_NUMBER, phonenumbers.parse(u"\uFF0B1 (650) 253-0000", "SG"))
-        # Using a soft hyphone U+00AD
+        # Using a soft hyphen U+00AD
         self.assertEqual(US_NUMBER, phonenumbers.parse(u"1 (650) 253\u00AD0000", "US"))
         # The whole number, including punctuation, is here represented in full-width form.
         self.assertEqual(US_NUMBER, phonenumbers.parse(u"\uFF0B\uFF11\u3000\uFF08\uFF16\uFF15\uFF10\uFF09" +
