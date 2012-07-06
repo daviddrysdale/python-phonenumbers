@@ -3,11 +3,11 @@ Holds a map from ISO 3166-1 country code (e.g. GB) to a dict.
 Each dict maps from an ISO 639-1 language code (e.g. ja) to the country's name in that language.
 
 Generated from java.util.Locale, generation info:
-  java.version=1.6.0_31
+  java.version=1.6.0_33
   java.vendor=Apple Inc.
   os.name=Mac OS X
   os.arch=x86_64
-  os.version=10.7.3
+  os.version=10.6.8
 
 Auto-generated file, do not edit by hand.
 """
