@@ -45,8 +45,23 @@ True
 
 from .phonenumberutil import format_number, PhoneNumberFormat, is_valid_number
 from .phonenumberutil import region_code_for_number
-from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
-from .geodata.locale import LOCALE_DATA
+try:
+    from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
+    from .geodata.locale import LOCALE_DATA
+except ImportError:  # pragma no cover
+    # Before the generated code exists, the teodata/ directory is empty.
+    # The generation process imports this module, creating a circular
+    # dependency.  The hack below works around this.
+    import os
+    import sys
+    if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
+        os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
+        print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
+        GEOCODE_DATA = {'1': {'en': u'United States'}}
+        GEOCODE_LONGEST_PREFIX = 1
+        LOCALE_DATA = {'US': {'en': u'United States'}}
+    else:
+        raise
 
 
 def _may_fall_back_to_english(lang):

@@ -11,10 +11,14 @@ phonenumbers/geodata/locale.py: DumpLocale.class
 
 locale: phonenumbers/geodata/locale.py
 
-phonenumbers/geodata/__init__.py: buildgeocodingdata.py ../resources/geocoding
+phonenumbers/geodata:
+	mkdir $@
+phonenumbers/geodata/__init__.py: buildgeocodingdata.py ../resources/geocoding | phonenumbers/geodata
 	$(PYTHON) buildgeocodingdata.py ../resources/geocoding $@
 
-tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding
+tests/testgeodata:
+	mkdir $@
+tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding | tests/testgeodata
 	$(PYTHON) buildgeocodingdata.py ../resources/test/geocoding $@
 
 geodata: phonenumbers/geodata/__init__.py tests/testgeodata/__init__.py

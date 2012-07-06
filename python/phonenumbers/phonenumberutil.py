@@ -47,7 +47,8 @@ except ImportError:  # pragma no cover
     # dependency.  The hack below works around this.
     import os
     import sys
-    if os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py":
+    if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
+        os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
         print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
         _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
     else:
