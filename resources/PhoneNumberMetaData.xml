@@ -25033,7 +25033,7 @@
       <generalDesc>
         <nationalNumberPattern>[13]\d{6,11}</nationalNumberPattern>
         <possibleNumberPattern>\d{7,12}</possibleNumberPattern>
-        <exampleNumber>321234567</exampleNumber>
+        <exampleNumber>3451234567</exampleNumber>
       </generalDesc>
       <fixedLine>
         <nationalNumberPattern>NA</nationalNumberPattern>
