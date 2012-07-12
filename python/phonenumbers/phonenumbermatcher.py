@@ -311,6 +311,13 @@ def _check_number_grouping_is_valid(numobj, candidate, checker):
     formatted_number_groups = _get_national_number_groups(numobj, None)
     if checker(numobj, normalized_candidate, formatted_number_groups):
         return True
+    # If this didn't pass, see if there are any alternate formats, and try them instead.
+    alternate_formats = None  # TODO: write equivalent to: MetadataManager.getAlternateFormatsForCountry(numobj.country_code)
+    if alternate_formats is not None:
+        for alternate_format in alternate_formats.number_formats:
+            formatted_number_groups = _get_national_number_groups(numobj, alternate_format)
+            if checker(numobj, normalized_candidate, formatted_number_groups):
+                return True
     return False
 
 

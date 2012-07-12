@@ -159,7 +159,12 @@ VALID_CASES = [NumberTest("65 02 53 00 00", "US"),
                NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF16-\uFF17\uFF17\uFF17", "US"),
                NumberTest("2012-0102 08", "US"),  # Very strange formatting.
                NumberTest("2012-01-02 08", "US"),
-               NumberTest("1800-10-10 22", "AU"),  # Breakdown assistance number.
+               # Breakdown assistance number with unexpected formatting.
+               NumberTest("1800-1-0-10 22", "AU"),
+               NumberTest("030-3-2 23 12 34", "DE"),
+               NumberTest("03 0 -3 2 23 12 34", "DE"),
+               NumberTest("(0)3 0 -3 2 23 12 34", "DE"),
+               NumberTest("0 3 0 -3 2 23 12 34", "DE"),
                ]
 
 # Strings with number-like things that should only be found up to and
@@ -170,6 +175,12 @@ STRICT_GROUPING_CASES = [NumberTest("(415) 6667777", "US"),
                          # grouping, as the last two groups are formatted
                          # together as a block.
                          NumberTest("0800-2491234", "DE"),
+                         # Doesn't match any formatting in the test file, but
+                         # almost matches an alternate format (the last two
+                         # groups have been squashed together here).
+                         NumberTest("0900-1 123123", "DE"),
+                         NumberTest("(0)900-1 123123", "DE"),
+                         NumberTest("0 900-1 123123", "DE"),
                          ]
 
 # Strings with number-like things that should be found at all levels.
@@ -193,6 +204,12 @@ EXACT_GROUPING_CASES = [NumberTest(u"\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17\
                         NumberTest("0494949 ext. 49", "DE"),
                         NumberTest("01 (33) 3461 2234", "MX"),  # Optional NP present
                         NumberTest("(33) 3461 2234", "MX"),  # Optional NP omitted
+                        NumberTest("1800-10-10 22", "AU"),  # Breakdown assistance number.
+                        # Doesn't match any formatting in the test file, but
+                        # matches an alternate format exactly.
+                        NumberTest("0900-1 123 123", "DE"),
+                        NumberTest("(0)900-1 123 123", "DE"),
+                        NumberTest("0 900-1 123 123", "DE"),
                         ]
 
 
@@ -792,7 +809,7 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
                         NumberContext("It's cheap! Call ", " before 6:30"),
                         # With a second number later.
                         NumberContext("Call ", " or +1800-123-4567!"),
-                        NumberContext("Call me on June 21 at", ""),    # with a Month-Day date
+                        NumberContext("Call me on June 2 at", ""),    # with a Month-Day date
                         # With publication pages.
                         NumberContext("As quoted by Alfonso 12-15 (2009), you may call me at ", ""),
                         NumberContext("As quoted by Alfonso et al. 12-15 (2009), you may call me at ", ""),

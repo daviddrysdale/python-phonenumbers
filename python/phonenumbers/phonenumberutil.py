@@ -239,9 +239,18 @@ _VALID_ALPHA_PHONE_PATTERN = re.compile(u"(?:.*?[A-Za-z]){3}.*")
 # since it is often used as a placeholder for carrier codes, for example in
 # Brazilian phone numbers. We also allow multiple "+" characters at the start.
 # Corresponds to the following:
+# [digits]{minLengthNsn}|
 # plus_sign*(([punctuation]|[star])*[digits]){3,}([punctuation]|[star]|[digits]|[alpha])*
+#
+# The first reg-ex is to allow short numbers (two digits long) to be parsed if
+# they are entered as "15" etc, but only if there is no punctuation in
+# them. The second expression restricts the number of digits to three or more,
+# but then allows them to be in international form, and to have
+# alpha-characters and punctuation.
+#
 # Note VALID_PUNCTUATION starts with a -, so must be the first in the range.
-_VALID_PHONE_NUMBER = (u"[" + _PLUS_CHARS + u"]*(?:[" + _VALID_PUNCTUATION + _STAR_SIGN + u"]*" + _DIGITS + u"){3,}[" +
+_VALID_PHONE_NUMBER = (_DIGITS + (u"{%d}" % _MIN_LENGTH_FOR_NSN) + u"|" +
+                       u"[" + _PLUS_CHARS + u"]*(?:[" + _VALID_PUNCTUATION + _STAR_SIGN + u"]*" + _DIGITS + u"){3,}[" +
                        _VALID_PUNCTUATION + _STAR_SIGN + _VALID_ALPHA + _DIGITS + u"]*")
 
 # Default extension prefix to use when formatting. This will be put in front
