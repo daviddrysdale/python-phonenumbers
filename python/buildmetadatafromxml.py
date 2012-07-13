@@ -74,6 +74,11 @@ _REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %s met
 from %s.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 '''
 
+# Boilerplate header for individual country-code alternate number format data files
+_ALT_FORMAT_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %s metadata"""
+from %s.phonemetadata import NumberFormat
+'''
+
 # Copyright notice covering the XML metadata; include current year.
 COPYRIGHT_NOTICE = """# Copyright (C) 2010-%s The Libphonenumber Authors
 #
@@ -442,7 +447,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
         """Add phone number alternate format metadata retrieved from XML"""
         with open(filename, "r") as infile:
             xtree = etree.parse(infile)
-        self.alt_territory = {}
+        self.alt_territory = {}  # country_code to XAlternateTerritory
         xterritories = xtree.find(TOP_XPATH)
         for xterritory in xterritories:
             if xterritory.tag == TERRITORY_TAG:
@@ -464,6 +469,13 @@ class XPhoneNumberMetadata(UnicodeMixin):
             print >> outfile, _REGION_METADATA_PROLOG % (terrobj.identifier(), module_prefix)
             print >> outfile, "PHONE_METADATA_%s = %s" % (terrobj.identifier(), terrobj)
 
+    def emit_alt_formats_for_cc_py(self, cc, cc_filename, module_prefix):
+        """Emit Python code generating the alternate format metadata for the given country code"""
+        terrobj = self.alt_territory[cc]
+        with open(cc_filename, "w") as outfile:
+            print >> outfile, _ALT_FORMAT_METADATA_PROLOG % (cc, module_prefix)
+            print >> outfile, "PHONE_ALT_FORMAT_%s = %s" % (cc, terrobj)
+
     def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
         to a data/ subdirectory in the same directory as that file."""
@@ -477,12 +489,23 @@ class XPhoneNumberMetadata(UnicodeMixin):
             filename = os.path.join(datadir, "region_%s.py" % country_id)
             self.emit_metadata_for_region_py(country_id, filename, module_prefix)
 
+        # Same for any per-country-code alternate format files
+        if self.alt_territory is not None:
+            for country_code in sorted(self.alt_territory.keys()):
+                filename = os.path.join(datadir, "alt_format_%s.py" % country_code)
+                self.emit_alt_formats_for_cc_py(country_code, filename, module_prefix)
+
         # Now build a module file that includes them all
         with open(modulefilename, "w") as outfile:
             print >> outfile, METADATA_FILE_PROLOG
             print >> outfile, COPYRIGHT_NOTICE
             for country_id in sorted(self.territory.keys()):
                 print >> outfile, "from .region_%s import PHONE_METADATA_%s" % (country_id, country_id)
+            if self.alt_territory is not None:
+                for country_code in sorted(self.alt_territory.keys()):
+                    print >> outfile, "from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code)
+                print >> outfile, ("ALT_NUMBER_FORMATS = {%s}" %
+                                   ", ".join(["%s: PHONE_ALT_FORMAT_%s" % (cc, cc) for cc in sorted(self.alt_territory.keys())]))
             # Emit the mapping from country code to region code
             print >> outfile, _COUNTRY_CODE_TO_REGION_CODE_PROLOG
             print >> outfile, "_COUNTRY_CODE_TO_REGION_CODE = {"
