@@ -2396,6 +2396,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # Create some metadata, including an invalid example number
         metadataXX = PhoneMetadata("XX",
+                                   international_prefix='9123',
+                                   general_desc=PhoneNumberDesc(example_number='12'),
                                    personal_number=PhoneNumberDesc(example_number='12'),
                                    preferred_international_prefix='9123',
                                    national_prefix='1',
@@ -2407,8 +2409,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                    leading_digits='123',
                                    leading_zero_possible=True,
                                    register=False)
-        self.assertEqual("""PhoneMetadata(id='XX', country_code=-1, international_prefix=None,
-    general_desc=None,
+        self.assertEqual("""PhoneMetadata(id='XX', country_code=-1, international_prefix='9123',
+    general_desc=PhoneNumberDesc(example_number='12'),
     fixed_line=None,
     mobile=None,
     toll_free=None,
