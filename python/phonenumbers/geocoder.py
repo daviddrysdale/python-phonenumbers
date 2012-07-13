@@ -49,7 +49,7 @@ try:
     from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
     from .geodata.locale import LOCALE_DATA
 except ImportError:  # pragma no cover
-    # Before the generated code exists, the teodata/ directory is empty.
+    # Before the generated code exists, the geodata/ directory is empty.
     # The generation process imports this module, creating a circular
     # dependency.  The hack below works around this.
     import os
