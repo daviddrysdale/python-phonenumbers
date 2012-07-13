@@ -1546,7 +1546,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # the number.
         self.assertEqual(JP_STAR_NUMBER, phonenumbers.parse("+81 *2345", "JP"))
 
-        shortNumber = PhoneNumber(country_code=64, national_number=12L)
+        shortNumber = PhoneNumber(country_code=64, national_number=12)
         self.assertEqual(shortNumber, phonenumbers.parse("12", "NZ"))
 
     def testParseNumberWithAlphaCharacters(self):
@@ -1706,8 +1706,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             sentencePhoneNumber = "1 Still not a number"
             phonenumbers.parse(sentencePhoneNumber, "NZ")
             self.fail("This should not parse without throwing an exception " + sentencePhoneNumber)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1715,8 +1716,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             sentencePhoneNumber = "1 MICROSOFT"
             phonenumbers.parse(sentencePhoneNumber, "NZ")
             self.fail("This should not parse without throwing an exception " + sentencePhoneNumber)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -1724,8 +1726,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             sentencePhoneNumber = "12 MICROSOFT"
             phonenumbers.parse(sentencePhoneNumber, "NZ")
             self.fail("This should not parse without throwing an exception " + sentencePhoneNumber)
-        except NumberParseException, e:
+        except NumberParseException:
             # Expected this exception.
+            e = sys.exc_info()[1]
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")

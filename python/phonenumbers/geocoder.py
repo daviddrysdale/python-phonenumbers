@@ -59,9 +59,9 @@ except ImportError:  # pragma no cover
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
         prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
-        GEOCODE_DATA = {'1': {'en': u'United States'}}
+        GEOCODE_DATA = {'1': {'en': u('United States')}}
         GEOCODE_LONGEST_PREFIX = 1
-        LOCALE_DATA = {'US': {'en': u'United States'}}
+        LOCALE_DATA = {'US': {'en': u('United States')}}
     else:
         raise
 
