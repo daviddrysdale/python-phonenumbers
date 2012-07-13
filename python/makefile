@@ -23,8 +23,8 @@ tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding
 
 geodata: phonenumbers/geodata/__init__.py tests/testgeodata/__init__.py
 
-phonenumbers/data/__init__.py: ../resources/PhoneNumberMetaData.xml buildmetadatafromxml.py
-	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaData.xml phonenumbers/data .
+phonenumbers/data/__init__.py: ../resources/PhoneNumberMetaData.xml ../resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
+	$(PYTHON) buildmetadatafromxml.py --alt ../resources/PhoneNumberAlternateFormats.xml ../resources/PhoneNumberMetaData.xml phonenumbers/data .
 
 metadata: phonenumbers/data/__init__.py tests/testdata/__init__.py geodata
 

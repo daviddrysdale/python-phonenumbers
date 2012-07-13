@@ -148,6 +148,30 @@ def _expand_formatting_rule(rule, national_prefix):
     return rule
 
 
+class XAlternateNumberFormat(UnicodeMixin):
+    """Parse alternate NumberFormat objects from XML element"""
+    def __init__(self, xtag):
+        if xtag is None:
+            self.o = None
+        else:
+            self.o = NumberFormat()
+            self.o._mutable = True
+            self.o.pattern = xtag.attrib['pattern']  # REQUIRED attribute
+            self.o.format = _get_unique_child_value(xtag, 'format')
+            if self.o.format is None:
+                raise Exception("No format pattern found")
+            else:
+                # Replace '$1' etc  with '\1' to match Python regexp group reference format
+                self.o.format = re.sub('\$', ur'\\', self.o.format)
+            xleading_digits = xtag.findall("leadingDigits")
+            for xleading_digit in xleading_digits:
+                self.o.leading_digits_pattern.append(_dews_re(xleading_digit.text))
+            # Currently this assumes no intlFormat elements in the element
+
+    def __unicode__(self):
+        return unicode(self.o)
+
+
 class XNumberFormat(UnicodeMixin):
     """Parsed NumberFormat objects from XML element"""
     def __init__(self, owning_xterr, xtag, national_prefix,
@@ -264,6 +288,26 @@ class XPhoneNumberDesc(UnicodeMixin):
 
     def __unicode__(self):
         return unicode(self.o)
+
+
+class XAlternateTerritory(UnicodeMixin):
+    """Parse alternate format metadata from XML element (territory)"""
+    def __init__(self, xterritory):
+        self.country_code = int(xterritory.attrib['countryCode'])
+        # Look for available formats
+        self.number_format = []
+        formats = _get_unique_child(xterritory, "availableFormats")
+        if formats is not None:
+            for xelt in formats.findall("numberFormat"):
+                # Create an XNumberFormat object, which contains a NumberFormat object
+                # or two, and which self-registers them with self.o
+                self.number_format.append(XAlternateNumberFormat(xelt).o)
+        if len(self.number_format) == 0:
+            raise Exception("No number formats found in available formats")
+        # Currently this assumes no intlFormat elements in the file
+
+    def __unicode__(self):
+        return unicode(self.number_format)
 
 
 class XTerritory(UnicodeMixin):
@@ -392,6 +436,23 @@ class XPhoneNumberMetadata(UnicodeMixin):
                 self.territory[id] = terrobj
             else:
                 raise Exception("Unexpected element %s found" % xterritory.tag)
+        self.alt_territory = None
+
+    def add_alternate_formats(self, filename):
+        """Add phone number alternate format metadata retrieved from XML"""
+        with open(filename, "r") as infile:
+            xtree = etree.parse(infile)
+        self.alt_territory = {}
+        xterritories = xtree.find(TOP_XPATH)
+        for xterritory in xterritories:
+            if xterritory.tag == TERRITORY_TAG:
+                terrobj = XAlternateTerritory(xterritory)
+                id = str(terrobj.country_code)
+                if id in self.alt_territory:
+                    raise Exception("Duplicate entry for %s" % id)
+                self.alt_territory[id] = terrobj
+            else:
+                raise Exception("Unexpected element %s found" % xterritory.tag)
 
     def __unicode__(self):
         return u'\n'.join([u"%s: %s" % (country_id, territory) for country_id, territory in self.territory.items()])
@@ -445,8 +506,9 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
 def _standalone(argv):
     """Parse the given XML file and emit generated code."""
+    alternate = None
     try:
-        opts, args = getopt.getopt(argv, "h", ("help",))
+        opts, args = getopt.getopt(argv, "ha:", ("help", "alt="))
     except getopt.GetoptError:
         print >> sys.stderr, __doc__
         sys.exit(1)
@@ -454,6 +516,8 @@ def _standalone(argv):
         if opt in ("-h", "--help"):
             print >> sys.stderr, __doc__
             sys.exit(1)
+        elif opt in ("-a", "--alt"):
+            alternate = arg
         else:
             print >> sys.stderr, "Unknown option %s" % opt
             print >> sys.stderr, __doc__
@@ -463,6 +527,8 @@ def _standalone(argv):
         print >> sys.stderr, __doc__
         sys.exit(1)
     pmd = XPhoneNumberMetadata(args[0])
+    if alternate is not None:
+        pmd.add_alternate_formats(alternate)
     pmd.emit_metadata_py(args[1], args[2])
 
 
