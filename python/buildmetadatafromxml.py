@@ -56,6 +56,8 @@ REGION_CODE_FOR_NON_GEO_ENTITY = "001"
 TOP_XPATH = "territories"
 # XML element name for the territory element
 TERRITORY_TAG = "territory"
+# Marker for unavailable entries
+DATA_NA = "NA"
 
 # Boilerplate text for generated Python files
 METADATA_FILE_PROLOG = '"""Auto-generated file, do not edit by hand."""'
@@ -217,7 +219,7 @@ class XNumberFormat(UnicodeMixin):
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
                 intl_format = re.sub('\$', ur'\\', intl_format)
-                if intl_format != "NA":
+                if intl_format != DATA_NA:
                     self.io.format = intl_format
                 owning_xterr.has_explicit_intl_format = True
             if self.io.format is not None:
@@ -239,8 +241,8 @@ class XPhoneNumberDesc(UnicodeMixin):
         self.o.example_number = None
         if xtag is None:
             if fill_na:
-                self.o.national_number_pattern = "NA"
-                self.o.possible_number_pattern = "NA"
+                self.o.national_number_pattern = DATA_NA
+                self.o.possible_number_pattern = DATA_NA
                 return
         # Start with the template values
         if template is not None:
