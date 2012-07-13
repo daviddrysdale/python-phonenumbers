@@ -47,8 +47,6 @@ True
 from .util import prnt, unicod, U_EMPTY_STRING
 from .phonenumberutil import format_number, PhoneNumberFormat, is_valid_number
 from .phonenumberutil import region_code_for_number
-
-# Import auto-generated data structures
 try:
     from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
     from .geodata.locale import LOCALE_DATA
@@ -58,12 +56,12 @@ except ImportError:  # pragma no cover
     # dependency.  The hack below works around this.
     import os
     import sys
-    if (os.path.basename(sys.argv[0]) == "buildgeocodingdata.py" or
-        os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py"):
+    if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
+        os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
         prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
-        GEOCODE_DATA = {}
-        GEOCODE_LONGEST_PREFIX = 3
-        LOCALE_DATA = {}
+        GEOCODE_DATA = {'1': {'en': u'United States'}}
+        GEOCODE_LONGEST_PREFIX = 1
+        LOCALE_DATA = {'US': {'en': u'United States'}}
     else:
         raise
 

@@ -37,6 +37,22 @@ from .phonenumberutil import choose_formatting_pattern_for_number
 from .phonenumber import CountryCodeSource
 from .phonemetadata import PhoneMetadata
 
+# Import auto-generated data structures
+try:
+    from .data import _ALT_NUMBER_FORMATS
+except ImportError:  # pragma no cover
+    # Before the generated code exists, the data/ directory is empty.
+    # The generation process imports this module, creating a circular
+    # dependency.  The hack below works around this.
+    import os
+    import sys
+    if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
+        os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
+        print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
+        _ALT_NUMBER_FORMATS = {}
+    else:
+        raise
+
 
 def _limit(lower, upper):
     """Returns a regular expression quantifier with an upper and lower limit."""
@@ -311,6 +327,13 @@ def _check_number_grouping_is_valid(numobj, candidate, checker):
     formatted_number_groups = _get_national_number_groups(numobj, None)
     if checker(numobj, normalized_candidate, formatted_number_groups):
         return True
+    # If this didn't pass, see if there are any alternate formats, and try them instead.
+    alternate_formats = _ALT_NUMBER_FORMATS.get(numobj.country_code, None)
+    if alternate_formats is not None:
+        for alternate_format in alternate_formats:
+            formatted_number_groups = _get_national_number_groups(numobj, alternate_format)
+            if checker(numobj, normalized_candidate, formatted_number_groups):
+                return True
     return False
 
 

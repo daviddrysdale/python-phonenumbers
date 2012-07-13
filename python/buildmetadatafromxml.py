@@ -41,6 +41,7 @@ from __future__ import with_statement
 import sys
 import os
 import re
+import getopt
 import datetime
 from xml.etree import ElementTree as etree
 
@@ -56,6 +57,8 @@ REGION_CODE_FOR_NON_GEO_ENTITY = "001"
 TOP_XPATH = "territories"
 # XML element name for the territory element
 TERRITORY_TAG = "territory"
+# Marker for unavailable entries
+DATA_NA = "NA"
 
 # Boilerplate text for generated Python files
 METADATA_FILE_PROLOG = '"""Auto-generated file, do not edit by hand."""'
@@ -69,6 +72,11 @@ _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
 # Boilerplate header for individual region data files
 _REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %(region)s metadata"""
 from %(module)s.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+'''
+
+# Boilerplate header for individual country-code alternate number format data files
+_ALT_FORMAT_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %s metadata"""
+from %s.phonemetadata import NumberFormat
 '''
 
 # Copyright notice covering the XML metadata; include current year.
@@ -145,6 +153,30 @@ def _expand_formatting_rule(rule, national_prefix):
     return rule
 
 
+class XAlternateNumberFormat(UnicodeMixin):
+    """Parse alternate NumberFormat objects from XML element"""
+    def __init__(self, xtag):
+        if xtag is None:
+            self.o = None
+        else:
+            self.o = NumberFormat()
+            self.o._mutable = True
+            self.o.pattern = xtag.attrib['pattern']  # REQUIRED attribute
+            self.o.format = _get_unique_child_value(xtag, 'format')
+            if self.o.format is None:
+                raise Exception("No format pattern found")
+            else:
+                # Replace '$1' etc  with '\1' to match Python regexp group reference format
+                self.o.format = re.sub('\$', ur'\\', self.o.format)
+            xleading_digits = xtag.findall("leadingDigits")
+            for xleading_digit in xleading_digits:
+                self.o.leading_digits_pattern.append(_dews_re(xleading_digit.text))
+            # Currently this assumes no intlFormat elements in the element
+
+    def __unicode__(self):
+        return unicode(self.o)
+
+
 class XNumberFormat(UnicodeMixin):
     """Parsed NumberFormat objects from XML element"""
     def __init__(self, owning_xterr, xtag, national_prefix,
@@ -217,7 +249,7 @@ class XNumberFormat(UnicodeMixin):
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
                 intl_format = re.sub('\$', u(r'\\'), intl_format)
-                if intl_format != "NA":
+                if intl_format != DATA_NA:
                     self.io.format = intl_format
                 owning_xterr.has_explicit_intl_format = True
             if self.io.format is not None:
@@ -239,8 +271,8 @@ class XPhoneNumberDesc(UnicodeMixin):
         self.o.example_number = None
         if xtag is None:
             if fill_na:
-                self.o.national_number_pattern = "NA"
-                self.o.possible_number_pattern = "NA"
+                self.o.national_number_pattern = DATA_NA
+                self.o.possible_number_pattern = DATA_NA
                 return
         # Start with the template values
         if template is not None:
@@ -261,6 +293,26 @@ class XPhoneNumberDesc(UnicodeMixin):
 
     def __unicode__(self):
         return u(self.o)
+
+
+class XAlternateTerritory(UnicodeMixin):
+    """Parse alternate format metadata from XML element (territory)"""
+    def __init__(self, xterritory):
+        self.country_code = int(xterritory.attrib['countryCode'])
+        # Look for available formats
+        self.number_format = []
+        formats = _get_unique_child(xterritory, "availableFormats")
+        if formats is not None:
+            for xelt in formats.findall("numberFormat"):
+                # Create an XNumberFormat object, which contains a NumberFormat object
+                # or two, and which self-registers them with self.o
+                self.number_format.append(XAlternateNumberFormat(xelt).o)
+        if len(self.number_format) == 0:
+            raise Exception("No number formats found in available formats")
+        # Currently this assumes no intlFormat elements in the file
+
+    def __unicode__(self):
+        return unicode(self.number_format)
 
 
 class XTerritory(UnicodeMixin):
@@ -389,6 +441,23 @@ class XPhoneNumberMetadata(UnicodeMixin):
                 self.territory[id] = terrobj
             else:
                 raise Exception("Unexpected element %s found" % xterritory.tag)
+        self.alt_territory = None
+
+    def add_alternate_formats(self, filename):
+        """Add phone number alternate format metadata retrieved from XML"""
+        with open(filename, "r") as infile:
+            xtree = etree.parse(infile)
+        self.alt_territory = {}  # country_code to XAlternateTerritory
+        xterritories = xtree.find(TOP_XPATH)
+        for xterritory in xterritories:
+            if xterritory.tag == TERRITORY_TAG:
+                terrobj = XAlternateTerritory(xterritory)
+                id = str(terrobj.country_code)
+                if id in self.alt_territory:
+                    raise Exception("Duplicate entry for %s" % id)
+                self.alt_territory[id] = terrobj
+            else:
+                raise Exception("Unexpected element %s found" % xterritory.tag)
 
     def __unicode__(self):
         return u("\n").join([u("%s: %s") % (country_id, territory) for country_id, territory in self.territory.items()])
@@ -399,6 +468,13 @@ class XPhoneNumberMetadata(UnicodeMixin):
         with open(region_filename, "w") as outfile:
             prnt(_REGION_METADATA_PROLOG % {'region': terrobj.identifier(), 'module': module_prefix}, file=outfile)
             prnt("PHONE_METADATA_%s = %s" % (terrobj.identifier(), terrobj), file=outfile)
+
+    def emit_alt_formats_for_cc_py(self, cc, cc_filename, module_prefix):
+        """Emit Python code generating the alternate format metadata for the given country code"""
+        terrobj = self.alt_territory[cc]
+        with open(cc_filename, "w") as outfile:
+            print >> outfile, _ALT_FORMAT_METADATA_PROLOG % (cc, module_prefix)
+            print >> outfile, "PHONE_ALT_FORMAT_%s = %s" % (cc, terrobj)
 
     def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
@@ -413,12 +489,24 @@ class XPhoneNumberMetadata(UnicodeMixin):
             filename = os.path.join(datadir, "region_%s.py" % country_id)
             self.emit_metadata_for_region_py(country_id, filename, module_prefix)
 
+        # Same for any per-country-code alternate format files
+        if self.alt_territory is not None:
+            for country_code in sorted(self.alt_territory.keys()):
+                filename = os.path.join(datadir, "alt_format_%s.py" % country_code)
+                self.emit_alt_formats_for_cc_py(country_code, filename, module_prefix)
+
         # Now build a module file that includes them all
         with open(modulefilename, "w") as outfile:
             prnt(METADATA_FILE_PROLOG, file=outfile)
             prnt(COPYRIGHT_NOTICE, file=outfile)
             for country_id in sorted(self.territory.keys()):
                 prnt("from .region_%s import PHONE_METADATA_%s" % (country_id, country_id), file=outfile)
+            if self.alt_territory is not None:
+                for country_code in sorted(self.alt_territory.keys()):
+                    prnt("from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code), file=outfile)
+                prnt("_ALT_NUMBER_FORMATS = {%s}" %
+                     ", ".join(["%s: PHONE_ALT_FORMAT_%s" % (cc, cc) for cc in sorted(self.alt_territory.keys())]), 
+                     file=outfile)
             # Emit the mapping from country code to region code
             prnt(_COUNTRY_CODE_TO_REGION_CODE_PROLOG, file=outfile)
             prnt("_COUNTRY_CODE_TO_REGION_CODE = {", file=outfile)
@@ -442,11 +530,30 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
 def _standalone(argv):
     """Parse the given XML file and emit generated code."""
-    if len(argv) != 3:
+    alternate = None
+    try:
+        opts, args = getopt.getopt(argv, "ha:", ("help", "alt="))
+    except getopt.GetoptError:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
-    pmd = XPhoneNumberMetadata(argv[0])
-    pmd.emit_metadata_py(argv[1], argv[2])
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            prnt(__doc__, file=sys.stderr)
+            sys.exit(1)
+        elif opt in ("-a", "--alt"):
+            alternate = arg
+        else:
+            prnt("Unknown option %s" % opt, file=sys.stderr)
+            prnt(__doc__, file=sys.stderr)
+            sys.exit(1)
+
+    if len(args) != 3:
+        prnt(__doc__, file=sys.stderr)
+        sys.exit(1)
+    pmd = XPhoneNumberMetadata(args[0])
+    if alternate is not None:
+        pmd.add_alternate_formats(alternate)
+    pmd.emit_metadata_py(args[1], args[2])
 
 
 if __name__ == "__main__":

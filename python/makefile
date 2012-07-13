@@ -11,16 +11,20 @@ phonenumbers/geodata/locale.py: DumpLocale.class
 
 locale: phonenumbers/geodata/locale.py
 
-phonenumbers/geodata/__init__.py: buildgeocodingdata.py ../resources/geocoding
+phonenumbers/geodata:
+	mkdir $@
+phonenumbers/geodata/__init__.py: buildgeocodingdata.py ../resources/geocoding | phonenumbers/geodata
 	$(PYTHON) buildgeocodingdata.py ../resources/geocoding $@ .
 
-tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding
-	$(PYTHON) buildgeocodingdata.py ../resources/test/geocoding $@ phonenumbers
+tests/testgeodata:
+	mkdir $@
+tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding | tests/testgeodata
+	$(PYTHON) buildgeocodingdata.py ../resources/test/geocoding $@ .
 
 geodata: phonenumbers/geodata/__init__.py tests/testgeodata/__init__.py
 
-phonenumbers/data/__init__.py: ../resources/PhoneNumberMetaData.xml buildmetadatafromxml.py
-	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaData.xml phonenumbers/data .
+phonenumbers/data/__init__.py: ../resources/PhoneNumberMetaData.xml ../resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
+	$(PYTHON) buildmetadatafromxml.py --alt ../resources/PhoneNumberAlternateFormats.xml ../resources/PhoneNumberMetaData.xml phonenumbers/data .
 
 tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
 	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata phonenumbers
@@ -71,11 +75,11 @@ clean: coverage_clean profile_clean
 	rm -rf tests/__pycache__ tests/testdata/__pycache__ tests/testgeodata/__pycache__
 	rm -rf build deb_dist dist
 
-metaclean: clean
+metaclean:
 	rm -rf phonenumbers/data tests/testdata
-	rm -rf phonenumbers/geodata/* tests/testgeodata/*
+	rm -rf phonenumbers/geodata tests/testgeodata
 
-distclean: metaclean
+distclean: clean metaclean
 	rm -rf $(PACKAGE).egg-info
 	rm -rf build
 	rm -f DumpLocale.class

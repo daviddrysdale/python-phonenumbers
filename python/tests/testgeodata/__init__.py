@@ -2,7 +2,7 @@
 
 Auto-generated file, do not edit by hand.
 """
-from phonenumbers.util import u
+from ..util import u
 
 # Copyright (C) 2011-2012 The Libphonenumber Authors
 #

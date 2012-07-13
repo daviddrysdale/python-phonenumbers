@@ -1214,16 +1214,20 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(tooShortNumberCopy, tooShortNumber)
 
     def testIsViablePhoneNumber(self):
+        self.assertFalse(phonenumberutil._is_viable_phone_number("1"))
         # Only one or two digits before strange non-possible punctuation.
-        self.assertFalse(phonenumberutil._is_viable_phone_number("12. March"))
         self.assertFalse(phonenumberutil._is_viable_phone_number("1+1+1"))
         self.assertFalse(phonenumberutil._is_viable_phone_number("80+0"))
-        self.assertFalse(phonenumberutil._is_viable_phone_number("00"))
-        # Three digits is viable.
+        # Two digits is viable.
+        self.assertTrue(phonenumberutil._is_viable_phone_number("00"))
         self.assertTrue(phonenumberutil._is_viable_phone_number("111"))
         # Alpha numbers.
         self.assertTrue(phonenumberutil._is_viable_phone_number("0800-4-pizza"))
         self.assertTrue(phonenumberutil._is_viable_phone_number("0800-4-PIZZA"))
+        # We need at least three digits before any alpha characters.
+        self.assertFalse(phonenumberutil._is_viable_phone_number("08-PIZZA"))
+        self.assertFalse(phonenumberutil._is_viable_phone_number("8-PIZZA"))
+        self.assertFalse(phonenumberutil._is_viable_phone_number("12. March"))
 
     def testIsViablePhoneNumberNonAscii(self):
         # Only one or two digits before possible punctuation followed by more digits.
@@ -1542,6 +1546,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # the number.
         self.assertEqual(JP_STAR_NUMBER, phonenumbers.parse("+81 *2345", "JP"))
 
+        shortNumber = PhoneNumber(country_code=64, national_number=12L)
+        self.assertEqual(shortNumber, phonenumbers.parse("12", "NZ"))
+
     def testParseNumberWithAlphaCharacters(self):
         # Test case with alpha characters.
         tollfreeNumber = PhoneNumber(country_code=64, national_number=800332005)
@@ -1692,6 +1699,33 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         except NumberParseException:
             # Expected this exception.
             e = sys.exc_info()[1]
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+        try:
+            sentencePhoneNumber = "1 Still not a number"
+            phonenumbers.parse(sentencePhoneNumber, "NZ")
+            self.fail("This should not parse without throwing an exception " + sentencePhoneNumber)
+        except NumberParseException, e:
+            # Expected this exception.
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+        try:
+            sentencePhoneNumber = "1 MICROSOFT"
+            phonenumbers.parse(sentencePhoneNumber, "NZ")
+            self.fail("This should not parse without throwing an exception " + sentencePhoneNumber)
+        except NumberParseException, e:
+            # Expected this exception.
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+        try:
+            sentencePhoneNumber = "12 MICROSOFT"
+            phonenumbers.parse(sentencePhoneNumber, "NZ")
+            self.fail("This should not parse without throwing an exception " + sentencePhoneNumber)
+        except NumberParseException, e:
+            # Expected this exception.
             self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
@@ -2150,7 +2184,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # Invalid numbers that can't be parsed.
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
-                         phonenumbers.is_number_match("43", "3 331 6043"))
+                         phonenumbers.is_number_match("4", "3 331 6043"))
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
                          phonenumbers.is_number_match("+43", "+64 3 331 6005"))
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
@@ -2256,7 +2290,10 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue(phonenumbers.is_alpha_number("1800 six-flags"))
         self.assertTrue(phonenumbers.is_alpha_number("1800 six-flags ext. 1234"))
         self.assertTrue(phonenumbers.is_alpha_number("+800 six-flags"))
+        self.assertTrue(phonenumbers.is_alpha_number("180 six-flags"))
         self.assertFalse(phonenumbers.is_alpha_number("1800 123-1234"))
+        self.assertFalse(phonenumbers.is_alpha_number("1 six-flags"))
+        self.assertFalse(phonenumbers.is_alpha_number("18 six-flags"))
         self.assertFalse(phonenumbers.is_alpha_number("1800 123-1234 extension: 1234"))
         self.assertFalse(phonenumbers.is_alpha_number("+800 1234-1234"))
         # Python version extra test
@@ -2382,6 +2419,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # Create some metadata, including an invalid example number
         metadataXX = PhoneMetadata("XX",
+                                   international_prefix='9123',
+                                   general_desc=PhoneNumberDesc(example_number='12'),
                                    personal_number=PhoneNumberDesc(example_number='12'),
                                    preferred_international_prefix='9123',
                                    national_prefix='1',
@@ -2393,8 +2432,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                    leading_digits='123',
                                    leading_zero_possible=True,
                                    register=False)
-        self.assertEqual("""PhoneMetadata(id='XX', country_code=-1, international_prefix=None,
-    general_desc=None,
+        self.assertEqual("""PhoneMetadata(id='XX', country_code=-1, international_prefix='9123',
+    general_desc=PhoneNumberDesc(example_number='12'),
     fixed_line=None,
     mobile=None,
     toll_free=None,
@@ -2509,7 +2548,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         metadata800.general_desc.example_number = saved_example
         metadata800.general_desc._mutable = False
 
-        self.assertFalse(phonenumbers.phonenumberutil._raw_input_contains_national_prefix("077", "0", "JP"))
+        self.assertFalse(phonenumbers.phonenumberutil._raw_input_contains_national_prefix("07", "0", "JP"))
 
         # Temporarily change formatting rule
         metadataGB = PhoneMetadata.region_metadata["GB"]
