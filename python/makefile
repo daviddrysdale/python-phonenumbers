@@ -19,7 +19,7 @@ phonenumbers/geodata/__init__.py: buildgeocodingdata.py ../resources/geocoding |
 tests/testgeodata:
 	mkdir $@
 tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding | tests/testgeodata
-	$(PYTHON) buildgeocodingdata.py ../resources/test/geocoding $@ .
+	$(PYTHON) buildgeocodingdata.py ../resources/test/geocoding $@ phonenumbers
 
 geodata: phonenumbers/geodata/__init__.py tests/testgeodata/__init__.py
 
