@@ -2525,7 +2525,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         metadata800.general_desc.example_number = saved_example
         metadata800.general_desc._mutable = False
 
-        self.assertFalse(phonenumbers.phonenumberutil._raw_input_contains_national_prefix("077", "0", "JP"))
+        self.assertFalse(phonenumbers.phonenumberutil._raw_input_contains_national_prefix("07", "0", "JP"))
 
         # Temporarily change formatting rule
         metadataGB = PhoneMetadata.region_metadata["GB"]
