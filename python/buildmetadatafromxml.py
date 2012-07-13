@@ -504,7 +504,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
             if self.alt_territory is not None:
                 for country_code in sorted(self.alt_territory.keys()):
                     print >> outfile, "from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code)
-                print >> outfile, ("ALT_NUMBER_FORMATS = {%s}" %
+                print >> outfile, ("_ALT_NUMBER_FORMATS = {%s}" %
                                    ", ".join(["%s: PHONE_ALT_FORMAT_%s" % (cc, cc) for cc in sorted(self.alt_territory.keys())]))
             # Emit the mapping from country code to region code
             print >> outfile, _COUNTRY_CODE_TO_REGION_CODE_PROLOG
