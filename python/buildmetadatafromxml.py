@@ -41,6 +41,7 @@ from __future__ import with_statement
 import sys
 import os
 import re
+import getopt
 import datetime
 from xml.etree import ElementTree as etree
 
@@ -444,11 +445,25 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
 def _standalone(argv):
     """Parse the given XML file and emit generated code."""
-    if len(argv) != 3:
+    try:
+        opts, args = getopt.getopt(argv, "h", ("help",))
+    except getopt.GetoptError:
         print >> sys.stderr, __doc__
         sys.exit(1)
-    pmd = XPhoneNumberMetadata(argv[0])
-    pmd.emit_metadata_py(argv[1], argv[2])
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            print >> sys.stderr, __doc__
+            sys.exit(1)
+        else:
+            print >> sys.stderr, "Unknown option %s" % opt
+            print >> sys.stderr, __doc__
+            sys.exit(1)
+
+    if len(args) != 3:
+        print >> sys.stderr, __doc__
+        sys.exit(1)
+    pmd = XPhoneNumberMetadata(args[0])
+    pmd.emit_metadata_py(args[1], args[2])
 
 
 if __name__ == "__main__":
