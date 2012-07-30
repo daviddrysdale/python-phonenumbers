@@ -80,6 +80,9 @@ def load_geodata_file(geodata, filename, locale, overall_prefix):
             if dm:
                 prefix = dm.group('prefix')
                 location = dm.group('location')
+                if location != location.rstrip():
+                    print ("%s:%d: Warning: stripping trailing whitespace" % (filename, lineno))
+                    location = location.rstrip()
                 if not prefix.startswith(overall_prefix):
                     raise Exception("%s:%d: Prefix %s is not within %s" %
                                     (filename, lineno, prefix, overall_prefix))
