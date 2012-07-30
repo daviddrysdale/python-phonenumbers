@@ -20,7 +20,7 @@ import re
 
 # Extra regexp function; see README
 from .re_util import fullmatch
-from .util import UnicodeMixin, u, unicod
+from .util import UnicodeMixin, u, unicod, prnt
 from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER, U_PERCENT
 from .unicode_util import Category, Block, is_letter
 from .phonenumberutil import _MAX_LENGTH_FOR_NSN, _MAX_LENGTH_COUNTRY_CODE
@@ -48,7 +48,7 @@ except ImportError:  # pragma no cover
     import sys
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
-        print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
+        prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         _ALT_NUMBER_FORMATS = {}
     else:
         raise

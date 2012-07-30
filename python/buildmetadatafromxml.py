@@ -167,7 +167,7 @@ class XAlternateNumberFormat(UnicodeMixin):
                 raise Exception("No format pattern found")
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
-                self.o.format = re.sub('\$', ur'\\', self.o.format)
+                self.o.format = re.sub('\$', u(r'\\'), self.o.format)
             xleading_digits = xtag.findall("leadingDigits")
             for xleading_digit in xleading_digits:
                 self.o.leading_digits_pattern.append(_dews_re(xleading_digit.text))
@@ -312,7 +312,7 @@ class XAlternateTerritory(UnicodeMixin):
         # Currently this assumes no intlFormat elements in the file
 
     def __unicode__(self):
-        return unicode(self.number_format)
+        return u(self.number_format)
 
 
 class XTerritory(UnicodeMixin):
@@ -473,8 +473,8 @@ class XPhoneNumberMetadata(UnicodeMixin):
         """Emit Python code generating the alternate format metadata for the given country code"""
         terrobj = self.alt_territory[cc]
         with open(cc_filename, "w") as outfile:
-            print >> outfile, _ALT_FORMAT_METADATA_PROLOG % (cc, module_prefix)
-            print >> outfile, "PHONE_ALT_FORMAT_%s = %s" % (cc, terrobj)
+            prnt(_ALT_FORMAT_METADATA_PROLOG % (cc, module_prefix), file=outfile)
+            prnt("PHONE_ALT_FORMAT_%s = %s" % (cc, terrobj), file=outfile)
 
     def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
