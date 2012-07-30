@@ -44,7 +44,7 @@ True
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .util import prnt, unicod, U_EMPTY_STRING
+from .util import prnt, unicod, u, U_EMPTY_STRING
 from .phonenumberutil import format_number, PhoneNumberFormat, is_valid_number
 from .phonenumberutil import region_code_for_number
 try:
