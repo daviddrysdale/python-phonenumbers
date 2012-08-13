@@ -1,84 +1,84 @@
 PYTHON=python
 PACKAGE=phonenumbers
+TOPDIR=..
+PYDIR=$(TOPDIR)/python
+
 alldata: metadata geodata locale
 
 # Dump the JRE's Locale information
 DumpLocale.class: DumpLocale.java
 	javac $<
-
-phonenumbers/geodata/locale.py: DumpLocale.class
+$(PYDIR)/phonenumbers/geodata/locale.py: DumpLocale.class
 	java DumpLocale > $@
+locale: $(PYDIR)/phonenumbers/geodata/locale.py
 
-locale: phonenumbers/geodata/locale.py
-
-phonenumbers/geodata:
+# Generate Python files from geocoding data
+$(PYDIR)/phonenumbers/geodata:
 	mkdir $@
-phonenumbers/geodata/__init__.py: buildgeocodingdata.py ../resources/geocoding | phonenumbers/geodata
-	$(PYTHON) buildgeocodingdata.py ../resources/geocoding $@
-
-tests/testgeodata:
+$(PYDIR)/phonenumbers/geodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/geocoding | $(PYDIR)/phonenumbers/geodata
+	$(PYTHON) buildgeocodingdata.py $(TOPDIR)/resources/geocoding $@
+$(PYDIR)/tests/testgeodata:
 	mkdir $@
-tests/testgeodata/__init__.py: buildgeocodingdata.py ../resources/test/geocoding | tests/testgeodata
-	$(PYTHON) buildgeocodingdata.py ../resources/test/geocoding $@
+$(PYDIR)/tests/testgeodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding | $(PYDIR)/tests/testgeodata
+	$(PYTHON) buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding $@
+geodata: $(PYDIR)/phonenumbers/geodata/__init__.py $(PYDIR)/tests/testgeodata/__init__.py
 
-geodata: phonenumbers/geodata/__init__.py tests/testgeodata/__init__.py
+# Generate Python files from metadata
+$(PYDIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetaData.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
+	$(PYTHON) buildmetadatafromxml.py --alt $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml $(TOPDIR)/resources/PhoneNumberMetaData.xml $(PYDIR)/phonenumbers/data .
+$(PYDIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
+	$(PYTHON) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetaDataForTesting.xml $(PYDIR)/tests/testdata phonenumbers
+metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata
 
-phonenumbers/data/__init__.py: ../resources/PhoneNumberMetaData.xml ../resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
-	$(PYTHON) buildmetadatafromxml.py --alt ../resources/PhoneNumberAlternateFormats.xml ../resources/PhoneNumberMetaData.xml phonenumbers/data .
-
-metadata: phonenumbers/data/__init__.py tests/testdata/__init__.py geodata
-
-tests/testdata/__init__.py:  ../resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
-	$(PYTHON) buildmetadatafromxml.py ../resources/PhoneNumberMetaDataForTesting.xml tests/testdata phonenumbers
-
-test: alldata tests/testdata/__init__.py
-	$(PYTHON) -m testwrapper
+test: alldata
+	cd $(PYDIR) && $(PYTHON) -m testwrapper
 
 # Coverage; requires coverage module
 COVERAGE=$(shell hash python-coverage 2>&- && echo python-coverage || echo coverage)
-COVERAGE_FILES=phonenumbers/*.py
-coverage: alldata tests/testdata/__init__.py coverage_clean coverage_generate coverage_report
+COVERAGE_FILES=$(PYDIR)/phonenumbers/*.py
+coverage: alldata $(PYDIR)/tests/testdata/__init__.py coverage_clean coverage_generate coverage_report
 coverage_clean:
-	$(COVERAGE) -e
+	cd $(PYDIR) && $(COVERAGE) -e
 coverage_generate:
-	$(COVERAGE) -x testwrapper.py
+	cd $(PYDIR) && $(COVERAGE) -x testwrapper.py
 coverage_report:
-	$(COVERAGE) -m -r $(COVERAGE_FILES)
+	cd $(PYDIR) && $(COVERAGE) -m -r $(COVERAGE_FILES)
 coverage_annotate:
-	$(COVERAGE) annotate $(COVERAGE_FILES)
+	cd $(PYDIR) && $(COVERAGE) annotate $(COVERAGE_FILES)
 
-VERSION=$(shell grep __version__ phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
-TARBALL=dist/$(PACKAGE)-$(VERSION).tar.gz
+VERSION=$(shell grep __version__ $(PYDIR)/phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
+TARBALL=$(PYDIR)/dist/$(PACKAGE)-$(VERSION).tar.gz
 # Build setuptools packaged tarball $(TARBALL)
 sdist: alldata
-	$(PYTHON) setup.py sdist
+	cd $(PYDIR) && $(PYTHON) setup.py sdist
 $(TARBALL): sdist
 
 install: alldata
-	$(PYTHON) setup.py build
-	sudo $(PYTHON) setup.py install
+	cd $(PYDIR) && $(PYTHON) setup.py build
+	cd $(PYDIR) && sudo $(PYTHON) setup.py install
 
 clean:
-	rm -f MANIFEST *.pyc phonenumbers/*.pyc phonenumbers/data/*.pyc phonenumbers/geodata/*.pyc
-	rm -rf phonenumbers/__pycache__ phonenumbers/data/__pycache__ phonenumbers/geodata/__pycache__
-	rm -f phonenumbers/*.py,cover .coverage*
-	rm -f tests/*.pyc tests/testdata/*.pyc tests/testgeodata/*.pyc
-	rm -rf build deb_dist dist
+	rm -f $(PYDIR)/MANIFEST *.pyc 
+	rm -f $(PYDIR)/phonenumbers/*.pyc $(PYDIR)/phonenumbers/data/*.pyc $(PYDIR)/phonenumbers/geodata/*.pyc
+	rm -rf $(PYDIR)/phonenumbers/__pycache__ $(PYDIR)/phonenumbers/data/__pycache__ $(PYDIR)/phonenumbers/geodata/__pycache__
+	rm -f $(PYDIR)/phonenumbers/*.py,cover $(PYDIR)/.coverage*
+	rm -f $(PYDIR)/tests/*.pyc $(PYDIR)/tests/testdata/*.pyc $(PYDIR)/tests/testgeodata/*.pyc
+	rm -rf $(PYDIR)/build $(PYDIR)/deb_dist $(PYDIR)/dist
 
 metaclean:
-	rm -rf phonenumbers/data tests/testdata
-	rm -rf phonenumbers/geodata tests/testgeodata
+	rm -rf $(PYDIR)/phonenumbers/data $(PYDIR)/tests/testdata
+	rm -rf $(PYDIR)/phonenumbers/geodata $(PYDIR)/tests/testgeodata
 
 distclean: clean metaclean
-	rm -rf $(PACKAGE).egg-info
-	rm -rf build
-	rm -f DumpLocale.class
+	rm -rf $(PYDIR)/$(PACKAGE).egg-info
+	rm -rf $(PYDIR)/build
+	rm -f $(PYDIR)/DumpLocale.class
 
 # Create Debian package.  Requires py2dsc, included in the python-stdeb package.
 DEB_PACKAGE=python-$(PACKAGE)
 DEB_VERSION=$(VERSION)-1_all
-deb: deb_dist/$(DEB_PACKAGE)_$(DEB_VERSION).deb
+deb: $(PYDIR)/deb_dist/$(DEB_PACKAGE)_$(DEB_VERSION).deb
 
 deb_dist/$(DEB_PACKAGE)_$(VERSION)-1_all.deb: $(TARBALL)
 	py2dsc $(TARBALL)
-	cd deb_dist/$(PACKAGE)-$(VERSION) && dpkg-buildpackage -us -uc -nc
+	cd $(PYDIR)/deb_dist/$(PACKAGE)-$(VERSION) && dpkg-buildpackage -us -uc -nc

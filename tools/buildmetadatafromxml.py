@@ -45,6 +45,9 @@ import getopt
 import datetime
 from xml.etree import ElementTree as etree
 
+# Use the local code in preference to any pre-installed version
+sys.path.insert(0, '../python')
+
 # Pull in the data structure definitions
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 from phonenumbers.util import UnicodeMixin
