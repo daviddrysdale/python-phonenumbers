@@ -63,6 +63,8 @@ class DumpLocale {
   }
 
   public static void main(String[] args) {
+    // Check for mode
+    if (args.length > 0 && args[0].equals("-python3")) python3 = true;
     printProlog();
     System.out.println("LOCALE_DATA = {");
     String[] all_countries = Locale.getISOCountries();
