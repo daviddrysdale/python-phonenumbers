@@ -3,12 +3,12 @@ PACKAGE=phonenumbers
 TOPDIR=..
 PYDIR=$(TOPDIR)/python
 
-alldata: metadata geodata locale
+all: alldata
 
 # Dump the JRE's Locale information
 DumpLocale.class: DumpLocale.java
 	javac $<
-$(PYDIR)/phonenumbers/geodata/locale.py: DumpLocale.class
+$(PYDIR)/phonenumbers/geodata/locale.py: DumpLocale.class | $(PYDIR)/phonenumbers/geodata
 	java DumpLocale > $@
 locale: $(PYDIR)/phonenumbers/geodata/locale.py
 
@@ -30,6 +30,8 @@ $(PYDIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetaDataFor
 	$(PYTHON) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetaDataForTesting.xml $(PYDIR)/tests/testdata phonenumbers
 metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata
 
+alldata: metadata geodata locale
+
 test: alldata
 	cd $(PYDIR) && $(PYTHON) -m testwrapper
 
@@ -46,6 +48,7 @@ coverage_report:
 coverage_annotate:
 	cd $(PYDIR) && $(COVERAGE) annotate $(COVERAGE_FILES)
 
+# Packaging
 VERSION=$(shell grep __version__ $(PYDIR)/phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
 TARBALL=$(PYDIR)/dist/$(PACKAGE)-$(VERSION).tar.gz
 # Build setuptools packaged tarball $(TARBALL)
@@ -58,9 +61,9 @@ install: alldata
 	cd $(PYDIR) && sudo $(PYTHON) setup.py install
 
 clean:
-	rm -f $(PYDIR)/MANIFEST *.pyc 
+	rm -f *.pyc
+	rm -f $(PYDIR)/MANIFEST $(PYDIR)/*.pyc
 	rm -f $(PYDIR)/phonenumbers/*.pyc $(PYDIR)/phonenumbers/data/*.pyc $(PYDIR)/phonenumbers/geodata/*.pyc
-	rm -rf $(PYDIR)/phonenumbers/__pycache__ $(PYDIR)/phonenumbers/data/__pycache__ $(PYDIR)/phonenumbers/geodata/__pycache__
 	rm -f $(PYDIR)/phonenumbers/*.py,cover $(PYDIR)/.coverage*
 	rm -f $(PYDIR)/tests/*.pyc $(PYDIR)/tests/testdata/*.pyc $(PYDIR)/tests/testgeodata/*.pyc
 	rm -rf $(PYDIR)/build $(PYDIR)/deb_dist $(PYDIR)/dist
