@@ -72,7 +72,7 @@ metaclean:
 	rm -rf $(PYDIR)/phonenumbers/data $(PYDIR)/tests/testdata
 	rm -rf $(PYDIR)/phonenumbers/geodata $(PYDIR)/tests/testgeodata
 
-distclean: clean metaclean
+distclean: clean metaclean distclean3
 	rm -rf $(PYDIR)/$(PACKAGE).egg-info
 	rm -rf $(PYDIR)/build
 	rm -f $(PYDIR)/DumpLocale.class
@@ -85,3 +85,76 @@ deb: $(PYDIR)/deb_dist/$(DEB_PACKAGE)_$(DEB_VERSION).deb
 deb_dist/$(DEB_PACKAGE)_$(VERSION)-1_all.deb: $(TARBALL)
 	py2dsc $(TARBALL)
 	cd $(PYDIR)/deb_dist/$(PACKAGE)-$(VERSION) && dpkg-buildpackage -us -uc -nc
+
+#####################################################################################################
+# Python3 generation
+PYTHON3=python3
+PY3PACKAGE=phonenumbers3k
+PY3DIR=$(TOPDIR)/python3
+PYSRC=$(wildcard $(PYDIR)/*.py) $(wildcard $(PYDIR)/tests/*.py) $(wildcard $(PYDIR)/phonenumbers/*.py)
+PY3SRC=$(subst $(PYDIR),$(PY3DIR),$(PYSRC))
+python3: $(PY3SRC) all3data
+
+$(PY3DIR):
+	mkdir $@
+$(PY3DIR)/phonenumbers: | $(PY3DIR)
+	mkdir $@
+$(PY3DIR)/phonenumbers/geodata: | $(PY3DIR)/phonenumbers
+	mkdir $@
+$(PY3DIR)/tests: | $(PY3DIR)
+	mkdir $@
+$(PY3DIR)/tests/testgeodata:
+	mkdir $@
+
+$(PY3DIR)/phonenumbers/%.py: $(PYDIR)/phonenumbers/%.py | $(PY3DIR)/phonenumbers
+	cp $< $@
+	2to3 --write --nobackups $@ > /dev/null 2>&1
+	2to3 --write --doctests_only --nobackups $@ > /dev/null 2>&1
+$(PY3DIR)/tests/%.py: $(PYDIR)/tests/%.py | $(PY3DIR)/tests
+	cp $< $@
+	2to3 --write --nobackups $@ > /dev/null 2>&1
+$(PY3DIR)/%.py: $(PYDIR)/%.py | $(PY3DIR)
+	cp $< $@
+	2to3 --write --nobackups $@ > /dev/null 2>&1
+
+# Python3 generation of .py files
+$(PY3DIR)/phonenumbers/geodata/locale.py: DumpLocale.class | $(PY3DIR)/phonenumbers/geodata
+	java DumpLocale -python3 > $@
+locale3: $(PY3DIR)/phonenumbers/geodata/locale.py
+$(PY3DIR)/phonenumbers/geodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/geocoding | $(PY3DIR)/phonenumbers/geodata
+	$(PYTHON3) buildgeocodingdata.py $(TOPDIR)/resources/geocoding $@
+$(PY3DIR)/tests/testgeodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding | $(PY3DIR)/tests/testgeodata
+	$(PYTHON3) buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding $@
+geo3data: $(PY3DIR)/phonenumbers/geodata/__init__.py $(PY3DIR)/tests/testgeodata/__init__.py
+
+$(PY3DIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetaData.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
+	$(PYTHON3) buildmetadatafromxml.py --alt $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml $(TOPDIR)/resources/PhoneNumberMetaData.xml $(PY3DIR)/phonenumbers/data .
+$(PY3DIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
+	$(PYTHON3) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetaDataForTesting.xml $(PY3DIR)/tests/testdata phonenumbers
+meta3data: $(PY3DIR)/phonenumbers/data/__init__.py $(PY3DIR)/tests/testdata/__init__.py geo3data
+
+all3data: meta3data geo3data locale3
+
+test3: all3data
+	cd $(PY3DIR) && $(PYTHON3) -m testwrapper
+
+# Packaging
+TARBALL3=$(PY3DIR)/dist/$(PY3PACKAGE)-$(VERSION).tar.gz
+# Build setuptools packaged tarball $(TARBALL)
+sdist3: all3data
+	cd $(PY3DIR) && $(PYTHON3) setup.py sdist
+$(TARBALL3): sdist3
+
+clean3:
+	rm -rf $(PY3DIR)/MANIFEST $(PY3DIR)/__pycache__
+	rm -rf $(PY3DIR)/phonenumbers/__pycache__ $(PY3DIR)/phonenumbers/data/__pycache__ $(PY3DIR)/phonenumbers/geodata/__pycache__
+	rm -rf $(PY3DIR)/tests/__pycache__ $(PY3DIR)/tests/testdata/__pycache__ $(PY3DIR)/tests/testgeodata/__pycache__
+	rm -rf $(PY3DIR)/build $(PY3DIR)/deb_dist $(PY3DIR)/dist
+
+metaclean3:
+	rm -rf $(PY3DIR)/phonenumbers/data $(PY3DIR)/tests/testdata
+	rm -rf $(PY3DIR)/phonenumbers/geodata $(PY3DIR)/tests/testgeodata
+
+distclean3: clean3 metaclean3
+	rm -rf $(PY3DIR)
+
