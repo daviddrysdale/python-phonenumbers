@@ -46,7 +46,23 @@ import datetime
 from xml.etree import ElementTree as etree
 
 # Use the local code in preference to any pre-installed version
-sys.path.insert(0, '../python')
+if sys.version_info >= (3, 0):
+    sys.path.insert(0, '../python3/phonenumbers')
+    sys.path.insert(0, '../python3')
+    import builtins
+    prnt = builtins.__dict__['print']
+    u = str
+else:
+    sys.path.insert(0, '../python')
+    def prnt(*args, **kwargs):
+        sep = kwargs.get('sep', ' ')
+        end = kwargs.get('end', '\n')
+        file = kwargs.get('file', None)
+        if file is None:
+            file = sys.stdout
+        print >> file, sep.join([str(arg) for arg in args]) + end,
+    def u(s):
+        return unicode(s)
 
 # Pull in the data structure definitions
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
@@ -150,9 +166,9 @@ def _expand_formatting_rule(rule, national_prefix):
     if rule is None:
         return None
     if national_prefix is None:
-        national_prefix = u""
-    rule = re.sub(u'\$NP', national_prefix, rule)
-    rule = re.sub(u'\$FG', u'$1', rule)
+        national_prefix = u("")
+    rule = re.sub(u("\$NP"), national_prefix, rule)
+    rule = re.sub(u("\$FG"), u("$1"), rule)
     return rule
 
 
@@ -170,14 +186,14 @@ class XAlternateNumberFormat(UnicodeMixin):
                 raise Exception("No format pattern found")
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
-                self.o.format = re.sub('\$', ur'\\', self.o.format)
+                self.o.format = re.sub('\$', u(r'\\'), self.o.format)
             xleading_digits = xtag.findall("leadingDigits")
             for xleading_digit in xleading_digits:
                 self.o.leading_digits_pattern.append(_dews_re(xleading_digit.text))
             # Currently this assumes no intlFormat elements in the element
 
     def __unicode__(self):
-        return unicode(self.o)
+        return u(self.o)
 
 
 class XNumberFormat(UnicodeMixin):
@@ -231,7 +247,7 @@ class XNumberFormat(UnicodeMixin):
                 raise Exception("No format pattern found")
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
-                self.o.format = re.sub('\$', ur'\\', self.o.format)
+                self.o.format = re.sub('\$', u(r'\\'), self.o.format)
             xleading_digits = xtag.findall("leadingDigits")
             for xleading_digit in xleading_digits:
                 self.o.leading_digits_pattern.append(_dews_re(xleading_digit.text))
@@ -251,7 +267,7 @@ class XNumberFormat(UnicodeMixin):
                 self.io.format = self.o.format
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
-                intl_format = re.sub('\$', ur'\\', intl_format)
+                intl_format = re.sub('\$', u(r'\\'), intl_format)
                 if intl_format != DATA_NA:
                     self.io.format = intl_format
                 owning_xterr.has_explicit_intl_format = True
@@ -260,7 +276,7 @@ class XNumberFormat(UnicodeMixin):
                 owning_xterr.o.intl_number_format.append(self.io)
 
     def __unicode__(self):
-        return unicode(self.o)
+        return u(self.o)
 
 
 class XPhoneNumberDesc(UnicodeMixin):
@@ -295,7 +311,7 @@ class XPhoneNumberDesc(UnicodeMixin):
                 self.o.example_number = example_number
 
     def __unicode__(self):
-        return unicode(self.o)
+        return u(self.o)
 
 
 class XAlternateTerritory(UnicodeMixin):
@@ -315,7 +331,7 @@ class XAlternateTerritory(UnicodeMixin):
         # Currently this assumes no intlFormat elements in the file
 
     def __unicode__(self):
-        return unicode(self.number_format)
+        return u(self.number_format)
 
 
 class XTerritory(UnicodeMixin):
@@ -421,7 +437,7 @@ class XTerritory(UnicodeMixin):
             return self.o.id
 
     def __unicode__(self):
-        return unicode(self.o)
+        return u(self.o)
 
 
 class XPhoneNumberMetadata(UnicodeMixin):
@@ -463,21 +479,21 @@ class XPhoneNumberMetadata(UnicodeMixin):
                 raise Exception("Unexpected element %s found" % xterritory.tag)
 
     def __unicode__(self):
-        return u'\n'.join([u"%s: %s" % (country_id, territory) for country_id, territory in self.territory.items()])
+        return u("\n").join([u("%s: %s") % (country_id, territory) for country_id, territory in self.territory.items()])
 
     def emit_metadata_for_region_py(self, region, region_filename, module_prefix):
         """Emit Python code generating the metadata for the given region"""
         terrobj = self.territory[region]
         with open(region_filename, "w") as outfile:
-            print >> outfile, _REGION_METADATA_PROLOG % {'region': terrobj.identifier(), 'module': module_prefix}
-            print >> outfile, "PHONE_METADATA_%s = %s" % (terrobj.identifier(), terrobj)
+            prnt(_REGION_METADATA_PROLOG % {'region': terrobj.identifier(), 'module': module_prefix}, file=outfile)
+            prnt("PHONE_METADATA_%s = %s" % (terrobj.identifier(), terrobj), file=outfile)
 
     def emit_alt_formats_for_cc_py(self, cc, cc_filename, module_prefix):
         """Emit Python code generating the alternate format metadata for the given country code"""
         terrobj = self.alt_territory[cc]
         with open(cc_filename, "w") as outfile:
-            print >> outfile, _ALT_FORMAT_METADATA_PROLOG % (cc, module_prefix)
-            print >> outfile, "PHONE_ALT_FORMAT_%s = %s" % (cc, terrobj)
+            prnt(_ALT_FORMAT_METADATA_PROLOG % (cc, module_prefix), file=outfile)
+            prnt("PHONE_ALT_FORMAT_%s = %s" % (cc, terrobj), file=outfile)
 
     def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
@@ -500,18 +516,19 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
         # Now build a module file that includes them all
         with open(modulefilename, "w") as outfile:
-            print >> outfile, METADATA_FILE_PROLOG
-            print >> outfile, COPYRIGHT_NOTICE
+            prnt(METADATA_FILE_PROLOG, file=outfile)
+            prnt(COPYRIGHT_NOTICE, file=outfile)
             for country_id in sorted(self.territory.keys()):
-                print >> outfile, "from .region_%s import PHONE_METADATA_%s" % (country_id, country_id)
+                prnt("from .region_%s import PHONE_METADATA_%s" % (country_id, country_id), file=outfile)
             if self.alt_territory is not None:
                 for country_code in sorted(self.alt_territory.keys()):
-                    print >> outfile, "from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code)
-                print >> outfile, ("_ALT_NUMBER_FORMATS = {%s}" %
-                                   ", ".join(["%s: PHONE_ALT_FORMAT_%s" % (cc, cc) for cc in sorted(self.alt_territory.keys())]))
+                    prnt("from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code), file=outfile)
+                prnt("_ALT_NUMBER_FORMATS = {%s}" %
+                     ", ".join(["%s: PHONE_ALT_FORMAT_%s" % (cc, cc) for cc in sorted(self.alt_territory.keys())]),
+                     file=outfile)
             # Emit the mapping from country code to region code
-            print >> outfile, _COUNTRY_CODE_TO_REGION_CODE_PROLOG
-            print >> outfile, "_COUNTRY_CODE_TO_REGION_CODE = {"
+            prnt(_COUNTRY_CODE_TO_REGION_CODE_PROLOG, file=outfile)
+            prnt("_COUNTRY_CODE_TO_REGION_CODE = {", file=outfile)
             # Build up the map
             country_code_to_region_code = {}
             for country_id in sorted(self.territory.keys()):
@@ -526,8 +543,8 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
             for country_code in sorted(country_code_to_region_code.keys()):
                 country_ids = country_code_to_region_code[country_code]
-                print >> outfile, '    %d: ("%s",),' % (country_code, '", "'.join(country_ids))
-            print >> outfile, "}"
+                prnt('    %d: ("%s",),' % (country_code, '", "'.join(country_ids)), file=outfile)
+            prnt("}", file=outfile)
 
 
 def _standalone(argv):
@@ -536,21 +553,21 @@ def _standalone(argv):
     try:
         opts, args = getopt.getopt(argv, "ha:", ("help", "alt="))
     except getopt.GetoptError:
-        print >> sys.stderr, __doc__
+        prnt(__doc__, file=sys.stderr)
         sys.exit(1)
     for opt, arg in opts:
         if opt in ("-h", "--help"):
-            print >> sys.stderr, __doc__
+            prnt(__doc__, file=sys.stderr)
             sys.exit(1)
         elif opt in ("-a", "--alt"):
             alternate = arg
         else:
-            print >> sys.stderr, "Unknown option %s" % opt
-            print >> sys.stderr, __doc__
+            prnt("Unknown option %s" % opt, file=sys.stderr)
+            prnt(__doc__, file=sys.stderr)
             sys.exit(1)
 
     if len(args) != 3:
-        print >> sys.stderr, __doc__
+        prnt(__doc__, file=sys.stderr)
         sys.exit(1)
     pmd = XPhoneNumberMetadata(args[0])
     if alternate is not None:
