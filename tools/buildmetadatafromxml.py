@@ -73,8 +73,8 @@ _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
 # "main_country_for_code" in the metadata should be first.'''
 
 # Boilerplate header for individual region data files
-_REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %s metadata"""
-from %s.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+_REGION_METADATA_PROLOG = '''"""Auto-generated file, do not edit by hand. %(region)s metadata"""
+from %(module)s.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 '''
 
 # Boilerplate header for individual country-code alternate number format data files
@@ -469,7 +469,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
         """Emit Python code generating the metadata for the given region"""
         terrobj = self.territory[region]
         with open(region_filename, "w") as outfile:
-            print >> outfile, _REGION_METADATA_PROLOG % (terrobj.identifier(), module_prefix)
+            print >> outfile, _REGION_METADATA_PROLOG % {'region': terrobj.identifier(), 'module': module_prefix}
             print >> outfile, "PHONE_METADATA_%s = %s" % (terrobj.identifier(), terrobj)
 
     def emit_alt_formats_for_cc_py(self, cc, cc_filename, module_prefix):
