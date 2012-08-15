@@ -106,13 +106,14 @@ $(PY3DIR)/tests: | $(PY3DIR)
 $(PY3DIR)/tests/testgeodata:
 	mkdir $@
 
+# Always convert as a batch
 $(PY3DIR)/phonenumbers/%.py: $(PYDIR)/phonenumbers/%.py | $(PY3DIR)/phonenumbers
-	cp $< $@
-	2to3 --write --nobackups $@ > /dev/null 2>&1
-	2to3 --write --doctests_only --nobackups $@ > /dev/null 2>&1
+	cp $(PYDIR)/phonenumbers/*.py $(PY3DIR)/phonenumbers
+	2to3 --write --nobackups $(PY3DIR)/phonenumbers/*.py > /dev/null 2>&1
+	2to3 --write --doctests_only --nobackups $(PY3DIR)/phonenumbers/*.py > /dev/null 2>&1
 $(PY3DIR)/tests/%.py: $(PYDIR)/tests/%.py | $(PY3DIR)/tests
-	cp $< $@
-	2to3 --write --nobackups $@ > /dev/null 2>&1
+	cp $(PYDIR)/tests/*.py $(PY3DIR)/tests
+	2to3 --write --nobackups $(PY3DIR)/tests/*.py > /dev/null 2>&1
 $(PY3DIR)/%.py: $(PYDIR)/%.py | $(PY3DIR)
 	cp $< $@
 	2to3 --write --nobackups $@ > /dev/null 2>&1
@@ -135,7 +136,7 @@ meta3data: $(PY3DIR)/phonenumbers/data/__init__.py $(PY3DIR)/tests/testdata/__in
 
 all3data: meta3data geo3data locale3
 
-test3: all3data
+test3: python3 all3data
 	cd $(PY3DIR) && $(PYTHON3) -m testwrapper
 
 # Packaging
