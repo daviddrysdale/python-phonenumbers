@@ -101,4 +101,6 @@ Project Layout
   directory from
   [libphonenumber](http://code.google.com/p/libphonenumber/source/browse/#svn%2Ftrunk%2Fresources).
   This is not needed to run the Python code, but is needed when upstream
-  changes to the master XML metadata need to be incorporated.
+  changes to the master metadata need to be incorporated.
+* The `tools/` directory holds the tools that are used to process upstream
+  changes to the master metadata.

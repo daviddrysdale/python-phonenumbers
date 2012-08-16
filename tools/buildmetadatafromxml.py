@@ -45,6 +45,25 @@ import getopt
 import datetime
 from xml.etree import ElementTree as etree
 
+# Use the local code in preference to any pre-installed version
+if sys.version_info >= (3, 0):
+    sys.path.insert(0, '../python3/phonenumbers')
+    sys.path.insert(0, '../python3')
+    import builtins
+    prnt = builtins.__dict__['print']
+    u = str
+else:
+    sys.path.insert(0, '../python')
+    def prnt(*args, **kwargs):
+        sep = kwargs.get('sep', ' ')
+        end = kwargs.get('end', '\n')
+        file = kwargs.get('file', None)
+        if file is None:
+            file = sys.stdout
+        print >> file, sep.join([str(arg) for arg in args]) + end,
+    def u(s):
+        return unicode(s)
+
 # Pull in the data structure definitions
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 from phonenumbers.util import UnicodeMixin, u, prnt
@@ -174,7 +193,7 @@ class XAlternateNumberFormat(UnicodeMixin):
             # Currently this assumes no intlFormat elements in the element
 
     def __unicode__(self):
-        return unicode(self.o)
+        return u(self.o)
 
 
 class XNumberFormat(UnicodeMixin):
@@ -505,7 +524,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
                 for country_code in sorted(self.alt_territory.keys()):
                     prnt("from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code), file=outfile)
                 prnt("_ALT_NUMBER_FORMATS = {%s}" %
-                     ", ".join(["%s: PHONE_ALT_FORMAT_%s" % (cc, cc) for cc in sorted(self.alt_territory.keys())]), 
+                     ", ".join(["%s: PHONE_ALT_FORMAT_%s" % (cc, cc) for cc in sorted(self.alt_territory.keys())]),
                      file=outfile)
             # Emit the mapping from country code to region code
             prnt(_COUNTRY_CODE_TO_REGION_CODE_PROLOG, file=outfile)

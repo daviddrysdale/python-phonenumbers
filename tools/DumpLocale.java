@@ -72,6 +72,7 @@ class DumpLocale {
   }
 
   public static void main(String[] args) {
+    // Check for mode
     printProlog();
     System.out.println("LOCALE_DATA = {");
     String[] all_countries = Locale.getISOCountries();
