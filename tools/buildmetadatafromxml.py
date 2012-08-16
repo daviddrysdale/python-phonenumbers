@@ -46,23 +46,7 @@ import datetime
 from xml.etree import ElementTree as etree
 
 # Use the local code in preference to any pre-installed version
-if sys.version_info >= (3, 0):
-    sys.path.insert(0, '../python3/phonenumbers')
-    sys.path.insert(0, '../python3')
-    import builtins
-    prnt = builtins.__dict__['print']
-    u = str
-else:
-    sys.path.insert(0, '../python')
-    def prnt(*args, **kwargs):
-        sep = kwargs.get('sep', ' ')
-        end = kwargs.get('end', '\n')
-        file = kwargs.get('file', None)
-        if file is None:
-            file = sys.stdout
-        print >> file, sep.join([str(arg) for arg in args]) + end,
-    def u(s):
-        return unicode(s)
+sys.path.insert(0, '../python')
 
 # Pull in the data structure definitions
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
