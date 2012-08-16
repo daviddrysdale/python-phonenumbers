@@ -43,6 +43,7 @@ else:
         if file is None:
             file = sys.stdout
         print >> file, sep.join([str(arg) for arg in args]) + end,
+
     def u(s):
         return unicode(s)
 

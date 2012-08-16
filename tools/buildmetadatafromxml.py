@@ -54,6 +54,7 @@ if sys.version_info >= (3, 0):
     u = str
 else:
     sys.path.insert(0, '../python')
+
     def prnt(*args, **kwargs):
         sep = kwargs.get('sep', ' ')
         end = kwargs.get('end', '\n')
@@ -61,6 +62,7 @@ else:
         if file is None:
             file = sys.stdout
         print >> file, sep.join([str(arg) for arg in args]) + end,
+
     def u(s):
         return unicode(s)
 
