@@ -31,7 +31,7 @@ import re
 import datetime
 
 # Use the local code in preference to any pre-installed version
-sys.path.insert(0, '../python')
+sys.path.insert(0, '../../python')
 
 from phonenumbers.util import prnt, rpr
 

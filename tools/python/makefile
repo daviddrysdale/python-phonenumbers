@@ -1,6 +1,6 @@
 PYTHON=python
 PACKAGE=phonenumbers
-TOPDIR=..
+TOPDIR=../..
 PYDIR=$(TOPDIR)/python
 
 all: alldata
