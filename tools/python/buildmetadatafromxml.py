@@ -47,13 +47,13 @@ from xml.etree import ElementTree as etree
 
 # Use the local code in preference to any pre-installed version
 if sys.version_info >= (3, 0):
-    sys.path.insert(0, '../python3/phonenumbers')
-    sys.path.insert(0, '../python3')
+    sys.path.insert(0, '../../python3/phonenumbers')
+    sys.path.insert(0, '../../python3')
     import builtins
     prnt = builtins.__dict__['print']
     u = str
 else:
-    sys.path.insert(0, '../python')
+    sys.path.insert(0, '../../python')
 
     def prnt(*args, **kwargs):
         sep = kwargs.get('sep', ' ')
