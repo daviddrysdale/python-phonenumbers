@@ -265,12 +265,13 @@ from .region_YT import PHONE_METADATA_YT
 from .region_ZA import PHONE_METADATA_ZA
 from .region_ZM import PHONE_METADATA_ZM
 from .region_ZW import PHONE_METADATA_ZW
+from .alt_format_43 import PHONE_ALT_FORMAT_43
 from .alt_format_44 import PHONE_ALT_FORMAT_44
 from .alt_format_49 import PHONE_ALT_FORMAT_49
 from .alt_format_55 import PHONE_ALT_FORMAT_55
 from .alt_format_61 import PHONE_ALT_FORMAT_61
 from .alt_format_81 import PHONE_ALT_FORMAT_81
-_ALT_NUMBER_FORMATS = {44: PHONE_ALT_FORMAT_44, 49: PHONE_ALT_FORMAT_49, 55: PHONE_ALT_FORMAT_55, 61: PHONE_ALT_FORMAT_61, 81: PHONE_ALT_FORMAT_81}
+_ALT_NUMBER_FORMATS = {43: PHONE_ALT_FORMAT_43, 44: PHONE_ALT_FORMAT_44, 49: PHONE_ALT_FORMAT_49, 55: PHONE_ALT_FORMAT_55, 61: PHONE_ALT_FORMAT_61, 81: PHONE_ALT_FORMAT_81}
 
 # A mapping from a country code to the region codes which
 # denote the country/region represented by that country code.

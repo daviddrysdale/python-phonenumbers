@@ -37,7 +37,7 @@ test: alldata
 
 # Coverage; requires coverage module
 COVERAGE=$(shell hash python-coverage 2>&- && echo python-coverage || echo coverage)
-COVERAGE_FILES=$(PYDIR)/phonenumbers/*.py
+COVERAGE_FILES=$(subst $(PYDIR),.,$(wildcard $(PYDIR)/phonenumbers/*.py))
 coverage: alldata $(PYDIR)/tests/testdata/__init__.py coverage_clean coverage_generate coverage_report
 coverage_clean:
 	cd $(PYDIR) && $(COVERAGE) -e
