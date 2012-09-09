@@ -33,7 +33,11 @@ from .phonenumberutil import _VALID_PUNCTUATION, REGION_CODE_FOR_NON_GEO_ENTITY
 from .phonenumberutil import _PLUS_SIGN, _PLUS_CHARS_PATTERN
 from .phonenumberutil import _extract_country_code, region_code_for_country_code
 from .phonenumberutil import country_code_for_region
+from .phonenumberutil import _formatting_rule_has_first_group_only
 
+# Character used when appropriate to separate a prefix, such as a long NDD or
+# a country calling code, from the national number.
+_SEPARATOR_BEFORE_NATIONAL_NUMBER = u' '
 _EMPTY_METADATA = PhoneMetadata(id=u"", international_prefix=u"NA", register=False)
 
 # A pattern that is used to match character classes in regular expressions. An
@@ -45,6 +49,10 @@ _CHARACTER_CLASS_PATTERN = re.compile(u"\\[([^\\[\\]])*\\]")
 # Two look-aheads are needed because the number following \\d could be a
 # two-digit number, since the phone number can be as long as 15 digits.
 _STANDALONE_DIGIT_PATTERN = re.compile(u"\\d(?=[^,}][^,}])")
+
+# A set of characters that, if found in a national prefix formatting rules, are an indicator to
+# us that we should separate the national prefix from the number when formatting.
+_NATIONAL_PREFIX_SEPARATORS_PATTERN = re.compile("[- ]")
 
 # A pattern that is used to determine if a number_format under
 # available_formats is eligible to be used by the AYTF. It is eligible when
@@ -107,6 +115,10 @@ class AsYouTypeFormatter(object):
                 return False
             if self._create_formatting_template(number_format):
                 self._current_formatting_pattern = pattern
+                if number_format.national_prefix_formatting_rule is None:
+                    self._should_add_space_after_national_prefix = False
+                else:
+                    self._should_add_space_after_national_prefix = bool(_NATIONAL_PREFIX_SEPARATORS_PATTERN.search(number_format.national_prefix_formatting_rule))
                 # With a new formatting template, the matched position using
                 # the old template needs to be reset.
                 self._last_match_position = 0
@@ -120,14 +132,16 @@ class AsYouTypeFormatter(object):
         return False
 
     def _get_available_formats(self, leading_three_digits):
-        if (self._is_international_formatting and
+        if (self._is_complete_number and
             len(self._current_metadata.intl_number_format) > 0):
             format_list = self._current_metadata.intl_number_format
         else:
             format_list = self._current_metadata.number_format
         for this_format in format_list:
-            if self._is_format_eligible(this_format.format):
-                self._possible_formats.append(this_format)
+            if (self._is_complete_number or this_format.national_prefix_optional_when_formatting or
+                _formatting_rule_has_first_group_only(this_format.national_prefix_formatting_rule)):
+                if self._is_format_eligible(this_format.format):
+                    self._possible_formats.append(this_format)
         self._narrow_down_possible_formats(leading_three_digits)
 
     def _is_format_eligible(self, format):
@@ -207,6 +221,7 @@ class AsYouTypeFormatter(object):
         # inserted). For example, this can contain IDD, country code, and/or
         # NDD, etc.
         self._prefix_before_national_number = ""
+        self._should_add_space_after_national_prefix = False
         # This contains the national prefix that has been extracted. It
         # contains only digits without formatting.
         self._national_prefix_extracted = ""
@@ -225,7 +240,11 @@ class AsYouTypeFormatter(object):
         # most recently invoked, as found in the original sequence of
         # characters the user entered.
         self._original_position = 0
-        self._is_international_formatting = False
+        # This is set to true when we know the user is entering a full
+        # national significant number, since we have either detected a
+        # national prefix or an international dialing prefix. When this is
+        # true, we will no longer use local number formatting patterns.
+        self._is_complete_number = False
         self._is_expecting_country_calling_code = False
         self._possible_formats = []
 
@@ -281,8 +300,11 @@ class AsYouTypeFormatter(object):
                     return self._current_output
             elif self._able_to_extract_longer_ndd():
                 # Add an additional space to separate long NDD and national
-                # significant number for readability.
-                self._prefix_before_national_number += " "
+                # significant number for readability. We don't set
+                # should_add_space_after_national_prefix to True, since we don't
+                # want this to change later when we choose formatting
+                # templates.
+                self._prefix_before_national_number += _SEPARATOR_BEFORE_NATIONAL_NUMBER
                 self._current_output = self._attempt_to_choose_pattern_with_prefix_extracted()
                 return self._current_output
 
@@ -310,8 +332,7 @@ class AsYouTypeFormatter(object):
             self._current_output = self._prefix_before_national_number + self._national_number
             return self._current_output
 
-        if len(self._possible_formats) > 0:
-            # The formatting pattern is already chosen.
+        if len(self._possible_formats) > 0:  # The formatting pattern is already chosen.
             temp_national_number = self._input_digit_helper(next_char)
             # See if the accrued digits can be formatted properly already. If
             # not, use the results from input_digit_helper, which does
@@ -325,7 +346,7 @@ class AsYouTypeFormatter(object):
                 self._current_output = self._input_accrued_national_number()
                 return self._current_output
             if self._able_to_format:
-                self._current_output = self._prefix_before_national_number + temp_national_number
+                self._current_output = self._append_national_number(temp_national_number)
                 return self._current_output
             else:
                 self._current_output = self._accrued_input
@@ -362,11 +383,18 @@ class AsYouTypeFormatter(object):
                  fullmatch(_PLUS_CHARS_PATTERN, next_char)))
 
     def _attempt_to_format_accrued_digits(self):
-        for num_format in self._possible_formats:
-            num_re = re.compile(num_format.pattern)
+        """Check to see if there is an exact pattern match for these digits. If so, we should use this
+        instead of any other formatting template whose leadingDigitsPattern also matches the input.
+        """
+        for number_format in self._possible_formats:
+            num_re = re.compile(number_format.pattern)
             if fullmatch(num_re, self._national_number):
-                formatted_number = re.sub(num_re, num_format.format, self._national_number)
-                return self._prefix_before_national_number + formatted_number
+                if number_format.national_prefix_formatting_rule is None:
+                    self._should_add_space_after_national_prefix = False
+                else:
+                    self._should_add_space_after_national_prefix = bool(_NATIONAL_PREFIX_SEPARATORS_PATTERN.search(number_format.national_prefix_formatting_rule))
+                formatted_number = re.sub(num_re, number_format.format, self._national_number)
+                return self._append_national_number(formatted_number)
         return ""
 
     def get_remembered_position(self):
@@ -385,6 +413,23 @@ class AsYouTypeFormatter(object):
             current_output_index += 1
         return current_output_index
 
+    def _append_national_number(self, national_number):
+        """Combines the national number with any prefix (IDD/+ and country
+        code or national prefix) that was collected. A space will be inserted
+        between them if the current formatting template indicates this to be
+        suitable.
+        """
+        prefix_before_nn_len = len(self._prefix_before_national_number)
+        if (self._should_add_space_after_national_prefix and prefix_before_nn_len > 0 and
+            self._prefix_before_national_number[-1] != _SEPARATOR_BEFORE_NATIONAL_NUMBER):
+            # We want to add a space after the national prefix if the national
+            # prefix formatting rule indicates that this would normally be
+            # done, with the exception of the case where we already appended a
+            # space because the NDD was surprisingly long.
+            return self._prefix_before_national_number + _SEPARATOR_BEFORE_NATIONAL_NUMBER + national_number
+        else:
+            return self._prefix_before_national_number + national_number
+
     def _attempt_to_choose_formatting_pattern(self):
         """Attempts to set the formatting template and returns a string which
         contains the formatted version of the digits entered so far."""
@@ -397,7 +442,7 @@ class AsYouTypeFormatter(object):
             else:
                 return self._accrued_input
         else:
-            return self._prefix_before_national_number + self._national_number
+            return self._append_national_number(self._national_number)
 
     def _input_accrued_national_number(self):
         """Invokes input_digit_helper on each digit of the national number
@@ -408,18 +453,30 @@ class AsYouTypeFormatter(object):
             for ii in xrange(length_of_national_number):
                 temp_national_number = self._input_digit_helper(self._national_number[ii])
             if self._able_to_format:
-                return self._prefix_before_national_number + temp_national_number
+                return self._append_national_number(temp_national_number)
             else:
                 return self._accrued_input
         else:
             return self._prefix_before_national_number
 
+    def _is_nanpa_number_with_national_prefix(self):
+        """Returns true if the current country is a NANPA country and the
+        national number begins with the national prefix.
+        """
+        # For NANPA numbers beginning with 1[2-9], treat the 1 as the national
+        # prefix. The reason is that national significant numbers in NANPA
+        # always start with [2-9] after the national prefix.  Numbers
+        # beginning with 1[01] can only be short/emergency numbers, which
+        # don't need the national prefix.
+        return (self._current_metadata.country_code == 1 and self._national_number[0] == '1' and
+                self._national_number[1] != '0' and self._national_number[1] != '1')
+
     def _remove_national_prefix_from_national_number(self):
         start_of_national_number = 0
-        if self._current_metadata.country_code == 1 and self._national_number[0] == '1':
+        if self._is_nanpa_number_with_national_prefix():
             start_of_national_number = 1
-            self._prefix_before_national_number += "1 "
-            self._is_international_formatting = True
+            self._prefix_before_national_number += "1" + _SEPARATOR_BEFORE_NATIONAL_NUMBER
+            self._is_complete_number = True
         elif self._current_metadata.national_prefix_for_parsing is not None:
             npp_re = re.compile(self._current_metadata.national_prefix_for_parsing)
             m = npp_re.match(self._national_number)
@@ -428,7 +485,7 @@ class AsYouTypeFormatter(object):
                 # formatting rules instead of national ones, because national
                 # formatting rules could contain local formatting rules for
                 # numbers entered without area code.
-                self._is_international_formatting = True
+                self._is_complete_number = True
                 start_of_national_number = m.end()
                 self._prefix_before_national_number += self._national_number[:start_of_national_number]
         national_prefix = self._national_number[:start_of_national_number]
@@ -446,12 +503,12 @@ class AsYouTypeFormatter(object):
         international_prefix = re.compile("\\" + _PLUS_SIGN + "|" + self._current_metadata.international_prefix)
         idd_match = international_prefix.match(self._accrued_input_without_formatting)
         if idd_match:
-            self._is_international_formatting = True
+            self._is_complete_number = True
             start_of_country_calling_code = idd_match.end()
             self._national_number = self._accrued_input_without_formatting[start_of_country_calling_code:]
             self._prefix_before_national_number = self._accrued_input_without_formatting[:start_of_country_calling_code]
             if self._accrued_input_without_formatting[0] != _PLUS_SIGN:
-                self._prefix_before_national_number += " "
+                self._prefix_before_national_number += _SEPARATOR_BEFORE_NATIONAL_NUMBER
             return True
         return False
 
@@ -478,7 +535,7 @@ class AsYouTypeFormatter(object):
             self._current_metadata = _get_metadata_for_region(new_region_code)
 
         self._prefix_before_national_number += str(country_code)
-        self._prefix_before_national_number += " "
+        self._prefix_before_national_number += _SEPARATOR_BEFORE_NATIONAL_NUMBER
         return True
 
     def _normalize_and_accrue_digits_and_plus_sign(self, next_char, remember_position):

@@ -91,6 +91,33 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         self.assertEqual("+81901234567890", formatter.input_digit('0'))
         self.assertEqual("+819012345678901", formatter.input_digit('1'))
 
+    def testCountryWithSpaceInNationalPrefixFormattingRule(self):
+        formatter = AsYouTypeFormatter("BY")
+        self.assertEqual("8", formatter.input_digit('8'))
+        self.assertEqual("88", formatter.input_digit('8'))
+        self.assertEqual("881", formatter.input_digit('1'))
+        self.assertEqual("8 819", formatter.input_digit('9'))
+        self.assertEqual("8 8190", formatter.input_digit('0'))
+        # The formatting rule for 5 digit numbers states that no space should
+        # be present after the national prefix.
+        self.assertEqual("881 901", formatter.input_digit('1'))
+        self.assertEqual("8 819 012", formatter.input_digit('2'))
+        # Too long, no formatting rule applies.
+        self.assertEqual("88190123", formatter.input_digit('3'))
+
+    def testCountryWithSpaceInNationalPrefixFormattingRuleAndLongNdd(self):
+        formatter = AsYouTypeFormatter("BY")
+        self.assertEqual("9", formatter.input_digit('9'))
+        self.assertEqual("99", formatter.input_digit('9'))
+        self.assertEqual("999", formatter.input_digit('9'))
+        self.assertEqual("9999", formatter.input_digit('9'))
+        self.assertEqual("99999 ", formatter.input_digit('9'))
+        self.assertEqual("99999 1", formatter.input_digit('1'))
+        self.assertEqual("99999 12", formatter.input_digit('2'))
+        self.assertEqual("99999 123", formatter.input_digit('3'))
+        self.assertEqual("99999 1234", formatter.input_digit('4'))
+        self.assertEqual("99999 12 345", formatter.input_digit('5'))
+
     def testAYTFUS(self):
         formatter = AsYouTypeFormatter("US")
         self.assertEqual("6", formatter.input_digit('6'))
@@ -878,6 +905,185 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         self.assertEqual("777777 9876 78", formatter.input_digit('8'))
         self.assertEqual("777777 9876 789", formatter.input_digit('9'))
         self.assertEqual("777777 9876 7890", formatter.input_digit('0'))
+
+    def testAYTFShortNumberFormattingFix_AU(self):
+        # For Australia, the national prefix is not optional when formatting.
+        formatter = AsYouTypeFormatter("AU")
+
+        # 1234567890 - For leading digit 1, the national prefix formatting
+        # rule has first group only.
+        self.assertEqual("1", formatter.input_digit('1'))
+        self.assertEqual("12", formatter.input_digit('2'))
+        self.assertEqual("123", formatter.input_digit('3'))
+        self.assertEqual("1234", formatter.input_digit('4'))
+        self.assertEqual("1234 5", formatter.input_digit('5'))
+        self.assertEqual("1234 56", formatter.input_digit('6'))
+        self.assertEqual("1234 567", formatter.input_digit('7'))
+        self.assertEqual("1234 567 8", formatter.input_digit('8'))
+        self.assertEqual("1234 567 89", formatter.input_digit('9'))
+        self.assertEqual("1234 567 890", formatter.input_digit('0'))
+
+        # +61 1234 567 890 - Test the same number, but with the country code.
+        formatter.clear()
+        self.assertEqual("+", formatter.input_digit('+'))
+        self.assertEqual("+6", formatter.input_digit('6'))
+        self.assertEqual("+61 ", formatter.input_digit('1'))
+        self.assertEqual("+61 1", formatter.input_digit('1'))
+        self.assertEqual("+61 12", formatter.input_digit('2'))
+        self.assertEqual("+61 123", formatter.input_digit('3'))
+        self.assertEqual("+61 1234", formatter.input_digit('4'))
+        self.assertEqual("+61 1234 5", formatter.input_digit('5'))
+        self.assertEqual("+61 1234 56", formatter.input_digit('6'))
+        self.assertEqual("+61 1234 567", formatter.input_digit('7'))
+        self.assertEqual("+61 1234 567 8", formatter.input_digit('8'))
+        self.assertEqual("+61 1234 567 89", formatter.input_digit('9'))
+        self.assertEqual("+61 1234 567 890", formatter.input_digit('0'))
+
+        # 212345678 - For leading digit 2, the national prefix formatting rule
+        # puts the national prefix before the first group.
+        formatter.clear()
+        self.assertEqual("0", formatter.input_digit('0'))
+        self.assertEqual("02", formatter.input_digit('2'))
+        self.assertEqual("021", formatter.input_digit('1'))
+        self.assertEqual("02 12", formatter.input_digit('2'))
+        self.assertEqual("02 123", formatter.input_digit('3'))
+        self.assertEqual("02 1234", formatter.input_digit('4'))
+        self.assertEqual("02 1234 5", formatter.input_digit('5'))
+        self.assertEqual("02 1234 56", formatter.input_digit('6'))
+        self.assertEqual("02 1234 567", formatter.input_digit('7'))
+        self.assertEqual("02 1234 5678", formatter.input_digit('8'))
+
+        # 212345678 - Test the same number, but without the leading 0.
+        formatter.clear()
+        self.assertEqual("2", formatter.input_digit('2'))
+        self.assertEqual("21", formatter.input_digit('1'))
+        self.assertEqual("212", formatter.input_digit('2'))
+        self.assertEqual("2123", formatter.input_digit('3'))
+        self.assertEqual("21234", formatter.input_digit('4'))
+        self.assertEqual("212345", formatter.input_digit('5'))
+        self.assertEqual("2123456", formatter.input_digit('6'))
+        self.assertEqual("21234567", formatter.input_digit('7'))
+        self.assertEqual("212345678", formatter.input_digit('8'))
+
+        # +61 2 1234 5678 - Test the same number, but with the country code.
+        formatter.clear()
+        self.assertEqual("+", formatter.input_digit('+'))
+        self.assertEqual("+6", formatter.input_digit('6'))
+        self.assertEqual("+61 ", formatter.input_digit('1'))
+        self.assertEqual("+61 2", formatter.input_digit('2'))
+        self.assertEqual("+61 21", formatter.input_digit('1'))
+        self.assertEqual("+61 2 12", formatter.input_digit('2'))
+        self.assertEqual("+61 2 123", formatter.input_digit('3'))
+        self.assertEqual("+61 2 1234", formatter.input_digit('4'))
+        self.assertEqual("+61 2 1234 5", formatter.input_digit('5'))
+        self.assertEqual("+61 2 1234 56", formatter.input_digit('6'))
+        self.assertEqual("+61 2 1234 567", formatter.input_digit('7'))
+        self.assertEqual("+61 2 1234 5678", formatter.input_digit('8'))
+
+    def testAYTFShortNumberFormattingFix_KR(self):
+        # For Korea, the national prefix is not optional when formatting, and
+        # the national prefix formatting rule doesn't consist of only the
+        # first group.
+        formatter = AsYouTypeFormatter("KR")
+
+        # 111
+        self.assertEqual("1", formatter.input_digit('1'))
+        self.assertEqual("11", formatter.input_digit('1'))
+        self.assertEqual("111", formatter.input_digit('1'))
+
+        # 114
+        formatter.clear()
+        self.assertEqual("1", formatter.input_digit('1'))
+        self.assertEqual("11", formatter.input_digit('1'))
+        self.assertEqual("114", formatter.input_digit('4'))
+
+        # 13121234 - Test a mobile number without the national prefix. Even
+        # though it is not an emergency number, it should be formatted as a
+        # block.
+        formatter.clear()
+        self.assertEqual("1", formatter.input_digit('1'))
+        self.assertEqual("13", formatter.input_digit('3'))
+        self.assertEqual("131", formatter.input_digit('1'))
+        self.assertEqual("1312", formatter.input_digit('2'))
+        self.assertEqual("13121", formatter.input_digit('1'))
+        self.assertEqual("131212", formatter.input_digit('2'))
+        self.assertEqual("1312123", formatter.input_digit('3'))
+        self.assertEqual("13121234", formatter.input_digit('4'))
+
+        # +82 131-2-1234 - Test the same number, but with the country code.
+        formatter.clear()
+        self.assertEqual("+", formatter.input_digit('+'))
+        self.assertEqual("+8", formatter.input_digit('8'))
+        self.assertEqual("+82 ", formatter.input_digit('2'))
+        self.assertEqual("+82 1", formatter.input_digit('1'))
+        self.assertEqual("+82 13", formatter.input_digit('3'))
+        self.assertEqual("+82 131", formatter.input_digit('1'))
+        self.assertEqual("+82 131-2", formatter.input_digit('2'))
+        self.assertEqual("+82 131-2-1", formatter.input_digit('1'))
+        self.assertEqual("+82 131-2-12", formatter.input_digit('2'))
+        self.assertEqual("+82 131-2-123", formatter.input_digit('3'))
+        self.assertEqual("+82 131-2-1234", formatter.input_digit('4'))
+
+    def testAYTFShortNumberFormattingFix_MX(self):
+        # For Mexico, the national prefix is optional when formatting.
+        formatter = AsYouTypeFormatter("MX")
+
+        # 911
+        self.assertEqual("9", formatter.input_digit('9'))
+        self.assertEqual("91", formatter.input_digit('1'))
+        self.assertEqual("911", formatter.input_digit('1'))
+
+        # 800 123 4567 - Test a toll-free number, which should have a
+        # formatting rule applied to it even though it doesn't begin with the
+        # national prefix.
+        formatter.clear()
+        self.assertEqual("8", formatter.input_digit('8'))
+        self.assertEqual("80", formatter.input_digit('0'))
+        self.assertEqual("800", formatter.input_digit('0'))
+        self.assertEqual("800 1", formatter.input_digit('1'))
+        self.assertEqual("800 12", formatter.input_digit('2'))
+        self.assertEqual("800 123", formatter.input_digit('3'))
+        self.assertEqual("800 123 4", formatter.input_digit('4'))
+        self.assertEqual("800 123 45", formatter.input_digit('5'))
+        self.assertEqual("800 123 456", formatter.input_digit('6'))
+        self.assertEqual("800 123 4567", formatter.input_digit('7'))
+
+        # +52 800 123 4567 - Test the same number, but with the country code.
+        formatter.clear()
+        self.assertEqual("+", formatter.input_digit('+'))
+        self.assertEqual("+5", formatter.input_digit('5'))
+        self.assertEqual("+52 ", formatter.input_digit('2'))
+        self.assertEqual("+52 8", formatter.input_digit('8'))
+        self.assertEqual("+52 80", formatter.input_digit('0'))
+        self.assertEqual("+52 800", formatter.input_digit('0'))
+        self.assertEqual("+52 800 1", formatter.input_digit('1'))
+        self.assertEqual("+52 800 12", formatter.input_digit('2'))
+        self.assertEqual("+52 800 123", formatter.input_digit('3'))
+        self.assertEqual("+52 800 123 4", formatter.input_digit('4'))
+        self.assertEqual("+52 800 123 45", formatter.input_digit('5'))
+        self.assertEqual("+52 800 123 456", formatter.input_digit('6'))
+        self.assertEqual("+52 800 123 4567", formatter.input_digit('7'))
+
+    def testAYTFShortNumberFormattingFix_US(self):
+        # For the US, an initial 1 is treated specially.
+        formatter = AsYouTypeFormatter("US")
+
+        # 101 - Test that the initial 1 is not treated as a national prefix.
+        self.assertEqual("1", formatter.input_digit('1'))
+        self.assertEqual("10", formatter.input_digit('0'))
+        self.assertEqual("101", formatter.input_digit('1'))
+
+        # 112 - Test that the initial 1 is not treated as a national prefix.
+        formatter.clear()
+        self.assertEqual("1", formatter.input_digit('1'))
+        self.assertEqual("11", formatter.input_digit('1'))
+        self.assertEqual("112", formatter.input_digit('2'))
+
+        # 122 - Test that the initial 1 is treated as a national prefix.
+        formatter.clear()
+        self.assertEqual("1", formatter.input_digit('1'))
+        self.assertEqual("12", formatter.input_digit('2'))
+        self.assertEqual("1 22", formatter.input_digit('2'))
 
     def testEdgeCases(self):
         # Python version extra tests for coverage

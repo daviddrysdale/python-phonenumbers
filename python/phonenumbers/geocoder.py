@@ -43,8 +43,8 @@ True
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .phonenumberutil import format_number, PhoneNumberFormat, is_valid_number
-from .phonenumberutil import region_code_for_number
+from .phonenumberutil import format_number, PhoneNumberFormat, number_type
+from .phonenumberutil import region_code_for_number, PhoneNumberType
 try:
     from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
     from .geodata.locale import LOCALE_DATA
@@ -177,7 +177,8 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
     or even just "United States".
 
     This function assumes the validity of the number passed in has already
-    been checked.
+    been checked, and that the number is suitable for geocoding.  We consider
+    fixed-line and mobile numbers possible candidates for geocoding.
 
     Arguments:
     numobj -- A valid PhoneNumber object for which we want to get a text
@@ -227,9 +228,18 @@ def description_for_number(numobj, lang, script=None, region=None):
 
     Returns a text description in the given language code, for the given phone
     number, or an empty string if no description is available."""
-    if not is_valid_number(numobj):
+    ntype = number_type(numobj)
+    if ntype == PhoneNumberType.UNKNOWN:
         return ""
+    elif not _can_be_geocoded(ntype):
+        return country_name_for_number(numobj, lang, script, region)
     return description_for_valid_number(numobj, lang, script, region)
+
+
+def _can_be_geocoded(ntype):
+    return (ntype == PhoneNumberType.FIXED_LINE or
+            ntype == PhoneNumberType.MOBILE or
+            ntype == PhoneNumberType.FIXED_LINE_OR_MOBILE)
 
 if __name__ == '__main__':  # pragma no cover
     import doctest
