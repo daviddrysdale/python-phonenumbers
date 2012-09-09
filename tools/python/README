@@ -114,11 +114,11 @@ Standard Python v2.x version:
  - Ensure that python/HISTORY file is up-to-date.
  - Set the __version__ field in python/phonenumbers/__init__.py
  - Check that the list of symbols in python/phonenumbers/__init__.py __all__ is
-   up to date.  The tools/allcheck.py script helps with this.
+   up to date.  The tools/python/allcheck.py script helps with this.
  - Check that the unit tests all run successfully:
-     cd tools && make test
+     cd tools/python && make test
  - Check that Python 2.5 is still supported:
-     cd tools && make PYTHON=python2.5 test
+     cd tools/python && make PYTHON=python2.5 test
  - Create a release-<version> branch and shift to it with:
      git checkout -b release-<version>
  - Push the branch to Github with:
@@ -128,7 +128,7 @@ Standard Python v2.x version:
      cd python && setup.py sdist
  - Create a Debian package deb_dist/python-phonenumbers-<version>-1_all.deb 
    on a Linux machine with:
-     cd tools && make deb
+     cd tools/python && make deb
  - Upload the tarball and Debian package to Github downloads page at:
      https://github.com/daviddrysdale/python-phonenumbers/downloads
  - Push the package to PyPI with:
