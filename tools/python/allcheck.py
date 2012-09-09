@@ -4,20 +4,20 @@ import re
 import glob
 
 # Use the local code in preference to any pre-installed version
-sys.path.insert(0, '../python')
+sys.path.insert(0, '../../python')
 
 import phonenumbers
 
 # Manually grep for top-level identifiers
-INTERNAL_FILES = ['../python/phonenumbers/util.py',
-                  '../python/phonenumbers/re_util.py',
-                  '../python/phonenumbers/unicode_util.py']
+INTERNAL_FILES = ['../../python/phonenumbers/util.py',
+                  '../../python/phonenumbers/re_util.py',
+                  '../../python/phonenumbers/unicode_util.py']
 CLASS_RE = re.compile(r"^class +([A-Za-z][_A-Za-z0-9]+)[ \(:]")
 FUNCTION_RE = re.compile("^def +([A-Za-z][_A-Za-z0-9]+)[ \(]")
 CONSTANT_RE = re.compile("^([A-Z][_A-Z0-9]+) *= *")
 
 grepped_all = set()
-for filename in glob.glob('../python/phonenumbers/*.py'):
+for filename in glob.glob('../../python/phonenumbers/*.py'):
     if filename in INTERNAL_FILES:
         continue
     with file(filename, "r") as infile:
