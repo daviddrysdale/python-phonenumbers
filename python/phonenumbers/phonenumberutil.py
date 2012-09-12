@@ -689,7 +689,7 @@ def _formatting_rule_has_first_group_only(national_prefix_formatting_rule):
     """Helper function to check if the national prefix formatting rule has the
     first group only, i.e., does not start with the national prefix.
     """
-    if national_prefix_formatting_rule is None:
+    if national_prefix_formatting_rule is None:  # pragma no cover
         return False
     return bool(fullmatch(_FIRST_GROUP_ONLY_PREFIX_PATTERN,
                           national_prefix_formatting_rule))
