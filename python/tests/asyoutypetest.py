@@ -1064,6 +1064,15 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         self.assertEqual("+52 800 123 456", formatter.input_digit('6'))
         self.assertEqual("+52 800 123 4567", formatter.input_digit('7'))
 
+    def testAYTFNoNationalPrefix(self):
+        formatter = AsYouTypeFormatter("IT")
+        self.assertEqual("3", formatter.input_digit('3'))
+        self.assertEqual("33", formatter.input_digit('3'))
+        self.assertEqual("333", formatter.input_digit('3'))
+        self.assertEqual("333 3", formatter.input_digit('3'))
+        self.assertEqual("333 33", formatter.input_digit('3'))
+        self.assertEqual("333 333", formatter.input_digit('3'))
+
     def testAYTFShortNumberFormattingFix_US(self):
         # For the US, an initial 1 is treated specially.
         formatter = AsYouTypeFormatter("US")
