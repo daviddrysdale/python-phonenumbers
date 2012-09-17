@@ -15,4 +15,5 @@ PHONE_METADATA_808 = PhoneMetadata(id='001', country_code=808, international_pre
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1 \\2')])
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1 \\2')],
+    leading_zero_possible=True)
