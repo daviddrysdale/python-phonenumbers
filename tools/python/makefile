@@ -59,7 +59,8 @@ profile_report: phonenumbers.pstats
 
 # Packaging
 VERSION=$(shell grep __version__ $(PYDIR)/phonenumbers/__init__.py | sed 's/__version__ = "\(.*\)"/\1/')
-TARBALL=$(PYDIR)/dist/$(PACKAGE)-$(VERSION).tar.gz
+TARBALL_LOCAL=dist/$(PACKAGE)-$(VERSION).tar.gz
+TARBALL=$(PYDIR)/$(TARBALL_LOCAL)
 # Build setuptools packaged tarball $(TARBALL)
 sdist: alldata
 	cd $(PYDIR) && $(PYTHON) setup.py sdist
@@ -94,7 +95,7 @@ DEB_PACKAGE=python-$(PACKAGE)
 DEB_VERSION=$(VERSION)-1_all
 deb: $(PYDIR)/deb_dist/$(DEB_PACKAGE)_$(DEB_VERSION).deb
 
-deb_dist/$(DEB_PACKAGE)_$(VERSION)-1_all.deb: $(TARBALL)
-	py2dsc $(TARBALL)
+$(PYDIR)/deb_dist/$(DEB_PACKAGE)_$(VERSION)-1_all.deb: $(TARBALL)
+	cd $(PYDIR) && py2dsc $(TARBALL_LOCAL)
 	cd $(PYDIR)/deb_dist/$(PACKAGE)-$(VERSION) && dpkg-buildpackage -us -uc -nc
 

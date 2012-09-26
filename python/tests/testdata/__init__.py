@@ -21,6 +21,7 @@ from .region_AR import PHONE_METADATA_AR
 from .region_AU import PHONE_METADATA_AU
 from .region_BR import PHONE_METADATA_BR
 from .region_BS import PHONE_METADATA_BS
+from .region_BY import PHONE_METADATA_BY
 from .region_DE import PHONE_METADATA_DE
 from .region_GB import PHONE_METADATA_GB
 from .region_IT import PHONE_METADATA_IT
@@ -55,6 +56,7 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     82: ("KR",),
     244: ("AO",),
     262: ("RE", "YT",),
+    375: ("BY",),
     376: ("AD",),
     800: ("001",),
     979: ("001",),

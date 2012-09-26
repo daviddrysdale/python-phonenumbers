@@ -326,6 +326,11 @@ _NP_PATTERN = re.compile(u("\\$NP"))
 _FG_PATTERN = re.compile(u("\\$FG"))
 _CC_PATTERN = re.compile(u("\\$CC"))
 
+# A pattern that is used to determine if the national prefix formatting rule
+# has the first group only, i.e., does not start with the national
+# prefix. Note that the pattern explicitly allows for unbalanced parentheses.
+_FIRST_GROUP_ONLY_PREFIX_PATTERN = re.compile("\\(?\\\\1\\)?")
+
 
 class PhoneNumberFormat(object):
     """
@@ -680,6 +685,16 @@ def _normalize_helper(number, replacements, remove_non_matches):
             normalized_number.append(char)
         # If neither of the above are true, we remove this character
     return U_EMPTY_STRING.join(normalized_number)
+
+
+def _formatting_rule_has_first_group_only(national_prefix_formatting_rule):
+    """Helper function to check if the national prefix formatting rule has the
+    first group only, i.e., does not start with the national prefix.
+    """
+    if national_prefix_formatting_rule is None:  # pragma no cover
+        return False
+    return bool(fullmatch(_FIRST_GROUP_ONLY_PREFIX_PATTERN,
+                          national_prefix_formatting_rule))
 
 
 def _is_valid_region_code(region_code):
