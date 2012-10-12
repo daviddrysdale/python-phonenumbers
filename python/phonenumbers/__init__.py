@@ -110,6 +110,7 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, UN
                               number_type,
                               parse,
                               region_code_for_country_code,
+                              region_codes_for_country_code,
                               region_code_for_number,
                               truncate_too_long_number,)
 from .shortnumberutil import connects_to_emergency_number, is_emergency_number
@@ -161,6 +162,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'number_type',
            'parse',
            'region_code_for_country_code',
+           'region_codes_for_country_code',
            'region_code_for_number',
            'truncate_too_long_number',
            # end of items from phonenumberutil.py
