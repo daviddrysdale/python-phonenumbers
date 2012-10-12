@@ -2,9 +2,9 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_OM = PhoneMetadata(id='OM', country_code=968, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='(?:2[3-6]|5|9[2-9])\\d{6}|800\\d{5,6}', possible_number_pattern='\\d{7,9}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='2[3-6]\\d{6}', possible_number_pattern='\\d{8}', example_number='23123456'),
-    mobile=PhoneNumberDesc(national_number_pattern='9[2-9]\\d{6}', possible_number_pattern='\\d{8}', example_number='92123456'),
+    general_desc=PhoneNumberDesc(national_number_pattern='(?:2[2-6]|5|9[1-9])\\d{6}|800\\d{5,6}', possible_number_pattern='\\d{7,9}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='2[2-6]\\d{6}', possible_number_pattern='\\d{8}', example_number='23123456'),
+    mobile=PhoneNumberDesc(national_number_pattern='9[1-9]\\d{6}', possible_number_pattern='\\d{8}', example_number='92123456'),
     toll_free=PhoneNumberDesc(national_number_pattern='8007\\d{4,5}|500\\d{4}', possible_number_pattern='\\d{7,9}', example_number='80071234'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
