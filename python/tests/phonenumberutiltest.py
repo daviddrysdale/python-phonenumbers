@@ -870,6 +870,10 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Python version extra tests
         number101 = phonenumbers.parse("87654321", None, keep_raw_input=True, _check_region=False)
         self.assertEqual("87654321", phonenumbers.format_in_original_format(number101, "US"))
+        number102 = PhoneNumber(country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY,
+                                country_code=44, national_number=999999999L)
+        self.assertEqual("999999999",
+                         phonenumbers.format_in_original_format(number102, "GB"))
 
     def testIsPremiumRate(self):
         self.assertEqual(PhoneNumberType.PREMIUM_RATE, phonenumbers.number_type(US_PREMIUM))
@@ -1084,6 +1088,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(0, phonenumbers.country_code_for_region("001"))
         # CS is already deprecated so the library doesn't support it.
         self.assertEqual(0, phonenumbers.country_code_for_region("CS"))
+        # Python version extra test
+        self.assertRaises(Exception, phonenumbers.country_code_for_valid_region, *("XY",))
 
     def testGetNationalDiallingPrefixForRegion(self):
         self.assertEqual("1", phonenumbers.ndd_prefix_for_region("US", False))
