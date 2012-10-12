@@ -1088,15 +1088,16 @@ def format_in_original_format(numobj, region_calling_from):
         return format_number(numobj, PhoneNumberFormat.NATIONAL)
 
     formatted_number = _format_original_allow_mods(numobj, region_calling_from)
-    raw_input = numobj.raw_input
+    num_raw_input = numobj.raw_input
     # If no digit is inserted/removed/modified as a result of our formatting,
     # we return the formatted phone number; otherwise we return the raw input
     # the user entered.
-    if formatted_number is not None and len(raw_input) > 0:
+    if (formatted_number is not None and
+        num_raw_input is not None and len(num_raw_input) > 0):
         normalized_formatted_number = _normalize_helper(formatted_number, _DIALLABLE_CHAR_MAPPINGS, True)
-        normalized_raw_input = _normalize_helper(raw_input, _DIALLABLE_CHAR_MAPPINGS, True)
+        normalized_raw_input = _normalize_helper(num_raw_input, _DIALLABLE_CHAR_MAPPINGS, True)
         if normalized_formatted_number != normalized_raw_input:
-            formatted_number = raw_input
+            formatted_number = num_raw_input
     return formatted_number
 
 
@@ -1221,21 +1222,21 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
 
     Returns the formatted phone number
     """
-    raw_input = numobj.raw_input
+    num_raw_input = numobj.raw_input
     # If there is no raw input, then we can't keep alpha characters because there aren't any.
     # In this case, we return format_out_of_country_calling_number.
-    if raw_input is None or len(raw_input) == 0:
+    if num_raw_input is None or len(num_raw_input) == 0:
         return format_out_of_country_calling_number(numobj, region_calling_from)
     country_code = numobj.country_code
     if not _has_valid_country_calling_code(country_code):
-        return raw_input
+        return num_raw_input
     # Strip any prefix such as country calling code, IDD, that was present. We
     # do this by comparing the number in raw_input with the parsed number.  To
     # do this, first we normalize punctuation. We retain number grouping
     # symbols such as " " only.
-    raw_input = _normalize_helper(raw_input,
-                                  _ALL_PLUS_NUMBER_GROUPING_SYMBOLS,
-                                  True)
+    num_raw_input = _normalize_helper(num_raw_input,
+                                      _ALL_PLUS_NUMBER_GROUPING_SYMBOLS,
+                                      True)
     # Now we trim everything before the first three digits in the parsed
     # number. We choose three because all valid alpha numbers have 3 digits at
     # the start - if it does not, then we don't trim anything at
@@ -1243,21 +1244,21 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
     # don't trim anything at all.
     national_number = national_significant_number(numobj)
     if len(national_number) > 3:
-        first_national_number_digit = raw_input.find(national_number[:3])
+        first_national_number_digit = num_raw_input.find(national_number[:3])
         if first_national_number_digit != -1:
-            raw_input = raw_input[first_national_number_digit:]
+            num_raw_input = num_raw_input[first_national_number_digit:]
 
     metadata_for_region_calling_from = PhoneMetadata.region_metadata.get(region_calling_from.upper(), None)
     if country_code == _NANPA_COUNTRY_CODE:
         if is_nanpa_country(region_calling_from):
-            return unicode(country_code) + u" " + raw_input
+            return unicode(country_code) + u" " + num_raw_input
     elif (metadata_for_region_calling_from is not None and
           country_code == country_code_for_region(region_calling_from)):
         formatting_pattern = choose_formatting_pattern_for_number(metadata_for_region_calling_from.number_format,
                                                                   national_number)
         if formatting_pattern is None:
             # If no pattern above is matched, we format the original input
-            return raw_input
+            return num_raw_input
         new_format = NumberFormat()
         new_format._mutable = True
         new_format.merge_from(formatting_pattern)
@@ -1273,7 +1274,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
         # leading digits) decide whether a national prefix needs to be used,
         # since we have overridden the pattern to match anything, but that is
         # not the case in the metadata to date.
-        return format_nsn_using_pattern(raw_input,
+        return format_nsn_using_pattern(num_raw_input,
                                         new_format,
                                         PhoneNumberFormat.NATIONAL)
     i18n_prefix_for_formatting = ""
@@ -1294,7 +1295,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
     formatted_number = _maybe_append_formatted_extension(numobj,
                                                          metadata_for_region,
                                                          PhoneNumberFormat.INTERNATIONAL,
-                                                         raw_input)
+                                                         num_raw_input)
     if i18n_prefix_for_formatting is not None and len(i18n_prefix_for_formatting) > 0:
         formatted_number = (i18n_prefix_for_formatting + u" " +
                             unicode(country_code) + u" " + formatted_number)
