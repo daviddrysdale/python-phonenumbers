@@ -238,6 +238,10 @@ def description_for_number(numobj, lang, script=None, region=None):
     return description_for_valid_number(numobj, lang, script, region)
 
 
+# A similar method is implemented as phonenumberutil._is_number_geographical,
+# which performs a stricter check, as it determines if a number has a
+# geographical association. Also, if new phone number types were added, we
+# should check if this other method should be updated too.
 def _can_be_geocoded(ntype):
     return (ntype == PhoneNumberType.FIXED_LINE or
             ntype == PhoneNumberType.MOBILE or

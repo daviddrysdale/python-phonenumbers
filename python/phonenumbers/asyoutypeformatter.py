@@ -376,8 +376,8 @@ class AsYouTypeFormatter(object):
             self._national_number = self._national_prefix_extracted + self._national_number
             # Remove the previously extracted NDD from
             # prefixBeforeNationalNumber. We cannot simply set it to empty
-            # string because people sometimes enter national prefix after
-            # country code, e.g +44 (0)20-1234-5678.
+            # string because people sometimes incorrectly enter national
+            # prefix after the country code, e.g. +44 (0)20-1234-5678.
             index_of_previous_ndd = self._prefix_before_national_number.rfind(self._national_prefix_extracted)
             self._prefix_before_national_number = self._prefix_before_national_number[:index_of_previous_ndd]
         return self._national_prefix_extracted != self._remove_national_prefix_from_national_number()

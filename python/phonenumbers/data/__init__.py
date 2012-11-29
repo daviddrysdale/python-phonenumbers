@@ -30,7 +30,6 @@ from .region_AG import PHONE_METADATA_AG
 from .region_AI import PHONE_METADATA_AI
 from .region_AL import PHONE_METADATA_AL
 from .region_AM import PHONE_METADATA_AM
-from .region_AN import PHONE_METADATA_AN
 from .region_AO import PHONE_METADATA_AO
 from .region_AR import PHONE_METADATA_AR
 from .region_AS import PHONE_METADATA_AS
@@ -433,7 +432,7 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     596: ("MQ",),
     597: ("SR",),
     598: ("UY",),
-    599: ("CW", "AN", "BQ",),
+    599: ("CW", "BQ",),
     670: ("TL",),
     672: ("NF",),
     673: ("BN",),

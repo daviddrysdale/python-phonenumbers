@@ -111,6 +111,7 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, UN
                               number_type,
                               parse,
                               region_code_for_country_code,
+                              region_codes_for_country_code,
                               region_code_for_number,
                               truncate_too_long_number,)
 from .shortnumberutil import connects_to_emergency_number, is_emergency_number
@@ -121,7 +122,7 @@ from .geocoder import (area_description_for_number, country_name_for_number,
 
 # Version number is taken from the upstream libphonenumber version
 # together with an indication of the version of the Python-specific code.
-__version__ = "5.1b1"
+__version__ = "5.2b1"
 
 __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'REGION_CODE_FOR_NON_GEO_ENTITY', 'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
@@ -162,6 +163,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'number_type',
            'parse',
            'region_code_for_country_code',
+           'region_codes_for_country_code',
            'region_code_for_number',
            'truncate_too_long_number',
            # end of items from phonenumberutil.py
