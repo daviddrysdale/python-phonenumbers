@@ -86,6 +86,7 @@ from .region_DZ import PHONE_METADATA_DZ
 from .region_EC import PHONE_METADATA_EC
 from .region_EE import PHONE_METADATA_EE
 from .region_EG import PHONE_METADATA_EG
+from .region_EH import PHONE_METADATA_EH
 from .region_ER import PHONE_METADATA_ER
 from .region_ES import PHONE_METADATA_ES
 from .region_ET import PHONE_METADATA_ET
@@ -325,7 +326,7 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     95: ("MM",),
     98: ("IR",),
     211: ("SS",),
-    212: ("MA",),
+    212: ("MA", "EH",),
     213: ("DZ",),
     216: ("TN",),
     218: ("LY",),

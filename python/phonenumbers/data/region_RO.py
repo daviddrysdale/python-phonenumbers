@@ -18,7 +18,7 @@ PHONE_METADATA_RO = PhoneMetadata(id='RO', country_code=40, international_prefix
     national_prefix='0',
     preferred_extn_prefix=' int ',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([237]\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[23]1|7'], national_prefix_formatting_rule=u'0\\1'),
+    number_format=[NumberFormat(pattern='([237]\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[23]1'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(21)(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['21'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[23][3-7]|[89]'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[23][3-7]|[7-9]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(2\\d{2})(\\d{3})', format=u'\\1 \\2', leading_digits_pattern=['2[3-6]'], national_prefix_formatting_rule=u'0\\1')])
