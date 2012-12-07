@@ -1,1 +1,5 @@
 python3
+*.pyc
+**/*.egg-info/
+**/*.egg
+build/
