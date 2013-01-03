@@ -24,6 +24,12 @@ that the phone number is from (unless the number is in E.164 format).
     Country Code: 44 National Number: 2083661177 Leading Zero: False
     >>> x == y
     True
+    >>> z = phonenumbers.parse("+4412345", None)
+    >>> print z
+    Country Code: 44 National Number: 12345 Leading Zero: False
+    >>> phonenumbers.is_valid_number(z)
+    False
+
 
 Once you've got a phone number, a common task is to format it in a standardized format.  There are a few
 formats available (under `PhoneNumberFormat`), and the `format_number` function does the formatting.
