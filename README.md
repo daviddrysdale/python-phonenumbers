@@ -24,6 +24,12 @@ that the phone number is from (unless the number is in E.164 format).
     Country Code: 44 National Number: 2083661177 Leading Zero: False
     >>> x == y
     True
+    >>> z = phonenumbers.parse("+4412345", None)
+    >>> print z
+    Country Code: 44 National Number: 12345 Leading Zero: False
+    >>> phonenumbers.is_valid_number(z)
+    False
+
 
 The `PhoneNumber` object that `parse` produces typically still needs to be validated, to check whether
 it's a *possible* number (e.g. it has the right number of digits) or a *valid* number (e.g. it's
