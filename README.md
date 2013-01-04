@@ -25,6 +25,25 @@ that the phone number is from (unless the number is in E.164 format).
     >>> x == y
     True
 
+The `PhoneNumber` object that `parse` produces typically still needs to be validated, to check whether
+it's a *possible* number (e.g. it has the right number of digits) or a *valid* number (e.g. it's
+in an assigned exchange).
+
+    >>> z = phonenumbers.parse("+120012301", None)
+    >>> print z
+    Country Code: 1 National Number: 20012301 Leading Zero: False
+    >>> phonenumbers.is_possible_number(z)  # too few digits for USA
+    False
+    >>> phonenumbers.is_valid_number(z)
+    False
+    >>> z = phonenumbers.parse("+12001230101", None)
+    >>> print z
+    Country Code: 1 National Number: 2001230101 Leading Zero: False
+    >>> phonenumbers.is_possible_number(z)
+    True
+    >>> phonenumbers.is_valid_number(z)  # NPA 200 not used
+    False
+
 Once you've got a phone number, a common task is to format it in a standardized format.  There are a few
 formats available (under `PhoneNumberFormat`), and the `format_number` function does the formatting.
 
