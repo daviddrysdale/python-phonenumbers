@@ -946,6 +946,12 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
         # phone for Movistar.  Instead they must be dialled in national
         # format.
         formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
+    elif( region_code == "AE" and region_calling_from == "AE" and
+          numobj_type == PhoneNumberType.UAN):
+        # In the United Arab Emirates, numbers with the prefix 600 (UAN
+        # numbers) cannot be dialled using E164 format. Instead they must be
+        # dialled in national format.
+        formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
     elif (region_code == "BR" and region_calling_from == "BR" and
           ((numobj_type == PhoneNumberType.FIXED_LINE) or
            (numobj_type == PhoneNumberType.MOBILE) or
