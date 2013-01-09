@@ -3,7 +3,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CL = PhoneMetadata(id='CL', country_code=56, international_prefix='(?:0|1(?:1[0-69]|2[0-57]|5[13-58]|69|7[0167]|8[018]))0',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:[2-9]|600|123)\\d{7,8}', possible_number_pattern='\\d{6,11}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:22|32|41|58)\\d{7}|(?:3[3-5]|4[235]|5[1-357]|6[13-57]|7[1-35])\\d{6,7}', possible_number_pattern='\\d{6,9}', example_number='221234567'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:[23]2|41|58)\\d{7}|(?:3[3-5]|4[235]|5[1-357]|6[13-57]|7[1-35])\\d{6,7}', possible_number_pattern='\\d{6,9}', example_number='221234567'),
     mobile=PhoneNumberDesc(national_number_pattern='9[5-9]\\d{7}', possible_number_pattern='\\d{8,9}', example_number='961234567'),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6}|1230\\d{7}', possible_number_pattern='\\d{9,11}', example_number='800123456'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
