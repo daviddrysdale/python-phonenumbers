@@ -115,8 +115,28 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, UN
                               truncate_too_long_number,)
 from .shortnumberutil import connects_to_emergency_number, is_emergency_number
 from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
-from .geocoder import (area_description_for_number, country_name_for_number,
-                       description_for_number, description_for_valid_number)
+
+
+# The geodata occupies a lot of space, so only perform the import on first use
+# of geocoder functionality.
+def area_description_for_number(*args, **kwargs):
+    from .geocoder import area_description_for_number as real_fn
+    return real_fn(*args, **kwargs)
+
+
+def country_name_for_number(*args, **kwargs):
+    from .geocoder import country_name_for_number as real_fn
+    return real_fn(*args, **kwargs)
+
+
+def description_for_number(*args, **kwargs):
+    from .geocoder import description_for_number as real_fn
+    return real_fn(*args, **kwargs)
+
+
+def description_for_valid_number(*args, **kwargs):
+    from .geocoder import description_for_valid_number as real_fn
+    return real_fn(*args, **kwargs)
 
 
 # Version number is taken from the upstream libphonenumber version
