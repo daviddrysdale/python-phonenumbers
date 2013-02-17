@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Unit tests for @@geocoder.py"""
+"""Unit tests for geocoder.py"""
 
 # Based on original Java code:
 #     java/test/com/google/i18n/phonenumbers/geocoding/PhoneNumberOfflineGeocoderTest.java
