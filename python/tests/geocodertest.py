@@ -22,6 +22,7 @@ import unittest
 from phonenumbers import PhoneNumber, FrozenPhoneNumber
 from phonenumbers import geocoder
 from phonenumbers import description_for_number, country_name_for_number
+from phonenumbers import description_for_valid_number, area_description_for_number
 
 # Allow override library geocoding metadata with the test metadata.
 REAL_GEOCODE_DATA = geocoder.GEOCODE_DATA
@@ -159,6 +160,10 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         # Python version extra tests
         invalid_number = PhoneNumber(country_code=210, national_number=123456L)
         self.assertEqual("", country_name_for_number(invalid_number, "en"))
+        # Ensure we exercise all public entrypoints directly
+        self.assertEqual("CA", area_description_for_number(US_NUMBER1, "en"))
+        self.assertEqual("CA", description_for_valid_number(US_NUMBER1, "en"))
+        self.assertEqual("", description_for_valid_number(US_INVALID_NUMBER, "en"))
         # Add in some script and region specific fictional names
         TEST_GEOCODE_DATA['1650960'] = {'en': u'Mountain View, CA',
                                         "en_GB": u'Mountain View California',
