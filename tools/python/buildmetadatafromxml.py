@@ -68,11 +68,10 @@ else:
 
 # Pull in the data structure definitions
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+from phonenumbers.phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY
 from phonenumbers.util import UnicodeMixin
 
 # Convention: variables beginning with 'x' are XML objects
-
-REGION_CODE_FOR_NON_GEO_ENTITY = "001"
 
 # Top-level XML element containing data
 TOP_XPATH = "territories"
