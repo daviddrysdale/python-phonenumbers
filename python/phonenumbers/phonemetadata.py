@@ -215,14 +215,14 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     #   - None, to indicate that the metadata is already loaded
     region_available = {}  # ISO 3166-1 alpha 2 => function or None
     # Likewise for non-geo country calling codes
-    country_code_available = {}  # ISO 3166-1 alpha 2 => function or None
+    country_code_available = {}  # country calling code (as int) => function or None
 
     region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
     # A mapping from a country calling code for a non-geographical entity to
     # the PhoneMetadata for that country calling code. Examples of the country
     # calling codes include 800 (International Toll Free Service) and 808
     # (International Shared Cost Service).
-    country_code_metadata = {}  # Country calling code => PhoneMetadata
+    country_code_metadata = {}  # country calling code (as int) => PhoneMetadata
 
     @classmethod
     def metadata_for_region(kls, region_code, default=None):
