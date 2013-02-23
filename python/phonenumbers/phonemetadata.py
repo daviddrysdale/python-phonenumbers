@@ -209,19 +209,37 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     This class is hand created based on phonemetadata.proto. Please refer to that file
     for detailed descriptions of the meaning of each field.
     """
+    # If a region code is a key in this dict, metadata for that region is available.
+    # The corresponding value of the map is either:
+    #   - a function which loads the region's metadata
+    #   - None, to indicate that the metadata is already loaded
+    region_available = {}  # ISO 3166-1 alpha 2 => function or None
+    # Likewise for non-geo country calling codes
+    country_code_available = {}  # ISO 3166-1 alpha 2 => function or None
+
     region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
     # A mapping from a country calling code for a non-geographical entity to
     # the PhoneMetadata for that country calling code. Examples of the country
     # calling codes include 800 (International Toll Free Service) and 808
     # (International Shared Cost Service).
-    country_code_metadata = {}
+    country_code_metadata = {}  # Country calling code => PhoneMetadata
 
     @classmethod
     def metadata_for_region(kls, region_code, default=None):
+        loader = kls.region_available.get(region_code, None)
+        if loader is not None:
+            # Region metadata is available but has not yet been loaded.  Do so now.
+            kls.region_available[region_code] = None
+            loader()
         return kls.region_metadata.get(region_code, default)
 
     @classmethod
     def metadata_for_nongeo_region(kls, country_code, default=None):
+        loader = kls.country_code_available.get(country_code, None)
+        if loader is not None:
+            # Region metadata is available but has not yet been loaded.  Do so now.
+            kls.country_code_available[country_code] = None
+            loader()
         return kls.country_code_metadata.get(country_code, default)
 
     @classmethod
@@ -230,6 +248,14 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
             return kls.metadata_for_nongeo_region(country_calling_code, None)
         else:
             return kls.metadata_for_region(region_code, None)
+
+    @classmethod
+    def register_region_loader(kls, region_code, loader):
+        kls.region_available[region_code] = loader
+
+    @classmethod
+    def register_nongeo_region_loader(kls, country_code, loader):
+        kls.country_code_available[country_code] = loader
 
     @mutating_method
     def __init__(self,
