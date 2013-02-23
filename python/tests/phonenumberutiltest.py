@@ -2476,11 +2476,11 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                           str(metadataXX))
 
         # Coverage test: invalid example number for region
-        PhoneMetadata.region_metadata['XX'] = metadataXX
+        PhoneMetadata._region_metadata['XX'] = metadataXX
         phonenumberutil.SUPPORTED_REGIONS.add("XX")
         self.assertTrue(phonenumbers.example_number_for_type("XX", PhoneNumberType.PERSONAL_NUMBER) is None)
         phonenumberutil.SUPPORTED_REGIONS.remove('XX')
-        del PhoneMetadata.region_metadata['XX']
+        del PhoneMetadata._region_metadata['XX']
 
         # And now the grand finale: check a real metadata example
         self.assertEqual(r"""PhoneMetadata(id='AU', country_code=61, international_prefix='001[12]',

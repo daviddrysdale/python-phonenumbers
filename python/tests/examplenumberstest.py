@@ -151,7 +151,7 @@ class ExampleNumbersTest(unittest.TestCase):
         self.assertEqual(0, wrongTypeCounter)
 
     def testGlobalNetworkNumbers(self):
-        for callingCode in PhoneMetadata.country_code_available.keys():
+        for callingCode in PhoneMetadata._country_code_available.keys():
             exampleNumber = phonenumberutil.example_number_for_non_geo_entity(callingCode)
             self.assertTrue(exampleNumber is not None,
                             msg="No example phone number for calling code %s" % callingCode)
