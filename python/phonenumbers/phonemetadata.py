@@ -257,6 +257,19 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     def register_nongeo_region_loader(kls, country_code, loader):
         kls._country_code_available[country_code] = loader
 
+    @classmethod
+    def load_all(kls):
+        """Force immediate load of all metadata"""
+        # Use .items() not .iteritems() because we would invalidate the iterator
+        for region_code, loader in kls._region_available.items():
+            if loader is not None:  # pragma no cover
+                loader()
+                kls._region_available[region_code] = None
+        for country_code, loader in kls._country_code_available.items():
+            if loader is not None:
+                loader()
+                kls._country_code_available[region_code] = None
+
     @mutating_method
     def __init__(self,
                  id,
