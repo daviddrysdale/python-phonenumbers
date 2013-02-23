@@ -221,6 +221,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         return kls.region_metadata.get(region_code, default)
 
     @classmethod
+    def metadata_for_nongeo_region(kls, country_code, default=None):
+        return kls.country_code_metadata.get(country_code, default)
+
+    @classmethod
     def metadata_for_region_or_calling_code(kls, country_calling_code, region_code):
         if region_code == REGION_CODE_FOR_NON_GEO_ENTITY:
             return kls.country_code_metadata.get(country_calling_code, None)

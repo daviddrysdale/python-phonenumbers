@@ -1489,7 +1489,7 @@ def example_number_for_non_geo_entity(country_calling_code):
     the metadata does not contain such information, or the country calling
     code passed in does not belong to a non-geographical entity.
     """
-    metadata = PhoneMetadata.country_code_metadata.get(country_calling_code, None)
+    metadata = PhoneMetadata.metadata_for_nongeo_region(country_calling_code, None)
     if metadata is not None:
         desc = metadata.general_desc
         try:

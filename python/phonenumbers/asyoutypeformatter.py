@@ -532,7 +532,7 @@ class AsYouTypeFormatter(object):
         self._national_number = number_without_ccc
         new_region_code = region_code_for_country_code(country_code)
         if new_region_code == REGION_CODE_FOR_NON_GEO_ENTITY:
-            self._current_metadata = PhoneMetadata.country_code_metadata[country_code]
+            self._current_metadata = PhoneMetadata.metadata_for_nongeo_region(country_code)
         elif new_region_code != self._default_country:
             self._current_metadata = _get_metadata_for_region(new_region_code)
 
