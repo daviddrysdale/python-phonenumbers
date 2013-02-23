@@ -13,28 +13,96 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .region_800 import PHONE_METADATA_800
-from .region_979 import PHONE_METADATA_979
-from .region_AD import PHONE_METADATA_AD
-from .region_AE import PHONE_METADATA_AE
-from .region_AO import PHONE_METADATA_AO
-from .region_AR import PHONE_METADATA_AR
-from .region_AU import PHONE_METADATA_AU
-from .region_BR import PHONE_METADATA_BR
-from .region_BS import PHONE_METADATA_BS
-from .region_BY import PHONE_METADATA_BY
-from .region_DE import PHONE_METADATA_DE
-from .region_GB import PHONE_METADATA_GB
-from .region_IT import PHONE_METADATA_IT
-from .region_JP import PHONE_METADATA_JP
-from .region_KR import PHONE_METADATA_KR
-from .region_MX import PHONE_METADATA_MX
-from .region_NZ import PHONE_METADATA_NZ
-from .region_PL import PHONE_METADATA_PL
-from .region_RE import PHONE_METADATA_RE
-from .region_SG import PHONE_METADATA_SG
-from .region_US import PHONE_METADATA_US
-from .region_YT import PHONE_METADATA_YT
+from phonenumbers.phonemetadata import PhoneMetadata
+
+def _load_nongeo_region_800():
+    from .region_800 import PHONE_METADATA_800
+PhoneMetadata.register_nongeo_region_loader(800, _load_nongeo_region_800)
+
+def _load_nongeo_region_979():
+    from .region_979 import PHONE_METADATA_979
+PhoneMetadata.register_nongeo_region_loader(979, _load_nongeo_region_979)
+
+def _load_region_AD():
+    from .region_AD import PHONE_METADATA_AD
+PhoneMetadata.register_region_loader('AD', _load_region_AD)
+
+def _load_region_AE():
+    from .region_AE import PHONE_METADATA_AE
+PhoneMetadata.register_region_loader('AE', _load_region_AE)
+
+def _load_region_AO():
+    from .region_AO import PHONE_METADATA_AO
+PhoneMetadata.register_region_loader('AO', _load_region_AO)
+
+def _load_region_AR():
+    from .region_AR import PHONE_METADATA_AR
+PhoneMetadata.register_region_loader('AR', _load_region_AR)
+
+def _load_region_AU():
+    from .region_AU import PHONE_METADATA_AU
+PhoneMetadata.register_region_loader('AU', _load_region_AU)
+
+def _load_region_BR():
+    from .region_BR import PHONE_METADATA_BR
+PhoneMetadata.register_region_loader('BR', _load_region_BR)
+
+def _load_region_BS():
+    from .region_BS import PHONE_METADATA_BS
+PhoneMetadata.register_region_loader('BS', _load_region_BS)
+
+def _load_region_BY():
+    from .region_BY import PHONE_METADATA_BY
+PhoneMetadata.register_region_loader('BY', _load_region_BY)
+
+def _load_region_DE():
+    from .region_DE import PHONE_METADATA_DE
+PhoneMetadata.register_region_loader('DE', _load_region_DE)
+
+def _load_region_GB():
+    from .region_GB import PHONE_METADATA_GB
+PhoneMetadata.register_region_loader('GB', _load_region_GB)
+
+def _load_region_IT():
+    from .region_IT import PHONE_METADATA_IT
+PhoneMetadata.register_region_loader('IT', _load_region_IT)
+
+def _load_region_JP():
+    from .region_JP import PHONE_METADATA_JP
+PhoneMetadata.register_region_loader('JP', _load_region_JP)
+
+def _load_region_KR():
+    from .region_KR import PHONE_METADATA_KR
+PhoneMetadata.register_region_loader('KR', _load_region_KR)
+
+def _load_region_MX():
+    from .region_MX import PHONE_METADATA_MX
+PhoneMetadata.register_region_loader('MX', _load_region_MX)
+
+def _load_region_NZ():
+    from .region_NZ import PHONE_METADATA_NZ
+PhoneMetadata.register_region_loader('NZ', _load_region_NZ)
+
+def _load_region_PL():
+    from .region_PL import PHONE_METADATA_PL
+PhoneMetadata.register_region_loader('PL', _load_region_PL)
+
+def _load_region_RE():
+    from .region_RE import PHONE_METADATA_RE
+PhoneMetadata.register_region_loader('RE', _load_region_RE)
+
+def _load_region_SG():
+    from .region_SG import PHONE_METADATA_SG
+PhoneMetadata.register_region_loader('SG', _load_region_SG)
+
+def _load_region_US():
+    from .region_US import PHONE_METADATA_US
+PhoneMetadata.register_region_loader('US', _load_region_US)
+
+def _load_region_YT():
+    from .region_YT import PHONE_METADATA_YT
+PhoneMetadata.register_region_loader('YT', _load_region_YT)
+
 
 # A mapping from a country code to the region codes which
 # denote the country/region represented by that country code.
