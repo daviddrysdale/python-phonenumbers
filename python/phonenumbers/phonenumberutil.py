@@ -575,7 +575,7 @@ def length_of_geographical_area_code(numobj):
 
     Returns the length of area code of the PhoneNumber object passed in.
     """
-    metadata = PhoneMetadata.region_metadata.get(region_code_for_number(numobj), None)
+    metadata = PhoneMetadata.metadata_for_region(region_code_for_number(numobj), None)
     if metadata is None:
         return 0
 
@@ -1131,7 +1131,7 @@ def _format_original_allow_mods(numobj, region_calling_from):
             return national_format
         # Metadata cannot be None here because ndd_prefix_for_region() (above) returns None if
         # there is no metadata for the region.
-        metadata = PhoneMetadata.region_metadata[region_code]
+        metadata = PhoneMetadata.metadata_for_region(region_code)
         national_number = national_significant_number(numobj)
         format_rule = choose_formatting_pattern_for_number(metadata.number_format, national_number)
         # The format rule could still be null here if the national number was
@@ -1254,7 +1254,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
         if first_national_number_digit != -1:
             num_raw_input = num_raw_input[first_national_number_digit:]
 
-    metadata_for_region_calling_from = PhoneMetadata.region_metadata.get(region_calling_from.upper(), None)
+    metadata_for_region_calling_from = PhoneMetadata.metadata_for_region(region_calling_from.upper(), None)
     if country_code == _NANPA_COUNTRY_CODE:
         if is_nanpa_country(region_calling_from):
             return unicode(country_code) + u" " + num_raw_input
@@ -1469,7 +1469,7 @@ def example_number_for_type(region_code, num_type):
     # Check the region code is valid.
     if not _is_valid_region_code(region_code):
         return None
-    metadata = PhoneMetadata.region_metadata[region_code.upper()]
+    metadata = PhoneMetadata.metadata_for_region(region_code.upper())
     desc = _number_desc_for_type(metadata, num_type)
     if desc.example_number is not None:
         try:
@@ -1696,9 +1696,9 @@ def _region_code_for_number_from_list(numobj, regions):
         # validation.
         # Metadata cannot be None because the region codes come from
         # the country calling code map.
-        if region_code.upper() not in PhoneMetadata.region_metadata:
+        metadata = PhoneMetadata.metadata_for_region(region_code.upper(), None)
+        if metadata is None:
             continue
-        metadata = PhoneMetadata.region_metadata[region_code.upper()]
         if metadata.leading_digits is not None:
             leading_digit_re = re.compile(metadata.leading_digits)
             match = leading_digit_re.match(national_number)
@@ -1764,7 +1764,7 @@ def country_code_for_valid_region(region_code):
 
     Returns the country calling code for the region denoted by region_code.
     """
-    metadata = PhoneMetadata.region_metadata.get(region_code.upper(), None)
+    metadata = PhoneMetadata.metadata_for_region(region_code.upper(), None)
     if metadata is None:
         raise Exception("Invalid region code %s" % region_code)
     return metadata.country_code
@@ -1792,7 +1792,7 @@ def ndd_prefix_for_region(region_code, strip_non_digits):
     """
     if region_code is None:
         return None
-    metadata = PhoneMetadata.region_metadata.get(region_code.upper(), None)
+    metadata = PhoneMetadata.metadata_for_region(region_code.upper(), None)
     if metadata is None:
         return None
     national_prefix = metadata.national_prefix
@@ -2355,7 +2355,7 @@ def parse(number, region=None, keep_raw_input=False,
     if region is None:
         metadata = None
     else:
-        metadata = PhoneMetadata.region_metadata.get(region.upper(), None)
+        metadata = PhoneMetadata.metadata_for_region(region.upper(), None)
 
     country_code = 0
     try:
@@ -2641,7 +2641,7 @@ def _can_be_internationally_dialled(numobj):
     numobj -- the phone number objectfor which we want to know whether it is
               diallable from outside the region.
     """
-    metadata = PhoneMetadata.region_metadata.get(region_code_for_number(numobj), None)
+    metadata = PhoneMetadata.metadata_for_region(region_code_for_number(numobj), None)
     if metadata is None:
         # Note numbers belonging to non-geographical entities (e.g. +800
         # numbers) are always internationally diallable, and will be caught

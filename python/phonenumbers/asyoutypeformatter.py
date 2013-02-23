@@ -83,7 +83,7 @@ def _get_metadata_for_region(region_code):
     # Set to a default instance of the metadata. This allows us to
     # function with an incorrect region code, even if formatting only
     # works for numbers specified with "+".
-    return PhoneMetadata.region_metadata.get(main_country, _EMPTY_METADATA)
+    return PhoneMetadata.metadata_for_region(main_country, _EMPTY_METADATA)
 
 
 class AsYouTypeFormatter(object):
