@@ -227,9 +227,9 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     @classmethod
     def metadata_for_region_or_calling_code(kls, country_calling_code, region_code):
         if region_code == REGION_CODE_FOR_NON_GEO_ENTITY:
-            return kls.country_code_metadata.get(country_calling_code, None)
+            return kls.metadata_for_nongeo_region(country_calling_code, None)
         else:
-            return kls.region_metadata.get(region_code, None)
+            return kls.metadata_for_region(region_code, None)
 
     @mutating_method
     def __init__(self,
