@@ -210,19 +210,66 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     This class is hand created based on phonemetadata.proto. Please refer to that file
     for detailed descriptions of the meaning of each field.
     """
-    region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
+    # If a region code is a key in this dict, metadata for that region is available.
+    # The corresponding value of the map is either:
+    #   - a function which loads the region's metadata
+    #   - None, to indicate that the metadata is already loaded
+    _region_available = {}  # ISO 3166-1 alpha 2 => function or None
+    # Likewise for non-geo country calling codes
+    _country_code_available = {}  # country calling code (as int) => function or None
+
+    _region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
     # A mapping from a country calling code for a non-geographical entity to
     # the PhoneMetadata for that country calling code. Examples of the country
     # calling codes include 800 (International Toll Free Service) and 808
     # (International Shared Cost Service).
-    country_code_metadata = {}
+    _country_code_metadata = {}  # country calling code (as int) => PhoneMetadata
+
+    @classmethod
+    def metadata_for_region(kls, region_code, default=None):
+        loader = kls._region_available.get(region_code, None)
+        if loader is not None:
+            # Region metadata is available but has not yet been loaded.  Do so now.
+            loader(region_code)
+            kls._region_available[region_code] = None
+        return kls._region_metadata.get(region_code, default)
+
+    @classmethod
+    def metadata_for_nongeo_region(kls, country_code, default=None):
+        loader = kls._country_code_available.get(country_code, None)
+        if loader is not None:
+            # Region metadata is available but has not yet been loaded.  Do so now.
+            loader(country_code)
+            kls._country_code_available[country_code] = None
+        return kls._country_code_metadata.get(country_code, default)
 
     @classmethod
     def metadata_for_region_or_calling_code(kls, country_calling_code, region_code):
         if region_code == REGION_CODE_FOR_NON_GEO_ENTITY:
-            return kls.country_code_metadata.get(country_calling_code, None)
+            return kls.metadata_for_nongeo_region(country_calling_code, None)
         else:
-            return kls.region_metadata.get(region_code, None)
+            return kls.metadata_for_region(region_code, None)
+
+    @classmethod
+    def register_region_loader(kls, region_code, loader):
+        kls._region_available[region_code] = loader
+
+    @classmethod
+    def register_nongeo_region_loader(kls, country_code, loader):
+        kls._country_code_available[country_code] = loader
+
+    @classmethod
+    def load_all(kls):
+        """Force immediate load of all metadata"""
+        # Use .items() not .iteritems() because we would invalidate the iterator
+        for region_code, loader in kls._region_available.items():
+            if loader is not None:  # pragma no cover
+                loader(region_code)
+                kls._region_available[region_code] = None
+        for country_code, loader in kls._country_code_available.items():
+            if loader is not None:
+                loader(country_code)
+                kls._country_code_available[region_code] = None
 
     @mutating_method
     def __init__(self,
@@ -416,10 +463,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         if register:
             # Register this instance with the relevant class-wide map
             if self.id == REGION_CODE_FOR_NON_GEO_ENTITY:
-                kls_map = PhoneMetadata.country_code_metadata
+                kls_map = PhoneMetadata._country_code_metadata
                 id = self.country_code
             else:
-                kls_map = PhoneMetadata.region_metadata
+                kls_map = PhoneMetadata._region_metadata
                 id = self.id
             if id in kls_map:
                 other = kls_map[id]

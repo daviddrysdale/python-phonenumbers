@@ -375,7 +375,7 @@ def _is_national_prefix_present_if_required(numobj):
     if numobj.country_code_source != CountryCodeSource.FROM_DEFAULT_COUNTRY:
         return True
     phone_number_region = region_code_for_country_code(numobj.country_code)
-    metadata = PhoneMetadata.region_metadata.get(phone_number_region, None)
+    metadata = PhoneMetadata.metadata_for_region(phone_number_region, None)
     if metadata is None:
         return True
     # Check if a national prefix should be present when formatting this number.

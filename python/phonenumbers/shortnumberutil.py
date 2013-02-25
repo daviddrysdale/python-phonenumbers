@@ -68,7 +68,7 @@ def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
         # (e.g. +1911) works, but later, if that proves to work, we can add
         # additional logic here to handle it.
         return False
-    metadata = PhoneMetadata.region_metadata.get(region_code.upper(), None)
+    metadata = PhoneMetadata.metadata_for_region(region_code.upper(), None)
     if metadata is None or metadata.emergency is None:
         return False
     emergency_number_pattern = re.compile(metadata.emergency.national_number_pattern)

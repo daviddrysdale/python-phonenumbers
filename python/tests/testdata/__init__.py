@@ -13,28 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .region_800 import PHONE_METADATA_800
-from .region_979 import PHONE_METADATA_979
-from .region_AD import PHONE_METADATA_AD
-from .region_AE import PHONE_METADATA_AE
-from .region_AO import PHONE_METADATA_AO
-from .region_AR import PHONE_METADATA_AR
-from .region_AU import PHONE_METADATA_AU
-from .region_BR import PHONE_METADATA_BR
-from .region_BS import PHONE_METADATA_BS
-from .region_BY import PHONE_METADATA_BY
-from .region_DE import PHONE_METADATA_DE
-from .region_GB import PHONE_METADATA_GB
-from .region_IT import PHONE_METADATA_IT
-from .region_JP import PHONE_METADATA_JP
-from .region_KR import PHONE_METADATA_KR
-from .region_MX import PHONE_METADATA_MX
-from .region_NZ import PHONE_METADATA_NZ
-from .region_PL import PHONE_METADATA_PL
-from .region_RE import PHONE_METADATA_RE
-from .region_SG import PHONE_METADATA_SG
-from .region_US import PHONE_METADATA_US
-from .region_YT import PHONE_METADATA_YT
+from phonenumbers.phonemetadata import PhoneMetadata
+
+_AVAILABLE_NONGEO_COUNTRY_CODES = [800, 979]
+_AVAILABLE_REGION_CODES = ['AD','AE','AO','AR','AU','BR','BS','BY','DE','GB','IT','JP','KR','MX','NZ','PL','RE','SG','US','YT']
+
+def _load_region(code):
+    __import__("region_%s" % code, globals(), locals(),
+               fromlist=["PHONE_METADATA_%s" % code], level=1)
+
+for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
+    PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
+
+for region_code in _AVAILABLE_REGION_CODES:
+    PhoneMetadata.register_region_loader(region_code, _load_region)
+
 
 # A mapping from a country code to the region codes which
 # denote the country/region represented by that country code.

@@ -121,7 +121,7 @@ class ExampleNumbersTest(unittest.TestCase):
     def testCanBeInternationallyDialled(self):
         for regionCode in phonenumberutil.SUPPORTED_REGIONS:
             exampleNumber = None
-            metadata = PhoneMetadata.region_metadata.get(regionCode, None)
+            metadata = PhoneMetadata.metadata_for_region(regionCode, None)
             desc = None
             if metadata is not None:
                 desc = metadata.no_international_dialling
@@ -142,7 +142,7 @@ class ExampleNumbersTest(unittest.TestCase):
     def testEmergency(self):
         wrongTypeCounter = 0
         for regionCode in phonenumberutil.SUPPORTED_REGIONS:
-            metadata = PhoneMetadata.region_metadata.get(regionCode, None)
+            metadata = PhoneMetadata.metadata_for_region(regionCode, None)
             desc = metadata.emergency
             if desc.example_number is not None:
                 exampleNumber = desc.example_number
@@ -153,7 +153,8 @@ class ExampleNumbersTest(unittest.TestCase):
         self.assertEqual(0, wrongTypeCounter)
 
     def testGlobalNetworkNumbers(self):
-        for callingCode in PhoneMetadata.country_code_metadata.keys():
+        PhoneMetadata.load_all()
+        for callingCode in PhoneMetadata._country_code_metadata.keys():
             exampleNumber = phonenumberutil.example_number_for_non_geo_entity(callingCode)
             self.assertTrue(exampleNumber is not None,
                             msg="No example phone number for calling code %s" % callingCode)

@@ -89,7 +89,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue("BS" in phonenumbers.SUPPORTED_REGIONS)
 
     def testGetInstanceLoadUSMetadata(self):
-        metadata = PhoneMetadata.region_metadata["US"]
+        metadata = PhoneMetadata.metadata_for_region("US")
         self.assertEqual("US", metadata.id)
         self.assertEqual(1, metadata.country_code)
         self.assertEqual("011", metadata.international_prefix)
@@ -108,7 +108,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("NA", metadata.shared_cost.possible_number_pattern)
 
     def testGetInstanceLoadDEMetadata(self):
-        metadata = PhoneMetadata.region_metadata["DE"]
+        metadata = PhoneMetadata.metadata_for_region("DE")
         self.assertEqual("DE", metadata.id)
         self.assertEqual(49, metadata.country_code)
         self.assertEqual("00", metadata.international_prefix)
@@ -127,7 +127,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("900([135]\\d{6}|9\\d{7})", metadata.premium_rate.national_number_pattern)
 
     def testGetInstanceLoadARMetadata(self):
-        metadata = PhoneMetadata.region_metadata["AR"]
+        metadata = PhoneMetadata.metadata_for_region("AR")
         self.assertEqual("AR", metadata.id)
         self.assertEqual(54, metadata.country_code)
         self.assertEqual("00", metadata.international_prefix)
@@ -142,7 +142,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("\\1 \\2 \\3 \\4", metadata.intl_number_format[3].format)
 
     def testGetInstanceLoadInternationalTollFreeMetadata(self):
-        metadata = PhoneMetadata.country_code_metadata[800]
+        metadata = PhoneMetadata.metadata_for_nongeo_region(800)
         self.assertEqual("001", metadata.id)
         self.assertEqual(800, metadata.country_code)
         self.assertEqual("\\1 \\2", metadata.number_format[0].format)
@@ -1399,7 +1399,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
     def testMaybeExtractCountryCode(self):
         number = PhoneNumber()
-        metadata = PhoneMetadata.region_metadata["US"]
+        metadata = PhoneMetadata.metadata_for_region("US")
         # Note that for the US, the IDD is 011.
         try:
             phoneNumber = "011112-3456789"
@@ -2450,7 +2450,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
     def testMetadataAsString(self):
         # Python version extra tests for string conversions
-        metadata = PhoneMetadata.region_metadata["AU"]
+        metadata = PhoneMetadata.metadata_for_region("AU")
         self.assertEqual('\\' + 'd',
                          metadata.number_format[0].pattern[1:3])
         self.assertEqual(r"""NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule='\\1')""",
@@ -2502,11 +2502,11 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                           str(metadataXX))
 
         # Coverage test: invalid example number for region
-        PhoneMetadata.region_metadata['XX'] = metadataXX
+        PhoneMetadata._region_metadata['XX'] = metadataXX
         phonenumberutil.SUPPORTED_REGIONS.add("XX")
         self.assertTrue(phonenumbers.example_number_for_type("XX", PhoneNumberType.PERSONAL_NUMBER) is None)
         phonenumberutil.SUPPORTED_REGIONS.remove('XX')
-        del PhoneMetadata.region_metadata['XX']
+        del PhoneMetadata._region_metadata['XX']
 
         # And now the grand finale: check a real metadata example
         self.assertEqual(r"""PhoneMetadata(id='AU', country_code=61, international_prefix='001[12]',
@@ -2532,7 +2532,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
     def testMetadataEval(self):
         # Python version extra tests for string conversions
-        metadata = PhoneMetadata.region_metadata["AU"]
+        metadata = PhoneMetadata.metadata_for_region("AU")
         new_number_format = eval(repr(metadata.number_format[0]))
         self.assertEqual(new_number_format, metadata.number_format[0])
         new_general_desc = eval(repr(metadata.general_desc))
@@ -2559,7 +2559,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue(phonenumberutil._region_code_for_number_from_list(GB_NUMBER, ("XX",)) is None)
         self.assertEqual((0, "abcdef"),
                           phonenumberutil._extract_country_code("abcdef"))
-        metadata = PhoneMetadata.region_metadata["AU"]
+        metadata = PhoneMetadata.metadata_for_region("AU")
         number = PhoneNumber()
         self.assertEqual((0, u("")),
                          phonenumberutil._maybe_extract_country_code("",
@@ -2584,7 +2584,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                                                                    metadataXY))
 
         # Temporarily insert invalid example number
-        metadata800 = PhoneMetadata.country_code_metadata[800]
+        metadata800 = PhoneMetadata.metadata_for_nongeo_region(800)
         saved_example = metadata800.general_desc.example_number
         metadata800.general_desc._mutable = True
         metadata800.general_desc.example_number = ''
@@ -2595,7 +2595,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertFalse(phonenumbers.phonenumberutil._raw_input_contains_national_prefix("07", "0", "JP"))
 
         # Temporarily change formatting rule
-        metadataGB = PhoneMetadata.region_metadata["GB"]
+        metadataGB = PhoneMetadata.metadata_for_region("GB")
         saved_rule = metadataGB.number_format[0].national_prefix_formatting_rule
         metadataGB.number_format[0]._mutable = True
         metadataGB.number_format[0].national_prefix_formatting_rule = u('(\\1)')

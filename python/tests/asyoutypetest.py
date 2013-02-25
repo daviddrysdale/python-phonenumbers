@@ -1107,7 +1107,7 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
                                                                format=u("\\1 \\2 \\3"),
                                                                leading_digits_pattern=['[1-59]|[78]0'],
                                                                national_prefix_formatting_rule=u("\\1"))])
-        PhoneMetadata.region_metadata['XX'] = metadataXX
+        PhoneMetadata._region_metadata['XX'] = metadataXX
         phonenumberutil.SUPPORTED_REGIONS.add("XX")
         phonenumberutil.COUNTRY_CODE_TO_REGION_CODE[384] = ("XX",)
         formatter = AsYouTypeFormatter('XX')
@@ -1123,4 +1123,4 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         # Restore normality
         del phonenumberutil.COUNTRY_CODE_TO_REGION_CODE[384]
         phonenumberutil.SUPPORTED_REGIONS.remove('XX')
-        del PhoneMetadata.region_metadata['XX']
+        del PhoneMetadata._region_metadata['XX']

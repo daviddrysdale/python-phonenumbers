@@ -113,6 +113,25 @@ Finally, you might want to get some information about the location that correspo
 For more information about the other functionality available from the library, look in the unit tests or in the original
 [libphonenumber project](http://code.google.com/p/libphonenumber/).
 
+Memory Usage
+------------
+
+The library includes a lot of metadata, giving a significant memory overhead.  This metadata is loaded on-demand so that
+the memory footprint of applications that only use a subset of the library functionality is not adversely affected.
+
+In particular:
+
+* The geocoding metadata (which makes up around 75% of the total memory footprint) is only loaded on the first use of
+  one of the geocoding functions (`description_for_number`, `description_for_valid_number`,
+  `area_description_for_number` and `country_name_for_number`).
+* The normal metadata for each region is only loaded on the first time that metadata for that region is needed.
+
+If you need to ensure that the metadata memory use is accounted for at start of day (i.e. that a subsequent on-demand
+load of metadata will not cause memory exhaustion):
+
+* Force-load the geocoding metadata by invoking `import phonenumbers.geocoder`.
+* Force-load the normal metadata by calling `phonenumbers.PhoneMetadata.load_all()`.
+
 Project Layout
 --------------
 * The `python/` directory holds the Python code.
