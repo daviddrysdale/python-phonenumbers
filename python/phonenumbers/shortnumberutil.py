@@ -75,8 +75,7 @@ def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
     normalized_number = normalize_digits_only(number)
 
     if not allow_prefix_match or region_code == "BR":
-        # In Brazil, it is impossible to append additional digits to an
-        # emergency number to dial the number.
+        # In Brazil, emergency numbers don't work when additional digits are appended.
         return fullmatch(emergency_number_pattern, normalized_number) is not None
     else:
         return emergency_number_pattern.match(normalized_number) is not None

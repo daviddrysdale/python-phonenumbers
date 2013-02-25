@@ -31,6 +31,7 @@ from .testmetadatatest import TestMetadataTestCase
 
 # Set up some test numbers to re-use.
 ALPHA_NUMERIC_NUMBER = FrozenPhoneNumber(country_code=1, national_number=80074935247)
+AE_UAN = FrozenPhoneNumber(country_code=971, national_number=600123456)
 AR_MOBILE = FrozenPhoneNumber(country_code=54, national_number=91187654321)
 AR_NUMBER = FrozenPhoneNumber(country_code=54, national_number=1187654321)
 AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300)
@@ -656,16 +657,23 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("*2345",
                          phonenumbers.format_number_for_mobile_dialing(JP_STAR_NUMBER, "JP", True))
 
+        self.assertEqual("+80012345678",
+                         phonenumbers.format_number_for_mobile_dialing(INTERNATIONAL_TOLL_FREE, "JP", False))
+        self.assertEqual("+800 1234 5678",
+                         phonenumbers.format_number_for_mobile_dialing(INTERNATIONAL_TOLL_FREE, "JP", True))
+
+        # UAE numbers beginning with 600 (classified as UAN) need to be dialled without +971 locally.
+        self.assertEqual("+971600123456",
+                         phonenumbers.format_number_for_mobile_dialing(AE_UAN, "JP", False))
+        self.assertEqual("600123456",
+                         phonenumbers.format_number_for_mobile_dialing(AE_UAN, "AE", False))
+
         # Python version extra tests
         number = PhoneNumber()
         number.merge_from(XY_NUMBER)
         self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(number, "US", False))
         number.raw_input = " 123-456-7890"
         self.assertEqual(" 123-456-7890", phonenumbers.format_number_for_mobile_dialing(number, "US", False))
-        self.assertEqual("+80012345678",
-                         phonenumbers.format_number_for_mobile_dialing(INTERNATIONAL_TOLL_FREE, "JP", False))
-        self.assertEqual("+800 1234 5678",
-                         phonenumbers.format_number_for_mobile_dialing(INTERNATIONAL_TOLL_FREE, "JP", True))
 
     def testFormatByPattern(self):
         newNumFormat = NumberFormat(pattern="(\\d{3})(\\d{3})(\\d{4})", format="(\\1) \\2-\\3")

@@ -1,7 +1,7 @@
 """Auto-generated file, do not edit by hand. SG metadata"""
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_SG = PhoneMetadata(id='SG', country_code=65, international_prefix='0[0-3][0-9]',
+PHONE_METADATA_SG = PhoneMetadata(id='SG', country_code=65, international_prefix='0[0-3]\\d',
     general_desc=PhoneNumberDesc(national_number_pattern='[36]\\d{7}|[17-9]\\d{7,10}', possible_number_pattern='\\d{8,11}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='6[1-9]\\d{6}', possible_number_pattern='\\d{8}', example_number='61234567'),
     mobile=PhoneNumberDesc(national_number_pattern='(?:8[1-7]|9[0-8])\\d{6}', possible_number_pattern='\\d{8}', example_number='81234567'),
@@ -9,10 +9,10 @@ PHONE_METADATA_SG = PhoneMetadata(id='SG', country_code=65, international_prefix
     premium_rate=PhoneNumberDesc(national_number_pattern='1900\\d{7}', possible_number_pattern='\\d{11}', example_number='19001234567'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    voip=PhoneNumberDesc(national_number_pattern='3[0-2]\\d{6}', possible_number_pattern='\\d{8}', example_number='31234567'),
+    voip=PhoneNumberDesc(national_number_pattern='3[12]\\d{6}', possible_number_pattern='\\d{8}', example_number='31234567'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='7000\\d{7}', possible_number_pattern='\\d{11}', example_number='70001234567'),
-    emergency=PhoneNumberDesc(national_number_pattern='99[59]', possible_number_pattern='\\d{3}', example_number='999'),
+    emergency=PhoneNumberDesc(national_number_pattern='99[359]', possible_number_pattern='\\d{3}', example_number='999'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='([3689]\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[369]|8[1-9]']),

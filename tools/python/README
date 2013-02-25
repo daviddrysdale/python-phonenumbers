@@ -44,7 +44,7 @@ This will:
      python/phonenumbers/data/region_<code>.py
    Each file contains the Python constructors for the metadata for that
    region.
- - Create a file python/phonenumbers/data/__init__.py which 
+ - Create a file python/phonenumbers/data/__init__.py which
    accumulates all of the per-region files.
 
 The script tools/buildgeocodingdata.py performs the second autogeneration.
@@ -64,11 +64,11 @@ mostly sticks to the structure of that code to make it easier
 to include future changes to the upstream code.
 
 However, there are a number of differences:
- - Naming conventions are converted to Python standards; in 
+ - Naming conventions are converted to Python standards; in
    particular, method names are connected_with_underscores
    rather than beingInCamelCase.
  - The PhoneNumber and PhoneMetadata classes are written by hand
-   based on the Java code and the protocol buffer definitions, 
+   based on the Java code and the protocol buffer definitions,
    rather than by using the the Python protocol buffer library.
    This makes the mapping to the Java code easier to follow, and
    allows for the custom modifications that have been made to
@@ -76,24 +76,24 @@ However, there are a number of differences:
    to indicate that a particular (optional) attribute is not
    present (instead of hasAttribute() methods).
  - The Java PhoneNumberUtil class was a singleton, and so its
-   contents are included at the top level in phonenumberutil.py. 
-   Static methods from the PhoneNumberUtil class thus become 
-   functions in phonenumberutil.py; private and package methods 
+   contents are included at the top level in phonenumberutil.py.
+   Static methods from the PhoneNumberUtil class thus become
+   functions in phonenumberutil.py; private and package methods
    get a leading underscore in their name.
- - Accessor functions (setAttribute() and getAttribute() are 
+ - Accessor functions (setAttribute() and getAttribute() are
    avoided, and direct access to attributes is used instead.
  - Methods named get_something_from(object) are typically renamed
    to something_from(object).
- - The format() methods in PhoneNumberUtil were renamed to 
+ - The format() methods in PhoneNumberUtil were renamed to
    format_number() to avoid clashing with the Python built-in
    format().
  - The internals of phonenumberutil.py do not have logging.
- - The Python version is less concerned with speed and size 
+ - The Python version is less concerned with speed and size
    optimization than the Java version (as Python code is more likely
-   to run on a server platform, and less likely to run on an 
+   to run on a server platform, and less likely to run on an
    embedded/smartphone platform).
 
-Much of the functionality of this library depends on regular 
+Much of the functionality of this library depends on regular
 expressions, so it's worth highlighting the translation between
 Java and Python regexps:
  - Java replacement group references are "$1 $2" etc, Python's are
@@ -128,13 +128,5 @@ Release Procedure
      git checkout -b release-<version>
  - Push the branch to Github with:
      git push <github-remote> release-<version>
- - Create a setup-tools packaged tarball dist/phonenumbers-<version>.tar.gz 
-   with:
-     cd python && setup.py sdist
- - Create a Debian package deb_dist/python-phonenumbers-<version>-1_all.deb 
-   on a Linux machine with:
-     cd tools/python && make deb
- - Upload the tarball and Debian package to Github downloads page at:
-     https://github.com/daviddrysdale/python-phonenumbers/downloads
  - Push the package to PyPI with:
      cd python && setup.py sdist upload
