@@ -229,7 +229,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         loader = kls._region_available.get(region_code, None)
         if loader is not None:
             # Region metadata is available but has not yet been loaded.  Do so now.
-            loader()
+            loader(region_code)
             kls._region_available[region_code] = None
         return kls._region_metadata.get(region_code, default)
 
@@ -238,7 +238,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         loader = kls._country_code_available.get(country_code, None)
         if loader is not None:
             # Region metadata is available but has not yet been loaded.  Do so now.
-            loader()
+            loader(country_code)
             kls._country_code_available[country_code] = None
         return kls._country_code_metadata.get(country_code, default)
 
@@ -263,11 +263,11 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # Use .items() not .iteritems() because we would invalidate the iterator
         for region_code, loader in kls._region_available.items():
             if loader is not None:  # pragma no cover
-                loader()
+                loader(region_code)
                 kls._region_available[region_code] = None
         for country_code, loader in kls._country_code_available.items():
             if loader is not None:
-                loader()
+                loader(country_code)
                 kls._country_code_available[region_code] = None
 
     @mutating_method

@@ -83,6 +83,18 @@ DATA_NA = "NA"
 # Boilerplate text for generated Python files
 METADATA_FILE_PROLOG = '"""Auto-generated file, do not edit by hand."""'
 METADATA_FILE_IMPORT = "from %(module)s.phonemetadata import PhoneMetadata\n"
+METADATA_FILE_LOOP = '''
+def _load_region(code):
+    __import__("region_%s" % code, globals(), locals(),
+               fromlist=["PHONE_METADATA_%s" % code], level=1)
+
+for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
+    PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
+
+for region_code in _AVAILABLE_REGION_CODES:
+    PhoneMetadata.register_region_loader(region_code, _load_region)
+'''
+
 _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
 # A mapping from a country code to the region codes which
 # denote the country/region represented by that country code.
@@ -521,17 +533,18 @@ class XPhoneNumberMetadata(UnicodeMixin):
             prnt(METADATA_FILE_PROLOG, file=outfile)
             prnt(COPYRIGHT_NOTICE, file=outfile)
             prnt(METADATA_FILE_IMPORT % {'module': module_prefix}, file=outfile)
+            nongeo_codes = []
+            country_codes = []
             for country_id in sorted(self.territory.keys()):
                 terrobj = self.territory[country_id]
                 if terrobj.o.id == REGION_CODE_FOR_NON_GEO_ENTITY:
-                    prnt("def _load_nongeo_region_%s():" % country_id, file=outfile);
-                    prnt("    from .region_%s import PHONE_METADATA_%s" % (country_id, country_id), file=outfile)
-                    prnt("PhoneMetadata.register_nongeo_region_loader(%s, _load_nongeo_region_%s)" % (country_id, country_id), file=outfile)
+                    nongeo_codes.append(country_id)  # int
                 else:
-                    prnt("def _load_region_%s():" % country_id, file=outfile);
-                    prnt("    from .region_%s import PHONE_METADATA_%s" % (country_id, country_id), file=outfile)
-                    prnt("PhoneMetadata.register_region_loader('%s', _load_region_%s)" % (country_id, country_id), file=outfile)
-                prnt("", file=outfile)
+                    country_codes.append("'%s'" % country_id)  # quoted string
+            prnt("_AVAILABLE_NONGEO_COUNTRY_CODES = [%s]" % ", ".join(nongeo_codes), file=outfile)
+            prnt("_AVAILABLE_REGION_CODES = [%s]" % ",".join(country_codes), file=outfile)
+            prnt(METADATA_FILE_LOOP, file=outfile)
+
             if self.alt_territory is not None:
                 for country_code in sorted(self.alt_territory.keys()):
                     prnt("from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code), file=outfile)
