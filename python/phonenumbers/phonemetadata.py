@@ -260,7 +260,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     @classmethod
     def load_all(kls):
         """Force immediate load of all metadata"""
-        # Use .items() not .iteritems() because we would invalidate the iterator
+        # Force expansion of contents to lists because we invalidate the iterator
         for region_code, loader in list(kls._region_available.items()):
             if loader is not None:  # pragma no cover
                 loader(region_code)
