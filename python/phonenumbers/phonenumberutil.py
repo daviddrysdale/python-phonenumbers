@@ -932,48 +932,52 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
     numobj_no_ext = PhoneNumber()
     numobj_no_ext.merge_from(numobj)
     numobj_no_ext.extension = None
-    numobj_type = number_type(numobj_no_ext)
     region_code = region_code_for_country_code(country_calling_code)
-    if region_code == "CO" and region_calling_from == "CO":
-        if numobj_type == PhoneNumberType.FIXED_LINE:
+
+    formatted_number = ""
+    if region_calling_from == region_code:
+        numobj_type = number_type(numobj_no_ext)
+        is_fixed_line_or_mobile = ((numobj_type == PhoneNumberType.FIXED_LINE) or
+                                   (numobj_type == PhoneNumberType.MOBILE) or
+                                   (numobj_type == PhoneNumberType.FIXED_LINE_OR_MOBILE))
+        # Carrier codes may be needed in some countries. We handle this here.
+        if region_code == "CO" and numobj_type == PhoneNumberType.FIXED_LINE:
             formatted_number = format_national_number_with_carrier_code(numobj_no_ext,
                                                                         _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX)
+        elif region_code == "BR" and is_fixed_line_or_mobile:
+            if numobj_no_ext.preferred_domestic_carrier_code is not None:
+                formatted_number = format_national_number_with_preferred_carrier_code(numobj_no_ext, "")
+            else:
+                # Brazilian fixed line and mobile numbers need to be dialed with a
+                # carrier code when called within Brazil. Without that, most of
+                # the carriers won't connect the call.  Because of that, we return
+                # an empty string here.
+                formatted_number = ""
         else:
-            # E164 doesn't work at all when dialling within Colombia
-            formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
-    elif region_code == "PE" and region_calling_from == "PE":
-        # In Peru, numbers cannot be dialled using E164 format from a mobile
-        # phone for Movistar.  Instead they must be dialled in national
-        # format.
-        formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
-    elif (region_code == "AE" and region_calling_from == "AE" and
-          numobj_type == PhoneNumberType.UAN):
-        # In the United Arab Emirates, numbers with the prefix 600 (UAN
-        # numbers) cannot be dialled using E164 format. Instead they must be
-        # dialled in national format.
-        formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
-    elif (region_code == "BR" and region_calling_from == "BR" and
-          ((numobj_type == PhoneNumberType.FIXED_LINE) or
-           (numobj_type == PhoneNumberType.MOBILE) or
-           (numobj_type == PhoneNumberType.FIXED_LINE_OR_MOBILE))):
-        if numobj_no_ext.preferred_domestic_carrier_code is not None:
-            formatted_number = format_national_number_with_preferred_carrier_code(numobj_no_ext, "")
-        else:
-            # Brazilian fixed line and mobile numbers need to be dialed with a
-            # carrier code when called within Brazil. Without that, most of
-            # the carriers won't connect the call.  Because of that, we return
-            # an empty string here.
-            formatted_number = ""
+            # For NANPA countries, non-geographical countries, and Mexican
+            # fixed line and mobile numbers, we output international format
+            # for numbers that can be dialed internationally as that always
+            # works.
+            if ((country_calling_code == _NANPA_COUNTRY_CODE or
+                 region_code == REGION_CODE_FOR_NON_GEO_ENTITY or
+                 (region_code == "MX" and is_fixed_line_or_mobile)) and
+                _can_be_internationally_dialled(numobj_no_ext)):
+                # MX fixed line and mobile numbers should always be formatted
+                # in international format, even when dialed within MX. For
+                # national format to work, a carrier code needs to be used,
+                # and the correct carrier code depends on if the caller and
+                # callee are from the same local area. It is trickier to get
+                # that to work correctly than using international format,
+                # which is tested to work fine on all carriers.
+                formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
+            else:
+                formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
     elif _can_be_internationally_dialled(numobj_no_ext):
         if with_formatting:
             return format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
         else:
             return format_number(numobj_no_ext, PhoneNumberFormat.E164)
-    else:
-        if region_calling_from == region_code:
-            formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
-        else:
-            formatted_number = ""
+
     if with_formatting:
         return formatted_number
     else:

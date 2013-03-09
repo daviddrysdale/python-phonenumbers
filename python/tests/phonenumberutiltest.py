@@ -631,8 +631,23 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.format_national_number_with_preferred_carrier_code(usNumber, "15"))
 
     def testFormatNumberForMobileDialing(self):
+        # Numbers are normally dialed in national format in-country, and
+        # international format from outside the country.
+        self.assertEqual("030123456",
+                         phonenumbers.format_number_for_mobile_dialing(DE_NUMBER, "DE", False))
+        self.assertEqual("+4930123456",
+                         phonenumbers.format_number_for_mobile_dialing(DE_NUMBER, "CH", False))
+        deNumberWithExtn = PhoneNumber()
+        deNumberWithExtn.merge_from(DE_NUMBER)
+        deNumberWithExtn.extension = "1234"
+        self.assertEqual("030123456",
+                         phonenumbers.format_number_for_mobile_dialing(deNumberWithExtn, "DE", False))
+        self.assertEqual("+4930123456",
+                         phonenumbers.format_number_for_mobile_dialing(deNumberWithExtn, "CH", False))
+
         # US toll free numbers are marked as noInternationalDialling in the
-        # test metadata for testing purposes.
+        # test metadata for testing purposes.For such numbers, we expect
+        # nothing to be returned when the region code is not the same one.
         self.assertEqual("800 253 0000",
                          phonenumbers.format_number_for_mobile_dialing(US_TOLLFREE, "US",
                                                                        True))  # Keep formatting
@@ -676,6 +691,17 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.format_number_for_mobile_dialing(AE_UAN, "JP", False))
         self.assertEqual("600123456",
                          phonenumbers.format_number_for_mobile_dialing(AE_UAN, "AE", False))
+
+        self.assertEqual("+523312345678",
+                         phonenumbers.format_number_for_mobile_dialing(MX_NUMBER1, "MX", False))
+        self.assertEqual("+523312345678",
+                         phonenumbers.format_number_for_mobile_dialing(MX_NUMBER1, "US", False))
+
+        # Non-geographical numbers should always be dialed in international format.
+        self.assertEqual("+80012345678",
+                         phonenumbers.format_number_for_mobile_dialing(INTERNATIONAL_TOLL_FREE, "US", False))
+        self.assertEqual("+80012345678",
+                         phonenumbers.format_number_for_mobile_dialing(INTERNATIONAL_TOLL_FREE, "001", False))
 
         # Python version extra tests
         number = PhoneNumber()
