@@ -4,7 +4,7 @@
 =====================
 
 Load metadata on demand rather than all at start of day.
-
+Merge up to upstream Subversion revision 557.
 
 
 =====================
