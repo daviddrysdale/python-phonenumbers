@@ -11,7 +11,7 @@ PHONE_METADATA_CZ = PhoneMetadata(id='CZ', country_code=420, international_prefi
     personal_number=PhoneNumberDesc(national_number_pattern='70[01]\\d{6}', possible_number_pattern='\\d{9,12}', example_number='700123456'),
     voip=PhoneNumberDesc(national_number_pattern='9[17]0\\d{6}', possible_number_pattern='\\d{9,12}', example_number='910123456'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    uan=PhoneNumberDesc(national_number_pattern='9(?:5[056]|7[234])\\d{6}', possible_number_pattern='\\d{9,12}', example_number='972123456'),
+    uan=PhoneNumberDesc(national_number_pattern='9(?:5\\d|7[234])\\d{6}', possible_number_pattern='\\d{9,12}', example_number='972123456'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:12|5[058])', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='9(?:3\\d{9}|6\\d{7,10})', possible_number_pattern='\\d{9,12}', example_number='93123456789'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
