@@ -142,3 +142,12 @@ Project Layout
   changes to the master metadata need to be incorporated.
 * The `tools/` directory holds the tools that are used to process upstream
   changes to the master metadata.
+
+When things go wrong
+------------
+`phonenumbers.parse()` will raise a `NumberParseException` for invalid numbers:
+
+    >>> phonenumbers.parse("12345", None)
+    phonenumbers.phonenumberutil.NumberParseException: (0) Missing or invalid default region.
+    >>> phonenumbers.parse("Hello", None)
+    phonenumbers.phonenumberutil.NumberParseException: (1) The string supplied did not seem to be a phone number.
