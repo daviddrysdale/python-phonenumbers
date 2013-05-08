@@ -45,7 +45,7 @@ in an assigned exchange).
     False
 
 Once you've got a phone number, a common task is to format it in a standardized format.  There are a few
-formats available (under `PhoneNumberFormat`), and the `format_number` function does the formatting.
+formats available (under `PhoneNumberFormat` in [phonenumberutil.py](python/phonenumbers/phonenumberutil.py)), and the `format_number` function does the formatting.
 
     >>> phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.NATIONAL)
     u'020 8366 1177'
