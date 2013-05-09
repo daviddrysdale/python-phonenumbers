@@ -953,14 +953,21 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                 # the carriers won't connect the call.  Because of that, we return
                 # an empty string here.
                 formatted_number = ""
+        elif region_code == "HU":
+            # The national format for HU numbers doesn't contain the national
+            # prefix, because that is how numbers are normally written
+            # down. However, the national prefix is obligatory when dialing
+            # from a mobile phone. As a result, we add it back here.
+            formatted_number = (ndd_prefix_for_region(region_code, True) +  # strip non-digits
+                                u" " + format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL))
         else:
-            # For NANPA countries, non-geographical countries, and Mexican
-            # fixed line and mobile numbers, we output international format
-            # for numbers that can be dialed internationally as that always
-            # works.
+            # For NANPA countries, non-geographical countries, Mexican and
+            # Chilean fixed line and mobile numbers, we output international
+            # format for numbers that can be dialed internationally as that
+            # always works.
             if ((country_calling_code == _NANPA_COUNTRY_CODE or
                  region_code == REGION_CODE_FOR_NON_GEO_ENTITY or
-                 (region_code == "MX" and is_fixed_line_or_mobile)) and
+                 ((region_code == "MX" or region_code == "CL") and is_fixed_line_or_mobile)) and
                 _can_be_internationally_dialled(numobj_no_ext)):
                 # MX fixed line and mobile numbers should always be formatted
                 # in international format, even when dialed within MX. For
