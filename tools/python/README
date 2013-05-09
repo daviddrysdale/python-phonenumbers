@@ -128,14 +128,12 @@ Standard Python v2.x version:
 
 Experimental Python v3.x version:
  - Perform the v2.x release procedure above.
- - Run the do3 script, which re-creates the python3/ directory from scratch,
-   based on the contents of the python/ directory.
- - Check that the unit tests run:
-     cd python3 && make test
+ - Build the python3/ code and test it with:
+     cd tools/python && make test3
  - Create a py3k-release-<version> branch and shift to it with:
      git checkout -b py3k-release-<version>
  - Push the branch to Github with:
      git push origin py3k-release-<version>
  - Create a setup-tools packaged tarball dist/phonenumbers3k-<version>.tar.gz
    with:
-     make sdist  # runs python3 setup.py sdist
+     cd python3 && make sdist  # runs python3 setup.py sdist
