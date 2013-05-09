@@ -2,9 +2,9 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MM = PhoneMetadata(id='MM', country_code=95, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[14578]\\d{5,7}|[26]\\d{5,8}|9(?:[258]|4\\d{1,2}|[679]\\d?)\\d{6}', possible_number_pattern='\\d{5,10}'),
+    general_desc=PhoneNumberDesc(national_number_pattern='[14578]\\d{5,7}|[26]\\d{5,8}|9(?:[258]|3\\d|4\\d{1,2}|[679]\\d?)\\d{6}', possible_number_pattern='\\d{5,10}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='1(?:2\\d{1,2}|[3-5]\\d|6\\d?|[89][0-6]\\d)\\d{4}|2(?:[236-9]\\d{4}|4(?:0\\d{5}|\\d{4})|5(?:1\\d{3,6}|[02-9]\\d{3,5}))|4(?:2[245-8]|[346][2-6]|5[3-5])\\d{4}|5(?:2(?:20?|[3-8])|3[2-68]|4(?:21?|[4-8])|5[23]|6[2-4]|7[2-8]|8[24-7]|9[2-7])\\d{4}|6(?:0[23]|1[2356]|[24][2-6]|3[24-6]|5[2-4]|6[2-8]|7(?:[2367]|4\\d|5\\d?|8[145]\\d)|8[245]|9[24])\\d{4}|7(?:[04][24-8]|[15][2-7]|22|3[2-4])\\d{4}|8(?:1(?:2\\d?|[3-689])|2[2-8]|3[24]|4[24-7]|5[245]|6[23])\\d{4}', possible_number_pattern='\\d{5,9}', example_number='1234567'),
-    mobile=PhoneNumberDesc(national_number_pattern='17[01]\\d{4}|9(?:2[0-4]|4(?:0[0-4]\\d|[1379]\\d|[24][0-589]\\d|5\\d{2}|88)|5[0-6]|61?\\d|73\\d|8\\d|9(?:1\\d|[089]))\\d{5}', possible_number_pattern='\\d{7,10}', example_number='92123456'),
+    mobile=PhoneNumberDesc(national_number_pattern='17[01]\\d{4}|9(?:2[0-4]|3[136]\\d|4(?:0[0-4]\\d|[1379]\\d|[24][0-589]\\d|5\\d{2}|88)|5[0-6]|61?\\d|73\\d|8\\d|9(?:1\\d|[089]))\\d{5}', possible_number_pattern='\\d{7,10}', example_number='92123456'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
@@ -22,5 +22,5 @@ PHONE_METADATA_MM = PhoneMetadata(id='MM', country_code=95, international_prefix
         NumberFormat(pattern='(\\d)(\\d{2})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['16|2'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['67|81'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[4-8]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(9)(\\d{3})(\\d{4,5})', format=u'\\1 \\2 \\3', leading_digits_pattern=['9(?:[25-9]|4[13789])'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='(9)(\\d{3})(\\d{4,5})', format=u'\\1 \\2 \\3', leading_digits_pattern=['9(?:[235-9]|4[13789])'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(9)(4\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['94[0245]'], national_prefix_formatting_rule=u'0\\1')])
