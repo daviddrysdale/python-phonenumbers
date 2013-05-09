@@ -1301,7 +1301,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
 
     region_code = region_code_for_country_code(country_code)
     # Metadata cannot be None because the country calling code is valid.
-    metadata_for_region = PhoneMetadata.metadata_for_region_or_calling_code(region_code, country_code)
+    metadata_for_region = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
     formatted_number = _maybe_append_formatted_extension(numobj,
                                                          metadata_for_region,
                                                          PhoneNumberFormat.INTERNATIONAL,
