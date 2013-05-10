@@ -1,5 +1,20 @@
 
 =====================
+ What's new in 5.5b1
+=====================
+
+Merge up to upstream Subversion revision 574.
+
+
+=====================
+ What's new in 5.4b1
+=====================
+
+Load metadata on demand rather than all at start of day.
+Merge up to upstream Subversion revision 557.
+
+
+=====================
  What's new in 5.3b1
 =====================
 

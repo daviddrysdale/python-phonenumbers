@@ -44,6 +44,20 @@ in an assigned exchange).
     >>> phonenumbers.is_valid_number(z)  # NPA 200 not used
     False
 
+The `parse` function will also fail completely (with a `NumberParseException`) on inputs that cannot
+be uniquely parsed, or that  can't possibly be phone numbers.
+
+    >>> z = phonenumbers.parse("02081234567", None)  # no region, no + => unparseable
+    Traceback (most recent call last):
+      File "phonenumbers/phonenumberutil.py", line 2350, in parse
+        "Missing or invalid default region.")
+    phonenumbers.phonenumberutil.NumberParseException: (0) Missing or invalid default region.
+    >>> z = phonenumbers.parse("gibberish", None)
+    Traceback (most recent call last):
+      File "phonenumbers/phonenumberutil.py", line 2344, in parse
+        "The string supplied did not seem to be a phone number.")
+    phonenumbers.phonenumberutil.NumberParseException: (1) The string supplied did not seem to be a phone number.
+
 Once you've got a phone number, a common task is to format it in a standardized format.  There are a few
 formats available (under `PhoneNumberFormat`), and the `format_number` function does the formatting.
 
