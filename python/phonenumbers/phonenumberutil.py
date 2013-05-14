@@ -1559,7 +1559,7 @@ def number_type(numobj):
     Arguments:
     numobj -- The PhoneNumber object that we want to know the type of.
 
-    Returns the type of the phone number.
+    Returns the type of the phone number, as a PhoneNumberType value.
     """
     region_code = region_code_for_number(numobj)
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(numobj.country_code, region_code)
