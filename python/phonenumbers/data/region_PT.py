@@ -15,4 +15,5 @@ PHONE_METADATA_PT = PhoneMetadata(id='PT', country_code=351, international_prefi
     emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='([2-46-9]\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3')])
+    number_format=[NumberFormat(pattern='(2\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2[12]']),
+        NumberFormat(pattern='([2-46-9]\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2[3-9]|[346-9]'])])
