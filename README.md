@@ -156,3 +156,18 @@ Project Layout
   changes to the master metadata need to be incorporated.
 * The `tools/` directory holds the tools that are used to process upstream
   changes to the master metadata.
+
+Python 3.x Support
+------------------
+
+There are currently two ways to get a Python 3 version of the library.
+
+* Check out the main branch, and run `make python3` from the `tools/python` directory.  This will produce a new
+  top-level `python3/` directory containing the Python 3 version of the library, as produced by
+  [2to3](http://docs.python.org/2/library/2to3.html).
+* Check out the (somewhat experimental) `python3` branch, which holds a unified version of the library that runs
+  under both Python 2.x (x >= 5) and Python 3.x.
+
+At some point the `python3` branch will probably become the main branch, but at the moment it sometimes lags behind the
+main branch.  Please let me know if you're using the `python3` branch in anger, so that I can know to keep it more
+up-to-date (and possibly accelerate the plans to make it the mainline version).

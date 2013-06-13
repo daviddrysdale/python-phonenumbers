@@ -686,8 +686,8 @@ def _formatting_rule_has_first_group_only(national_prefix_formatting_rule):
     """Helper function to check if the national prefix formatting rule has the
     first group only, i.e., does not start with the national prefix.
     """
-    if national_prefix_formatting_rule is None:  # pragma no cover
-        return False
+    if national_prefix_formatting_rule is None:
+        return True
     return bool(fullmatch(_FIRST_GROUP_ONLY_PREFIX_PATTERN,
                           national_prefix_formatting_rule))
 
@@ -1561,7 +1561,7 @@ def number_type(numobj):
     Arguments:
     numobj -- The PhoneNumber object that we want to know the type of.
 
-    Returns the type of the phone number.
+    Returns the type of the phone number, as a PhoneNumberType value.
     """
     region_code = region_code_for_number(numobj)
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(numobj.country_code, region_code)
