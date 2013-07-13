@@ -487,11 +487,8 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
 
     def __unicode__(self):
         # Generate a string that is valid Python input for the constructor
-        country_code = self.country_code
-        if country_code is None:
-            country_code = -1
-        result = (u"PhoneMetadata(id='%s', country_code=%d, international_prefix=%r" %
-                  (self.id, country_code, self.international_prefix))
+        result = (u"PhoneMetadata(id='%s', country_code=%r, international_prefix=%r" %
+                  (self.id, self.country_code, self.international_prefix))
         result += ",\n    general_desc=%s" % self.general_desc
         result += ",\n    fixed_line=%s" % self.fixed_line
         result += ",\n    mobile=%s" % self.mobile
