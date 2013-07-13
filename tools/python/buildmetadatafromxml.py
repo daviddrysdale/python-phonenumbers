@@ -337,7 +337,10 @@ class XTerritory(UnicodeMixin):
         id = xterritory.attrib['id']
         self.o = PhoneMetadata(id, register=False)
         self.o._mutable = True
-        self.o.country_code = int(xterritory.attrib['countryCode'])
+        if 'countryCode' in xterritory.attrib:
+            self.o.country_code = int(xterritory.attrib['countryCode'])
+        else:
+            self.o.country_code = None
         # Retrieve the IMPLIED attributes
         self.o.international_prefix = xterritory.get('internationalPrefix', None)
         self.o.leading_digits = xterritory.get('leadingDigits', None)
@@ -540,13 +543,14 @@ class XPhoneNumberMetadata(UnicodeMixin):
             country_code_to_region_code = {}
             for country_id in sorted(self.territory.keys()):
                 terrobj = self.territory[country_id]
-                country_code = int(terrobj.o.country_code)
-                if country_code not in country_code_to_region_code:
-                    country_code_to_region_code[country_code] = []
-                if terrobj.o.main_country_for_code:
-                    country_code_to_region_code[country_code].insert(0, terrobj.o.id)
-                else:
-                    country_code_to_region_code[country_code].append(terrobj.o.id)
+                if terrobj.o.country_code is not None:
+                    country_code = int(terrobj.o.country_code)
+                    if country_code not in country_code_to_region_code:
+                        country_code_to_region_code[country_code] = []
+                    if terrobj.o.main_country_for_code:
+                        country_code_to_region_code[country_code].insert(0, terrobj.o.id)
+                    else:
+                        country_code_to_region_code[country_code].append(terrobj.o.id)
 
             for country_code in sorted(country_code_to_region_code.keys()):
                 country_ids = country_code_to_region_code[country_code]

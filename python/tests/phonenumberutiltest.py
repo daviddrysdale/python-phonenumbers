@@ -2502,7 +2502,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                    leading_digits='123',
                                    leading_zero_possible=True,
                                    register=False)
-        self.assertEqual("""PhoneMetadata(id='XX', country_code=-1, international_prefix='9123',
+        self.assertEqual("""PhoneMetadata(id='XX', country_code=None, international_prefix='9123',
     general_desc=PhoneNumberDesc(example_number='12'),
     fixed_line=None,
     mobile=None,
