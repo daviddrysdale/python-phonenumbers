@@ -36,7 +36,7 @@ generated from the files in resources/geocoding/
 The script tools/buildmetadatafromxml.py performs the first autogeneration.
 Run it with:
   cd tools
-  python buildmetadatafromxml.py ../resources/PhoneNumberMetaData.xml ../python/phonenumbers/data .
+  python buildmetadatafromxml.py ../resources/PhoneNumberMetadata.xml ../python/phonenumbers/data .
 
 This will:
  - Create the python/phonenumbers/data/ directory if not present.

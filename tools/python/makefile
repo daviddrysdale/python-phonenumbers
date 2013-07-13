@@ -24,10 +24,10 @@ $(PYDIR)/tests/testgeodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resource
 geodata: $(PYDIR)/phonenumbers/geodata/__init__.py $(PYDIR)/tests/testgeodata/__init__.py
 
 # Generate Python files from metadata
-$(PYDIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetaData.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
-	$(PYTHON) buildmetadatafromxml.py --alt $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml $(TOPDIR)/resources/PhoneNumberMetaData.xml $(PYDIR)/phonenumbers/data .
-$(PYDIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
-	$(PYTHON) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetaDataForTesting.xml $(PYDIR)/tests/testdata phonenumbers
+$(PYDIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetadata.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
+	$(PYTHON) buildmetadatafromxml.py --alt $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml $(TOPDIR)/resources/PhoneNumberMetadata.xml $(PYDIR)/phonenumbers/data .
+$(PYDIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml buildmetadatafromxml.py
+	$(PYTHON) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml $(PYDIR)/tests/testdata phonenumbers
 metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata
 
 alldata: metadata geodata locale
@@ -129,10 +129,10 @@ $(PY3DIR)/tests/testgeodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resourc
 	$(PYTHON3) buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding $@
 geo3data: $(PY3DIR)/phonenumbers/geodata/__init__.py $(PY3DIR)/tests/testgeodata/__init__.py
 
-$(PY3DIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetaData.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
-	$(PYTHON3) buildmetadatafromxml.py --alt $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml $(TOPDIR)/resources/PhoneNumberMetaData.xml $(PY3DIR)/phonenumbers/data .
-$(PY3DIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetaDataForTesting.xml buildmetadatafromxml.py
-	$(PYTHON3) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetaDataForTesting.xml $(PY3DIR)/tests/testdata phonenumbers
+$(PY3DIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetadata.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
+	$(PYTHON3) buildmetadatafromxml.py --alt $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml $(TOPDIR)/resources/PhoneNumberMetadata.xml $(PY3DIR)/phonenumbers/data .
+$(PY3DIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml buildmetadatafromxml.py
+	$(PYTHON3) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml $(PY3DIR)/tests/testdata phonenumbers
 meta3data: $(PY3DIR)/phonenumbers/data/__init__.py $(PY3DIR)/tests/testdata/__init__.py geo3data
 
 all3data: meta3data geo3data locale3
