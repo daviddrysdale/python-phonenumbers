@@ -1,4 +1,4 @@
-"""PhoneMetaData object definitions"""
+"""PhoneMetadata object definitions"""
 
 # Based on original Java code and protocol buffer:
 #     resources/phonemetadata.proto
