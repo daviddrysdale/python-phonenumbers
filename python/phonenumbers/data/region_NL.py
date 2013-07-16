@@ -17,7 +17,7 @@ PHONE_METADATA_NL = PhoneMetadata(id='NL', country_code=31, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='14\\d{3,4}', possible_number_pattern='\\d{5,6}'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([1-578]\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1[035]|2[0346]|3[03568]|4[0356]|5[0358]|7|8[458]'], national_prefix_formatting_rule=u'0\\1'),
+    number_format=[NumberFormat(pattern='([1-578]\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1[035]|2[0346]|3[03568]|4[0356]|5[0358]|7|8[4578]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([1-5]\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1[16-8]|2[259]|3[124]|4[17-9]|5[124679]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(6)(\\d{8})', format=u'\\1 \\2', leading_digits_pattern=['6[0-57-9]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(66)(\\d{7})', format=u'\\1 \\2', leading_digits_pattern=['66'], national_prefix_formatting_rule=u'0\\1'),
