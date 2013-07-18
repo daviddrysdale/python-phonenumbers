@@ -15,18 +15,19 @@
 
 from phonenumbers.phonemetadata import PhoneMetadata
 
-_AVAILABLE_NONGEO_COUNTRY_CODES = [800, 979]
 _AVAILABLE_REGION_CODES = ['AD','AE','AO','AR','AU','BR','BS','BY','DE','GB','IT','JP','KR','MX','NZ','PL','RE','SG','US','YT']
+_AVAILABLE_NONGEO_COUNTRY_CODES = [800, 979]
 
 def _load_region(code):
     __import__("region_%s" % code, globals(), locals(),
                fromlist=["PHONE_METADATA_%s" % code], level=1)
 
-for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
-    PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
-
 for region_code in _AVAILABLE_REGION_CODES:
     PhoneMetadata.register_region_loader(region_code, _load_region)
+
+
+for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
+    PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
 
 
 # A mapping from a country code to the region codes which
