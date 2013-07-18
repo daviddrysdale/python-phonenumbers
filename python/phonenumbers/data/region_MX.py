@@ -14,6 +14,8 @@ PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='06[568]|911', possible_number_pattern='\\d{3}', example_number='066'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='01',
     national_prefix_for_parsing='0[12]|04[45](\\d{10})',

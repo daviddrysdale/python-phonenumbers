@@ -14,6 +14,8 @@ PHONE_METADATA_VN = PhoneMetadata(id='VN', country_code=84, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='[17]99\\d{4}|69\\d{5,6}|80\\d{5}', possible_number_pattern='\\d{7,8}', example_number='1992000'),
     emergency=PhoneNumberDesc(national_number_pattern='11[345]', possible_number_pattern='\\d{3}', example_number='113'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='[17]99\\d{4}|69\\d{5,6}', possible_number_pattern='\\d{7,8}', example_number='1992000'),
     national_prefix='0',
     national_prefix_for_parsing='0',

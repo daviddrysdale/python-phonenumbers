@@ -14,6 +14,8 @@ PHONE_METADATA_NL = PhoneMetadata(id='NL', country_code=31, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='140(?:1(?:[035]|[16-8]\\d)|2(?:[0346]|[259]\\d)|3(?:[03568]|[124]\\d)|4(?:[0356]|[17-9]\\d)|5(?:[0358]|[124679]\\d)|7\\d|8[458])', possible_number_pattern='\\d{5,6}', example_number='14020'),
     emergency=PhoneNumberDesc(national_number_pattern='112|911', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='14\\d{3,4}', possible_number_pattern='\\d{5,6}'),
     national_prefix='0',
     national_prefix_for_parsing='0',

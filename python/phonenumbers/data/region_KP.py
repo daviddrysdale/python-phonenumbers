@@ -14,6 +14,8 @@ PHONE_METADATA_KP = PhoneMetadata(id='KP', country_code=850, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='2(?:[0-24-9]\\d{2}|3(?:[0-79]\\d|8[02-9]))\\d{4}', possible_number_pattern='\\d{8}', example_number='23821234'),
     national_prefix='0',
     national_prefix_for_parsing='0',
