@@ -31,9 +31,9 @@ __init__.py and per-region data files will be created in the directory.
 # BuildMetadataFromXml.java
 #
 # OPEN QUERIES/ISSUES
-#  - The XML includes territory/areaCodeOptional? and territory/shortCode?
-#    elements, which are PhoneNumberDesc instances; these do not
-#    appear to be used in the libphonenumber Java source code.
+#  - The XML includes territory/areaCodeOptional? elements, which are
+#    PhoneNumberDesc instances; these do not appear to be used in the
+#    libphonenumber Java source code.
 
 # import to allow this code to work with Python2.5
 from __future__ import with_statement
@@ -414,12 +414,14 @@ class XTerritory(UnicodeMixin):
                                        template=self.o.general_desc.o)
         self.o.uan = XPhoneNumberDesc(_get_unique_child(xterritory, 'uan'),
                                       template=self.o.general_desc.o)
-        self.o.short_code = XPhoneNumberDesc(_get_unique_child(xterritory, 'shortCode'),
-                                             template=self.o.general_desc.o)
         self.o.emergency = XPhoneNumberDesc(_get_unique_child(xterritory, 'emergency'),
                                             template=self.o.general_desc.o)
         self.o.voicemail = XPhoneNumberDesc(_get_unique_child(xterritory, 'voicemail'),
                                             template=self.o.general_desc.o)
+        self.o.short_code = XPhoneNumberDesc(_get_unique_child(xterritory, 'shortCode'),
+                                             template=self.o.general_desc.o)
+        self.o.standard_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'standardRate'),
+                                                template=self.o.general_desc.o)
         # Look for available formats
         self.has_explicit_intl_format = False
         formats = _get_unique_child(xterritory, "availableFormats")

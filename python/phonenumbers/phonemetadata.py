@@ -285,6 +285,8 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
                  uan=None,
                  emergency=None,
                  voicemail=None,
+                 short_code=None,
+                 standard_rate=None,
                  no_international_dialling=None,
                  country_code=None,
                  international_prefix=None,
@@ -320,6 +322,8 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         self.uan = uan  # None or PhoneNumberDesc
         self.emergency = emergency  # None or PhoneNumberDesc
         self.voicemail = voicemail  # None or PhoneNumberDesc
+        self.short_code = short_code  # None or PhoneNumberDesc
+        self.standard_rate = standard_rate  # None or PhoneNumberDesc
 
         # The rules here distinguish the numbers that are only able to be
         # dialled nationally.
@@ -501,6 +505,8 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         result += ",\n    uan=%s" % self.uan
         result += ",\n    emergency=%s" % self.emergency
         result += ",\n    voicemail=%s" % self.voicemail
+        result += ",\n    short_code=%s" % self.short_code
+        result += ",\n    standard_rate=%s" % self.standard_rate
         result += ",\n    no_international_dialling=%s" % self.no_international_dialling
 
         if self.preferred_international_prefix is not None:
