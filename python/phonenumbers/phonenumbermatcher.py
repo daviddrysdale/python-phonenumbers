@@ -163,7 +163,9 @@ class Leniency(object):
     # written as "65 02 53 00 00" and "650253 0000" are not accepted at this
     # leniency level, whereas "650 253 0000", "650 2530000" or "6502530000"
     # are.
-    # Numbers with more than one '/' symbol are also dropped at this level.
+    # Numbers with more than one '/' symbol in the national significant number
+    # are also dropped at this level.
+    #
     # Warning: This level might result in lower coverage especially for
     # regions outside of country code "+1". If you are not sure about which
     # level to use, email the discussion group
@@ -202,7 +204,7 @@ def _verify(leniency, numobj, candidate):
 def _verify_strict_grouping(numobj, candidate):
     if (not is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
-        _contains_more_than_one_slash(candidate) or
+        _contains_more_than_one_slash_in_national_number(numobj, candidate) or
         not _is_national_prefix_present_if_required(numobj)):
         return False
     return _check_number_grouping_is_valid(numobj, candidate,
@@ -251,7 +253,7 @@ def _all_number_groups_remain_grouped(numobj, normalized_candidate, formatted_nu
 def _verify_exact_grouping(numobj, candidate):
     if (not is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
-        _contains_more_than_one_slash(candidate) or
+        _contains_more_than_one_slash_in_national_number(numobj, candidate) or
         not _is_national_prefix_present_if_required(numobj)):
         return False
     return _check_number_grouping_is_valid(numobj, candidate,
@@ -337,10 +339,26 @@ def _check_number_grouping_is_valid(numobj, candidate, checker):
     return False
 
 
-def _contains_more_than_one_slash(candidate):
-    first_slash_index = candidate.find(u'/')
-    return (first_slash_index > 0 and
-            (candidate.find(u'/', (first_slash_index + 1)) != -1))
+def _contains_more_than_one_slash_in_national_number(numobj, candidate):
+    first_slash_in_body_index = candidate.find(u'/')
+    if first_slash_in_body_index < 0:
+        # No slashes, this is okay.
+        return False
+    # Now look for a second one.
+    second_slash_in_body_index = candidate.find(u'/', first_slash_in_body_index + 1)
+    if second_slash_in_body_index < 0:
+        # Only one slash, this is okay.,
+        return False
+
+    # If the first slash is after the country calling code, this is permitted.
+    candidate_has_country_code = (numobj.country_code_source == CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN or
+                                  numobj.country_code_source == CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN)
+    if (candidate_has_country_code and
+        normalize_digits_only(candidate[:first_slash_in_body_index]) ==
+        unicode(numobj.country_code)):
+        # Any more slashes and this is illegal.
+        return (candidate[(second_slash_in_body_index + 1):].find(u'/') != -1)
+    return True
 
 
 def _contains_only_valid_x_chars(numobj, candidate):

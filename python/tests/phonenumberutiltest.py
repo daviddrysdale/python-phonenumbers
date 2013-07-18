@@ -310,6 +310,13 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.normalize_digits_only(inputNumber),
                          msg="Conversion did not correctly remove alpha character")
 
+    def testNormaliseStripNonDiallableCharacters(self):
+        inputNumber = "03*4-56&+a#234"
+        expectedOutput = "03*456+234"
+        self.assertEqual(expectedOutput,
+                         phonenumberutil._normalize_diallable_chars_only(inputNumber),
+                         msg="Conversion did not correctly remove non-diallable characters")
+
     def testFormatUSNumber(self):
         self.assertEqual("650 253 0000", phonenumbers.format_number(US_NUMBER, PhoneNumberFormat.NATIONAL))
         self.assertEqual("+1 650 253 0000", phonenumbers.format_number(US_NUMBER, PhoneNumberFormat.INTERNATIONAL))
