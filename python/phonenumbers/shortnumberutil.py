@@ -25,6 +25,57 @@ from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
 from .phonenumberutil import normalize_digits_only
 
 
+class ShortNumberCost(object):
+    """Cost categories of short numbers."""
+    TOLL_FREE = 0
+    STANDARD_RATE = 1
+    PREMIUM_RATE = 2
+    UNKNOWN_COST = 3
+
+
+def _example_short_number(region_code):
+    metadata = PhoneMetadata.short_metadata_for_region(region_code)
+    if metadata is None:
+        return u""
+    desc = metadata.short_code
+    if desc.example_number is not None:
+        return desc.example_number
+    return u""
+
+
+def _example_short_number_for_cost(region_code, cost):
+    """Gets a valid short number for the specified cost category.
+
+    Arguments:
+    region_code -- the region for which an example short number is needed.
+    cost -- the cost category of number that is needed.
+
+    Returns a valid short number for the specified region and cost
+    category. Returns an empty string when the metadata does not contain such
+    information, or the cost is UNKNOWN_COST.
+    """
+    metadata = PhoneMetadata.short_metadata_for_region(region_code)
+    if metadata is None:
+        return u""
+    desc = _short_number_desc_by_cost(metadata, cost)
+    if desc is not None and desc.example_number is not None:
+        return desc.example_number
+    return u""
+
+
+def _short_number_desc_by_cost(metadata, cost):
+    if cost == ShortNumberCost.TOLL_FREE:
+        return metadata.toll_free
+    elif cost == ShortNumberCost.STANDARD_RATE:
+        return metadata.standard_rate
+    elif cost == ShortNumberCost.PREMIUM_RATE:
+        return metadata.premium_rate
+    else:
+        # ShortNumberCost.UNKNOWN_COST numbers are computed by the process of
+        # elimination from the other cost categoried.
+        return None
+
+
 def connects_to_emergency_number(number, region_code):
     """Returns whether the number might be used to connect to an emergency
     service in the given region.

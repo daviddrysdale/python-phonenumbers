@@ -23,6 +23,7 @@ import unittest
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber, is_emergency_number
+from phonenumbers import shortnumberutil
 from phonenumbers.re_util import fullmatch
 
 
@@ -165,6 +166,10 @@ class ExampleNumbersTest(unittest.TestCase):
             exampleNumber = phonenumberutil.example_number(regionCode)
             self.assertTrue(exampleNumber is not None,
                             msg="None found for region %s" % regionCode)
+        for regionCode in phonenumberutil.SUPPORTED_SHORT_REGIONS:
+            exampleShortNumber = shortnumberutil._example_short_number(regionCode)
+            self.assertNotEqual(exampleShortNumber, "",
+                                msg="No example short number found for region %s" % regionCode)
 
     # Extra tests that need access to the real metadata
     def testBlankMetadata(self):

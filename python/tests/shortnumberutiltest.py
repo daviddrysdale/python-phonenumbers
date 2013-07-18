@@ -17,12 +17,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from phonenumbers import connects_to_emergency_number, is_emergency_number
+from phonenumbers import connects_to_emergency_number, is_emergency_number, ShortNumberCost
+from phonenumbers import shortnumberutil, ShortNumberCost
 from .testmetadatatest import TestMetadataTestCase
 
 
 class ShortNumberUtilTest(TestMetadataTestCase):
     """Unit tests for shortnumberutil.py"""
+
+    def testGetExampleShortNumber(self):
+        self.assertEqual("8711", shortnumberutil._example_short_number("AM"))
+        self.assertEqual("1010", shortnumberutil._example_short_number("FR"))
+        self.assertEqual("", shortnumberutil._example_short_number("001"))
+        self.assertEqual("", shortnumberutil._example_short_number(None))
+
+    def testGetExampleShortNumberForCost(self):
+        self.assertEqual("3010",
+                         shortnumberutil._example_short_number_for_cost("FR", ShortNumberCost.TOLL_FREE))
+        self.assertEqual("118777",
+                         shortnumberutil._example_short_number_for_cost("FR", ShortNumberCost.STANDARD_RATE))
+        self.assertEqual("3200",
+                         shortnumberutil._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE))
+        self.assertEqual("",
+                         shortnumberutil._example_short_number_for_cost("FR", ShortNumberCost.UNKNOWN_COST))
 
     def testConnectsToEmergencyNumber_US(self):
         self.assertTrue(connects_to_emergency_number("911", "US"))
