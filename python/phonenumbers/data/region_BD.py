@@ -14,6 +14,8 @@ PHONE_METADATA_BD = PhoneMetadata(id='BD', country_code=880, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='10[0-2]|999', possible_number_pattern='\\d{3}', example_number='999'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix='00',
     national_prefix='0',

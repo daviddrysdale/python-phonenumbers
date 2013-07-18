@@ -23,6 +23,7 @@ import unittest
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber, is_emergency_number
+from phonenumbers import shortnumberutil
 from phonenumbers.util import prnt
 from phonenumbers.re_util import fullmatch
 
@@ -167,6 +168,10 @@ class ExampleNumbersTest(unittest.TestCase):
             exampleNumber = phonenumberutil.example_number(regionCode)
             self.assertTrue(exampleNumber is not None,
                             msg="None found for region %s" % regionCode)
+        for regionCode in phonenumberutil.SUPPORTED_SHORT_REGIONS:
+            exampleShortNumber = shortnumberutil._example_short_number(regionCode)
+            self.assertNotEqual(exampleShortNumber, "",
+                                msg="No example short number found for region %s" % regionCode)
 
     # Extra tests that need access to the real metadata
     def testBlankMetadata(self):
@@ -185,7 +190,7 @@ class ExampleNumbersTest(unittest.TestCase):
         brNumberFixed = PhoneNumber(country_code=55, national_number=1123456789)
         brNumberMobile = PhoneNumber(country_code=55, national_number=1161234567,
                                      preferred_domestic_carrier_code="303")
-        huNumberFixed= PhoneNumber(country_code=36, national_number=12345678)
+        huNumberFixed = PhoneNumber(country_code=36, national_number=12345678)
         self.assertEqual("0312345678",
                          phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", False))
         self.assertEqual("03 1 2345678",

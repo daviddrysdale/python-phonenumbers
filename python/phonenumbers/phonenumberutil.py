@@ -43,6 +43,7 @@ from .phonemetadata import NumberFormat, PhoneMetadata, REGION_CODE_FOR_NON_GEO_
 # Import auto-generated data structures
 try:
     from .data import _COUNTRY_CODE_TO_REGION_CODE
+    from .shortdata import _AVAILABLE_REGION_CODES as _AVAILABLE_SHORT_REGION_CODES
 except ImportError:  # pragma no cover
     # Before the generated code exists, the data/ directory is empty.
     # The generation process imports this module, creating a circular
@@ -53,6 +54,7 @@ except ImportError:  # pragma no cover
         os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
         prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
+        _AVAILABLE_SHORT_REGION_CODES = []
     else:
         raise
 
@@ -418,6 +420,7 @@ class ValidationResult(object):
 SUPPORTED_REGIONS = set([_item for _sublist in COUNTRY_CODE_TO_REGION_CODE.values() for _item in _sublist])
 if REGION_CODE_FOR_NON_GEO_ENTITY in SUPPORTED_REGIONS:
     SUPPORTED_REGIONS.remove(REGION_CODE_FOR_NON_GEO_ENTITY)
+SUPPORTED_SHORT_REGIONS = _AVAILABLE_SHORT_REGION_CODES
 _NANPA_REGIONS = set(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
 
 
@@ -528,6 +531,20 @@ def normalize_digits_only(number, keep_non_digits=False):
         elif keep_non_digits:
             normalized_digits += number[ii]
     return normalized_digits
+
+
+def _normalize_diallable_chars_only(number):
+    """Normalizes a string of characters representing a phone number.
+
+    This strips all characters which are not diallable on a mobile phone
+    keypad (including all non-ASCII digits).
+
+    Arguments:
+    number -- a string of characters representing a phone number
+
+    Returns the normalized string version of the phone number.
+    """
+    return _normalize_helper(number, _DIALLABLE_CHAR_MAPPINGS, True)
 
 
 def convert_alpha_characters_in_number(number):
@@ -990,8 +1007,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
     if with_formatting:
         return formatted_number
     else:
-        return _normalize_helper(formatted_number, _DIALLABLE_CHAR_MAPPINGS,
-                                 True)  # remove non matches
+        return _normalize_diallable_chars_only(formatted_number)
 
 
 def format_out_of_country_calling_number(numobj, region_calling_from):
@@ -1113,8 +1129,8 @@ def format_in_original_format(numobj, region_calling_from):
     # the user entered.
     if (formatted_number is not None and
         num_raw_input is not None and len(num_raw_input) > 0):
-        normalized_formatted_number = _normalize_helper(formatted_number, _DIALLABLE_CHAR_MAPPINGS, True)
-        normalized_raw_input = _normalize_helper(num_raw_input, _DIALLABLE_CHAR_MAPPINGS, True)
+        normalized_formatted_number = _normalize_diallable_chars_only(formatted_number)
+        normalized_raw_input = _normalize_diallable_chars_only(num_raw_input)
         if normalized_formatted_number != normalized_raw_input:
             formatted_number = num_raw_input
     return formatted_number
@@ -1609,13 +1625,19 @@ def _number_type_helper(national_number, metadata):
     return PhoneNumberType.UNKNOWN
 
 
+def _is_number_possible_for_desc(national_number, number_desc):
+    if number_desc is None:
+        return False
+    possible_re = re.compile(number_desc.possible_number_pattern or U_EMPTY_STRING)
+    return fullmatch(possible_re, national_number)
+
+
 def _is_number_matching_desc(national_number, number_desc):
     """Determine if the number matches the given PhoneNumberDesc"""
     if number_desc is None:
         return False
-    possible_re = re.compile(number_desc.possible_number_pattern or U_EMPTY_STRING)
     national_re = re.compile(number_desc.national_number_pattern or U_EMPTY_STRING)
-    return (fullmatch(possible_re, national_number) and
+    return (_is_number_possible_for_desc(national_number, number_desc) and
             fullmatch(national_re, national_number))
 
 

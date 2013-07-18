@@ -14,6 +14,8 @@ PHONE_METADATA_OM = PhoneMetadata(id='OM', country_code=968, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='9999', possible_number_pattern='\\d{4}', example_number='9999'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(2\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['2']),
         NumberFormat(pattern='(9\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['9']),

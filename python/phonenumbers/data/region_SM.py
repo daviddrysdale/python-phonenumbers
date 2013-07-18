@@ -14,6 +14,8 @@ PHONE_METADATA_SM = PhoneMetadata(id='SM', country_code=378, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='11[358]', possible_number_pattern='\\d{3}', example_number='113'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix_for_parsing='(?:0549)?([89]\\d{5})',
     national_prefix_transform_rule='0549\\1',

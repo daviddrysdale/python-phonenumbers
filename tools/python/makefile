@@ -26,9 +26,11 @@ geodata: $(PYDIR)/phonenumbers/geodata/__init__.py $(PYDIR)/tests/testgeodata/__
 # Generate Python files from metadata
 $(PYDIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetadata.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
 	$(PYTHON) buildmetadatafromxml.py --alt $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml $(TOPDIR)/resources/PhoneNumberMetadata.xml $(PYDIR)/phonenumbers/data .
+$(PYDIR)/phonenumbers/shortdata/__init__.py: $(TOPDIR)/resources/ShortNumberMetadata.xml buildmetadatafromxml.py
+	$(PYTHON) buildmetadatafromxml.py --short $(TOPDIR)/resources/ShortNumberMetadata.xml $(PYDIR)/phonenumbers/shortdata .
 $(PYDIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml buildmetadatafromxml.py
 	$(PYTHON) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml $(PYDIR)/tests/testdata phonenumbers
-metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata
+metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/phonenumbers/shortdata/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata
 
 alldata: metadata geodata locale
 
@@ -82,7 +84,7 @@ clean: coverage_clean profile_clean
 	rm -rf $(PYDIR)/build $(PYDIR)/deb_dist $(PYDIR)/dist
 
 metaclean:
-	rm -rf $(PYDIR)/phonenumbers/data $(PYDIR)/tests/testdata
+	rm -rf $(PYDIR)/phonenumbers/data $(PYDIR)/phonenumbers/shortdata $(PYDIR)/tests/testdata
 	rm -rf $(PYDIR)/phonenumbers/geodata $(PYDIR)/tests/testgeodata
 
 distclean: clean metaclean

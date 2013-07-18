@@ -14,6 +14,8 @@ PHONE_METADATA_NO = PhoneMetadata(id='NO', country_code=47, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='0\\d{4}|81(?:0(?:0[7-9]|1\\d)|5\\d{2})\\d{3}', possible_number_pattern='\\d{5}(?:\\d{3})?', example_number='01234'),
     emergency=PhoneNumberDesc(national_number_pattern='11[023]', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='81[23]\\d{5}', possible_number_pattern='\\d{8}', example_number='81212345'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='([489]\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[489]']),
         NumberFormat(pattern='([235-7]\\d)(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[235-7]'])],

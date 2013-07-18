@@ -909,12 +909,12 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
 
     def testAYTFNoNationalPrefixFormattingRule(self):
         formatter = AsYouTypeFormatter("AO")
-        self.assertEqual("3", formatter.input_digit('3'));
-        self.assertEqual("33", formatter.input_digit('3'));
-        self.assertEqual("333", formatter.input_digit('3'));
-        self.assertEqual("333 3", formatter.input_digit('3'));
-        self.assertEqual("333 33", formatter.input_digit('3'));
-        self.assertEqual("333 333", formatter.input_digit('3'));
+        self.assertEqual("3", formatter.input_digit('3'))
+        self.assertEqual("33", formatter.input_digit('3'))
+        self.assertEqual("333", formatter.input_digit('3'))
+        self.assertEqual("333 3", formatter.input_digit('3'))
+        self.assertEqual("333 33", formatter.input_digit('3'))
+        self.assertEqual("333 333", formatter.input_digit('3'))
 
     def testAYTFShortNumberFormattingFix_AU(self):
         # For Australia, the national prefix is not optional when formatting.

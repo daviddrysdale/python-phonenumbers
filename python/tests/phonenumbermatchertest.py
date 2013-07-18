@@ -22,6 +22,7 @@ import unittest
 
 from phonenumbers import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 from phonenumbers import PhoneNumber, NumberFormat, phonenumberutil
+from phonenumbers import phonenumbermatcher, CountryCodeSource
 from phonenumbers.util import u
 from .testmetadatatest import TestMetadataTestCase
 
@@ -220,6 +221,43 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
     This only tests basic functionality based on test metadata.  See
     testphonenumberutil.py for the origin of the test data.
     """
+    def testContainsMoreThanOneSlashInNationalNumber(self):
+        # A date should return true.
+        number = PhoneNumber(country_code=1,
+                             country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
+        candidate = "1/05/2013"
+        self.assertTrue(phonenumbermatcher._contains_more_than_one_slash_in_national_number(number, candidate))
+
+        # Here, the country code source thinks it started with a country calling code, but this is not
+        # the same as the part before the slash, so it's still true.
+        number = PhoneNumber(country_code=274,
+                             country_code_source=CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN)
+        candidate = "27/4/2013"
+        self.assertTrue(phonenumbermatcher._contains_more_than_one_slash_in_national_number(number, candidate))
+
+        # Now it should be false, because the first slash is after the country calling code.
+        number = PhoneNumber(country_code=49,
+                             country_code_source=CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN)
+        candidate = "49/69/2013"
+        self.assertFalse(phonenumbermatcher._contains_more_than_one_slash_in_national_number(number, candidate))
+
+        number = PhoneNumber(country_code=49,
+                             country_code_source=CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN)
+        candidate = "+49/69/2013"
+        self.assertFalse(phonenumbermatcher._contains_more_than_one_slash_in_national_number(number, candidate))
+
+        candidate = "+ 49/69/2013"
+        self.assertFalse(phonenumbermatcher._contains_more_than_one_slash_in_national_number(number, candidate))
+
+        candidate = "+ 49/69/20/13"
+        self.assertTrue(phonenumbermatcher._contains_more_than_one_slash_in_national_number(number, candidate))
+
+        # Here, the first group is not assumed to be the country calling code, even though it is the
+        # same as it, so this should return true.
+        number = PhoneNumber(country_code=49,
+                             country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY)
+        candidate = "49/69/2013"
+        self.assertTrue(phonenumbermatcher._contains_more_than_one_slash_in_national_number(number, candidate))
 
     # See PhoneNumberUtilTest.testParseNationalNumber().
     def testFindNationalNumber(self):

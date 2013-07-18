@@ -14,6 +14,8 @@ PHONE_METADATA_RS = PhoneMetadata(id='RS', country_code=381, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='7[06]\\d{4,10}', possible_number_pattern='\\d{6,12}', example_number='700123456'),
     emergency=PhoneNumberDesc(national_number_pattern='112|9[234]', possible_number_pattern='\\d{2,3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',

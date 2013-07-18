@@ -15,18 +15,19 @@
 
 from ..phonemetadata import PhoneMetadata
 
-_AVAILABLE_NONGEO_COUNTRY_CODES = [800, 808, 870, 878, 881, 882, 883, 888, 979]
 _AVAILABLE_REGION_CODES = ['AC','AD','AE','AF','AG','AI','AL','AM','AO','AR','AS','AT','AU','AW','AX','AZ','BA','BB','BD','BE','BF','BG','BH','BI','BJ','BL','BM','BN','BO','BQ','BR','BS','BT','BW','BY','BZ','CA','CC','CD','CF','CG','CH','CI','CK','CL','CM','CN','CO','CR','CU','CV','CW','CX','CY','CZ','DE','DJ','DK','DM','DO','DZ','EC','EE','EG','EH','ER','ES','ET','FI','FJ','FK','FM','FO','FR','GA','GB','GD','GE','GF','GG','GH','GI','GL','GM','GN','GP','GQ','GR','GT','GU','GW','GY','HK','HN','HR','HT','HU','ID','IE','IL','IM','IN','IO','IQ','IR','IS','IT','JE','JM','JO','JP','KE','KG','KH','KI','KM','KN','KP','KR','KW','KY','KZ','LA','LB','LC','LI','LK','LR','LS','LT','LU','LV','LY','MA','MC','MD','ME','MF','MG','MH','MK','ML','MM','MN','MO','MP','MQ','MR','MS','MT','MU','MV','MW','MX','MY','MZ','NA','NC','NE','NF','NG','NI','NL','NO','NP','NR','NU','NZ','OM','PA','PE','PF','PG','PH','PK','PL','PM','PR','PS','PT','PW','PY','QA','RE','RO','RS','RU','RW','SA','SB','SC','SD','SE','SG','SH','SI','SJ','SK','SL','SM','SN','SO','SR','SS','ST','SV','SX','SY','SZ','TA','TC','TD','TG','TH','TJ','TK','TL','TM','TN','TO','TR','TT','TV','TW','TZ','UA','UG','US','UY','UZ','VA','VC','VE','VG','VI','VN','VU','WF','WS','YE','YT','ZA','ZM','ZW']
+_AVAILABLE_NONGEO_COUNTRY_CODES = [800, 808, 870, 878, 881, 882, 883, 888, 979]
 
 def _load_region(code):
     __import__("region_%s" % code, globals(), locals(),
                fromlist=["PHONE_METADATA_%s" % code], level=1)
 
-for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
-    PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
-
 for region_code in _AVAILABLE_REGION_CODES:
     PhoneMetadata.register_region_loader(region_code, _load_region)
+
+
+for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
+    PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
 
 from .alt_format_34 import PHONE_ALT_FORMAT_34
 from .alt_format_351 import PHONE_ALT_FORMAT_351

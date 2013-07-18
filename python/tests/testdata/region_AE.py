@@ -14,4 +14,6 @@ PHONE_METADATA_AE = PhoneMetadata(id='AE', country_code=971, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='600\\d{6}', possible_number_pattern='\\d{9}', example_number='600123456'),
     emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'))

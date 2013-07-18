@@ -14,6 +14,8 @@ PHONE_METADATA_PK = PhoneMetadata(id='PK', country_code=92, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='(?:2(?:[125]|3[2358]|4[2-4]|9[2-8])|4(?:[0-246-9]|5[3479])|5(?:[1-35-7]|4[2-467])|6(?:[1-8]|0[468])|7(?:[14]|2[236])|8(?:[16]|2[2-689]|3[23578]|4[3478]|5[2356])|9(?:1|22|3[27-9]|4[2-6]|6[3569]|9[2-7]))111\\d{6}', possible_number_pattern='\\d{11,12}', example_number='21111825888'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:1(?:22?|5)|[56])', possible_number_pattern='\\d{2,4}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
