@@ -41,6 +41,7 @@ from .phonemetadata import NumberFormat, PhoneMetadata, REGION_CODE_FOR_NON_GEO_
 # Import auto-generated data structures
 try:
     from .data import _COUNTRY_CODE_TO_REGION_CODE
+    from .shortdata import _AVAILABLE_REGION_CODES as SUPPORTED_SHORT_REGIONS
 except ImportError:  # pragma no cover
     # Before the generated code exists, the data/ directory is empty.
     # The generation process imports this module, creating a circular
@@ -51,6 +52,7 @@ except ImportError:  # pragma no cover
         os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
         print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
         _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
+        SUPPORTED_SHORT_REGIONS = []
     else:
         raise
 
@@ -540,6 +542,7 @@ def _normalize_diallable_chars_only(number):
     Returns the normalized string version of the phone number.
     """
     return _normalize_helper(number, _DIALLABLE_CHAR_MAPPINGS, True)
+
 
 def convert_alpha_characters_in_number(number):
     """Convert alpha chars in a number to their respective digits on a keypad,

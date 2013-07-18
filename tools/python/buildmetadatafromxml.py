@@ -85,14 +85,15 @@ METADATA_FILE_PROLOG = '"""Auto-generated file, do not edit by hand."""'
 METADATA_FILE_IMPORT = "from %(module)s.phonemetadata import PhoneMetadata\n"
 METADATA_FILE_LOOP = '''
 def _load_region(code):
-    __import__("region_%s" % code, globals(), locals(),
-               fromlist=["PHONE_METADATA_%s" % code], level=1)
-
-for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
-    PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
+    __import__("region_%%s" %% code, globals(), locals(),
+               fromlist=["PHONE_METADATA_%%s" %% code], level=1)
 
 for region_code in _AVAILABLE_REGION_CODES:
-    PhoneMetadata.register_region_loader(region_code, _load_region)
+    PhoneMetadata.register_%(prefix)sregion_loader(region_code, _load_region)
+'''
+METADATA_NONGEO_FILE_LOOP = '''
+for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
+    PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
 '''
 
 _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
@@ -295,8 +296,7 @@ class XNumberFormat(UnicodeMixin):
 
 class XPhoneNumberDesc(UnicodeMixin):
     """Parse PhoneNumberDesc object from XML element"""
-    def __init__(self, xtag,
-                 template=None, fill_na=True):
+    def __init__(self, xtag, template=None, fill_na=True):
         self.o = PhoneNumberDesc()
         self.o._mutable = True
         self.o.national_number_pattern = None
@@ -350,10 +350,10 @@ class XAlternateTerritory(UnicodeMixin):
 
 class XTerritory(UnicodeMixin):
     """Parse PhoneMetadata from XML element (territory)"""
-    def __init__(self, xterritory):
+    def __init__(self, xterritory, short_data):
         # Retrieve the REQUIRED attributes
         id = xterritory.attrib['id']
-        self.o = PhoneMetadata(id, register=False)
+        self.o = PhoneMetadata(id, short_data=short_data, register=False)
         self.o._mutable = True
         if 'countryCode' in xterritory.attrib:
             self.o.country_code = int(xterritory.attrib['countryCode'])
@@ -461,7 +461,7 @@ class XTerritory(UnicodeMixin):
 
 class XPhoneNumberMetadata(UnicodeMixin):
     """Entire collection of phone number metadata retrieved from XML"""
-    def __init__(self, filename):
+    def __init__(self, filename, short_data):
         # Load the XML data from the given filename
         with open(filename, "r") as infile:
             xtree = etree.parse(infile)
@@ -472,7 +472,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
         self.territory = {}
         for xterritory in xterritories:
             if xterritory.tag == TERRITORY_TAG:
-                terrobj = XTerritory(xterritory)
+                terrobj = XTerritory(xterritory, short_data)
                 id = terrobj.identifier()  # like "US" for countries, "800" for non-geo
                 if id in self.territory:
                     raise Exception("Duplicate entry for %s" % id)
@@ -480,6 +480,7 @@ class XPhoneNumberMetadata(UnicodeMixin):
             else:
                 raise Exception("Unexpected element %s found" % xterritory.tag)
         self.alt_territory = None
+        self.short_data = short_data
 
     def add_alternate_formats(self, filename):
         """Add phone number alternate format metadata retrieved from XML"""
@@ -546,9 +547,13 @@ class XPhoneNumberMetadata(UnicodeMixin):
                     nongeo_codes.append(country_id)  # int
                 else:
                     country_codes.append("'%s'" % country_id)  # quoted string
-            prnt("_AVAILABLE_NONGEO_COUNTRY_CODES = [%s]" % ", ".join(nongeo_codes), file=outfile)
             prnt("_AVAILABLE_REGION_CODES = [%s]" % ",".join(country_codes), file=outfile)
-            prnt(METADATA_FILE_LOOP, file=outfile)
+            if len(nongeo_codes) > 0:
+                prnt("_AVAILABLE_NONGEO_COUNTRY_CODES = [%s]" % ", ".join(nongeo_codes), file=outfile)
+            register_prefix = "short_" if self.short_data else ""
+            prnt(METADATA_FILE_LOOP % {'prefix': register_prefix}, file=outfile)
+            if len(nongeo_codes) > 0:
+                prnt(METADATA_NONGEO_FILE_LOOP, file=outfile)
 
             if self.alt_territory is not None:
                 for country_code in sorted(self.alt_territory.keys()):
@@ -556,10 +561,8 @@ class XPhoneNumberMetadata(UnicodeMixin):
                 prnt("_ALT_NUMBER_FORMATS = {%s}" %
                      ", ".join(["%s: PHONE_ALT_FORMAT_%s" % (cc, cc) for cc in sorted(self.alt_territory.keys())]),
                      file=outfile)
-            # Emit the mapping from country code to region code
-            prnt(_COUNTRY_CODE_TO_REGION_CODE_PROLOG, file=outfile)
-            prnt("_COUNTRY_CODE_TO_REGION_CODE = {", file=outfile)
-            # Build up the map
+
+            # Build up a map from country code (int) to list of region codes (ISO 3166-1 alpha 2)
             country_code_to_region_code = {}
             for country_id in sorted(self.territory.keys()):
                 terrobj = self.territory[country_id]
@@ -572,17 +575,22 @@ class XPhoneNumberMetadata(UnicodeMixin):
                     else:
                         country_code_to_region_code[country_code].append(terrobj.o.id)
 
-            for country_code in sorted(country_code_to_region_code.keys()):
-                country_ids = country_code_to_region_code[country_code]
-                prnt('    %d: ("%s",),' % (country_code, '", "'.join(country_ids)), file=outfile)
-            prnt("}", file=outfile)
+            # Emit the mapping from country code to region code if nonempty.
+            if len(country_code_to_region_code.keys()) > 0:
+                prnt(_COUNTRY_CODE_TO_REGION_CODE_PROLOG, file=outfile)
+                prnt("_COUNTRY_CODE_TO_REGION_CODE = {", file=outfile)
+                for country_code in sorted(country_code_to_region_code.keys()):
+                    country_ids = country_code_to_region_code[country_code]
+                    prnt('    %d: ("%s",),' % (country_code, '", "'.join(country_ids)), file=outfile)
+                prnt("}", file=outfile)
 
 
 def _standalone(argv):
     """Parse the given XML file and emit generated code."""
     alternate = None
+    short_data = False
     try:
-        opts, args = getopt.getopt(argv, "ha:", ("help", "alt="))
+        opts, args = getopt.getopt(argv, "hsa:", ("help", "short", "alt="))
     except getopt.GetoptError:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
@@ -590,6 +598,8 @@ def _standalone(argv):
         if opt in ("-h", "--help"):
             prnt(__doc__, file=sys.stderr)
             sys.exit(1)
+        elif opt in ("-s", "--short"):
+            short_data = True
         elif opt in ("-a", "--alt"):
             alternate = arg
         else:
@@ -600,7 +610,7 @@ def _standalone(argv):
     if len(args) != 3:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
-    pmd = XPhoneNumberMetadata(args[0])
+    pmd = XPhoneNumberMetadata(args[0], short_data)
     if alternate is not None:
         pmd.add_alternate_formats(alternate)
     pmd.emit_metadata_py(args[1], args[2])

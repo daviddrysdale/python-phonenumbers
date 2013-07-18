@@ -214,10 +214,13 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     #   - a function which loads the region's metadata
     #   - None, to indicate that the metadata is already loaded
     _region_available = {}  # ISO 3166-1 alpha 2 => function or None
-    # Likewise for non-geo country calling codes
+    # Likewise for short number metadata.
+    _short_region_available = {}  # ISO 3166-1 alpha 2 => function or None
+    # Likewise for non-geo country calling codes.
     _country_code_available = {}  # country calling code (as int) => function or None
 
     _region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
+    _short_region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
     # A mapping from a country calling code for a non-geographical entity to
     # the PhoneMetadata for that country calling code. Examples of the country
     # calling codes include 800 (International Toll Free Service) and 808
@@ -232,6 +235,15 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
             loader(region_code)
             kls._region_available[region_code] = None
         return kls._region_metadata.get(region_code, default)
+
+    @classmethod
+    def short_metadata_for_region(kls, region_code, default=None):
+        loader = kls._short_region_available.get(region_code, None)
+        if loader is not None:
+            # Region short number metadata is available but has not yet been loaded.  Do so now.
+            loader(region_code)
+            kls._short_region_available[region_code] = None
+        return kls._short_region_metadata.get(region_code, default)
 
     @classmethod
     def metadata_for_nongeo_region(kls, country_code, default=None):
@@ -252,6 +264,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     @classmethod
     def register_region_loader(kls, region_code, loader):
         kls._region_available[region_code] = loader
+
+    @classmethod
+    def register_short_region_loader(kls, region_code, loader):
+        kls._short_region_available[region_code] = loader
 
     @classmethod
     def register_nongeo_region_loader(kls, country_code, loader):
@@ -300,6 +316,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
                  main_country_for_code=False,
                  leading_digits=None,
                  leading_zero_possible=False,
+                 short_data=False,
                  register=True):
         # The general_desc contains information which is a superset of
         # descriptions for all types of phone numbers. If any element is
@@ -463,11 +480,17 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # that calling code will use the same setting.
         self.leading_zero_possible = leading_zero_possible  # bool
 
+        # Record whether this metadata is for short numbers or normal numbers.
+        self.short_data = short_data  # bool
+
         if register:
             # Register this instance with the relevant class-wide map
             if self.id == REGION_CODE_FOR_NON_GEO_ENTITY:
                 kls_map = PhoneMetadata._country_code_metadata
                 id = self.country_code
+            elif self.short_data:
+                kls_map = PhoneMetadata._short_region_metadata
+                id = self.id
             else:
                 kls_map = PhoneMetadata._region_metadata
                 id = self.id
@@ -530,5 +553,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
             result += ",\n    leading_digits='%s'" % self.leading_digits
         if self.leading_zero_possible:
             result += ",\n    leading_zero_possible=True"
+        if self.short_data:
+            result += ",\n    short_data=True"
         result += u")"
         return result
