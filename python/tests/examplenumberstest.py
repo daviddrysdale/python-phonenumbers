@@ -183,7 +183,7 @@ class ExampleNumbersTest(unittest.TestCase):
         brNumberFixed = PhoneNumber(country_code=55, national_number=1123456789L)
         brNumberMobile = PhoneNumber(country_code=55, national_number=1161234567L,
                                      preferred_domestic_carrier_code="303")
-        huNumberFixed= PhoneNumber(country_code=36, national_number=12345678L)
+        huNumberFixed = PhoneNumber(country_code=36, national_number=12345678L)
         self.assertEqual("0312345678",
                          phonenumberutil.format_number_for_mobile_dialing(coNumberFixed, "CO", False))
         self.assertEqual("03 1 2345678",
@@ -204,5 +204,5 @@ class ExampleNumbersTest(unittest.TestCase):
                          phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", False))
         self.assertEqual("0 303 (11) 6123-4567",
                          phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", True))
-        self.assertEqual("0612345678", 
+        self.assertEqual("0612345678",
                          phonenumberutil.format_number_for_mobile_dialing(huNumberFixed, "HU", False))
