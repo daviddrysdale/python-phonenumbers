@@ -41,7 +41,7 @@ from .phonemetadata import NumberFormat, PhoneMetadata, REGION_CODE_FOR_NON_GEO_
 # Import auto-generated data structures
 try:
     from .data import _COUNTRY_CODE_TO_REGION_CODE
-    from .shortdata import _AVAILABLE_REGION_CODES as SUPPORTED_SHORT_REGIONS
+    from .shortdata import _AVAILABLE_REGION_CODES as _AVAILABLE_SHORT_REGION_CODES
 except ImportError:  # pragma no cover
     # Before the generated code exists, the data/ directory is empty.
     # The generation process imports this module, creating a circular
@@ -52,7 +52,7 @@ except ImportError:  # pragma no cover
         os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
         print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
         _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
-        SUPPORTED_SHORT_REGIONS = []
+        _AVAILABLE_SHORT_REGION_CODES = []
     else:
         raise
 
@@ -418,6 +418,7 @@ class ValidationResult(object):
 SUPPORTED_REGIONS = set([_item for _sublist in COUNTRY_CODE_TO_REGION_CODE.values() for _item in _sublist])
 if REGION_CODE_FOR_NON_GEO_ENTITY in SUPPORTED_REGIONS:
     SUPPORTED_REGIONS.remove(REGION_CODE_FOR_NON_GEO_ENTITY)
+SUPPORTED_SHORT_REGIONS = _AVAILABLE_SHORT_REGION_CODES
 _NANPA_REGIONS = set(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
 
 

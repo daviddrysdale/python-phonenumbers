@@ -77,7 +77,7 @@ from .phonenumber import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
 from .phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY, NumberFormat, PhoneNumberDesc, PhoneMetadata
 # Functionality
 from .asyoutypeformatter import AsYouTypeFormatter
-from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, UNKNOWN_REGION,
+from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, SUPPORTED_SHORT_REGIONS, UNKNOWN_REGION,
                               MatchType, NumberParseException, PhoneNumberFormat,
                               PhoneNumberType, ValidationResult,
                               convert_alpha_characters_in_number,
@@ -113,7 +113,7 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, UN
                               region_codes_for_country_code,
                               region_code_for_number,
                               truncate_too_long_number,)
-from .shortnumberutil import connects_to_emergency_number, is_emergency_number
+from .shortnumberutil import connects_to_emergency_number, is_emergency_number, ShortNumberCost
 from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 
 
@@ -229,7 +229,8 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'REGION_CODE_FOR_NON_GEO_ENTITY', 'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
            'AsYouTypeFormatter',
            # items from phonenumberutil.py
-           'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS', 'UNKNOWN_REGION', 'NON_DIGITS_PATTERN',
+           'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS', 'SUPPORTED_SHORT_REGIONS',
+           'UNKNOWN_REGION', 'NON_DIGITS_PATTERN',
            'MatchType', 'NumberParseException', 'PhoneNumberFormat',
            'PhoneNumberType', 'ValidationResult',
            'choose_formatting_pattern_for_number',
@@ -268,7 +269,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'region_code_for_number',
            'truncate_too_long_number',
            # end of items from phonenumberutil.py
-           'connects_to_emergency_number', 'is_emergency_number',
+           'connects_to_emergency_number', 'is_emergency_number', 'ShortNumberCost',
            'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency',
            'area_description_for_number',
            'country_name_for_number',
