@@ -24,7 +24,7 @@ from phonenumbers import FrozenPhoneNumber, PhoneNumberDesc
 from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseException
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 # Access internal functions of phonenumberutil.py
-from phonenumbers import phonenumberutil
+from phonenumbers import phonenumberutil, shortnumberutil
 from .testmetadatatest import TestMetadataTestCase
 
 
@@ -2211,6 +2211,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
                          phonenumbers.is_number_match("asdfasdf", brNumberOne))
         self.assertFalse(phonenumberutil._is_number_matching_desc(1234, None))
+        self.assertFalse(phonenumberutil._is_number_possible_for_desc(1234, None))
 
     def testIsNumberMatchNonMatches(self):
         # Non-matches.
@@ -2473,6 +2474,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                    international_prefix='9123',
                                    general_desc=PhoneNumberDesc(example_number='12'),
                                    personal_number=PhoneNumberDesc(example_number='12'),
+                                   short_code=PhoneNumberDesc(national_number_pattern='[123]', possible_number_pattern='[123]'),
                                    preferred_international_prefix='9123',
                                    national_prefix='1',
                                    preferred_extn_prefix='2',
@@ -2482,6 +2484,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                    intl_number_format=[NumberFormat()],
                                    leading_digits='123',
                                    leading_zero_possible=True,
+                                   short_data=True,
                                    register=False)
         self.assertEqual("""PhoneMetadata(id='XX', country_code=None, international_prefix='9123',
     general_desc=PhoneNumberDesc(example_number='12'),
@@ -2496,7 +2499,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     uan=None,
     emergency=None,
     voicemail=None,
-    short_code=None,
+    short_code=PhoneNumberDesc(national_number_pattern='[123]', possible_number_pattern='[123]'),
     standard_rate=None,
     no_international_dialling=None,
     preferred_international_prefix='9123',
@@ -2507,7 +2510,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     number_format=[NumberFormat(pattern=None, format=None)],
     intl_number_format=[NumberFormat(pattern=None, format=None)],
     leading_digits='123',
-    leading_zero_possible=True)""",
+    leading_zero_possible=True,
+    short_data=True)""",
                           str(metadataXX))
 
         # Coverage test: invalid example number for region
@@ -2516,6 +2520,11 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue(phonenumbers.example_number_for_type("XX", PhoneNumberType.PERSONAL_NUMBER) is None)
         phonenumberutil.SUPPORTED_REGIONS.remove('XX')
         del PhoneMetadata._region_metadata['XX']
+
+        # Coverage test: short_code desc has no example number
+        PhoneMetadata._short_region_metadata['XX'] = metadataXX
+        self.assertEqual("", shortnumberutil._example_short_number("XX"))
+        del PhoneMetadata._short_region_metadata['XX']
 
         # And now the grand finale: check a real metadata example
         self.assertEqual(r"""PhoneMetadata(id='AU', country_code=61, international_prefix='001[12]',

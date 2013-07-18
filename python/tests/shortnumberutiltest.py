@@ -40,6 +40,9 @@ class ShortNumberUtilTest(TestMetadataTestCase):
                          shortnumberutil._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE))
         self.assertEqual("",
                          shortnumberutil._example_short_number_for_cost("FR", ShortNumberCost.UNKNOWN_COST))
+        # Python version extra test
+        self.assertEqual("",
+                         shortnumberutil._example_short_number_for_cost("XY", ShortNumberCost.UNKNOWN_COST))
 
     def testConnectsToEmergencyNumber_US(self):
         self.assertTrue(connects_to_emergency_number("911", "US"))
