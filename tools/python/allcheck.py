@@ -43,6 +43,6 @@ if len(code_not_grepped) > 0:
     for identifier in code_not_grepped:
         print >> sys.stderr, "  %s" % identifier
 if len(grepped_not_code) > 0:
-    print >> sys.stderr, "Found the following in grepped code but not in__all__:"
+    print >> sys.stderr, "Found the following in grepped code but not in __all__:"
     for identifier in grepped_not_code:
         print >> sys.stderr, "  %s" % identifier
