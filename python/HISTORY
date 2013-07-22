@@ -1,5 +1,11 @@
 
 =====================
+ What's new in 5.7b2
+=====================
+
+Fix setup.py to include new .shortdata sub-package.
+
+=====================
  What's new in 5.7b1
 =====================
 
