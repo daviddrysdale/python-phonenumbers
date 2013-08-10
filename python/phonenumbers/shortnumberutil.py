@@ -20,6 +20,7 @@ Note most commercial short numbers are not handled here, but by phonenumberutil.
 import re
 
 from .re_util import fullmatch
+from .util import U_EMPTY_STRING
 from .phonemetadata import PhoneMetadata
 from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
 from .phonenumberutil import normalize_digits_only
@@ -36,11 +37,11 @@ class ShortNumberCost(object):
 def _example_short_number(region_code):
     metadata = PhoneMetadata.short_metadata_for_region(region_code)
     if metadata is None:
-        return u""
+        return U_EMPTY_STRING
     desc = metadata.short_code
     if desc.example_number is not None:
         return desc.example_number
-    return u""
+    return U_EMPTY_STRING
 
 
 def _example_short_number_for_cost(region_code, cost):
@@ -56,11 +57,11 @@ def _example_short_number_for_cost(region_code, cost):
     """
     metadata = PhoneMetadata.short_metadata_for_region(region_code)
     if metadata is None:
-        return u""
+        return U_EMPTY_STRING
     desc = _short_number_desc_by_cost(metadata, cost)
     if desc is not None and desc.example_number is not None:
         return desc.example_number
-    return u""
+    return U_EMPTY_STRING
 
 
 def _short_number_desc_by_cost(metadata, cost):

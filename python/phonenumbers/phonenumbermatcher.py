@@ -355,7 +355,7 @@ def _contains_more_than_one_slash_in_national_number(numobj, candidate):
                                   numobj.country_code_source == CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN)
     if (candidate_has_country_code and
         normalize_digits_only(candidate[:first_slash_in_body_index]) ==
-        unicode(numobj.country_code)):
+        unicod(numobj.country_code)):
         # Any more slashes and this is illegal.
         return (candidate[(second_slash_in_body_index + 1):].find(U_SLASH) != -1)
     return True
