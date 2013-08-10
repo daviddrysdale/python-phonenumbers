@@ -211,3 +211,14 @@ class ExampleNumbersTest(unittest.TestCase):
                          phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", True))
         self.assertEqual("0612345678",
                          phonenumberutil.format_number_for_mobile_dialing(huNumberFixed, "HU", False))
+
+    def testPrintShortMetadata(self):
+        # Python version extra test.  Print string representation of short metadata.
+        short_metadata = PhoneMetadata.short_metadata_for_region("GB")
+        self.assertEqual(r"""PhoneMetadata(id='GB', country_code=None, international_prefix=None,
+    general_desc=PhoneNumberDesc(national_number_pattern='[1-4679]\\d{2,5}', possible_number_pattern='\\d{3,6}'),
+    toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_code=PhoneNumberDesc(national_number_pattern='1(?:0[01]|1(?:1|[68]\\d{3})|2[123]|33|4(?:1|7\\d)|5\\d|70\\d|800\\d|9[15])|2(?:02|2(?:02|11|2)|3(?:02|45)|425)|3[13]3|4(?:0[02]|35[01]|44[45]|5\\d)|650|789|901', possible_number_pattern='\\d{3,6}', example_number='150'),
+    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    short_data=True)""", str(short_metadata))
