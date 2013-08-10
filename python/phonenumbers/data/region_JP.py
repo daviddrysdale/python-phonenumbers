@@ -14,8 +14,6 @@ PHONE_METADATA_JP = PhoneMetadata(id='JP', country_code=81, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='570\\d{6}', possible_number_pattern='\\d{9}', example_number='570123456'),
     emergency=PhoneNumberDesc(national_number_pattern='11[09]', possible_number_pattern='\\d{3}', example_number='110'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='0(?:37\\d{6,13}|66\\d{6,13}|777(?:[01]\\d{2}|5\\d{3}|8\\d{4})|882[1245]\\d{4})', possible_number_pattern='\\d{7,16}', example_number='0777012'),
     national_prefix='0',
     national_prefix_for_parsing='0',

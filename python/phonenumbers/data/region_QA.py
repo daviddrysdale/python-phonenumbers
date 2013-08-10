@@ -14,8 +14,6 @@ PHONE_METADATA_QA = PhoneMetadata(id='QA', country_code=974, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='999', possible_number_pattern='\\d{3}', example_number='999'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='([28]\\d{2})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[28]']),
         NumberFormat(pattern='([3-7]\\d{3})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[3-7]'])])

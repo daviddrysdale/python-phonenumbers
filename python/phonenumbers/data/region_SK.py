@@ -14,8 +14,6 @@ PHONE_METADATA_SK = PhoneMetadata(id='SK', country_code=421, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='96\\d{7}', possible_number_pattern='\\d{9}', example_number='961234567'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:12|5[058])', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:8(?:00|[5-9]\\d)|9(?:00|[78]\\d))\\d{6}', possible_number_pattern='\\d{9}', example_number='800123456'),
     national_prefix='0',
     national_prefix_for_parsing='0',

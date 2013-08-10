@@ -14,8 +14,6 @@ PHONE_METADATA_ME = PhoneMetadata(id='ME', country_code=382, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='77\\d{6}', possible_number_pattern='\\d{8}', example_number='77273012'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:12|2[234])', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',

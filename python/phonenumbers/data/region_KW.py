@@ -14,8 +14,6 @@ PHONE_METADATA_KW = PhoneMetadata(id='KW', country_code=965, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{3,4})', format=u'\\1 \\2', leading_digits_pattern=['[1269]']),
         NumberFormat(pattern='(5[015]\\d)(\\d{5})', format=u'\\1 \\2', leading_digits_pattern=['5'])])

@@ -14,8 +14,6 @@ PHONE_METADATA_TH = PhoneMetadata(id='TH', country_code=66, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='1\\d{3}', possible_number_pattern='\\d{4}', example_number='1100'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:669|9[19])', possible_number_pattern='\\d{3,4}', example_number='191'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1\\d{3}', possible_number_pattern='\\d{4}', example_number='1100'),
     national_prefix='0',
     national_prefix_for_parsing='0',

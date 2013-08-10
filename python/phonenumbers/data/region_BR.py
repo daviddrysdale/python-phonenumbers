@@ -14,8 +14,6 @@ PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:12|28|9[023])|911', possible_number_pattern='\\d{3}', example_number='190'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='[34]00\\d{5}', possible_number_pattern='\\d{8}', example_number='40041234'),
     national_prefix='0',
     national_prefix_for_parsing='0(?:(1[245]|2[135]|[34]1)(\\d{10,11}))?',
