@@ -325,9 +325,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # will inherit from its counterpart in the general_desc. Every locale
         # is assumed to have fixed line and mobile numbers - if these types
         # are missing altogether, they will inherit all fields from the
-        # general_desc. For all other types, if the whole type is missing, it
-        # will be given a national_number_pattern of "NA" and a
-        # possible_number_pattern of "NA".
+        # general_desc. For all other types, if the whole type is missing and
+        # it is relevant for the metadata, it will be given a
+        # national_number_pattern of "NA" and a possible_number_pattern of
+        # "NA".
         self.general_desc = general_desc  # None or PhoneNumberDesc
         self.fixed_line = fixed_line  # None or PhoneNumberDesc
         self.mobile = mobile  # None or PhoneNumberDesc
@@ -518,20 +519,34 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         result = (unicod("PhoneMetadata(id='%s', country_code=%r, international_prefix=%s") %
                   (self.id, self.country_code, rpr(self.international_prefix)))
         result += unicod(",\n    general_desc=%s") % self.general_desc
-        result += unicod(",\n    fixed_line=%s") % self.fixed_line
-        result += unicod(",\n    mobile=%s") % self.mobile
-        result += unicod(",\n    toll_free=%s") % self.toll_free
-        result += unicod(",\n    premium_rate=%s") % self.premium_rate
-        result += unicod(",\n    shared_cost=%s") % self.shared_cost
-        result += unicod(",\n    personal_number=%s") % self.personal_number
-        result += unicod(",\n    voip=%s") % self.voip
-        result += unicod(",\n    pager=%s") % self.pager
-        result += unicod(",\n    uan=%s") % self.uan
-        result += unicod(",\n    emergency=%s") % self.emergency
-        result += unicod(",\n    voicemail=%s") % self.voicemail
-        result += unicod(",\n    short_code=%s") % self.short_code
-        result += unicod(",\n    standard_rate=%s") % self.standard_rate
-        result += unicod(",\n    no_international_dialling=%s") % self.no_international_dialling
+        if self.fixed_line is not None:
+            result += unicod(",\n    fixed_line=%s") % self.fixed_line
+        if self.mobile is not None:
+            result += unicod(",\n    mobile=%s") % self.mobile
+        if self.toll_free is not None:
+            result += unicod(",\n    toll_free=%s") % self.toll_free
+        if self.premium_rate is not None:
+            result += unicod(",\n    premium_rate=%s") % self.premium_rate
+        if self.shared_cost is not None:
+            result += unicod(",\n    shared_cost=%s") % self.shared_cost
+        if self.personal_number is not None:
+            result += unicod(",\n    personal_number=%s") % self.personal_number
+        if self.voip is not None:
+            result += unicod(",\n    voip=%s") % self.voip
+        if self.pager is not None:
+            result += unicod(",\n    pager=%s") % self.pager
+        if self.uan is not None:
+            result += unicod(",\n    uan=%s") % self.uan
+        if self.emergency is not None:
+            result += unicod(",\n    emergency=%s") % self.emergency
+        if self.voicemail is not None:
+            result += unicod(",\n    voicemail=%s") % self.voicemail
+        if self.short_code is not None:
+            result += unicod(",\n    short_code=%s") % self.short_code
+        if self.standard_rate is not None:
+            result += unicod(",\n    standard_rate=%s") % self.standard_rate
+        if self.no_international_dialling is not None:
+            result += unicod(",\n    no_international_dialling=%s") % self.no_international_dialling
 
         if self.preferred_international_prefix is not None:
             result += unicod(",\n    preferred_international_prefix=%s") % rpr(self.preferred_international_prefix)

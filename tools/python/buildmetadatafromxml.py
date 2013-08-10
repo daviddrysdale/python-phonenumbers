@@ -374,36 +374,41 @@ class XTerritory(UnicodeMixin):
         # many of the other PhoneNumberDesc elements.
         self.o.general_desc = XPhoneNumberDesc(_get_unique_child(xterritory, 'generalDesc'),
                                                fill_na=False)
-        self.o.no_international_dialling = XPhoneNumberDesc(_get_unique_child(xterritory, 'noInternationalDialling'),
-                                                            template=self.o.general_desc.o)
+        # areaCodeOptional is in the XML but not used in the code.
         self.o.area_code_optional = XPhoneNumberDesc(_get_unique_child(xterritory, 'areaCodeOptional'),
                                                      template=self.o.general_desc.o)
-        self.o.fixed_line = XPhoneNumberDesc(_get_unique_child(xterritory, 'fixedLine'),
+        if not short_data:
+            self.o.fixed_line = XPhoneNumberDesc(_get_unique_child(xterritory, 'fixedLine'),
+                                                 template=self.o.general_desc.o, fill_na=False)
+            self.o.mobile = XPhoneNumberDesc(_get_unique_child(xterritory, 'mobile'),
                                              template=self.o.general_desc.o, fill_na=False)
-        self.o.mobile = XPhoneNumberDesc(_get_unique_child(xterritory, 'mobile'),
-                                         template=self.o.general_desc.o, fill_na=False)
-        self.o.pager = XPhoneNumberDesc(_get_unique_child(xterritory, 'pager'),
-                                        template=self.o.general_desc.o)
+            self.o.pager = XPhoneNumberDesc(_get_unique_child(xterritory, 'pager'),
+                                            template=self.o.general_desc.o)
+            self.o.shared_cost = XPhoneNumberDesc(_get_unique_child(xterritory, 'sharedCost'),
+                                                  template=self.o.general_desc.o)
+            self.o.personal_number = XPhoneNumberDesc(_get_unique_child(xterritory, 'personalNumber'),
+                                                      template=self.o.general_desc.o)
+            self.o.voip = XPhoneNumberDesc(_get_unique_child(xterritory, 'voip'),
+                                           template=self.o.general_desc.o)
+            self.o.uan = XPhoneNumberDesc(_get_unique_child(xterritory, 'uan'),
+                                          template=self.o.general_desc.o)
+            self.o.voicemail = XPhoneNumberDesc(_get_unique_child(xterritory, 'voicemail'),
+                                                template=self.o.general_desc.o)
+            self.o.no_international_dialling = XPhoneNumberDesc(_get_unique_child(xterritory, 'noInternationalDialling'),
+                                                                template=self.o.general_desc.o)
+            # When emergency metadata is moved to ShortNumberMetadata.xml,
+            # this needs to be moved below.
+            self.o.emergency = XPhoneNumberDesc(_get_unique_child(xterritory, 'emergency'),
+                                                template=self.o.general_desc.o)
+        else:
+            self.o.short_code = XPhoneNumberDesc(_get_unique_child(xterritory, 'shortCode'),
+                                                 template=self.o.general_desc.o)
+            self.o.standard_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'standardRate'),
+                                                    template=self.o.general_desc.o)
         self.o.toll_free = XPhoneNumberDesc(_get_unique_child(xterritory, 'tollFree'),
                                             template=self.o.general_desc.o)
         self.o.premium_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'premiumRate'),
                                                template=self.o.general_desc.o)
-        self.o.shared_cost = XPhoneNumberDesc(_get_unique_child(xterritory, 'sharedCost'),
-                                              template=self.o.general_desc.o)
-        self.o.personal_number = XPhoneNumberDesc(_get_unique_child(xterritory, 'personalNumber'),
-                                                  template=self.o.general_desc.o)
-        self.o.voip = XPhoneNumberDesc(_get_unique_child(xterritory, 'voip'),
-                                       template=self.o.general_desc.o)
-        self.o.uan = XPhoneNumberDesc(_get_unique_child(xterritory, 'uan'),
-                                      template=self.o.general_desc.o)
-        self.o.emergency = XPhoneNumberDesc(_get_unique_child(xterritory, 'emergency'),
-                                            template=self.o.general_desc.o)
-        self.o.voicemail = XPhoneNumberDesc(_get_unique_child(xterritory, 'voicemail'),
-                                            template=self.o.general_desc.o)
-        self.o.short_code = XPhoneNumberDesc(_get_unique_child(xterritory, 'shortCode'),
-                                             template=self.o.general_desc.o)
-        self.o.standard_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'standardRate'),
-                                                template=self.o.general_desc.o)
         # Look for available formats
         self.has_explicit_intl_format = False
         formats = _get_unique_child(xterritory, "availableFormats")

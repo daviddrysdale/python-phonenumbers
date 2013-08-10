@@ -14,8 +14,6 @@ PHONE_METADATA_AT = PhoneMetadata(id='AT', country_code=43, international_prefix
     uan=PhoneNumberDesc(national_number_pattern='5(?:(?:0[1-9]|17)\\d{2,10}|[79]\\d{3,11})|720\\d{6,10}', possible_number_pattern='\\d{5,13}', example_number='50123'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:[12]2|33|44)', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',

@@ -14,8 +14,6 @@ PHONE_METADATA_HR = PhoneMetadata(id='HR', country_code=385, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='62\\d{6,7}', possible_number_pattern='\\d{8,9}', example_number='62123456'),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:12|92)|9[34]', possible_number_pattern='\\d{2,3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    short_code=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
