@@ -15,7 +15,7 @@
 
 from ..phonemetadata import PhoneMetadata
 
-_AVAILABLE_REGION_CODES = ['AM','AR','BD','CH','CR','CU','CZ','DE','EE','FJ','FK','FO','FR','GB','GG','GI','GT','GY','HT','IL','IM','IT','JE','JO','KE','KI','KW','LI','LU','MD','ME','MU','MV','MZ','NA','NC','NL','NR','PA','PY','QA','RS','SA','SB','SC','SG','SH','SR','TL','UY']
+_AVAILABLE_REGION_CODES = ['AM','AR','BD','BR','CH','CR','CU','CZ','DE','EE','FJ','FK','FO','FR','GB','GG','GI','GT','GY','HT','IL','IM','IT','JE','JO','KE','KI','KW','LI','LU','MD','ME','MU','MV','MZ','NA','NC','NL','NR','PA','PY','QA','RS','SA','SB','SC','SG','SH','SR','TL','UY']
 
 def _load_region(code):
     __import__("region_%s" % code, globals(), locals(),

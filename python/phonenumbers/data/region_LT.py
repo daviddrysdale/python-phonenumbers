@@ -17,7 +17,7 @@ PHONE_METADATA_LT = PhoneMetadata(id='LT', country_code=370, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='8',
     national_prefix_for_parsing='[08]',
-    number_format=[NumberFormat(pattern='([34]\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['37|4(?:1|5[45]|6[2-4])'], national_prefix_formatting_rule='(8-\\1)'),
-        NumberFormat(pattern='([3-6]\\d{2})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['3[148]|4(?:[24]|6[09])|528|6'], national_prefix_formatting_rule='(8-\\1)'),
-        NumberFormat(pattern='([7-9]\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[7-9]'], national_prefix_formatting_rule='8 \\1'),
-        NumberFormat(pattern='(5)(2\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['52[0-79]'], national_prefix_formatting_rule='(8-\\1)')])
+    number_format=[NumberFormat(pattern='([34]\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['37|4(?:1|5[45]|6[2-4])'], national_prefix_formatting_rule='(8-\\1)', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='([3-6]\\d{2})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['3[148]|4(?:[24]|6[09])|528|6'], national_prefix_formatting_rule='(8-\\1)', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='([7-9]\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[7-9]'], national_prefix_formatting_rule='8 \\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(5)(2\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['52[0-79]'], national_prefix_formatting_rule='(8-\\1)', national_prefix_optional_when_formatting=True)])
