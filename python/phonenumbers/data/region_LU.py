@@ -9,7 +9,7 @@ PHONE_METADATA_LU = PhoneMetadata(id='LU', country_code=352, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='90[01]\\d{5}', possible_number_pattern='\\d{8}', example_number='90012345'),
     shared_cost=PhoneNumberDesc(national_number_pattern='801\\d{5}', possible_number_pattern='\\d{8}', example_number='80112345'),
     personal_number=PhoneNumberDesc(national_number_pattern='70\\d{6}', possible_number_pattern='\\d{8}', example_number='70123456'),
-    voip=PhoneNumberDesc(national_number_pattern='20\\d{2,8}', possible_number_pattern='\\d{4,10}', example_number='2012345'),
+    voip=PhoneNumberDesc(national_number_pattern='20(?:1\\d{5}|[2-689]\\d{1,7})', possible_number_pattern='\\d{4,10}', example_number='20201234'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='11[23]', possible_number_pattern='\\d{3}', example_number='112'),
