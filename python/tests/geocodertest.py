@@ -169,6 +169,7 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         TEST_GEOCODE_DATA['1650960'] = {'en': u'Mountain View, CA',
                                         "en_GB": u'Mountain View California',
                                         "en_US": u'Mountain View, Sunny California',
+                                        "en_Xyzz_US": u'MTV - xyzz',
                                         "en_Latn": u'MountainView'}
         # The following test might one day return "Mountain View California"
         self.assertEqual("United States",
@@ -179,7 +180,18 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
                          description_for_number(US_NUMBER2, _ENGLISH, script="Latn"))
         self.assertEqual("United States",
                          description_for_number(US_NUMBER2, _ENGLISH, script="Latn", region="GB"))
+        self.assertEqual("MTV - xyzz",
+                         description_for_number(US_NUMBER2, _ENGLISH, script="Xyzz", region="US"))
+        self.assertEqual("Mountain View, Sunny California",
+                         description_for_number(US_NUMBER2, _ENGLISH, script="Zazz", region="US"))
         # Get a different result when there is a script-specific variant
         self.assertEqual("MountainView",
                          description_for_number(US_NUMBER2, _ENGLISH, script="Latn", region="US"))
         TEST_GEOCODE_DATA['1650960'] = {'en': u'Mountain View, CA'}
+
+        # Test the locale mapping
+        TEST_GEOCODE_DATA['8868'] = {'zh': u'Chinese', 'zh_Hant': u'Hant-specific'}
+        tw_number = FrozenPhoneNumber(country_code=886, national_number=810080123)
+        self.assertEqual("Hant-specific",
+                         description_for_number(tw_number, "zh", region="TW"))
+        del TEST_GEOCODE_DATA['8868']

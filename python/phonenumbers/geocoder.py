@@ -64,6 +64,9 @@ except ImportError:  # pragma no cover
         raise
 
 
+_LOCALE_NORMALIZATION_MAP = {"zh_TW": "zh_Hant", "zh_HK": "zh_Hant", "zh_MO": "zh_Hant"}
+
+
 def _may_fall_back_to_english(lang):
     # Don't fall back to English if the requested language is among the following:
     # - Chinese
@@ -72,16 +75,38 @@ def _may_fall_back_to_english(lang):
     return lang != "zh" and lang != "ja" and lang != "ko"
 
 
+def _full_locale(lang, script, region):
+    if script is not None:
+        if region is not None:
+            return "%s_%s_%s" % (lang, script, region)
+        else:
+            return "%s_%s" % (lang, script)
+    elif region is not None:
+        return "%s_%s" % (lang, region)
+    else:
+        return lang
+
+
 def _find_lang(langdict, lang, script, region):
     """Return the entry in the dictionary for the given language information."""
-    # First look for lang, script as a combination
-    lang_script = "%s_%s" % (lang, script)
-    if lang_script in langdict:
-        return langdict[lang_script]
+    # Check if we should map this to a different locale.
+    full_locale = _full_locale(lang, script, region)
+    if (full_locale in _LOCALE_NORMALIZATION_MAP and
+        _LOCALE_NORMALIZATION_MAP[full_locale] in langdict):
+        return langdict[_LOCALE_NORMALIZATION_MAP[full_locale]]
+    # First look for the full locale
+    if full_locale in langdict:
+        return langdict[full_locale]
+    # Then look for lang, script as a combination
+    if script is not None:
+        lang_script = "%s_%s" % (lang, script)
+        if lang_script in langdict:
+            return langdict[lang_script]
     # Next look for lang, region as a combination
-    lang_region = "%s_%s" % (lang, region)
-    if lang_region in langdict:
-        return langdict[lang_region]
+    if region is not None:
+        lang_region = "%s_%s" % (lang, region)
+        if lang_region in langdict:
+            return langdict[lang_region]
     # Fall back to bare language code lookup
     if lang in langdict:
         return langdict[lang]
