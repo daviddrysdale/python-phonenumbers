@@ -1,30 +1,30 @@
 """Phone number geocoding functionality
 
 >>> import phonenumbers
->>> from phonenumbers.geocoder import area_description_for_number
+>>> from phonenumbers.geocoder import description_for_number
 >>> from phonenumbers.util import u
 >>> gb_number = phonenumbers.parse("+442083612345", "GB")
 >>> de_number = phonenumbers.parse("0891234567", "DE")
 >>> ch_number = phonenumbers.parse("0431234567", "CH")
->>> str(area_description_for_number(gb_number, "en"))
+>>> str(description_for_number(gb_number, "en"))
 'London'
->>> str(area_description_for_number(gb_number, "fr"))  # fall back to English
+>>> str(description_for_number(gb_number, "fr"))  # fall back to English
 'London'
->>> str(area_description_for_number(gb_number, "en", region="GB"))
+>>> str(description_for_number(gb_number, "en", region="GB"))
 'London'
->>> str(area_description_for_number(gb_number, "en", region="US"))
-'London'
->>> str(area_description_for_number(de_number, "en"))
+>>> str(description_for_number(gb_number, "en", region="US"))  # fall back to country
+'United Kingdom'
+>>> str(description_for_number(de_number, "en"))
 'Munich'
->>> u('M\u00fcnchen') == area_description_for_number(de_number, "de")
+>>> u('M\u00fcnchen') == description_for_number(de_number, "de")
 True
->>> u('Z\u00fcrich') == area_description_for_number(ch_number, "de")
+>>> u('Z\u00fcrich') == description_for_number(ch_number, "de")
 True
->>> str(area_description_for_number(ch_number, "en"))
+>>> str(description_for_number(ch_number, "en"))
 'Zurich'
->>> str(area_description_for_number(ch_number, "fr"))
+>>> str(description_for_number(ch_number, "fr"))
 'Zurich'
->>> str(area_description_for_number(ch_number, "it"))
+>>> str(description_for_number(ch_number, "it"))
 'Zurigo'
 
 """
@@ -66,6 +66,9 @@ except ImportError:  # pragma no cover
         raise
 
 
+_LOCALE_NORMALIZATION_MAP = {"zh_TW": "zh_Hant", "zh_HK": "zh_Hant", "zh_MO": "zh_Hant"}
+
+
 def _may_fall_back_to_english(lang):
     # Don't fall back to English if the requested language is among the following:
     # - Chinese
@@ -74,16 +77,38 @@ def _may_fall_back_to_english(lang):
     return lang != "zh" and lang != "ja" and lang != "ko"
 
 
+def _full_locale(lang, script, region):
+    if script is not None:
+        if region is not None:
+            return "%s_%s_%s" % (lang, script, region)
+        else:
+            return "%s_%s" % (lang, script)
+    elif region is not None:
+        return "%s_%s" % (lang, region)
+    else:
+        return lang
+
+
 def _find_lang(langdict, lang, script, region):
     """Return the entry in the dictionary for the given language information."""
-    # First look for lang, script as a combination
-    lang_script = "%s_%s" % (lang, script)
-    if lang_script in langdict:
-        return langdict[lang_script]
+    # Check if we should map this to a different locale.
+    full_locale = _full_locale(lang, script, region)
+    if (full_locale in _LOCALE_NORMALIZATION_MAP and
+        _LOCALE_NORMALIZATION_MAP[full_locale] in langdict):
+        return langdict[_LOCALE_NORMALIZATION_MAP[full_locale]]
+    # First look for the full locale
+    if full_locale in langdict:
+        return langdict[full_locale]
+    # Then look for lang, script as a combination
+    if script is not None:
+        lang_script = "%s_%s" % (lang, script)
+        if lang_script in langdict:
+            return langdict[lang_script]
     # Next look for lang, region as a combination
-    lang_region = "%s_%s" % (lang, region)
-    if lang_region in langdict:
-        return langdict[lang_region]
+    if region is not None:
+        lang_region = "%s_%s" % (lang, region)
+        if lang_region in langdict:
+            return langdict[lang_region]
     # Fall back to bare language code lookup
     if lang in langdict:
         return langdict[lang]
@@ -94,7 +119,7 @@ def _find_lang(langdict, lang, script, region):
         return None
 
 
-def area_description_for_number(numobj, lang, script=None, region=None):
+def _area_description_for_number(numobj, lang, script=None, region=None):
     """Return a text description of the area of a PhoneNumber for the given language.
 
     Arguments:
@@ -199,7 +224,7 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
     number, or an empty string if no description is available."""
     number_region = region_code_for_number(numobj)
     if region is None or region == number_region:
-        area_description = area_description_for_number(numobj, lang, script, region)
+        area_description = _area_description_for_number(numobj, lang, script, region)
         if area_description != "":
             return area_description
         else:
