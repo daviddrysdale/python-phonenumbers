@@ -119,24 +119,6 @@ from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 
 # The geodata occupies a lot of space, so only perform the import on first use
 # of geocoder functionality.
-def area_description_for_number(*args, **kwargs):
-    """Return a text description of the area of a PhoneNumber for the given language.
-
-    Arguments:
-    numobj -- The PhoneNumber object for which we want to get a text description.
-    lang -- A 2-letter lowercase ISO 639-1 language code for the language in
-                  which the description should be returned (e.g. "en")
-    script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
-                  ISO script code as defined in ISO 15924, separated by an
-                  underscore (e.g. "Hant")
-    region --  A 2-letter uppercase ISO 3166-1 country code (e.g. "GB")
-
-    Returns a text description in the given language code, for the given phone
-    number's area, or an empty string if no description is available."""
-    from .geocoder import area_description_for_number as real_fn
-    return real_fn(*args, **kwargs)
-
-
 def country_name_for_number(*args, **kwargs):
     """Return the given PhoneNumber object's country name in the given language.
 
@@ -271,7 +253,6 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            # end of items from phonenumberutil.py
            'connects_to_emergency_number', 'is_emergency_number', 'ShortNumberCost',
            'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency',
-           'area_description_for_number',
            'country_name_for_number',
            'description_for_number',
            'description_for_valid_number',

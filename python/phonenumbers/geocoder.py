@@ -1,29 +1,29 @@
 """Phone number geocoding functionality
 
 >>> import phonenumbers
->>> from phonenumbers.geocoder import area_description_for_number
+>>> from phonenumbers.geocoder import description_for_number
 >>> gb_number = phonenumbers.parse("+442083612345", "GB")
 >>> de_number = phonenumbers.parse("0891234567", "DE")
 >>> ch_number = phonenumbers.parse("0431234567", "CH")
->>> str(area_description_for_number(gb_number, "en"))
+>>> str(description_for_number(gb_number, "en"))
 'London'
->>> str(area_description_for_number(gb_number, "fr"))  # fall back to English
+>>> str(description_for_number(gb_number, "fr"))  # fall back to English
 'London'
->>> str(area_description_for_number(gb_number, "en", region="GB"))
+>>> str(description_for_number(gb_number, "en", region="GB"))
 'London'
->>> str(area_description_for_number(gb_number, "en", region="US"))
-'London'
->>> str(area_description_for_number(de_number, "en"))
+>>> str(description_for_number(gb_number, "en", region="US"))  # fall back to country
+'United Kingdom'
+>>> str(description_for_number(de_number, "en"))
 'Munich'
->>> u'M\xfcnchen' == area_description_for_number(de_number, "de")
+>>> u'M\xfcnchen' == description_for_number(de_number, "de")
 True
->>> u'Z\xfcrich' == area_description_for_number(ch_number, "de")
+>>> u'Z\xfcrich' == description_for_number(ch_number, "de")
 True
->>> str(area_description_for_number(ch_number, "en"))
+>>> str(description_for_number(ch_number, "en"))
 'Zurich'
->>> str(area_description_for_number(ch_number, "fr"))
+>>> str(description_for_number(ch_number, "fr"))
 'Zurich'
->>> str(area_description_for_number(ch_number, "it"))
+>>> str(description_for_number(ch_number, "it"))
 'Zurigo'
 
 """
@@ -92,7 +92,7 @@ def _find_lang(langdict, lang, script, region):
         return None
 
 
-def area_description_for_number(numobj, lang, script=None, region=None):
+def _area_description_for_number(numobj, lang, script=None, region=None):
     """Return a text description of the area of a PhoneNumber for the given language.
 
     Arguments:
@@ -197,7 +197,7 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
     number, or an empty string if no description is available."""
     number_region = region_code_for_number(numobj)
     if region is None or region == number_region:
-        area_description = area_description_for_number(numobj, lang, script, region)
+        area_description = _area_description_for_number(numobj, lang, script, region)
         if area_description != "":
             return area_description
         else:
