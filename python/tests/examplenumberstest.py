@@ -181,6 +181,16 @@ class ExampleNumbersTest(unittest.TestCase):
         number = phonenumberutil.parse("+6927654321", "US")
         self.assertEqual("Country Code: 692 National Number: 7654321 Leading Zero: False", str(number))
 
+    def testWhitespaceInNationalPrefixForParsing(self):
+        # Python version extra test
+        # AR metadata has whitespace in the RE for nationalPrefixForParsing
+        number = phonenumberutil.parse("+540348215617137", "AR")
+        self.assertTrue(phonenumberutil.is_valid_number(number))
+        self.assertEqual(PhoneNumberType.MOBILE, phonenumberutil.number_type(number))
+        number = phonenumberutil.parse("0344615614207", "AR")
+        self.assertTrue(phonenumberutil.is_valid_number(number))
+        self.assertEqual(PhoneNumberType.MOBILE, phonenumberutil.number_type(number))
+
     def testFormatNumberForMobile(self):
         # Python version extra test.  Special cases for CO and BR in
         # format_number_for_mobile_dialing(), included here so that real metadata is used
