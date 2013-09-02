@@ -364,7 +364,7 @@ class XTerritory(UnicodeMixin):
         self.o.leading_digits = xterritory.get('leadingDigits', None)
         self.o.preferred_international_prefix = xterritory.get('preferredInternationalPrefix', None)
         self.o.national_prefix = xterritory.get('nationalPrefix', None)
-        self.o.national_prefix_for_parsing = xterritory.get('nationalPrefixForParsing', None)
+        self.o.national_prefix_for_parsing = _dews_re(xterritory.get('nationalPrefixForParsing', None))
         self.o.national_prefix_transform_rule = xterritory.get('nationalPrefixTransformRule', None)
         if self.o.national_prefix_transform_rule is not None:
             # Replace '$1' etc  with '\1' to match Python regexp group reference format
