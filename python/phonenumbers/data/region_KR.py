@@ -12,7 +12,6 @@ PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='70\\d{8}', possible_number_pattern='\\d{10}', example_number='7012345678'),
     pager=PhoneNumberDesc(national_number_pattern='15\\d{7,8}', possible_number_pattern='\\d{9,10}', example_number='1523456789'),
     uan=PhoneNumberDesc(national_number_pattern='1(?:5(?:44|66|77|88|99)|6(?:00|44|6[16]|70|88))\\d{4}', possible_number_pattern='\\d{8}', example_number='15441234'),
-    emergency=PhoneNumberDesc(national_number_pattern='11[29]', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',

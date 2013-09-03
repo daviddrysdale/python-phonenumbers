@@ -12,7 +12,6 @@ PHONE_METADATA_JO = PhoneMetadata(id='JO', country_code=962, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='74(?:66|77)\\d{5}', possible_number_pattern='\\d{9}', example_number='746612345'),
     uan=PhoneNumberDesc(national_number_pattern='8(?:10|8\\d)\\d{5}', possible_number_pattern='\\d{8}', example_number='88101234'),
-    emergency=PhoneNumberDesc(national_number_pattern='1(?:12|91)|911', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',

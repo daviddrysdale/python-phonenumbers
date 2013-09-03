@@ -438,10 +438,14 @@ class AsYouTypeFormatter(object):
     def _attempt_to_choose_formatting_pattern(self):
         """Attempts to set the formatting template and returns a string which
         contains the formatted version of the digits entered so far."""
-        # We start to attempt to format only when as least MIN_LEADING_DIGITS_LENGTH digits of national
+        # We start to attempt to format only when at least MIN_LEADING_DIGITS_LENGTH digits of national
         # number (excluding national prefix) have been entered.
         if len(self._national_number) >= _MIN_LEADING_DIGITS_LENGTH:
             self._get_available_formats(self._national_number[:_MIN_LEADING_DIGITS_LENGTH])
+            # See if the accrued digits can be formatted properly already.
+            formatted_number = self._attempt_to_format_accrued_digits()
+            if len(formatted_number) > 0:
+                return formatted_number
             if self._maybe_create_new_template():
                 return self._input_accrued_national_number()
             else:
@@ -485,7 +489,9 @@ class AsYouTypeFormatter(object):
         elif self._current_metadata.national_prefix_for_parsing is not None:
             npp_re = re.compile(self._current_metadata.national_prefix_for_parsing)
             m = npp_re.match(self._national_number)
-            if m:
+            # Since some national prefix patterns are entirely optional, check
+            # that a national prefix could actually be extracted.
+            if m and m.end() > 0:
                 # When the national prefix is detected, we use international
                 # formatting rules instead of national ones, because national
                 # formatting rules could contain local formatting rules for

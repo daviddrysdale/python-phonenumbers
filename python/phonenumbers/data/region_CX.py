@@ -12,7 +12,6 @@ PHONE_METADATA_CX = PhoneMetadata(id='CX', country_code=61, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='550\\d{6}', possible_number_pattern='\\d{9}', example_number='550123456'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='000|112', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix='0011',

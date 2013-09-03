@@ -12,7 +12,6 @@ PHONE_METADATA_883 = PhoneMetadata(id='001', country_code=883, international_pre
     voip=PhoneNumberDesc(national_number_pattern='51(?:00\\d{5}(?:\\d{3})?|10\\d{8})', possible_number_pattern='\\d{9}(?:\\d{3})?', example_number='510012345'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3'),

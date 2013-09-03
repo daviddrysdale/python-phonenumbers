@@ -304,6 +304,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
                  voicemail=None,
                  short_code=None,
                  standard_rate=None,
+                 carrier_specific=None,
                  no_international_dialling=None,
                  country_code=None,
                  international_prefix=None,
@@ -343,6 +344,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         self.voicemail = voicemail  # None or PhoneNumberDesc
         self.short_code = short_code  # None or PhoneNumberDesc
         self.standard_rate = standard_rate  # None or PhoneNumberDesc
+        self.carrier_specific = carrier_specific  # None or PhoneNumberDesc
 
         # The rules here distinguish the numbers that are only able to be
         # dialled nationally.
@@ -545,6 +547,8 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
             result += unicod(",\n    short_code=%s") % self.short_code
         if self.standard_rate is not None:
             result += unicod(",\n    standard_rate=%s") % self.standard_rate
+        if self.carrier_specific is not None:
+            result += unicod(",\n    carrier_specific=%s") % self.carrier_specific
         if self.no_international_dialling is not None:
             result += unicod(",\n    no_international_dialling=%s") % self.no_international_dialling
 

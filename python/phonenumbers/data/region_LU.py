@@ -12,7 +12,6 @@ PHONE_METADATA_LU = PhoneMetadata(id='LU', country_code=352, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='20(?:1\\d{5}|[2-689]\\d{1,7})', possible_number_pattern='\\d{4,10}', example_number='20201234'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='11[23]', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix_for_parsing='(15(?:0[06]|1[12]|35|4[04]|55|6[26]|77|88|99)\\d)',

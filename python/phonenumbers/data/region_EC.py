@@ -12,7 +12,6 @@ PHONE_METADATA_EC = PhoneMetadata(id='EC', country_code=593, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='[2-7]890\\d{4}', possible_number_pattern='\\d{8}', example_number='28901234'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='1(?:0[12]|12)|911', possible_number_pattern='\\d{3}', example_number='911'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',

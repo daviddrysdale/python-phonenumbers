@@ -12,7 +12,6 @@ PHONE_METADATA_MM = PhoneMetadata(id='MM', country_code=95, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='1333\\d{4}', possible_number_pattern='\\d{8}', example_number='13331234'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='199', possible_number_pattern='\\d{3}', example_number='199'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',

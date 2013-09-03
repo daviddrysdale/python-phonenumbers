@@ -3,7 +3,7 @@ import unittest
 
 from .phonenumbertest import PhoneNumberTest
 from .phonenumberutiltest import PhoneNumberUtilTest
-from .shortnumberutiltest import ShortNumberUtilTest
+from .shortnumberinfotest import ShortNumberInfoTest
 from .asyoutypetest import AsYouTypeFormatterTest
 from .examplenumberstest import ExampleNumbersTest
 from .phonenumbermatchertest import PhoneNumberMatchTest, PhoneNumberMatcherTest

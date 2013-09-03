@@ -12,7 +12,6 @@ PHONE_METADATA_MN = PhoneMetadata(id='MN', country_code=976, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='7[05-8]\\d{6}', possible_number_pattern='\\d{8}', example_number='75123456'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='10[0-3]', possible_number_pattern='\\d{3}', example_number='102'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
