@@ -12,7 +12,6 @@ PHONE_METADATA_MG = PhoneMetadata(id='MG', country_code=261, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='22\\d{7}', possible_number_pattern='\\d{9}', example_number='221234567'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='11?[78]', possible_number_pattern='\\d{2,3}', example_number='117'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',

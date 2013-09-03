@@ -12,7 +12,6 @@ PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='06[568]|911', possible_number_pattern='\\d{3}', example_number='066'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='01',
@@ -25,4 +24,5 @@ PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix
     intl_number_format=[NumberFormat(pattern='([358]\\d)(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['33|55|81']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2467]|3[12457-9]|5[89]|8[02-9]|9[0-35-9]']),
         NumberFormat(pattern='(1)([358]\\d)(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:33|55|81)']),
-        NumberFormat(pattern='(1)(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:[2467]|3[12457-9]|5[89]|8[2-9]|9[1-35-9])'])])
+        NumberFormat(pattern='(1)(\\d{3})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:[2467]|3[12457-9]|5[89]|8[2-9]|9[1-35-9])'])],
+    leading_zero_possible=True)

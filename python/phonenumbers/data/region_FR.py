@@ -12,7 +12,6 @@ PHONE_METADATA_FR = PhoneMetadata(id='FR', country_code=33, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='9\\d{8}', possible_number_pattern='\\d{9}', example_number='912345678'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='1(?:[578]|12)', possible_number_pattern='\\d{2,3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='3\\d{3}', possible_number_pattern='\\d{4}', example_number='3123'),
     preferred_international_prefix='00',

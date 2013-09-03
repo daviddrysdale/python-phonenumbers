@@ -12,7 +12,6 @@ PHONE_METADATA_DZ = PhoneMetadata(id='DZ', country_code=213, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='98[23]\\d{6}', possible_number_pattern='\\d{9}', example_number='983123456'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='1[47]', possible_number_pattern='\\d{2}', example_number='17'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',

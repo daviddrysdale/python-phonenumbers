@@ -12,7 +12,6 @@ PHONE_METADATA_MV = PhoneMetadata(id='MV', country_code=960, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='781\\d{4}', possible_number_pattern='\\d{7}', example_number='7812345'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='1(?:02|19)', possible_number_pattern='\\d{3}', example_number='102'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix='00',

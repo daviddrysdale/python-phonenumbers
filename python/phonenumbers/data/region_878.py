@@ -12,7 +12,6 @@ PHONE_METADATA_878 = PhoneMetadata(id='001', country_code=878, international_pre
     voip=PhoneNumberDesc(national_number_pattern='10\\d{10}', possible_number_pattern='\\d{12}', example_number='101234567890'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{5})(\\d{5})', format=u'\\1 \\2 \\3')])

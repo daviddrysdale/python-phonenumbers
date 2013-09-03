@@ -12,7 +12,6 @@ PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='7(?:2[23]\\d|3[237]\\d|47\\d|6(?:5\\d|8[08])|7\\d{2}|8(?:33|55|77|81))\\d{5}', possible_number_pattern='\\d{9}', example_number='771234567'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='[2-689]\\d{3}|1599\\d{6}', possible_number_pattern='\\d{4}(?:\\d{6})?', example_number='1599123456'),
-    emergency=PhoneNumberDesc(national_number_pattern='1(?:0[012]|12)', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1700\\d{6}|[2-689]\\d{3}', possible_number_pattern='\\d{4,10}', example_number='1700123456'),
     national_prefix='0',

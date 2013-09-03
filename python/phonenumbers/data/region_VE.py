@@ -12,9 +12,8 @@ PHONE_METADATA_VE = PhoneMetadata(id='VE', country_code=58, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='171', possible_number_pattern='\\d{3}', example_number='171'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
-    national_prefix_for_parsing='(1\\d{2})|0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{7})', format=u'\\1-\\2', national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'$CC \\1')])

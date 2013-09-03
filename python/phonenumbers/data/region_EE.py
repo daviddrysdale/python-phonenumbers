@@ -12,7 +12,6 @@ PHONE_METADATA_EE = PhoneMetadata(id='EE', country_code=372, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='1(?:2[01245]|3[0-6]|4[1-489]|5[0-59]|6[1-46-9]|7[0-27-9]|8[189]|9[012])\\d{1,2}', possible_number_pattern='\\d{4,5}', example_number='12123'),
-    emergency=PhoneNumberDesc(national_number_pattern='11[02]', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1\\d{3,4}|800[2-9]\\d{3}', possible_number_pattern='\\d{4,7}', example_number='8002123'),
     number_format=[NumberFormat(pattern='([3-79]\\d{2})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[369]|4[3-8]|5(?:[0-2]|5[0-478]|6[45])|7[1-9]', '[369]|4[3-8]|5(?:[02]|1(?:[0-8]|95)|5[0-478]|6(?:4[0-4]|5[1-589]))|7[1-9]']),

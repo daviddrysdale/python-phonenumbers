@@ -12,7 +12,6 @@ PHONE_METADATA_CL = PhoneMetadata(id='CL', country_code=56, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='44\\d{7}', possible_number_pattern='\\d{9}', example_number='441234567'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='13[123]', possible_number_pattern='\\d{3}', example_number='133'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='600\\d{7,8}', possible_number_pattern='\\d{10,11}', example_number='6001234567'),
     national_prefix='0',
@@ -23,4 +22,12 @@ PHONE_METADATA_CL = PhoneMetadata(id='CL', country_code=56, international_prefix
         NumberFormat(pattern='(44)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['44'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([68]00)(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['60|8'], national_prefix_formatting_rule=u'\\1'),
         NumberFormat(pattern='(600)(\\d{3})(\\d{2})(\\d{3})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['60'], national_prefix_formatting_rule=u'\\1'),
-        NumberFormat(pattern='(1230)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=u'\\1')])
+        NumberFormat(pattern='(1230)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule=u'\\1'),
+        NumberFormat(pattern='(\\d{4,5})', format=u'\\1', leading_digits_pattern=['[1-9]'], national_prefix_formatting_rule=u'\\1')],
+    intl_number_format=[NumberFormat(pattern='(2)(\\d{3,4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2']),
+        NumberFormat(pattern='(\\d{2})(\\d{2,3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[357]|4[1-35]|6[13-57]']),
+        NumberFormat(pattern='(9)([5-9]\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['9']),
+        NumberFormat(pattern='(44)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['44']),
+        NumberFormat(pattern='([68]00)(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['60|8']),
+        NumberFormat(pattern='(600)(\\d{3})(\\d{2})(\\d{3})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['60']),
+        NumberFormat(pattern='(1230)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['1'])])

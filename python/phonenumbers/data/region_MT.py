@@ -12,7 +12,6 @@ PHONE_METADATA_MT = PhoneMetadata(id='MT', country_code=356, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='3550\\d{4}', possible_number_pattern='\\d{8}', example_number='35501234'),
     pager=PhoneNumberDesc(national_number_pattern='7117\\d{4}', possible_number_pattern='\\d{8}', example_number='71171234'),
     uan=PhoneNumberDesc(national_number_pattern='501\\d{5}', possible_number_pattern='\\d{8}', example_number='50112345'),
-    emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3}', example_number='112'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1 \\2')])
