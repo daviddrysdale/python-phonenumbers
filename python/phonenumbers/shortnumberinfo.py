@@ -93,7 +93,7 @@ def is_valid_short_number(short_number, region_dialing_from):
         not _is_number_matching_desc(short_number, general_desc)):
         return False
     short_number_desc = metadata.short_code
-    if short_number_desc.national_number_pattern is None:
+    if short_number_desc.national_number_pattern is None:  # pragma no cover
         return False
     return _is_number_matching_desc(short_number, short_number_desc)
 

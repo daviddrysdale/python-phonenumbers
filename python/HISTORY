@@ -1,5 +1,14 @@
 
 =====================
+ What's new in 5.8b1
+=====================
+
+Merge up to upstream Subversion revision 603.
+Rename shortnumberutil.py to shortnumberinfo.py
+
+
+
+=====================
  What's new in 5.7b2
 =====================
 
