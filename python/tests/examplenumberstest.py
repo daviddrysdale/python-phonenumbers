@@ -23,7 +23,7 @@ import unittest
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber, is_emergency_number
-from phonenumbers import shortnumberinfo, ShortNumberCost
+from phonenumbers import shortnumberinfo, ShortNumberCost, AsYouTypeFormatter
 from phonenumbers.re_util import fullmatch
 
 
@@ -191,7 +191,6 @@ class ExampleNumbersTest(unittest.TestCase):
                 invalid_string_case = "region_code: %s, national_number: %s" % (regionCode, exampleShortNumber)
                 invalid_string_cases.append(invalid_string_case)
                 print >> sys.stderr, "Failed validation from string %s" % invalid_string_case
-                print >> sys.stderr, "@@@@ Metadata = %s" % PhoneMetadata.short_metadata_for_region(regionCode)
             phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
             if not shortnumberinfo.is_valid_short_number_object(phoneNumber):
                 self.invalid_cases.append(phoneNumber)
@@ -207,6 +206,13 @@ class ExampleNumbersTest(unittest.TestCase):
         self.assertEqual(0, len(invalid_string_cases))
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
+
+    def testIsCarrierSpecific(self):
+        # Python version extra test: hit is_carrier_specific entrypoint
+        esNumber = PhoneNumber(country_code=34, national_number=123)
+        self.assertTrue(shortnumberinfo.is_carrier_specific(esNumber))
+        esNumber.national_number = 512345678
+        self.assertFalse(shortnumberinfo.is_carrier_specific(esNumber))
 
     # Extra tests that need access to the real metadata
     def testBlankMetadata(self):
@@ -258,6 +264,14 @@ class ExampleNumbersTest(unittest.TestCase):
                          phonenumberutil.format_number_for_mobile_dialing(brNumberMobile, "BR", True))
         self.assertEqual("0612345678",
                          phonenumberutil.format_number_for_mobile_dialing(huNumberFixed, "HU", False))
+
+    def testAYTFShortNumberFormatting_AR(self):
+        # Python version extra test: use real metadata so that the check for accrued digits already
+        # matching a format fires.
+        formatter = AsYouTypeFormatter("AR")
+        self.assertEqual("1", formatter.input_digit('1'))
+        self.assertEqual("10", formatter.input_digit('0'))
+        self.assertEqual("101", formatter.input_digit('1'))
 
     def testPrintShortMetadata(self):
         # Python version extra test.  Print string representation of short metadata.

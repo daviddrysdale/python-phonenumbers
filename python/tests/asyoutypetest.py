@@ -1103,6 +1103,13 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         self.assertEqual("12", formatter.input_digit('2'))
         self.assertEqual("1 22", formatter.input_digit('2'))
 
+    def testAYTFShortNumberFormatting_AR(self):
+        # Python version extra test: use real metadata
+        formatter = AsYouTypeFormatter("AR")
+        self.assertEqual("1", formatter.input_digit('1'))
+        self.assertEqual("10", formatter.input_digit('0'))
+        self.assertEqual("101", formatter.input_digit('1'))
+
     def testEdgeCases(self):
         # Python version extra tests for coverage
         metadataXX = PhoneMetadata(id='XX', country_code=384, international_prefix='011',

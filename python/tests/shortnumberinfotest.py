@@ -25,6 +25,7 @@ from phonenumbers import shortnumberinfo, ShortNumberCost, PhoneNumber
 from .testmetadatatest import TestMetadataTestCase
 
 
+# Note that these test use real metadata for short numbers, but test metadata o/w.
 class ShortNumberInfoTest(TestMetadataTestCase):
     """Unit tests for shortnumberinfo.py"""
     def testIsPossibleShortNumber(self):
@@ -35,6 +36,15 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         impossibleNumber = PhoneNumber(country_code=33, national_number=9)
         self.assertFalse(is_possible_short_number_object(impossibleNumber))
         self.assertFalse(is_possible_short_number("9", "FR"))
+
+        # Python version extra test: check invalid region code
+        self.assertFalse(is_possible_short_number("123456", "XY"))
+        # Python version extra test: multiple regions with same calling code
+        self.assertTrue(is_possible_short_number_object(
+                PhoneNumber(country_code=44, national_number=18001)))
+        # Python version extra test: multiple regions with same calling code, hit none
+        self.assertFalse(is_possible_short_number_object(
+                PhoneNumber(country_code=44, national_number=58001)))
 
     def testIsValidShortNumber(self):
         self.assertTrue(is_valid_short_number_object(
@@ -47,6 +57,11 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         # Note that GB and GG share the country calling code 44.
         self.assertTrue(is_valid_short_number_object(
                 PhoneNumber(country_code=44, national_number=18001)))
+
+        # Python version extra test: check invalid region code
+        self.assertFalse(is_valid_short_number("123456", "XY"))
+        # Python version extra test: not matching general desc
+        self.assertFalse(is_valid_short_number("2123456", "US"))
 
     def testGetExpectedCost(self):
         premiumRateNumber = PhoneNumber(country_code=33,
@@ -193,3 +208,6 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertFalse(is_emergency_number("911", "ZW"))
         self.assertFalse(is_emergency_number("01312345", "ZW"))
         self.assertFalse(is_emergency_number("0711234567", "ZW"))
+
+        # Python version extra test: invalid region code
+        self.assertFalse(is_emergency_number("911", "XY"))
