@@ -2097,7 +2097,7 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
     full_number = number
     # Set the default prefix to be something that will never match.
     possible_country_idd_prefix = u"NonMatch"
-    if metadata is not None:
+    if metadata is not None and metadata.international_prefix is not None:
         possible_country_idd_prefix = metadata.international_prefix
 
     country_code_source, full_number = _maybe_strip_i18n_prefix_and_normalize(full_number,

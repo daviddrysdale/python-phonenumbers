@@ -113,7 +113,15 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, SU
                               region_codes_for_country_code,
                               region_code_for_number,
                               truncate_too_long_number,)
-from .shortnumberutil import connects_to_emergency_number, is_emergency_number, ShortNumberCost
+from .shortnumberinfo import (ShortNumberCost,
+                              is_possible_short_number,
+                              is_possible_short_number_object,
+                              is_valid_short_number,
+                              is_valid_short_number_object,
+                              expected_cost,
+                              connects_to_emergency_number,
+                              is_emergency_number,
+                              is_carrier_specific)
 from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 
 
@@ -251,7 +259,17 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'region_code_for_number',
            'truncate_too_long_number',
            # end of items from phonenumberutil.py
-           'connects_to_emergency_number', 'is_emergency_number', 'ShortNumberCost',
+           # items from shortnumberinfo.py
+           'ShortNumberCost',
+           'is_possible_short_number',
+           'is_possible_short_number_object',
+           'is_valid_short_number',
+           'is_valid_short_number_object',
+           'expected_cost',
+           'connects_to_emergency_number',
+           'is_emergency_number',
+           'is_carrier_specific',
+           # end of items from shortnumberinfo.py
            'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency',
            'country_name_for_number',
            'description_for_number',

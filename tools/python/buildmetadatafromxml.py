@@ -414,15 +414,15 @@ class XTerritory(UnicodeMixin):
                                                 template=self.o.general_desc.o)
             self.o.no_international_dialling = XPhoneNumberDesc(_get_unique_child(xterritory, 'noInternationalDialling'),
                                                                 template=self.o.general_desc.o)
-            # When emergency metadata is moved to ShortNumberMetadata.xml,
-            # this needs to be moved below.
-            self.o.emergency = XPhoneNumberDesc(_get_unique_child(xterritory, 'emergency'),
-                                                template=self.o.general_desc.o)
         else:
-            self.o.short_code = XPhoneNumberDesc(_get_unique_child(xterritory, 'shortCode'),
-                                                 template=self.o.general_desc.o)
             self.o.standard_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'standardRate'),
                                                     template=self.o.general_desc.o)
+            self.o.short_code = XPhoneNumberDesc(_get_unique_child(xterritory, 'shortCode'),
+                                                 template=self.o.general_desc.o)
+            self.o.carrier_specific = XPhoneNumberDesc(_get_unique_child(xterritory, 'carrierSpecific'),
+                                                       template=self.o.general_desc.o)
+            self.o.emergency = XPhoneNumberDesc(_get_unique_child(xterritory, 'emergency'),
+                                                template=self.o.general_desc.o)
         self.o.toll_free = XPhoneNumberDesc(_get_unique_child(xterritory, 'tollFree'),
                                             template=self.o.general_desc.o)
         self.o.premium_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'premiumRate'),

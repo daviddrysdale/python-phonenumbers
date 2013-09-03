@@ -24,7 +24,7 @@ from phonenumbers import FrozenPhoneNumber, PhoneNumberDesc
 from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseException
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 # Access internal functions of phonenumberutil.py
-from phonenumbers import phonenumberutil, shortnumberutil
+from phonenumbers import phonenumberutil, shortnumberinfo
 from .testmetadatatest import TestMetadataTestCase
 
 
@@ -2199,17 +2199,17 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                   country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY,
                                   preferred_domestic_carrier_code="14", raw_input="143121286979")
         self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
-                          phonenumbers.is_number_match(brNumberOne, brNumberTwo))
+                         phonenumbers.is_number_match(brNumberOne, brNumberTwo))
 
         # Python version extra tests
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
                          phonenumbers.is_number_match("+9991234567", "+99943211234"))
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
-                         phonenumbers.is_number_match(brNumberOne, "+9991235467"))
+                         phonenumbers.is_number_match(nzNumber, "+9991235467"))
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
-                         phonenumbers.is_number_match("+9991235467", brNumberOne))
+                         phonenumbers.is_number_match("+9991235467", nzNumber))
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
-                         phonenumbers.is_number_match("asdfasdf", brNumberOne))
+                         phonenumbers.is_number_match("asdfasdf", nzNumber))
         self.assertFalse(phonenumberutil._is_number_matching_desc(1234, None))
         self.assertFalse(phonenumberutil._is_number_possible_for_desc(1234, None))
 
@@ -2511,7 +2511,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # Coverage test: short_code desc has no example number
         PhoneMetadata._short_region_metadata['XX'] = metadataXX
-        self.assertEqual("", shortnumberutil._example_short_number("XX"))
+        self.assertEqual("", shortnumberinfo._example_short_number("XX"))
         del PhoneMetadata._short_region_metadata['XX']
 
         # And now the grand finale: check a real metadata example
@@ -2526,7 +2526,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    emergency=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     preferred_international_prefix='0011',

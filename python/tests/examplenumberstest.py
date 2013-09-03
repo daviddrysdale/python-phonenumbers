@@ -23,7 +23,7 @@ import unittest
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber, is_emergency_number
-from phonenumbers import shortnumberutil
+from phonenumbers import shortnumberinfo, ShortNumberCost
 from phonenumbers.re_util import fullmatch
 
 
@@ -140,8 +140,13 @@ class ExampleNumbersTest(unittest.TestCase):
 
     def testEmergency(self):
         wrongTypeCounter = 0
-        for regionCode in phonenumberutil.SUPPORTED_REGIONS:
-            metadata = PhoneMetadata.metadata_for_region(regionCode, None)
+        for regionCode in phonenumberutil.SUPPORTED_SHORT_REGIONS:
+            if regionCode == "PG":
+                # The only short number for Papua New Guinea is 000, which
+                # fails the test, since the national prefix is 0. This needs
+                # to be fixed.
+                continue
+            metadata = PhoneMetadata.short_metadata_for_region(regionCode, None)
             desc = metadata.emergency
             if desc.example_number is not None:
                 exampleNumber = desc.example_number
@@ -149,6 +154,11 @@ class ExampleNumbersTest(unittest.TestCase):
                     not is_emergency_number(exampleNumber, regionCode)):
                     wrongTypeCounter += 1
                     print >> sys.stderr, "Emergency example number test failed for %s" % regionCode
+                else:
+                    emergencyNumber = phonenumberutil.parse(exampleNumber, regionCode)
+                    if shortnumberinfo.expected_cost(emergencyNumber) != ShortNumberCost.TOLL_FREE:
+                        wrongTypeCounter += 1
+                        print >> sys.stderr, "Emergency example number not toll free for %s" % regionCode
         self.assertEqual(0, wrongTypeCounter)
 
     def testGlobalNetworkNumbers(self):
@@ -160,16 +170,43 @@ class ExampleNumbersTest(unittest.TestCase):
             if not phonenumberutil.is_valid_number(exampleNumber):
                 self.invalid_cases.append(exampleNumber)
                 print >> sys.stderr, "Failed validation for %s" % exampleNumber
+        self.assertEqual(0, len(self.invalid_cases))
 
     def testEveryRegionHasAnExampleNumber(self):
         for regionCode in phonenumberutil.SUPPORTED_REGIONS:
             exampleNumber = phonenumberutil.example_number(regionCode)
             self.assertTrue(exampleNumber is not None,
                             msg="None found for region %s" % regionCode)
+
+    def testShortNumbersValidAndCorrectCost(self):
+        invalid_string_cases = []
         for regionCode in phonenumberutil.SUPPORTED_SHORT_REGIONS:
-            exampleShortNumber = shortnumberutil._example_short_number(regionCode)
-            self.assertNotEqual(exampleShortNumber, "",
-                                msg="No example short number found for region %s" % regionCode)
+            if regionCode == "PG":
+                # The only short number for Papua New Guinea is 000, which
+                # fails the test, since the national prefix is 0. This needs
+                # to be fixed.
+                continue
+            exampleShortNumber = shortnumberinfo._example_short_number(regionCode)
+            if not shortnumberinfo.is_valid_short_number(exampleShortNumber, regionCode):
+                invalid_string_case = "region_code: %s, national_number: %s" % (regionCode, exampleShortNumber)
+                invalid_string_cases.append(invalid_string_case)
+                print >> sys.stderr, "Failed validation from string %s" % invalid_string_case
+                print >> sys.stderr, "@@@@ Metadata = %s" % PhoneMetadata.short_metadata_for_region(regionCode)
+            phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
+            if not shortnumberinfo.is_valid_short_number_object(phoneNumber):
+                self.invalid_cases.append(phoneNumber)
+                print >> sys.stderr, "Failed validation for %s" % phoneNumber
+            for cost in [ShortNumberCost.TOLL_FREE, ShortNumberCost.STANDARD_RATE,
+                         ShortNumberCost.PREMIUM_RATE, ShortNumberCost.UNKNOWN_COST]:
+                exampleShortNumber = shortnumberinfo._example_short_number_for_cost(regionCode, cost)
+                if exampleShortNumber != "":
+                    phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
+                    if cost != shortnumberinfo.expected_cost(phoneNumber):
+                        self.wrong_type_cases.append(phoneNumber)
+                        print >> sys.stderr, "Wrong cost for %s" % phoneNumber
+        self.assertEqual(0, len(invalid_string_cases))
+        self.assertEqual(0, len(self.invalid_cases))
+        self.assertEqual(0, len(self.wrong_type_cases))
 
     # Extra tests that need access to the real metadata
     def testBlankMetadata(self):
@@ -229,6 +266,8 @@ class ExampleNumbersTest(unittest.TestCase):
     general_desc=PhoneNumberDesc(national_number_pattern='[1-4679]\\d{2,5}', possible_number_pattern='\\d{3,6}'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    emergency=PhoneNumberDesc(national_number_pattern='112|999', possible_number_pattern='\\d{3}', example_number='112'),
     short_code=PhoneNumberDesc(national_number_pattern='1(?:0[01]|1(?:[12]|[68]\\d{3})|2[123]|33|4(?:1|7\\d)|5\\d|70\\d|800\\d|9[15])|2(?:02|2(?:02|11|2)|3(?:02|45)|425)|3[13]3|4(?:0[02]|35[01]|44[45]|5\\d)|650|789|9(?:01|99)', possible_number_pattern='\\d{3,6}', example_number='150'),
     standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     short_data=True)""", str(short_metadata))

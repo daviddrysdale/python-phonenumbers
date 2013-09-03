@@ -30,10 +30,11 @@ from .phonenumberutil import _SECOND_NUMBER_START_PATTERN, _UNWANTED_END_CHAR_PA
 from .phonenumberutil import MatchType, NumberParseException, PhoneNumberFormat
 from .phonenumberutil import is_possible_number, is_valid_number, parse
 from .phonenumberutil import normalize_digits_only, national_significant_number
-from .phonenumberutil import format_nsn_using_pattern
+from .phonenumberutil import format_nsn_using_pattern, ndd_prefix_for_region
 from .phonenumberutil import format_number, is_number_match, region_code_for_country_code
 from .phonenumberutil import _maybe_strip_national_prefix_carrier_code
 from .phonenumberutil import choose_formatting_pattern_for_number
+from .phonenumberutil import _formatting_rule_has_first_group_only
 from .phonenumber import CountryCodeSource
 from .phonemetadata import PhoneMetadata
 
@@ -236,12 +237,19 @@ def _all_number_groups_remain_grouped(numobj, normalized_candidate, formatted_nu
         # Moves from_index forward.
         from_index += len(formatted_number_group)
         if (ii == 0 and from_index < len(normalized_candidate)):
-            # We are at the position right after the NDC.
-            if normalized_candidate[from_index].isdigit():
+            # We are at the position right after the NDC.  We get the region
+            # used for formatting information based on the country code in the
+            # phone number, rather than the number itself, as we do not need
+            # to distinguish between different countries with the same country
+            # calling code and this is faster.
+            region = region_code_for_country_code(numobj.country_code)
+            if (ndd_prefix_for_region(region, True) is not None and
+                normalized_candidate[from_index].isdigit()):
                 # This means there is no formatting symbol after the NDC. In
                 # this case, we only accept the number if there is no
                 # formatting symbol at all in the number, except for
-                # extensions.
+                # extensions.  This is only important for countries with
+                # national prefixes.
                 nsn = national_significant_number(numobj)
                 return normalized_candidate[(from_index - len(formatted_number_group)):].startswith(nsn)
     # The check here makes sure that we haven't mistakenly already used the extension to
@@ -409,13 +417,7 @@ def _is_national_prefix_present_if_required(numobj):
             # The national-prefix is optional in these cases, so we don't need
             # to check if it was present.
             return True
-        # Remove the first-group symbol.
-        candidate_national_prefix_rule = format_rule.national_prefix_formatting_rule
-        # We assume that the first-group symbol will never be _before_ the
-        # national prefix.
-        candidate_national_prefix_rule = candidate_national_prefix_rule[:candidate_national_prefix_rule.find("\\1")]
-        candidate_national_prefix_rule = normalize_digits_only(candidate_national_prefix_rule)
-        if len(candidate_national_prefix_rule) == 0:
+        if _formatting_rule_has_first_group_only(format_rule.national_prefix_formatting_rule):
             # National Prefix not needed for this number.
             return True
         # Normalize the remainder.
