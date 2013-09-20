@@ -137,7 +137,7 @@ class ExampleNumbersTest(unittest.TestCase):
             if (exampleNumber is not None and
                 phonenumberutil._can_be_internationally_dialled(exampleNumber)):
                 self.wrong_type_cases.append(exampleNumber)
-                print >> sys.stderr, "Number %s should not be internationally diallable" % exampleNumber
+                prnt("Number %s should not be internationally diallable" % exampleNumber, file=sys.stderr)
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testEmergency(self):
@@ -155,14 +155,14 @@ class ExampleNumbersTest(unittest.TestCase):
                 if (not fullmatch(re.compile(desc.possible_number_pattern), exampleNumber) or
                     not is_emergency_number(exampleNumber, regionCode)):
                     wrongTypeCounter += 1
-                    print >> sys.stderr, "Emergency example number test failed for %s" % regionCode
+                    prnt("Emergency example number test failed for %s" % regionCode, file=sys.stderr)
                 else:
                     emergencyNumber = phonenumberutil.parse(exampleNumber, regionCode)
                     if shortnumberinfo.expected_cost(emergencyNumber) != ShortNumberCost.TOLL_FREE:
                         # TODO: Reenable this when a method is available to get the expected cost for a
                         # particular region.
                         #wrongTypeCounter += 1
-                        print >> sys.stderr, "Emergency example number not toll free for %s" % regionCode
+                        prnt("Emergency example number not toll free for %s" % regionCode, file=sys.stderr)
         self.assertEqual(0, wrongTypeCounter)
 
     def testGlobalNetworkNumbers(self):
@@ -173,7 +173,7 @@ class ExampleNumbersTest(unittest.TestCase):
                             msg="No example phone number for calling code %s" % callingCode)
             if not phonenumberutil.is_valid_number(exampleNumber):
                 self.invalid_cases.append(exampleNumber)
-                print >> sys.stderr, "Failed validation for %s" % exampleNumber
+                prnt("Failed validation for %s" % exampleNumber, file=sys.stderr)
         self.assertEqual(0, len(self.invalid_cases))
 
     def testEveryRegionHasAnExampleNumber(self):
@@ -194,11 +194,11 @@ class ExampleNumbersTest(unittest.TestCase):
             if not shortnumberinfo.is_valid_short_number(exampleShortNumber, regionCode):
                 invalid_string_case = "region_code: %s, national_number: %s" % (regionCode, exampleShortNumber)
                 invalid_string_cases.append(invalid_string_case)
-                print >> sys.stderr, "Failed validation from string %s" % invalid_string_case
+                prnt("Failed validation from string %s" % invalid_string_case, file=sys.stderr)
             phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
             if not shortnumberinfo.is_valid_short_number_object(phoneNumber):
                 self.invalid_cases.append(phoneNumber)
-                print >> sys.stderr, "Failed validation for %s" % phoneNumber
+                prnt("Failed validation for %s" % phoneNumber, file=sys.stderr)
             for cost in [ShortNumberCost.TOLL_FREE, ShortNumberCost.STANDARD_RATE,
                          ShortNumberCost.PREMIUM_RATE, ShortNumberCost.UNKNOWN_COST]:
                 exampleShortNumber = shortnumberinfo._example_short_number_for_cost(regionCode, cost)
@@ -206,7 +206,7 @@ class ExampleNumbersTest(unittest.TestCase):
                     phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
                     if cost != shortnumberinfo.expected_cost(phoneNumber):
                         self.wrong_type_cases.append(phoneNumber)
-                        print >> sys.stderr, "Wrong cost for %s" % phoneNumber
+                        prnt("Wrong cost for %s" % phoneNumber, file=sys.stderr)
         self.assertEqual(0, len(invalid_string_cases))
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
