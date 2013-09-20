@@ -98,9 +98,9 @@ class ShortNumberInfoTest(TestMetadataTestCase):
     def testGetExampleShortNumberForCost(self):
         self.assertEqual("3010",
                          shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.TOLL_FREE))
-        self.assertEqual("118777",
+        self.assertEqual("1023",
                          shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.STANDARD_RATE))
-        self.assertEqual("3200",
+        self.assertEqual("42000",
                          shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE))
         self.assertEqual("",
                          shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.UNKNOWN_COST))
