@@ -56,6 +56,7 @@ US_NUMBER4 = FrozenPhoneNumber(country_code=1, national_number=6174240000L)
 US_INVALID_NUMBER = FrozenPhoneNumber(country_code=1, national_number=123456789L)
 BS_NUMBER1 = FrozenPhoneNumber(country_code=1, national_number=2423651234L)
 AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300L)
+AR_MOBILE_NUMBER = FrozenPhoneNumber(country_code=54, national_number=92214000000L)
 NUMBER_WITH_INVALID_COUNTRY_CODE = FrozenPhoneNumber(country_code=999, national_number=2423651234L)
 INTERNATIONAL_TOLL_FREE = FrozenPhoneNumber(country_code=800, national_number=12345678L)
 
@@ -119,6 +120,9 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
                           description_for_number(KO_NUMBER1, _KOREAN))
         self.assertEqual(u"\uC778\uCC9C",
                           description_for_number(KO_NUMBER2, _KOREAN))
+
+    def testGetDescriptionForArgentinianMobileNumber(self):
+        self.assertEqual("La Plata", description_for_number(AR_MOBILE_NUMBER, _ENGLISH))
 
     def testGetDescriptionForFallBack(self):
         # No fallback, as the location name for the given phone number is
