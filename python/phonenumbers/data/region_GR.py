@@ -16,4 +16,5 @@ PHONE_METADATA_GR = PhoneMetadata(id='GR', country_code=30, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='([27]\\d)(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['21|7']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['2[2-9]1|[689]']),
-        NumberFormat(pattern='(2\\d{3})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['2[2-9][02-9]'])])
+        NumberFormat(pattern='(2\\d{3})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['2[2-9][02-9]'])],
+    mobile_number_portable_region=True)

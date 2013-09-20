@@ -23,4 +23,5 @@ PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefi
         NumberFormat(pattern='(1200)(\\d{3})(\\d{3})', format='\\1-\\2-\\3', leading_digits_pattern=['120'], national_prefix_formatting_rule='\\1'),
         NumberFormat(pattern='(1212)(\\d{2})(\\d{2})', format='\\1-\\2-\\3', leading_digits_pattern=['121'], national_prefix_formatting_rule='\\1'),
         NumberFormat(pattern='(1599)(\\d{6})', format='\\1-\\2', leading_digits_pattern=['15'], national_prefix_formatting_rule='\\1'),
-        NumberFormat(pattern='(\\d{4})', format='*\\1', leading_digits_pattern=['[2-689]'], national_prefix_formatting_rule='\\1')])
+        NumberFormat(pattern='(\\d{4})', format='*\\1', leading_digits_pattern=['[2-689]'], national_prefix_formatting_rule='\\1')],
+    mobile_number_portable_region=True)

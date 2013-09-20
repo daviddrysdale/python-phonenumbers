@@ -86,6 +86,11 @@ _NANPA_COUNTRY_CODE = 1
 # The prefix that needs to be inserted in front of a Colombian landline number
 # when dialed from a mobile phone in Colombia.
 _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = unicod("3")
+# Map of country calling codes that use a mobile token before the area
+# code. One example of when this is relevant is when determining the length of
+# the national destination code, which should be the length of the area code
+# plus the length of the mobile token.
+_MOBILE_TOKEN_MAPPINGS = {52: u('1'), 54: u('9')}
 # The PLUS_SIGN signifies the international prefix.
 _PLUS_SIGN = u("+")
 _STAR_SIGN = u('*')
@@ -660,17 +665,30 @@ def length_of_national_destination_code(numobj):
     if len(number_groups) <= 3:
         return 0
 
-    if (region_code_for_country_code(numobj.country_code) == unicod("AR") and
-        number_type(numobj) == PhoneNumberType.MOBILE):
-        # Argentinian mobile numbers, when formatted in the international
-        # format, are in the form of +54 9 NDC XXXX... As a result, we take the
-        # length of the third group (NDC) and add 1 for the digit 9, which also
-        # forms part of the national significant number.
-        #
-        # TODO: Investigate the possibility of better modeling the metadata to
-        # make it easier to obtain the NDC.
-        return len(number_groups[3]) + 1
+    if number_type(numobj) == PhoneNumberType.MOBILE:
+        # For example Argentinian mobile numbers, when formatted in the
+        # international format, are in the form of +54 9 NDC XXXX... As a
+        # result, we take the length of the third group (NDC) and add the
+        # length of the second group (which is the mobile token), which also
+        # forms part of the national significant number.  This assumes that
+        # the mobile token is always formatted separately from the rest of the
+        # phone number.
+        mobile_token = country_mobile_token(numobj.country_code)
+        if mobile_token != U_EMPTY_STRING:
+            return len(number_groups[2]) + len(number_groups[3])
     return len(number_groups[2])
+
+
+def country_mobile_token(country_code):
+    """Returns the mobile token for the provided country calling code if it has one, otherwise
+    returns an empty string. A mobile token is a number inserted before the area code when dialing
+    a mobile number from that country from abroad.
+
+    Arguments:
+    country_code -- the country calling code for which we want the mobile token
+    Returns the mobile token, as a string, for the given country calling code.
+    """
+    return _MOBILE_TOKEN_MAPPINGS.get(country_code, U_EMPTY_STRING)
 
 
 def _normalize_helper(number, replacements, remove_non_matches):

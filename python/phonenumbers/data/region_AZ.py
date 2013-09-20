@@ -18,4 +18,5 @@ PHONE_METADATA_AZ = PhoneMetadata(id='AZ', country_code=994, international_prefi
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['(?:1[28]|2(?:[45]2|[0-36])|365)'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[4-8]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['9'], national_prefix_formatting_rule='0\\1')])
+        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['9'], national_prefix_formatting_rule='0\\1')],
+    mobile_number_portable_region=True)

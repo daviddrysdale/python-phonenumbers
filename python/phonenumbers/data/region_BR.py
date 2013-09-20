@@ -27,4 +27,5 @@ PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix
     intl_number_format=[NumberFormat(pattern='(\\d{2})(\\d{5})(\\d{4})', format='\\1 \\2-\\3', leading_digits_pattern=['(?:1[1-9]|2[12478])9']),
         NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format='\\1 \\2-\\3', leading_digits_pattern=['[1-9][1-9]']),
         NumberFormat(pattern='([34]00\\d)(\\d{4})', format='\\1-\\2', leading_digits_pattern=['[34]00']),
-        NumberFormat(pattern='([3589]00)(\\d{2,3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[3589]00'])])
+        NumberFormat(pattern='([3589]00)(\\d{2,3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[3589]00'])],
+    mobile_number_portable_region=True)

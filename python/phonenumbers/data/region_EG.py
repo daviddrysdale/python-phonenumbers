@@ -18,4 +18,5 @@ PHONE_METADATA_EG = PhoneMetadata(id='EG', country_code=20, international_prefix
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d)(\\d{7,8})', format='\\1 \\2', leading_digits_pattern=['[23]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1[012]|[89]00'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{6,7})', format='\\1 \\2', leading_digits_pattern=['1(?:3|5[23])|[4-6]|[89][2-9]'], national_prefix_formatting_rule='0\\1')])
+        NumberFormat(pattern='(\\d{2})(\\d{6,7})', format='\\1 \\2', leading_digits_pattern=['1(?:3|5[23])|[4-6]|[89][2-9]'], national_prefix_formatting_rule='0\\1')],
+    mobile_number_portable_region=True)

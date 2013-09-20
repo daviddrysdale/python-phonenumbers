@@ -19,4 +19,5 @@ PHONE_METADATA_LT = PhoneMetadata(id='LT', country_code=370, international_prefi
     number_format=[NumberFormat(pattern='([34]\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['37|4(?:1|5[45]|6[2-4])'], national_prefix_formatting_rule='(8-\\1)', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='([3-6]\\d{2})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['3[148]|4(?:[24]|6[09])|528|6'], national_prefix_formatting_rule='(8-\\1)', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='([7-9]\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[7-9]'], national_prefix_formatting_rule='8 \\1', national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(5)(2\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['52[0-79]'], national_prefix_formatting_rule='(8-\\1)', national_prefix_optional_when_formatting=True)])
+        NumberFormat(pattern='(5)(2\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['52[0-79]'], national_prefix_formatting_rule='(8-\\1)', national_prefix_optional_when_formatting=True)],
+    mobile_number_portable_region=True)

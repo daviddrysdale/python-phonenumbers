@@ -368,6 +368,7 @@ class XTerritory(UnicodeMixin):
                                                                self.o.national_prefix)
         self.o.main_country_for_code = get_true_attrib(xterritory, 'mainCountryForCode')
         self.o.leading_zero_possible = get_true_attrib(xterritory, 'leadingZeroPossible')
+        self.o.mobile_number_portable_region = get_true_attrib(xterritory, 'mobileNumberPortableRegion')
 
         # Retrieve the various PhoneNumberDesc elements.  The general_desc is
         # first and most important; it will be used to fill out missing fields in

@@ -44,9 +44,10 @@ True
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .util import prnt, unicod, u, U_EMPTY_STRING
+from .util import prnt, unicod, u, U_EMPTY_STRING, U_ZERO
 from .phonenumberutil import format_number, PhoneNumberFormat, number_type
-from .phonenumberutil import region_code_for_number, PhoneNumberType
+from .phonenumberutil import region_code_for_number, PhoneNumberType, PhoneNumber
+from .phonenumberutil import country_mobile_token, national_significant_number
 try:
     from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
     from .geodata.locale import LOCALE_DATA
@@ -224,7 +225,19 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
     number, or an empty string if no description is available."""
     number_region = region_code_for_number(numobj)
     if region is None or region == number_region:
-        area_description = _area_description_for_number(numobj, lang, script, region)
+        mobile_token = country_mobile_token(numobj.country_code)
+        national_number = national_significant_number(numobj)
+        if mobile_token != U_EMPTY_STRING and national_number.startswith(mobile_token):
+            # In some countries, eg. Argentina, mobile numbers have a mobile token
+            # before the national destination code, this should be removed before
+            # geocoding.
+            national_number = national_number[len(mobile_token):]
+            copied_numobj = PhoneNumber(country_code=numobj.country_code,
+                                        national_number=national_number,
+                                        italian_leading_zero=national_number.startswith(U_ZERO))
+            area_description = _area_description_for_number(copied_numobj, lang, script, region)
+        else:
+            area_description = _area_description_for_number(numobj, lang, script, region)
         if area_description != "":
             return area_description
         else:

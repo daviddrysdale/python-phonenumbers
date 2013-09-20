@@ -16,4 +16,5 @@ PHONE_METADATA_CZ = PhoneMetadata(id='CZ', country_code=420, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='([2-9]\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-8]|9[015-7]']),
         NumberFormat(pattern='(96\\d)(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['96']),
-        NumberFormat(pattern='(9\\d)(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['9[36]'])])
+        NumberFormat(pattern='(9\\d)(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['9[36]'])],
+    mobile_number_portable_region=True)

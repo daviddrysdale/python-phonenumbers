@@ -25,4 +25,5 @@ PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2467]|3[12457-9]|5[89]|8[02-9]|9[0-35-9]']),
         NumberFormat(pattern='(1)([358]\\d)(\\d{4})(\\d{4})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:33|55|81)']),
         NumberFormat(pattern='(1)(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['1(?:[2467]|3[12457-9]|5[89]|8[2-9]|9[1-35-9])'])],
-    leading_zero_possible=True)
+    leading_zero_possible=True,
+    mobile_number_portable_region=True)

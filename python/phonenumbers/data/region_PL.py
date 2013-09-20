@@ -18,4 +18,5 @@ PHONE_METADATA_PL = PhoneMetadata(id='PL', country_code=48, international_prefix
         NumberFormat(pattern='(\\d{2})(\\d{4,6})', format='\\1 \\2', leading_digits_pattern=['[124]|3[2-4]|5[24-689]|6[1-3578]|7[14-7]|8[1-7]']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['39|5[013]|6[0469]|7[02389]|8[08]']),
         NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2,3})', format='\\1 \\2 \\3', leading_digits_pattern=['64']),
-        NumberFormat(pattern='(\\d{3})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['64'])])
+        NumberFormat(pattern='(\\d{3})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['64'])],
+    mobile_number_portable_region=True)

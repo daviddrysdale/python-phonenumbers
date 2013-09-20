@@ -19,4 +19,5 @@ PHONE_METADATA_BY = PhoneMetadata(id='BY', country_code=375, international_prefi
     national_prefix_for_parsing='8?0?',
     number_format=[NumberFormat(pattern='([1-4]\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[1-4]'], national_prefix_formatting_rule='8 0\\1'),
         NumberFormat(pattern='([89]\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['8[01]|9'], national_prefix_formatting_rule='8 \\1'),
-        NumberFormat(pattern='(8\\d{2})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['82'], national_prefix_formatting_rule='8 \\1')])
+        NumberFormat(pattern='(8\\d{2})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['82'], national_prefix_formatting_rule='8 \\1')],
+    mobile_number_portable_region=True)

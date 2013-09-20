@@ -30,4 +30,5 @@ PHONE_METADATA_CL = PhoneMetadata(id='CL', country_code=56, international_prefix
         NumberFormat(pattern='(44)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['44']),
         NumberFormat(pattern='([68]00)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['60|8']),
         NumberFormat(pattern='(600)(\\d{3})(\\d{2})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['60']),
-        NumberFormat(pattern='(1230)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1'])])
+        NumberFormat(pattern='(1230)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1'])],
+    mobile_number_portable_region=True)

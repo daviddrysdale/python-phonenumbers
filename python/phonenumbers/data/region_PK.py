@@ -23,4 +23,5 @@ PHONE_METADATA_PK = PhoneMetadata(id='PK', country_code=92, international_prefix
         NumberFormat(pattern='(3\\d{2})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['3'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='([15]\\d{3})(\\d{5,6})', format='\\1 \\2', leading_digits_pattern=['58[12]|1'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(586\\d{2})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['586'], national_prefix_formatting_rule='(0\\1)'),
-        NumberFormat(pattern='([89]00)(\\d{3})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['[89]00'], national_prefix_formatting_rule='0\\1')])
+        NumberFormat(pattern='([89]00)(\\d{3})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['[89]00'], national_prefix_formatting_rule='0\\1')],
+    mobile_number_portable_region=True)

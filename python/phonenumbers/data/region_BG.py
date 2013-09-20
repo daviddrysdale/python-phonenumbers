@@ -22,4 +22,5 @@ PHONE_METADATA_BG = PhoneMetadata(id='BG', country_code=359, international_prefi
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['43[124-7]|70[1-9]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[78]00'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2,3})', format='\\1 \\2 \\3', leading_digits_pattern=['[356]|4[124-7]|7[1-9]|8[1-6]|9[1-7]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['48|8[7-9]|9[08]'], national_prefix_formatting_rule='0\\1')])
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['48|8[7-9]|9[08]'], national_prefix_formatting_rule='0\\1')],
+    mobile_number_portable_region=True)
