@@ -25,6 +25,7 @@ GEOCODE_DATA = {
  '1650':{'de': u'Kalifornien', 'en': u'CA'},
  '1650960':{'en': u'Mountain View, CA'},
  '1989':{'en': u'MA'},
+ '542214':{'en': u'La Plata'},
  '822':{'en': u'Seoul', 'ko': u'\uc11c\uc6b8'},
  '8231':{'en': u'Gyeonggi', 'ko': u'\uacbd\uae30'},
  '8232':{'en': u'Incheon', 'ko': u'\uc778\ucc9c'},
