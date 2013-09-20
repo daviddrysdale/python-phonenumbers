@@ -104,6 +104,7 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, SU
                               is_valid_number_for_region,
                               length_of_geographical_area_code,
                               length_of_national_destination_code,
+                              country_mobile_token,
                               national_significant_number,
                               ndd_prefix_for_region,
                               normalize_digits_only,
