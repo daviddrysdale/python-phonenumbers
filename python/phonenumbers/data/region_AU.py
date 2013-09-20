@@ -6,7 +6,7 @@ PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix
     fixed_line=PhoneNumberDesc(national_number_pattern='[237]\\d{8}|8(?:[68]\\d{3}|7[0-69]\\d{2}|9(?:[02-9]\\d{2}|1(?:[0-57-9]\\d|6[0135-9])))\\d{4}', possible_number_pattern='\\d{8,9}', example_number='212345678'),
     mobile=PhoneNumberDesc(national_number_pattern='14(?:5\\d|71)\\d{5}|4(?:[0-2]\\d|3[0-57-9]|4[47-9]|5[0-35-9]|6[6-9]|[79][07-9]|8[17-9])\\d{6}', possible_number_pattern='\\d{9}', example_number='412345678'),
     toll_free=PhoneNumberDesc(national_number_pattern='180(?:0\\d{3}|2)\\d{3}', possible_number_pattern='\\d{7,10}', example_number='1800123456'),
-    premium_rate=PhoneNumberDesc(national_number_pattern='19(?:0[0126]\\d{6}|[13-5]\\d{3}|[679]\\d{5})', possible_number_pattern='\\d{6,10}', example_number='1900123456'),
+    premium_rate=PhoneNumberDesc(national_number_pattern='190[0126]\\d{6}', possible_number_pattern='\\d{10}', example_number='1900123456'),
     shared_cost=PhoneNumberDesc(national_number_pattern='13(?:00\\d{2})?\\d{4}', possible_number_pattern='\\d{6,10}', example_number='1300123456'),
     personal_number=PhoneNumberDesc(national_number_pattern='500\\d{6}', possible_number_pattern='\\d{9}', example_number='500123456'),
     voip=PhoneNumberDesc(national_number_pattern='550\\d{6}', possible_number_pattern='\\d{9}', example_number='550123456'),
