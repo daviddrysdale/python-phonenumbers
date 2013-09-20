@@ -25,4 +25,5 @@ PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix
         NumberFormat(pattern='(19\\d)(\\d{3})', format=u'\\1 \\2', leading_digits_pattern=['19[13]'], national_prefix_formatting_rule=u'\\1'),
         NumberFormat(pattern='(19\\d{2})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['19[67]'], national_prefix_formatting_rule=u'\\1'),
         NumberFormat(pattern='(13)(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3', leading_digits_pattern=['13[1-9]'], national_prefix_formatting_rule=u'\\1')],
-    main_country_for_code=True)
+    main_country_for_code=True,
+    mobile_number_portable_region=True)

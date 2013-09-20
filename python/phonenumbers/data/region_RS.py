@@ -21,4 +21,5 @@ PHONE_METADATA_RS = PhoneMetadata(id='RS', country_code=381, international_prefi
         NumberFormat(pattern='(6\\d)(\\d{6,8})', format=u'\\1 \\2', leading_digits_pattern=['6'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([89]\\d{2})(\\d{3,9})', format=u'\\1 \\2', leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(7[26])(\\d{4,9})', format=u'\\1 \\2', leading_digits_pattern=['7[26]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(7[08]\\d)(\\d{4,9})', format=u'\\1 \\2', leading_digits_pattern=['7[08]'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='(7[08]\\d)(\\d{4,9})', format=u'\\1 \\2', leading_digits_pattern=['7[08]'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

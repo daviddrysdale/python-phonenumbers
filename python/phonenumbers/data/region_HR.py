@@ -26,4 +26,5 @@ PHONE_METADATA_HR = PhoneMetadata(id='HR', country_code=385, international_prefi
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2,3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['6[145]|7'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3,4})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['6[145]|7'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(80[01])(\\d{2})(\\d{2,3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['8'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(80[01])(\\d{3,4})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['8'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='(80[01])(\\d{3,4})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['8'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

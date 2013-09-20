@@ -22,4 +22,5 @@ PHONE_METADATA_NZ = PhoneMetadata(id='NZ', country_code=64, international_prefix
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['21'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2(?:1[1-9]|[69]|7[0-35-9])|86'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(2\\d)(\\d{3,4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2[028]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2(?:10|74)|5|[89]0'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2(?:10|74)|5|[89]0'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

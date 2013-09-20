@@ -16,4 +16,5 @@ PHONE_METADATA_OM = PhoneMetadata(id='OM', country_code=968, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(2\\d)(\\d{6})', format=u'\\1 \\2', leading_digits_pattern=['2']),
         NumberFormat(pattern='(9\\d{3})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['9']),
-        NumberFormat(pattern='([58]00)(\\d{4,6})', format=u'\\1 \\2', leading_digits_pattern=['[58]'])])
+        NumberFormat(pattern='([58]00)(\\d{4,6})', format=u'\\1 \\2', leading_digits_pattern=['[58]'])],
+    mobile_number_portable_region=True)

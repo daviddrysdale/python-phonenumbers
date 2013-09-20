@@ -15,4 +15,5 @@ PHONE_METADATA_CA = PhoneMetadata(id='CA', country_code=1, international_prefix=
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='1',
-    national_prefix_for_parsing='1')
+    national_prefix_for_parsing='1',
+    mobile_number_portable_region=True)

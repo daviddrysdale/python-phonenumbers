@@ -21,4 +21,5 @@ PHONE_METADATA_MY = PhoneMetadata(id='MY', country_code=60, international_prefix
         NumberFormat(pattern='([18]\\d)(\\d{3})(\\d{3,4})', format=u'\\1-\\2 \\3', leading_digits_pattern=['1[02-46-9][1-9]|8'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(1)([36-8]00)(\\d{2})(\\d{4})', format=u'\\1-\\2-\\3-\\4', leading_digits_pattern=['1[36-8]0']),
         NumberFormat(pattern='(11)(\\d{4})(\\d{4})', format=u'\\1-\\2 \\3', leading_digits_pattern=['11'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(15[49])(\\d{3})(\\d{4})', format=u'\\1-\\2 \\3', leading_digits_pattern=['15'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='(15[49])(\\d{3})(\\d{4})', format=u'\\1-\\2 \\3', leading_digits_pattern=['15'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

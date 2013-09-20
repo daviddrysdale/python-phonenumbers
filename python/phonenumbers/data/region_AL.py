@@ -19,4 +19,5 @@ PHONE_METADATA_AL = PhoneMetadata(id='AL', country_code=355, international_prefi
     number_format=[NumberFormat(pattern='(4)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['4[0-6]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(6[6-9])(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['6'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2358][2-5]|4[7-9]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{3,5})', format=u'\\1 \\2', leading_digits_pattern=['[235][16-9]|8[016-9]|[79]'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='(\\d{3})(\\d{3,5})', format=u'\\1 \\2', leading_digits_pattern=['[235][16-9]|8[016-9]|[79]'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

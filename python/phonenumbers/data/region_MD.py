@@ -18,4 +18,5 @@ PHONE_METADATA_MD = PhoneMetadata(id='MD', country_code=373, international_prefi
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['22|3'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([25-7]\\d{2})(\\d{2})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['2[13-79]|[5-7]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='([89]\\d{2})(\\d{5})', format=u'\\1 \\2', leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='([89]\\d{2})(\\d{5})', format=u'\\1 \\2', leading_digits_pattern=['[89]'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

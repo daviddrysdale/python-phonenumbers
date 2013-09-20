@@ -35,4 +35,5 @@ PHONE_METADATA_SE = PhoneMetadata(id='SE', country_code=46, international_prefix
         NumberFormat(pattern='(77)(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3', leading_digits_pattern=['7']),
         NumberFormat(pattern='(20)(\\d{2,3})(\\d{2})', format=u'\\1 \\2 \\3', leading_digits_pattern=['20']),
         NumberFormat(pattern='(9[034]\\d)(\\d{2})(\\d{2})(\\d{3})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['9[034]']),
-        NumberFormat(pattern='(9[034]\\d)(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['9[034]'])])
+        NumberFormat(pattern='(9[034]\\d)(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['9[034]'])],
+    mobile_number_portable_region=True)

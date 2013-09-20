@@ -17,4 +17,5 @@ PHONE_METADATA_HK = PhoneMetadata(id='HK', country_code=852, international_prefi
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[235-7]|[89](?:0[1-9]|[1-9])']),
         NumberFormat(pattern='(800)(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['800']),
         NumberFormat(pattern='(900)(\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['900']),
-        NumberFormat(pattern='(900)(\\d{2,5})', format=u'\\1 \\2', leading_digits_pattern=['900'])])
+        NumberFormat(pattern='(900)(\\d{2,5})', format=u'\\1 \\2', leading_digits_pattern=['900'])],
+    mobile_number_portable_region=True)

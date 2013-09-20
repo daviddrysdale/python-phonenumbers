@@ -17,4 +17,5 @@ PHONE_METADATA_EE = PhoneMetadata(id='EE', country_code=372, international_prefi
     number_format=[NumberFormat(pattern='([3-79]\\d{2})(\\d{4})', format=u'\\1 \\2', leading_digits_pattern=['[369]|4[3-8]|5(?:[0-2]|5[0-478]|6[45])|7[1-9]', '[369]|4[3-8]|5(?:[02]|1(?:[0-8]|95)|5[0-478]|6(?:4[0-4]|5[1-589]))|7[1-9]']),
         NumberFormat(pattern='(70)(\\d{2})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['70']),
         NumberFormat(pattern='(8000)(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['800', '8000']),
-        NumberFormat(pattern='([458]\\d{3})(\\d{3,4})', format=u'\\1 \\2', leading_digits_pattern=['40|5|8(?:00|[1-5])', '40|5|8(?:00[1-9]|[1-5])'])])
+        NumberFormat(pattern='([458]\\d{3})(\\d{3,4})', format=u'\\1 \\2', leading_digits_pattern=['40|5|8(?:00|[1-5])', '40|5|8(?:00[1-9]|[1-5])'])],
+    mobile_number_portable_region=True)

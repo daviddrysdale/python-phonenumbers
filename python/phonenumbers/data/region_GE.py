@@ -18,4 +18,5 @@ PHONE_METADATA_GE = PhoneMetadata(id='GE', country_code=995, international_prefi
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['[348]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['7'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['5'], national_prefix_formatting_rule=u'\\1')])
+        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['5'], national_prefix_formatting_rule=u'\\1')],
+    mobile_number_portable_region=True)

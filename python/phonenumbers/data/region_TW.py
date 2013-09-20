@@ -18,4 +18,5 @@ PHONE_METADATA_TW = PhoneMetadata(id='TW', country_code=886, international_prefi
     preferred_extn_prefix='#',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='([2-8])(\\d{3,4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[2-7]|8[1-9]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='([89]\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['80|9'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='([89]\\d{2})(\\d{3})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['80|9'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

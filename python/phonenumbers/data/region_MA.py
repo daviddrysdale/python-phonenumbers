@@ -20,4 +20,5 @@ PHONE_METADATA_MA = PhoneMetadata(id='MA', country_code=212, international_prefi
         NumberFormat(pattern='([58]\\d{3})(\\d{5})', format=u'\\1-\\2', leading_digits_pattern=['5(?:2[2-489]|3[5-9])|892', '5(?:2(?:[2-48]|90)|3(?:[5-79]|80))|892'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(5\\d{4})(\\d{4})', format=u'\\1-\\2', leading_digits_pattern=['5(?:29|38)', '5(?:29|38)[89]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(8[09])(\\d{7})', format=u'\\1-\\2', leading_digits_pattern=['8(?:0|9[013-9])'], national_prefix_formatting_rule=u'0\\1')],
-    main_country_for_code=True)
+    main_country_for_code=True,
+    mobile_number_portable_region=True)

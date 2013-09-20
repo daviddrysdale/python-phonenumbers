@@ -27,4 +27,5 @@ PHONE_METADATA_GB = PhoneMetadata(id='GB', country_code=44, international_prefix
         NumberFormat(pattern='(8\\d{2})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['8(?:4[2-5]|7[0-3])'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(80\\d)(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['80'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([58]00)(\\d{6})', format=u'\\1 \\2', leading_digits_pattern=['[58]00'], national_prefix_formatting_rule=u'0\\1')],
-    main_country_for_code=True)
+    main_country_for_code=True,
+    mobile_number_portable_region=True)

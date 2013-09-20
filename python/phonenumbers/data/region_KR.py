@@ -25,4 +25,5 @@ PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix
         NumberFormat(pattern='(\\d)(\\d{3,4})(\\d{4})', format=u'\\1-\\2-\\3', leading_digits_pattern=['2[1-9]'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
         NumberFormat(pattern='(\\d)(\\d{3,4})', format=u'\\1-\\2', leading_digits_pattern=['21[0-46-9]'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3,4})', format=u'\\1-\\2', leading_digits_pattern=['[3-6][1-9]1', '[3-6][1-9]1(?:[0-46-9])'], national_prefix_formatting_rule=u'0\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1'),
-        NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1-\\2', leading_digits_pattern=['1(?:5[46-9]|6[04678])', '1(?:5(?:44|66|77|88|99)|6(?:00|44|6[16]|70|88))'], national_prefix_formatting_rule=u'\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1')])
+        NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1-\\2', leading_digits_pattern=['1(?:5[46-9]|6[04678])', '1(?:5(?:44|66|77|88|99)|6(?:00|44|6[16]|70|88))'], national_prefix_formatting_rule=u'\\1', domestic_carrier_code_formatting_rule=u'0$CC-\\1')],
+    mobile_number_portable_region=True)

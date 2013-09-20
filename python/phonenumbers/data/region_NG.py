@@ -21,4 +21,5 @@ PHONE_METADATA_NG = PhoneMetadata(id='NG', country_code=234, international_prefi
         NumberFormat(pattern='([78]\\d{2})(\\d{3})(\\d{3,4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['70|8[01]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([78]00)(\\d{4})(\\d{4,5})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[78]00'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='([78]00)(\\d{5})(\\d{5,6})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[78]00'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(78)(\\d{2})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['78'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='(78)(\\d{2})(\\d{3})', format=u'\\1 \\2 \\3', leading_digits_pattern=['78'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

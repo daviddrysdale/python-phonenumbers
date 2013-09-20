@@ -25,4 +25,5 @@ PHONE_METADATA_IN = PhoneMetadata(id='IN', country_code=91, international_prefix
         NumberFormat(pattern='(1600)(\\d{2})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['160', '1600'], national_prefix_formatting_rule=u'\\1', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(1800)(\\d{4,5})', format=u'\\1 \\2', leading_digits_pattern=['180', '1800'], national_prefix_formatting_rule=u'\\1', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(18[06]0)(\\d{2,4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['18[06]', '18[06]0'], national_prefix_formatting_rule=u'\\1', national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{4})(\\d{2})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['18[06]', '18(?:03|6[12])'], national_prefix_formatting_rule=u'\\1', national_prefix_optional_when_formatting=True)])
+        NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{4})(\\d{2})', format=u'\\1 \\2 \\3 \\4', leading_digits_pattern=['18[06]', '18(?:03|6[12])'], national_prefix_formatting_rule=u'\\1', national_prefix_optional_when_formatting=True)],
+    mobile_number_portable_region=True)

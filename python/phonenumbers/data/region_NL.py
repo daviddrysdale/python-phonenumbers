@@ -21,4 +21,5 @@ PHONE_METADATA_NL = PhoneMetadata(id='NL', country_code=31, international_prefix
         NumberFormat(pattern='(6)(\\d{8})', format=u'\\1 \\2', leading_digits_pattern=['6[0-57-9]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(66)(\\d{7})', format=u'\\1 \\2', leading_digits_pattern=['66'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(14)(\\d{3,4})', format=u'\\1 \\2', leading_digits_pattern=['14'], national_prefix_formatting_rule=u'\\1'),
-        NumberFormat(pattern='([89]0\\d)(\\d{4,7})', format=u'\\1 \\2', leading_digits_pattern=['80|9'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='([89]0\\d)(\\d{4,7})', format=u'\\1 \\2', leading_digits_pattern=['80|9'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

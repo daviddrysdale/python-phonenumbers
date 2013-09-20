@@ -14,4 +14,5 @@ PHONE_METADATA_MT = PhoneMetadata(id='MT', country_code=356, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='501\\d{5}', possible_number_pattern='\\d{8}', example_number='50112345'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1 \\2')])
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format=u'\\1 \\2')],
+    mobile_number_portable_region=True)

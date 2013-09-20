@@ -20,4 +20,5 @@ PHONE_METADATA_PY = PhoneMetadata(id='PY', country_code=595, international_prefi
         NumberFormat(pattern='(\\d{3})(\\d{3,6})', format=u'\\1 \\2', leading_digits_pattern=['[2-9]0'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{6})', format=u'\\1 \\2', leading_digits_pattern=['9[1-9]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['8700']),
-        NumberFormat(pattern='(\\d{3})(\\d{4,6})', format=u'\\1 \\2', leading_digits_pattern=['[2-8][1-9]'], national_prefix_formatting_rule=u'(\\1)')])
+        NumberFormat(pattern='(\\d{3})(\\d{4,6})', format=u'\\1 \\2', leading_digits_pattern=['[2-8][1-9]'], national_prefix_formatting_rule=u'(\\1)')],
+    mobile_number_portable_region=True)

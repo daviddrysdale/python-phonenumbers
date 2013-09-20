@@ -17,4 +17,5 @@ PHONE_METADATA_GH = PhoneMetadata(id='GH', country_code=233, international_prefi
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['[235]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{5})', format=u'\\1 \\2', leading_digits_pattern=['8'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='(\\d{3})(\\d{5})', format=u'\\1 \\2', leading_digits_pattern=['8'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)

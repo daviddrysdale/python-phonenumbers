@@ -29,4 +29,5 @@ PHONE_METADATA_DE = PhoneMetadata(id='DE', country_code=49, international_prefix
         NumberFormat(pattern='(18\\d{3})(\\d{6})', format=u'\\1 \\2', leading_digits_pattern=['185', '1850', '18500'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(18\\d{2})(\\d{7})', format=u'\\1 \\2', leading_digits_pattern=['18[68]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(18\\d)(\\d{8})', format=u'\\1 \\2', leading_digits_pattern=['18[2-579]'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(700)(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['700'], national_prefix_formatting_rule=u'0\\1')])
+        NumberFormat(pattern='(700)(\\d{4})(\\d{4})', format=u'\\1 \\2 \\3', leading_digits_pattern=['700'], national_prefix_formatting_rule=u'0\\1')],
+    mobile_number_portable_region=True)
