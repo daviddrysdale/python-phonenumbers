@@ -224,6 +224,11 @@ class ExampleNumbersTest(unittest.TestCase):
         number = phonenumberutil.parse("+6927654321", "US")
         self.assertEqual("Country Code: 692 National Number: 7654321 Leading Zero: False", str(number))
 
+    def testMetadataPrint(self):
+        for callingCode in PhoneMetadata._region_available.keys():
+            metadata = PhoneMetadata.metadata_for_region("GB")
+            str(metadata)
+
     def testWhitespaceInNationalPrefixForParsing(self):
         # Python version extra test
         # AR metadata has whitespace in the RE for nationalPrefixForParsing
