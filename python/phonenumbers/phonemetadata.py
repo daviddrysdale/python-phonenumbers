@@ -317,6 +317,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
                  main_country_for_code=False,
                  leading_digits=None,
                  leading_zero_possible=False,
+                 mobile_number_portable_region=False,
                  short_data=False,
                  register=True):
         # The general_desc contains information which is a superset of
@@ -483,6 +484,12 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # that calling code will use the same setting.
         self.leading_zero_possible = leading_zero_possible  # bool
 
+        # This field is set when this country has implemented mobile number
+        # portability. This means that transferring mobile numbers between
+        # carriers is allowed. A consequence of this is that phone prefix to
+        # carrier mapping is less reliable.
+        self.mobile_number_portable_region = mobile_number_portable_region  # bool
+
         # Record whether this metadata is for short numbers or normal numbers.
         self.short_data = short_data  # bool
 
@@ -572,6 +579,8 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
             result += ",\n    leading_digits='%s'" % self.leading_digits
         if self.leading_zero_possible:
             result += ",\n    leading_zero_possible=True"
+        if self.mobile_number_portable_region:
+            result += ",\n    mobile_number_portable_region=True"
         if self.short_data:
             result += ",\n    short_data=True"
         result += u")"
