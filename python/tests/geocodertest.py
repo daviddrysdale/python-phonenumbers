@@ -21,8 +21,8 @@ import unittest
 
 from phonenumbers import PhoneNumber, FrozenPhoneNumber
 from phonenumbers import geocoder
-from phonenumbers import description_for_number, country_name_for_number
-from phonenumbers import description_for_valid_number
+from phonenumbers.geocoder import description_for_number, country_name_for_number
+from phonenumbers.geocoder import description_for_valid_number
 from phonenumbers.prefix import prefix_description_for_number
 
 # Allow override library geocoding metadata with the test metadata.

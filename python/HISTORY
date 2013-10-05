@@ -1,5 +1,17 @@
 
 =====================
+ What's new in 5.9b1
+=====================
+
+The top-level module no longer exports the following functions:
+ - country_name_for_number
+ - description_for_number
+ - description_for_valid_number
+These functions now need to be imported via the phonenumbers.geocoder submodule.
+
+
+
+=====================
  What's new in 5.8b1
 =====================
 
