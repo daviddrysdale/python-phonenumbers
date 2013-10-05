@@ -28,28 +28,15 @@ With phonenumbers on the Python path, run:
 Auto-Generating Python Code
 ===========================
 
-The code within the python/phonenumbers/data subdirectory is automatically
-generated from the master XML metadata file (resources/PhoneNumberMetadata.xml).
-Similarly, the code in the python/phonenumbers/geodata subdirectory is automatically
-generated from the files in resources/geocoding/
+Several subdirectories under python/phonenumbers are automatically generated
+from the master metadata under resources/:
+ - python/phonenumbers/data is generated from resources/PhoneNumberMetadata.xml.
+ - python/phonenumbers/shortdata is generated from resources/ShortNumberMetadata.xml.
+ - python/phonenumbers/geodata is generated from files under resources/geocoding/.
+ - python/phonenumbers/carrierdata is generated from files under resources/carrier/.
 
-The script tools/buildmetadatafromxml.py performs the first autogeneration.
-Run it with:
-  cd tools
-  python buildmetadatafromxml.py ../resources/PhoneNumberMetadata.xml ../python/phonenumbers/data .
-
-This will:
- - Create the python/phonenumbers/data/ directory if not present.
- - Create a collection of files, one for each region code:
-     python/phonenumbers/data/region_<code>.py
-   Each file contains the Python constructors for the metadata for that
-   region.
- - Create a file python/phonenumbers/data/__init__.py which
-   accumulates all of the per-region files.
-
-The script tools/buildgeocodingdata.py performs the second autogeneration.
-  cd tools
-  python buildgeocodingdata.py ../resources/geocoding ../python/phonenumbers/geodata/__init__.py
+The script tools/buildmetadatafromxml.py performs the first pair of autogenerations.
+The script tools/buildgeocodingdata.py performs the second pair of autogenerations.
 
 This approach results in a large set of Python files, but makes it easy
 to apply local fixes to the formatting metadata.
