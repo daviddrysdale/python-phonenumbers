@@ -122,20 +122,30 @@ PhoneNumberMatch [51,62) 703-4800500
 +17034800500
 ```
 
-Finally, you might want to get some information about the location that corresponds to a phone number.  The
+You might want to get some information about the location that corresponds to a phone number.  The
 `geocoder.area_description_for_number` does this, when possible.
 
 ```pycon
->>> from phonenumbers.geocoder import area_description_for_number
+>>> from phonenumbers import geocoder
 >>> ch_number = phonenumbers.parse("0431234567", "CH")
->>> print repr(area_description_for_number(ch_number, "de"))
+>>> print repr(geocoder.description_for_number(ch_number, "de"))
 u'Z\\xfcrich'
->>> print repr(area_description_for_number(ch_number, "en"))
+>>> print repr(geocoder.description_for_number(ch_number, "en"))
 u'Zurich'
->>> print repr(area_description_for_number(ch_number, "fr"))
+>>> print repr(geocoder.description_for_number(ch_number, "fr"))
 u'Zurich'
->>> print repr(area_description_for_number(ch_number, "it"))
+>>> print repr(geocoder.description_for_number(ch_number, "it"))
 u'Zurigo'
+```
+
+For mobile numbers in some countries, you can also find out information about which carrier
+originally owned a phone number.
+
+```pycon
+>>> from phonenumbers import carrier
+>>> ro_number = phonenumbers.parse("+40721234567", "RO")
+>>> print repr(carrier.description_for_number(ro_number, "en"))
+u'Vodafone'
 ```
 
 For more information about the other functionality available from the library, look in the unit tests or in the original
@@ -152,12 +162,15 @@ In particular:
 * The geocoding metadata (which makes up around 75% of the total memory footprint) is only loaded on the first use of
   one of the geocoding functions (`geocoder.description_for_number`, `geocoder.description_for_valid_number`
   or `geocoder.country_name_for_number`).
+* The carrier metadata is only loaded on the first use of one of the mapping functions (`carrier.description_for_number`
+  or `carrier.description_for_valid_number`).
 * The normal metadata for each region is only loaded on the first time that metadata for that region is needed.
 
 If you need to ensure that the metadata memory use is accounted for at start of day (i.e. that a subsequent on-demand
 load of metadata will not cause memory exhaustion):
 
 * Force-load the geocoding metadata by invoking `import phonenumbers.geocoder`.
+* Force-load the carrier metadata by invoking `import phonenumbers.carrier`.
 * Force-load the normal metadata by calling `phonenumbers.PhoneMetadata.load_all()`.
 
 Project Layout

@@ -6,6 +6,7 @@ from phonenumbers import util
 from phonenumbers import re_util
 from phonenumbers import unicode_util
 from phonenumbers import geocoder
+from phonenumbers import carrier
 from tests import *
 
 if __name__ == '__main__':
@@ -14,4 +15,5 @@ if __name__ == '__main__':
     doctest.testmod(re_util)
     doctest.testmod(unicode_util)
     doctest.testmod(geocoder)
+    doctest.testmod(carrier)
     unittest.main()

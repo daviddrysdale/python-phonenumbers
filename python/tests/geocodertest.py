@@ -73,7 +73,7 @@ _USA = "US"
 
 
 class PhoneNumberGeocoderTest(unittest.TestCase):
-    """Unit tests for PhoneNumberGeocoder"""
+    """Unit tests for geocoder.py"""
 
     def setUp(self):
         insert_test_geodata()
