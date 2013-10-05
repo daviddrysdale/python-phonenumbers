@@ -15,12 +15,12 @@ locale: $(PYDIR)/phonenumbers/geodata/locale.py
 # Generate Python files from geocoding data
 $(PYDIR)/phonenumbers/geodata:
 	mkdir $@
-$(PYDIR)/phonenumbers/geodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/geocoding | $(PYDIR)/phonenumbers/geodata
-	$(PYTHON) buildgeocodingdata.py $(TOPDIR)/resources/geocoding $@
+$(PYDIR)/phonenumbers/geodata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/geocoding | $(PYDIR)/phonenumbers/geodata
+	$(PYTHON) buildprefixdata.py --var GEOCODE $(TOPDIR)/resources/geocoding $@
 $(PYDIR)/tests/testgeodata:
 	mkdir $@
-$(PYDIR)/tests/testgeodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding | $(PYDIR)/tests/testgeodata
-	$(PYTHON) buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding $@
+$(PYDIR)/tests/testgeodata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/test/geocoding | $(PYDIR)/tests/testgeodata
+	$(PYTHON) buildprefixdata.py --var GEOCODE $(TOPDIR)/resources/test/geocoding $@
 geodata: $(PYDIR)/phonenumbers/geodata/__init__.py $(PYDIR)/tests/testgeodata/__init__.py
 
 # Generate Python files from metadata
@@ -133,10 +133,10 @@ $(PY3DIR)/%.py: $(PYDIR)/%.py | $(PY3DIR)
 $(PY3DIR)/phonenumbers/geodata/locale.py: DumpLocale.class | $(PY3DIR)/phonenumbers/geodata
 	java DumpLocale -python3 > $@
 locale3: $(PY3DIR)/phonenumbers/geodata/locale.py
-$(PY3DIR)/phonenumbers/geodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/geocoding | $(PY3DIR)/phonenumbers/geodata
-	$(PYTHON3) buildgeocodingdata.py $(TOPDIR)/resources/geocoding $@
-$(PY3DIR)/tests/testgeodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding | $(PY3DIR)/tests/testgeodata
-	$(PYTHON3) buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding $@
+$(PY3DIR)/phonenumbers/geodata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/geocoding | $(PY3DIR)/phonenumbers/geodata
+	$(PYTHON3) buildprefixdata.py --var GEOCODE $(TOPDIR)/resources/geocoding $@
+$(PY3DIR)/tests/testgeodata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/test/geocoding | $(PY3DIR)/tests/testgeodata
+	$(PYTHON3) buildprefixdata.py --var GEOCODE $(TOPDIR)/resources/test/geocoding $@
 geo3data: $(PY3DIR)/phonenumbers/geodata/__init__.py $(PY3DIR)/tests/testgeodata/__init__.py
 
 $(PY3DIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetadata.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py

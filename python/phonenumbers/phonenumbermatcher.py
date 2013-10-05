@@ -48,7 +48,7 @@ except ImportError:  # pragma no cover
     import os
     import sys
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
-        os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
+        os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
         print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
         _ALT_NUMBER_FORMATS = {}
     else:

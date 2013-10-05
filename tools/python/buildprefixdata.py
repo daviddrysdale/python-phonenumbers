@@ -1,15 +1,15 @@
 #!/usr/bin/env python
-"""Script to read the libphonenumber geocoding metadata and generate Python code.
+"""Script to read the libphonenumber per-prefix metadata and generate Python code.
 
 Invocation:
-  buildgeocodingdata.py indir outfile
+  buildprefixdata.py indir outfile
 
-Processes all of the geocoding data under the given input directory and emit
+Processes all of the per-prefix data under the given input directory and emit
 generated Python code.
 """
 
-# Based on original geocoding data files from libphonenumber:
-#     resources/geocoding/*/*.txt
+# Based on original metadata data files from libphonenumber:
+#     resources/geocoding/*/*.txt, resources/carrier/*/*.txt
 # Copyright (C) 2011 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,6 +28,7 @@ import os
 import sys
 import glob
 import re
+import getopt
 import datetime
 
 if sys.version_info >= (3, 0):
@@ -47,13 +48,13 @@ else:
     def u(s):
         return unicode(s)
 
-GEODATA_SUFFIX = ".txt"
+PREFIXDATA_SUFFIX = ".txt"
 BLANK_LINE_RE = re.compile(r'^\s*$', re.UNICODE)
 COMMENT_LINE_RE = re.compile(r'^\s*#.*$', re.UNICODE)
-DATA_LINE_RE = re.compile(r'^(?P<prefix>\d+)\|(?P<location>.*)$', re.UNICODE)
+DATA_LINE_RE = re.compile(r'^\+?(?P<prefix>\d+)\|(?P<location>.*)$', re.UNICODE)
 
 # Boilerplate header
-GEODATA_FILE_PROLOG = '''"""Geocoding data, mapping each prefix to a dict of locale:locationname.
+PREFIXDATA_FILE_PROLOG = '''"""Per-prefix data, mapping each prefix to a dict of locale:name.
 
 Auto-generated file, do not edit by hand.
 """
@@ -76,8 +77,8 @@ COPYRIGHT_NOTICE = """# Copyright (C) 2011-%s The Libphonenumber Authors
 """ % datetime.datetime.now().year
 
 
-def load_geodata_file(geodata, filename, locale, overall_prefix):
-    """Load geocoding data from the given file, for the given locale and prefix.
+def load_prefixdata_file(prefixdata, filename, locale, overall_prefix):
+    """Load per-prefix data from the given file, for the given locale and prefix.
 
     We assume that this file:
      - is encoded in UTF-8
@@ -100,9 +101,9 @@ def load_geodata_file(geodata, filename, locale, overall_prefix):
                 if not prefix.startswith(overall_prefix):
                     raise Exception("%s:%d: Prefix %s is not within %s" %
                                     (filename, lineno, prefix, overall_prefix))
-                if prefix not in geodata:
-                    geodata[prefix] = {}
-                geodata[prefix][locale] = location
+                if prefix not in prefixdata:
+                    prefixdata[prefix] = {}
+                prefixdata[prefix][locale] = location
             elif BLANK_LINE_RE.match(uline):
                 pass
             elif COMMENT_LINE_RE.match(uline):
@@ -112,21 +113,21 @@ def load_geodata_file(geodata, filename, locale, overall_prefix):
                                 (filename, lineno, line))
 
 
-def load_geodata(indir):
-    """Load geocoding data from the given top-level directory.
+def load_prefixdata(indir):
+    """Load per-prefix data from the given top-level directory.
 
-    Geocoding data is assumed to be held in files <indir>/<locale>/<prefix>.txt.
+    Prefix data is assumed to be held in files <indir>/<locale>/<prefix>.txt.
     The same prefix may occur in multiple files, giving the location's name in
     different locales.
     """
-    geodata = {}  # prefix => dict mapping location to location name
+    prefixdata = {}  # prefix => dict mapping location to location name
     for locale in os.listdir(indir):
         if not os.path.isdir(os.path.join(indir, locale)):
             continue
-        for filename in glob.glob(os.path.join(indir, locale, "*%s" % GEODATA_SUFFIX)):
+        for filename in glob.glob(os.path.join(indir, locale, "*%s" % PREFIXDATA_SUFFIX)):
             overall_prefix, ext = os.path.splitext(os.path.basename(filename))
-            load_geodata_file(geodata, filename, locale, overall_prefix)
-    return geodata
+            load_prefixdata_file(prefixdata, filename, locale, overall_prefix)
+    return prefixdata
 
 
 def _stable_dict_repr(strdict):
@@ -137,28 +138,44 @@ def _stable_dict_repr(strdict):
     return "{%s}" % ", ".join(lines)
 
 
-def output_geodata_code(geodata, outfilename):
-    """Output the geocoding data in Python form to the given file """
+def output_prefixdata_code(prefixdata, outfilename, varprefix):
+    """Output the per-prefix data in Python form to the given file """
     with open(outfilename, "w") as outfile:
         longest_prefix = 0
-        prnt(GEODATA_FILE_PROLOG, file=outfile)
+        prnt(PREFIXDATA_FILE_PROLOG, file=outfile)
         prnt(COPYRIGHT_NOTICE, file=outfile)
-        prnt("GEOCODE_DATA = {", file=outfile)
-        for prefix in sorted(geodata.keys()):
+        prnt("%s_DATA = {" % varprefix, file=outfile)
+        for prefix in sorted(prefixdata.keys()):
             if len(prefix) > longest_prefix:
                 longest_prefix = len(prefix)
-            prnt(" '%s':%s," % (prefix, _stable_dict_repr(geodata[prefix])), file=outfile)
+            prnt(" '%s':%s," % (prefix, _stable_dict_repr(prefixdata[prefix])), file=outfile)
         prnt("}", file=outfile)
-        prnt("GEOCODE_LONGEST_PREFIX = %d" % longest_prefix, file=outfile)
+        prnt("%s_LONGEST_PREFIX = %d" % (varprefix, longest_prefix), file=outfile)
 
 
 def _standalone(argv):
     """Parse the given input directory and emit generated code."""
-    if len(argv) != 2:
+    varprefix = "GEOCODE"
+    try:
+        opts, args = getopt.getopt(argv, "hv:", ("help", "var="))
+    except getopt.GetoptError:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
-    geodata = load_geodata(argv[0])
-    output_geodata_code(geodata, argv[1])
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            prnt(__doc__, file=sys.stderr)
+            sys.exit(1)
+        elif opt in ("-v", "--var"):
+            varprefix = arg
+        else:
+            prnt("Unknown option %s" % opt, file=sys.stderr)
+            prnt(__doc__, file=sys.stderr)
+            sys.exit(1)
+    if len(args) != 2:
+        prnt(__doc__, file=sys.stderr)
+        sys.exit(1)
+    prefixdata = load_prefixdata(args[0])
+    output_prefixdata_code(prefixdata, args[1], varprefix)
 
 
 if __name__ == "__main__":
