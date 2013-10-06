@@ -8,6 +8,7 @@ from .asyoutypetest import AsYouTypeFormatterTest
 from .examplenumberstest import ExampleNumbersTest
 from .phonenumbermatchertest import PhoneNumberMatchTest, PhoneNumberMatcherTest
 from .geocodertest import PhoneNumberGeocoderTest
+from .carriertest import PhoneNumberToCarrierMapperTest
 
 if __name__ == '__main__':
     unittest.main()

@@ -51,7 +51,7 @@ except ImportError:  # pragma no cover
     import os
     import sys
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
-        os.path.basename(sys.argv[0]) == "buildgeocodingdata.py"):
+        os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
         prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
         _AVAILABLE_SHORT_REGION_CODES = []

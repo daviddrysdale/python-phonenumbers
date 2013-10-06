@@ -1,4 +1,4 @@
-"""Geocoding data, mapping each prefix to a dict of locale:locationname.
+"""Per-prefix data, mapping each prefix to a dict of locale:name.
 
 Auto-generated file, do not edit by hand.
 """

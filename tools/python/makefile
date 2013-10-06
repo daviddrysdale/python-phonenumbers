@@ -15,13 +15,24 @@ locale: $(PYDIR)/phonenumbers/geodata/locale.py
 # Generate Python files from geocoding data
 $(PYDIR)/phonenumbers/geodata:
 	mkdir $@
-$(PYDIR)/phonenumbers/geodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/geocoding | $(PYDIR)/phonenumbers/geodata
-	$(PYTHON) buildgeocodingdata.py $(TOPDIR)/resources/geocoding $@ .
+$(PYDIR)/phonenumbers/geodata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/geocoding | $(PYDIR)/phonenumbers/geodata
+	$(PYTHON) buildprefixdata.py --var GEOCODE $(TOPDIR)/resources/geocoding $@ .
 $(PYDIR)/tests/testgeodata:
 	mkdir $@
-$(PYDIR)/tests/testgeodata/__init__.py: buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding | $(PYDIR)/tests/testgeodata
-	$(PYTHON) buildgeocodingdata.py $(TOPDIR)/resources/test/geocoding $@ phonenumbers
+$(PYDIR)/tests/testgeodata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/test/geocoding | $(PYDIR)/tests/testgeodata
+	$(PYTHON) buildprefixdata.py --var GEOCODE $(TOPDIR)/resources/test/geocoding $@ phonenumbers
 geodata: $(PYDIR)/phonenumbers/geodata/__init__.py $(PYDIR)/tests/testgeodata/__init__.py
+
+# Generate Python files from carrier data
+$(PYDIR)/phonenumbers/carrierdata:
+	mkdir $@
+$(PYDIR)/phonenumbers/carrierdata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/carrier | $(PYDIR)/phonenumbers/carrierdata
+	$(PYTHON) buildprefixdata.py --var CARRIER $(TOPDIR)/resources/carrier $@ .
+$(PYDIR)/tests/testcarrierdata:
+	mkdir $@
+$(PYDIR)/tests/testcarrierdata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/test/carrier | $(PYDIR)/tests/testcarrierdata
+	$(PYTHON) buildprefixdata.py --var CARRIER $(TOPDIR)/resources/test/carrier $@ phonenumbers
+carrierdata: $(PYDIR)/phonenumbers/carrierdata/__init__.py $(PYDIR)/tests/testcarrierdata/__init__.py
 
 # Generate Python files from metadata
 $(PYDIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetadata.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
@@ -30,9 +41,9 @@ $(PYDIR)/phonenumbers/shortdata/__init__.py: $(TOPDIR)/resources/ShortNumberMeta
 	$(PYTHON) buildmetadatafromxml.py --short $(TOPDIR)/resources/ShortNumberMetadata.xml $(PYDIR)/phonenumbers/shortdata .
 $(PYDIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml buildmetadatafromxml.py
 	$(PYTHON) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml $(PYDIR)/tests/testdata phonenumbers
-metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/phonenumbers/shortdata/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata
+metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/phonenumbers/shortdata/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata carrierdata
 
-alldata: metadata geodata locale
+alldata: metadata geodata carrierdata locale
 
 test: alldata
 	cd $(PYDIR) && $(PYTHON) -m testwrapper
@@ -76,16 +87,17 @@ clean: coverage_clean profile_clean
 	rm -f *.pyc
 	rm -rf __pycache__
 	rm -f $(PYDIR)/MANIFEST $(PYDIR)/*.pyc
-	rm -f $(PYDIR)/phonenumbers/*.pyc $(PYDIR)/phonenumbers/data/*.pyc $(PYDIR)/phonenumbers/geodata/*.pyc
-	rm -rf $(PYDIR)/phonenumbers/__pycache__ $(PYDIR)/phonenumbers/data/__pycache__ $(PYDIR)/phonenumbers/geodata/__pycache__
+	rm -f $(PYDIR)/phonenumbers/*.pyc $(PYDIR)/phonenumbers/data/*.pyc $(PYDIR)/phonenumbers/geodata/*.pyc $(PYDIR)/phonenumbers/carrierdata/*.pyc
+	rm -rf $(PYDIR)/phonenumbers/__pycache__ $(PYDIR)/phonenumbers/data/__pycache__ $(PYDIR)/phonenumbers/geodata/__pycache__ $(PYDIR)/phonenumbers/carrierdata/__pycache__
 	rm -f $(PYDIR)/phonenumbers/*.py,cover $(PYDIR)/.coverage*
-	rm -f $(PYDIR)/tests/*.pyc $(PYDIR)/tests/testdata/*.pyc $(PYDIR)/tests/testgeodata/*.pyc
-	rm -rf $(PYDIR)/tests/__pycache__ $(PYDIR)/tests/testdata/__pycache__ $(PYDIR)/tests/testgeodata/__pycache__
+	rm -f $(PYDIR)/tests/*.pyc $(PYDIR)/tests/testdata/*.pyc $(PYDIR)/tests/testgeodata/*.pyc $(PYDIR)/tests/testcarrierdata/*.pyc
+	rm -rf $(PYDIR)/tests/__pycache__ $(PYDIR)/tests/testdata/__pycache__ $(PYDIR)/tests/testgeodata/__pycache__ $(PYDIR)/tests/testcarrierdata/__pycache__
 	rm -rf $(PYDIR)/build $(PYDIR)/deb_dist $(PYDIR)/dist
 
 metaclean:
 	rm -rf $(PYDIR)/phonenumbers/data $(PYDIR)/phonenumbers/shortdata $(PYDIR)/tests/testdata
 	rm -rf $(PYDIR)/phonenumbers/geodata $(PYDIR)/tests/testgeodata
+	rm -rf $(PYDIR)/phonenumbers/carrierdata $(PYDIR)/tests/testcarrierdata
 
 distclean: clean metaclean
 	rm -rf $(PYDIR)/$(PACKAGE).egg-info

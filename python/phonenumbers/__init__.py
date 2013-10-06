@@ -127,92 +127,6 @@ from .shortnumberinfo import (ShortNumberCost,
 from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 
 
-# The geodata occupies a lot of space, so only perform the import on first use
-# of geocoder functionality.
-def country_name_for_number(*args, **kwargs):
-    """Return the given PhoneNumber object's country name in the given language.
-
-    Arguments:
-    numobj -- The PhoneNumber object for which we want to get a text description.
-    lang -- A 2-letter lowercase ISO 639-1 language code for the language in
-                  which the description should be returned (e.g. "en")
-    script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
-                  ISO script code as defined in ISO 15924, separated by an
-                  underscore (e.g. "Hant")
-    region --  A 2-letter uppercase ISO 3166-1 country code (e.g. "GB")
-
-    The script and region parameters are currently ignored.
-
-    Returns a text description in the given language code, for the given phone
-    number's region, or an empty string if no description is available."""
-    from .geocoder import country_name_for_number as real_fn
-    return real_fn(*args, **kwargs)
-
-
-def description_for_number(*args, **kwargs):
-    """Return a text description of a PhoneNumber object for the given language.
-
-    The description might consist of the name of the country where the phone
-    number is from and/or the name of the geographical area the phone number
-    is from.  This function explicitly checks the validity of the number passed in
-
-    Arguments:
-    numobj -- The PhoneNumber object for which we want to get a text description.
-    lang -- A 2-letter lowercase ISO 639-1 language code for the language in
-                  which the description should be returned (e.g. "en")
-    script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
-                  ISO script code as defined in ISO 15924, separated by an
-                  underscore (e.g. "Hant")
-    region --  A 2-letter uppercase ISO 3166-1 country code (e.g. "GB")
-
-    Returns a text description in the given language code, for the given phone
-    number, or an empty string if no description is available."""
-    from .geocoder import description_for_number as real_fn
-    return real_fn(*args, **kwargs)
-
-
-def description_for_valid_number(*args, **kwargs):
-    """Return a text description of a PhoneNumber object, in the language
-    provided.
-
-    The description might consist of the name of the country where the phone
-    number is from and/or the name of the geographical area the phone number
-    is from if more detailed information is available.
-
-    If the phone number is from the same region as the user, only a
-    lower-level description will be returned, if one exists. Otherwise, the
-    phone number's region will be returned, with optionally some more detailed
-    information.
-
-    For example, for a user from the region "US" (United States), we would
-    show "Mountain View, CA" for a particular number, omitting the United
-    States from the description. For a user from the United Kingdom (region
-    "GB"), for the same number we may show "Mountain View, CA, United States"
-    or even just "United States".
-
-    This function assumes the validity of the number passed in has already
-    been checked, and that the number is suitable for geocoding.  We consider
-    fixed-line and mobile numbers possible candidates for geocoding.
-
-    Arguments:
-    numobj -- A valid PhoneNumber object for which we want to get a text
-                  description.
-    lang -- A 2-letter lowercase ISO 639-1 language code for the language in
-                  which the description should be returned (e.g. "en")
-    script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
-                  ISO script code as defined in ISO 15924, separated by an
-                  underscore (e.g. "Hant")
-    region -- The region code for a given user. This region will be omitted
-                  from the description if the phone number comes from this
-                  region. It is a two-letter uppercase ISO country code as
-                  defined by ISO 3166-1.
-
-    Returns a text description in the given language code, for the given phone
-    number, or an empty string if no description is available."""
-    from .geocoder import description_for_valid_number as real_fn
-    return real_fn(*args, **kwargs)
-
-
 # Version number is taken from the upstream libphonenumber version
 # together with an indication of the version of the Python-specific code.
 __version__ = "5.8b1"
@@ -273,9 +187,6 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'is_carrier_specific',
            # end of items from shortnumberinfo.py
            'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency',
-           'country_name_for_number',
-           'description_for_number',
-           'description_for_valid_number',
            ]
 
 if __name__ == '__main__':  # pragma no cover
