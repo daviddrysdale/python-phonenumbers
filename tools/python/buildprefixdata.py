@@ -51,7 +51,7 @@ else:
 PREFIXDATA_SUFFIX = ".txt"
 BLANK_LINE_RE = re.compile(r'^\s*$', re.UNICODE)
 COMMENT_LINE_RE = re.compile(r'^\s*#.*$', re.UNICODE)
-DATA_LINE_RE = re.compile(r'^\+?(?P<prefix>\d+)\|(?P<location>.*)$', re.UNICODE)
+DATA_LINE_RE = re.compile(r'^\+?(?P<prefix>\d+)\|(?P<stringdata>.*)$', re.UNICODE)
 
 # Boilerplate header
 PREFIXDATA_FILE_PROLOG = '''"""Per-prefix data, mapping each prefix to a dict of locale:name.
@@ -77,13 +77,13 @@ COPYRIGHT_NOTICE = """# Copyright (C) 2011-%s The Libphonenumber Authors
 """ % datetime.datetime.now().year
 
 
-def load_prefixdata_file(prefixdata, filename, locale, overall_prefix):
+def load_locale_prefixdata_file(prefixdata, filename, locale, overall_prefix):
     """Load per-prefix data from the given file, for the given locale and prefix.
 
     We assume that this file:
      - is encoded in UTF-8
      - may have comment lines (starting with #) and blank lines
-     - has data lines of the form '<prefix>|<location_name>'
+     - has data lines of the form '<prefix>|<stringdata>'
      - contains only data for prefixes that are extensions of the filename.
     """
     with open(filename, "rb") as infile:
@@ -94,16 +94,16 @@ def load_prefixdata_file(prefixdata, filename, locale, overall_prefix):
             dm = DATA_LINE_RE.match(uline)
             if dm:
                 prefix = dm.group('prefix')
-                location = dm.group('location')
-                if location != location.rstrip():
+                stringdata = dm.group('stringdata')
+                if stringdata != stringdata.rstrip():
                     print ("%s:%d: Warning: stripping trailing whitespace" % (filename, lineno))
-                    location = location.rstrip()
+                    stringdata = stringdata.rstrip()
                 if not prefix.startswith(overall_prefix):
                     raise Exception("%s:%d: Prefix %s is not within %s" %
                                     (filename, lineno, prefix, overall_prefix))
                 if prefix not in prefixdata:
                     prefixdata[prefix] = {}
-                prefixdata[prefix][locale] = location
+                prefixdata[prefix][locale] = stringdata
             elif BLANK_LINE_RE.match(uline):
                 pass
             elif COMMENT_LINE_RE.match(uline):
@@ -113,20 +113,20 @@ def load_prefixdata_file(prefixdata, filename, locale, overall_prefix):
                                 (filename, lineno, line))
 
 
-def load_prefixdata(indir):
+def load_locale_prefixdata(indir):
     """Load per-prefix data from the given top-level directory.
 
     Prefix data is assumed to be held in files <indir>/<locale>/<prefix>.txt.
-    The same prefix may occur in multiple files, giving the location's name in
-    different locales.
+    The same prefix may occur in multiple files, giving the prefix's description
+    in different locales.
     """
-    prefixdata = {}  # prefix => dict mapping location to location name
+    prefixdata = {}  # prefix => dict mapping locale to description
     for locale in os.listdir(indir):
         if not os.path.isdir(os.path.join(indir, locale)):
             continue
         for filename in glob.glob(os.path.join(indir, locale, "*%s" % PREFIXDATA_SUFFIX)):
             overall_prefix, ext = os.path.splitext(os.path.basename(filename))
-            load_prefixdata_file(prefixdata, filename, locale, overall_prefix)
+            load_locale_prefixdata_file(prefixdata, filename, locale, overall_prefix)
     return prefixdata
 
 
@@ -174,7 +174,7 @@ def _standalone(argv):
     if len(args) != 2:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
-    prefixdata = load_prefixdata(args[0])
+    prefixdata = load_locale_prefixdata(args[0])
     output_prefixdata_code(prefixdata, args[1], varprefix)
 
 
