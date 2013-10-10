@@ -113,7 +113,8 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, SU
                               region_code_for_country_code,
                               region_codes_for_country_code,
                               region_code_for_number,
-                              truncate_too_long_number,)
+                              truncate_too_long_number,
+                              is_mobile_number_portable_region,)
 from .shortnumberinfo import (ShortNumberCost,
                               is_possible_short_number,
                               is_possible_short_number_object,
@@ -173,6 +174,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'region_codes_for_country_code',
            'region_code_for_number',
            'truncate_too_long_number',
+           'is_mobile_number_portable_region',
            # end of items from phonenumberutil.py
            # items from shortnumberinfo.py
            'ShortNumberCost',

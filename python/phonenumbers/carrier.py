@@ -1,11 +1,11 @@
 """Phone number to carrier mapping functionality
 
 >>> import phonenumbers
->>> from phonenumbers.carrier import description_for_number
+>>> from phonenumbers.carrier import name_for_number
 >>> ro_number = phonenumbers.parse("+40721234567", "RO")
->>> str(description_for_number(ro_number, "en"))
+>>> str(name_for_number(ro_number, "en"))
 'Vodafone'
->>> str(description_for_number(ro_number, "fr"))  # fall back to English
+>>> str(name_for_number(ro_number, "fr"))  # fall back to English
 'Vodafone'
 
 """
@@ -26,6 +26,8 @@
 # limitations under the License.
 
 from .phonenumberutil import PhoneNumberType, number_type
+from .phonenumberutil import region_code_for_number
+from .phonenumberutil import is_mobile_number_portable_region
 from .prefix import prefix_description_for_number
 try:
     from .carrierdata import CARRIER_DATA, CARRIER_LONGEST_PREFIX
@@ -44,20 +46,21 @@ except ImportError:  # pragma no cover
         raise
 
 
-def description_for_valid_number(numobj, lang, script=None, region=None):
-    """Return a text description of a PhoneNumber object for the given language.
+def name_for_valid_number(numobj, lang, script=None, region=None):
+    """Returns a carrier name for the given PhoneNumber object, in the
+    language provided.
 
-    The description consists of the name of the carrier the number was
-    originally allocated to, however if the country supports mobile number
-    portability the number might not belong to the returned carrier
-    anymore. If no mapping is found an empty string is returned.
+    The carrier name is the one the number was originally allocated to,
+    however if the country supports mobile number portability the number might
+    not belong to the returned carrier anymore. If no mapping is found an
+    empty string is returned.
 
     This method assumes the validity of the number passed in has already been
     checked, and that the number is suitable for carrier lookup. We consider
     mobile and pager numbers possible candidates for carrier lookup.
 
     Arguments:
-    numobj -- The PhoneNumber object for which we want to get a text description.
+    numobj -- The PhoneNumber object for which we want to get a carrier name.
     lang -- A 2-letter lowercase ISO 639-1 language code for the language in
                   which the description should be returned (e.g. "en")
     script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
@@ -65,24 +68,26 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
                   underscore (e.g. "Hant")
     region --  A 2-letter uppercase ISO 3166-1 country code (e.g. "GB")
 
-    Returns a text description in the given language code, for the given phone
-    number, or an empty string if no description is available."""
+    Returns a carrier name in the given language code, for the given phone
+    number, or an empty string if no description is available.
+    """
     return prefix_description_for_number(CARRIER_DATA, CARRIER_LONGEST_PREFIX,
                                          numobj, lang, script, region)
 
 
-def description_for_number(numobj, lang, script=None, region=None):
-    """Return a text description of a PhoneNumber object for the given language.
+def name_for_number(numobj, lang, script=None, region=None):
+    """Returns a carrier name for the given PhoneNumber object, in the
+    language provided.
 
-    The description consists of the name of the carrier the number was
-    originally allocated to, however if the country supports mobile number
-    portability the number might not belong to the returned carrier
-    anymore. If no mapping is found an empty string is returned.
+    The carrier name is the one the number was originally allocated to,
+    however if the country supports mobile number portability the number might
+    not belong to the returned carrier anymore. If no mapping is found an
+    empty string is returned.
 
     This function explicitly checks the validity of the number passed in
 
     Arguments:
-    numobj -- The PhoneNumber object for which we want to get a text description.
+    numobj -- The PhoneNumber object for which we want to get a carrier name.
     lang -- A 2-letter lowercase ISO 639-1 language code for the language in
                   which the description should be returned (e.g. "en")
     script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
@@ -90,12 +95,38 @@ def description_for_number(numobj, lang, script=None, region=None):
                   underscore (e.g. "Hant")
     region --  A 2-letter uppercase ISO 3166-1 country code (e.g. "GB")
 
-    Returns a text description in the given language code, for the given phone
-    number, or an empty string if no description is available."""
+    Returns a carrier name in the given language code, for the given phone
+    number, or an empty string if no description is available.
+    """
     ntype = number_type(numobj)
     if _is_mobile(ntype):
-        return description_for_valid_number(numobj, lang, script, region)
+        return name_for_valid_number(numobj, lang, script, region)
     return ""
+
+
+def safe_display_name(numobj, lang, script=None, region=None):
+    """Gets the name of the carrier for the given PhoneNumber object only when
+    it is 'safe' to display to users.  A carrier name is onsidered safe if the
+    number is valid and for a region that doesn't support mobile number
+    portability (http://en.wikipedia.org/wiki/Mobile_number_portability).
+
+
+    This function explicitly checks the validity of the number passed in
+
+    Arguments:
+    numobj -- The PhoneNumber object for which we want to get a carrier name.
+    lang -- A 2-letter lowercase ISO 639-1 language code for the language in
+                  which the description should be returned (e.g. "en")
+    script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
+                  ISO script code as defined in ISO 15924, separated by an
+                  underscore (e.g. "Hant")
+    region --  A 2-letter uppercase ISO 3166-1 country code (e.g. "GB")
+
+    Returns a carrier name that is safe to display to users, or the empty string.
+    """
+    if is_mobile_number_portable_region(region_code_for_number(numobj)):
+        return ""
+    return name_for_number(numobj, lang, script, region)
 
 
 def _is_mobile(ntype):

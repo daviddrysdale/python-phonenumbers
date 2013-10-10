@@ -2702,6 +2702,21 @@ def _can_be_internationally_dialled(numobj):
     return not _is_number_matching_desc(nsn, metadata.no_international_dialling)
 
 
+def is_mobile_number_portable_region(region_code):
+    """Returns true if the supplied region supports mobile number portability.
+    Returns false for invalid, unknown or regions that don't support mobile
+    number portability.
+
+    Arguments:
+    region_code -- the region for which we want to know whether it supports mobile number
+                   portability or not.
+    """
+    metadata = PhoneMetadata.metadata_for_region(region_code, None)
+    if metadata is None:
+        return False
+    return metadata.mobile_number_portable_region
+
+
 class NumberParseException(UnicodeMixin, Exception):
     """Exception when attempting to parse a putative phone number"""
     # Invalid country code specified

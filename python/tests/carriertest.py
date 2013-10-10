@@ -21,7 +21,7 @@ import unittest
 
 from phonenumbers import PhoneNumber, FrozenPhoneNumber
 from phonenumbers import carrier
-from phonenumbers.carrier import description_for_number, description_for_valid_number
+from phonenumbers.carrier import name_for_number, name_for_valid_number, safe_display_name
 
 # Allow override library carrier metadata with the test metadata.
 REAL_CARRIER_DATA = carrier.CARRIER_DATA
@@ -73,37 +73,40 @@ class PhoneNumberToCarrierMapperTest(unittest.TestCase):
         reinstate_real_carrierdata()
 
     def testGetDescriptionForMobilePortableRegion(self):
-        self.assertEqual("British carrier", description_for_number(UK_MOBILE1, _ENGLISH))
-        self.assertEqual(u"Brittisk operat\u00F6r", description_for_number(UK_MOBILE1, "sv", region="SE"))
-        self.assertEqual("British carrier", description_for_number(UK_MOBILE1, _FRENCH))
+        self.assertEqual("British carrier", name_for_number(UK_MOBILE1, _ENGLISH))
+        self.assertEqual(u"Brittisk operat\u00F6r", name_for_number(UK_MOBILE1, "sv", region="SE"))
+        self.assertEqual("British carrier", name_for_number(UK_MOBILE1, _FRENCH))
+        # Returns an empty string because the UK implements mobile number portability.
+        self.assertEqual("", safe_display_name(UK_MOBILE1, _ENGLISH))
 
     def testGetDescriptionForNonMobilePortableRegion(self):
-        self.assertEqual("Angolan carrier", description_for_number(AO_MOBILE1, _ENGLISH))
+        self.assertEqual("Angolan carrier", name_for_number(AO_MOBILE1, _ENGLISH))
+        self.assertEqual("Angolan carrier", safe_display_name(AO_MOBILE1, _ENGLISH))
 
     def testGetDescriptionForFixedLineNumber(self):
-        self.assertEqual("", description_for_number(AO_FIXED1, _ENGLISH))
-        self.assertEqual("", description_for_number(UK_FIXED1, _ENGLISH))
+        self.assertEqual("", name_for_number(AO_FIXED1, _ENGLISH))
+        self.assertEqual("", name_for_number(UK_FIXED1, _ENGLISH))
         # If the carrier information is present in the files and the method
         # that assumes a valid number is used, a carrier is returned.
-        self.assertEqual("Angolan fixed line carrier", description_for_valid_number(AO_FIXED2, _ENGLISH))
-        self.assertEqual("", description_for_valid_number(UK_FIXED2, _ENGLISH))
+        self.assertEqual("Angolan fixed line carrier", name_for_valid_number(AO_FIXED2, _ENGLISH))
+        self.assertEqual("", name_for_valid_number(UK_FIXED2, _ENGLISH))
 
     def testGetDescriptionForFixedOrMobileNumber(self):
-        self.assertEqual("US carrier", description_for_number(US_FIXED_OR_MOBILE, _ENGLISH))
+        self.assertEqual("US carrier", name_for_number(US_FIXED_OR_MOBILE, _ENGLISH))
 
     def testGetDescriptionForPagerNumber(self):
-        self.assertEqual("British pager", description_for_number(UK_PAGER, _ENGLISH))
+        self.assertEqual("British pager", name_for_number(UK_PAGER, _ENGLISH))
 
     def testGetDescriptionForNumberWithNoDataFile(self):
-        self.assertEqual("", description_for_number(NUMBER_WITH_INVALID_COUNTRY_CODE, _ENGLISH))
-        self.assertEqual("", description_for_number(INTERNATIONAL_TOLL_FREE, _ENGLISH))
-        self.assertEqual("", description_for_valid_number(NUMBER_WITH_INVALID_COUNTRY_CODE, _ENGLISH))
-        self.assertEqual("", description_for_valid_number(INTERNATIONAL_TOLL_FREE, _ENGLISH))
+        self.assertEqual("", name_for_number(NUMBER_WITH_INVALID_COUNTRY_CODE, _ENGLISH))
+        self.assertEqual("", name_for_number(INTERNATIONAL_TOLL_FREE, _ENGLISH))
+        self.assertEqual("", name_for_valid_number(NUMBER_WITH_INVALID_COUNTRY_CODE, _ENGLISH))
+        self.assertEqual("", name_for_valid_number(INTERNATIONAL_TOLL_FREE, _ENGLISH))
 
     def testGetDescriptionForNumberWithMissingPrefix(self):
-        self.assertEqual("", description_for_number(UK_MOBILE2, _ENGLISH))
-        self.assertEqual("", description_for_number(AO_MOBILE2, _ENGLISH))
+        self.assertEqual("", name_for_number(UK_MOBILE2, _ENGLISH))
+        self.assertEqual("", name_for_number(AO_MOBILE2, _ENGLISH))
 
     def testGetDescriptionForInvalidNumber(self):
-        self.assertEqual("", description_for_number(UK_INVALID_NUMBER, _ENGLISH))
-        self.assertEqual("", description_for_number(AO_INVALID_NUMBER, _ENGLISH))
+        self.assertEqual("", name_for_number(UK_INVALID_NUMBER, _ENGLISH))
+        self.assertEqual("", name_for_number(AO_INVALID_NUMBER, _ENGLISH))
