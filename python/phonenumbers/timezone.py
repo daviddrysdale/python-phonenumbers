@@ -3,11 +3,19 @@
 >>> import phonenumbers
 >>> from phonenumbers.timezone import time_zones_for_number
 >>> ro_number = phonenumbers.parse("+40721234567", "RO")
->>> str(time_zones_for_number(ro_number))
-"(u'Europe/Bucharest',)"
+>>> tzlist = time_zones_for_number(ro_number)
+>>> len(tzlist)
+1
+>>> str(tzlist[0])
+'Europe/Bucharest'
 >>> gb_number = phonenumbers.parse("+447986123456", "GB")
->>> str(time_zones_for_number(gb_number))
-"(u'Atlantic/Reykjavik', u'Europe/London')"
+>>> tzlist = time_zones_for_number(gb_number)
+>>> len(tzlist)
+2
+>>> str(tzlist[0])
+'Atlantic/Reykjavik'
+>>> str(tzlist[1])
+'Europe/London'
 
 """
 # Based very loosely on original Java code:
