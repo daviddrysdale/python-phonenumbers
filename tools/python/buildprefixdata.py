@@ -2,10 +2,15 @@
 """Script to read the libphonenumber per-prefix metadata and generate Python code.
 
 Invocation:
-  buildprefixdata.py indir outfile module_prefix
+  buildprefixdata.py [options] indir outfile module_prefix
 
 Processes all of the per-prefix data under the given input directory and emit
 generated Python code.
+
+Options:
+  --var XXX : use this prefix for variable names in generated code
+  --flat    : don't do per-locale processing
+  --sep C   : expect metadata to be a list with C as separator
 """
 
 # Based on original metadata data files from libphonenumber:
@@ -39,10 +44,16 @@ from phonenumbers.util import prnt, rpr
 PREFIXDATA_SUFFIX = ".txt"
 BLANK_LINE_RE = re.compile(r'^\s*$', re.UNICODE)
 COMMENT_LINE_RE = re.compile(r'^\s*#.*$', re.UNICODE)
-DATA_LINE_RE = re.compile(r'^\+?(?P<prefix>\d+)\|(?P<location>.*)$', re.UNICODE)
+DATA_LINE_RE = re.compile(r'^\+?(?P<prefix>\d+)\|(?P<stringdata>.*)$', re.UNICODE)
 
 # Boilerplate header
-PREFIXDATA_FILE_PROLOG = '''"""Per-prefix data, mapping each prefix to a dict of locale:name.
+PREFIXDATA_LOCALE_FILE_PROLOG = '''"""Per-prefix data, mapping each prefix to a dict of locale:name.
+
+Auto-generated file, do not edit by hand.
+"""
+from %(module)s.util import u
+'''
+PREFIXDATA_FILE_PROLOG = '''"""Per-prefix data, mapping each prefix to a name.
 
 Auto-generated file, do not edit by hand.
 """
@@ -66,14 +77,21 @@ COPYRIGHT_NOTICE = """# Copyright (C) 2011-%s The Libphonenumber Authors
 """ % datetime.datetime.now().year
 
 
-def load_prefixdata_file(prefixdata, filename, locale, overall_prefix):
+def load_locale_prefixdata_file(prefixdata, filename, locale=None, overall_prefix=None, separator=None):
     """Load per-prefix data from the given file, for the given locale and prefix.
 
     We assume that this file:
      - is encoded in UTF-8
      - may have comment lines (starting with #) and blank lines
-     - has data lines of the form '<prefix>|<location_name>'
+     - has data lines of the form '<prefix>|<stringdata>'
      - contains only data for prefixes that are extensions of the filename.
+
+    If overall_prefix is specified, lines are checked to ensure their prefix falls within this value.
+
+    If locale is specified, prefixdata[prefix][locale] is filled in; otherwise, just prefixdata[prefix].
+
+    If separator is specified, the string data will be split on this separator, and the output values
+    in the dict will be tuples of strings rather than strings.
     """
     with open(filename, "rb") as infile:
         lineno = 0
@@ -83,16 +101,21 @@ def load_prefixdata_file(prefixdata, filename, locale, overall_prefix):
             dm = DATA_LINE_RE.match(uline)
             if dm:
                 prefix = dm.group('prefix')
-                location = dm.group('location')
-                if location != location.rstrip():
+                stringdata = dm.group('stringdata')
+                if stringdata != stringdata.rstrip():
                     print ("%s:%d: Warning: stripping trailing whitespace" % (filename, lineno))
-                    location = location.rstrip()
-                if not prefix.startswith(overall_prefix):
+                    stringdata = stringdata.rstrip()
+                if overall_prefix is not None and not prefix.startswith(overall_prefix):
                     raise Exception("%s:%d: Prefix %s is not within %s" %
                                     (filename, lineno, prefix, overall_prefix))
+                if separator is not None:
+                    stringdata = tuple(stringdata.split(separator))
                 if prefix not in prefixdata:
                     prefixdata[prefix] = {}
-                prefixdata[prefix][locale] = location
+                if locale is not None:
+                    prefixdata[prefix][locale] = stringdata
+                else:
+                    prefixdata[prefix] = stringdata
             elif BLANK_LINE_RE.match(uline):
                 pass
             elif COMMENT_LINE_RE.match(uline):
@@ -102,20 +125,20 @@ def load_prefixdata_file(prefixdata, filename, locale, overall_prefix):
                                 (filename, lineno, line))
 
 
-def load_prefixdata(indir):
+def load_locale_prefixdata(indir, separator=None):
     """Load per-prefix data from the given top-level directory.
 
     Prefix data is assumed to be held in files <indir>/<locale>/<prefix>.txt.
-    The same prefix may occur in multiple files, giving the location's name in
-    different locales.
+    The same prefix may occur in multiple files, giving the prefix's description
+    in different locales.
     """
-    prefixdata = {}  # prefix => dict mapping location to location name
+    prefixdata = {}  # prefix => dict mapping locale to description
     for locale in os.listdir(indir):
         if not os.path.isdir(os.path.join(indir, locale)):
             continue
         for filename in glob.glob(os.path.join(indir, locale, "*%s" % PREFIXDATA_SUFFIX)):
             overall_prefix, ext = os.path.splitext(os.path.basename(filename))
-            load_prefixdata_file(prefixdata, filename, locale, overall_prefix)
+            load_locale_prefixdata_file(prefixdata, filename, locale, overall_prefix, separator)
     return prefixdata
 
 
@@ -127,17 +150,31 @@ def _stable_dict_repr(strdict):
     return "{%s}" % ", ".join(lines)
 
 
-def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix):
+def _tuple_repr(data):
+    """Return a repr() for a list/tuple"""
+    if len(data) == 1:
+        return "(%s,)" % rpr(data[0])
+    else:
+        return "(%s)" % ", ".join([rpr(x) for x in data])
+
+
+def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, per_locale):
     """Output the per-prefix data in Python form to the given file """
     with open(outfilename, "w") as outfile:
         longest_prefix = 0
-        prnt(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
+        if per_locale:
+            prnt(PREFIXDATA_LOCALE_FILE_PROLOG % {'module': module_prefix}, file=outfile)
+        else:
+            prnt(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
         prnt(COPYRIGHT_NOTICE, file=outfile)
         prnt("%s_DATA = {" % varprefix, file=outfile)
         for prefix in sorted(prefixdata.keys()):
             if len(prefix) > longest_prefix:
                 longest_prefix = len(prefix)
-            prnt(" '%s':%s," % (prefix, _stable_dict_repr(prefixdata[prefix])), file=outfile)
+            if per_locale:
+                prnt(" '%s':%s," % (prefix, _stable_dict_repr(prefixdata[prefix])), file=outfile)
+            else:
+                prnt(" '%s':%s," % (prefix, _tuple_repr(prefixdata[prefix])), file=outfile)
         prnt("}", file=outfile)
         prnt("%s_LONGEST_PREFIX = %d" % (varprefix, longest_prefix), file=outfile)
 
@@ -145,8 +182,10 @@ def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix):
 def _standalone(argv):
     """Parse the given input directory and emit generated code."""
     varprefix = "GEOCODE"
+    per_locale = True
+    separator = None
     try:
-        opts, args = getopt.getopt(argv, "hv:", ("help", "var="))
+        opts, args = getopt.getopt(argv, "hv:fs:", ("help", "var=", "flat", "sep="))
     except getopt.GetoptError:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
@@ -156,6 +195,10 @@ def _standalone(argv):
             sys.exit(1)
         elif opt in ("-v", "--var"):
             varprefix = arg
+        elif opt in ("-f", "--flat"):
+            per_locale = False
+        elif opt in ("-s", "--sep"):
+            separator = arg
         else:
             prnt("Unknown option %s" % opt, file=sys.stderr)
             prnt(__doc__, file=sys.stderr)
@@ -163,8 +206,12 @@ def _standalone(argv):
     if len(args) != 3:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
-    prefixdata = load_prefixdata(args[0])
-    output_prefixdata_code(prefixdata, args[1], args[2], varprefix)
+    if per_locale:
+        prefixdata = load_locale_prefixdata(args[0], separator=separator)
+    else:
+        prefixdata = {}
+        load_locale_prefixdata_file(prefixdata, args[0], separator=separator)
+    output_prefixdata_code(prefixdata, args[1], args[2], varprefix, per_locale)
 
 
 if __name__ == "__main__":

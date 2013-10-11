@@ -144,8 +144,18 @@ originally owned a phone number.
 ```pycon
 >>> from phonenumbers import carrier
 >>> ro_number = phonenumbers.parse("+40721234567", "RO")
->>> print repr(carrier.description_for_number(ro_number, "en"))
+>>> print repr(carrier.name_for_number(ro_number, "en"))
 u'Vodafone'
+```
+
+You might also be able to retrieve a list of time zone names that the number potentially
+belongs to.
+
+```pycon
+>>> from phonenumbers import timezone
+>>> gb_number = phonenumbers.parse("+447986123456", "GB")
+>>> str(time_zones_for_number(gb_number))
+"(u'Atlantic/Reykjavik', u'Europe/London')"
 ```
 
 For more information about the other functionality available from the library, look in the unit tests or in the original
@@ -162,8 +172,8 @@ In particular:
 * The geocoding metadata (which makes up around 75% of the total memory footprint) is only loaded on the first use of
   one of the geocoding functions (`geocoder.description_for_number`, `geocoder.description_for_valid_number`
   or `geocoder.country_name_for_number`).
-* The carrier metadata is only loaded on the first use of one of the mapping functions (`carrier.description_for_number`
-  or `carrier.description_for_valid_number`).
+* The carrier metadata is only loaded on the first use of one of the mapping functions (`carrier.name_for_number`
+  or `carrier.name_for_valid_number`).
 * The normal metadata for each region is only loaded on the first time that metadata for that region is needed.
 
 If you need to ensure that the metadata memory use is accounted for at start of day (i.e. that a subsequent on-demand

@@ -2383,6 +2383,14 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Python version extra test
         self.assertFalse(phonenumbers.is_alpha_number(""))
 
+    def testIsMobileNumberPortableRegion(self):
+        self.assertTrue(phonenumbers.is_mobile_number_portable_region("US"))
+        self.assertTrue(phonenumbers.is_mobile_number_portable_region("GB"))
+        self.assertFalse(phonenumbers.is_mobile_number_portable_region("AE"))
+        self.assertFalse(phonenumbers.is_mobile_number_portable_region("BS"))
+        # Python version extra test: check with bogus region
+        self.assertFalse(phonenumbers.is_mobile_number_portable_region("XY"))
+
     def testMetadataEquality(self):
         # Python version extra tests for equality against other types
         desc1 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")

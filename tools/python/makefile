@@ -34,6 +34,17 @@ $(PYDIR)/tests/testcarrierdata/__init__.py: buildprefixdata.py $(TOPDIR)/resourc
 	$(PYTHON) buildprefixdata.py --var CARRIER $(TOPDIR)/resources/test/carrier $@ phonenumbers
 carrierdata: $(PYDIR)/phonenumbers/carrierdata/__init__.py $(PYDIR)/tests/testcarrierdata/__init__.py
 
+# Generate Python files from timezone data
+$(PYDIR)/phonenumbers/tzdata:
+	mkdir $@
+$(PYDIR)/phonenumbers/tzdata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/timezones/map_data.txt | $(PYDIR)/phonenumbers/tzdata
+	$(PYTHON) buildprefixdata.py --var TIMEZONE --flat --sep '&' $(TOPDIR)/resources/timezones/map_data.txt $@ .
+$(PYDIR)/tests/testtzdata:
+	mkdir $@
+$(PYDIR)/tests/testtzdata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/test/timezones/map_data.txt | $(PYDIR)/tests/testtzdata
+	$(PYTHON) buildprefixdata.py --var TIMEZONE --flat --sep '&' $(TOPDIR)/resources/test/timezones/map_data.txt $@ phonenumbers
+tzdata: $(PYDIR)/phonenumbers/tzdata/__init__.py $(PYDIR)/tests/testtzdata/__init__.py
+
 # Generate Python files from metadata
 $(PYDIR)/phonenumbers/data/__init__.py: $(TOPDIR)/resources/PhoneNumberMetadata.xml $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml buildmetadatafromxml.py
 	$(PYTHON) buildmetadatafromxml.py --alt $(TOPDIR)/resources/PhoneNumberAlternateFormats.xml $(TOPDIR)/resources/PhoneNumberMetadata.xml $(PYDIR)/phonenumbers/data .
@@ -41,9 +52,9 @@ $(PYDIR)/phonenumbers/shortdata/__init__.py: $(TOPDIR)/resources/ShortNumberMeta
 	$(PYTHON) buildmetadatafromxml.py --short $(TOPDIR)/resources/ShortNumberMetadata.xml $(PYDIR)/phonenumbers/shortdata .
 $(PYDIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml buildmetadatafromxml.py
 	$(PYTHON) buildmetadatafromxml.py $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml $(PYDIR)/tests/testdata phonenumbers
-metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/phonenumbers/shortdata/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata carrierdata
+metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/phonenumbers/shortdata/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata carrierdata tzdata
 
-alldata: metadata geodata carrierdata locale
+alldata: metadata geodata carrierdata tzdata locale
 
 test: alldata
 	cd $(PYDIR) && $(PYTHON) -m testwrapper
@@ -87,8 +98,16 @@ clean: coverage_clean profile_clean
 	rm -f *.pyc
 	rm -rf __pycache__
 	rm -f $(PYDIR)/MANIFEST $(PYDIR)/*.pyc
-	rm -f $(PYDIR)/phonenumbers/*.pyc $(PYDIR)/phonenumbers/data/*.pyc $(PYDIR)/phonenumbers/geodata/*.pyc $(PYDIR)/phonenumbers/carrierdata/*.pyc
-	rm -rf $(PYDIR)/phonenumbers/__pycache__ $(PYDIR)/phonenumbers/data/__pycache__ $(PYDIR)/phonenumbers/geodata/__pycache__ $(PYDIR)/phonenumbers/carrierdata/__pycache__
+	rm -f $(PYDIR)/phonenumbers/*.pyc
+	rm -f $(PYDIR)/phonenumbers/data/*.pyc
+	rm -f $(PYDIR)/phonenumbers/geodata/*.pyc
+	rm -f $(PYDIR)/phonenumbers/carrierdata/*.pyc
+	rm -f $(PYDIR)/phonenumbers/tzdata/*.pyc
+	rm -rf $(PYDIR)/phonenumbers/__pycache__
+	rm -rf $(PYDIR)/phonenumbers/data/__pycache__
+	rm -rf $(PYDIR)/phonenumbers/geodata/__pycache__
+	rm -rf $(PYDIR)/phonenumbers/carrierdata/__pycache__
+	rm -rf $(PYDIR)/phonenumbers/tzdata/__pycache__
 	rm -f $(PYDIR)/phonenumbers/*.py,cover $(PYDIR)/.coverage*
 	rm -f $(PYDIR)/tests/*.pyc $(PYDIR)/tests/testdata/*.pyc $(PYDIR)/tests/testgeodata/*.pyc $(PYDIR)/tests/testcarrierdata/*.pyc
 	rm -rf $(PYDIR)/tests/__pycache__ $(PYDIR)/tests/testdata/__pycache__ $(PYDIR)/tests/testgeodata/__pycache__ $(PYDIR)/tests/testcarrierdata/__pycache__
@@ -98,6 +117,7 @@ metaclean:
 	rm -rf $(PYDIR)/phonenumbers/data $(PYDIR)/phonenumbers/shortdata $(PYDIR)/tests/testdata
 	rm -rf $(PYDIR)/phonenumbers/geodata $(PYDIR)/tests/testgeodata
 	rm -rf $(PYDIR)/phonenumbers/carrierdata $(PYDIR)/tests/testcarrierdata
+	rm -rf $(PYDIR)/phonenumbers/tzdata $(PYDIR)/tests/testtzdata
 
 distclean: clean metaclean
 	rm -rf $(PYDIR)/$(PACKAGE).egg-info
