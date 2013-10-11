@@ -148,6 +148,16 @@ originally owned a phone number.
 u'Vodafone'
 ```
 
+You might also be able to retrieve a list of time zone names that the number potentially
+belongs to.
+
+```pycon
+>>> from phonenumbers import timezone
+>>> gb_number = phonenumbers.parse("+447986123456", "GB")
+>>> str(time_zones_for_number(gb_number))
+"(u'Atlantic/Reykjavik', u'Europe/London')"
+```
+
 For more information about the other functionality available from the library, look in the unit tests or in the original
 [libphonenumber project](http://code.google.com/p/libphonenumber/).
 
