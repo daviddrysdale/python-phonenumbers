@@ -319,7 +319,7 @@ def _get_national_number_groups(numobj, formatting_pattern=None):
         end_index = rfc3966_format.find(U_SEMICOLON)
         if end_index < 0:
             end_index = len(rfc3966_format)
-    
+
         # The country-code will have a '-' following it.
         start_index = rfc3966_format.find(U_DASH) + 1
         return rfc3966_format[start_index:end_index].split(U_DASH)

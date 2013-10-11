@@ -25,6 +25,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from .util import prnt, u, U_EMPTY_STRING
 from .phonenumberutil import PhoneNumberType, number_type
 from .phonenumberutil import region_code_for_number
 from .phonenumberutil import is_mobile_number_portable_region
@@ -39,7 +40,7 @@ except ImportError:  # pragma no cover
     import sys
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
-        print >> sys.stderr, "Failed to import generated data (but OK as during autogeneration)"
+        prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         CARRIER_DATA = {'1': {'en': u('United States')}}
         CARRIER_LONGEST_PREFIX = 1
     else:
@@ -101,7 +102,7 @@ def name_for_number(numobj, lang, script=None, region=None):
     ntype = number_type(numobj)
     if _is_mobile(ntype):
         return name_for_valid_number(numobj, lang, script, region)
-    return ""
+    return U_EMPTY_STRING
 
 
 def safe_display_name(numobj, lang, script=None, region=None):
@@ -125,7 +126,7 @@ def safe_display_name(numobj, lang, script=None, region=None):
     Returns a carrier name that is safe to display to users, or the empty string.
     """
     if is_mobile_number_portable_region(region_code_for_number(numobj)):
-        return ""
+        return U_EMPTY_STRING
     return name_for_number(numobj, lang, script, region)
 
 
