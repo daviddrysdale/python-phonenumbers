@@ -1763,11 +1763,15 @@ def _region_code_for_number_from_list(numobj, regions):
 
 
 def region_code_for_country_code(country_code):
-    """Returns the region code matching a country calling code.
+    """Returns the region code that matches a specific country calling code.
 
     In the case of no region code being found, UNKNOWN_REGION ('ZZ') will be
     returned. In the case of multiple regions, the one designated in the
-    metadata as the "main" region for this calling code will be returned.
+    metadata as the "main" region for this calling code will be returned.  If
+    the country_code entered is valid but doesn't match a specific region
+    (such as in the case of non-geographical calling codes like 800) the value
+    "001" will be returned (corresponding to the value for World in the UN
+    M.49 schema).
     """
     regions = COUNTRY_CODE_TO_REGION_CODE.get(country_code, None)
     if regions is None:
