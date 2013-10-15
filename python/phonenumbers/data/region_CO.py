@@ -1,7 +1,7 @@
 """Auto-generated file, do not edit by hand. CO metadata"""
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_CO = PhoneMetadata(id='CO', country_code=57, international_prefix='00[579]|#555|#999',
+PHONE_METADATA_CO = PhoneMetadata(id='CO', country_code=57, international_prefix='00(?:4(?:[14]4|56)|[579])',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:[13]\\d{0,3}|[24-8])\\d{7}', possible_number_pattern='\\d{7,11}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='[124-8][2-9]\\d{6}', possible_number_pattern='\\d{8}', example_number='12345678'),
     mobile=PhoneNumberDesc(national_number_pattern='3(?:0[0-24]|1\\d|2[01])\\d{7}', possible_number_pattern='\\d{10}', example_number='3211234567'),

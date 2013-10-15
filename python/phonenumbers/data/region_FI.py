@@ -17,7 +17,7 @@ PHONE_METADATA_FI = PhoneMetadata(id='FI', country_code=358, international_prefi
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3,7})', format=u'\\1 \\2', leading_digits_pattern=['(?:[1-3]00|[6-8]0)'], national_prefix_formatting_rule=u'0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{4,10})', format=u'\\1 \\2', leading_digits_pattern=['2[09]|[14]|50|7[135]'], national_prefix_formatting_rule=u'0\\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{4,10})', format=u'\\1 \\2', leading_digits_pattern=['[14]|2[09]|50|7[135]'], national_prefix_formatting_rule=u'0\\1'),
         NumberFormat(pattern='(\\d)(\\d{4,11})', format=u'\\1 \\2', leading_digits_pattern=['[25689][1-8]|3'], national_prefix_formatting_rule=u'0\\1')],
     main_country_for_code=True,
     mobile_number_portable_region=True)
