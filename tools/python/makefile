@@ -100,11 +100,13 @@ clean: coverage_clean profile_clean
 	rm -f $(PYDIR)/MANIFEST $(PYDIR)/*.pyc
 	rm -f $(PYDIR)/phonenumbers/*.pyc
 	rm -f $(PYDIR)/phonenumbers/data/*.pyc
+	rm -f $(PYDIR)/phonenumbers/shortdata/*.pyc
 	rm -f $(PYDIR)/phonenumbers/geodata/*.pyc
 	rm -f $(PYDIR)/phonenumbers/carrierdata/*.pyc
 	rm -f $(PYDIR)/phonenumbers/tzdata/*.pyc
 	rm -rf $(PYDIR)/phonenumbers/__pycache__
 	rm -rf $(PYDIR)/phonenumbers/data/__pycache__
+	rm -rf $(PYDIR)/phonenumbers/shortdata/__pycache__
 	rm -rf $(PYDIR)/phonenumbers/geodata/__pycache__
 	rm -rf $(PYDIR)/phonenumbers/carrierdata/__pycache__
 	rm -rf $(PYDIR)/phonenumbers/tzdata/__pycache__
