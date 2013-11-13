@@ -12,17 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Diallog operates as Belcel.
+# The name of the company to which prefix 7421 is assigned is listed as MVNO
+# MOBIK TELEKOMUNIKACII in the ITU document - we are not sure what company this
+# is so have omitted it for now.
 
-37525|life:)
-375291|Velcom
-375292|MTS
-375293|Velcom
-375294|Belcel
-375295|MTS
-375296|Velcom
-375297|MTS
-375298|MTS
-375299|Velcom
-37533|MTS
-37544|Velcom
+38970|T-Mobile
+38971|T-Mobile
+38972|T-Mobile
+389732|Albafone
+38975|One
+38976|One
+38977|vip
+38978|vip

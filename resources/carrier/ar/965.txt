@@ -12,17 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Diallog operates as Belcel.
-
-37525|life:)
-375291|Velcom
-375292|MTS
-375293|Velcom
-375294|Belcel
-375295|MTS
-375296|Velcom
-375297|MTS
-375298|MTS
-375299|Velcom
-37533|MTS
-37544|Velcom
+9655|فيفا
+9656|الوطنية
+9659|زين
