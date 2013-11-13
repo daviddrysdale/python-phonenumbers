@@ -10,7 +10,7 @@ PHONE_METADATA_GB = PhoneMetadata(id='GB', country_code=44, international_prefix
     shared_cost=PhoneNumberDesc(national_number_pattern='8(?:4[3-5]|7[0-2])\\d{7}', possible_number_pattern='\\d{10}'),
     personal_number=PhoneNumberDesc(national_number_pattern='70\\d{8}', possible_number_pattern='\\d{10}'),
     voip=PhoneNumberDesc(national_number_pattern='56\\d{8}', possible_number_pattern='\\d{10}'),
-    pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    pager=PhoneNumberDesc(national_number_pattern='76\\d{8}', possible_number_pattern='\\d{10}'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

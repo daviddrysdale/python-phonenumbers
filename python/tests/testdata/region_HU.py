@@ -1,10 +1,10 @@
-"""Auto-generated file, do not edit by hand. KI metadata"""
-from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+"""Auto-generated file, do not edit by hand. HU metadata"""
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_KI = PhoneMetadata(id='KI', country_code=686, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[2-689]\\d{4}|7\\d{7}', possible_number_pattern='\\d{5,8}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:[234]\\d|50|8[1-5])\\d{3}', possible_number_pattern='\\d{5}', example_number='31234'),
-    mobile=PhoneNumberDesc(national_number_pattern='6\\d{4}|7\\d{7}|9(?:[0-8]\\d|9[015-8])\\d{2}', possible_number_pattern='\\d{5,8}', example_number='61234'),
+PHONE_METADATA_HU = PhoneMetadata(id='HU', country_code=36, international_prefix=None,
+    general_desc=PhoneNumberDesc(national_number_pattern='30\\d{7}', possible_number_pattern='\\d{9}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='30\\d{7}', possible_number_pattern='\\d{9}'),
+    mobile=PhoneNumberDesc(national_number_pattern='30\\d{7}', possible_number_pattern='\\d{9}'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
@@ -14,4 +14,5 @@ PHONE_METADATA_KI = PhoneMetadata(id='KI', country_code=686, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    national_prefix_for_parsing='0')
+    national_prefix='06',
+    national_prefix_for_parsing='06')
