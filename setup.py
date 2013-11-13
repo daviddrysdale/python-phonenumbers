@@ -28,13 +28,6 @@ major, minor = sys.version_info[:2]
 python_25 = (major > 2 or (major == 2 and minor >= 5))
 if not python_25:
     raise RuntimeError("Python 2.5 or newer is required")
-python_3x = (major >= 3)
-if python_3x:
-    package_name = 'phonenumbers3k'
-    dev_status = 'Development Status :: 3 - Alpha'
-else:
-    package_name = 'phonenumbers'
-    dev_status = 'Development Status :: 4 - Beta'
 
 # Add ./python/ subdirectory to path
 sys.path.append('python')
@@ -42,7 +35,7 @@ sys.path.append('python')
 # Discover version of phonenumbers package
 from phonenumbers import __version__
 
-distutils.core.setup(name=package_name,
+distutils.core.setup(name='phonenumbers',
                      version=__version__,
                      description="Python version of Google's common library for parsing, formatting, storing and validating international phone numbers.",
                      author='David Drysdale',
@@ -54,7 +47,7 @@ distutils.core.setup(name=package_name,
                      package_dir={'': 'python'},
                      test_suite="tests",
                      platforms='Posix; MacOS X; Windows',
-                     classifiers=[dev_status,
+                     classifiers=['Development Status :: 4 - Beta',
                                   'Intended Audience :: Developers',
                                   'License :: OSI Approved :: Apache Software License',
                                   'Operating System :: OS Independent',

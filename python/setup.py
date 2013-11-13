@@ -28,11 +28,6 @@ major, minor = sys.version_info[:2]
 python_25 = (major > 2 or (major == 2 and minor >= 5))
 if not python_25:
     raise RuntimeError("Python 2.5 or newer is required")
-python_3x = (major >= 3)
-if python_3x:
-    dev_status = 'Development Status :: 3 - Alpha'
-else:
-    dev_status = 'Development Status :: 4 - Beta'
 
 # Discover version of phonenumbers package
 from phonenumbers import __version__
@@ -48,7 +43,7 @@ distutils.core.setup(name='phonenumbers',
                                'phonenumbers.carrierdata', 'phonenumbers.tzdata'],
                      test_suite="tests",
                      platforms='Posix; MacOS X; Windows',
-                     classifiers=[dev_status,
+                     classifiers=['Development Status :: 4 - Beta',
                                   'Intended Audience :: Developers',
                                   'License :: OSI Approved :: Apache Software License',
                                   'Operating System :: OS Independent',
