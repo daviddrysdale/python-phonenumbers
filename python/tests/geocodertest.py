@@ -124,6 +124,11 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
 
     def testGetDescriptionForArgentinianMobileNumber(self):
         self.assertEqual("La Plata", description_for_number(AR_MOBILE_NUMBER, _ENGLISH))
+        # Python version extra test
+        # Put an invalid number after the mobile token ("9") and lie about
+        # this being a valid number
+        arInvalidMobileNumber = PhoneNumber(country_code=54, national_number=91)
+        self.assertEqual("Argentina", description_for_valid_number(arInvalidMobileNumber, _ENGLISH))
 
     def testGetDescriptionForFallBack(self):
         # No fallback, as the location name for the given phone number is

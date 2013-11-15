@@ -56,8 +56,11 @@ class ShortNumberInfoTest(TestMetadataTestCase):
 
         # Python version extra test: check invalid region code
         self.assertFalse(is_valid_short_number_for_region("123456", "XY"))
+        self.assertFalse(is_valid_short_number(PhoneNumber(country_code=99, national_number=123)))
         # Python version extra test: not matching general desc
         self.assertFalse(is_valid_short_number_for_region("2123456", "US"))
+        # Python version extra test: shared country code (44 => GB+GG) but not valid in either
+        self.assertFalse(is_valid_short_number(PhoneNumber(country_code=44, national_number=58001)))
 
     def testGetExpectedCost(self):
         premiumRateExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE)
@@ -91,7 +94,6 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         unknownCostNumber.country_code = 123
         unknownCostNumber.national_number = 911
         self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost(unknownCostNumber))
-
 
     def testGetExpectedCostForSharedCountryCallingCode(self):
         # Test some numbers which have different costs in countries sharing
@@ -275,7 +277,7 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertTrue(shortnumberinfo.is_valid_short_number(sharedEmergencyNumber))
         self.assertEqual(ShortNumberCost.TOLL_FREE,
                          shortnumberinfo.expected_cost(sharedEmergencyNumber))
-     
+
     def testOverlappingNANPANumber(self):
         # 211 is an emergency number in Barbados, while it is a toll-free
         # information line in Canada and the USA.

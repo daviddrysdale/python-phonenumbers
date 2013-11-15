@@ -217,7 +217,7 @@ def expected_cost(numobj):
         elif cost_for_region == ShortNumberCost.TOLL_FREE:
             # Do nothing
             pass
-        else:
+        else:  # pragma no cover
             raise Exception("Unrecognized cost for region: %s", cost_for_region)
     return cost
 

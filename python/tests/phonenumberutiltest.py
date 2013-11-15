@@ -740,6 +740,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(auNumber, "NZ", False))
 
         # Python version extra tests
+        self.assertNotEqual(-1, str(auNumber).find("Number of leading zeros"))
         number = PhoneNumber()
         number.merge_from(XY_NUMBER)
         self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(number, "US", False))
