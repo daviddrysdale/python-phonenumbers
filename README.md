@@ -176,6 +176,8 @@ In particular:
   or `geocoder.country_name_for_number`).
 * The carrier metadata is only loaded on the first use of one of the mapping functions (`carrier.name_for_number`
   or `carrier.name_for_valid_number`).
+* The timezone metadata is only loaded on the first use of one of the timezone functions (`time_zones_for_number`
+  or `time_zones_for_geographical_number`).
 * The normal metadata for each region is only loaded on the first time that metadata for that region is needed.
 
 If you need to ensure that the metadata memory use is accounted for at start of day (i.e. that a subsequent on-demand
@@ -183,6 +185,7 @@ load of metadata will not cause memory exhaustion):
 
 * Force-load the geocoding metadata by invoking `import phonenumbers.geocoder`.
 * Force-load the carrier metadata by invoking `import phonenumbers.carrier`.
+* Force-load the timezone metadata by invoking `import phonenumbers.timezone`.
 * Force-load the normal metadata by calling `phonenumbers.PhoneMetadata.load_all()`.
 
 Project Layout
