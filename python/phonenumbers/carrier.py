@@ -29,7 +29,7 @@ from .util import prnt, u, U_EMPTY_STRING
 from .phonenumberutil import PhoneNumberType, number_type
 from .phonenumberutil import region_code_for_number
 from .phonenumberutil import is_mobile_number_portable_region
-from .prefix import prefix_description_for_number
+from .prefix import _prefix_description_for_number
 try:
     from .carrierdata import CARRIER_DATA, CARRIER_LONGEST_PREFIX
 except ImportError:  # pragma no cover
@@ -45,6 +45,9 @@ except ImportError:  # pragma no cover
         CARRIER_LONGEST_PREFIX = 1
     else:
         raise
+
+
+__all__ = ['name_for_valid_number', 'name_for_number', 'safe_display_name']
 
 
 def name_for_valid_number(numobj, lang, script=None, region=None):
@@ -72,8 +75,8 @@ def name_for_valid_number(numobj, lang, script=None, region=None):
     Returns a carrier name in the given language code, for the given phone
     number, or an empty string if no description is available.
     """
-    return prefix_description_for_number(CARRIER_DATA, CARRIER_LONGEST_PREFIX,
-                                         numobj, lang, script, region)
+    return _prefix_description_for_number(CARRIER_DATA, CARRIER_LONGEST_PREFIX,
+                                          numobj, lang, script, region)
 
 
 def name_for_number(numobj, lang, script=None, region=None):

@@ -37,7 +37,6 @@
 from .util import prnt, u, U_PLUS
 from .phonenumberutil import PhoneNumberType, number_type
 from .phonenumberutil import PhoneNumberFormat, format_number
-from .prefix import prefix_description_for_number
 try:
     from .tzdata import TIMEZONE_DATA, TIMEZONE_LONGEST_PREFIX
 except ImportError:  # pragma no cover
@@ -53,6 +52,8 @@ except ImportError:  # pragma no cover
         TIMEZONE_LONGEST_PREFIX = 4
     else:
         raise
+
+__all__ = ['UNKNOWN_TIMEZONE', 'time_zones_for_geographical_number', 'time_zones_for_number']
 
 # This is defined by ICU as the unknown time zone.
 UNKNOWN_TIMEZONE = u("Etc/Unknown")

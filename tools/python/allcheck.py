@@ -7,6 +7,9 @@ import glob
 sys.path.insert(0, '../../python')
 
 import phonenumbers
+import phonenumbers.geocoder
+import phonenumbers.carrier
+import phonenumbers.timezone
 
 # Manually grep for top-level identifiers
 INTERNAL_FILES = ['../../python/phonenumbers/util.py',
@@ -33,7 +36,10 @@ for filename in glob.glob('../../python/phonenumbers/*.py'):
                 grepped_all.add(m.group(1))
 
 # Pull in the declared identifiers
-code_all = set(phonenumbers.__all__)
+code_all = (set(phonenumbers.__all__) |
+            set(phonenumbers.geocoder.__all__) |
+            set(phonenumbers.carrier.__all__) |
+            set(phonenumbers.timezone.__all__))
 
 # Compare
 code_not_grepped = (code_all - grepped_all)

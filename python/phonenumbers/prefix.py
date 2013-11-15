@@ -56,7 +56,7 @@ def _find_lang(langdict, lang, script, region):
         return None
 
 
-def prefix_description_for_number(data, longest_prefix, numobj, lang, script=None, region=None):
+def _prefix_description_for_number(data, longest_prefix, numobj, lang, script=None, region=None):
     """Return a text description of a PhoneNumber for the given language.
 
     Arguments:

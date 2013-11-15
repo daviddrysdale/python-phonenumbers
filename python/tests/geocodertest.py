@@ -23,7 +23,7 @@ from phonenumbers import PhoneNumber, FrozenPhoneNumber
 from phonenumbers import geocoder
 from phonenumbers.geocoder import description_for_number, country_name_for_number
 from phonenumbers.geocoder import description_for_valid_number
-from phonenumbers.prefix import prefix_description_for_number
+from phonenumbers.prefix import _prefix_description_for_number
 from phonenumbers.util import u
 
 # Allow override library geocoding metadata with the test metadata.
@@ -167,7 +167,7 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         invalid_number = PhoneNumber(country_code=210, national_number=123456)
         self.assertEqual("", country_name_for_number(invalid_number, "en"))
         # Ensure we exercise all public entrypoints directly
-        self.assertEqual("CA", prefix_description_for_number(TEST_GEOCODE_DATA, TEST_GEOCODE_LONGEST_PREFIX, US_NUMBER1, "en"))
+        self.assertEqual("CA", _prefix_description_for_number(TEST_GEOCODE_DATA, TEST_GEOCODE_LONGEST_PREFIX, US_NUMBER1, "en"))
         self.assertEqual("CA", description_for_valid_number(US_NUMBER1, "en"))
         self.assertEqual("", description_for_valid_number(US_INVALID_NUMBER, "en"))
         # Add in some script and region specific fictional names

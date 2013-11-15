@@ -48,7 +48,7 @@ from .util import prnt, unicod, u, U_EMPTY_STRING, U_ZERO
 from .phonenumberutil import region_code_for_number, PhoneNumberType, PhoneNumber
 from .phonenumberutil import country_mobile_token, national_significant_number, number_type
 from .phonenumberutil import region_code_for_country_code, parse, NumberParseException
-from .prefix import prefix_description_for_number
+from .prefix import _prefix_description_for_number
 try:
     from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
     from .geodata.locale import LOCALE_DATA
@@ -66,6 +66,8 @@ except ImportError:  # pragma no cover
         LOCALE_DATA = {'US': {'en': u('United States')}}
     else:
         raise
+
+__all__ = ['country_name_for_number', 'description_for_valid_number', 'description_for_number']
 
 
 def country_name_for_number(numobj, lang, script=None, region=None):
@@ -155,11 +157,11 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
             except NumberParseException:
                 # If this happens, just re-use what we had.
                 copied_numobj = numobj
-            area_description = prefix_description_for_number(GEOCODE_DATA, GEOCODE_LONGEST_PREFIX,
-                                                             copied_numobj, lang, script, region)
+            area_description = _prefix_description_for_number(GEOCODE_DATA, GEOCODE_LONGEST_PREFIX,
+                                                              copied_numobj, lang, script, region)
         else:
-            area_description = prefix_description_for_number(GEOCODE_DATA, GEOCODE_LONGEST_PREFIX,
-                                                             numobj, lang, script, region)
+            area_description = _prefix_description_for_number(GEOCODE_DATA, GEOCODE_LONGEST_PREFIX,
+                                                              numobj, lang, script, region)
         if area_description != "":
             return area_description
         else:
