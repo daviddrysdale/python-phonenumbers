@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='phonenumber.proto',
   package='i18n.phonenumbers',
-  serialized_pb='\n\x11phonenumber.proto\x12\x11i18n.phonenumbers\"\x85\x03\n\x0bPhoneNumber\x12\x14\n\x0c\x63ountry_code\x18\x01 \x02(\x05\x12\x17\n\x0fnational_number\x18\x02 \x02(\x04\x12\x11\n\textension\x18\x03 \x01(\t\x12\x1c\n\x14italian_leading_zero\x18\x04 \x01(\x08\x12\x11\n\traw_input\x18\x05 \x01(\t\x12M\n\x13\x63ountry_code_source\x18\x06 \x01(\x0e\x32\x30.i18n.phonenumbers.PhoneNumber.CountryCodeSource\x12\'\n\x1fpreferred_domestic_carrier_code\x18\x07 \x01(\t\"\x8a\x01\n\x11\x43ountryCodeSource\x12\x1e\n\x1a\x46ROM_NUMBER_WITH_PLUS_SIGN\x10\x01\x12\x18\n\x14\x46ROM_NUMBER_WITH_IDD\x10\x05\x12!\n\x1d\x46ROM_NUMBER_WITHOUT_PLUS_SIGN\x10\n\x12\x18\n\x14\x46ROM_DEFAULT_COUNTRY\x10\x14\x42 \n\x1c\x63om.google.i18n.phonenumbersH\x03')
+  serialized_pb='\n\x11phonenumber.proto\x12\x11i18n.phonenumbers\"\xa9\x03\n\x0bPhoneNumber\x12\x14\n\x0c\x63ountry_code\x18\x01 \x02(\x05\x12\x17\n\x0fnational_number\x18\x02 \x02(\x04\x12\x11\n\textension\x18\x03 \x01(\t\x12\x1c\n\x14italian_leading_zero\x18\x04 \x01(\x08\x12\"\n\x17number_of_leading_zeros\x18\x08 \x01(\x05:\x01\x31\x12\x11\n\traw_input\x18\x05 \x01(\t\x12M\n\x13\x63ountry_code_source\x18\x06 \x01(\x0e\x32\x30.i18n.phonenumbers.PhoneNumber.CountryCodeSource\x12\'\n\x1fpreferred_domestic_carrier_code\x18\x07 \x01(\t\"\x8a\x01\n\x11\x43ountryCodeSource\x12\x1e\n\x1a\x46ROM_NUMBER_WITH_PLUS_SIGN\x10\x01\x12\x18\n\x14\x46ROM_NUMBER_WITH_IDD\x10\x05\x12!\n\x1d\x46ROM_NUMBER_WITHOUT_PLUS_SIGN\x10\n\x12\x18\n\x14\x46ROM_DEFAULT_COUNTRY\x10\x14\x42 \n\x1c\x63om.google.i18n.phonenumbersH\x03')
 
 
 
@@ -42,8 +42,8 @@ _PHONENUMBER_COUNTRYCODESOURCE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=292,
-  serialized_end=430,
+  serialized_start=328,
+  serialized_end=466,
 )
 
 
@@ -83,21 +83,28 @@ _PHONENUMBER = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='raw_input', full_name='i18n.phonenumbers.PhoneNumber.raw_input', index=4,
+      name='number_of_leading_zeros', full_name='i18n.phonenumbers.PhoneNumber.number_of_leading_zeros', index=4,
+      number=8, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='raw_input', full_name='i18n.phonenumbers.PhoneNumber.raw_input', index=5,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='country_code_source', full_name='i18n.phonenumbers.PhoneNumber.country_code_source', index=5,
+      name='country_code_source', full_name='i18n.phonenumbers.PhoneNumber.country_code_source', index=6,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='preferred_domestic_carrier_code', full_name='i18n.phonenumbers.PhoneNumber.preferred_domestic_carrier_code', index=6,
+      name='preferred_domestic_carrier_code', full_name='i18n.phonenumbers.PhoneNumber.preferred_domestic_carrier_code', index=7,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
@@ -114,7 +121,7 @@ _PHONENUMBER = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=41,
-  serialized_end=430,
+  serialized_end=466,
 )
 
 _PHONENUMBER.fields_by_name['country_code_source'].enum_type = _PHONENUMBER_COUNTRYCODESOURCE

@@ -24,16 +24,16 @@ class CountryCodeSource(object):
     """The source from which a country code is derived."""
 
     # The country_code is derived based on a phone number with a leading "+",
-    # e.g. the French number "+33 (0)1 42 68 53 00".
+    # e.g. the French number "+33 1 42 68 53 00".
     FROM_NUMBER_WITH_PLUS_SIGN = 1
 
     # The country_code is derived based on a phone number with a leading IDD,
-    # e.g. the French number "011 33 (0)1 42 68 53 00", as it is dialled
+    # e.g. the French number "011 33 1 42 68 53 00", as it is dialled
     # from US.
     FROM_NUMBER_WITH_IDD = 5
 
     # The country_code is derived based on a phone number without a leading
-    # "+", e.g. the French number "33 (0)1 42 68 53 00" when default_country is
+    # "+", e.g. the French number "33 1 42 68 53 00" when default_country is
     # supplied as France.
     FROM_NUMBER_WITHOUT_PLUS_SIGN = 10
 
@@ -41,7 +41,7 @@ class CountryCodeSource(object):
     # from the default_country parameter provided in the parsing function by
     # the clients. This happens mostly for numbers written in the national
     # format (without country code). For example, this would be set when
-    # parsing the French number "(0)1 42 68 53 00", when default_country is
+    # parsing the French number "01 42 68 53 00", when default_country is
     # supplied as France.
     FROM_DEFAULT_COUNTRY = 20
 
@@ -58,6 +58,7 @@ class PhoneNumber(UnicodeMixin):
                  national_number=None,
                  extension=None,
                  italian_leading_zero=False,
+                 number_of_leading_zeros=None,
                  raw_input=None,
                  country_code_source=None,
                  preferred_domestic_carrier_code=None):
@@ -71,18 +72,21 @@ class PhoneNumber(UnicodeMixin):
         else:
             self.country_code = int(country_code)
 
-        # National (significant) Number is defined in International
-        # Telecommunication Union Recommendation E.164. It is a
-        # language/country-neutral representation of a phone number at a
-        # country level. For countries which have the concept of Area Code, the
-        # National (significant) Number contains the area code. It contains a
-        # maximum number of digits which equal to 15 - n, where n is the number
-        # of digits of the country code. Take note that National (significant)
         # Number does not contain National(trunk) prefix.
+        # National (significant) Number is defined in International
+        # Telecommunication Union (ITU) Recommendation E.164. It is a
+        # language/country-neutral representation of a phone number at a
+        # country level. For countries which have the concept of Area Code,
+        # the National (significant) Number contains the area code. It
+        # contains a maximum number of digits which equal to 15 - n, where n
+        # is the number of digits of the country code. Take note that National
+        # (significant) Number does not contain National(trunk)
+        # prefix.
         #
         # None if not set, of type long otherwise (and so it will never
         # contain any formatting (hypens, spaces, parentheses), nor any
         # alphanumeric spellings).
+
         if national_number is None:
             self.national_number = None
         else:
@@ -98,23 +102,25 @@ class PhoneNumber(UnicodeMixin):
         # However, only ASCII digits should be stored here.
         self.extension = force_unicode(extension)  # None or Unicode '[0-9]+'
 
-        # In some countries, the national (significant) number starts with
-        # a "0" without this being a national prefix or trunk code of some
-        # kind. For example, the leading zero in the national (significant)
-        # number of an Italian phone number indicates the number is a
-        # fixed-line number. There have been plans to migrate fixed-line
+        # In some countries, the national (significant) number starts with one
+        # or more "0"s without this being a national prefix or trunk code of
+        # some kind. For example, the leading zero in the national
+        # (significant) number of an Italian phone number indicates the number
+        # is a fixed-line number.  There have been plans to migrate fixed-line
         # numbers to start with the digit two since December 2000, but it has
         # not happened yet. See http://en.wikipedia.org/wiki/%2B39 for more
         # details.
         #
-        # This field can be safely ignored (there is no need to set it) for
-        # most countries. Some limited amount of countries behave like Italy;
-        # for these cases, if the leading zero of a number would be
-        # retained even when dialling internationally, set this flag to true.
+        # These fields can be safely ignored (there is no need to set them)
+        # for most countries. Some limited number of countries behave like
+        # Italy - for these cases, if the leading zero(s) of a number would be
+        # retained even when dialling internationally, set this flag to true,
+        # and also set the number of leading zeros.
         #
-        # Clients who use the parsing functionality of the phonenumbers
-        # library will have this field set if necessary automatically.
+        # Clients who use the parsing functionality of the i18n phone number
+        # libraries will have these fields set if necessary automatically.
         self.italian_leading_zero = bool(italian_leading_zero)
+        self.number_of_leading_zeros = number_of_leading_zeros  # None or int
 
         # The next few fields are non-essential fields for a phone number.
         # They retain extra information about the form the phone number was
@@ -151,6 +157,7 @@ class PhoneNumber(UnicodeMixin):
         self.national_number = None
         self.extension = None
         self.italian_leading_zero = False
+        self.number_of_leading_zeros = None
         self.raw_input = None
         self.country_code_source = None
         self.preferred_domestic_carrier_code = None
@@ -165,6 +172,8 @@ class PhoneNumber(UnicodeMixin):
             self.extension = other.extension
         if other.italian_leading_zero is not None:
             self.italian_leading_zero = other.italian_leading_zero
+        if other.number_of_leading_zeros is not None:
+            self.number_of_leading_zeros = other.number_of_leading_zeros
         if other.raw_input is not None:
             self.raw_input = other.raw_input
         if other.country_code_source is not None:
@@ -179,6 +188,7 @@ class PhoneNumber(UnicodeMixin):
                 self.national_number == other.national_number and
                 self.extension == other.extension and
                 self.italian_leading_zero == other.italian_leading_zero and
+                self.number_of_leading_zeros == other.number_of_leading_zeros and
                 self.raw_input == other.raw_input and
                 self.country_code_source == other.country_code_source and
                 self.preferred_domestic_carrier_code == other.preferred_domestic_carrier_code)
@@ -188,11 +198,13 @@ class PhoneNumber(UnicodeMixin):
 
     def __repr__(self):
         return (unicod("PhoneNumber(country_code=%s, national_number=%s, extension=%s, " +
-                       "italian_leading_zero=%s, country_code_source=%s, preferred_domestic_carrier_code=%s)") %
+                       "italian_leading_zero=%s, number_of_leading_zeros=%s, " +
+                       "country_code_source=%s, preferred_domestic_carrier_code=%s)") %
                 (self.country_code,
                  self.national_number,
                  rpr(self.extension),
                  self.italian_leading_zero,
+                 self.number_of_leading_zeros,
                  self.country_code_source,
                  rpr(self.preferred_domestic_carrier_code)))
 
@@ -200,7 +212,9 @@ class PhoneNumber(UnicodeMixin):
         result = (unicod("Country Code: %s National Number: %s") %
                   (self.country_code, self.national_number))
         if self.italian_leading_zero is not None:
-            result += unicod(" Leading Zero: %s") % self.italian_leading_zero
+            result += unicod(" Leading Zero(s): %s") % self.italian_leading_zero
+        if self.number_of_leading_zeros is not None:
+            result += unicod(" Number of leading zeros: %d") % self.number_of_leading_zeros
         if self.extension is not None:
             result += unicod(" Extension: %s") % self.extension
         if self.country_code_source is not None:
@@ -218,6 +232,7 @@ class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
                      self.national_number,
                      self.extension,
                      self.italian_leading_zero,
+                     self.number_of_leading_zeros,
                      self.raw_input,
                      self.country_code_source,
                      self.preferred_domestic_carrier_code))

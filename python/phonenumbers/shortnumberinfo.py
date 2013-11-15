@@ -29,6 +29,11 @@ from .phonenumberutil import national_significant_number
 from .phonenumberutil import _is_number_possible_for_desc, _is_number_matching_desc
 
 
+# In these countries, if extra digits are added to an emergency number, it no longer connects
+# to the emergency service.
+_REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT = set(["BR", "CL", "NI"])
+
+
 class ShortNumberCost(object):
     """Cost categories of short numbers."""
     TOLL_FREE = 0
@@ -37,10 +42,11 @@ class ShortNumberCost(object):
     UNKNOWN_COST = 3
 
 
-def is_possible_short_number(short_number, region_dialing_from):
-    """Check whether a short number is a possible number, given the number in
-    the form of a string, and the region where the number is dialed from. This
-    provides a more lenient check than is_valid_short_number.
+def is_possible_short_number_for_region(short_number, region_dialing_from):
+    """Check whether a short number is a possible number when dialled from a
+    region, given the number in the form of a string, and the region where the
+    number is dialed from. This provides a more lenient check than
+    is_valid_short_number_for_region.
 
     Arguments:
     short_number -- the short number to check as a string
@@ -55,9 +61,12 @@ def is_possible_short_number(short_number, region_dialing_from):
     return _is_number_possible_for_desc(short_number, general_desc)
 
 
-def is_possible_short_number_object(numobj):
-    """Check whether a short number is a possible number.  This provides a
-    more lenient check than is_valid_short_number.
+def is_possible_short_number(numobj):
+    """Check whether a short number is a possible number.
+
+    If a country calling code is shared by multiple regions, this returns True
+    if it's possible in any of them. This provides a more lenient check than
+    is_valid_short_number.
 
     Arguments:
     numobj -- the short number to check
@@ -66,18 +75,19 @@ def is_possible_short_number_object(numobj):
     """
     region_codes = region_codes_for_country_code(numobj.country_code)
     short_number = national_significant_number(numobj)
-    region_code = _region_code_for_short_number_from_region_list(numobj, region_codes)
-    if len(region_codes) > 1 and region_code is not None:
-        # If a matching region had been found for the phone number from among two or more regions,
-        # then we have already implicitly verified its validity for that region.
-        return True
-    return is_possible_short_number(short_number, region_code)
+
+    for region in region_codes:
+        metadata = PhoneMetadata.short_metadata_for_region(region)
+        if _is_number_possible_for_desc(short_number, metadata.general_desc):
+            return True
+    return False
 
 
-def is_valid_short_number(short_number, region_dialing_from):
-    """Tests whether a short number matches a valid pattern. Note that this
-    doesn't verify the number is actually in use, which is impossible to tell
-    by just looking at the number itself.
+def is_valid_short_number_for_region(short_number, region_dialing_from):
+    """Tests whether a short number matches a valid pattern in a region.
+
+    Note that this doesn't verify the number is actually in use, which is
+    impossible to tell by just looking at the number itself.
 
     Arguments:
     short_number -- the short number to check as a string
@@ -98,10 +108,13 @@ def is_valid_short_number(short_number, region_dialing_from):
     return _is_number_matching_desc(short_number, short_number_desc)
 
 
-def is_valid_short_number_object(numobj):
-    """Tests whether a short number matches a valid pattern. Note that this
-    doesn't verify the number is actually in use, which is impossible to tell by
-    just looking at the number itself. See is_valid_short_number for details.
+def is_valid_short_number(numobj):
+    """Tests whether a short number matches a valid pattern.
+
+    If a country calling code is shared by multiple regions, this returns True
+    if it's valid in any of them. Note that this doesn't verify the number is
+    actually in use, which is impossible to tell by just looking at the number
+    itself. See is_valid_short_number_for_region for details.
 
     Arguments:
     numobj - the short number for which we want to test the validity
@@ -115,49 +128,98 @@ def is_valid_short_number_object(numobj):
         # If a matching region had been found for the phone number from among two or more regions,
         # then we have already implicitly verified its validity for that region.
         return True
-    return is_valid_short_number(short_number, region_code)
+    return is_valid_short_number_for_region(short_number, region_code)
 
 
-def expected_cost(numobj):
-    """Gets the expected cost category of a short number (however, nothing is
-    implied about its validity). If it is important that the number is valid,
-    then its validity must first be checked using is_valid_short_number. Note
-    that emergency numbers are always considered toll-free.
+def expected_cost_for_region(short_number, region_dialing_from):
+    """Gets the expected cost category of a short number when dialled from a
+    region (however, nothing is implied about its validity). If it is
+    important that the number is valid, then its validity must first be
+    checked using is_valid_short_number_for_region. Note that emergency
+    numbers are always considered toll-free.
 
     Example usage:
-    number = phonenumbers.parse("110", "FR");
-    if phonenumbers.is_valid_short_number(number):
-        cost = phonenumbers.expected_cost(number)  # ShortNumberCost
+    short_number = "110"
+    region_code = "FR"
+    if phonenumbers.is_valid_short_number_for_region(short_number, region_code):
+        cost = phonenumbers.expected_cost(short_number, region_code)  # ShortNumberCost
         # Do something with the cost information here.
 
     Arguments:
-    numobj -- the short number for which we want to know the expected cost category
+    short_number -- the short number for which we want to know the expected cost category
+    region_dialing_from -- the region from which the number is dialed
 
-    Return the expected cost category of the short number. Returns
-    UNKNOWN_COST if the number does not match a cost category. Note that an
-    invalid number may match any cost category.
+    Return the expected cost category for that region of the short
+    number. Returns UNKNOWN_COST if the number does not match a cost
+    category. Note that an invalid number may match any cost category.
     """
-    region_codes = region_codes_for_country_code(numobj.country_code)
-    region_code = _region_code_for_short_number_from_region_list(numobj, region_codes)
-    # Note that regionCode may be None, in which case metadata will also be None.
-    metadata = PhoneMetadata.short_metadata_for_region(region_code)
+    # Note that region_dialing_from may be None, in which case metadata will also be None.
+    metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
         return ShortNumberCost.UNKNOWN_COST
-    national_number = national_significant_number(numobj)
 
     # The cost categories are tested in order of decreasing expense, since if
     # for some reason the patterns overlap the most expensive matching cost
     # category should be returned.
-    if _is_number_matching_desc(national_number, metadata.premium_rate):
+    if _is_number_matching_desc(short_number, metadata.premium_rate):
         return ShortNumberCost.PREMIUM_RATE
-    if _is_number_matching_desc(national_number, metadata.standard_rate):
+    if _is_number_matching_desc(short_number, metadata.standard_rate):
         return ShortNumberCost.STANDARD_RATE
-    if _is_number_matching_desc(national_number, metadata.toll_free):
+    if _is_number_matching_desc(short_number, metadata.toll_free):
         return ShortNumberCost.TOLL_FREE
-    if is_emergency_number(national_number, region_code):
+    if is_emergency_number(short_number, region_dialing_from):
         # Emergency numbers are implicitly toll-free.
         return ShortNumberCost.TOLL_FREE
     return ShortNumberCost.UNKNOWN_COST
+
+
+def expected_cost(numobj):
+    """Gets the expected cost category of a short number (however, nothing is
+    implied about its validity). If the country calling code is unique to a
+    region, this method behaves exactly the same as
+    get_expected_cost_for_region. However, if the country calling code is
+    shared by multiple regions, then it returns the highest cost in the
+    sequence PREMIUM_RATE, UNKNOWN_COST, STANDARD_RATE, TOLL_FREE. The reason
+    for the position of UNKNOWN_COST in this order is that if a number is
+    UNKNOWN_COST in one region but STANDARD_RATE or TOLL_FREE in another, its
+    expected cost cannot be estimated as one of the latter since it might be a
+    PREMIUM_RATE number.
+
+    For example, if a number is STANDARD_RATE in the US, but TOLL_FREE in
+    Canada, the expected cost returned by this method will be STANDARD_RATE,
+    since the NANPA countries share the same country calling code.
+
+    Note: If the region from which the number is dialed is known, it is highly preferable to call
+    expected_cost_for_region instead.
+
+    Arguments:
+    numobj -- the short number for which we want to know the expected cost category
+
+    Return the highest expected cost category of the short number in the
+    region(s) with the given country calling code
+    """
+    region_codes = region_codes_for_country_code(numobj.country_code)
+    if len(region_codes) == 0:
+        return ShortNumberCost.UNKNOWN_COST
+    short_number = national_significant_number(numobj)
+    if len(region_codes) == 1:
+        return expected_cost_for_region(short_number, region_codes[0])
+    cost = ShortNumberCost.TOLL_FREE
+    for region_code in region_codes:
+        cost_for_region = expected_cost_for_region(short_number, region_code)
+        if cost_for_region == ShortNumberCost.PREMIUM_RATE:
+            return ShortNumberCost.PREMIUM_RATE
+        elif cost_for_region == ShortNumberCost.UNKNOWN_COST:
+            return ShortNumberCost.UNKNOWN_COST
+        elif cost_for_region == ShortNumberCost.STANDARD_RATE:
+            if cost != ShortNumberCost.UNKNOWN_COST:
+                cost = ShortNumberCost.STANDARD_RATE
+        elif cost_for_region == ShortNumberCost.TOLL_FREE:
+            # Do nothing
+            pass
+        else:
+            raise Exception("Unrecognized cost for region: %s", cost_for_region)
+    return cost
 
 
 def _region_code_for_short_number_from_region_list(numobj, region_codes):
@@ -275,8 +337,7 @@ def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
     emergency_number_pattern = re.compile(metadata.emergency.national_number_pattern)
     normalized_number = normalize_digits_only(number)
 
-    if not allow_prefix_match or region_code == "BR" or region_code == "CL":
-        # In Brazil and Chile, emergency numbers don't work when additional digits are appended.
+    if not allow_prefix_match or region_code in _REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT:
         return fullmatch(emergency_number_pattern, normalized_number) is not None
     else:
         return emergency_number_pattern.match(normalized_number) is not None
@@ -286,7 +347,7 @@ def is_carrier_specific(numobj):
     """Given a valid short number, determines whether it is carrier-specific
     (however, nothing is implied about its validity).  If it is important that
     the number is valid, then its validity must first be checked using
-    is_valid_short_number
+    is_valid_short_number or is_valid_short_number_for_region.
 
     Arguments:
     numobj -- the valid short number to check

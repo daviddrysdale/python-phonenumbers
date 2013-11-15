@@ -94,9 +94,10 @@ class PhoneNumberMatchTest(unittest.TestCase):
 
         self.assertEqual("PhoneNumberMatch [10,25) 1 800 234 45 67", str(match))
         # Python version extra test
-        self.assertEqual("PhoneNumberMatch(start=10, raw_string='1 800 234 45 67', " +
-                          "numobj=PhoneNumber(country_code=None, national_number=None, extension=None, " +
-                          "italian_leading_zero=False, country_code_source=None, preferred_domestic_carrier_code=None))", repr(match))
+        self.assertEqual("PhoneNumberMatch(start=10, raw_string='1 800 234 45 67', "
+                         "numobj=PhoneNumber(country_code=None, national_number=None, extension=None, "
+                         "italian_leading_zero=False, number_of_leading_zeros=None, "
+                         "country_code_source=None, preferred_domestic_carrier_code=None))", repr(match))
 
 
 class NumberContext(object):
@@ -183,6 +184,9 @@ STRICT_GROUPING_CASES = [NumberTest("(415) 6667777", "US"),
                          NumberTest("0900-1 123123", "DE"),
                          NumberTest("(0)900-1 123123", "DE"),
                          NumberTest("0 900-1 123123", "DE"),
+                         # NDC also found as part of the country calling code;
+                         # this shouldn't ruin the grouping expectations.
+                         NumberTest("+33 3 34 2312", "FR"),
                          ]
 
 # Strings with number-like things that should be found at all levels.
@@ -212,6 +216,7 @@ EXACT_GROUPING_CASES = [NumberTest(u("\uFF14\uFF11\uFF15\uFF16\uFF16\uFF16\uFF17
                         NumberTest("0900-1 123 123", "DE"),
                         NumberTest("(0)900-1 123 123", "DE"),
                         NumberTest("0 900-1 123 123", "DE"),
+                        NumberTest("+33 3 34 23 12", "FR"),
                         ]
 
 

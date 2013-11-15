@@ -21,7 +21,7 @@ import re
 # Extra regexp function; see README
 from .re_util import fullmatch
 from .util import UnicodeMixin, u, unicod, prnt
-from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER, U_PERCENT
+from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER, U_PERCENT, U_STAR
 from .unicode_util import Category, Block, is_letter
 from .phonenumberutil import _MAX_LENGTH_FOR_NSN, _MAX_LENGTH_COUNTRY_CODE
 from .phonenumberutil import _VALID_PUNCTUATION, _PLUS_CHARS, NON_DIGITS_PATTERN
@@ -225,6 +225,10 @@ def _all_number_groups_remain_grouped(numobj, normalized_candidate, formatted_nu
     Returns True if expectations matched.
     """
     from_index = 0
+    if numobj.country_code_source != CountryCodeSource.FROM_DEFAULT_COUNTRY:
+        # First skip the country code if the normalized candidate contained it.
+        country_code = str(numobj.country_code)
+        from_index = normalized_candidate.find(country_code) + len(country_code)
     # Check each group of consecutive digits are not broken into separate
     # groupings in the candidate string.
     for ii, formatted_number_group in enumerate(formatted_number_groups):
@@ -662,6 +666,28 @@ class PhoneNumberMatcher(object):
                         return None
 
             numobj = parse(candidate, self.preferred_region, keep_raw_input=True)
+            # Check Israel * numbers: these are a special case in that they
+            # are four-digit numbers that our library supports, but they can
+            # only be dialled with a leading *. Since we don't actually store
+            # or detect the * in our phone number library, this means in
+            # practice we detect most four digit numbers as being valid for
+            # Israel. We are considering moving these numbers to
+            # ShortNumberInfo instead, in which case this problem would go
+            # away, but in the meantime we want to restrict the false matches
+            # so we only allow these numbers if they are preceded by a
+            # star. We enforce this for all leniency levels even though these
+            # numbers are technically accepted by isPossibleNumber and
+            # isValidNumber since we consider it to be a deficiency in those
+            # methods that they accept these numbers without the *.
+            # TODO: Remove this or make it significantly less hacky once we've
+            # decided how to handle these short codes going forward in
+            # ShortNumberInfo. We could use the formatting rules for instance,
+            # but that would be slower.
+            if (region_code_for_country_code(numobj.country_code) == "IL" and
+                len(national_significant_number(numobj)) == 4 and
+                (offset == 0 or (offset > 0 and self.text[offset - 1] != U_STAR))):
+                # No match.
+                return None
             if _verify(self.leniency, numobj, candidate):
                 # We used parse(keep_raw_input=True) to create this number,
                 # but for now we don't return the extra values parsed.

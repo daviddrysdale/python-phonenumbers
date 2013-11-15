@@ -6,7 +6,7 @@ Examples of use:
 >>> from phonenumbers.util import prnt  # equivalent to Py3k print()
 >>> x = phonenumbers.parse("+442083661177", None)
 >>> prnt(x)
-Country Code: 44 National Number: 2083661177 Leading Zero: False
+Country Code: 44 National Number: 2083661177 Leading Zero(s): False
 >>> type(x)
 <class 'phonenumbers.phonenumber.PhoneNumber'>
 >>> str(phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.NATIONAL))
@@ -17,7 +17,7 @@ Country Code: 44 National Number: 2083661177 Leading Zero: False
 '+442083661177'
 >>> y = phonenumbers.parse("020 8366 1177", "GB")
 >>> prnt(y)
-Country Code: 44 National Number: 2083661177 Leading Zero: False
+Country Code: 44 National Number: 2083661177 Leading Zero(s): False
 >>> x == y
 True
 >>>
@@ -117,10 +117,11 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, SU
                               truncate_too_long_number,
                               is_mobile_number_portable_region,)
 from .shortnumberinfo import (ShortNumberCost,
+                              is_possible_short_number_for_region,
                               is_possible_short_number,
-                              is_possible_short_number_object,
+                              is_valid_short_number_for_region,
                               is_valid_short_number,
-                              is_valid_short_number_object,
+                              expected_cost_for_region,
                               expected_cost,
                               connects_to_emergency_number,
                               is_emergency_number,
@@ -179,10 +180,11 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            # end of items from phonenumberutil.py
            # items from shortnumberinfo.py
            'ShortNumberCost',
+           'is_possible_short_number_for_region',
            'is_possible_short_number',
-           'is_possible_short_number_object',
+           'is_valid_short_number_for_region',
            'is_valid_short_number',
-           'is_valid_short_number_object',
+           'expected_cost_for_region',
            'expected_cost',
            'connects_to_emergency_number',
            'is_emergency_number',

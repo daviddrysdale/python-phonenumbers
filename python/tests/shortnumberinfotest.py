@@ -18,9 +18,9 @@
 # limitations under the License.
 
 from phonenumbers import connects_to_emergency_number, is_emergency_number, ShortNumberCost
-from phonenumbers import is_possible_short_number, is_possible_short_number_object
-from phonenumbers import is_valid_short_number, is_valid_short_number_object
-from phonenumbers import expected_cost
+from phonenumbers import is_possible_short_number_for_region, is_possible_short_number
+from phonenumbers import is_valid_short_number_for_region, is_valid_short_number
+from phonenumbers import expected_cost, expected_cost_for_region
 from phonenumbers import shortnumberinfo, ShortNumberCost, PhoneNumber
 from phonenumbers.util import u
 from .testmetadatatest import TestMetadataTestCase
@@ -31,64 +31,111 @@ class ShortNumberInfoTest(TestMetadataTestCase):
     """Unit tests for shortnumberinfo.py"""
     def testIsPossibleShortNumber(self):
         possibleNumber = PhoneNumber(country_code=33, national_number=123456)
-        self.assertTrue(is_possible_short_number_object(possibleNumber))
-        self.assertTrue(is_possible_short_number("123456", "FR"))
+        self.assertTrue(is_possible_short_number(possibleNumber))
+        self.assertTrue(is_possible_short_number_for_region("123456", "FR"))
 
         impossibleNumber = PhoneNumber(country_code=33, national_number=9)
-        self.assertFalse(is_possible_short_number_object(impossibleNumber))
-        self.assertFalse(is_possible_short_number("9", "FR"))
+        self.assertFalse(is_possible_short_number(impossibleNumber))
+        self.assertFalse(is_possible_short_number_for_region("9", "FR"))
+
+        # Note that GB and GG share the country calling code 44, and that this
+        # number is possible but not valid.
+        self.assertTrue(is_possible_short_number(PhoneNumber(country_code=44, national_number=11001)))
 
         # Python version extra test: check invalid region code
-        self.assertFalse(is_possible_short_number("123456", "XY"))
-        # Python version extra test: multiple regions with same calling code
-        self.assertTrue(is_possible_short_number_object(
-                PhoneNumber(country_code=44, national_number=18001)))
-        # Python version extra test: multiple regions with same calling code, hit none
-        self.assertFalse(is_possible_short_number_object(
-                PhoneNumber(country_code=44, national_number=58001)))
+        self.assertFalse(is_possible_short_number_for_region("123456", "XY"))
 
     def testIsValidShortNumber(self):
-        self.assertTrue(is_valid_short_number_object(
-                PhoneNumber(country_code=33, national_number=1010)))
-        self.assertTrue(is_valid_short_number("1010", "FR"))
-        self.assertFalse(is_valid_short_number_object(
-                PhoneNumber(country_code=33, national_number=123456)))
-        self.assertFalse(is_valid_short_number("123456", "FR"))
+        self.assertTrue(is_valid_short_number(PhoneNumber(country_code=33, national_number=1010)))
+        self.assertTrue(is_valid_short_number_for_region("1010", "FR"))
+        self.assertFalse(is_valid_short_number(PhoneNumber(country_code=33, national_number=123456)))
+        self.assertFalse(is_valid_short_number_for_region("123456", "FR"))
 
         # Note that GB and GG share the country calling code 44.
-        self.assertTrue(is_valid_short_number_object(
-                PhoneNumber(country_code=44, national_number=18001)))
+        self.assertTrue(is_valid_short_number(PhoneNumber(country_code=44, national_number=18001)))
 
         # Python version extra test: check invalid region code
-        self.assertFalse(is_valid_short_number("123456", "XY"))
+        self.assertFalse(is_valid_short_number_for_region("123456", "XY"))
         # Python version extra test: not matching general desc
-        self.assertFalse(is_valid_short_number("2123456", "US"))
+        self.assertFalse(is_valid_short_number_for_region("2123456", "US"))
 
     def testGetExpectedCost(self):
-        premiumRateNumber = PhoneNumber(country_code=33,
-                                        national_number=int(shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE)))
+        premiumRateExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE)
+        self.assertEqual(ShortNumberCost.PREMIUM_RATE, expected_cost_for_region(premiumRateExample, "FR"))
+        premiumRateNumber = PhoneNumber(country_code=33, national_number=int(premiumRateExample))
         self.assertEqual(ShortNumberCost.PREMIUM_RATE, expected_cost(premiumRateNumber))
 
-        standardRateNumber = PhoneNumber(country_code=33,
-                                         national_number=int(shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.STANDARD_RATE)))
+        standardRateExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.STANDARD_RATE)
+        self.assertEqual(ShortNumberCost.STANDARD_RATE, expected_cost_for_region(standardRateExample, "FR"))
+        standardRateNumber = PhoneNumber(country_code=33, national_number=int(standardRateExample))
         self.assertEqual(ShortNumberCost.STANDARD_RATE, expected_cost(standardRateNumber))
 
-        tollFreeNumber = PhoneNumber(country_code=33,
-                                     national_number=int(shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.TOLL_FREE)))
+        tollFreeExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.TOLL_FREE)
+        self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost_for_region(tollFreeExample, "FR"))
+        tollFreeNumber = PhoneNumber(country_code=33, national_number=int(tollFreeExample))
         self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost(tollFreeNumber))
 
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost_for_region("12345", "FR"))
         unknownCostNumber = PhoneNumber(country_code=33, national_number=12345)
         self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost(unknownCostNumber))
 
         # Test that an invalid number may nevertheless have a cost other than UNKNOWN_COST.
+        self.assertFalse(is_valid_short_number_for_region("116123", "FR"))
         invalidNumber = PhoneNumber(country_code=33, national_number=116123)
-        self.assertFalse(is_valid_short_number_object(invalidNumber))
+        self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost_for_region("116123", "FR"))
+        self.assertFalse(is_valid_short_number(invalidNumber))
         self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost(invalidNumber))
 
-        # Test a non-existent country code.
+        # Test a nonexistent country code.
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost_for_region("911", "ZZ"))
         unknownCostNumber.country_code = 123
         unknownCostNumber.national_number = 911
         self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost(unknownCostNumber))
+
+
+    def testGetExpectedCostForSharedCountryCallingCode(self):
+        # Test some numbers which have different costs in countries sharing
+        # the same country calling code. In Australia, 1234 is premium-rate,
+        # 1194 is standard-rate, and 733 is toll-free. These are not known to
+        # be valid numbers in the Christmas Islands.
+        ambiguousPremiumRateString = "1234"
+        ambiguousPremiumRateNumber = PhoneNumber(country_code=61, national_number=1234)
+        ambiguousStandardRateString = "1194"
+        ambiguousStandardRateNumber = PhoneNumber(country_code=61, national_number=1194)
+        ambiguousTollFreeString = "733"
+        ambiguousTollFreeNumber = PhoneNumber(country_code=61, national_number=733)
+
+        self.assertTrue(shortnumberinfo.is_valid_short_number(ambiguousPremiumRateNumber))
+        self.assertTrue(shortnumberinfo.is_valid_short_number(ambiguousStandardRateNumber))
+        self.assertTrue(shortnumberinfo.is_valid_short_number(ambiguousTollFreeNumber))
+
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(ambiguousPremiumRateString, "AU"))
+        self.assertEqual(ShortNumberCost.PREMIUM_RATE,
+                         shortnumberinfo.expected_cost_for_region(ambiguousPremiumRateString, "AU"))
+        self.assertFalse(shortnumberinfo.is_valid_short_number_for_region(ambiguousPremiumRateString, "CX"))
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST,
+                         shortnumberinfo.expected_cost_for_region(ambiguousPremiumRateString, "CX"))
+        # PREMIUM_RATE takes precedence over UNKNOWN_COST.
+        self.assertEqual(ShortNumberCost.PREMIUM_RATE,
+                         shortnumberinfo.expected_cost(ambiguousPremiumRateNumber))
+
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(ambiguousStandardRateString, "AU"))
+        self.assertEqual(ShortNumberCost.STANDARD_RATE,
+                         shortnumberinfo.expected_cost_for_region(ambiguousStandardRateString, "AU"))
+        self.assertFalse(shortnumberinfo.is_valid_short_number_for_region(ambiguousStandardRateString, "CX"))
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST,
+                         shortnumberinfo.expected_cost_for_region(ambiguousStandardRateString, "CX"))
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST,
+                         shortnumberinfo.expected_cost(ambiguousStandardRateNumber))
+
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(ambiguousTollFreeString, "AU"))
+        self.assertEqual(ShortNumberCost.TOLL_FREE,
+                         shortnumberinfo.expected_cost_for_region(ambiguousTollFreeString, "AU"))
+        self.assertFalse(shortnumberinfo.is_valid_short_number_for_region(ambiguousTollFreeString, "CX"))
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST,
+                         shortnumberinfo.expected_cost_for_region(ambiguousTollFreeString, "CX"))
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST,
+                         shortnumberinfo.expected_cost(ambiguousTollFreeNumber))
 
     def testGetExampleShortNumber(self):
         self.assertEqual("8711", shortnumberinfo._example_short_number("AM"))
@@ -212,3 +259,32 @@ class ShortNumberInfoTest(TestMetadataTestCase):
 
         # Python version extra test: invalid region code
         self.assertFalse(is_emergency_number("911", "XY"))
+
+    def testEmergencyNumberForSharedCountryCallingCode(self):
+        # Test the emergency number 112, which is valid in both Australia and
+        # the Christmas Islands.
+        self.assertTrue(is_emergency_number("112", "AU"))
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region("112", "AU"))
+        self.assertEqual(ShortNumberCost.TOLL_FREE,
+                         shortnumberinfo.expected_cost_for_region("112", "AU"))
+        self.assertTrue(is_emergency_number("112", "CX"))
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region("112", "CX"))
+        self.assertEqual(ShortNumberCost.TOLL_FREE,
+                         shortnumberinfo.expected_cost_for_region("112", "CX"))
+        sharedEmergencyNumber = PhoneNumber(country_code=61, national_number=112)
+        self.assertTrue(shortnumberinfo.is_valid_short_number(sharedEmergencyNumber))
+        self.assertEqual(ShortNumberCost.TOLL_FREE,
+                         shortnumberinfo.expected_cost(sharedEmergencyNumber))
+     
+    def testOverlappingNANPANumber(self):
+        # 211 is an emergency number in Barbados, while it is a toll-free
+        # information line in Canada and the USA.
+        self.assertTrue(is_emergency_number("211", "BB"))
+        self.assertEqual(ShortNumberCost.TOLL_FREE,
+                         shortnumberinfo.expected_cost_for_region("211", "BB"))
+        self.assertFalse(is_emergency_number("211", "US"))
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST,
+                         shortnumberinfo.expected_cost_for_region("211", "US"))
+        self.assertFalse(is_emergency_number("211", "CA"))
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST,
+                         shortnumberinfo.expected_cost_for_region("211", "CA"))

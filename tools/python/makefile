@@ -138,7 +138,7 @@ $(PYDIR)/deb_dist/$(DEB_PACKAGE)_$(VERSION)-1_all.deb: $(TARBALL)
 #####################################################################################################
 # Protobuf interface.  Requires local installation of protobuf compiler and Python package (google.protobuf)
 pb2: $(PYDIR)/phonenumbers/pb2/phonenumber_pb2.py
-$(PYDIR)/pb2/phonenumber_pb2.py: $(TOPDIR)/resources/phonenumber.proto
+$(PYDIR)/phonenumbers/pb2/phonenumber_pb2.py: $(TOPDIR)/resources/phonenumber.proto
 	protoc -I$(TOPDIR)/resources --python_out=$(PYDIR)/phonenumbers/pb2 $<
 testpb2: pb2
 	cd $(PYDIR) && $(PYTHON) -m testpb2

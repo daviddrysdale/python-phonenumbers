@@ -965,15 +965,15 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             return U_EMPTY_STRING
         else:
             return numobj.raw_input
+    formatted_number = U_EMPTY_STRING
     # Clear the extension, as that part cannot normally be dialed together with the main number.
     numobj_no_ext = PhoneNumber()
     numobj_no_ext.merge_from(numobj)
     numobj_no_ext.extension = None
     region_code = region_code_for_country_code(country_calling_code)
-
-    formatted_number = U_EMPTY_STRING
+    numobj_type = number_type(numobj_no_ext)
+    is_valid_number = (numobj_type != PhoneNumberType.UNKNOWN)
     if region_calling_from == region_code:
-        numobj_type = number_type(numobj_no_ext)
         is_fixed_line_or_mobile = ((numobj_type == PhoneNumberType.FIXED_LINE) or
                                    (numobj_type == PhoneNumberType.MOBILE) or
                                    (numobj_type == PhoneNumberType.FIXED_LINE_OR_MOBILE))
@@ -990,21 +990,32 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                 # the carriers won't connect the call.  Because of that, we return
                 # an empty string here.
                 formatted_number = U_EMPTY_STRING
-        elif region_code == "HU":
+        elif is_valid_number and region_code == "HU":
             # The national format for HU numbers doesn't contain the national
             # prefix, because that is how numbers are normally written
             # down. However, the national prefix is obligatory when dialing
-            # from a mobile phone. As a result, we add it back here.
+            # from a mobile phone, except for short numbers. As a result, we
+            # add it back here if it is a valid regular length phone number.
             formatted_number = (ndd_prefix_for_region(region_code, True) +  # strip non-digits
                                 U_SPACE + format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL))
+        elif country_calling_code == _NANPA_COUNTRY_CODE:
+            # For NANPA countries, we output international format for numbers
+            # that can be dialed internationally, since that always works,
+            # except for numbers which might potentially be short numbers,
+            # which are always dialled in national format.
+            metadata = PhoneMetadata.metadata_for_region(region_calling_from)
+            if (_can_be_internationally_dialled(numobj_no_ext) and
+                not _is_shorter_than_possible_normal_number(metadata, national_significant_number(numobj_no_ext))):
+                formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
+            else:
+                formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
         else:
-            # For NANPA countries, non-geographical countries, Mexican and
-            # Chilean fixed line and mobile numbers, we output international
-            # format for numbers that can be dialed internationally as that
-            # always works.
-            if ((country_calling_code == _NANPA_COUNTRY_CODE or
-                 region_code == REGION_CODE_FOR_NON_GEO_ENTITY or
-                 ((region_code == unicod("MX") or region_code == unicod("CL")) and is_fixed_line_or_mobile)) and
+            # For non-geographical countries, and Mexican and Chilean fixed
+            # line and mobile numbers, we output international format for
+            # numbers that can be dialed internationally as that always works.
+            if ((region_code == REGION_CODE_FOR_NON_GEO_ENTITY or
+                 ((region_code == unicod("MX") or region_code == unicod("CL")) and
+                  is_fixed_line_or_mobile)) and
                 _can_be_internationally_dialled(numobj_no_ext)):
                 # MX fixed line and mobile numbers should always be formatted
                 # in international format, even when dialed within MX. For
@@ -1016,7 +1027,10 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
             else:
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
-    elif _can_be_internationally_dialled(numobj_no_ext):
+    elif is_valid_number and _can_be_internationally_dialled(numobj_no_ext):
+        # We assume that short numbers are not diallable from outside their
+        # region, so if a number is not a valid regular length phone number,
+        # we treat it as if it cannot be internationally dialled.
         if with_formatting:
             return format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
         else:
@@ -1375,10 +1389,14 @@ def national_significant_number(numobj):
     Returns the national significant number of the PhoneNumber object passed
     in.
     """
-    # If a leading zero has been set, we prefix this now. Note this is not a national prefix.
+    # If leading zero(s) have been set, we prefix this now. Note this is not a
+    # national prefix.
     national_number = U_EMPTY_STRING
     if numobj.italian_leading_zero is not None and numobj.italian_leading_zero:
-        national_number = U_ZERO
+        num_zeros = numobj.number_of_leading_zeros
+        if num_zeros is None:
+            num_zeros = 1
+        national_number = U_ZERO * num_zeros
     national_number += str(numobj.national_number)
     return national_number
 
@@ -1933,6 +1951,15 @@ def _test_number_length_against_pattern(possible_re, national_number):
         return ValidationResult.TOO_SHORT
 
 
+def _is_shorter_than_possible_normal_number(metadata, number):
+    """Helper method to check whether a number is too short to be a regular
+    length phone number in a region.
+    """
+    possible_number_pattern = re.compile(metadata.general_desc.possible_number_pattern or U_EMPTY_STRING)
+    return (_test_number_length_against_pattern(possible_number_pattern, number) ==
+            ValidationResult.TOO_SHORT)
+
+
 def is_possible_number_with_reason(numobj):
     """Check whether a phone number is a possible number.
 
@@ -2346,6 +2373,21 @@ def _check_region_for_parsing(number, default_region):
     return True
 
 
+def _set_italian_leading_zeros_for_phone_number(national_number, numobj):
+    """A helper function to set the values related to leading zeros in a
+    PhoneNumber."""
+    if len(national_number) > 1 and national_number[0] == U_ZERO:
+        numobj.italian_leading_zero = True
+        number_of_leading_zeros = 1
+        # Note that if the number is all "0"s, the last "0" is not counted as
+        # a leading zero.
+        while (number_of_leading_zeros < len(national_number) - 1 and
+               national_number[number_of_leading_zeros] == U_ZERO):
+            number_of_leading_zeros += 1
+        if number_of_leading_zeros != 1:
+            numobj.number_of_leading_zeros = number_of_leading_zeros
+
+
 def parse(number, region=None, keep_raw_input=False,
           numobj=None, _check_region=True):
     """Parse a string and return a corresponding PhoneNumber object.
@@ -2457,10 +2499,17 @@ def parse(number, region=None, keep_raw_input=False,
         raise NumberParseException(NumberParseException.TOO_SHORT_NSN,
                                    "The string supplied is too short to be a phone number.")
     if metadata is not None:
-        carrier_code, normalized_national_number, _ = _maybe_strip_national_prefix_carrier_code(normalized_national_number,
-                                                                                                metadata)
-        if keep_raw_input:
-            numobj.preferred_domestic_carrier_code = carrier_code
+        potential_national_number = normalized_national_number
+        carrier_code, potential_national_number, _ = _maybe_strip_national_prefix_carrier_code(potential_national_number,
+                                                                                               metadata)
+        # We require that the NSN remaining after stripping the national
+        # prefix and carrier code be of a possible length for the
+        # region. Otherwise, we don't do the stripping, since the original
+        # number could be a valid short number.
+        if not _is_shorter_than_possible_normal_number(metadata, potential_national_number):
+            normalized_national_number = potential_national_number
+            if keep_raw_input:
+                numobj.preferred_domestic_carrier_code = carrier_code
     len_national_number = len(normalized_national_number)
     if len_national_number < _MIN_LENGTH_FOR_NSN:  # pragma no cover
         # Check of _is_viable_phone_number() at the top of this function makes
@@ -2470,8 +2519,7 @@ def parse(number, region=None, keep_raw_input=False,
     if len_national_number > _MAX_LENGTH_FOR_NSN:
         raise NumberParseException(NumberParseException.TOO_LONG,
                                    "The string supplied is too long to be a phone number.")
-    if normalized_national_number[0] == U_ZERO:
-        numobj.italian_leading_zero = True
+    _set_italian_leading_zeros_for_phone_number(normalized_national_number, numobj)
     numobj.national_number = to_long(normalized_national_number)
     return numobj
 

@@ -47,6 +47,7 @@ True
 from .util import prnt, unicod, u, U_EMPTY_STRING, U_ZERO
 from .phonenumberutil import region_code_for_number, PhoneNumberType, PhoneNumber
 from .phonenumberutil import country_mobile_token, national_significant_number, number_type
+from .phonenumberutil import region_code_for_country_code, parse, NumberParseException
 from .prefix import prefix_description_for_number
 try:
     from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
@@ -147,9 +148,13 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
             # before the national destination code, this should be removed before
             # geocoding.
             national_number = national_number[len(mobile_token):]
-            copied_numobj = PhoneNumber(country_code=numobj.country_code,
-                                        national_number=national_number,
-                                        italian_leading_zero=national_number.startswith(U_ZERO))
+
+            region = region_code_for_country_code(numobj.country_code)
+            try:
+                copied_numobj = parse(national_number, region)
+            except NumberParseException:
+                # If this happens, just re-use what we had.
+                copied_numobj = numobj
             area_description = prefix_description_for_number(GEOCODE_DATA, GEOCODE_LONGEST_PREFIX,
                                                              copied_numobj, lang, script, region)
         else:

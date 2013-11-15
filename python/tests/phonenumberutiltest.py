@@ -617,10 +617,11 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.format_national_number_with_preferred_carrier_code(arNumber, ""))
         # Python version extra test: check string conversion with preferred carrier code
         self.assertEqual('Country Code: 54 National Number: 91234125678 '
-                         'Leading Zero: False Preferred Domestic Carrier Code: 19',
+                         'Leading Zero(s): False Preferred Domestic Carrier Code: 19',
                           str(arNumber))
         self.assertEqual("PhoneNumber(country_code=54, national_number=91234125678, extension=None, "
-                         "italian_leading_zero=False, country_code_source=None, preferred_domestic_carrier_code='19')",
+                         "italian_leading_zero=False, number_of_leading_zeros=None, "
+                         "country_code_source=None, preferred_domestic_carrier_code='19')",
                          repr(arNumber))
         # When the preferred_domestic_carrier_code is present (even when it
         # contains an empty string), use it instead of the default carrier
@@ -706,6 +707,37 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.format_number_for_mobile_dialing(INTERNATIONAL_TOLL_FREE, "US", False))
         self.assertEqual("+80012345678",
                          phonenumbers.format_number_for_mobile_dialing(INTERNATIONAL_TOLL_FREE, "001", False))
+
+        # Test that a short number is formatted correctly for mobile dialing
+        # within the region, and is not diallable from outside the region.
+        deShortNumber = PhoneNumber(country_code=49, national_number=123)
+        self.assertEqual("123", phonenumbers.format_number_for_mobile_dialing(deShortNumber, "DE", False))
+        self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(deShortNumber, "IT", False))
+
+        # Test the special logic for Hungary, where the national prefix must be added before dialing
+        # from a mobile phone for regular length numbers, but not for short numbers.
+        huRegularNumber = PhoneNumber(country_code=36, national_number=301234567)
+        self.assertEqual("06301234567", phonenumbers.format_number_for_mobile_dialing(huRegularNumber, "HU", False))
+        self.assertEqual("+36301234567", phonenumbers.format_number_for_mobile_dialing(huRegularNumber, "JP", False))
+        huShortNumber = PhoneNumber(country_code=36, national_number=104)
+        self.assertEqual("104", phonenumbers.format_number_for_mobile_dialing(huShortNumber, "HU", False))
+        self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(huShortNumber, "JP", False))
+
+        # Test the special logic for NANPA countries, for which regular length phone numbers are always
+        # output in international format, but short numbers are in national format.
+        usRegularNumber = PhoneNumber(country_code=1, national_number=6502530000)
+        self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(usRegularNumber, "US", False))
+        self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(usRegularNumber, "CA", False))
+        self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(usRegularNumber, "BR", False))
+        usShortNumber = PhoneNumber(country_code=1, national_number=911)
+        self.assertEqual("911", phonenumbers.format_number_for_mobile_dialing(usShortNumber, "US", False))
+        self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(usShortNumber, "CA", False))
+        self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(usShortNumber, "BR", False))
+
+        # Test that the Australian emergency number 000 is formatted correctly.
+        auNumber = PhoneNumber(country_code=61, national_number=0, italian_leading_zero=True, number_of_leading_zeros=2)
+        self.assertEqual("000", phonenumbers.format_number_for_mobile_dialing(auNumber, "AU", False))
+        self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(auNumber, "NZ", False))
 
         # Python version extra tests
         number = PhoneNumber()
@@ -1454,7 +1486,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             self.assertEqual(strippedNumber, numberToFill,
                              msg="Did not strip off the country calling code correctly.")
             # Python version extra test covering string conversion with country_code_source present
-            self.assertEqual("Country Code: 1 National Number: None Leading Zero: False Country Code Source: 5",
+            self.assertEqual("Country Code: 1 National Number: None Leading Zero(s): False Country Code Source: 5",
                              str(number))
         except NumberParseException:
             e = sys.exc_info()[1]
@@ -2054,6 +2086,24 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Null is also allowed for the region code in these cases.
         self.assertEqual(nzNumberWithRawInput, phonenumbers.parse("+64 3 331 6005", None, keep_raw_input=True))
 
+    def testParseNumberTooShortIfNationalPrefixStripped(self):
+        # Test that a number whose first digits happen to coincide with the national prefix does not
+        # get them stripped if doing so would result in a number too short to be a possible (regular
+        # length) phone number for that region.
+        byNumber = PhoneNumber(country_code=375, national_number=8123)
+        self.assertEqual(byNumber, phonenumbers.parse("8123", "BY"))
+        byNumber.national_number = 81234
+        self.assertEqual(byNumber, phonenumbers.parse("81234", "BY"))
+
+        # The prefix doesn't get stripped, since the input is a viable 6-digit number, whereas the
+        # result of stripping is only 5 digits.
+        byNumber.national_number = 812345
+        self.assertEqual(byNumber, phonenumbers.parse("812345", "BY"))
+
+        # The prefix gets stripped, since only 6-digit numbers are possible.
+        byNumber.national_number = 123456
+        self.assertEqual(byNumber, phonenumbers.parse("8123456", "BY"))
+
     def testParseExtensions(self):
         nzNumber = PhoneNumber(country_code=64, national_number=33316005, extension="3456")
         self.assertEqual(nzNumber, phonenumbers.parse("03 331 6005 ext 3456", "NZ"))
@@ -2161,6 +2211,23 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                    preferred_domestic_carrier_code="81")
         self.assertEqual(koreanNumber, phonenumbers.parse("08122123456", "KR", keep_raw_input=True))
 
+    def testParseItalianLeadingZeros(self):
+        # Test the number "011".
+        oneZero = PhoneNumber(country_code=61, national_number=11, italian_leading_zero=True)
+        self.assertEqual(oneZero, phonenumbers.parse("011", "AU"))
+
+        # Test the number "001".
+        twoZeros = PhoneNumber(country_code=61, national_number=1, italian_leading_zero=True, number_of_leading_zeros=2)
+        self.assertEqual(twoZeros, phonenumbers.parse("001", "AU"))
+
+        # Test the number "000". This number has 2 leading zeros.
+        stillTwoZeros = PhoneNumber(country_code=61, national_number=0, italian_leading_zero=True, number_of_leading_zeros=2)
+        self.assertEqual(stillTwoZeros, phonenumbers.parse("000", "AU"))
+
+        # Test the number "0000". This number has 3 leading zeros.
+        threeZeros = PhoneNumber(country_code=61, national_number=0, italian_leading_zero=True, number_of_leading_zeros=3)
+        self.assertEqual(threeZeros, phonenumbers.parse("0000", "AU"))
+
     def testCountryWithNoNumberDesc(self):
         # Andorra is a country where we don't have PhoneNumberDesc info in the metadata.
         adNumber = PhoneNumber(country_code=376, national_number=12345)
@@ -2183,7 +2250,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.format_number(UNKNOWN_COUNTRY_CODE_NO_RAW_INPUT, PhoneNumberFormat.E164))
 
     def testIsNumberMatchMatches(self):
-        # Test simple matches where formatting is different, or leading zeroes, or country calling code
+        # Test simple matches where formatting is different, or leading zeros, or country calling code
         # has been specified.
         self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
                          phonenumbers.is_number_match("+64 3 331 6005", "+64 03 331 6005"))
