@@ -3,12 +3,24 @@
  What's new in 5.9b1
 =====================
 
+The codebase now supports Python 2.5-2.7 and Python 3.x out of the box, without
+needing 2to3 conversion.
+
 The top-level module no longer exports the following functions:
  - country_name_for_number
  - description_for_number
  - description_for_valid_number
 These functions now need to be imported via the phonenumbers.geocoder submodule.
 
+The short number functions have been renamed:
+ - is_possible_short_number_object becomes is_possible_short_number
+ - is_possible_short_number becomes is_possible_short_number_for_object
+ - is_valid_short_number_object becomes is_valid_short_number
+ - is_valid_short_number becomes is_valid_short_number_for_object
+ - expected_cost becomes expected_cost_for_region, and there's a new expected_cost
+   function that takes a PhoneNumber object.
+
+Merge up to upstream Subversion revision 622.
 
 
 =====================
