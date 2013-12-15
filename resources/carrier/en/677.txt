@@ -12,23 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-59771|Digicel
-59772|Digicel
-59773|Uniqa
-597740|Digicel
-597741|Digicel
-597742|Digicel
-597743|Digicel
-597744|Digicel
-597745|Digicel
-59775|Telesur
-59777|Telesur
-59781|Digicel
-59782|Digicel
-59783|Uniqa
-59784|Uniqa
-59785|Telesur
-59786|Telesur
-59787|Telesur
-59788|Telesur
-59789|Telesur
+67774|Solomon Telekom
+67775|Solomon Telekom
+67776|Solomon Telekom
+67777|Solomon Telekom
+67778|Solomon Telekom
+677790|Solomon Telekom
+67784|BMobile
+67785|BMobile
+67786|BMobile
+67787|BMobile
+67788|BMobile
+67794|Smile
+67795|Smile
+67796|Smile
+67797|Smile
+67798|Smile
+67799|Smile
