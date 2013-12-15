@@ -2,16 +2,17 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_SN = PhoneMetadata(id='SN', country_code=221, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[37]\\d{8}', possible_number_pattern='\\d{9}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='3(?:0(?:1[01]|80)|3(?:8[1-9]|9[2-9]))\\d{5}', possible_number_pattern='\\d{9}', example_number='301012345'),
-    mobile=PhoneNumberDesc(national_number_pattern='7(?:0(?:[01279]0|3[03]|4[05]|5[06]|6[03-5]|8[029])|6(?:1[23]|2[89]|3[3489]|4[6-9]|5\\d|6[3-9]|7[45]|8[3-8])|7\\d{2}|8(?:01|1[01]))\\d{5}', possible_number_pattern='\\d{9}', example_number='701012345'),
-    toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    general_desc=PhoneNumberDesc(national_number_pattern='[378]\\d{8}', possible_number_pattern='\\d{9}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='3(?:0(?:1[0-2]|80)|211|3(?:8[1-9]|9[2-9])|90[1-5])\\d{5}', possible_number_pattern='\\d{9}', example_number='301012345'),
+    mobile=PhoneNumberDesc(national_number_pattern='7(?:[07]\\d|21|6[1-9]|8[0-26]|90)\\d{6}', possible_number_pattern='\\d{9}', example_number='701234567'),
+    toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6}', possible_number_pattern='\\d{9}', example_number='800123456'),
+    premium_rate=PhoneNumberDesc(national_number_pattern='88[4689]\\d{6}', possible_number_pattern='\\d{9}', example_number='884123456'),
+    shared_cost=PhoneNumberDesc(national_number_pattern='81[02468]\\d{6}', possible_number_pattern='\\d{9}', example_number='810123456'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    voip=PhoneNumberDesc(national_number_pattern='33301\\d{4}', possible_number_pattern='\\d{9}', example_number='333011234'),
+    voip=PhoneNumberDesc(national_number_pattern='391\\d{6}', possible_number_pattern='\\d{9}', example_number='391011234'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4')])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[37]']),
+        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['8'])])
