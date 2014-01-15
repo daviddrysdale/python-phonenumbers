@@ -171,7 +171,7 @@ the memory footprint of applications that only use a subset of the library funct
 
 In particular:
 
-* The geocoding metadata (which makes up around 75% of the total memory footprint) is only loaded on the first use of
+* The geocoding metadata (which is over 100 megabytes) is only loaded on the first use of
   one of the geocoding functions (`geocoder.description_for_number`, `geocoder.description_for_valid_number`
   or `geocoder.country_name_for_number`).
 * The carrier metadata is only loaded on the first use of one of the mapping functions (`carrier.name_for_number`
