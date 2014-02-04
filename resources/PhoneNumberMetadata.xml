@@ -17328,7 +17328,7 @@
           6(?:
             [024-9]\d|
             1[0-5]|
-            3[04-9]
+            3[014-9]
           )\d{5}
         </nationalNumberPattern>
         <exampleNumber>60012345</exampleNumber>
