@@ -12,8 +12,9 @@ Example Usage
 -------------
 
 The main object that the library deals with is a `PhoneNumber` object.  You can create this from a string
-representing a phone number using the `parse` function, but you normally also need to specify the country
-that the phone number is from (unless the number is in E.164 format).
+representing a phone number using the `parse` function, but you also need to specify the country
+that the phone number is being dialled from (unless the number is in E.164 format, which is globally
+unique).
 
 ```pycon
 >>> import phonenumbers
@@ -27,6 +28,9 @@ Country Code: 44 National Number: 2083661177 Leading Zero: False
 Country Code: 44 National Number: 2083661177 Leading Zero: False
 >>> x == y
 True
+>>> z = phonenumbers.parse("00 1 650 253 2222", "GB")  # as dialled from GB, not a GB number
+>>> print z
+Country Code: 1 National Number: 6502532222 Leading Zero(s): False
 ```
 
 The `PhoneNumber` object that `parse` produces typically still needs to be validated, to check whether
