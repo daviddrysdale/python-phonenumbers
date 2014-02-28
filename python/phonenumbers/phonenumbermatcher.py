@@ -138,13 +138,36 @@ _SLASH_SEPARATED_DATES = re.compile(u("(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-
 _TIME_STAMPS = re.compile(u("[12]\\d{3}[-/]?[01]\\d[-/]?[0-3]\\d [0-2]\\d$"))
 _TIME_STAMPS_SUFFIX = re.compile(u(":[0-5]\\d"))
 
-# Matches white-space, which may indicate the end of a phone number and the
-# start of something else (such as a neighbouring zip-code). If white-space is
-# found, continues to match all characters that are not typically used to
-# start a phone number.
-_GROUP_SEPARATOR = re.compile(u("(?u)\\s") +  # Unicode Separator, \p{Z}
-                              u("[^") + _LEAD_CLASS_CHARS +
-                              u("\\d]*"))  # Unicode Decimal Digit Number, \p{Nd}
+# Patterns used to extract phone numbers from a larger phone-number-like
+# pattern. These are ordered according to specificity. For example,
+# white-space is last since that is frequently used in numbers, not just to
+# separate two numbers. We have separate patterns since we don't want to break
+# up the phone-number-like text on more than one different kind of symbol at
+# one time, although symbols of the same type (e.g. space) can be safely
+# grouped together.
+#
+# Note that if there is a match, we will always check any text found up to the
+# first match as well.
+_INNER_MATCHES = (
+     # Breaks on the slash - e.g. "651-234-2345/332-445-1234"
+     re.compile(u("/+(.*)")),
+     # Note that the bracket here is inside the capturing group, since we
+     # consider it part of the phone number. Will match a pattern like "(650)
+     # 223 3345 (754) 223 3321".
+     re.compile(u("(\\([^(]*)")),
+     # Breaks on a hyphen - e.g. "12345 - 332-445-1234 is my number."  We
+     # require a space on either side of the hyphen for it to be considered a
+     # separator.
+     re.compile(u("(?u)(?:\\p{Z}-|-\\s)\\s*(.+)")),
+     # Various types of wide hyphens. Note we have decided not to enforce a
+     # space here, since it's possible that it's supposed to be used to break
+     # two numbers without spaces, and we haven't seen many instances of it
+     # used within a number.
+     re.compile(u("(?u)[\u2012-\u2015\uFF0D]\\s*(.+)")),
+     # Breaks on a full stop - e.g. "12345. 332-445-1234 is my number."
+     re.compile(u("(?u)\\.+\\s*([^.]+)")),
+     # Breaks on space - e.g. "3324451234 8002341234"
+     re.compile(u("(?u)\\s+(\\S+)")))
 
 
 class Leniency(object):
@@ -553,8 +576,7 @@ class PhoneNumberMatcher(object):
         """
         # Skip a match that is more likely a publication page reference or a
         # date.
-        if (_PUB_PAGES.search(candidate) or
-            _SLASH_SEPARATED_DATES.search(candidate)):
+        if (_SLASH_SEPARATED_DATES.search(candidate)):
             return None
 
         # Skip potential time-stamps.
@@ -581,50 +603,26 @@ class PhoneNumberMatcher(object):
         offset -- The current offset of candidate within text
         Returns the match found, None if none can be found
         """
-        # Try removing either the first or last "group" in the number and see
-        # if this gives a result.  We consider white space to be a possible
-        # indication of the start or end of the phone number.
-        group_match = _GROUP_SEPARATOR.search(candidate)
-        if group_match:
-            # Try the first group by itself.
-            first_group_only = candidate[:group_match.start()]
-            first_group_only = self._trim_after_first_match(_UNWANTED_END_CHAR_PATTERN,
-                                                            first_group_only)
-            match = self._parse_and_verify(first_group_only, offset)
-            if match is not None:
-                return match
-            self._max_tries -= 1
-
-            without_first_group_start = group_match.end()
-            # Try the rest of the candidate without the first group.
-            without_first_group = candidate[without_first_group_start:]
-            without_first_group = self._trim_after_first_match(_UNWANTED_END_CHAR_PATTERN,
-                                                               without_first_group)
-            match = self._parse_and_verify(without_first_group, offset + without_first_group_start)
-            if match is not None:
-                return match
-            self._max_tries -= 1
-
-            if self._max_tries > 0:
-                last_group_start = without_first_group_start
-                group_match = _GROUP_SEPARATOR.search(candidate, last_group_start)
-                while group_match:
-                    # Find the last group.
-                    last_group_start = group_match.start()
-                    group_match = _GROUP_SEPARATOR.search(candidate, group_match.end())
-                without_last_group = candidate[:last_group_start]
-                without_last_group = self._trim_after_first_match(_UNWANTED_END_CHAR_PATTERN,
-                                                                  without_last_group)
-                if without_last_group == first_group_only:
-                    # If there are only two groups, then the group "without
-                    # the last group" is the same as the first group. In these
-                    # cases, we don't want to re-check the number group, so we
-                    # exit already.
-                    return None
-                match = self._parse_and_verify(without_last_group, offset)
+        for possible_inner_match in _INNER_MATCHES:
+            group_match = possible_inner_match.search(candidate)
+            is_first_match = True
+            while group_match and self._max_tries > 0:
+                if is_first_match:
+                    # We should handle any group before this one too.
+                    group = self._trim_after_first_match(_UNWANTED_END_CHAR_PATTERN,
+                                                         candidate[:group_match.start()])
+                    match = self._parse_and_verify(group, offset)
+                    if match is not None:
+                        return match
+                    self._max_tries -= 1
+                    is_first_match = False
+                group = self._trim_after_first_match(_UNWANTED_END_CHAR_PATTERN,
+                                                     group_match.group(1))
+                match = self._parse_and_verify(group, offset + group_match.start(1))
                 if match is not None:
                     return match
                 self._max_tries -= 1
+                group_match = possible_inner_match.search(candidate, group_match.start() + 1)
         return None
 
     def _parse_and_verify(self, candidate, offset):
@@ -640,7 +638,7 @@ class PhoneNumberMatcher(object):
         try:
             # Check the candidate doesn't contain any formatting which would
             # indicate that it really isn't a phone number.
-            if not fullmatch(_MATCHING_BRACKETS, candidate):
+            if (not fullmatch(_MATCHING_BRACKETS, candidate) or _PUB_PAGES.search(candidate)):
                 return None
 
             # If leniency is set to VALID or stricter, we also want to skip

@@ -229,7 +229,7 @@ class AsYouTypeFormatter(object):
         self._should_add_space_after_national_prefix = False
         # This contains the national prefix that has been extracted. It
         # contains only digits without formatting.
-        self._national_prefix_extracted = U_EMPTY_STRING
+        self._extracted_national_prefix = U_EMPTY_STRING
         self._national_number = U_EMPTY_STRING
         # This indicates whether AsYouTypeFormatter is currently doing the
         # formatting.
@@ -328,7 +328,7 @@ class AsYouTypeFormatter(object):
                 self._is_expecting_country_calling_code = True
             else:
                 # No IDD or plus sign is found, might be entering in national format.
-                self._national_prefix_extracted = self._remove_national_prefix_from_national_number()
+                self._extracted_national_prefix = self._remove_national_prefix_from_national_number()
                 self._current_output = self._attempt_to_choose_formatting_pattern()
                 return self._current_output
         if self._is_expecting_country_calling_code:
@@ -370,17 +370,17 @@ class AsYouTypeFormatter(object):
     # shorter NDD doesn't result in a number we can format, we try to see if
     # we can extract a longer version here.
     def _able_to_extract_longer_ndd(self):
-        if len(self._national_prefix_extracted) > 0:
+        if len(self._extracted_national_prefix) > 0:
             # Put the extracted NDD back to the national number before
             # attempting to extract a new NDD.
-            self._national_number = self._national_prefix_extracted + self._national_number
+            self._national_number = self._extracted_national_prefix + self._national_number
             # Remove the previously extracted NDD from
             # prefixBeforeNationalNumber. We cannot simply set it to empty
             # string because people sometimes incorrectly enter national
             # prefix after the country code, e.g. +44 (0)20-1234-5678.
-            index_of_previous_ndd = self._prefix_before_national_number.rfind(self._national_prefix_extracted)
+            index_of_previous_ndd = self._prefix_before_national_number.rfind(self._extracted_national_prefix)
             self._prefix_before_national_number = self._prefix_before_national_number[:index_of_previous_ndd]
-        return self._national_prefix_extracted != self._remove_national_prefix_from_national_number()
+        return self._extracted_national_prefix != self._remove_national_prefix_from_national_number()
 
     def _is_digit_or_leading_plus_sign(self, next_char):
         return (next_char.isdigit() or
@@ -548,6 +548,9 @@ class AsYouTypeFormatter(object):
 
         self._prefix_before_national_number += str(country_code)
         self._prefix_before_national_number += _SEPARATOR_BEFORE_NATIONAL_NUMBER
+        # When we have successfully extracted the IDD, the previously
+        # extracted NDD should be cleared because it is no longer valid.
+        self._extracted_national_prefix = U_EMPTY_STRING
         return True
 
     def _normalize_and_accrue_digits_and_plus_sign(self, next_char, remember_position):

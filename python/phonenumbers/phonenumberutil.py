@@ -10,7 +10,6 @@ in upper-case. The list of the codes can be found here:
 http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm
 
 author: Shaopeng Jia (original Java version)
-author: Lara Rennie (original Java Version)
 author: David Drysdale (Python version)
 """
 # Based on original Java code:
@@ -73,7 +72,7 @@ _REGEX_FLAGS = re.UNICODE | re.IGNORECASE
 _MIN_LENGTH_FOR_NSN = 2
 # The ITU says the maximum length should be 15, but we have found longer
 # numbers in Germany.
-_MAX_LENGTH_FOR_NSN = 16
+_MAX_LENGTH_FOR_NSN = 17
 # The maximum length of the country calling code.
 _MAX_LENGTH_COUNTRY_CODE = 3
 # We don't allow input strings for parsing to be longer than 250 chars. This

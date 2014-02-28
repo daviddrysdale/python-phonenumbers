@@ -725,10 +725,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # Test the special logic for NANPA countries, for which regular length phone numbers are always
         # output in international format, but short numbers are in national format.
-        usRegularNumber = PhoneNumber(country_code=1, national_number=6502530000)
-        self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(usRegularNumber, "US", False))
-        self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(usRegularNumber, "CA", False))
-        self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(usRegularNumber, "BR", False))
+        self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(US_NUMBER, "US", False))
+        self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(US_NUMBER, "CA", False))
+        self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(US_NUMBER, "BR", False))
         usShortNumber = PhoneNumber(country_code=1, national_number=911)
         self.assertEqual("911", phonenumbers.format_number_for_mobile_dialing(usShortNumber, "US", False))
         self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(usShortNumber, "CA", False))
@@ -1245,7 +1244,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(ValidationResult.TOO_SHORT,
                          phonenumbers.is_possible_number_with_reason(adNumber))
         adNumber.country_code = 376
-        adNumber.national_number = to_long(12345678901234567)
+        adNumber.national_number = to_long(123456789012345678)
         self.assertEqual(ValidationResult.TOO_LONG,
                          phonenumbers.is_possible_number_with_reason(adNumber))
 
