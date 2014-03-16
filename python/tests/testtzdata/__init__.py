@@ -1,9 +1,3 @@
-"""Per-prefix data, mapping each prefix to a name.
-
-Auto-generated file, do not edit by hand.
-"""
-from phonenumbers.util import u
-
 # Copyright (C) 2011-2014 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,16 +12,10 @@ from phonenumbers.util import u
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TIMEZONE_DATA = {
- '1':('America/New_York', 'America/Chicago', 'America/Winnipeg', 'America/Los_Angeles'),
- '1201':('America/New_York',),
- '1212812':('America/New_York',),
- '1234':('America/New_York',),
- '1604':('America/Winnipeg',),
- '1617423':('America/Chicago',),
- '1650960':('America/Los_Angeles',),
- '1989':('Ameriac/Los_Angeles',),
- '612':('Australia/Sydney',),
- '82':('Asia/Seoul',),
-}
+import os
+import shelve
+from phonenumbers.util import u
+
+_DIR, _ = os.path.split(__file__)
 TIMEZONE_LONGEST_PREFIX = 7
+TIMEZONE_DATA = shelve.open(os.path.join(_DIR, "tzdata"), "r")
