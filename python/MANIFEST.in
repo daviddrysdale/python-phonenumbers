@@ -3,4 +3,7 @@ include MANIFEST.in
 include MANIFEST
 include HISTORY
 include setup.py
+include phonenumbers/carrierdata/carrierdata.db
+include phonenumbers/geodata/geodata.db
+include phonenumbers/tzdata/tzdata.db
 exclude .*ignore
