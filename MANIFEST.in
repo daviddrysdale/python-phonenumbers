@@ -1,0 +1,9 @@
+recursive-include tests *.py
+include MANIFEST.in
+include MANIFEST
+include python/HISTORY
+include setup.py
+include python/phonenumbers/carrierdata/carrierdata.db
+include python/phonenumbers/geodata/geodata.db
+include python/phonenumbers/tzdata/tzdata.db
+exclude .*ignore
