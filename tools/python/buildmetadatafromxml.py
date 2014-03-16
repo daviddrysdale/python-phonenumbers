@@ -216,7 +216,7 @@ class XNumberFormat(UnicodeMixin):
             if self.o.national_prefix_formatting_rule is not None:
                 # expand abbreviations
                 self.o.national_prefix_formatting_rule = _expand_formatting_rule(self.o.national_prefix_formatting_rule,
-                                                                                   national_prefix)
+                                                                                 national_prefix)
             else:
                 # set to territory-wide formatting rule
                 self.o.national_prefix_formatting_rule = national_prefix_formatting_rule
@@ -231,7 +231,7 @@ class XNumberFormat(UnicodeMixin):
             if self.o.domestic_carrier_code_formatting_rule is not None:
                 # expand abbreviations
                 self.o.domestic_carrier_code_formatting_rule = _expand_formatting_rule(self.o.domestic_carrier_code_formatting_rule,
-                                                                                         national_prefix)
+                                                                                       national_prefix)
             else:
                 # set to territory-wide formatting rule
                 self.o.domestic_carrier_code_formatting_rule = carrier_code_formatting_rule

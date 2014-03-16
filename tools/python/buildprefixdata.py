@@ -10,6 +10,7 @@ generated Python code.
 Options:
   --var XXX : use this prefix for variable names in generated code
   --flat    : don't do per-locale processing
+  --shelf F : generate shelf output to file F
   --sep C   : expect metadata to be a list with C as separator
 """
 
@@ -35,6 +36,7 @@ import glob
 import re
 import getopt
 import datetime
+import shelve
 
 # Use the local code in preference to any pre-installed version
 sys.path.insert(0, '../../python')
@@ -75,6 +77,14 @@ COPYRIGHT_NOTICE = """# Copyright (C) 2011-%s The Libphonenumber Authors
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ % datetime.datetime.now().year
+
+
+PREFIXDATA_SHELF_LOADER = """%(copyright)s
+import shelve
+from %(module)s.util import u
+
+%(varprefix)s_LONGEST_PREFIX = %(longest_prefix)d
+%(varprefix)s_DATA = shelve.open("%(shelf)s", "r")"""
 
 
 def load_locale_prefixdata_file(prefixdata, filename, locale=None, overall_prefix=None, separator=None):
@@ -179,13 +189,36 @@ def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, pe
         prnt("%s_LONGEST_PREFIX = %d" % (varprefix, longest_prefix), file=outfile)
 
 
+def output_prefixdata_shelf(prefixdata, outfilename):
+    """Output the per-prefix data as a shelf to the given file """
+    shelf = shelve.open(outfilename, "c")
+    longest_prefix = 0
+    for prefix in sorted(prefixdata.keys()):
+        if len(prefix) > longest_prefix:
+            longest_prefix = len(prefix)
+        shelf[prefix] = prefixdata[prefix]
+    shelf.close()
+    return longest_prefix
+
+
+def output_shelf_loader(outfilename, shelf_name, module_prefix, varprefix, per_locale, longest_prefix):
+    with open(outfilename, "w") as outfile:
+        prnt(PREFIXDATA_SHELF_LOADER % {'longest_prefix': longest_prefix,
+                                        'varprefix': varprefix,
+                                        'module': module_prefix,
+                                        'shelf': shelf_name,
+                                        'copyright': COPYRIGHT_NOTICE},
+             file=outfile)
+
+
 def _standalone(argv):
     """Parse the given input directory and emit generated code."""
     varprefix = "GEOCODE"
     per_locale = True
+    shelf_name = None
     separator = None
     try:
-        opts, args = getopt.getopt(argv, "hv:fs:", ("help", "var=", "flat", "sep="))
+        opts, args = getopt.getopt(argv, "hv:fS:s:", ("help", "var=", "flat", "shelf=", "sep="))
     except getopt.GetoptError:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
@@ -197,6 +230,10 @@ def _standalone(argv):
             varprefix = arg
         elif opt in ("-f", "--flat"):
             per_locale = False
+        elif opt in ("-S", "--shelf"):
+            shelf_name = arg
+            if shelf_name.endswith(".db"):
+                shelf_name = shelf_name[:-3]
         elif opt in ("-s", "--sep"):
             separator = arg
         else:
@@ -211,7 +248,12 @@ def _standalone(argv):
     else:
         prefixdata = {}
         load_locale_prefixdata_file(prefixdata, args[0], separator=separator)
-    output_prefixdata_code(prefixdata, args[1], args[2], varprefix, per_locale)
+    if shelf_name is not None:
+        longest_prefix = output_prefixdata_shelf(prefixdata, shelf_name)
+        base_shelf_name = os.path.basename(shelf_name)
+        output_shelf_loader(args[1], shelf_name, args[2], varprefix, per_locale, longest_prefix)
+    else:
+        output_prefixdata_code(prefixdata, args[1], args[2], varprefix, per_locale)
 
 
 if __name__ == "__main__":
