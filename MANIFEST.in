@@ -1,9 +1,8 @@
-recursive-include tests *.py
+recursive-include python/tests *.py
 include MANIFEST.in
 include MANIFEST
 include python/HISTORY
 include setup.py
-include python/phonenumbers/carrierdata/carrierdata.db
-include python/phonenumbers/geodata/geodata.db
-include python/phonenumbers/tzdata/tzdata.db
+recursive-include python/phonenumbers *.db
+recursive-include python/tests *.db
 exclude .*ignore
