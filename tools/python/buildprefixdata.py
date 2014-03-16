@@ -80,11 +80,13 @@ COPYRIGHT_NOTICE = """# Copyright (C) 2011-%s The Libphonenumber Authors
 
 
 PREFIXDATA_SHELF_LOADER = """%(copyright)s
+import os
 import shelve
 from %(module)s.util import u
 
+_DIR, _ = os.path.split(__file__)
 %(varprefix)s_LONGEST_PREFIX = %(longest_prefix)d
-%(varprefix)s_DATA = shelve.open("%(shelf)s", "r")"""
+%(varprefix)s_DATA = shelve.open(os.path.join(_DIR, "%(shelf)s"), "r")"""
 
 
 def load_locale_prefixdata_file(prefixdata, filename, locale=None, overall_prefix=None, separator=None):
@@ -251,7 +253,7 @@ def _standalone(argv):
     if shelf_name is not None:
         longest_prefix = output_prefixdata_shelf(prefixdata, shelf_name)
         base_shelf_name = os.path.basename(shelf_name)
-        output_shelf_loader(args[1], shelf_name, args[2], varprefix, per_locale, longest_prefix)
+        output_shelf_loader(args[1], base_shelf_name, args[2], varprefix, per_locale, longest_prefix)
     else:
         output_prefixdata_code(prefixdata, args[1], args[2], varprefix, per_locale)
 
