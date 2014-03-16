@@ -16,33 +16,33 @@ locale: $(PYDIR)/phonenumbers/geodata/locale.py
 $(PYDIR)/phonenumbers/geodata:
 	mkdir $@
 $(PYDIR)/phonenumbers/geodata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/geocoding | $(PYDIR)/phonenumbers/geodata
-	$(PYTHON) buildprefixdata.py --var GEOCODE $(TOPDIR)/resources/geocoding $@ .
+	$(PYTHON) buildprefixdata.py --var GEOCODE --shelf $(PYDIR)/phonenumbers/geodata/geodata.db $(TOPDIR)/resources/geocoding $@ .
 $(PYDIR)/tests/testgeodata:
 	mkdir $@
 $(PYDIR)/tests/testgeodata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/test/geocoding | $(PYDIR)/tests/testgeodata
-	$(PYTHON) buildprefixdata.py --var GEOCODE $(TOPDIR)/resources/test/geocoding $@ phonenumbers
+	$(PYTHON) buildprefixdata.py --var GEOCODE --shelf $(PYDIR)/tests/testgeodata/geodata.db $(TOPDIR)/resources/test/geocoding $@ phonenumbers
 geodata: $(PYDIR)/phonenumbers/geodata/__init__.py $(PYDIR)/tests/testgeodata/__init__.py
 
 # Generate Python files from carrier data
 $(PYDIR)/phonenumbers/carrierdata:
 	mkdir $@
 $(PYDIR)/phonenumbers/carrierdata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/carrier | $(PYDIR)/phonenumbers/carrierdata
-	$(PYTHON) buildprefixdata.py --var CARRIER $(TOPDIR)/resources/carrier $@ .
+	$(PYTHON) buildprefixdata.py --var CARRIER --shelf $(PYDIR)/phonenumbers/carrierdata/carrierdata.db $(TOPDIR)/resources/carrier $@ .
 $(PYDIR)/tests/testcarrierdata:
 	mkdir $@
 $(PYDIR)/tests/testcarrierdata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/test/carrier | $(PYDIR)/tests/testcarrierdata
-	$(PYTHON) buildprefixdata.py --var CARRIER $(TOPDIR)/resources/test/carrier $@ phonenumbers
+	$(PYTHON) buildprefixdata.py --var CARRIER --shelf $(PYDIR)/tests/testcarrierdata/carrierdata.db $(TOPDIR)/resources/test/carrier $@ phonenumbers
 carrierdata: $(PYDIR)/phonenumbers/carrierdata/__init__.py $(PYDIR)/tests/testcarrierdata/__init__.py
 
 # Generate Python files from timezone data
 $(PYDIR)/phonenumbers/tzdata:
 	mkdir $@
 $(PYDIR)/phonenumbers/tzdata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/timezones/map_data.txt | $(PYDIR)/phonenumbers/tzdata
-	$(PYTHON) buildprefixdata.py --var TIMEZONE --flat --sep '&' $(TOPDIR)/resources/timezones/map_data.txt $@ .
+	$(PYTHON) buildprefixdata.py --var TIMEZONE --shelf $(PYDIR)/phonenumbers/tzdata/tzdata.db --flat --sep '&' $(TOPDIR)/resources/timezones/map_data.txt $@ .
 $(PYDIR)/tests/testtzdata:
 	mkdir $@
 $(PYDIR)/tests/testtzdata/__init__.py: buildprefixdata.py $(TOPDIR)/resources/test/timezones/map_data.txt | $(PYDIR)/tests/testtzdata
-	$(PYTHON) buildprefixdata.py --var TIMEZONE --flat --sep '&' $(TOPDIR)/resources/test/timezones/map_data.txt $@ phonenumbers
+	$(PYTHON) buildprefixdata.py --var TIMEZONE --shelf $(PYDIR)/tests/testtzdata/tzdata.db --flat --sep '&' $(TOPDIR)/resources/test/timezones/map_data.txt $@ phonenumbers
 tzdata: $(PYDIR)/phonenumbers/tzdata/__init__.py $(PYDIR)/tests/testtzdata/__init__.py
 
 # Generate Python files from metadata
