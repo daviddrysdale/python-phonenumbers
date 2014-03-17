@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import atexit
 import os
 import shelve
 from ..util import u
 
 _DIR, _ = os.path.split(__file__)
 TIMEZONE_LONGEST_PREFIX = 7
-TIMEZONE_DATA = shelve.open(os.path.join(_DIR, "tzdata"), "r")
+TIMEZONE_DATA = shelve.open(os.path.join(_DIR, "tzdata.db"), "r")
+atexit.register(lambda: TIMEZONE_DATA.close())

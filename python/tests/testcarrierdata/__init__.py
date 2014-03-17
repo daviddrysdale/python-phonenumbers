@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import atexit
 import os
 import shelve
 from phonenumbers.util import u
 
 _DIR, _ = os.path.split(__file__)
 CARRIER_LONGEST_PREFIX = 7
-CARRIER_DATA = shelve.open(os.path.join(_DIR, "carrierdata"), "r")
+CARRIER_DATA = shelve.open(os.path.join(_DIR, "carrierdata.db"), "r")
+atexit.register(lambda: CARRIER_DATA.close())

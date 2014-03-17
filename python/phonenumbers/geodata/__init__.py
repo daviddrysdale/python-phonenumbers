@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import atexit
 import os
 import shelve
 from ..util import u
 
 _DIR, _ = os.path.split(__file__)
 GEOCODE_LONGEST_PREFIX = 9
-GEOCODE_DATA = shelve.open(os.path.join(_DIR, "geodata"), "r")
+GEOCODE_DATA = shelve.open(os.path.join(_DIR, "geodata.db"), "r")
+atexit.register(lambda: GEOCODE_DATA.close())
