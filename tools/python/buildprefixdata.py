@@ -80,13 +80,15 @@ COPYRIGHT_NOTICE = """# Copyright (C) 2011-%s The Libphonenumber Authors
 
 
 PREFIXDATA_SHELF_LOADER = """%(copyright)s
+import atexit
 import os
 import shelve
 from %(module)s.util import u
 
 _DIR, _ = os.path.split(__file__)
 %(varprefix)s_LONGEST_PREFIX = %(longest_prefix)d
-%(varprefix)s_DATA = shelve.open(os.path.join(_DIR, "%(shelf)s"), "r")"""
+%(varprefix)s_DATA = shelve.open(os.path.join(_DIR, "%(shelf)s"), "r")
+atexit.register(lambda: %(varprefix)s_DATA.close())"""
 
 
 def load_locale_prefixdata_file(prefixdata, filename, locale=None, overall_prefix=None, separator=None):
