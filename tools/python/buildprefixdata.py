@@ -234,8 +234,6 @@ def _standalone(argv):
             per_locale = False
         elif opt in ("-S", "--shelf"):
             shelf_name = arg
-            if shelf_name.endswith(".db"):
-                shelf_name = shelf_name[:-3]
         elif opt in ("-s", "--sep"):
             separator = arg
         else:
