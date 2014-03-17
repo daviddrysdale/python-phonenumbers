@@ -78,7 +78,7 @@ def _prefix_description_for_number(data, longest_prefix, numobj, lang, script=No
         # the library
         raise Exception("Expect E164 number to start with +")
     for prefix_len in range(longest_prefix, 0, -1):
-        prefix = e164_num[1:(1 + prefix_len)]
+        prefix = str(e164_num[1:(1 + prefix_len)])
         if prefix in data:
             # This prefix is present in the geocoding data, as a dictionary
             # mapping language info to location name.

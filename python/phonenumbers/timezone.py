@@ -79,7 +79,7 @@ def time_zones_for_geographical_number(numobj):
         # the library
         raise Exception("Expect E164 number to start with +")
     for prefix_len in range(TIMEZONE_LONGEST_PREFIX, 0, -1):
-        prefix = e164_num[1:(1 + prefix_len)]
+        prefix = str(e164_num[1:(1 + prefix_len)])
         if prefix in TIMEZONE_DATA:
             return TIMEZONE_DATA[prefix]
     return _UNKNOWN_TIME_ZONE_LIST
@@ -109,7 +109,7 @@ def _country_level_time_zones_for_number(numobj):
     unknown time zone if no other time zone was found or if the number was invalid"""
     cc = str(numobj.country_code)
     for prefix_len in range(TIMEZONE_LONGEST_PREFIX, 0, -1):
-        prefix = cc[:(1 + prefix_len)]
+        prefix = str(cc[:(1 + prefix_len)])
         if prefix in TIMEZONE_DATA:
             return TIMEZONE_DATA[prefix]
     return _UNKNOWN_TIME_ZONE_LIST

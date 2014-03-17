@@ -198,7 +198,7 @@ def output_prefixdata_shelf(prefixdata, outfilename):
     for prefix in sorted(prefixdata.keys()):
         if len(prefix) > longest_prefix:
             longest_prefix = len(prefix)
-        shelf[prefix] = prefixdata[prefix]
+        shelf[str(prefix)] = prefixdata[prefix]
     shelf.close()
     return longest_prefix
 
