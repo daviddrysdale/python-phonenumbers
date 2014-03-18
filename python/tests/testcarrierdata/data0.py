@@ -18,8 +18,12 @@ from phonenumbers.util import u
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CARRIER_DATA = {}
-from .data0 import data
-CARRIER_DATA.update(data)
-del data
-CARRIER_LONGEST_PREFIX = 7
+data = {
+ '44760':{'en': 'British pager'},
+ '244917':{'en': 'Angolan carrier'},
+ '4411':{'en': 'British fixed line carrier'},
+ '1650213':{'en': 'US carrier2'},
+ '1650212':{'en': 'US carrier'},
+ '244262':{'en': 'Angolan fixed line carrier'},
+ '4473':{'en': 'British carrier', 'sv': u('Brittisk operat\u00f6r')},
+}
