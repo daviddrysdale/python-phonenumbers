@@ -35,12 +35,14 @@ import glob
 import re
 import getopt
 import datetime
+import math
 
 # Use the local code in preference to any pre-installed version
 sys.path.insert(0, '../../python')
 
 from phonenumbers.util import prnt, rpr
 
+PREFIXDATA_CHUNK_SIZE = 10000
 PREFIXDATA_SUFFIX = ".txt"
 BLANK_LINE_RE = re.compile(r'^\s*$', re.UNICODE)
 COMMENT_LINE_RE = re.compile(r'^\s*#.*$', re.UNICODE)
@@ -160,6 +162,37 @@ def _tuple_repr(data):
 
 def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, per_locale):
     """Output the per-prefix data in Python form to the given file """
+    sorted_keys = sorted(prefixdata.keys())
+    total_keys = len(sorted_keys)
+    total_chunks = int(math.ceil(total_keys / float(PREFIXDATA_CHUNK_SIZE)))
+
+    outdirname = os.path.dirname(outfilename)
+    longest_prefix = 0
+    for chunk_num in range(total_chunks):
+        chunk_index = PREFIXDATA_CHUNK_SIZE * chunk_num
+        chunk_keys = sorted_keys[chunk_index:chunk_index + PREFIXDATA_CHUNK_SIZE]
+        chunk_data = {key: prefixdata[key] for key in chunk_keys}
+        chunk_file = os.path.join(outdirname, 'data%d.py' % chunk_num)
+        chunk_longest = output_prefixdata_chunk(
+            chunk_data, chunk_file, module_prefix, per_locale)
+        if chunk_longest > longest_prefix:
+            longest_prefix = chunk_longest
+
+    with open(outfilename, "w") as outfile:
+        if per_locale:
+            prnt(PREFIXDATA_LOCALE_FILE_PROLOG % {'module': module_prefix}, file=outfile)
+        else:
+            prnt(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
+        prnt(COPYRIGHT_NOTICE, file=outfile)
+        prnt("%s_DATA = {}" % varprefix, file=outfile)
+        for chunk_num in range(total_chunks):
+            prnt("from .data%d import data" % chunk_num, file=outfile)
+            prnt("%s_DATA.update(data)" % varprefix, file=outfile)
+        prnt("del data", file=outfile)
+        prnt("%s_LONGEST_PREFIX = %d" % (varprefix, longest_prefix), file=outfile)
+
+
+def output_prefixdata_chunk(prefixdata, outfilename, module_prefix, per_locale):
     with open(outfilename, "w") as outfile:
         longest_prefix = 0
         if per_locale:
@@ -167,8 +200,8 @@ def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, pe
         else:
             prnt(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
         prnt(COPYRIGHT_NOTICE, file=outfile)
-        prnt("%s_DATA = {" % varprefix, file=outfile)
-        for prefix in sorted(prefixdata.keys()):
+        prnt("data = {", file=outfile)
+        for prefix in prefixdata.keys():
             if len(prefix) > longest_prefix:
                 longest_prefix = len(prefix)
             if per_locale:
@@ -176,7 +209,7 @@ def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, pe
             else:
                 prnt(" '%s':%s," % (prefix, _tuple_repr(prefixdata[prefix])), file=outfile)
         prnt("}", file=outfile)
-        prnt("%s_LONGEST_PREFIX = %d" % (varprefix, longest_prefix), file=outfile)
+    return longest_prefix
 
 
 def _standalone(argv):
