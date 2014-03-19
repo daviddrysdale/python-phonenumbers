@@ -192,7 +192,7 @@ load of metadata will not cause a pause or memory exhaustion):
 * Force-load the timezone metadata by invoking `import phonenumbers.timezone`.
 * Force-load the normal metadata by calling `phonenumbers.PhoneMetadata.load_all()`.
 
-The `phonenumbers-lite` version of the package does not include the geocoding, carrier and timezone metadata,
+The `phonenumberslite` version of the package does not include the geocoding, carrier and timezone metadata,
 which can be useful if you have problems installing the main `phonenumbers` package due to space/memory limitations.
 
 Project Layout

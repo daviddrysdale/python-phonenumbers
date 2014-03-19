@@ -42,7 +42,7 @@ The script tools/buildprefixdata.py performs the latter 3 sets of autogeneration
 This approach results in a large set of Python files, but makes it easy
 to apply local fixes to the formatting metadata.
 
-The phonenumbers-lite version of the package does not include the prefix-based
+The phonenumberslite version of the package does not include the prefix-based
 metadata (in order to reduce package size), so phonenumbers.geodata,
 phonenumbers.carrierdata and phonenumbers.tzdata are all unavailable with this
 version.
@@ -123,5 +123,5 @@ Release Procedure
      git push <github-remote> release-<version>
  - Push the package to PyPI with:
      cd python && setup.py sdist upload
- - Push the -lite package to PyPI with:
+ - Push the lite package to PyPI with:
      cd python && setup-lite.py sdist upload

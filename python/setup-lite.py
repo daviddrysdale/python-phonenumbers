@@ -32,7 +32,7 @@ if not python_25:
 # Discover version of phonenumbers package
 from phonenumbers import __version__
 
-distutils.core.setup(name='phonenumbers-lite',
+distutils.core.setup(name='phonenumberslite',
                      version=__version__,
                      description="Python version of Google's common library for parsing, formatting, storing and validating international phone numbers, without (large) per-prefix metadata for geocoding, timezones and carrier info",
                      author='David Drysdale',
