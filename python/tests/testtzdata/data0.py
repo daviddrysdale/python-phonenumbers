@@ -1,4 +1,4 @@
-"""Per-prefix data, mapping each prefix to a dict of locale:name.
+"""Per-prefix data, mapping each prefix to a name.
 
 Auto-generated file, do not edit by hand.
 """
@@ -18,8 +18,15 @@ from phonenumbers.util import u
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CARRIER_DATA = {}
-from .data0 import data
-CARRIER_DATA.update(data)
-del data
-CARRIER_LONGEST_PREFIX = 7
+data = {
+ '1234':('America/New_York',),
+ '612':('Australia/Sydney',),
+ '1650960':('America/Los_Angeles',),
+ '1201':('America/New_York',),
+ '1604':('America/Winnipeg',),
+ '1989':('Ameriac/Los_Angeles',),
+ '1':('America/New_York', 'America/Chicago', 'America/Winnipeg', 'America/Los_Angeles'),
+ '1212812':('America/New_York',),
+ '1617423':('America/Chicago',),
+ '82':('Asia/Seoul',),
+}
