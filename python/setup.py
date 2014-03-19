@@ -32,15 +32,38 @@ if not python_25:
 # Discover version of phonenumbers package
 from phonenumbers import __version__
 
-distutils.core.setup(name='phonenumbers',
+# Discover whether per-prefix data is available
+if 'lite' in sys.argv:
+    lite = True
+    del sys.argv[sys.argv.index('lite')]
+else:
+    lite = False
+if not lite:
+    try:
+        import phonenumbers.tzdata
+    except ImportError:
+        lite = True
+
+# Various parameters depend on whether we are the lite package or not
+if lite:
+    pkgname = 'phonenumberslite'
+    pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.shortdata']
+    pkgstatus = 'Development Status :: 4 - Beta'
+    lite = True
+else:
+    pkgname = 'phonenumbers'
+    pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.geodata', 'phonenumbers.shortdata',
+            'phonenumbers.carrierdata', 'phonenumbers.tzdata']
+    pkgstatus = 'Development Status :: 5 - Production/Stable'
+
+distutils.core.setup(name=pkgname,
                      version=__version__,
                      description="Python version of Google's common library for parsing, formatting, storing and validating international phone numbers.",
                      author='David Drysdale',
                      author_email='dmd@lurklurk.org',
                      url='https://github.com/daviddrysdale/python-phonenumbers',
                      license='Apache License 2.0',
-                     packages=['phonenumbers', 'phonenumbers.data', 'phonenumbers.geodata', 'phonenumbers.shortdata',
-                               'phonenumbers.carrierdata', 'phonenumbers.tzdata'],
+                     packages=pkgs,
                      test_suite="tests",
                      platforms='Posix; MacOS X; Windows',
                      classifiers=['Development Status :: 5 - Production/Stable',

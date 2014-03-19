@@ -124,4 +124,4 @@ Release Procedure
  - Push the package to PyPI with:
      cd python && setup.py sdist upload
  - Push the lite package to PyPI with:
-     cd python && setup-lite.py sdist upload
+     cd python && setup.py lite sdist upload
