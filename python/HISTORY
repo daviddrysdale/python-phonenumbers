@@ -1,10 +1,29 @@
 
-==================
- What's new in 6.0
-==================
+=====================
+ What's new in 6.0.0a
+=====================
 
-Merged to upstream Subversion revision 650.
+Split geographic metadata into chunks.
+Generate separate phonenumbers-lite package.
+(No upstream changes.)
+
+
+====================
+ What's new in 6.0.0
+====================
+
 Removed beta status.
+Merge up to upstream Subversion revision 650; upstream code changelog:
+   - Better support for detecting phone numbers in text that are beside each
+     other
+   - Change to how Japanese numbers beginning with "00" are modelled, with the
+     side-effect that the maximum possible number length has been extended by
+     1.
+   - Handle StringIndexOutOfBoundsException in the AsYouTypeFormatter when the
+     national prefix that was extracted was not found in the prefix. This
+     affected countries with very long carrier codes, such as Korea.
+   - Removal of some of the author attributions - contributions to be tracked
+     in CONTRIBUTORS file.
 
 
 =====================
@@ -28,16 +47,43 @@ The short number functions have been renamed:
  - expected_cost becomes expected_cost_for_region, and there's a new expected_cost
    function that takes a PhoneNumber object.
 
-Merge up to upstream Subversion revision 622.
+Merge up to upstream Subversion revision 622; upstream code changelog:
+    - Adding support for numbers with multiple Italian leading zeros, by
+      adding a field to the phone number proto to allow an arbitrary number of
+      leading zeros, and supporting this when parsing, validating and
+      formatting.
+    - Adding more functionality to ShortNumberInfo -> such as
+      GetExpectedCostForRegion.
+    - Fix for parsing short numbers that start with the national prefix.
+    - Updating FormatNumberForMobileDialing to work with short numbers.
+    - Stop finding Israeli 4-digit "star" numbers in text when no star is in
+      fact present.
+    - Bug fix for finding phone numbers where the area code was also part of
+      the country calling code.
 
 
 =====================
  What's new in 5.8b1
 =====================
 
-Merge up to upstream Subversion revision 603.
 Rename shortnumberutil.py to shortnumberinfo.py
-
+Merge up to upstream Subversion revision 603; upstream code changelog:
+   - Renamed ShortNumberUtil to ShortNumberInfo -> the former class is now
+     deprecated and will be deleted in a later release. At the moment it just
+     delegates to ShortNumberInfo.
+   - New methods in the ShortNumberInfo API - isCarrierSpecific, singleton interface,
+     isPossibleShortNumber, isValidShortNumber, getShortNumberCost. Note this
+     is an experimental API at the moment and subject to change.
+   - Bug fixes:
+      -- AsYouTypeFormatting: 3-digit numbers can be formatted as a group
+         where appropriate
+      -- AsYouTypeFormatting: Countries with an optional national prefix were
+         considered before to have always entered it, resulting in bugs where
+         numbers without the national prefix were not properly formatted.
+      -- Numbers in Chile that overlap with emergency numbers are no longer
+         marked as connecting to them
+      -- Not requiring the NDC to be alone for countries where there is no
+         national prefix in strict grouping when extracting phone numbers
 
 
 =====================
@@ -46,27 +92,34 @@ Rename shortnumberutil.py to shortnumberinfo.py
 
 Fix setup.py to include new .shortdata sub-package.
 
+
 =====================
  What's new in 5.7b1
 =====================
 
-Merge up to upstream Subversion revision 594.
-
+Merge up to upstream Subversion revision 594; upstream code changelog:
+    - Improve phone number extraction recall.
+    - Add support for loading short number metadata.
 
 
 =====================
  What's new in 5.6b1
 =====================
 
-Merge up to upstream Subversion revision 579.
-
+Merge up to upstream Subversion revision 579; upstream code changelog:
+   - Fix for as-you-type-formatting bug affecting countries with no national prefix
+     formatting rule, such as China.
 
 
 =====================
  What's new in 5.5b1
 =====================
 
-Merge up to upstream Subversion revision 574.
+Merge up to upstream Subversion revision 574; upstream code changelog:
+    - Changed internal initialization code and made more fields final.
+      Note that we now throw an exception if an attempt is made to set the
+      metadata more than once (which should only happen during testing).
+    - Fix problem with formatNumberForMobileDialing for HU and CL.
 
 
 =====================
@@ -74,14 +127,18 @@ Merge up to upstream Subversion revision 574.
 =====================
 
 Load metadata on demand rather than all at start of day.
-Merge up to upstream Subversion revision 557.
+Merge up to upstream Subversion revision 557; upstream code changelog:
+    - Switch formatNumberForMobileDialing to prefer national format to international format when the
+      number is dialed from the same region the phone number is from.
 
 
 =====================
  What's new in 5.3b1
 =====================
 
-Merge up to upstream Subversion revision 550.
+Merge up to upstream Subversion revision 550; upstream code changelog:
+    - Handling UAN numbers in Argentina better when dialling them locally from a
+      mobile
 
 
 =====================
@@ -113,7 +170,6 @@ fixed the mismatch.
 =====================
 
 Merge up to upstream Subversion revision 492.
-
 
 
 =====================
@@ -226,11 +282,13 @@ Require Python 2.5, to allow import unicodedata.
 
 Fix GH-3: crash in parse() for number with blank metadata
 
+
 =====================
  What's new in 3.5b1
 =====================
 
 Merge up to upstream Subversion revision 213.
+
 
 =====================
  What's new in 3.4b1
@@ -246,11 +304,13 @@ More unit test coverage
 
 Merge up to upstream Subversion revision 190.
 
+
 =====================
  What's new in 3.2a1
 =====================
 
 Merge up to upstream version 3.3, Subversion revision 171.
+
 
 =====================
  What's new in 3.1a1

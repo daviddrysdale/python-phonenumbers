@@ -103,7 +103,10 @@ re_util.py.
 Release Procedure
 ===========================
 
- - Ensure that python/HISTORY file is up-to-date.
+ - Ensure that python/HISTORY file is up-to-date, and includes
+   descriptions of changes in this version (adapted from the
+   upstream debian/changelog, skipping the metadata changes
+   chunks).
  - Set the __version__ field in python/phonenumbers/__init__.py
  - Check that the list of symbols in python/phonenumbers/__init__.py __all__ is
    up to date.  The tools/python/allcheck.py script helps with this.
