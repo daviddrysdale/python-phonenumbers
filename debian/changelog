@@ -1,0 +1,5 @@
+python-phonenumbers (6.00a) UNRELEASED; urgency=low
+
+  * Initial Debian packaging
+
+ -- Torge Szczepanek <debian@cygnusnetworks.de>  Wed, 07 May 2014 13:01:55 +0200
