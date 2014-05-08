@@ -1,4 +1,4 @@
-python-phonenumbers (6.00a) UNRELEASED; urgency=low
+python-phonenumbers (6.0.0a) UNRELEASED; urgency=low
 
   * Initial Debian packaging
 
