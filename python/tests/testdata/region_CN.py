@@ -1,10 +1,10 @@
-"""Auto-generated file, do not edit by hand. BF metadata"""
-from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
+"""Auto-generated file, do not edit by hand. CN metadata"""
+from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_BF = PhoneMetadata(id='BF', country_code=226, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[24-7]\\d{7}', possible_number_pattern='\\d{8}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:20(?:49|5[23]|9[016-9])|40(?:4[569]|5[4-6]|7[0179])|50(?:[34]\\d|50))\\d{4}', possible_number_pattern='\\d{8}', example_number='20491234'),
-    mobile=PhoneNumberDesc(national_number_pattern='6(?:[0-689]\\d|7[0-2])\\d{5}|7\\d{7}', possible_number_pattern='\\d{8}', example_number='70123456'),
+PHONE_METADATA_CN = PhoneMetadata(id='CN', country_code=86, international_prefix=None,
+    general_desc=PhoneNumberDesc(),
+    fixed_line=PhoneNumberDesc(),
+    mobile=PhoneNumberDesc(),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
@@ -14,4 +14,4 @@ PHONE_METADATA_BF = PhoneMetadata(id='BF', country_code=226, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4')])
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{5,6})', format='\\1 \\2', leading_digits_pattern=['[3-9]', '[3-9]\\d{2}[19]', '[3-9]\\d{2}(?:10|95)'], national_prefix_formatting_rule='\\1', domestic_carrier_code_formatting_rule='$CC \\1')])

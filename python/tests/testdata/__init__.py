@@ -15,7 +15,7 @@
 
 from phonenumbers.phonemetadata import PhoneMetadata
 
-_AVAILABLE_REGION_CODES = ['AD','AE','AO','AR','AU','BR','BS','BY','CC','CX','DE','FR','GB','GG','HU','IT','JP','KR','MX','NZ','PL','RE','SG','US','YT']
+_AVAILABLE_REGION_CODES = ['AD','AE','AO','AR','AU','BR','BS','BY','CC','CN','CX','DE','FR','GB','GG','HU','IT','JP','KR','MX','NZ','PL','RE','SG','US','YT']
 _AVAILABLE_NONGEO_COUNTRY_CODES = [800, 979]
 
 def _load_region(code):
@@ -51,6 +51,7 @@ _COUNTRY_CODE_TO_REGION_CODE = {
     65: ("SG",),
     81: ("JP",),
     82: ("KR",),
+    86: ("CN",),
     244: ("AO",),
     262: ("RE", "YT",),
     375: ("BY",),
