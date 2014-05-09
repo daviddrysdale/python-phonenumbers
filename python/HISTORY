@@ -1,4 +1,15 @@
 
+====================
+ What's new in 6.1.0
+====================
+
+Merge to upstream Subversion revision 656; upstream code changelog:
+   - Adding MetadataLoader support to allow custom metadata loading from
+     alternative sources (should have no visible impact to users).
+   - Fixing bug where digits could be lost in as-you-type formatting and
+     formatting patterns incorrectly applied.
+
+
 =====================
  What's new in 6.0.0a
 =====================
