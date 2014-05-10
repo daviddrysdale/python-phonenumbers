@@ -165,7 +165,7 @@ _ALL_PLUS_NUMBER_GROUPING_SYMBOLS = dict({u("-"): u("-"),  # Add grouping symbol
                                          # Put (lower letter -> upper letter) and
                                          # (upper letter -> upper letter) mappings.
                                          **dict([(_c.lower(), _c) for _c in _ALPHA_MAPPINGS.keys()] +
-                                                [(_c, _c)         for _c in _ALPHA_MAPPINGS.keys()],
+                                                [(_c, _c) for _c in _ALPHA_MAPPINGS.keys()],
                                                 **_ASCII_DIGITS_MAP))
 
 # Pattern that makes it easy to distinguish whether a region has a unique
@@ -1256,7 +1256,7 @@ def _has_formatting_pattern_for_number(numobj):
         return False
     national_number = national_significant_number(numobj)
     format_rule = choose_formatting_pattern_for_number(metadata.number_format, national_number)
-    return format_rule != None
+    return format_rule is not None
 
 
 def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):

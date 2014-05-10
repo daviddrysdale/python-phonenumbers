@@ -618,7 +618,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Python version extra test: check string conversion with preferred carrier code
         self.assertEqual('Country Code: 54 National Number: 91234125678 '
                          'Leading Zero(s): False Preferred Domestic Carrier Code: 19',
-                          str(arNumber))
+                         str(arNumber))
         self.assertEqual("PhoneNumber(country_code=54, national_number=91234125678, extension=None, "
                          "italian_leading_zero=False, number_of_leading_zeros=None, "
                          "country_code_source=None, preferred_domestic_carrier_code='19')",
@@ -2183,12 +2183,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                          country_code_source=CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN,
                                          preferred_domestic_carrier_code="")
         self.assertEqual(shorterAlphaNumber,
-                          phonenumbers.parse("1800 six-flag", "US", keep_raw_input=True))
+                         phonenumbers.parse("1800 six-flag", "US", keep_raw_input=True))
 
         shorterAlphaNumber.raw_input = "+1800 six-flag"
         shorterAlphaNumber.country_code_source = CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN
         self.assertEqual(shorterAlphaNumber,
-                          phonenumbers.parse("+1800 six-flag", "NZ", keep_raw_input=True))
+                         phonenumbers.parse("+1800 six-flag", "NZ", keep_raw_input=True))
 
         shorterAlphaNumber.raw_input = "001800 six-flag"
         shorterAlphaNumber.country_code_source = CountryCodeSource.FROM_NUMBER_WITH_IDD
@@ -2607,7 +2607,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     leading_digits='123',
     leading_zero_possible=True,
     short_data=True)""",
-                          str(metadataXX))
+                         str(metadataXX))
 
         # Coverage test: invalid example number for region
         PhoneMetadata._region_metadata['XX'] = metadataXX
@@ -2640,7 +2640,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule='\\1'),
         NumberFormat(pattern='(\\d{1})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-478]'], national_prefix_formatting_rule='0\\1')])""",
-                          str(metadata))
+                         str(metadata))
 
     def testMetadataEval(self):
         # Python version extra tests for string conversions
@@ -2670,7 +2670,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Python version extra tests
         self.assertTrue(phonenumberutil._region_code_for_number_from_list(GB_NUMBER, ("XX",)) is None)
         self.assertEqual((0, "abcdef"),
-                          phonenumberutil._extract_country_code("abcdef"))
+                         phonenumberutil._extract_country_code("abcdef"))
         metadata = PhoneMetadata.metadata_for_region("AU")
         number = PhoneNumber()
         self.assertEqual((0, u("")),

@@ -149,25 +149,25 @@ _TIME_STAMPS_SUFFIX = re.compile(u(":[0-5]\\d"))
 # Note that if there is a match, we will always check any text found up to the
 # first match as well.
 _INNER_MATCHES = (
-     # Breaks on the slash - e.g. "651-234-2345/332-445-1234"
-     re.compile(u("/+(.*)")),
-     # Note that the bracket here is inside the capturing group, since we
-     # consider it part of the phone number. Will match a pattern like "(650)
-     # 223 3345 (754) 223 3321".
-     re.compile(u("(\\([^(]*)")),
-     # Breaks on a hyphen - e.g. "12345 - 332-445-1234 is my number."  We
-     # require a space on either side of the hyphen for it to be considered a
-     # separator.
-     re.compile(u("(?u)(?:\\p{Z}-|-\\s)\\s*(.+)")),
-     # Various types of wide hyphens. Note we have decided not to enforce a
-     # space here, since it's possible that it's supposed to be used to break
-     # two numbers without spaces, and we haven't seen many instances of it
-     # used within a number.
-     re.compile(u("(?u)[\u2012-\u2015\uFF0D]\\s*(.+)")),
-     # Breaks on a full stop - e.g. "12345. 332-445-1234 is my number."
-     re.compile(u("(?u)\\.+\\s*([^.]+)")),
-     # Breaks on space - e.g. "3324451234 8002341234"
-     re.compile(u("(?u)\\s+(\\S+)")))
+    # Breaks on the slash - e.g. "651-234-2345/332-445-1234"
+    re.compile(u("/+(.*)")),
+    # Note that the bracket here is inside the capturing group, since we
+    # consider it part of the phone number. Will match a pattern like "(650)
+    # 223 3345 (754) 223 3321".
+    re.compile(u("(\\([^(]*)")),
+    # Breaks on a hyphen - e.g. "12345 - 332-445-1234 is my number."  We
+    # require a space on either side of the hyphen for it to be considered a
+    # separator.
+    re.compile(u("(?u)(?:\\p{Z}-|-\\s)\\s*(.+)")),
+    # Various types of wide hyphens. Note we have decided not to enforce a
+    # space here, since it's possible that it's supposed to be used to break
+    # two numbers without spaces, and we haven't seen many instances of it
+    # used within a number.
+    re.compile(u("(?u)[\u2012-\u2015\uFF0D]\\s*(.+)")),
+    # Breaks on a full stop - e.g. "12345. 332-445-1234 is my number."
+    re.compile(u("(?u)\\.+\\s*([^.]+)")),
+    # Breaks on space - e.g. "3324451234 8002341234"
+    re.compile(u("(?u)\\s+(\\S+)")))
 
 
 class Leniency(object):
@@ -309,7 +309,7 @@ def _all_number_groups_are_exactly_present(numobj, normalized_candidate, formatt
     """
     candidate_groups = re.split(NON_DIGITS_PATTERN, normalized_candidate)
     # Set this to the last group, skipping it if the number has an extension.
-    if numobj.extension != None:
+    if numobj.extension is not None:
         candidate_number_group_index = len(candidate_groups) - 2
     else:
         candidate_number_group_index = len(candidate_groups) - 1
