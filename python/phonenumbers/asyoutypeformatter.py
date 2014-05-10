@@ -134,7 +134,7 @@ class AsYouTypeFormatter(object):
         self._able_to_format = False
         return False
 
-    def _get_available_formats(self, leading_three_digits):
+    def _get_available_formats(self, leading_digits):
         if (self._is_complete_number and
             len(self._current_metadata.intl_number_format) > 0):
             format_list = self._current_metadata.intl_number_format
@@ -147,7 +147,7 @@ class AsYouTypeFormatter(object):
                 _formatting_rule_has_first_group_only(this_format.national_prefix_formatting_rule)):
                 if self._is_format_eligible(this_format.format):
                     self._possible_formats.append(this_format)
-        self._narrow_down_possible_formats(leading_three_digits)
+        self._narrow_down_possible_formats(leading_digits)
 
     def _is_format_eligible(self, format):
         return fullmatch(_ELIGIBLE_FORMAT_PATTERN, format)
@@ -156,19 +156,19 @@ class AsYouTypeFormatter(object):
         index_of_leading_digits_pattern = len(leading_digits) - _MIN_LEADING_DIGITS_LENGTH
         ii = 0
         while ii < len(self._possible_formats):
-            format = self._possible_formats[ii]
+            num_format = self._possible_formats[ii]
             ii += 1
-            if len(format.leading_digits_pattern) > index_of_leading_digits_pattern:
-                leading_digits_pattern = re.compile(format.leading_digits_pattern[index_of_leading_digits_pattern])
-                m = leading_digits_pattern.match(leading_digits)
-                if not m:
-                    # remove the element we've just examined, now at (ii-1)
-                    ii -= 1
-                    self._possible_formats.pop(ii)
-            else:
-                # The particular format has no more specific
-                # leading_digits_pattern, and it should be retained.
-                pass
+            if len(num_format.leading_digits_pattern) == 0:
+                # Keep everything that isn't restricted by leading digits.
+                continue
+            last_leading_digits_pattern = min(index_of_leading_digits_pattern,
+                                              len(num_format.leading_digits_pattern) - 1)
+            leading_digits_pattern = re.compile(num_format.leading_digits_pattern[last_leading_digits_pattern])
+            m = leading_digits_pattern.match(leading_digits)
+            if not m:
+                # remove the element we've just examined, now at (ii-1)
+                ii -= 1
+                self._possible_formats.pop(ii)
 
     def _create_formatting_template(self, num_format):
         number_pattern = num_format.pattern
@@ -337,7 +337,7 @@ class AsYouTypeFormatter(object):
             self._current_output = self._prefix_before_national_number + self._national_number
             return self._current_output
 
-        if len(self._possible_formats) > 0:  # The formatting pattern is already chosen.
+        if len(self._possible_formats) > 0:  # The formatting patterns are already chosen.
             temp_national_number = self._input_digit_helper(next_char)
             # See if the accrued digits can be formatted properly already. If
             # not, use the results from input_digit_helper, which does
@@ -441,7 +441,7 @@ class AsYouTypeFormatter(object):
         # We start to attempt to format only when at least MIN_LEADING_DIGITS_LENGTH digits of national
         # number (excluding national prefix) have been entered.
         if len(self._national_number) >= _MIN_LEADING_DIGITS_LENGTH:
-            self._get_available_formats(self._national_number[:_MIN_LEADING_DIGITS_LENGTH])
+            self._get_available_formats(self._national_number)
             # See if the accrued digits can be formatted properly already.
             formatted_number = self._attempt_to_format_accrued_digits()
             if len(formatted_number) > 0:
