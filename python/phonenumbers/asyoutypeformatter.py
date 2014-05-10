@@ -511,8 +511,8 @@ class AsYouTypeFormatter(object):
         Returns True when accrued_input_without_formatting begins with the plus sign or valid IDD for
         default_country.
         """
-        international_prefix = re.compile(unicod("\\") + _PLUS_SIGN +
-                                          unicod("|") + self._current_metadata.international_prefix)
+        international_prefix = re.compile(unicod("\\") + _PLUS_SIGN + unicod("|") +
+                                          (self._current_metadata.international_prefix or U_EMPTY_STRING))
         idd_match = international_prefix.match(self._accrued_input_without_formatting)
         if idd_match:
             self._is_complete_number = True
