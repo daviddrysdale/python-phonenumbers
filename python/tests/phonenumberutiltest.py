@@ -1608,12 +1608,15 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:03-331-6005;phone-context=+64", "NZ"))
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:331-6005;phone-context=+64-3", "NZ"))
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:331-6005;phone-context=+64-3", "US"))
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse("My number is tel:03-331-6005;phone-context=+64", "NZ"))
         # Test parsing RFC3966 format with optional user-defined
         # parameters. The parameters will appear after the context if present.
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:03-331-6005;phone-context=+64;a=%A1", "NZ"))
         # Test parsing RFC3966 with an ISDN subaddress.
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:03-331-6005;isub=12345;phone-context=+64", "NZ"))
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:+64-3-331-6005;isub=12345", "NZ"))
+        # Test parsing RFC3966 with "tel:" missing.
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse("03-331-6005;phone-context=+64", "NZ"))
         # Testing international prefixes.
         # Should strip country calling code.
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("0064 3 331 6005", "NZ"))

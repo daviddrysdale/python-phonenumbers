@@ -2555,8 +2555,13 @@ def _build_national_number_for_parsing(number):
             national_number = U_EMPTY_STRING
         # Now append everything between the "tel:" prefix and the
         # phone-context. This should include the national number, an optional
-        # extension or isdn-subaddress component.
-        national_number += number[number.find(_RFC3966_PREFIX) + len(_RFC3966_PREFIX):index_of_phone_context]
+        # extension or isdn-subaddress component. Note we also handle the case
+        # when "tel:" is missing, as we have seen in some of the phone number
+        # inputs.  In that case we append everything from the beginning.
+        index_of_rfc3996_prefix = number.find(_RFC3966_PREFIX)
+        index_of_national_number = ((index_of_rfc3996_prefix + len(_RFC3966_PREFIX))
+                                    if (index_of_rfc3996_prefix >= 0) else 0);
+        national_number += number[index_of_national_number:index_of_phone_context]
     else:
         # Extract a possible number from the string passed in (this strips leading characters that
         # could not be the start of a phone number.)
