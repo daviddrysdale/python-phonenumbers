@@ -560,12 +560,11 @@ def convert_alpha_characters_in_number(number):
 def length_of_geographical_area_code(numobj):
     """Return length of the geographical area code for a number.
 
-    Gets the length of the geographical area code from the national_number
-    field of the PhoneNumber object passed in, so that clients could use it to
-    split a national significant number into geographical area code and
-    subscriber number. It works in such a way that the resultant subscriber
-    number should be diallable, at least on some devices. An example of how
-    this could be used:
+    Gets the length of the geographical area code from the PhoneNumber object
+    passed in, so that clients could use it to split a national significant
+    number into geographical area code and subscriber number. It works in such
+    a way that the resultant subscriber number should be diallable, at least
+    on some devices. An example of how this could be used:
 
     >>> import phonenumbers
     >>> numobj = phonenumbers.parse("16502530000", "US")
@@ -727,6 +726,18 @@ def _formatting_rule_has_first_group_only(national_prefix_formatting_rule):
 
 
 def _is_number_geographical(numobj):
+    """Tests whether a phone number has a geographical association.
+
+    It checks if the number is associated to a certain region in the country
+    where it belongs to. Note that this doesn't verify if the number is
+    actually in use.
+
+    A similar method is implemented as geocoder._can_be_geocoded, which
+    performs a looser check, since it only prevents cases where prefixes
+    overlap for geocodable and non-geocodable numbers. Also, if new phone
+    number types were added, we should check if this other method should be
+    updated too.
+    """
     num_type = number_type(numobj)
     # TODO: Include mobile phone numbers from countries like Indonesia, which
     # has some mobile numbers that are geographical.
