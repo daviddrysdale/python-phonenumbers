@@ -135,7 +135,7 @@ _SLASH_SEPARATED_DATES = re.compile(u("(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-
 
 # Matches timestamps. Examples: "2012-01-02 08:00". Note that the reg-ex does
 # not include the trailing ":\d\d" -- that is covered by TIME_STAMPS_SUFFIX.
-_TIME_STAMPS = re.compile(u("[12]\\d{3}[-/]?[01]\\d[-/]?[0-3]\\d [0-2]\\d$"))
+_TIME_STAMPS = re.compile(u("[12]\\d{3}[-/]?[01]\\d[-/]?[0-3]\\d +[0-2]\\d$"))
 _TIME_STAMPS_SUFFIX = re.compile(u(":[0-5]\\d"))
 
 # Patterns used to extract phone numbers from a larger phone-number-like

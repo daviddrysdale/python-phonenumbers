@@ -134,6 +134,10 @@ IMPOSSIBLE_CASES = [NumberTest("12345", "US"),
                     NumberTest("2012-01-02 08:00", "US"),
                     NumberTest("2012/01/02 08:00", "US"),
                     NumberTest("20120102 08:00", "US"),
+                    NumberTest("2014-04-12 04:04 PM", "US"),
+                    NumberTest("2014-04-12 &nbsp;04:04 PM", "US"),
+                    NumberTest("2014-04-12 &nbsp;04:04 PM", "US"),
+                    NumberTest("2014-04-12  04:04 PM", "US"),
                     ]
 
 # Strings with number-like things that should only be found under "possible".
