@@ -52,5 +52,7 @@ distutils.core.setup(name='phonenumbers',
                                   'License :: OSI Approved :: Apache Software License',
                                   'Operating System :: OS Independent',
                                   'Topic :: Communications :: Telephony',
+                                  'Programming Language :: Python',
+                                  'Programming Language :: Python :: 3'
                                   ],
                      )
