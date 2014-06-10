@@ -22131,7 +22131,8 @@
           5(?:
             00|
             33|
-            44
+            44|
+            66
           )[2-9]\d{6}
         </nationalNumberPattern>
         <possibleNumberPattern>\d{10}</possibleNumberPattern>
