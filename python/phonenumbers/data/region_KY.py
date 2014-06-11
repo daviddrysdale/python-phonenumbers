@@ -8,7 +8,7 @@ PHONE_METADATA_KY = PhoneMetadata(id='KY', country_code=1, international_prefix=
     toll_free=PhoneNumberDesc(national_number_pattern='8(?:00|44|55|66|77|88)[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='8002345678'),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[2-9]\\d{6}|345976\\d{4}', possible_number_pattern='\\d{10}', example_number='9002345678'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|33|44)[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='5002345678'),
+    personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|33|44|66|77)[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='5002345678'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='345849\\d{4}', possible_number_pattern='\\d{10}', example_number='3458491234'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
