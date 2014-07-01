@@ -1,5 +1,14 @@
 
 ====================
+ What's new in 6.2.0
+====================
+
+Merge to upstream Subversion revision 674; upstream code changelog:
+   - Better exclusion of dates when matching phone numbers from text.
+   - Handle phone input in RFC3966 with missing tel: prefix
+
+
+====================
  What's new in 6.1.0
 ====================
 
