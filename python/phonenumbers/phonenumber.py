@@ -57,7 +57,7 @@ class PhoneNumber(UnicodeMixin):
                  country_code=None,
                  national_number=None,
                  extension=None,
-                 italian_leading_zero=False,
+                 italian_leading_zero=None,
                  number_of_leading_zeros=None,
                  raw_input=None,
                  country_code_source=None,
@@ -119,8 +119,18 @@ class PhoneNumber(UnicodeMixin):
         #
         # Clients who use the parsing functionality of the i18n phone number
         # libraries will have these fields set if necessary automatically.
-        self.italian_leading_zero = bool(italian_leading_zero)
-        self.number_of_leading_zeros = number_of_leading_zeros  # None or int
+        #
+        # None if not set, of type bool otherwise:
+        if italian_leading_zero is None:
+            self.italian_leading_zero = None
+        else:
+            self.italian_leading_zero = bool(italian_leading_zero)
+
+        # None if not set, of type int otherwise.
+        if number_of_leading_zeros is None:
+            self.number_of_leading_zeros = number_of_leading_zeros
+        else:
+            self.number_of_leading_zeros = int(number_of_leading_zeros)
 
         # The next few fields are non-essential fields for a phone number.
         # They retain extra information about the form the phone number was
@@ -156,7 +166,7 @@ class PhoneNumber(UnicodeMixin):
         self.country_code = None
         self.national_number = None
         self.extension = None
-        self.italian_leading_zero = False
+        self.italian_leading_zero = None
         self.number_of_leading_zeros = None
         self.raw_input = None
         self.country_code_source = None
@@ -187,7 +197,7 @@ class PhoneNumber(UnicodeMixin):
         return (self.country_code == other.country_code and
                 self.national_number == other.national_number and
                 self.extension == other.extension and
-                self.italian_leading_zero == other.italian_leading_zero and
+                bool(self.italian_leading_zero) == bool(other.italian_leading_zero) and
                 self.number_of_leading_zeros == other.number_of_leading_zeros and
                 self.raw_input == other.raw_input and
                 self.country_code_source == other.country_code_source and
@@ -231,7 +241,7 @@ class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
         return hash((self.country_code,
                      self.national_number,
                      self.extension,
-                     self.italian_leading_zero,
+                     bool(self.italian_leading_zero),
                      self.number_of_leading_zeros,
                      self.raw_input,
                      self.country_code_source,

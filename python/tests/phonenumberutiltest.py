@@ -617,10 +617,10 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.format_national_number_with_preferred_carrier_code(arNumber, ""))
         # Python version extra test: check string conversion with preferred carrier code
         self.assertEqual('Country Code: 54 National Number: 91234125678 '
-                         'Leading Zero(s): False Preferred Domestic Carrier Code: 19',
+                         'Preferred Domestic Carrier Code: 19',
                          str(arNumber))
         self.assertEqual("PhoneNumber(country_code=54, national_number=91234125678, extension=None, "
-                         "italian_leading_zero=False, number_of_leading_zeros=None, "
+                         "italian_leading_zero=None, number_of_leading_zeros=None, "
                          "country_code_source=None, preferred_domestic_carrier_code='19')",
                          repr(arNumber))
         # When the preferred_domestic_carrier_code is present (even when it
@@ -1486,7 +1486,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             self.assertEqual(strippedNumber, numberToFill,
                              msg="Did not strip off the country calling code correctly.")
             # Python version extra test covering string conversion with country_code_source present
-            self.assertEqual("Country Code: 1 National Number: None Leading Zero(s): False Country Code Source: 5",
+            self.assertEqual("Country Code: 1 National Number: None Country Code Source: 5",
                              str(number))
         except NumberParseException:
             e = sys.exc_info()[1]

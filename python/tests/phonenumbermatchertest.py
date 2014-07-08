@@ -96,7 +96,7 @@ class PhoneNumberMatchTest(unittest.TestCase):
         # Python version extra test
         self.assertEqual("PhoneNumberMatch(start=10, raw_string='1 800 234 45 67', "
                          "numobj=PhoneNumber(country_code=None, national_number=None, extension=None, "
-                         "italian_leading_zero=False, number_of_leading_zeros=None, "
+                         "italian_leading_zero=None, number_of_leading_zeros=None, "
                          "country_code_source=None, preferred_domestic_carrier_code=None))", repr(match))
 
 

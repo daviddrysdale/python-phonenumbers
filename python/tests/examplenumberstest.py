@@ -234,7 +234,7 @@ class ExampleNumbersTest(unittest.TestCase):
         # Some metadata is blank; check that we cope with this.
         # Example: MH (+692)
         number = phonenumberutil.parse("+6927654321", "US")
-        self.assertEqual("Country Code: 692 National Number: 7654321 Leading Zero(s): False", str(number))
+        self.assertEqual("Country Code: 692 National Number: 7654321", str(number))
 
     def testMetadataPrint(self):
         for callingCode in PhoneMetadata._region_available.keys():
