@@ -38,18 +38,6 @@ class PhoneNumberTest(unittest.TestCase):
         numberB = PhoneNumber(country_code=1, national_number=6502530000)
         self.assertEqual(numberA, numberB)
 
-    def test_equal_with_italian_leading_zero_set_to_default(self):
-        numberA = PhoneNumber()
-        numberA.country_code = 1
-        numberA.national_number = to_long(6502530000)
-        numberA.italian_leading_zero = False
-        numberB = PhoneNumber()
-        numberB.country_code = 1
-        numberB.national_number = to_long(6502530000)
-        # These should still be equal, since the default value for this field
-        # is false.
-        self.assertEqual(numberA, numberB)
-
     def test_equal_with_country_code_source_set(self):
         numberA = PhoneNumber()
         numberA.raw_input = "+1 650 253 00 00"
