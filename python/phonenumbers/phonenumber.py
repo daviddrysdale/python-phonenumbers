@@ -197,7 +197,7 @@ class PhoneNumber(UnicodeMixin):
         return (self.country_code == other.country_code and
                 self.national_number == other.national_number and
                 self.extension == other.extension and
-                self.italian_leading_zero == other.italian_leading_zero and
+                bool(self.italian_leading_zero) == bool(other.italian_leading_zero) and
                 self.number_of_leading_zeros == other.number_of_leading_zeros and
                 self.raw_input == other.raw_input and
                 self.country_code_source == other.country_code_source and
@@ -241,7 +241,7 @@ class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
         return hash((self.country_code,
                      self.national_number,
                      self.extension,
-                     self.italian_leading_zero,
+                     bool(self.italian_leading_zero),
                      self.number_of_leading_zeros,
                      self.raw_input,
                      self.country_code_source,
