@@ -6,7 +6,7 @@ Examples of use:
 >>> from phonenumbers.util import prnt  # equivalent to Py3k print()
 >>> x = phonenumbers.parse("+442083661177", None)
 >>> prnt(x)
-Country Code: 44 National Number: 2083661177 Leading Zero(s): False
+Country Code: 44 National Number: 2083661177
 >>> type(x)
 <class 'phonenumbers.phonenumber.PhoneNumber'>
 >>> str(phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.NATIONAL))
@@ -17,7 +17,7 @@ Country Code: 44 National Number: 2083661177 Leading Zero(s): False
 '+442083661177'
 >>> y = phonenumbers.parse("020 8366 1177", "GB")
 >>> prnt(y)
-Country Code: 44 National Number: 2083661177 Leading Zero(s): False
+Country Code: 44 National Number: 2083661177
 >>> x == y
 True
 >>>
