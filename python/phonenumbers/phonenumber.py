@@ -122,15 +122,15 @@ class PhoneNumber(UnicodeMixin):
         #
         # None if not set, of type bool otherwise:
         if italian_leading_zero is None:
-          self.italian_leading_zero = None
+            self.italian_leading_zero = None
         else:
-          self.italian_leading_zero = bool(italian_leading_zero)
+            self.italian_leading_zero = bool(italian_leading_zero)
 
         # None if not set, of type int otherwise.
         if number_of_leading_zeros is None:
-          self.number_of_leading_zeros = number_of_leading_zeros
+            self.number_of_leading_zeros = number_of_leading_zeros
         else:
-          self.number_of_leading_zeros = int(number_of_leading_zeros)
+            self.number_of_leading_zeros = int(number_of_leading_zeros)
 
         # The next few fields are non-essential fields for a phone number.
         # They retain extra information about the form the phone number was
