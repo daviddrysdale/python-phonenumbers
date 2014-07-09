@@ -2560,7 +2560,7 @@ def _build_national_number_for_parsing(number):
         # inputs.  In that case we append everything from the beginning.
         index_of_rfc3996_prefix = number.find(_RFC3966_PREFIX)
         index_of_national_number = ((index_of_rfc3996_prefix + len(_RFC3966_PREFIX))
-                                    if (index_of_rfc3996_prefix >= 0) else 0);
+                                    if (index_of_rfc3996_prefix >= 0) else 0)
         national_number += number[index_of_national_number:index_of_phone_context]
     else:
         # Extract a possible number from the string passed in (this strips leading characters that
