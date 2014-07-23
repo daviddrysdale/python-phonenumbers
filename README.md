@@ -160,7 +160,7 @@ belongs to.
 ```pycon
 >>> from phonenumbers import timezone
 >>> gb_number = phonenumbers.parse("+447986123456", "GB")
->>> str(time_zones_for_number(gb_number))
+>>> str(timezone.time_zones_for_number(gb_number))
 "(u'Atlantic/Reykjavik', u'Europe/London')"
 ```
 
