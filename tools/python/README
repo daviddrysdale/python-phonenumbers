@@ -120,9 +120,9 @@ Release Procedure
      cd tools/python && make PYTHON=python3 test
  - Check that Python 2.5 is still supported:
      cd tools/python && make PYTHON=python2.5 test
- - Create a release-<version> branch and shift to it with:
-     git checkout -b release-<version>
- - Push the branch to Github with:
+ - Create a release-<version> tag:
+     git tag release-<version>
+ - Push the tag to Github with:
      git push <github-remote> release-<version>
  - Push the package to PyPI with:
      cd python && setup.py sdist upload
