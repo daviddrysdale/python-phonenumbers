@@ -55,6 +55,7 @@ US_NUMBER2 = FrozenPhoneNumber(country_code=1, national_number=6509600000)
 US_NUMBER3 = FrozenPhoneNumber(country_code=1, national_number=2128120000)
 US_NUMBER4 = FrozenPhoneNumber(country_code=1, national_number=6174240000)
 US_INVALID_NUMBER = FrozenPhoneNumber(country_code=1, national_number=123456789)
+NANPA_TOLL_FREE = FrozenPhoneNumber(country_code=1, national_number=8002431234)
 BS_NUMBER1 = FrozenPhoneNumber(country_code=1, national_number=2423651234)
 AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300)
 AR_MOBILE_NUMBER = FrozenPhoneNumber(country_code=54, national_number=92214000000)
@@ -101,6 +102,12 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         # is valid but not covered by the geocoding data file.
         self.assertEqual("United States",
                          description_for_number(US_NUMBER4, _ENGLISH, region=_USA))
+
+    def testGetDescriptionForNumberBelongingToMultipleCountriesIsEmpty(self):
+        # Test that nothing is returned when the number passed in is valid but
+        # not covered by the geocoding data file and belongs to multiple
+        # countries
+        self.assertEqual("", description_for_number(NANPA_TOLL_FREE, _ENGLISH, region=_USA))
 
     def testGetDescriptionForNumber_en_US(self):
         self.assertEqual("CA",
