@@ -2,9 +2,9 @@
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CX = PhoneMetadata(id='CX', country_code=61, international_prefix=None,
-    general_desc=PhoneNumberDesc(national_number_pattern='5\\d{3,14}', possible_number_pattern='\\d{2,14}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='5\\d{3,14}', possible_number_pattern='\\d{2,14}'),
-    mobile=PhoneNumberDesc(national_number_pattern='5\\d{3,14}', possible_number_pattern='\\d{2,14}'),
+    general_desc=PhoneNumberDesc(),
+    fixed_line=PhoneNumberDesc(),
+    mobile=PhoneNumberDesc(),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
