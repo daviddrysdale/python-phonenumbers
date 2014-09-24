@@ -1635,9 +1635,7 @@ def number_type(numobj):
 
 def _number_type_helper(national_number, metadata):
     """Return the type of the given number against the metadata"""
-    general_desc = metadata.general_desc
-    if (general_desc.national_number_pattern is None or
-        not _is_number_matching_desc(national_number, general_desc)):
+    if not _is_number_matching_desc(national_number, metadata.general_desc):
         return PhoneNumberType.UNKNOWN
     if _is_number_matching_desc(national_number, metadata.premium_rate):
         return PhoneNumberType.PREMIUM_RATE
@@ -1734,16 +1732,7 @@ def is_valid_number_for_region(numobj, region_code):
         # Either the region code was invalid, or the country calling code for
         # this number does not match that of the region code.
         return False
-    general_desc = metadata.general_desc
     nsn = national_significant_number(numobj)
-
-    # For regions where we don't have metadata for PhoneNumberDesc, we treat
-    # any number passed in as a valid number if its national significant
-    # number is between the minimum and maximum lengths defined by ITU for a
-    # national significant number.
-    if general_desc.national_number_pattern is None:
-        num_len = len(nsn)
-        return (num_len > _MIN_LENGTH_FOR_NSN and num_len < _MAX_LENGTH_FOR_NSN)
     return (_number_type_helper(nsn, metadata) != PhoneNumberType.UNKNOWN)
 
 
@@ -2012,16 +2001,6 @@ def is_possible_number_with_reason(numobj):
     # Metadata cannot be None because the country calling code is valid.
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
     general_desc = metadata.general_desc
-
-    # Handling case of numbers with no metadata.
-    if general_desc.national_number_pattern is None:
-        num_len = len(national_number)
-        if num_len < _MIN_LENGTH_FOR_NSN:
-            return ValidationResult.TOO_SHORT
-        elif num_len > _MAX_LENGTH_FOR_NSN:
-            return ValidationResult.TOO_LONG
-        else:
-            return ValidationResult.IS_POSSIBLE
     possible_re = re.compile(general_desc.possible_number_pattern or U_EMPTY_STRING)
     return _test_number_length_against_pattern(possible_re, national_number)
 

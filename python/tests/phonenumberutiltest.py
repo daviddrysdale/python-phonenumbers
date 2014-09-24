@@ -1235,19 +1235,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(ValidationResult.TOO_LONG,
                          phonenumbers.is_possible_number_with_reason(INTERNATIONAL_TOLL_FREE_TOO_LONG))
 
-        # Try with number that we don't have metadata for.
-        adNumber = PhoneNumber(country_code=376, national_number=12345)
-        self.assertEqual(ValidationResult.IS_POSSIBLE,
-                         phonenumbers.is_possible_number_with_reason(adNumber))
-        adNumber.country_code = 376
-        adNumber.national_number = to_long(1)
-        self.assertEqual(ValidationResult.TOO_SHORT,
-                         phonenumbers.is_possible_number_with_reason(adNumber))
-        adNumber.country_code = 376
-        adNumber.national_number = to_long(123456789012345678)
-        self.assertEqual(ValidationResult.TOO_LONG,
-                         phonenumbers.is_possible_number_with_reason(adNumber))
-
     def testIsNotPossibleNumber(self):
         self.assertFalse(phonenumbers.is_possible_number(US_LONG_NUMBER))
         self.assertFalse(phonenumbers.is_possible_number(INTERNATIONAL_TOLL_FREE_TOO_LONG))
@@ -2238,7 +2225,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("+37612345", phonenumbers.format_number(adNumber, PhoneNumberFormat.E164))
         self.assertEqual("12345", phonenumbers.format_number(adNumber, PhoneNumberFormat.NATIONAL))
         self.assertEqual(PhoneNumberType.UNKNOWN, phonenumbers.number_type(adNumber))
-        self.assertTrue(phonenumbers.is_valid_number(adNumber))
+        self.assertFalse(phonenumbers.is_valid_number(adNumber))
 
         # Test dialing a US number from within Andorra.
         self.assertEqual("00 1 650 253 0000",
