@@ -2000,8 +2000,7 @@ def is_possible_number_with_reason(numobj):
     region_code = region_code_for_country_code(country_code)
     # Metadata cannot be None because the country calling code is valid.
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
-    general_desc = metadata.general_desc
-    possible_re = re.compile(general_desc.possible_number_pattern or U_EMPTY_STRING)
+    possible_re = re.compile(metadata.general_desc.possible_number_pattern or U_EMPTY_STRING)
     return _test_number_length_against_pattern(possible_re, national_number)
 
 
