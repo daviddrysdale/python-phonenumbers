@@ -1,5 +1,15 @@
 
 ====================
+ What's new in 6.3.0
+====================
+
+Merge to upstream Subversion revision 703; upstream code changelog:
+   - Changing the offline geocoder to not return any country at all if the number
+     could belong to multiple countries
+   - Removing obsolete code that treated countries with no metadata as valid.
+
+
+====================
  What's new in 6.2.0
 ====================
 
