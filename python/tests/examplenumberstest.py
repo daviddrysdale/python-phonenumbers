@@ -162,11 +162,11 @@ class ExampleNumbersTest(unittest.TestCase):
         invalid_string_cases = []
         for regionCode in phonenumberutil.SUPPORTED_SHORT_REGIONS:
             exampleShortNumber = shortnumberinfo._example_short_number(regionCode)
-            if not shortnumberinfo.is_valid_short_number_for_region(exampleShortNumber, regionCode):
+            phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
+            if not shortnumberinfo.is_valid_short_number_for_region(phoneNumber, regionCode):
                 invalid_string_case = "region_code: %s, national_number: %s" % (regionCode, exampleShortNumber)
                 invalid_string_cases.append(invalid_string_case)
                 prnt("Failed validation from string %s" % invalid_string_case, file=sys.stderr)
-            phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
             if not shortnumberinfo.is_valid_short_number(phoneNumber):
                 self.invalid_cases.append(phoneNumber)
                 prnt("Failed validation for %s" % phoneNumber, file=sys.stderr)
@@ -174,7 +174,8 @@ class ExampleNumbersTest(unittest.TestCase):
                          ShortNumberCost.PREMIUM_RATE, ShortNumberCost.UNKNOWN_COST]:
                 exampleShortNumber = shortnumberinfo._example_short_number_for_cost(regionCode, cost)
                 if exampleShortNumber != "":
-                    if cost != shortnumberinfo.expected_cost_for_region(exampleShortNumber, regionCode):
+                    phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
+                    if cost != shortnumberinfo.expected_cost_for_region(phoneNumber, regionCode):
                         self.wrong_type_cases.append(phoneNumber)
                         prnt("Wrong cost for %s" % phoneNumber, file=sys.stderr)
         self.assertEqual(0, len(invalid_string_cases))

@@ -771,7 +771,7 @@ def format_number(numobj, num_format):
 
     Arguments:
     numobj -- The phone number to be formatted.
-    num_format --  The format the phone number should be formatted into
+    num_format -- The format the phone number should be formatted into
 
     Returns the formatted phone number.
     """
