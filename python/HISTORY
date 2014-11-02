@@ -1,5 +1,14 @@
 
 ====================
+ What's new in 7.0.0
+====================
+
+Merge to upstream Subversion revision 715; upstream code changelog:
+   - New APIs for ShortNumberInfo. The old APIs have been deprecated and will be
+     removed in an upcoming release.
+
+
+====================
  What's new in 6.3.0
 ====================
 
