@@ -3,10 +3,10 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_EE = PhoneMetadata(id='EE', country_code=372, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='1\\d{3,4}|[3-9]\\d{6,7}|800\\d{6,7}', possible_number_pattern='\\d{4,10}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:3[23589]|4(?:0\\d|[3-8])|6\\d|7[1-9]|88)\\d{5}', possible_number_pattern='\\d{7,8}', example_number='3212345'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:3[23589]|4[3-8]|6\\d|7[1-9]|88)\\d{5}', possible_number_pattern='\\d{7}', example_number='3212345'),
     mobile=PhoneNumberDesc(national_number_pattern='(?:5\\d|8[1-5])\\d{6}|5(?:[02]\\d{2}|1(?:[0-8]\\d|95)|5[0-478]\\d|64[0-4]|65[1-589])\\d{3}', possible_number_pattern='\\d{7,8}', example_number='51234567'),
     toll_free=PhoneNumberDesc(national_number_pattern='800(?:0\\d{3}|1\\d|[2-9])\\d{3}', possible_number_pattern='\\d{7,10}', example_number='80012345'),
-    premium_rate=PhoneNumberDesc(national_number_pattern='900\\d{4}', possible_number_pattern='\\d{7}', example_number='9001234'),
+    premium_rate=PhoneNumberDesc(national_number_pattern='(?:40\\d{2}|900)\\d{4}', possible_number_pattern='\\d{7,8}', example_number='9001234'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='70[0-2]\\d{5}', possible_number_pattern='\\d{8}', example_number='70012345'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
