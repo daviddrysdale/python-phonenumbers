@@ -23,6 +23,7 @@ from phonenumbers import PhoneNumber, PhoneMetadata
 from phonenumbers import FrozenPhoneNumber, PhoneNumberDesc
 from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseException
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
+from phonenumbers import region_code_for_country_code
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil, shortnumberinfo
 from phonenumbers.util import u, to_long
@@ -87,6 +88,13 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertFalse("001" in phonenumbers.SUPPORTED_REGIONS)
         # Check a non-US NANPA country is correctly listed as supported
         self.assertTrue("BS" in phonenumbers.SUPPORTED_REGIONS)
+
+    def testGetSupportedGlobalNetworkCallingCodes(self):
+        globalNetworkCallingCodes = phonenumbers.COUNTRY_CODES_FOR_NON_GEO_REGIONS
+        self.assertTrue(len(globalNetworkCallingCodes) > 0)
+        for callingCode in globalNetworkCallingCodes:
+            self.assertTrue(callingCode > 0)
+            self.assertEqual("001", region_code_for_country_code(callingCode))
 
     def testGetInstanceLoadUSMetadata(self):
         metadata = PhoneMetadata.metadata_for_region("US")

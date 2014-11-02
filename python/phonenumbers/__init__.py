@@ -78,7 +78,8 @@ from .phonenumber import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
 from .phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY, NumberFormat, PhoneNumberDesc, PhoneMetadata
 # Functionality
 from .asyoutypeformatter import AsYouTypeFormatter
-from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS, SUPPORTED_SHORT_REGIONS, UNKNOWN_REGION,
+from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS,
+                              SUPPORTED_SHORT_REGIONS, UNKNOWN_REGION, COUNTRY_CODES_FOR_NON_GEO_REGIONS,
                               MatchType, NumberParseException, PhoneNumberFormat,
                               PhoneNumberType, ValidationResult,
                               convert_alpha_characters_in_number,

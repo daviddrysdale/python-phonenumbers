@@ -421,11 +421,28 @@ class ValidationResult(object):
 
 
 # Derived data structures
-SUPPORTED_REGIONS = set([_item for _sublist in COUNTRY_CODE_TO_REGION_CODE.values() for _item in _sublist])
-if REGION_CODE_FOR_NON_GEO_ENTITY in SUPPORTED_REGIONS:
-    SUPPORTED_REGIONS.remove(REGION_CODE_FOR_NON_GEO_ENTITY)
+SUPPORTED_REGIONS = set()
+COUNTRY_CODES_FOR_NON_GEO_REGIONS = set()
+_NANPA_REGIONS = set()
 SUPPORTED_SHORT_REGIONS = _AVAILABLE_SHORT_REGION_CODES
-_NANPA_REGIONS = set(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
+
+
+def _regenerate_derived_data():
+    global SUPPORTED_REGIONS, COUNTRY_CODES_FOR_NON_GEO_REGIONS, _NANPA_REGIONS
+    SUPPORTED_REGIONS.clear()
+    COUNTRY_CODES_FOR_NON_GEO_REGIONS.clear()
+    for cc, region_codes in COUNTRY_CODE_TO_REGION_CODE.items():
+        if (len(region_codes) == 1 and region_codes[0] == REGION_CODE_FOR_NON_GEO_ENTITY):
+            COUNTRY_CODES_FOR_NON_GEO_REGIONS.add(cc)
+        else:
+            SUPPORTED_REGIONS.update(region_codes)
+    if REGION_CODE_FOR_NON_GEO_ENTITY in SUPPORTED_REGIONS:  # pragma no cover
+        SUPPORTED_REGIONS.remove(REGION_CODE_FOR_NON_GEO_ENTITY)
+    _NANPA_REGIONS.clear()
+    _NANPA_REGIONS.update(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
+
+
+_regenerate_derived_data()
 
 
 def _extract_possible_number(number):

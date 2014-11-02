@@ -34,6 +34,7 @@ def reinstate_real_metadata():
     PhoneMetadata._country_code_available = REAL_COUNTRY_CODE_LOADERS
     PhoneMetadata._region_metadata = REAL_REGION_METADATA
     PhoneMetadata._country_code_metadata = REAL_COUNTRY_CODE_METADATA
+    phonenumberutil._regenerate_derived_data()
 
 
 def insert_test_metadata():
@@ -43,6 +44,7 @@ def insert_test_metadata():
     PhoneMetadata._country_code_available = TEST_COUNTRY_CODE_LOADERS
     PhoneMetadata._region_metadata = TEST_REGION_METADATA
     PhoneMetadata._country_code_metadata = TEST_COUNTRY_CODE_METADATA
+    phonenumberutil._regenerate_derived_data()
 
 # Reinstate the real metadata so any importers of this module are not affected
 reinstate_real_metadata()
