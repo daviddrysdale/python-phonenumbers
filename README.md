@@ -1,8 +1,7 @@
 phonenumbers Python Library
 ===========================
 
-This is a Python port of libphonenumber, originally from
-[http://code.google.com/p/libphonenumber/](http://code.google.com/p/libphonenumber/).
+This is a Python port of [Google's libphonenumber library](https://github.com/googlei18n/libphonenumber)
 It supports Python 2.5-2.7 and Python 3.x (in the same codebase, with no
 [2to3](http://docs.python.org/2/library/2to3.html) conversion needed).
 
@@ -165,7 +164,7 @@ belongs to.
 ```
 
 For more information about the other functionality available from the library, look in the unit tests or in the original
-[libphonenumber project](http://code.google.com/p/libphonenumber/).
+[libphonenumber project](https://github.com/googlei18n/libphonenumber).
 
 Memory Usage
 ------------
@@ -200,7 +199,7 @@ Project Layout
 * The `python/` directory holds the Python code.
 * The `resources/` directory is a copy of the `resources/`
   directory from
-  [libphonenumber](http://code.google.com/p/libphonenumber/source/browse/#svn%2Ftrunk%2Fresources).
+  [libphonenumber](https://github.com/googlei18n/libphonenumber/tree/master/resources).
   This is not needed to run the Python code, but is needed when upstream
   changes to the master metadata need to be incorporated.
 * The `tools/` directory holds the tools that are used to process upstream

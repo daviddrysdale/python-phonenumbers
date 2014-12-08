@@ -9,7 +9,7 @@ Package: python-phonenumbers
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}
 Description: Python port of Google libphonenumber
- This is a Python port of libphonenumber, originally from 
- http://code.google.com/p/libphonenumber/. 
- It supports Python 2.5-2.7 and Python 3.x (in the same codebase, with 
+ This is a Python port of Google's libphonenumber library, from
+ https://github.com/googlei18n/libphonenumber.
+ It supports Python 2.5-2.7 and Python 3.x (in the same codebase, with
  no 2to3 conversion needed).

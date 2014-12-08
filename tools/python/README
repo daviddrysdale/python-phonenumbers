@@ -1,7 +1,7 @@
 phonenumbers Python Library
 
 This is a Python port of libphonenumber, originally from:
-  http://code.google.com/p/libphonenumber/.
+  https://github.com/googlei18n/libphonenumber
 
 Original Java code is Copyright (C) 2009-2012 The Libphonenumber Authors
 
