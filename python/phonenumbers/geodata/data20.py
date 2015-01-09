@@ -3626,6 +3626,7 @@ data = {
  '917640':{'en': 'Shahpur, Madhya Pradesh'},
  '91469':{'en': 'Tiruvalla, Kerala'},
  '91461':{'en': 'Thoothukudi, Tamil Nadu'},
+ '91460':{'en': 'Taliparamba, Kerala'},
  '91462':{'en': 'Tirunelvelli, Tamil Nadu'},
  '912929':{'en': 'Shergarh/Balesar, Rajasthan'},
  '912928':{'en': 'Shergarh/Deechu, Rajasthan'},
