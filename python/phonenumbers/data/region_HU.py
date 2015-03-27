@@ -3,8 +3,8 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_HU = PhoneMetadata(id='HU', country_code=36, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{7,8}', possible_number_pattern='\\d{6,9}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:1\\d|2(?:1\\d|[2-9])|3[2-7]|4[24-9]|5[2-79]|6[23689]|7(?:1\\d|[2-9])|8[2-57-9]|9[2-69])\\d{6}', possible_number_pattern='\\d{6,9}', example_number='12345678'),
-    mobile=PhoneNumberDesc(national_number_pattern='(?:[27]0|3[01])\\d{7}', possible_number_pattern='\\d{9}', example_number='201234567'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:1\\d|2(?:1\\d|[2-9])|3(?:[2-7]|8\\d)|4[24-9]|5[2-79]|6[23689]|7(?:1\\d|[2-9])|8[2-57-9]|9[2-69])\\d{6}', possible_number_pattern='\\d{6,9}', example_number='12345678'),
+    mobile=PhoneNumberDesc(national_number_pattern='(?:[257]0|3[01])\\d{7}', possible_number_pattern='\\d{9}', example_number='201234567'),
     toll_free=PhoneNumberDesc(national_number_pattern='80\\d{6}', possible_number_pattern='\\d{8}', example_number='80123456'),
     premium_rate=PhoneNumberDesc(national_number_pattern='9[01]\\d{6}', possible_number_pattern='\\d{8}', example_number='90123456'),
     shared_cost=PhoneNumberDesc(national_number_pattern='40\\d{6}', possible_number_pattern='\\d{8}', example_number='40123456'),
