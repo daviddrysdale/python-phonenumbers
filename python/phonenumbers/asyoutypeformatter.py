@@ -364,6 +364,9 @@ class AsYouTypeFormatter(object):
         self._able_to_format = True
         self._is_expecting_country_calling_code = False
         self._possible_formats = []
+        self._last_match_position = 0
+        self._formatting_template = U_EMPTY_STRING
+        self._current_formatting_pattern = U_EMPTY_STRING
         return self._attempt_to_choose_formatting_pattern()
 
     # Some national prefixes are a substring of others. If extracting the
@@ -577,6 +580,9 @@ class AsYouTypeFormatter(object):
         return normalized_char
 
     def _input_digit_helper(self, next_char):
+        # Note that formattingTemplate is not guaranteed to have a value, it
+        # could be empty, e.g. when the next digit is entered after extracting
+        # an IDD or NDD.
         digit_match = _DIGIT_PATTERN.search(self._formatting_template, self._last_match_position)
         if digit_match:
             # Reset to search for _DIGIT_PLACEHOLDER from start of string
