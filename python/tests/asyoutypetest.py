@@ -70,7 +70,7 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         self.assertEqual("+48881231+2", formatter.input_digit('2'))
 
     def testTooLongNumberMatchingMultipleLeadingDigits(self):
-        # See http://code.google.com/p/libphonenumber/issues/detail?id=36
+        # See https://github.com/googlei18n/libphonenumber/issues/36
         # The bug occurred last time for countries which have two
         # formatting rules with exactly the same leading digits pattern
         # but differ in length.
@@ -1152,7 +1152,7 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         # we should ensure we use the last leading digit pattern, rather than
         # the first one such that it *thinks* it's found a valid formatting
         # rule again.
-        # https://code.google.com/p/libphonenumber/issues/detail?id=437
+        # https://github.com/googlei18n/libphonenumber/issues/437
         self.assertEqual("+8698812", formatter.input_digit('2'))
         self.assertEqual("+86988123", formatter.input_digit('3'))
         self.assertEqual("+869881234", formatter.input_digit('4'))
