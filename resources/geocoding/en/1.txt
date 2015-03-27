@@ -2234,6 +2234,7 @@
 1219987|De Motte, IN
 1219989|Hammond, IN
 1219996|Hebron, IN
+1220|Ohio
 1224|Illinois
 1224610|North Chicago, IL
 1224653|Schaumburg, IL
@@ -11374,7 +11375,7 @@
 1417935|Seymour, MO
 1417962|Cabool, MO
 1417967|Houston, MO
-1418|Québec
+1418|Quebec
 1418226|Saint-Georges, QC
 1418227|Saint-Georges, QC
 1418228|Saint-Georges, QC
@@ -12225,7 +12226,7 @@
 1435946|Garden City, UT
 1435986|St. George, UT
 1437|Ontario
-1438|Québec
+1438|Quebec
 1438380|Montreal, QC
 1440|Ohio
 1440204|Lorain, OH
@@ -12366,7 +12367,7 @@
 1443944|Salisbury, MD
 1443949|Annapolis, MD
 1443977|Baltimore, MD
-1450|Québec
+1450|Quebec
 1450218|Vaudreuil-Dorion, QC
 1450224|Prévost, QC
 1450225|Beauharnois, QC
@@ -14851,7 +14852,7 @@
 1513984|Cincinnati, OH
 1513985|Cincinnati, OH
 1513988|Trenton, OH
-1514|Québec
+1514|Quebec
 1514223|Montreal, QC
 1514227|Montreal, QC
 1514251|Montreal, QC
@@ -20626,6 +20627,8 @@
 1626967|Covina, CA
 1626969|Azusa, CA
 1626974|Covina, CA
+1628|California
+1629|Tennessee
 1630|Illinois
 1630208|Geneva, IL
 1630226|Bolingbrook, IL
@@ -29002,7 +29005,7 @@
 1818993|Northridge, CA
 1818994|Van Nuys, CA
 1818997|Van Nuys, CA
-1819|Québec
+1819|Quebec
 1819205|Gatineau, QC
 1819228|Louiseville, QC
 1819242|Grenville, QC
