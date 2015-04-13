@@ -3,7 +3,7 @@ Section: python
 Priority: optional
 Maintainer: Torge Szczepanek <debian@cygnusnetworks.de>
 Build-Depends: debhelper (>= 9), python-all, python-setuptools
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 
 Package: python-phonenumbers
 Architecture: all
