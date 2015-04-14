@@ -32,21 +32,49 @@ if not python_25:
 # Discover version of phonenumbers package
 from phonenumbers import __version__
 
-distutils.core.setup(name='phonenumbers',
+# Discover whether per-prefix data is available
+if 'lite' in sys.argv:
+    lite = True
+    del sys.argv[sys.argv.index('lite')]
+else:
+    lite = False
+if not lite:
+    try:
+        import phonenumbers.tzdata
+    except ImportError:
+        lite = True
+
+# Various parameters depend on whether we are the lite package or not
+if lite:
+    pkgname = 'phonenumberslite'
+    pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.shortdata']
+    pkgstatus = 'Development Status :: 4 - Beta'
+    lite = True
+else:
+    pkgname = 'phonenumbers'
+    pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.geodata', 'phonenumbers.shortdata',
+            'phonenumbers.carrierdata', 'phonenumbers.tzdata']
+    pkgstatus = 'Development Status :: 5 - Production/Stable'
+
+distutils.core.setup(name=pkgname,
                      version=__version__,
                      description="Python version of Google's common library for parsing, formatting, storing and validating international phone numbers.",
                      author='David Drysdale',
                      author_email='dmd@lurklurk.org',
                      url='https://github.com/daviddrysdale/python-phonenumbers',
                      license='Apache License 2.0',
-                     packages=['phonenumbers', 'phonenumbers.data', 'phonenumbers.geodata', 'phonenumbers.shortdata',
-                               'phonenumbers.carrierdata', 'phonenumbers.tzdata'],
-                     test_suite="tests",
+                     packages=pkgs,
+                     test_suite="tests.examplenumberstest",
                      platforms='Posix; MacOS X; Windows',
                      classifiers=['Development Status :: 5 - Production/Stable',
                                   'Intended Audience :: Developers',
                                   'License :: OSI Approved :: Apache Software License',
                                   'Operating System :: OS Independent',
                                   'Topic :: Communications :: Telephony',
+                                  'Programming Language :: Python :: 2',
+                                  'Programming Language :: Python :: 2.5',
+                                  'Programming Language :: Python :: 2.6',
+                                  'Programming Language :: Python :: 2.7',
+                                  'Programming Language :: Python :: 3',
                                   ],
                      )

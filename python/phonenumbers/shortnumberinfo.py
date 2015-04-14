@@ -23,6 +23,7 @@ import re
 from .re_util import fullmatch
 from .util import U_EMPTY_STRING
 from .phonemetadata import PhoneMetadata
+from .phonenumber import PhoneNumber
 from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
 from .phonenumberutil import normalize_digits_only, region_codes_for_country_code
 from .phonenumberutil import national_significant_number
@@ -44,16 +45,19 @@ class ShortNumberCost(object):
 
 def is_possible_short_number_for_region(short_number, region_dialing_from):
     """Check whether a short number is a possible number when dialled from a
-    region, given the number in the form of a string, and the region where the
-    number is dialed from. This provides a more lenient check than
+    region. This provides a more lenient check than
     is_valid_short_number_for_region.
 
     Arguments:
-    short_number -- the short number to check as a string
+    short_number -- the short number to check as a PhoneNumber object or as
+              a string.  (The string variant is deprecated, and will be
+              removed in the next release.)
     region_dialing_from -- the region from which the number is dialed
 
     Return whether the number is a possible short number.
     """
+    if isinstance(short_number, PhoneNumber):
+        short_number = national_significant_number(short_number)
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
         return False
@@ -90,11 +94,15 @@ def is_valid_short_number_for_region(short_number, region_dialing_from):
     impossible to tell by just looking at the number itself.
 
     Arguments:
-    short_number -- the short number to check as a string
+    short_number -- the short number to check as a PhoneNumber object or as
+              a string.  (The string variant is deprecated, and will be
+              removed in the next release.)
     region_dialing_from -- the region from which the number is dialed
 
     Return whether the short number matches a valid pattern
     """
+    if isinstance(short_number, PhoneNumber):
+        short_number = national_significant_number(short_number)
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
         return False
@@ -147,12 +155,16 @@ def expected_cost_for_region(short_number, region_dialing_from):
 
     Arguments:
     short_number -- the short number for which we want to know the expected cost category
+              as a PhoneNumber object or as a string.  (The string variant is deprecated,
+              and will be removed in the next release.)
     region_dialing_from -- the region from which the number is dialed
 
     Return the expected cost category for that region of the short
     number. Returns UNKNOWN_COST if the number does not match a cost
     category. Note that an invalid number may match any cost category.
     """
+    if isinstance(short_number, PhoneNumber):
+        short_number = national_significant_number(short_number)
     # Note that region_dialing_from may be None, in which case metadata will also be None.
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
@@ -177,7 +189,7 @@ def expected_cost(numobj):
     """Gets the expected cost category of a short number (however, nothing is
     implied about its validity). If the country calling code is unique to a
     region, this method behaves exactly the same as
-    get_expected_cost_for_region. However, if the country calling code is
+    expected_cost_for_region. However, if the country calling code is
     shared by multiple regions, then it returns the highest cost in the
     sequence PREMIUM_RATE, UNKNOWN_COST, STANDARD_RATE, TOLL_FREE. The reason
     for the position of UNKNOWN_COST in this order is that if a number is
@@ -201,12 +213,11 @@ def expected_cost(numobj):
     region_codes = region_codes_for_country_code(numobj.country_code)
     if len(region_codes) == 0:
         return ShortNumberCost.UNKNOWN_COST
-    short_number = national_significant_number(numobj)
     if len(region_codes) == 1:
-        return expected_cost_for_region(short_number, region_codes[0])
+        return expected_cost_for_region(numobj, region_codes[0])
     cost = ShortNumberCost.TOLL_FREE
     for region_code in region_codes:
-        cost_for_region = expected_cost_for_region(short_number, region_code)
+        cost_for_region = expected_cost_for_region(numobj, region_code)
         if cost_for_region == ShortNumberCost.PREMIUM_RATE:
             return ShortNumberCost.PREMIUM_RATE
         elif cost_for_region == ShortNumberCost.UNKNOWN_COST:
@@ -289,12 +300,16 @@ def _example_short_number_for_cost(region_code, cost):
 
 
 def connects_to_emergency_number(number, region_code):
-    """Returns whether the number might be used to connect to an emergency
-    service in the given region.
+    """Returns whether the given number, exactly as dialled, might be used to
+    connect to an emergency service in the given region.
+
+    This function accepts a string, rather than a PhoneNumber, because it
+    needs to distinguish cases such as "+1 911" and "911", where the former
+    may not connect to an emergency service in all cases but the latter would.
 
     This function takes into account cases where the number might contain
     formatting, or might have additional digits appended (when it is okay to
-    do that in the region specified).
+    do that in the specified region).
 
     Arguments:
     number -- The phone number to test.
@@ -307,11 +322,13 @@ def connects_to_emergency_number(number, region_code):
 
 
 def is_emergency_number(number, region_code):
-    """Returns true if the number exactly matches an emergency service number
-    in the given region.
+    """Returns true if the given number exactly matches an emergency service
+    number in the given region.
 
     This method takes into account cases where the number might contain
-    formatting, but doesn't allow additional digits to be appended.
+    formatting, but doesn't allow additional digits to be appended.  Note that
+    is_emergency_number(number, region) implies
+    connects_to_emergency_number(number, region).
 
     Arguments:
     number -- The phone number to test.
@@ -337,10 +354,12 @@ def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
     emergency_number_pattern = re.compile(metadata.emergency.national_number_pattern)
     normalized_number = normalize_digits_only(number)
 
-    if not allow_prefix_match or region_code in _REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT:
-        return fullmatch(emergency_number_pattern, normalized_number) is not None
-    else:
+    allow_prefix_match_for_region = (allow_prefix_match and
+                                     (region_code not in _REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT))
+    if allow_prefix_match_for_region:
         return emergency_number_pattern.match(normalized_number) is not None
+    else:
+        return fullmatch(emergency_number_pattern, normalized_number) is not None
 
 
 def is_carrier_specific(numobj):

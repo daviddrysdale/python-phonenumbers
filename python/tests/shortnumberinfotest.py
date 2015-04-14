@@ -17,6 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import phonenumbers
 from phonenumbers import connects_to_emergency_number, is_emergency_number, ShortNumberCost
 from phonenumbers import is_possible_short_number_for_region, is_possible_short_number
 from phonenumbers import is_valid_short_number_for_region, is_valid_short_number
@@ -26,17 +27,24 @@ from phonenumbers.util import u
 from .testmetadatatest import TestMetadataTestCase
 
 
+def _parse(number, regionCode):
+    try:
+        return phonenumbers.parse(number, regionCode)
+    except NumberParseException:
+        e = sys.exc_info()[1]
+        self.fail("Test input data should always parse correctly: %s (%s) => %s %s" % (number, regionCode, e))
+
+
 # Note that these test use real metadata for short numbers, but test metadata o/w.
 class ShortNumberInfoTest(TestMetadataTestCase):
     """Unit tests for shortnumberinfo.py"""
     def testIsPossibleShortNumber(self):
         possibleNumber = PhoneNumber(country_code=33, national_number=123456)
         self.assertTrue(is_possible_short_number(possibleNumber))
-        self.assertTrue(is_possible_short_number_for_region("123456", "FR"))
+        self.assertTrue(is_possible_short_number_for_region(_parse("123456", "FR"), "FR"))
 
         impossibleNumber = PhoneNumber(country_code=33, national_number=9)
         self.assertFalse(is_possible_short_number(impossibleNumber))
-        self.assertFalse(is_possible_short_number_for_region("9", "FR"))
 
         # Note that GB and GG share the country calling code 44, and that this
         # number is possible but not valid.
@@ -47,9 +55,9 @@ class ShortNumberInfoTest(TestMetadataTestCase):
 
     def testIsValidShortNumber(self):
         self.assertTrue(is_valid_short_number(PhoneNumber(country_code=33, national_number=1010)))
-        self.assertTrue(is_valid_short_number_for_region("1010", "FR"))
+        self.assertTrue(is_valid_short_number_for_region(_parse("1010", "FR"), "FR"))
         self.assertFalse(is_valid_short_number(PhoneNumber(country_code=33, national_number=123456)))
-        self.assertFalse(is_valid_short_number_for_region("123456", "FR"))
+        self.assertFalse(is_valid_short_number_for_region(_parse("123456", "FR"), "FR"))
 
         # Note that GB and GG share the country calling code 44.
         self.assertTrue(is_valid_short_number(PhoneNumber(country_code=44, national_number=18001)))
@@ -58,39 +66,39 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertFalse(is_valid_short_number_for_region("123456", "XY"))
         self.assertFalse(is_valid_short_number(PhoneNumber(country_code=99, national_number=123)))
         # Python version extra test: not matching general desc
-        self.assertFalse(is_valid_short_number_for_region("2123456", "US"))
+        self.assertFalse(is_valid_short_number_for_region(_parse("2123456", "US"), "US"))
         # Python version extra test: shared country code (44 => GB+GG) but not valid in either
         self.assertFalse(is_valid_short_number(PhoneNumber(country_code=44, national_number=58001)))
 
     def testGetExpectedCost(self):
         premiumRateExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE)
-        self.assertEqual(ShortNumberCost.PREMIUM_RATE, expected_cost_for_region(premiumRateExample, "FR"))
+        self.assertEqual(ShortNumberCost.PREMIUM_RATE, expected_cost_for_region(_parse(premiumRateExample, "FR"), "FR"))
         premiumRateNumber = PhoneNumber(country_code=33, national_number=int(premiumRateExample))
         self.assertEqual(ShortNumberCost.PREMIUM_RATE, expected_cost(premiumRateNumber))
 
         standardRateExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.STANDARD_RATE)
-        self.assertEqual(ShortNumberCost.STANDARD_RATE, expected_cost_for_region(standardRateExample, "FR"))
+        self.assertEqual(ShortNumberCost.STANDARD_RATE, expected_cost_for_region(_parse(standardRateExample, "FR"), "FR"))
         standardRateNumber = PhoneNumber(country_code=33, national_number=int(standardRateExample))
         self.assertEqual(ShortNumberCost.STANDARD_RATE, expected_cost(standardRateNumber))
 
         tollFreeExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.TOLL_FREE)
-        self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost_for_region(tollFreeExample, "FR"))
+        self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost_for_region(_parse(tollFreeExample, "FR"), "FR"))
         tollFreeNumber = PhoneNumber(country_code=33, national_number=int(tollFreeExample))
         self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost(tollFreeNumber))
 
-        self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost_for_region("12345", "FR"))
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost_for_region(_parse("12345", "FR"), "FR"))
         unknownCostNumber = PhoneNumber(country_code=33, national_number=12345)
         self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost(unknownCostNumber))
 
         # Test that an invalid number may nevertheless have a cost other than UNKNOWN_COST.
         self.assertFalse(is_valid_short_number_for_region("116123", "FR"))
         invalidNumber = PhoneNumber(country_code=33, national_number=116123)
-        self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost_for_region("116123", "FR"))
+        self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost_for_region(_parse("116123", "FR"), "FR"))
         self.assertFalse(is_valid_short_number(invalidNumber))
         self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost(invalidNumber))
 
         # Test a nonexistent country code.
-        self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost_for_region("911", "ZZ"))
+        self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost_for_region(_parse("911", "US"), "ZZ"))
         unknownCostNumber.country_code = 123
         unknownCostNumber.national_number = 911
         self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost(unknownCostNumber))
@@ -111,31 +119,31 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertTrue(shortnumberinfo.is_valid_short_number(ambiguousStandardRateNumber))
         self.assertTrue(shortnumberinfo.is_valid_short_number(ambiguousTollFreeNumber))
 
-        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(ambiguousPremiumRateString, "AU"))
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(_parse(ambiguousPremiumRateString, "AU"), "AU"))
         self.assertEqual(ShortNumberCost.PREMIUM_RATE,
-                         shortnumberinfo.expected_cost_for_region(ambiguousPremiumRateString, "AU"))
-        self.assertFalse(shortnumberinfo.is_valid_short_number_for_region(ambiguousPremiumRateString, "CX"))
+                         shortnumberinfo.expected_cost_for_region(_parse(ambiguousPremiumRateString, "AU"), "AU"))
+        self.assertFalse(shortnumberinfo.is_valid_short_number_for_region(_parse(ambiguousPremiumRateString, "CX"), "CX"))
         self.assertEqual(ShortNumberCost.UNKNOWN_COST,
-                         shortnumberinfo.expected_cost_for_region(ambiguousPremiumRateString, "CX"))
+                         shortnumberinfo.expected_cost_for_region(_parse(ambiguousPremiumRateString, "CX"), "CX"))
         # PREMIUM_RATE takes precedence over UNKNOWN_COST.
         self.assertEqual(ShortNumberCost.PREMIUM_RATE,
                          shortnumberinfo.expected_cost(ambiguousPremiumRateNumber))
 
-        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(ambiguousStandardRateString, "AU"))
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(_parse(ambiguousStandardRateString, "AU"), "AU"))
         self.assertEqual(ShortNumberCost.STANDARD_RATE,
-                         shortnumberinfo.expected_cost_for_region(ambiguousStandardRateString, "AU"))
-        self.assertFalse(shortnumberinfo.is_valid_short_number_for_region(ambiguousStandardRateString, "CX"))
+                         shortnumberinfo.expected_cost_for_region(_parse(ambiguousStandardRateString, "AU"), "AU"))
+        self.assertFalse(shortnumberinfo.is_valid_short_number_for_region(_parse(ambiguousStandardRateString, "CX"), "CX"))
         self.assertEqual(ShortNumberCost.UNKNOWN_COST,
-                         shortnumberinfo.expected_cost_for_region(ambiguousStandardRateString, "CX"))
+                         shortnumberinfo.expected_cost_for_region(_parse(ambiguousStandardRateString, "CX"), "CX"))
         self.assertEqual(ShortNumberCost.UNKNOWN_COST,
                          shortnumberinfo.expected_cost(ambiguousStandardRateNumber))
 
-        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(ambiguousTollFreeString, "AU"))
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(_parse(ambiguousTollFreeString, "AU"), "AU"))
         self.assertEqual(ShortNumberCost.TOLL_FREE,
-                         shortnumberinfo.expected_cost_for_region(ambiguousTollFreeString, "AU"))
-        self.assertFalse(shortnumberinfo.is_valid_short_number_for_region(ambiguousTollFreeString, "CX"))
+                         shortnumberinfo.expected_cost_for_region(_parse(ambiguousTollFreeString, "AU"), "AU"))
+        self.assertFalse(shortnumberinfo.is_valid_short_number_for_region(_parse(ambiguousTollFreeString, "CX"), "CX"))
         self.assertEqual(ShortNumberCost.UNKNOWN_COST,
-                         shortnumberinfo.expected_cost_for_region(ambiguousTollFreeString, "CX"))
+                         shortnumberinfo.expected_cost_for_region(_parse(ambiguousTollFreeString, "CX"), "CX"))
         self.assertEqual(ShortNumberCost.UNKNOWN_COST,
                          shortnumberinfo.expected_cost(ambiguousTollFreeNumber))
 
@@ -266,13 +274,13 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         # Test the emergency number 112, which is valid in both Australia and
         # the Christmas Islands.
         self.assertTrue(is_emergency_number("112", "AU"))
-        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region("112", "AU"))
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(_parse("112", "AU"), "AU"))
         self.assertEqual(ShortNumberCost.TOLL_FREE,
-                         shortnumberinfo.expected_cost_for_region("112", "AU"))
+                         shortnumberinfo.expected_cost_for_region(_parse("112", "AU"), "AU"))
         self.assertTrue(is_emergency_number("112", "CX"))
-        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region("112", "CX"))
+        self.assertTrue(shortnumberinfo.is_valid_short_number_for_region(_parse("112", "CX"), "CX"))
         self.assertEqual(ShortNumberCost.TOLL_FREE,
-                         shortnumberinfo.expected_cost_for_region("112", "CX"))
+                         shortnumberinfo.expected_cost_for_region(_parse("112", "CX"), "CX"))
         sharedEmergencyNumber = PhoneNumber(country_code=61, national_number=112)
         self.assertTrue(shortnumberinfo.is_valid_short_number(sharedEmergencyNumber))
         self.assertEqual(ShortNumberCost.TOLL_FREE,
@@ -283,10 +291,10 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         # information line in Canada and the USA.
         self.assertTrue(is_emergency_number("211", "BB"))
         self.assertEqual(ShortNumberCost.TOLL_FREE,
-                         shortnumberinfo.expected_cost_for_region("211", "BB"))
+                         shortnumberinfo.expected_cost_for_region(_parse("211", "BB"), "BB"))
         self.assertFalse(is_emergency_number("211", "US"))
         self.assertEqual(ShortNumberCost.UNKNOWN_COST,
-                         shortnumberinfo.expected_cost_for_region("211", "US"))
+                         shortnumberinfo.expected_cost_for_region(_parse("211", "US"), "US"))
         self.assertFalse(is_emergency_number("211", "CA"))
         self.assertEqual(ShortNumberCost.UNKNOWN_COST,
-                         shortnumberinfo.expected_cost_for_region("211", "CA"))
+                         shortnumberinfo.expected_cost_for_region(_parse("211", "CA"), "CA"))

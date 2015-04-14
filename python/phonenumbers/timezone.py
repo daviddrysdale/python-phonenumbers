@@ -8,14 +8,14 @@
 1
 >>> str(tzlist[0])
 'Europe/Bucharest'
->>> gb_number = phonenumbers.parse("+447986123456", "GB")
->>> tzlist = time_zones_for_number(gb_number)
+>>> mx_number = phonenumbers.parse("+523291234567", "GB")
+>>> tzlist = time_zones_for_number(mx_number)
 >>> len(tzlist)
 2
 >>> str(tzlist[0])
-'Atlantic/Reykjavik'
+'America/Mazatlan'
 >>> str(tzlist[1])
-'Europe/London'
+'America/Mexico_City'
 
 """
 # Based very loosely on original Java code:

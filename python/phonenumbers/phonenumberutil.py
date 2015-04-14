@@ -10,7 +10,6 @@ in upper-case. The list of the codes can be found here:
 http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm
 
 author: Shaopeng Jia (original Java version)
-author: Lara Rennie (original Java Version)
 author: David Drysdale (Python version)
 """
 # Based on original Java code:
@@ -73,7 +72,7 @@ _REGEX_FLAGS = re.UNICODE | re.IGNORECASE
 _MIN_LENGTH_FOR_NSN = 2
 # The ITU says the maximum length should be 15, but we have found longer
 # numbers in Germany.
-_MAX_LENGTH_FOR_NSN = 16
+_MAX_LENGTH_FOR_NSN = 17
 # The maximum length of the country calling code.
 _MAX_LENGTH_COUNTRY_CODE = 3
 # We don't allow input strings for parsing to be longer than 250 chars. This
@@ -166,7 +165,7 @@ _ALL_PLUS_NUMBER_GROUPING_SYMBOLS = dict({u("-"): u("-"),  # Add grouping symbol
                                          # Put (lower letter -> upper letter) and
                                          # (upper letter -> upper letter) mappings.
                                          **dict([(_c.lower(), _c) for _c in _ALPHA_MAPPINGS.keys()] +
-                                                [(_c, _c)         for _c in _ALPHA_MAPPINGS.keys()],
+                                                [(_c, _c) for _c in _ALPHA_MAPPINGS.keys()],
                                                 **_ASCII_DIGITS_MAP))
 
 # Pattern that makes it easy to distinguish whether a region has a unique
@@ -422,11 +421,28 @@ class ValidationResult(object):
 
 
 # Derived data structures
-SUPPORTED_REGIONS = set([_item for _sublist in COUNTRY_CODE_TO_REGION_CODE.values() for _item in _sublist])
-if REGION_CODE_FOR_NON_GEO_ENTITY in SUPPORTED_REGIONS:
-    SUPPORTED_REGIONS.remove(REGION_CODE_FOR_NON_GEO_ENTITY)
+SUPPORTED_REGIONS = set()
+COUNTRY_CODES_FOR_NON_GEO_REGIONS = set()
+_NANPA_REGIONS = set()
 SUPPORTED_SHORT_REGIONS = _AVAILABLE_SHORT_REGION_CODES
-_NANPA_REGIONS = set(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
+
+
+def _regenerate_derived_data():
+    global SUPPORTED_REGIONS, COUNTRY_CODES_FOR_NON_GEO_REGIONS, _NANPA_REGIONS
+    SUPPORTED_REGIONS.clear()
+    COUNTRY_CODES_FOR_NON_GEO_REGIONS.clear()
+    for cc, region_codes in COUNTRY_CODE_TO_REGION_CODE.items():
+        if (len(region_codes) == 1 and region_codes[0] == REGION_CODE_FOR_NON_GEO_ENTITY):
+            COUNTRY_CODES_FOR_NON_GEO_REGIONS.add(cc)
+        else:
+            SUPPORTED_REGIONS.update(region_codes)
+    if REGION_CODE_FOR_NON_GEO_ENTITY in SUPPORTED_REGIONS:  # pragma no cover
+        SUPPORTED_REGIONS.remove(REGION_CODE_FOR_NON_GEO_ENTITY)
+    _NANPA_REGIONS.clear()
+    _NANPA_REGIONS.update(COUNTRY_CODE_TO_REGION_CODE[_NANPA_COUNTRY_CODE])
+
+
+_regenerate_derived_data()
 
 
 def _extract_possible_number(number):
@@ -561,12 +577,11 @@ def convert_alpha_characters_in_number(number):
 def length_of_geographical_area_code(numobj):
     """Return length of the geographical area code for a number.
 
-    Gets the length of the geographical area code from the national_number
-    field of the PhoneNumber object passed in, so that clients could use it to
-    split a national significant number into geographical area code and
-    subscriber number. It works in such a way that the resultant subscriber
-    number should be diallable, at least on some devices. An example of how
-    this could be used:
+    Gets the length of the geographical area code from the PhoneNumber object
+    passed in, so that clients could use it to split a national significant
+    number into geographical area code and subscriber number. It works in such
+    a way that the resultant subscriber number should be diallable, at least
+    on some devices. An example of how this could be used:
 
     >>> import phonenumbers
     >>> numobj = phonenumbers.parse("16502530000", "US")
@@ -728,6 +743,18 @@ def _formatting_rule_has_first_group_only(national_prefix_formatting_rule):
 
 
 def _is_number_geographical(numobj):
+    """Tests whether a phone number has a geographical association.
+
+    It checks if the number is associated to a certain region in the country
+    where it belongs to. Note that this doesn't verify if the number is
+    actually in use.
+
+    A similar method is implemented as geocoder._can_be_geocoded, which
+    performs a looser check, since it only prevents cases where prefixes
+    overlap for geocodable and non-geocodable numbers. Also, if new phone
+    number types were added, we should check if this other method should be
+    updated too.
+    """
     num_type = number_type(numobj)
     # TODO: Include mobile phone numbers from countries like Indonesia, which
     # has some mobile numbers that are geographical.
@@ -761,7 +788,7 @@ def format_number(numobj, num_format):
 
     Arguments:
     numobj -- The phone number to be formatted.
-    num_format --  The format the phone number should be formatted into
+    num_format -- The format the phone number should be formatted into
 
     Returns the formatted phone number.
     """
@@ -1257,7 +1284,7 @@ def _has_formatting_pattern_for_number(numobj):
         return False
     national_number = national_significant_number(numobj)
     format_rule = choose_formatting_pattern_for_number(metadata.number_format, national_number)
-    return format_rule != None
+    return format_rule is not None
 
 
 def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
@@ -1625,9 +1652,7 @@ def number_type(numobj):
 
 def _number_type_helper(national_number, metadata):
     """Return the type of the given number against the metadata"""
-    general_desc = metadata.general_desc
-    if (general_desc.national_number_pattern is None or
-        not _is_number_matching_desc(national_number, general_desc)):
+    if not _is_number_matching_desc(national_number, metadata.general_desc):
         return PhoneNumberType.UNKNOWN
     if _is_number_matching_desc(national_number, metadata.premium_rate):
         return PhoneNumberType.PREMIUM_RATE
@@ -1724,16 +1749,7 @@ def is_valid_number_for_region(numobj, region_code):
         # Either the region code was invalid, or the country calling code for
         # this number does not match that of the region code.
         return False
-    general_desc = metadata.general_desc
     nsn = national_significant_number(numobj)
-
-    # For regions where we don't have metadata for PhoneNumberDesc, we treat
-    # any number passed in as a valid number if its national significant
-    # number is between the minimum and maximum lengths defined by ITU for a
-    # national significant number.
-    if general_desc.national_number_pattern is None:
-        num_len = len(nsn)
-        return (num_len > _MIN_LENGTH_FOR_NSN and num_len < _MAX_LENGTH_FOR_NSN)
     return (_number_type_helper(nsn, metadata) != PhoneNumberType.UNKNOWN)
 
 
@@ -2001,18 +2017,7 @@ def is_possible_number_with_reason(numobj):
     region_code = region_code_for_country_code(country_code)
     # Metadata cannot be None because the country calling code is valid.
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
-    general_desc = metadata.general_desc
-
-    # Handling case of numbers with no metadata.
-    if general_desc.national_number_pattern is None:
-        num_len = len(national_number)
-        if num_len < _MIN_LENGTH_FOR_NSN:
-            return ValidationResult.TOO_SHORT
-        elif num_len > _MAX_LENGTH_FOR_NSN:
-            return ValidationResult.TOO_LONG
-        else:
-            return ValidationResult.IS_POSSIBLE
-    possible_re = re.compile(general_desc.possible_number_pattern or U_EMPTY_STRING)
+    possible_re = re.compile(metadata.general_desc.possible_number_pattern or U_EMPTY_STRING)
     return _test_number_length_against_pattern(possible_re, national_number)
 
 
@@ -2545,8 +2550,13 @@ def _build_national_number_for_parsing(number):
             national_number = U_EMPTY_STRING
         # Now append everything between the "tel:" prefix and the
         # phone-context. This should include the national number, an optional
-        # extension or isdn-subaddress component.
-        national_number += number[number.find(_RFC3966_PREFIX) + len(_RFC3966_PREFIX):index_of_phone_context]
+        # extension or isdn-subaddress component. Note we also handle the case
+        # when "tel:" is missing, as we have seen in some of the phone number
+        # inputs.  In that case we append everything from the beginning.
+        index_of_rfc3996_prefix = number.find(_RFC3966_PREFIX)
+        index_of_national_number = ((index_of_rfc3996_prefix + len(_RFC3966_PREFIX))
+                                    if (index_of_rfc3996_prefix >= 0) else 0)
+        national_number += number[index_of_national_number:index_of_phone_context]
     else:
         # Extract a possible number from the string passed in (this strips leading characters that
         # could not be the start of a phone number.)

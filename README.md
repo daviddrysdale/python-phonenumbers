@@ -1,8 +1,7 @@
 phonenumbers Python Library
 ===========================
 
-This is a Python port of libphonenumber, originally from
-[http://code.google.com/p/libphonenumber/](http://code.google.com/p/libphonenumber/).
+This is a Python port of [Google's libphonenumber library](https://github.com/googlei18n/libphonenumber)
 It supports Python 2.5-2.7 and Python 3.x (in the same codebase, with no
 [2to3](http://docs.python.org/2/library/2to3.html) conversion needed).
 
@@ -12,8 +11,9 @@ Example Usage
 -------------
 
 The main object that the library deals with is a `PhoneNumber` object.  You can create this from a string
-representing a phone number using the `parse` function, but you normally also need to specify the country
-that the phone number is from (unless the number is in E.164 format).
+representing a phone number using the `parse` function, but you also need to specify the country
+that the phone number is being dialled from (unless the number is in E.164 format, which is globally
+unique).
 
 ```pycon
 >>> import phonenumbers
@@ -27,6 +27,9 @@ Country Code: 44 National Number: 2083661177 Leading Zero: False
 Country Code: 44 National Number: 2083661177 Leading Zero: False
 >>> x == y
 True
+>>> z = phonenumbers.parse("00 1 650 253 2222", "GB")  # as dialled from GB, not a GB number
+>>> print z
+Country Code: 1 National Number: 6502532222 Leading Zero(s): False
 ```
 
 The `PhoneNumber` object that `parse` produces typically still needs to be validated, to check whether
@@ -156,12 +159,12 @@ belongs to.
 ```pycon
 >>> from phonenumbers import timezone
 >>> gb_number = phonenumbers.parse("+447986123456", "GB")
->>> str(time_zones_for_number(gb_number))
+>>> str(timezone.time_zones_for_number(gb_number))
 "(u'Atlantic/Reykjavik', u'Europe/London')"
 ```
 
 For more information about the other functionality available from the library, look in the unit tests or in the original
-[libphonenumber project](http://code.google.com/p/libphonenumber/).
+[libphonenumber project](https://github.com/googlei18n/libphonenumber).
 
 Memory Usage
 ------------
@@ -181,19 +184,22 @@ In particular:
 * The normal metadata for each region is only loaded on the first time that metadata for that region is needed.
 
 If you need to ensure that the metadata memory use is accounted for at start of day (i.e. that a subsequent on-demand
-load of metadata will not cause memory exhaustion):
+load of metadata will not cause a pause or memory exhaustion):
 
 * Force-load the geocoding metadata by invoking `import phonenumbers.geocoder`.
 * Force-load the carrier metadata by invoking `import phonenumbers.carrier`.
 * Force-load the timezone metadata by invoking `import phonenumbers.timezone`.
 * Force-load the normal metadata by calling `phonenumbers.PhoneMetadata.load_all()`.
 
+The `phonenumberslite` version of the package does not include the geocoding, carrier and timezone metadata,
+which can be useful if you have problems installing the main `phonenumbers` package due to space/memory limitations.
+
 Project Layout
 --------------
 * The `python/` directory holds the Python code.
 * The `resources/` directory is a copy of the `resources/`
   directory from
-  [libphonenumber](http://code.google.com/p/libphonenumber/source/browse/#svn%2Ftrunk%2Fresources).
+  [libphonenumber](https://github.com/googlei18n/libphonenumber/tree/master/resources).
   This is not needed to run the Python code, but is needed when upstream
   changes to the master metadata need to be incorporated.
 * The `tools/` directory holds the tools that are used to process upstream

@@ -4,6 +4,6 @@
 dist
 deb_dist
 MANIFEST
-phonenumbers.egg-info
+phonenumbers*.egg-info
 build
 phonenumbers.pstats

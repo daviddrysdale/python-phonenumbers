@@ -8,5 +8,5 @@ PHONE_METADATA_US = PhoneMetadata(id='US', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='112|911', possible_number_pattern='\\d{3}', example_number='911'),
     short_code=PhoneNumberDesc(national_number_pattern='1(?:1(?:2|5[1-47]|[68]\\d|7[0-57]|98))|[2-9](?:11|\\d{4,5})', possible_number_pattern='\\d{3,6}', example_number='911'),
     standard_rate=PhoneNumberDesc(national_number_pattern='2(?:3333|42242|56447|6688|75622)|3(?:1010|2665|7404)|40404|560560|6(?:0060|22639|5246|7622)|7(?:0701|3822|4666)|8(?:38255|4816|72265)|99099', possible_number_pattern='\\d{5,6}', example_number='73822'),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='33669|611', possible_number_pattern='\\d{5}', example_number='33669'),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='33669|611', possible_number_pattern='\\d{3,5}', example_number='33669'),
     short_data=True)

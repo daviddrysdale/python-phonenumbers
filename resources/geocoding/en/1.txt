@@ -14,6 +14,10 @@
 
 # Generated from:
 # Internal statistics data (2013-11-28).
+# Bahamas data comes from the ITU document:
+# http://www.itu.int/dms_pub/itu-t/oth/02/02/T02020000100001PDFE.pdf with the
+# addition of 242601 and 242602, from the homepage of Cable Bahamas
+# http://www.cablebahamas.com/?p=n&sectid=5&catid=104.
 
 1201|New Jersey
 1201200|Jersey City, NJ
@@ -2230,6 +2234,7 @@
 1219987|De Motte, IN
 1219989|Hammond, IN
 1219996|Hebron, IN
+1220|Ohio
 1224|Illinois
 1224610|North Chicago, IL
 1224653|Schaumburg, IL
@@ -2707,6 +2712,84 @@
 1240686|Germantown, MD
 1240777|Rockville, MD
 1240857|Joint Base Andrews Naval Air Facility, MD
+12422250|New Providence
+12422251|New Providence
+12422252|New Providence
+12422253|New Providence
+12422254|New Providence
+12422256|New Providence
+12422257|New Providence
+12422258|New Providence
+12422259|New Providence
+1242302|New Providence
+1242321|New Providence
+1242322|New Providence
+1242323|New Providence
+1242324|New Providence
+1242325|New Providence
+1242326|New Providence
+1242327|New Providence
+1242328|New Providence
+1242329|North Andros
+1242331|Rum Cay & San Sal
+1242332|Eleuthera
+1242333|Eleuthera
+1242334|Eleuthera
+1242335|Eleuthera
+1242336|Exuma
+1242337|Long Island
+1242338|Long Island
+1242339|Inagua/Mayaguana
+1242340|New Providence
+1242341|New Providence
+1242342|Cat Island
+1242344|Acklins
+1242345|Exuma
+1242346|Grand Bahama
+1242347|Bimini and Cat Cay
+1242348|Grand Bahama
+1242349|Grand Bahama
+1242350|Grand Bahama
+1242351|Grand Bahama
+1242352|Grand Bahama
+1242353|Grand Bahama
+1242354|Cat Island
+1242355|Exuma Cays
+1242356|New Providence
+1242358|Exuma
+1242361|New Providence
+1242362|New Providence
+1242363|New Providence
+1242364|New Providence
+1242365|Abaco Island
+1242366|Abaco Island
+1242367|Abaco Island
+1242368|Andros
+1242369|Andros
+1242373|Grand Bahama
+1242374|Grand Bahama
+1242376|Grand Bahama
+1242377|New Providence
+1242380|New Providence
+1242381|New Providence
+1242382|New Providence
+1242383|New Providence
+1242384|New Providence
+1242392|New Providence
+1242393|New Providence
+1242394|New Providence
+1242396|New Providence
+1242397|New Providence
+1242461|New Providence
+1242601|New Providence
+1242602|Grand Bahama
+1242676|New Providence
+1242677|New Providence
+1242687|Grand Bahama
+1242688|Grand Bahama
+1242698|Abaco
+1242699|Abaco
+1242702|New Providence
 1248|Michigan
 1248208|Southfield, MI
 1248223|Southfield, MI
@@ -7940,6 +8023,7 @@
 1337993|Lafayette, LA
 1339|Massachusetts
 1345949|George Town
+1346|Texas
 1347|New York
 1347221|Brooklyn, NY
 1347240|Brooklyn, NY
@@ -11291,7 +11375,7 @@
 1417935|Seymour, MO
 1417962|Cabool, MO
 1417967|Houston, MO
-1418|Québec
+1418|Quebec
 1418226|Saint-Georges, QC
 1418227|Saint-Georges, QC
 1418228|Saint-Georges, QC
@@ -12142,7 +12226,7 @@
 1435946|Garden City, UT
 1435986|St. George, UT
 1437|Ontario
-1438|Québec
+1438|Quebec
 1438380|Montreal, QC
 1440|Ohio
 1440204|Lorain, OH
@@ -12283,7 +12367,7 @@
 1443944|Salisbury, MD
 1443949|Annapolis, MD
 1443977|Baltimore, MD
-1450|Québec
+1450|Quebec
 1450218|Vaudreuil-Dorion, QC
 1450224|Prévost, QC
 1450225|Beauharnois, QC
@@ -14768,7 +14852,7 @@
 1513984|Cincinnati, OH
 1513985|Cincinnati, OH
 1513988|Trenton, OH
-1514|Québec
+1514|Quebec
 1514223|Montreal, QC
 1514227|Montreal, QC
 1514251|Montreal, QC
@@ -20543,6 +20627,8 @@
 1626967|Covina, CA
 1626969|Azusa, CA
 1626974|Covina, CA
+1628|California
+1629|Tennessee
 1630|Illinois
 1630208|Geneva, IL
 1630226|Bolingbrook, IL
@@ -26576,6 +26662,7 @@
 1781963|Randolph, MA
 1781979|Melrose, MA
 1781986|Randolph, MA
+1782|Nova Scotia
 1785|Kansas
 1785215|Topeka, KS
 1785222|La Crosse, KS
@@ -28918,7 +29005,7 @@
 1818993|Northridge, CA
 1818994|Van Nuys, CA
 1818997|Van Nuys, CA
-1819|Québec
+1819|Quebec
 1819205|Gatineau, QC
 1819228|Louiseville, QC
 1819242|Grenville, QC
@@ -34032,6 +34119,8 @@
 1928871|Window Rock, AZ
 1928899|Prescott, AZ
 1928927|Quartzsite, AZ
+1929|New York
+1930|Indiana
 1931|Tennessee
 1931221|Clarksville, TN
 1931223|Columbia, TN
@@ -34350,6 +34439,7 @@
 1937962|Lewisburg, OH
 1937964|Springfield, OH
 1937981|Greenfield, OH
+1938|Alabama
 1940|Texas
 1940228|Wichita Falls, TX
 1940243|Denton, TX
@@ -35083,6 +35173,7 @@
 1956982|Brownsville, TX
 1956992|McAllen, TX
 1956994|McAllen, TX
+1959|Connecticut
 1970|Colorado
 1970203|Loveland, CO
 1970204|Fort Collins, CO

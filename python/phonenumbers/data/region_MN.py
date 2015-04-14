@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_MN = PhoneMetadata(id='MN', country_code=976, international_prefix='001',
     general_desc=PhoneNumberDesc(national_number_pattern='[12]\\d{7,9}|[57-9]\\d{7}', possible_number_pattern='\\d{6,10}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='[12](?:1\\d|2(?:[1-3]\\d?|7\\d)|3[2-8]\\d{1,2}|4[2-68]\\d{1,2}|5[1-4689]\\d{1,2})\\d{5}|5[0568]\\d{6}', possible_number_pattern='\\d{6,10}', example_number='50123456'),
-    mobile=PhoneNumberDesc(national_number_pattern='(?:8[89]|9[013-9])\\d{6}', possible_number_pattern='\\d{8}', example_number='88123456'),
+    mobile=PhoneNumberDesc(national_number_pattern='(?:8[689]|9[013-9])\\d{6}', possible_number_pattern='\\d{8}', example_number='88123456'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

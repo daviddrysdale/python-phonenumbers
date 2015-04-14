@@ -70,7 +70,7 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         self.assertEqual("+48881231+2", formatter.input_digit('2'))
 
     def testTooLongNumberMatchingMultipleLeadingDigits(self):
-        # See http://code.google.com/p/libphonenumber/issues/detail?id=36
+        # See https://github.com/googlei18n/libphonenumber/issues/36
         # The bug occurred last time for countries which have two
         # formatting rules with exactly the same leading digits pattern
         # but differ in length.
@@ -1103,6 +1103,60 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         self.assertEqual("1", formatter.input_digit('1'))
         self.assertEqual("12", formatter.input_digit('2'))
         self.assertEqual("1 22", formatter.input_digit('2'))
+
+    def testAYTFClearNDDAfterIDDExtraction(self):
+        formatter = AsYouTypeFormatter("KR")
+
+        # Check that when we have successfully extracted an IDD, the
+        # previously extracted NDD is cleared since it is no longer valid.
+        self.assertEqual("0", formatter.input_digit('0'))
+        self.assertEqual("00", formatter.input_digit('0'))
+        self.assertEqual("007", formatter.input_digit('7'))
+        self.assertEqual("0070", formatter.input_digit('0'))
+        self.assertEqual("00700", formatter.input_digit('0'))
+        self.assertEqual("0", formatter._extracted_national_prefix)
+
+        # Once the IDD "00700" has been extracted, it no longer makes sense
+        # for the initial "0" to be treated as an NDD.
+        self.assertEqual("00700 1 ", formatter.input_digit('1'))
+        self.assertEqual("", formatter._extracted_national_prefix)
+
+        self.assertEqual("00700 1 2", formatter.input_digit('2'))
+        self.assertEqual("00700 1 23", formatter.input_digit('3'))
+        self.assertEqual("00700 1 234", formatter.input_digit('4'))
+        self.assertEqual("00700 1 234 5", formatter.input_digit('5'))
+        self.assertEqual("00700 1 234 56", formatter.input_digit('6'))
+        self.assertEqual("00700 1 234 567", formatter.input_digit('7'))
+        self.assertEqual("00700 1 234 567 8", formatter.input_digit('8'))
+        self.assertEqual("00700 1 234 567 89", formatter.input_digit('9'))
+        self.assertEqual("00700 1 234 567 890", formatter.input_digit('0'))
+        self.assertEqual("00700 1 234 567 8901", formatter.input_digit('1'))
+        self.assertEqual("00700123456789012", formatter.input_digit('2'))
+        self.assertEqual("007001234567890123", formatter.input_digit('3'))
+        self.assertEqual("0070012345678901234", formatter.input_digit('4'))
+        self.assertEqual("00700123456789012345", formatter.input_digit('5'))
+        self.assertEqual("007001234567890123456", formatter.input_digit('6'))
+        self.assertEqual("0070012345678901234567", formatter.input_digit('7'))
+
+    def testAYTFNumberPatternsBecomingInvalidShouldNotResultInDigitLoss(self):
+        formatter = AsYouTypeFormatter("CN")
+        self.assertEqual("+", formatter.input_digit('+'))
+        self.assertEqual("+8", formatter.input_digit('8'))
+        self.assertEqual("+86 ", formatter.input_digit('6'))
+        self.assertEqual("+86 9", formatter.input_digit('9'))
+        self.assertEqual("+86 98", formatter.input_digit('8'))
+        self.assertEqual("+86 988", formatter.input_digit('8'))
+        self.assertEqual("+86 988 1", formatter.input_digit('1'))
+        # Now the number pattern is no longer valid because there are multiple
+        # leading digit patterns; when we try again to extract a country code
+        # we should ensure we use the last leading digit pattern, rather than
+        # the first one such that it *thinks* it's found a valid formatting
+        # rule again.
+        # https://github.com/googlei18n/libphonenumber/issues/437
+        self.assertEqual("+8698812", formatter.input_digit('2'))
+        self.assertEqual("+86988123", formatter.input_digit('3'))
+        self.assertEqual("+869881234", formatter.input_digit('4'))
+        self.assertEqual("+8698812345", formatter.input_digit('5'))
 
     def testAYTFShortNumberFormatting_AR(self):
         # Python version extra test: use real metadata

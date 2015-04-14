@@ -15,4 +15,5 @@ PHONE_METADATA_WS = PhoneMetadata(id='WS', country_code=685, international_prefi
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(8\\d{2})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['8']),
-        NumberFormat(pattern='(7\\d)(\\d{5})', format='\\1 \\2', leading_digits_pattern=['7'])])
+        NumberFormat(pattern='(7\\d)(\\d{5})', format='\\1 \\2', leading_digits_pattern=['7']),
+        NumberFormat(pattern='(\\d{5})', format='\\1', leading_digits_pattern=['[2-6]'])])

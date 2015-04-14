@@ -55,6 +55,7 @@ US_NUMBER2 = FrozenPhoneNumber(country_code=1, national_number=6509600000)
 US_NUMBER3 = FrozenPhoneNumber(country_code=1, national_number=2128120000)
 US_NUMBER4 = FrozenPhoneNumber(country_code=1, national_number=6174240000)
 US_INVALID_NUMBER = FrozenPhoneNumber(country_code=1, national_number=123456789)
+NANPA_TOLL_FREE = FrozenPhoneNumber(country_code=1, national_number=8002431234)
 BS_NUMBER1 = FrozenPhoneNumber(country_code=1, national_number=2423651234)
 AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300)
 AR_MOBILE_NUMBER = FrozenPhoneNumber(country_code=54, national_number=92214000000)
@@ -86,41 +87,47 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         # No data file containing mappings for US numbers is available in Chinese for the unittests. As
         # a result, the country name of United States in simplified Chinese is returned.
         self.assertEqual(u("\u7F8E\u56FD"),
-                          description_for_number(US_NUMBER1, _CHINESE, region=_CHINA))
+                         description_for_number(US_NUMBER1, _CHINESE, region=_CHINA))
         self.assertEqual("Bahamas",
-                          description_for_number(BS_NUMBER1, _ENGLISH, region=_USA))
+                         description_for_number(BS_NUMBER1, _ENGLISH, region=_USA))
         self.assertEqual("Australia",
-                          description_for_number(AU_NUMBER, _ENGLISH, region=_USA))
+                         description_for_number(AU_NUMBER, _ENGLISH, region=_USA))
         self.assertEqual("",
-                          description_for_number(NUMBER_WITH_INVALID_COUNTRY_CODE, _ENGLISH, region=_USA))
+                         description_for_number(NUMBER_WITH_INVALID_COUNTRY_CODE, _ENGLISH, region=_USA))
         self.assertEqual("",
-                          description_for_number(INTERNATIONAL_TOLL_FREE, _ENGLISH, region=_USA))
+                         description_for_number(INTERNATIONAL_TOLL_FREE, _ENGLISH, region=_USA))
 
     def testGetDescriptionForNumberWithMissingPrefix(self):
         # Test that the name of the country is returned when the number passed in
         # is valid but not covered by the geocoding data file.
         self.assertEqual("United States",
-                          description_for_number(US_NUMBER4, _ENGLISH, region=_USA))
+                         description_for_number(US_NUMBER4, _ENGLISH, region=_USA))
+
+    def testGetDescriptionForNumberBelongingToMultipleCountriesIsEmpty(self):
+        # Test that nothing is returned when the number passed in is valid but
+        # not covered by the geocoding data file and belongs to multiple
+        # countries
+        self.assertEqual("", description_for_number(NANPA_TOLL_FREE, _ENGLISH, region=_USA))
 
     def testGetDescriptionForNumber_en_US(self):
         self.assertEqual("CA",
-                          description_for_number(US_NUMBER1, _ENGLISH, region=_USA))
+                         description_for_number(US_NUMBER1, _ENGLISH, region=_USA))
         self.assertEqual("Mountain View, CA",
-                          description_for_number(US_NUMBER2, _ENGLISH, region=_USA))
+                         description_for_number(US_NUMBER2, _ENGLISH, region=_USA))
         self.assertEqual("New York, NY",
-                          description_for_number(US_NUMBER3, _ENGLISH, region=_USA))
+                         description_for_number(US_NUMBER3, _ENGLISH, region=_USA))
 
     def testGetDescriptionForKoreanNumber(self):
         self.assertEqual("Seoul",
-                          description_for_number(KO_NUMBER1, _ENGLISH))
+                         description_for_number(KO_NUMBER1, _ENGLISH))
         self.assertEqual("Incheon",
-                          description_for_number(KO_NUMBER2, _ENGLISH))
+                         description_for_number(KO_NUMBER2, _ENGLISH))
         self.assertEqual("Jeju",
-                          description_for_number(KO_NUMBER3, _ENGLISH))
+                         description_for_number(KO_NUMBER3, _ENGLISH))
         self.assertEqual(u("\uC11C\uC6B8"),
-                          description_for_number(KO_NUMBER1, _KOREAN))
+                         description_for_number(KO_NUMBER1, _KOREAN))
         self.assertEqual(u("\uC778\uCC9C"),
-                          description_for_number(KO_NUMBER2, _KOREAN))
+                         description_for_number(KO_NUMBER2, _KOREAN))
 
     def testGetDescriptionForArgentinianMobileNumber(self):
         self.assertEqual("La Plata", description_for_number(AR_MOBILE_NUMBER, _ENGLISH))
@@ -134,16 +141,16 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         # No fallback, as the location name for the given phone number is
         # available in the requested language.
         self.assertEqual("Kalifornien",
-                          description_for_number(US_NUMBER1, _GERMAN))
+                         description_for_number(US_NUMBER1, _GERMAN))
         # German falls back to English.
         self.assertEqual("New York, NY",
-                          description_for_number(US_NUMBER3, _GERMAN))
+                         description_for_number(US_NUMBER3, _GERMAN))
         # Italian falls back to English.
         self.assertEqual("CA",
-                          description_for_number(US_NUMBER1, _ITALIAN))
+                         description_for_number(US_NUMBER1, _ITALIAN))
         # Korean doesn't fall back to English.
         self.assertEqual(u("\uB300\uD55C\uBBFC\uAD6D"),
-                          description_for_number(KO_NUMBER3, _KOREAN))
+                         description_for_number(KO_NUMBER3, _KOREAN))
 
     def testGetDescriptionForNumberWithUserRegion(self):
         # User in Italy, American number. We should just show United States, in

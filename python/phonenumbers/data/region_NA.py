@@ -9,7 +9,7 @@ PHONE_METADATA_NA = PhoneMetadata(id='NA', country_code=264, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='8701\\d{5}', possible_number_pattern='\\d{9}', example_number='870123456'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    voip=PhoneNumberDesc(national_number_pattern='8(3\\d{2}|86)\\d{5}', possible_number_pattern='\\d{8,9}', example_number='88612345'),
+    voip=PhoneNumberDesc(national_number_pattern='8(?:3\\d{2}|86)\\d{5}', possible_number_pattern='\\d{8,9}', example_number='88612345'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
