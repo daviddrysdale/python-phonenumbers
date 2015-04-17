@@ -35,7 +35,7 @@ sys.path.append('python')
 # Discover version of phonenumbers package
 from phonenumbers import __version__
 
-distutils.core.setup(name='phonenumbers',
+distutils.core.setup(name='tg-phonenumbers',
                      version=__version__,
                      description="Python version of Google's common library for parsing, formatting, storing and validating international phone numbers.",
                      author='David Drysdale',
