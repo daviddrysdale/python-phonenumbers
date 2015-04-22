@@ -30,10 +30,10 @@ from .phonenumberutil import _SECOND_NUMBER_START_PATTERN, _UNWANTED_END_CHAR_PA
 from .phonenumberutil import MatchType, NumberParseException, PhoneNumberFormat
 from .phonenumberutil import is_possible_number, is_valid_number, parse
 from .phonenumberutil import normalize_digits_only, national_significant_number
-from .phonenumberutil import format_nsn_using_pattern, ndd_prefix_for_region
+from .phonenumberutil import _format_nsn_using_pattern, ndd_prefix_for_region
 from .phonenumberutil import format_number, is_number_match, region_code_for_country_code
 from .phonenumberutil import _maybe_strip_national_prefix_carrier_code
-from .phonenumberutil import choose_formatting_pattern_for_number
+from .phonenumberutil import _choose_formatting_pattern_for_number
 from .phonenumberutil import _formatting_rule_has_first_group_only
 from .phonenumber import CountryCodeSource
 from .phonemetadata import PhoneMetadata
@@ -353,8 +353,8 @@ def _get_national_number_groups(numobj, formatting_pattern=None):
     else:
         # We format the NSN only, and split that according to the separator.
         nsn = national_significant_number(numobj)
-        return format_nsn_using_pattern(nsn, formatting_pattern,
-                                        PhoneNumberFormat.RFC3966).split(U_DASH)
+        return _format_nsn_using_pattern(nsn, formatting_pattern,
+                                         PhoneNumberFormat.RFC3966).split(U_DASH)
 
 
 def _check_number_grouping_is_valid(numobj, candidate, checker):
@@ -433,8 +433,8 @@ def _is_national_prefix_present_if_required(numobj):
         return True
     # Check if a national prefix should be present when formatting this number.
     national_number = national_significant_number(numobj)
-    format_rule = choose_formatting_pattern_for_number(metadata.number_format,
-                                                       national_number)
+    format_rule = _choose_formatting_pattern_for_number(metadata.number_format,
+                                                        national_number)
     # To do this, we check that a national prefix formatting rule was present
     # and that it wasn't just the first-group symbol ($1) with punctuation.
     if (format_rule is not None and
