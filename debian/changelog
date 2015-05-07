@@ -1,3 +1,9 @@
+python-phonenumbers (7.0.4) UNRELEASED; urgency=low
+
+  * Update to upstream version 7.0.4
+
+ -- Torge Szczepanek <debian@cygnusnetworks.de>  Mon, 04 May 2015 12:10:11 +0200
+
 python-phonenumbers (6.0.0a) UNRELEASED; urgency=low
 
   * Initial Debian packaging
