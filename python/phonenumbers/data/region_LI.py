@@ -16,6 +16,6 @@ PHONE_METADATA_LI = PhoneMetadata(id='LI', country_code=423, international_prefi
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[23789]']),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['[23789]']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6[56]']),
         NumberFormat(pattern='(69)(7\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['697'])])
