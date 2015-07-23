@@ -230,6 +230,12 @@ class ExampleNumbersTest(unittest.TestCase):
         matcher2 = PhoneNumberMatcher("*1234", "IL", leniency=Leniency.POSSIBLE)
         self.assertTrue(matcher2.has_next())
 
+    def testMissingShortMetadata(self):
+        # Python version extra test:
+        # Check a short number for a country (ER) that has no short metadata
+        numobj = PhoneNumber(country_code=291, national_number=123456)
+        self.assertFalse(shortnumberinfo.is_possible_short_number(numobj))
+
     def testBlankMetadata(self):
         # Python version extra test
         # Some metadata is blank; check that we cope with this.
