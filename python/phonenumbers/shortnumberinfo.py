@@ -82,6 +82,8 @@ def is_possible_short_number(numobj):
 
     for region in region_codes:
         metadata = PhoneMetadata.short_metadata_for_region(region)
+        if metadata is None:
+            continue
         if _is_number_possible_for_desc(short_number, metadata.general_desc):
             return True
     return False
