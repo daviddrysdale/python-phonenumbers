@@ -2,8 +2,8 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AC = PhoneMetadata(id='AC', country_code=247, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[46]\\d{4}|[2-467]\\d{3}|[01589]\\d{5}', possible_number_pattern='\\d{4,6}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='6[2-467]\\d{3}|(?:[267]\\d|3[0-5]|4[4-69])\\d{2}', possible_number_pattern='\\d{4,5}', example_number='62889'),
+    general_desc=PhoneNumberDesc(national_number_pattern='[46]\\d{4}|[01589]\\d{5}', possible_number_pattern='\\d{5,6}'),
+    fixed_line=PhoneNumberDesc(national_number_pattern='6[2-467]\\d{3}', possible_number_pattern='\\d{5}', example_number='62889'),
     mobile=PhoneNumberDesc(national_number_pattern='4\\d{4}', possible_number_pattern='\\d{5}', example_number='40123'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
