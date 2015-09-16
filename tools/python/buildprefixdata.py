@@ -171,7 +171,9 @@ def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, pe
     for chunk_num in range(total_chunks):
         chunk_index = PREFIXDATA_CHUNK_SIZE * chunk_num
         chunk_keys = sorted_keys[chunk_index:chunk_index + PREFIXDATA_CHUNK_SIZE]
-        chunk_data = {key: prefixdata[key] for key in chunk_keys}
+        chunk_data = {}
+        for key in chunk_keys:
+            chunk_data[key] = prefixdata[key]
         chunk_file = os.path.join(outdirname, 'data%d.py' % chunk_num)
         chunk_longest = output_prefixdata_chunk(
             chunk_data, chunk_file, module_prefix, per_locale)
