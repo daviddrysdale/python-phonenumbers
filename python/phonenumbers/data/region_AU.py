@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix='(?:14(?:1[14]|34|4[17]|[56]6|7[47]|88))?001[14-689]',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-578]\\d{5,9}', possible_number_pattern='\\d{6,10}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='[237]\\d{8}|8(?:[68]\\d{3}|7[0-69]\\d{2}|9(?:[02-9]\\d{2}|1(?:[0-57-9]\\d|6[0135-9])))\\d{4}', possible_number_pattern='\\d{8,9}', example_number='212345678'),
-    mobile=PhoneNumberDesc(national_number_pattern='14(?:5\\d|71)\\d{5}|4(?:[0-2]\\d|3[0-57-9]|4[47-9]|5[0-25-9]|6[6-9]|7[03-9]|8[17-9]|9[017-9])\\d{6}', possible_number_pattern='\\d{9}', example_number='412345678'),
+    mobile=PhoneNumberDesc(national_number_pattern='14(?:5\\d|71)\\d{5}|4(?:[0-2]\\d|3[0-57-9]|4[47-9]|5[0-25-9]|6[6-9]|7[03-9]|8[147-9]|9[017-9])\\d{6}', possible_number_pattern='\\d{9}', example_number='412345678'),
     toll_free=PhoneNumberDesc(national_number_pattern='180(?:0\\d{3}|2)\\d{3}', possible_number_pattern='\\d{7,10}', example_number='1800123456'),
     premium_rate=PhoneNumberDesc(national_number_pattern='190[0126]\\d{6}', possible_number_pattern='\\d{10}', example_number='1900123456'),
     shared_cost=PhoneNumberDesc(national_number_pattern='13(?:00\\d{2})?\\d{4}', possible_number_pattern='\\d{6,10}', example_number='1300123456'),
