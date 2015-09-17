@@ -12,15 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-22780|Orange
-22788|Airtel
-22789|Airtel
-22790|Orange
-22791|Orange
-22792|Orange
-22794|Moov
-22795|Moov
-22796|Airtel
-22797|Airtel
-22798|Airtel
-22799|Airtel
+97680|Unitel
+97686|Unitel
+97688|Unitel
+97689|Unitel
