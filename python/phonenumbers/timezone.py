@@ -13,9 +13,9 @@
 >>> len(tzlist)
 2
 >>> str(tzlist[0])
-'America/Mazatlan'
->>> str(tzlist[1])
 'America/Mexico_City'
+>>> str(tzlist[1])
+'America/Mazatlan'
 
 """
 # Based very loosely on original Java code:

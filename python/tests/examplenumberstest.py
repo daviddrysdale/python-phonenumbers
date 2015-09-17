@@ -232,8 +232,8 @@ class ExampleNumbersTest(unittest.TestCase):
 
     def testMissingShortMetadata(self):
         # Python version extra test:
-        # Check a short number for a country (ER) that has no short metadata
-        numobj = PhoneNumber(country_code=291, national_number=123456)
+        # Check a short number for a country (GQ) that has no short metadata
+        numobj = PhoneNumber(country_code=240, national_number=234123456)
         self.assertFalse(shortnumberinfo.is_possible_short_number(numobj))
 
     def testBlankMetadata(self):
