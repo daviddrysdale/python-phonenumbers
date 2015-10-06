@@ -12,8 +12,15 @@ python:
 sudo: false
 install:
   - pip install coveralls
+  - pip install protobuf
 script:
   - make -C tools/python test
-  - if [ "$TRAVIS_PYTHON_VERSION" = "2.7" ]; then cd python && coverage run --source=phonenumbers ./testwrapper.py && coverage report -m && cd ..; fi
+  - |
+        if [ "$TRAVIS_PYTHON_VERSION" = "2.7" ]; then
+           cd python
+           coverage run --source=phonenumbers ./testwrapper.py
+           coverage run --source=phonenumbers.pb2 ./testpb2.py
+           cd ..
+        fi
 after_success:
   - cd python && coveralls && cd ..
