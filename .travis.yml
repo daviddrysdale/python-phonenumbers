@@ -9,5 +9,11 @@ python:
   - "3.3"
   - "3.4"
   - "3.5"
-
-script: make -C tools/python test
+sudo: false
+install:
+  - pip install coveralls
+script:
+  - make -C tools/python test
+  - if [ "$TRAVIS_PYTHON_VERSION" = "2.7" ]; then cd python && coverage run --source=phonenumbers ./testwrapper.py && coverage report -m && cd ..; fi
+after_success:
+  - cd python && coveralls && cd ..
