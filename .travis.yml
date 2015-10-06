@@ -18,8 +18,9 @@ script:
   - |
         if [ "$TRAVIS_PYTHON_VERSION" = "2.7" ]; then
            cd python
-           coverage run --source=phonenumbers ./testwrapper.py
-           coverage run --source=phonenumbers.pb2 ./testpb2.py
+           COVERAGE_FILE=main.cov coverage run --source=phonenumbers ./testwrapper.py
+           COVERAGE_FILE=pb2.cov coverage run --source=phonenumbers.pb2 ./testpb2.py
+           coverage combine main.cov pb2.cov
            cd ..
         fi
 after_success:
