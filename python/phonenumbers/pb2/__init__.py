@@ -38,13 +38,14 @@ from phonenumbers import PhoneNumber
 
 def PBToPy(numpb):
     """Convert phonenumber_pb2.PhoneNumber to phonenumber.PhoneNumber"""
-    return PhoneNumber(numpb.country_code if numpb.HasField("country_code") else None,
-                       numpb.national_number if numpb.HasField("national_number") else None,
-                       numpb.extension if numpb.HasField("extension") else None,
-                       numpb.italian_leading_zero if numpb.HasField("italian_leading_zero") else None,
-                       numpb.raw_input if numpb.HasField("raw_input") else None,
-                       numpb.country_code_source if numpb.HasField("country_code_source") else None,
-                       numpb.preferred_domestic_carrier_code if numpb.HasField("preferred_domestic_carrier_code") else None)
+    return PhoneNumber(country_code=numpb.country_code if numpb.HasField("country_code") else None,
+                       national_number=numpb.national_number if numpb.HasField("national_number") else None,
+                       extension=numpb.extension if numpb.HasField("extension") else None,
+                       italian_leading_zero=numpb.italian_leading_zero if numpb.HasField("italian_leading_zero") else None,
+                       number_of_leading_zeros=numpb.number_of_leading_zeros if numpb.HasField("number_of_leading_zeros") else None,
+                       raw_input=numpb.raw_input if numpb.HasField("raw_input") else None,
+                       country_code_source=numpb.country_code_source if numpb.HasField("country_code_source") else None,
+                       preferred_domestic_carrier_code=numpb.preferred_domestic_carrier_code if numpb.HasField("preferred_domestic_carrier_code") else None)
 
 def PyToPB(numobj):
     """Convert phonenumber.PhoneNumber to phonenumber_pb2.PhoneNumber"""
@@ -57,6 +58,8 @@ def PyToPB(numobj):
         numpb.extension = numobj.extension
     if numobj.italian_leading_zero is not None:
         numpb.italian_leading_zero = numobj.italian_leading_zero
+    if numobj.number_of_leading_zeros is not None:
+        numpb.number_of_leading_zeros = numobj.number_of_leading_zeros
     if numobj.raw_input is not None:
         numpb.raw_input = numobj.raw_input
     if numobj.country_code_source is not None:
