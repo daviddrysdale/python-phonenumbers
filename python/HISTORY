@@ -1,5 +1,15 @@
 
 ====================
+ What's new in 7.1.0
+====================
+
+Merge to upstream commit 903ac5de5b6e1112; upstream code changelog:
+   - Only upstream code change doesn't affect python version
+     (New MetadataSource implementation that reads from a single metadata file with
+     all regions' phone number metadata.)
+
+
+====================
  What's new in 7.0.0
 ====================
 
