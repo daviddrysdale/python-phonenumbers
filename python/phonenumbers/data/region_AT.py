@@ -7,7 +7,7 @@ PHONE_METADATA_AT = PhoneMetadata(id='AT', country_code=43, international_prefix
     mobile=PhoneNumberDesc(national_number_pattern='6(?:44|5[0-3579]|6[013-9]|[7-9]\\d)\\d{4,10}', possible_number_pattern='\\d{7,13}', example_number='644123456'),
     toll_free=PhoneNumberDesc(national_number_pattern='80[02]\\d{6,10}', possible_number_pattern='\\d{9,13}', example_number='800123456'),
     premium_rate=PhoneNumberDesc(national_number_pattern='(?:711|9(?:0[01]|3[019]))\\d{6,10}', possible_number_pattern='\\d{9,13}', example_number='900123456'),
-    shared_cost=PhoneNumberDesc(national_number_pattern='8(?:10|2[018])\\d{6,10}', possible_number_pattern='\\d{9,13}', example_number='810123456'),
+    shared_cost=PhoneNumberDesc(national_number_pattern='8(?:10\\d|2(?:[01]\\d|8\\d?))\\d{5,9}', possible_number_pattern='\\d{8,13}', example_number='810123456'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='780\\d{6,10}', possible_number_pattern='\\d{9,13}', example_number='780123456'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
