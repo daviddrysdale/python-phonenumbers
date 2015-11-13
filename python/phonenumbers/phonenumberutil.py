@@ -445,6 +445,18 @@ def _regenerate_derived_data():
 _regenerate_derived_data()
 
 
+def _copy_number_format(other):
+    """Return a mutable copy of the given NumberFormat object"""
+    copy = NumberFormat(pattern=other.pattern,
+                        format=other.format,
+                        leading_digits_pattern=list(other.leading_digits_pattern),
+                        national_prefix_formatting_rule=other.national_prefix_formatting_rule,
+                        national_prefix_optional_when_formatting=other.national_prefix_optional_when_formatting,
+                        domestic_carrier_code_formatting_rule=other.domestic_carrier_code_formatting_rule)
+    copy._mutable = True
+    return copy
+
+
 def _extract_possible_number(number):
     """Attempt to extract a possible number from the string passed in.
 
@@ -863,13 +875,11 @@ def format_by_pattern(numobj, number_format, user_defined_formats):
         # If no pattern above is matched, we format the number as a whole.
         formatted_number = nsn
     else:
-        num_format_copy = NumberFormat()
-        num_format_copy._mutable = True
+        num_format_copy = _copy_number_format(formatting_pattern)
         # Before we do a replacement of the national prefix pattern $NP with
         # the national prefix, we need to copy the rule so that subsequent
         # replacements for different numbers have the appropriate national
         # prefix.
-        num_format_copy.merge_from(formatting_pattern)
         np_formatting_rule = formatting_pattern.national_prefix_formatting_rule
         if (np_formatting_rule is not None and len(np_formatting_rule) > 0):
             national_prefix = metadata.national_prefix
@@ -1244,9 +1254,7 @@ def _format_original_allow_mods(numobj, region_calling_from):
             # National prefix not used when formatting this number.
             return national_format
         # Otherwise, we need to remove the national prefix from our output.
-        new_format_rule = NumberFormat()
-        new_format_rule._mutable = True
-        new_format_rule.merge_from(format_rule)
+        new_format_rule = _copy_number_format(format_rule)
         new_format_rule.national_prefix_formatting_rule = None
         return format_by_pattern(numobj, PhoneNumberFormat.NATIONAL, [new_format_rule])
 
@@ -1353,9 +1361,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
         if formatting_pattern is None:
             # If no pattern above is matched, we format the original input
             return num_raw_input
-        new_format = NumberFormat()
-        new_format._mutable = True
-        new_format.merge_from(formatting_pattern)
+        new_format = _copy_number_format(formatting_pattern)
         # The first group is the first group of digits that the user
         # wrote together.
         new_format.pattern = u("(\\d+)(.*)")

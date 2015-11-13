@@ -137,11 +137,11 @@ class AsYouTypeFormatter(object):
     def _get_available_formats(self, leading_digits):
         if (self._is_complete_number and
             len(self._current_metadata.intl_number_format) > 0):
-            format_list = self._current_metadata.intl_number_format
+            number_formats = self._current_metadata.intl_number_format
         else:
-            format_list = self._current_metadata.number_format
+            number_formats = self._current_metadata.number_format
         national_prefix_is_used_by_country = (self._current_metadata.national_prefix is not None)
-        for this_format in format_list:
+        for this_format in number_formats:
             if (not national_prefix_is_used_by_country or self._is_complete_number or
                 this_format.national_prefix_optional_when_formatting or
                 _formatting_rule_has_first_group_only(this_format.national_prefix_formatting_rule)):
