@@ -1,5 +1,14 @@
 
 ====================
+ What's new in 7.2.0
+====================
+
+Merge to upstream commit ab5e61acc087ec9f5, which is 7.2.1 (7.2.0 had an immediate
+problem on release); upstream changelog mentions no code changes, but the Java
+implementation includes a change to use nano protobufs.
+
+
+====================
  What's new in 7.1.0
 ====================
 
