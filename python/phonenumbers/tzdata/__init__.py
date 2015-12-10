@@ -21,5 +21,35 @@ from ..util import u
 TIMEZONE_DATA = {}
 from .data0 import data
 TIMEZONE_DATA.update(data)
+from .data1 import data
+TIMEZONE_DATA.update(data)
+from .data2 import data
+TIMEZONE_DATA.update(data)
+from .data3 import data
+TIMEZONE_DATA.update(data)
+from .data4 import data
+TIMEZONE_DATA.update(data)
+from .data5 import data
+TIMEZONE_DATA.update(data)
+from .data6 import data
+TIMEZONE_DATA.update(data)
+from .data7 import data
+TIMEZONE_DATA.update(data)
+from .data8 import data
+TIMEZONE_DATA.update(data)
+from .data9 import data
+TIMEZONE_DATA.update(data)
+from .data10 import data
+TIMEZONE_DATA.update(data)
+from .data11 import data
+TIMEZONE_DATA.update(data)
+from .data12 import data
+TIMEZONE_DATA.update(data)
+from .data13 import data
+TIMEZONE_DATA.update(data)
+from .data14 import data
+TIMEZONE_DATA.update(data)
+from .data15 import data
+TIMEZONE_DATA.update(data)
 del data
 TIMEZONE_LONGEST_PREFIX = 7
