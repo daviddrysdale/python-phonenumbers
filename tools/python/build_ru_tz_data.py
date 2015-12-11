@@ -51,14 +51,18 @@ TZ_TO_REGION_DATA = {
     'Asia/Kamchatka': ['Камчатский край', 'Чукотский АО']
 }
 
+PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'python/phonenumbers/tzdata'))
 
-def write_file(chunk, index):
-    path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'python/phonenumbers/tzdata'))
-    data_file = open('%s/data%d.py' % (path, index), 'w')
+
+def write_file(chunk, index, init_file):
+    data_file = open('%s/data%d.py' % (PATH, index), 'w')
     data_file.write('data = {\n')
     data_file.writelines(chunk)
     data_file.write('}')
     data_file.close()
+
+    init_file.write('from .data%d import data\n' % index)
+    init_file.write('TIMEZONE_DATA.update(data)\n')
 
 
 def parse_csv(filename):
@@ -66,6 +70,12 @@ def parse_csv(filename):
     reader = csv.reader(open(filename, 'rb'), dialect='excel', delimiter=';')
     chunk = []
     index = 1
+
+    init_file = open(os.path.join(PATH, '__init__.py'), 'w')
+    init_file.write('TIMEZONE_DATA = {}\n')
+    init_file.write('from .data0 import data\n')
+    init_file.write('TIMEZONE_DATA.update(data)\n')
+
     for i, row in enumerate(reader):
         if i >= 1 and row:
             row = [column.strip().decode('cp1251').encode('utf8') for column in row]
@@ -79,12 +89,15 @@ def parse_csv(filename):
                 chunk.append('\t"' + key + '": ' + '("' + '", "'.join(tz) + '", ),\n')
 
             if len(chunk) > 2000:
-                write_file(chunk, index)
+                write_file(chunk, index, init_file)
                 chunk = []
                 index += 1
     if chunk:
-        write_file(chunk, index)
+        write_file(chunk, index, init_file)
 
+    init_file.write('del data\n')
+    init_file.write('TIMEZONE_LONGEST_PREFIX = 7\n')
+    init_file.close()
 
 if __name__ == "__main__":
     parse_csv(sys.argv[1])
