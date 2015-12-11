@@ -76,7 +76,7 @@ def parse_csv(filename):
 
             tz = [tz_name for tz_name, regions in TZ_TO_REGION_DATA.items() if region in regions]
             if tz:
-                chunk.append('\t"' + key + '": ' + '("' + '", "'.join(tz) + '"),\n')
+                chunk.append('\t"' + key + '": ' + '("' + '", "'.join(tz) + '", ),\n')
 
             if len(chunk) > 2000:
                 write_file(chunk, index)
