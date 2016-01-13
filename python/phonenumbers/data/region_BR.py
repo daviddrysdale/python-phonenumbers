@@ -1,7 +1,7 @@
 """Auto-generated file, do not edit by hand. BR metadata"""
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix='00(?:1[45]|2[135]|31|4[13])',
+PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix='00(?:1[245]|2[1-35]|31|4[13]|[56]5|99)',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-46-9]\\d{7,10}|5\\d{8,9}', possible_number_pattern='\\d{8,11}'),
     fixed_line=PhoneNumberDesc(national_number_pattern='1[1-9][2-5]\\d{7}|(?:[4689][1-9]|2[12478]|3[1-578]|5[1-5]|7[13-579])[2-5]\\d{7}', possible_number_pattern='\\d{8,11}', example_number='1123456789'),
     mobile=PhoneNumberDesc(national_number_pattern='1[1-9](?:7|9\\d)\\d{7}|(?:2[12478]|3[1-578]|7[13-579]|[89][1-9])9?[6-9]\\d{7}|(?:[46][1-9]|5[1-5])[6-9]\\d{7}', possible_number_pattern='\\d{10,11}', example_number='11961234567'),
@@ -15,7 +15,7 @@ PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:300\\d|40(?:0\\d|20))\\d{4}', possible_number_pattern='\\d{8}', example_number='40041234'),
     national_prefix='0',
-    national_prefix_for_parsing='0(?:(1[245]|2[135]|31|4[13])(\\d{10,11}))?',
+    national_prefix_for_parsing='0(?:(1[245]|2[1-35]|31|4[13]|[56]5|99)(\\d{10,11}))?',
     national_prefix_transform_rule='\\2',
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['[2-9](?:[1-9]|0[1-9])'], national_prefix_formatting_rule='\\1'),
         NumberFormat(pattern='(\\d{5})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['9(?:[1-9]|0[1-9])'], national_prefix_formatting_rule='\\1'),

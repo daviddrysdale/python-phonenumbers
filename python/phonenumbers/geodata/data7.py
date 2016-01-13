@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2015 The Libphonenumber Authors
+# Copyright (C) 2011-2016 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -178,7 +178,6 @@ data = {
  '861331462':{'en': 'Qiqihar, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9f50\u9f50\u54c8\u5c14\u5e02')},
  '861322606':{'en': 'Zhongshan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e2d\u5c71\u5e02')},
  '861332327':{'en': 'Cangzhou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u6ca7\u5dde\u5e02')},
- '861332776':{'en': 'Zhenjiang, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u9547\u6c5f\u5e02')},
  '861332326':{'en': 'Langfang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5eca\u574a\u5e02')},
  '861328333':{'en': 'Zhangjiakou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5f20\u5bb6\u53e3\u5e02')},
  '861328332':{'en': 'Zhangjiakou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5f20\u5bb6\u53e3\u5e02')},
@@ -274,7 +273,7 @@ data = {
  '861324212':{'en': 'Foshan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4f5b\u5c71\u5e02')},
  '861324213':{'en': 'Foshan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4f5b\u5c71\u5e02')},
  '861321338':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
- '861321339':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
+ '861324219':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
  '861329893':{'en': 'Shannan, Tibet', 'zh': u('\u897f\u85cf\u5c71\u5357\u5730\u533a')},
  '861329025':{'en': 'Liaocheng, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u804a\u57ce\u5e02')},
  '861327648':{'en': 'Qingdao, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u9752\u5c9b\u5e02')},
@@ -1625,7 +1624,6 @@ data = {
  '861331750':{'en': 'Huanggang, Hubei', 'zh': u('\u6e56\u5317\u7701\u9ec4\u5188\u5e02')},
  '861329121':{'en': 'Wuxi, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u65e0\u9521\u5e02')},
  '86132780':{'en': 'Siping, Jilin', 'zh': u('\u5409\u6797\u7701\u56db\u5e73\u5e02')},
- '861332777':{'en': 'Zhenjiang, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u9547\u6c5f\u5e02')},
  '86132789':{'en': 'Haikou, Hainan', 'zh': u('\u6d77\u5357\u7701\u6d77\u53e3\u5e02')},
  '861329120':{'en': 'Wuxi, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u65e0\u9521\u5e02')},
  '861327428':{'en': 'Huludao, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u846b\u82a6\u5c9b\u5e02')},
@@ -1835,6 +1833,15 @@ data = {
  '861322473':{'en': 'Wuhai, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u4e4c\u6d77\u5e02')},
  '861322470':{'en': 'Baotou, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5305\u5934\u5e02')},
  '861322471':{'en': 'Baotou, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5305\u5934\u5e02')},
+ '861318039':{'en': 'Zhangjiakou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5f20\u5bb6\u53e3\u5e02')},
+ '861318038':{'en': 'Langfang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5eca\u574a\u5e02')},
+ '861318033':{'en': 'Cangzhou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u6ca7\u5dde\u5e02')},
+ '861318032':{'en': 'Cangzhou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u6ca7\u5dde\u5e02')},
+ '861318031':{'en': 'Cangzhou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u6ca7\u5dde\u5e02')},
+ '861318037':{'en': 'Langfang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5eca\u574a\u5e02')},
+ '861318036':{'en': 'Langfang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5eca\u574a\u5e02')},
+ '861318035':{'en': 'Langfang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5eca\u574a\u5e02')},
+ '861318034':{'en': 'Langfang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5eca\u574a\u5e02')},
  '861320550':{'en': 'Chuzhou, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u6ec1\u5dde\u5e02')},
  '861328765':{'en': 'Weifang, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6f4d\u574a\u5e02')},
  '861328570':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
@@ -2739,7 +2746,6 @@ data = {
  '861318303':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
  '861318302':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
  '861329753':{'en': 'Xiaogan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5b5d\u611f\u5e02')},
- '861332778':{'en': 'Taizhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u6cf0\u5dde\u5e02')},
  '861330450':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
  '861323789':{'en': 'Laibin, Guangxi', 'zh': u('\u5e7f\u897f\u6765\u5bbe\u5e02')},
  '861323788':{'en': 'Hechi, Guangxi', 'zh': u('\u5e7f\u897f\u6cb3\u6c60\u5e02')},
@@ -3310,7 +3316,7 @@ data = {
  '861328249':{'en': 'Wenzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u6e29\u5dde\u5e02')},
  '861328248':{'en': 'Wenzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u6e29\u5dde\u5e02')},
  '861324218':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
- '861324219':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
+ '861321339':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
  '861319649':{'en': 'Yangzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u626c\u5dde\u5e02')},
  '861319648':{'en': 'Yangzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u626c\u5dde\u5e02')},
  '861319647':{'en': 'Yangzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u626c\u5dde\u5e02')},
@@ -8399,14 +8405,8 @@ data = {
  '861329047':{'en': 'Cangzhou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u6ca7\u5dde\u5e02')},
  '861329044':{'en': 'Shijiazhuang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u77f3\u5bb6\u5e84\u5e02')},
  '861329045':{'en': 'Tangshan, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5510\u5c71\u5e02')},
- '861332774':{'en': 'Zhenjiang, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u9547\u6c5f\u5e02')},
- '861332775':{'en': 'Zhenjiang, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u9547\u6c5f\u5e02')},
  '861329048':{'en': 'Handan, Hebei', 'zh': u('\u6cb3\u5317\u7701\u90af\u90f8\u5e02')},
  '861329049':{'en': 'Xingtai, Hebei', 'zh': u('\u6cb3\u5317\u7701\u90a2\u53f0\u5e02')},
- '861332770':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
- '861332771':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
- '861332772':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
- '861332773':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
  '861328395':{'en': 'Luohe, Henan', 'zh': u('\u6cb3\u5357\u7701\u6f2f\u6cb3\u5e02')},
  '861328394':{'en': 'Zhoukou, Henan', 'zh': u('\u6cb3\u5357\u7701\u5468\u53e3\u5e02')},
  '861328397':{'en': 'Xinyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u4fe1\u9633\u5e02')},

@@ -17,7 +17,7 @@ PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix
     national_prefix='0',
     national_prefix_for_parsing='0(8[1-46-8]|85\\d{2})?',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['1(?:0|1[19]|[69]9|5[458])|[57]0', '1(?:0|1[19]|[69]9|5(?:44|59|8))|[57]0'], national_prefix_formatting_rule='0\\1', domestic_carrier_code_formatting_rule='0$CC-\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3,4})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['1(?:[169][2-8]|[78]|5[1-4])|[68]0|[3-6][1-9][1-9]', '1(?:[169][2-8]|[78]|5(?:[1-3]|4[56]))|[68]0|[3-6][1-9][1-9]'], national_prefix_formatting_rule='0\\1', domestic_carrier_code_formatting_rule='0$CC-\\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{3,4})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['1(?:[01]|5[1-4]|6[2-8]|[7-9])|[68]0|[3-6][1-9][1-9]', '1(?:[01]|5(?:[1-3]|4[56])|6[2-8]|[7-9])|[68]0|[3-6][1-9][1-9]'], national_prefix_formatting_rule='0\\1', domestic_carrier_code_formatting_rule='0$CC-\\1'),
         NumberFormat(pattern='(\\d{3})(\\d)(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['131', '1312'], national_prefix_formatting_rule='0\\1', domestic_carrier_code_formatting_rule='0$CC-\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['131', '131[13-9]'], national_prefix_formatting_rule='0\\1', domestic_carrier_code_formatting_rule='0$CC-\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['13[2-9]'], national_prefix_formatting_rule='0\\1', domestic_carrier_code_formatting_rule='0$CC-\\1'),

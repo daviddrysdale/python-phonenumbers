@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2015 The Libphonenumber Authors
+# Copyright (C) 2011-2016 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1161,8 +1161,11 @@ data = {
  '474046':{'en': 'NetCom'},
  '55389806':{'en': 'Telemig Celular'},
  '55649626':{'en': 'Vivo'},
- '55389807':{'en': 'Telemig Celular'},
- '25191':{'en': 'ETH-MTN'},
+ '25194':{'en': 'Ethio Telecom'},
+ '25195':{'en': 'Ethio Telecom'},
+ '25192':{'en': 'Ethio Telecom'},
+ '25193':{'en': 'Ethio Telecom'},
+ '25191':{'en': 'Ethio Telecom'},
  '55538427':{'en': 'Brasil Telecom GSM'},
  '55499922':{'en': 'TIM'},
  '479837':{'en': 'NetCom'},
@@ -5017,6 +5020,7 @@ data = {
  '55619956':{'en': 'Vivo'},
  '55619957':{'en': 'Vivo'},
  '55619958':{'en': 'Vivo'},
+ '55549965':{'en': 'Vivo'},
  '55619959':{'en': 'Vivo'},
  '55659648':{'en': 'Vivo'},
  '551196913':{'en': 'Vivo'},
@@ -5706,6 +5710,7 @@ data = {
  '55619653':{'en': 'Vivo'},
  '55619652':{'en': 'Vivo'},
  '55619651':{'en': 'Vivo'},
+ '55319406':{'en': 'TIM'},
  '5543910':{'en': 'Vivo'},
  '55319707':{'en': 'Telemig Celular'},
  '55319705':{'en': 'Telemig Celular'},
@@ -5985,7 +5990,7 @@ data = {
  '55319405':{'en': 'TIM'},
  '55319404':{'en': 'TIM'},
  '55319407':{'en': 'TIM'},
- '55319406':{'en': 'TIM'},
+ '5066':{'en': 'Movistar'},
  '55319401':{'en': 'TIM'},
  '1787372':{'en': 'Claro'},
  '55319403':{'en': 'TIM'},
@@ -6243,11 +6248,8 @@ data = {
  '55339973':{'en': 'Telemig Celular'},
  '55339972':{'en': 'Telemig Celular'},
  '55339971':{'en': 'Telemig Celular'},
- '55659669':{'en': 'Vivo'},
- '55659666':{'en': 'Vivo'},
  '55549611':{'en': 'Vivo'},
  '55659664':{'en': 'Vivo'},
- '55659665':{'en': 'Vivo'},
  '55659662':{'en': 'Vivo'},
  '55659663':{'en': 'Vivo'},
  '55339979':{'en': 'Telemig Celular'},
@@ -6804,7 +6806,7 @@ data = {
  '551599165':{'en': 'Claro BR'},
  '55549969':{'en': 'Vivo'},
  '55549968':{'en': 'Vivo'},
- '55549965':{'en': 'Vivo'},
+ '55389807':{'en': 'Telemig Celular'},
  '55549964':{'en': 'Vivo'},
  '55518226':{'en': 'TIM'},
  '55518227':{'en': 'TIM'},
@@ -7199,8 +7201,6 @@ data = {
  '55458401':{'en': 'Brasil Telecom GSM'},
  '55658411':{'en': 'Brasil Telecom GSM'},
  '55619823':{'en': 'Vivo'},
- '55659668':{'en': 'Vivo'},
- '55659667':{'en': 'Vivo'},
  '55449157':{'en': 'Vivo'},
  '55389191':{'en': 'TIM'},
  '55359838':{'en': 'Telemig Celular'},

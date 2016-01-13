@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2015 The Libphonenumber Authors
+# Copyright (C) 2011-2016 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -3110,6 +3110,7 @@ data = {
  '61476':{'en': 'Telstra'},
  '61470':{'en': 'Lycamobile'},
  '61473':{'en': 'Telstra'},
+ '61472':{'en': 'Telstra'},
  '658293':{'en': 'StarHub'},
  '61478':{'en': 'Optus'},
  '918290':{'en': 'Hexacom'},
@@ -3334,7 +3335,7 @@ data = {
  '55878120':{'en': 'Vivo'},
  '6011273':{'en': 'U Mobile'},
  '6011276':{'en': 'Maxis'},
- '6011277':{'en': 'Maxis'},
+ '55878125':{'en': 'Vivo'},
  '917683':{'en': 'Airtel'},
  '917682':{'en': 'Airtel'},
  '99620':{'en': 'Aktel'},
@@ -3457,6 +3458,7 @@ data = {
  '599953':{'en': 'Chippie'},
  '599952':{'en': 'Chippie'},
  '599954':{'en': 'Chippie'},
+ '599957':{'en': 'Chippie'},
  '599956':{'en': 'Chippie'},
  '918444':{'en': 'Reliance'},
  '918445':{'en': 'Telewings'},
@@ -5472,7 +5474,11 @@ data = {
  '919665':{'en': 'AirTel'},
  '62481994':{'en': 'Esia'},
  '917379':{'en': 'Vodafone'},
- '917373':{'en': 'Aircel'},
+ '55659668':{'en': 'Vivo'},
+ '55659669':{'en': 'Vivo'},
+ '55659666':{'en': 'Vivo'},
+ '55659667':{'en': 'Vivo'},
+ '55659665':{'en': 'Vivo'},
  '917377':{'en': 'Idea'},
  '917376':{'en': 'Cellone'},
  '55999128':{'en': 'Vivo'},
@@ -5792,7 +5798,7 @@ data = {
  '918424':{'en': 'Idea'},
  '55969149':{'en': 'Vivo'},
  '55969148':{'en': 'Vivo'},
- '55739983':{'en': 'Vivo'},
+ '67678':{'en': 'U-Call'},
  '55969145':{'en': 'Vivo'},
  '55969144':{'en': 'Vivo'},
  '55969147':{'en': 'Vivo'},
@@ -6399,6 +6405,7 @@ data = {
  '6225141':{'en': 'Esia'},
  '6225140':{'en': 'Esia'},
  '5579816':{'en': 'Claro BR'},
+ '917373':{'en': 'Aircel'},
  '5579814':{'en': 'Claro BR'},
  '5579815':{'en': 'Claro BR'},
  '5579812':{'en': 'Claro BR'},
@@ -6533,7 +6540,7 @@ data = {
  '6011274':{'en': 'U Mobile'},
  '6011275':{'en': 'Maxis'},
  '55878124':{'en': 'Vivo'},
- '55878125':{'en': 'Vivo'},
+ '6011277':{'en': 'Maxis'},
  '6011278':{'en': 'Maxis'},
  '6011279':{'en': 'Maxis'},
  '917681':{'en': 'Airtel'},
@@ -8163,6 +8170,7 @@ data = {
  '599968':{'en': 'Digicel'},
  '599969':{'en': 'Digicel'},
  '558191':{'en': 'Claro BR'},
+ '599965':{'en': 'Digicel'},
  '599966':{'en': 'Digicel'},
  '599967':{'en': 'Digicel'},
  '599961':{'en': 'CSC'},
@@ -8579,7 +8587,7 @@ data = {
  '67675':{'en': 'U-Call'},
  '67677':{'en': 'U-Call'},
  '67676':{'en': 'U-Call'},
- '67678':{'en': 'U-Call'},
+ '55739983':{'en': 'Vivo'},
  '55739980':{'en': 'Vivo'},
  '55739981':{'en': 'Vivo'},
  '55739986':{'en': 'Vivo'},
