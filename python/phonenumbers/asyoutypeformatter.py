@@ -29,7 +29,7 @@ import re
 from .util import u, unicod, U_EMPTY_STRING, U_SPACE
 from .unicode_util import digit as unicode_digit
 from .re_util import fullmatch
-from .phonemetadata import PhoneMetadata
+from .phonemetadata import RegionCode, PhoneMetadata
 from .phonenumberutil import _VALID_PUNCTUATION, REGION_CODE_FOR_NON_GEO_ENTITY
 from .phonenumberutil import _PLUS_SIGN, _PLUS_CHARS_PATTERN
 from .phonenumberutil import _extract_country_code, region_code_for_country_code
@@ -100,7 +100,7 @@ class AsYouTypeFormatter(object):
         phone numbers in the specific region "as you type"
         """
         self._clear()
-        self._default_country = region_code.upper()
+        self._default_country = RegionCode(region_code.upper())
         self._current_metadata = _get_metadata_for_region(self._default_country)
         self._default_metadata = self._current_metadata
 

@@ -22,7 +22,7 @@ import re
 
 from .re_util import fullmatch
 from .util import U_EMPTY_STRING
-from .phonemetadata import PhoneMetadata
+from .phonemetadata import RegionCode, PhoneMetadata
 from .phonenumber import PhoneNumber
 from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
 from .phonenumberutil import normalize_digits_only, region_codes_for_country_code
@@ -32,7 +32,7 @@ from .phonenumberutil import _is_number_possible_for_desc, _is_number_matching_d
 
 # In these countries, if extra digits are added to an emergency number, it no longer connects
 # to the emergency service.
-_REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT = set(["BR", "CL", "NI"])
+_REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT = set(map(RegionCode, ("BR", "CL", "NI")))
 
 
 class ShortNumberCost(object):

@@ -20,6 +20,7 @@ from phonenumbers import AsYouTypeFormatter
 from phonenumbers import PhoneMetadata, PhoneNumberDesc, NumberFormat
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil
+from phonenumbers.phonemetadata import RegionCode
 from phonenumbers.util import u
 from .testmetadatatest import TestMetadataTestCase
 
@@ -1178,8 +1179,8 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
                                                                leading_digits_pattern=['[1-59]|[78]0'],
                                                                national_prefix_formatting_rule=u("\\1"))])
         PhoneMetadata._region_metadata['XX'] = metadataXX
-        phonenumberutil.SUPPORTED_REGIONS.add("XX")
-        phonenumberutil.COUNTRY_CODE_TO_REGION_CODE[384] = ("XX",)
+        phonenumberutil.SUPPORTED_REGIONS.add(RegionCode("XX"))
+        phonenumberutil.COUNTRY_CODE_TO_REGION_CODE[384] = (RegionCode("XX"),)
         formatter = AsYouTypeFormatter('XX')
         # A pattern with "|" in it doesn't get formatting
         self.assertEqual('1', formatter.input_digit('1'))

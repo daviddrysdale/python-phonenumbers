@@ -13,10 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from phonenumbers.phonemetadata import PhoneMetadata
+from phonenumbers.phonemetadata import RegionCode, PhoneMetadata
 
-_AVAILABLE_REGION_CODES = ['AD','AE','AO','AR','AU','BB','BR','BS','BY','CA','CC','CN','CX','DE','FR','GB','GG','HU','IT','JP','KR','MX','NZ','PL','RE','SE','SG','US','YT']
-_AVAILABLE_NONGEO_COUNTRY_CODES = [800, 979]
+_AVAILABLE_REGION_CODES = tuple(map(RegionCode, ('AD','AE','AO','AR','AU','BB','BR','BS','BY','CA','CC','CN','CX','DE','FR','GB','GG','HU','IT','JP','KR','MX','NZ','PL','RE','SE','SG','US','YT')))
+_AVAILABLE_NONGEO_COUNTRY_CODES = (800, 979)
 
 def _load_region(code):
     __import__("region_%s" % code, globals(), locals(),
@@ -35,29 +35,29 @@ for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
 # In the case of multiple countries sharing a calling code,
 # such as the NANPA countries, the one indicated with
 # "main_country_for_code" in the metadata should be first.
-_COUNTRY_CODE_TO_REGION_CODE = {
-    1: ("US", "BB", "BS", "CA",),
-    33: ("FR",),
-    36: ("HU",),
-    39: ("IT",),
-    44: ("GB", "GG",),
-    46: ("SE",),
-    48: ("PL",),
-    49: ("DE",),
-    52: ("MX",),
-    54: ("AR",),
-    55: ("BR",),
-    61: ("AU", "CC", "CX",),
-    64: ("NZ",),
-    65: ("SG",),
-    81: ("JP",),
-    82: ("KR",),
-    86: ("CN",),
-    244: ("AO",),
-    262: ("RE", "YT",),
-    375: ("BY",),
-    376: ("AD",),
-    800: ("001",),
-    971: ("AE",),
-    979: ("001",),
-}
+_COUNTRY_CODE_TO_REGION_CODE = dict((k, tuple(map(RegionCode, v))) for (k, v) in (
+    (1, ("US", "BB", "BS", "CA",)),
+    (33, ("FR",)),
+    (36, ("HU",)),
+    (39, ("IT",)),
+    (44, ("GB", "GG",)),
+    (46, ("SE",)),
+    (48, ("PL",)),
+    (49, ("DE",)),
+    (52, ("MX",)),
+    (54, ("AR",)),
+    (55, ("BR",)),
+    (61, ("AU", "CC", "CX",)),
+    (64, ("NZ",)),
+    (65, ("SG",)),
+    (81, ("JP",)),
+    (82, ("KR",)),
+    (86, ("CN",)),
+    (244, ("AO",)),
+    (262, ("RE", "YT",)),
+    (375, ("BY",)),
+    (376, ("AD",)),
+    (800, ("001",)),
+    (971, ("AE",)),
+    (979, ("001",)),
+))

@@ -37,7 +37,7 @@ from .unicode_util import digit as unicode_digit
 
 # Data class definitions
 from .phonenumber import PhoneNumber, CountryCodeSource
-from .phonemetadata import NumberFormat, PhoneMetadata, REGION_CODE_FOR_NON_GEO_ENTITY
+from .phonemetadata import RegionCode, NumberFormat, PhoneMetadata, REGION_CODE_FOR_NON_GEO_ENTITY
 
 # Import auto-generated data structures
 try:
@@ -52,7 +52,7 @@ except ImportError:  # pragma no cover
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
         prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
-        _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
+        _COUNTRY_CODE_TO_REGION_CODE = {1: (RegionCode("US"),)}
         _AVAILABLE_SHORT_REGION_CODES = []
     else:
         raise
@@ -79,7 +79,7 @@ _MAX_LENGTH_COUNTRY_CODE = 3
 # prevents malicious input from overflowing the regular-expression engine.
 _MAX_INPUT_STRING_LENGTH = 250
 # Region-code for the unknown region.
-UNKNOWN_REGION = u("ZZ")
+UNKNOWN_REGION = RegionCode("ZZ")
 # The set of regions that share country calling code 1.
 _NANPA_COUNTRY_CODE = 1
 # The prefix that needs to be inserted in front of a Colombian landline number
@@ -830,7 +830,7 @@ def format_number(numobj, num_format):
     # Metadata cannot be None because the country calling code is valid (which
     # means that the region code cannot be ZZ and must be one of our supported
     # region codes).
-    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_calling_code, region_code.upper())
+    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_calling_code, region_code)
     formatted_number = _format_nsn(nsn, metadata, num_format)
     formatted_number = _maybe_append_formatted_extension(numobj,
                                                          metadata,
@@ -1015,10 +1015,10 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                                    (numobj_type == PhoneNumberType.MOBILE) or
                                    (numobj_type == PhoneNumberType.FIXED_LINE_OR_MOBILE))
         # Carrier codes may be needed in some countries. We handle this here.
-        if region_code == "CO" and numobj_type == PhoneNumberType.FIXED_LINE:
+        if region_code == RegionCode("CO") and numobj_type == PhoneNumberType.FIXED_LINE:
             formatted_number = format_national_number_with_carrier_code(numobj_no_ext,
                                                                         _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX)
-        elif region_code == "BR" and is_fixed_line_or_mobile:
+        elif region_code == RegionCode("BR") and is_fixed_line_or_mobile:
             if numobj_no_ext.preferred_domestic_carrier_code is not None:
                 formatted_number = format_national_number_with_preferred_carrier_code(numobj_no_ext, "")
             else:
@@ -1027,7 +1027,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                 # the carriers won't connect the call.  Because of that, we return
                 # an empty string here.
                 formatted_number = U_EMPTY_STRING
-        elif is_valid_number and region_code == "HU":
+        elif is_valid_number and region_code == RegionCode("HU"):
             # The national format for HU numbers doesn't contain the national
             # prefix, because that is how numbers are normally written
             # down. However, the national prefix is obligatory when dialing
@@ -1051,7 +1051,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             # line and mobile numbers, we output international format for
             # numbers that can be dialed internationally as that always works.
             if ((region_code == REGION_CODE_FOR_NON_GEO_ENTITY or
-                 ((region_code == unicod("MX") or region_code == unicod("CL")) and
+                 ((region_code == RegionCode("MX") or region_code == RegionCode("CL")) and
                   is_fixed_line_or_mobile)) and
                 _can_be_internationally_dialled(numobj_no_ext)):
                 # MX fixed line and mobile numbers should always be formatted
@@ -1143,7 +1143,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
 
     region_code = region_code_for_country_code(country_code)
     # Metadata cannot be None because the country calling code is valid.
-    metadata_for_region = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code.upper())
+    metadata_for_region = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
     formatted_national_number = _format_nsn(nsn,
                                             metadata_for_region,
                                             PhoneNumberFormat.INTERNATIONAL)
