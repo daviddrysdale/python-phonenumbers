@@ -3277,6 +3277,7 @@ data = {
  '86189505':{'en': 'Ningde, Fujian', 'zh': u('\u798f\u5efa\u7701\u5b81\u5fb7\u5e02')},
  '861892269':{'en': 'Shanwei, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c55\u5c3e\u5e02')},
  '861892268':{'en': 'Jieyang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u63ed\u9633\u5e02')},
+ '861892265':{'en': 'Yunfu, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e91\u6d6e\u5e02')},
  '861892267':{'en': 'Jieyang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u63ed\u9633\u5e02')},
  '861892266':{'en': 'Yunfu, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e91\u6d6e\u5e02')},
  '915645':{'en': 'Rupbas, Rajasthan'},
