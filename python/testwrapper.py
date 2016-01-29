@@ -10,12 +10,17 @@ from phonenumbers import carrier
 from phonenumbers import timezone
 from tests import *
 
+
+class DocTest(unittest.TestCase):
+    def testDocStrings(self):
+        self.assertEqual(0, doctest.testmod(phonenumbers)[0])
+        self.assertEqual(0, doctest.testmod(util)[0])
+        self.assertEqual(0, doctest.testmod(re_util)[0])
+        self.assertEqual(0, doctest.testmod(unicode_util)[0])
+        self.assertEqual(0, doctest.testmod(geocoder)[0])
+        self.assertEqual(0, doctest.testmod(carrier)[0])
+        self.assertEqual(0, doctest.testmod(timezone)[0])
+
+
 if __name__ == '__main__':
-    doctest.testmod(phonenumbers)
-    doctest.testmod(util)
-    doctest.testmod(re_util)
-    doctest.testmod(unicode_util)
-    doctest.testmod(geocoder)
-    doctest.testmod(carrier)
-    doctest.testmod(timezone)
     unittest.main()
