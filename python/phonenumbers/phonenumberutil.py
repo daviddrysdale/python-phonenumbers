@@ -1829,7 +1829,7 @@ def region_codes_for_country_code(country_code):
     """
     regions = COUNTRY_CODE_TO_REGION_CODE.get(country_code, None)
     if regions is None:
-        return []
+        return ()
     else:
         return regions
 
