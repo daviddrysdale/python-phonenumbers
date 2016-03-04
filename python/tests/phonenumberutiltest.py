@@ -36,6 +36,8 @@ AE_UAN = FrozenPhoneNumber(country_code=971, national_number=600123456)
 AR_MOBILE = FrozenPhoneNumber(country_code=54, national_number=91187654321)
 AR_NUMBER = FrozenPhoneNumber(country_code=54, national_number=1187654321)
 AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300)
+BR_MOBILE = FrozenPhoneNumber(country_code=55, national_number=21988001122)
+BR_NUMBER = FrozenPhoneNumber(country_code=55, national_number=2156780001)
 BS_MOBILE = FrozenPhoneNumber(country_code=1, national_number=2423570000)
 BS_NUMBER = FrozenPhoneNumber(country_code=1, national_number=2423651234)
 # Note that this is the same as the example number for DE in the metadata.
@@ -160,6 +162,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
     def testIsNumberGeographical(self):
         self.assertFalse(phonenumberutil._is_number_geographical(BS_MOBILE))  # Bahamas, mobile phone number.
+        self.assertTrue(phonenumberutil._is_number_geographical(BR_MOBILE))  # Brazil mobile number
+        self.assertTrue(phonenumberutil._is_number_geographical(BR_NUMBER))  # Brazil fixed line number
         self.assertTrue(phonenumberutil._is_number_geographical(AU_NUMBER))  # Australian fixed line number.
         self.assertFalse(phonenumberutil._is_number_geographical(INTERNATIONAL_TOLL_FREE))  # International toll free number
 
@@ -191,6 +195,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(0, phonenumbers.length_of_geographical_area_code(US_SHORT_BY_ONE_NUMBER))
         # An international toll free number, which has no area code.
         self.assertEqual(0, phonenumbers.length_of_geographical_area_code(INTERNATIONAL_TOLL_FREE))
+        # Brazilian Mobile, always a two digits area code
+        self.assertEqual(2, phonenumbers.length_of_geographical_area_code(BR_MOBILE))
+        self.assertEqual(2, phonenumbers.length_of_geographical_area_code(BR_NUMBER))
 
     def testGetLengthOfNationalDestinationCode(self):
         # Google MTV, which has national destination code (NDC) "650".
@@ -226,6 +233,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # An international toll free number, which has NDC "1234".
         self.assertEqual(4, phonenumbers.length_of_national_destination_code(INTERNATIONAL_TOLL_FREE))
+
+        self.assertEqual(2, phonenumbers.length_of_national_destination_code(BR_MOBILE))
+        self.assertEqual(2, phonenumbers.length_of_national_destination_code(BR_NUMBER))
 
         # Python version extra test
         # A number with an extension; still has NDC "7912"
