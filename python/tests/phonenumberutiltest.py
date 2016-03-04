@@ -36,7 +36,7 @@ AE_UAN = FrozenPhoneNumber(country_code=971, national_number=600123456)
 AR_MOBILE = FrozenPhoneNumber(country_code=54, national_number=91187654321)
 AR_NUMBER = FrozenPhoneNumber(country_code=54, national_number=1187654321)
 AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300)
-BR_MOBILE = FrozenPhoneNumber(country_code=55, national_number=21988001122)
+BR_MOBILE = FrozenPhoneNumber(country_code=55, national_number=21981036511)
 BR_NUMBER = FrozenPhoneNumber(country_code=55, national_number=2156780001)
 BS_MOBILE = FrozenPhoneNumber(country_code=1, national_number=2423570000)
 BS_NUMBER = FrozenPhoneNumber(country_code=1, national_number=2423651234)
@@ -150,6 +150,23 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("(9)(\\d{4})(\\d{2})(\\d{4})",
                          metadata.intl_number_format[3].pattern)
         self.assertEqual("\\1 \\2 \\3 \\4", metadata.intl_number_format[3].format)
+
+    def testGetInstanceLoadBRMetadata(self):
+        metadata = PhoneMetadata.metadata_for_region("BR")
+        self.assertEqual("BR", metadata.id)
+        self.assertEqual(55, metadata.country_code)
+        self.assertEqual(u'00(?:1[245]|2[1-35]|31|4[13]|[56]5|99)',
+                         metadata.international_prefix)
+        self.assertEqual("0", metadata.national_prefix)
+        self.assertEqual(u'0(?:(1[245]|2[1-35]|31|4[13]|[56]5|99)(\\d{10,11}))?',
+                         metadata.national_prefix_for_parsing)
+        self.assertEqual("\\2", metadata.national_prefix_transform_rule)
+        self.assertEqual(u'\\1', metadata.number_format[2].format)
+        self.assertEqual(u'(\\d{2})(\\d{5})(\\d{4})',
+                         metadata.number_format[3].pattern)
+        self.assertEqual(u'([3589]00)(\\d{2,3})(\\d{4})',
+                         metadata.intl_number_format[3].pattern)
+        self.assertEqual(u'\\1 \\2 \\3', metadata.intl_number_format[3].format)
 
     def testGetInstanceLoadInternationalTollFreeMetadata(self):
         metadata = PhoneMetadata.metadata_for_nongeo_region(800)
