@@ -770,8 +770,12 @@ def _is_number_geographical(numobj):
     num_type = number_type(numobj)
     # TODO: Include mobile phone numbers from countries like Indonesia, which
     # has some mobile numbers that are geographical.
-    return (num_type == PhoneNumberType.FIXED_LINE or
-            num_type == PhoneNumberType.FIXED_LINE_OR_MOBILE)
+    valid_types = [PhoneNumberType.FIXED_LINE,
+                   PhoneNumberType.FIXED_LINE_OR_MOBILE]
+    if numobj.country_code == 55:
+        # In Brazil, mobile numbers are geographical
+        valid_types += [PhoneNumberType.MOBILE]
+    return num_type in valid_types
 
 
 def _is_valid_region_code(region_code):
