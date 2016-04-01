@@ -157,7 +157,7 @@ _INNER_MATCHES = (
     # Breaks on a hyphen - e.g. "12345 - 332-445-1234 is my number."  We
     # require a space on either side of the hyphen for it to be considered a
     # separator.
-    re.compile(u("(?u)(?:\\p{Z}-|-\\s)\\s*(.+)")),
+    re.compile(u("(?u)(?:\\s-|-\\s)\\s*(.+)")),
     # Various types of wide hyphens. Note we have decided not to enforce a
     # space here, since it's possible that it's supposed to be used to break
     # two numbers without spaces, and we haven't seen many instances of it
