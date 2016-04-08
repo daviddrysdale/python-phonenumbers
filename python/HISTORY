@@ -3,6 +3,17 @@
  What's new in 7.2.0
 ====================
 
+Merge to upstream commit d933631fbf15; code changes:
+   - Added support for region_code of None in example_number_for_type()
+   - Added invalid_example_number()
+   - Improvements to docstring for parse method
+   - Update is_number_geographical to return true for geographical mobile numbers.
+
+
+====================
+ What's new in 7.2.0
+====================
+
 Merge to upstream commit ab5e61acc087ec9f5, which is 7.2.1 (7.2.0 had an immediate
 problem on release); upstream changelog mentions no code changes, but the Java
 implementation includes a change to use nano protobufs.
