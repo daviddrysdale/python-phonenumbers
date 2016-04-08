@@ -63,7 +63,7 @@ class PhoneNumber(UnicodeMixin):
                  country_code_source=None,
                  preferred_domestic_carrier_code=None):
         # The country calling code for this number, as defined by the
-        # International Telecommunication Union (ITU). Fox example, this would
+        # International Telecommunication Union (ITU). For example, this would
         # be 1 for NANPA countries, and 33 for France.
         #
         # None if not set, of type int otherwise.
@@ -76,12 +76,12 @@ class PhoneNumber(UnicodeMixin):
         # National (significant) Number is defined in International
         # Telecommunication Union (ITU) Recommendation E.164. It is a
         # language/country-neutral representation of a phone number at a
-        # country level. For countries which have the concept of Area Code,
-        # the National (significant) Number contains the area code. It
-        # contains a maximum number of digits which equal to 15 - n, where n
-        # is the number of digits of the country code. Take note that National
-        # (significant) Number does not contain National(trunk)
-        # prefix.
+        # country level. For countries which have the concept of an "area
+        # code" or "national destination code", this is included in the
+        # National (significant) Number. Although the ITU says the maximum
+        # length should be 15, we have found longer numbers in some countries
+        # e.g. Germany.  Note that the National (significant) Number does not
+        # contain the National(trunk) prefix.
         #
         # None if not set, of type long otherwise (and so it will never
         # contain any formatting (hypens, spaces, parentheses), nor any

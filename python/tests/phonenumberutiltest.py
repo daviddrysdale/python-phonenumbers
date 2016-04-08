@@ -163,6 +163,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue(phonenumberutil._is_number_geographical(AU_NUMBER))  # Australian fixed line number.
         self.assertFalse(phonenumberutil._is_number_geographical(INTERNATIONAL_TOLL_FREE))  # International toll free number
 
+        # We test that mobile phone numbers in relevant regions are indeed
+        # considered geographical.
+        self.assertTrue(phonenumberutil._is_number_geographical(AR_MOBILE))  # Argentina, mobile phone number.
+        self.assertTrue(phonenumberutil._is_number_geographical(MX_MOBILE1))  # Mexico, mobile phone number.
+        self.assertTrue(phonenumberutil._is_number_geographical(MX_MOBILE2))  # Mexico, another mobile phone number.
+
     def testIsLeadingZeroPossible(self):
         self.assertTrue(phonenumberutil._is_leading_zero_possible(39))  # Italy
         self.assertFalse(phonenumberutil._is_leading_zero_possible(1))  # USA
@@ -271,9 +277,25 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # this method.
         self.assertTrue(phonenumbers.example_number("001") is None)
 
+    def testGetInvalidExampleNumber(self):
+        # RegionCode 001 is reserved for supporting non-geographical country
+        # calling codes. We don't support getting an invalid example number
+        # for it with invalid_example_number.
+        self.assertTrue(phonenumbers.invalid_example_number("001") is None)
+        self.assertTrue(phonenumbers.invalid_example_number("CS") is None)
+        usInvalidNumber = phonenumbers.invalid_example_number("US")
+        self.assertEqual(1, usInvalidNumber.country_code)
+        self.assertFalse(usInvalidNumber.national_number == 0)
+
     def testGetExampleNumberForNonGeoEntity(self):
         self.assertEqual(INTERNATIONAL_TOLL_FREE, phonenumbers.example_number_for_non_geo_entity(800))
         self.assertEqual(UNIVERSAL_PREMIUM_RATE, phonenumbers.example_number_for_non_geo_entity(979))
+
+    def testGetExampleNumberWithoutRegion(self):
+        # In our test metadata we don't cover all types: in our real metadata, we do.
+        self.assertTrue(phonenumbers.example_number_for_type(None, PhoneNumberType.FIXED_LINE) is not None)
+        self.assertTrue(phonenumbers.example_number_for_type(None, PhoneNumberType.MOBILE) is not None)
+        self.assertTrue(phonenumbers.example_number_for_type(None, PhoneNumberType.PREMIUM_RATE) is not None)
 
     def testConvertAlphaCharactersInNumber(self):
         input = "1800-ABC-DEF"

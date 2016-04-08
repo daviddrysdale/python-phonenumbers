@@ -156,7 +156,19 @@ class ExampleNumbersTest(unittest.TestCase):
         for regionCode in phonenumberutil.SUPPORTED_REGIONS:
             exampleNumber = phonenumberutil.example_number(regionCode)
             self.assertTrue(exampleNumber is not None,
-                            msg="None found for region %s" % regionCode)
+                            msg="No example number found for region %s" % regionCode)
+
+    def testEveryRegionHasAnInvalidExampleNumber(self):
+        for regionCode in phonenumberutil.SUPPORTED_REGIONS:
+            exampleNumber = phonenumberutil.invalid_example_number(regionCode)
+            self.assertTrue(exampleNumber is not None,
+                            msg="No invalid example number found for region %s" % regionCode)
+
+    def testEveryTypeHasAnExampleNumber(self):
+        for num_type in PhoneNumberType.values():
+            exampleNumber = phonenumberutil.example_number_for_type(None, num_type)
+            self.assertTrue(exampleNumber is not None,
+                            msg="No example number found for type %s" % num_type)
 
     def testShortNumbersValidAndCorrectCost(self):
         invalid_string_cases = []
@@ -175,9 +187,11 @@ class ExampleNumbersTest(unittest.TestCase):
                 exampleShortNumber = shortnumberinfo._example_short_number_for_cost(regionCode, cost)
                 if exampleShortNumber != "":
                     phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
-                    if cost != shortnumberinfo.expected_cost_for_region(phoneNumber, regionCode):
+                    exampleCost = shortnumberinfo.expected_cost_for_region(phoneNumber, regionCode)
+                    if cost != exampleCost:
                         self.wrong_type_cases.append(phoneNumber)
-                        prnt("Wrong cost for %s" % phoneNumber, file=sys.stderr)
+                        prnt("Wrong cost for %s: got %s, expected: %s" %
+                             (phoneNumber, exampleCost, cost), file=sys.stderr)
         self.assertEqual(0, len(invalid_string_cases))
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))

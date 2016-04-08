@@ -90,6 +90,13 @@ _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = unicod("3")
 # the national destination code, which should be the length of the area code
 # plus the length of the mobile token.
 _MOBILE_TOKEN_MAPPINGS = {52: u('1'), 54: u('9')}
+# Set of country calling codes that have geographically assigned mobile
+# numbers. This may not be complete; we add calling codes case by case, as we
+# find geographical mobile numbers or hear from user reports.
+_GEO_MOBILE_COUNTRIES = (
+    52,  # Mexico
+    54,  # Argentina
+    55)  # Brazil
 # The PLUS_SIGN signifies the international prefix.
 _PLUS_SIGN = u("+")
 _STAR_SIGN = u('*')
@@ -391,6 +398,21 @@ class PhoneNumberType(object):
     # A phone number is of type UNKNOWN when it does not fit any of the known
     # patterns for a specific region.
     UNKNOWN = 99
+
+    @classmethod
+    def values(cls):
+        return (PhoneNumberType.FIXED_LINE,
+                PhoneNumberType.MOBILE,
+                PhoneNumberType.FIXED_LINE_OR_MOBILE,
+                PhoneNumberType.TOLL_FREE,
+                PhoneNumberType.PREMIUM_RATE,
+                PhoneNumberType.SHARED_COST,
+                PhoneNumberType.VOIP,
+                PhoneNumberType.PERSONAL_NUMBER,
+                PhoneNumberType.PAGER,
+                PhoneNumberType.UAN,
+                PhoneNumberType.VOICEMAIL,
+                PhoneNumberType.UNKNOWN)
 
 
 class MatchType(object):
@@ -768,10 +790,10 @@ def _is_number_geographical(numobj):
     updated too.
     """
     num_type = number_type(numobj)
-    # TODO: Include mobile phone numbers from countries like Indonesia, which
-    # has some mobile numbers that are geographical.
     return (num_type == PhoneNumberType.FIXED_LINE or
-            num_type == PhoneNumberType.FIXED_LINE_OR_MOBILE)
+            num_type == PhoneNumberType.FIXED_LINE_OR_MOBILE or
+            ((numobj.country_code in _GEO_MOBILE_COUNTRIES) and
+             num_type == PhoneNumberType.MOBILE))
 
 
 def _is_valid_region_code(region_code):
@@ -1486,7 +1508,7 @@ def _choose_formatting_pattern_for_number(available_formats, national_number):
 
 
 def _format_nsn_using_pattern(national_number, formatting_pattern, number_format,
-                             carrier_code=None):
+                              carrier_code=None):
     # Note that carrier_code is optional - if None or an empty string, no
     # carrier code replacement will take place.
     number_format_rule = formatting_pattern.format
@@ -1552,11 +1574,77 @@ def example_number(region_code):
     return example_number_for_type(region_code, PhoneNumberType.FIXED_LINE)
 
 
-def example_number_for_type(region_code, num_type):
-    """Gets a valid number for the specified region and number type.
+def invalid_example_number(region_code):
+    """Gets an invalid number for the specified region.
+
+    This is useful for unit-testing purposes, where you want to test what
+    will happen with an invalid number. Note that the number that is
+    returned will always be able to be parsed and will have the correct
+    country code. It may also be a valid *short* number/code for this
+    region. Validity checking such numbers is handled with shortnumberinfo.
 
     Arguments:
     region_code -- The region for which an example number is needed.
+
+
+    Returns an invalid number for the specified region. Returns None when an
+    unsupported region or the region 001 (Earth) is passed in.
+    """
+    if not _is_valid_region_code(region_code):
+        return None
+    # We start off with a valid fixed-line number since every country
+    # supports this. Alternatively we could start with a different number
+    # type, since fixed-line numbers typically have a wide breadth of valid
+    # number lengths and we may have to make it very short before we get an
+    # invalid number.
+    metadata = PhoneMetadata.metadata_for_region(region_code.upper())
+    desc = _number_desc_for_type(metadata, PhoneNumberType.FIXED_LINE)
+    if desc.example_number is None:
+        # This shouldn't happen; we have a test for this.
+        return None  # pragma no cover
+    example_number = desc.example_number
+    # Try and make the number invalid. We do this by changing the length. We
+    # try reducing the length of the number, since currently no region has a
+    # number that is the same length as MIN_LENGTH_FOR_NSN. This is probably
+    # quicker than making the number longer, which is another
+    # alternative. We could also use the possible number pattern to extract
+    # the possible lengths of the number to make this faster, but this
+    # method is only for unit-testing so simplicity is preferred to
+    # performance.  We don't want to return a number that can't be parsed,
+    # so we check the number is long enough. We try all possible lengths
+    # because phone number plans often have overlapping prefixes so the
+    # number 123456 might be valid as a fixed-line number, and 12345 as a
+    # mobile number. It would be faster to loop in a different order, but we
+    # prefer numbers that look closer to real numbers (and it gives us a
+    # variety of different lengths for the resulting phone numbers -
+    # otherwise they would all be MIN_LENGTH_FOR_NSN digits long.)
+    phone_number_length = len(example_number) - 1
+    while phone_number_length >= _MIN_LENGTH_FOR_NSN:
+        number_to_try = example_number[:phone_number_length]
+        try:
+            possibly_valid_number = parse(number_to_try, region_code)
+            if not is_valid_number(possibly_valid_number):
+                return possibly_valid_number
+        except NumberParseException:  # pragma no cover
+            # Shouldn't happen: we have already checked the length, we know
+            # example numbers have only valid digits, and we know the region
+            # code is fine.
+            pass
+        phone_number_length -= 1
+
+    # We have a test to check that this doesn't happen for any of our
+    # supported regions.
+    return None  # pragma no cover
+
+
+def example_number_for_type(region_code, num_type):
+    """Gets a valid number for the specified region and number type.
+
+    If None is given as the region_code, then the returned number object
+    may belong to any country.
+
+    Arguments:
+    region_code -- The region for which an example number is needed, or None.
     num_type -- The type of number that is needed.
 
     Returns a valid number for the specified region and type. Returns None
@@ -1564,6 +1652,8 @@ def example_number_for_type(region_code, num_type):
     region or region 001 was specified.  For 001 (representing
     non-geographical numbers), call example_number_for_non_geo_entity instead.
     """
+    if region_code is None:
+        return _example_number_anywhere_for_type(num_type)
     # Check the region code is valid.
     if not _is_valid_region_code(region_code):
         return None
@@ -1575,6 +1665,34 @@ def example_number_for_type(region_code, num_type):
         except NumberParseException:
             pass
     return None
+
+
+def _example_number_anywhere_for_type(num_type):
+    """Gets a valid number for the specified number type (it may belong to any country).
+
+    Arguments:
+    num_type -- The type of number that is needed.
+
+    Returns a valid number for the specified type. Returns None when the
+    metadata does not contain such information. This should only happen when
+    no numbers of this type are allocated anywhere in the world anymore.
+    """
+    for region_code in SUPPORTED_REGIONS:
+        example_numobj = example_number_for_type(region_code, num_type)
+        if example_numobj is not None:
+            return example_numobj
+    # If there wasn't an example number for a region, try the non-geographical entities.
+    for country_calling_code in COUNTRY_CODES_FOR_NON_GEO_REGIONS:
+        metadata = PhoneMetadata.metadata_for_nongeo_region(country_calling_code, None)
+        desc = _number_desc_for_type(metadata, num_type)
+        if desc.example_number is not None:
+            try:
+                return parse(_PLUS_SIGN + unicod(country_calling_code) + desc.example_number, UNKNOWN_REGION)
+            except NumberParseException:  # pragma no cover
+                pass
+
+    # There are no example numbers of this type for any country in the library.
+    return None  # pragma no cover
 
 
 def example_number_for_non_geo_entity(country_calling_code):
@@ -1592,7 +1710,8 @@ def example_number_for_non_geo_entity(country_calling_code):
         desc = metadata.general_desc
         try:
             if desc.example_number is not None:
-                return parse(_PLUS_SIGN + unicod(country_calling_code) + desc.example_number, "ZZ")
+                return parse(_PLUS_SIGN + unicod(country_calling_code) + desc.example_number,
+                             UNKNOWN_REGION)
         except NumberParseException:
             pass
     return None
@@ -2403,6 +2522,16 @@ def parse(number, region=None, keep_raw_input=False,
           numobj=None, _check_region=True):
     """Parse a string and return a corresponding PhoneNumber object.
 
+    The method is quite lenient and looks for a number in the input text
+    (raw input) and does not check whether the string is definitely only a
+    phone number. To do this, it ignores punctuation and white-space, as
+    well as any text before the number (e.g. a leading "Tel: ") and trims
+    the non-number bits.  It will accept a number in any format (E164,
+    national, international etc), assuming it can be interpreted with the
+    defaultRegion supplied. It also attempts to convert any alpha characters
+    into digits if it thinks this is a vanity number of the type "1800
+    MICROSOFT".
+
     This method will throw a NumberParseException if the number is not
     considered to be a possible number. Note that validation of whether the
     number is actually a valid number for a particular region is not
@@ -2431,8 +2560,9 @@ def parse(number, region=None, keep_raw_input=False,
 
     Raises:
     NumberParseException if the string is not considered to be a viable
-    phone number or if no default region was supplied and the number is
-    not in international format (does not start with +).
+    phone number (e.g.  too few or too many digits) or if no default
+    region was supplied and the number is not in international format
+    (does not start with +).
     """
     if numobj is None:
         numobj = PhoneNumber()
