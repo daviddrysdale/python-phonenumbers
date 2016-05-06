@@ -296,5 +296,5 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertEqual(ShortNumberCost.UNKNOWN_COST,
                          shortnumberinfo.expected_cost_for_region(_parse("211", "US"), "US"))
         self.assertFalse(is_emergency_number("211", "CA"))
-        self.assertEqual(ShortNumberCost.UNKNOWN_COST,
+        self.assertEqual(ShortNumberCost.TOLL_FREE,
                          shortnumberinfo.expected_cost_for_region(_parse("211", "CA"), "CA"))
