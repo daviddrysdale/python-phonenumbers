@@ -1,5 +1,13 @@
 
 ====================
+ What's new in 7.4.0
+====================
+
+Merge to upstream commit 598b9a4f89d6; no code changes that affect the Python
+version so this is just a version bump to stay in sync with upstream.
+
+
+====================
  What's new in 7.3.0
 ====================
 
