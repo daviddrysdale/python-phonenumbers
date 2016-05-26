@@ -537,7 +537,6 @@ class AsYouTypeFormatter(object):
         if len(self._national_number) == 0:
             return False
 
-        number_without_ccc = U_EMPTY_STRING
         country_code, number_without_ccc = _extract_country_code(self._national_number)
         if country_code == 0:
             return False
