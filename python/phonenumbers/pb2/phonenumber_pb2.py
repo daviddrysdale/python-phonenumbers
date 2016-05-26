@@ -125,7 +125,7 @@ _PHONENUMBER = _descriptor.Descriptor(
 )
 
 _PHONENUMBER.fields_by_name['country_code_source'].enum_type = _PHONENUMBER_COUNTRYCODESOURCE
-_PHONENUMBER_COUNTRYCODESOURCE.containing_type = _PHONENUMBER;
+_PHONENUMBER_COUNTRYCODESOURCE.containing_type = _PHONENUMBER
 DESCRIPTOR.message_types_by_name['PhoneNumber'] = _PHONENUMBER
 
 class PhoneNumber(_message.Message):
