@@ -437,8 +437,7 @@ def _is_national_prefix_present_if_required(numobj):
     # To do this, we check that a national prefix formatting rule was present
     # and that it wasn't just the first-group symbol ($1) with punctuation.
     if (format_rule is not None and
-        format_rule.national_prefix_formatting_rule is not None and
-        len(format_rule.national_prefix_formatting_rule) > 0):
+        format_rule.national_prefix_formatting_rule):
         if format_rule.national_prefix_optional_when_formatting:
             # The national-prefix is optional in these cases, so we don't need
             # to check if it was present.

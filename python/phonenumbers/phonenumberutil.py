@@ -903,9 +903,9 @@ def format_by_pattern(numobj, number_format, user_defined_formats):
         # replacements for different numbers have the appropriate national
         # prefix.
         np_formatting_rule = formatting_pattern.national_prefix_formatting_rule
-        if (np_formatting_rule is not None and len(np_formatting_rule) > 0):
+        if np_formatting_rule:
             national_prefix = metadata.national_prefix
-            if (national_prefix is not None and len(national_prefix) > 0):
+            if national_prefix:
                 # Replace $NP with national prefix and $FG with the first
                 # group (\1) matcher.
                 np_formatting_rule = re.sub(_NP_PATTERN,
@@ -1218,8 +1218,7 @@ def format_in_original_format(numobj, region_calling_from):
     # If no digit is inserted/removed/modified as a result of our formatting,
     # we return the formatted phone number; otherwise we return the raw input
     # the user entered.
-    if (formatted_number is not None and
-        num_raw_input is not None and len(num_raw_input) > 0):
+    if (formatted_number is not None and num_raw_input):
         normalized_formatted_number = _normalize_diallable_chars_only(formatted_number)
         normalized_raw_input = _normalize_diallable_chars_only(num_raw_input)
         if normalized_formatted_number != normalized_raw_input:
@@ -1418,7 +1417,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
                                                          metadata_for_region,
                                                          PhoneNumberFormat.INTERNATIONAL,
                                                          num_raw_input)
-    if i18n_prefix_for_formatting is not None and len(i18n_prefix_for_formatting) > 0:
+    if i18n_prefix_for_formatting:
         formatted_number = (i18n_prefix_for_formatting + U_SPACE +
                             unicod(country_code) + U_SPACE + formatted_number)
     else:
@@ -1447,7 +1446,7 @@ def national_significant_number(numobj):
     # If leading zero(s) have been set, we prefix this now. Note this is not a
     # national prefix.
     national_number = U_EMPTY_STRING
-    if numobj.italian_leading_zero is not None and numobj.italian_leading_zero:
+    if numobj.italian_leading_zero:
         num_zeros = numobj.number_of_leading_zeros
         if num_zeros is None:
             num_zeros = 1
@@ -1515,10 +1514,8 @@ def _format_nsn_using_pattern(national_number, formatting_pattern, number_format
     m_re = re.compile(formatting_pattern.pattern)
     formatted_national_number = U_EMPTY_STRING
 
-    if (number_format == PhoneNumberFormat.NATIONAL and
-        carrier_code is not None and len(carrier_code) > 0 and
-        formatting_pattern.domestic_carrier_code_formatting_rule is not None and
-        len(formatting_pattern.domestic_carrier_code_formatting_rule) > 0):
+    if (number_format == PhoneNumberFormat.NATIONAL and carrier_code and
+        formatting_pattern.domestic_carrier_code_formatting_rule):
         # Replace the $CC in the formatting rule with the desired
         # carrier code.
         cc_format_rule = formatting_pattern.domestic_carrier_code_formatting_rule
@@ -1539,8 +1536,7 @@ def _format_nsn_using_pattern(national_number, formatting_pattern, number_format
         # Use the national prefix formatting rule instead.
         national_prefix_formatting_rule = formatting_pattern.national_prefix_formatting_rule
         if (number_format == PhoneNumberFormat.NATIONAL and
-            national_prefix_formatting_rule is not None and
-            len(national_prefix_formatting_rule) > 0):
+            national_prefix_formatting_rule):
             first_group_rule = re.sub(_FIRST_GROUP_PATTERN,
                                       national_prefix_formatting_rule,
                                       number_format_rule,
@@ -1721,7 +1717,7 @@ def _maybe_append_formatted_extension(numobj, metadata, num_format, number):
     """Appends the formatted extension of a phone number to formatted number,
     if the phone number had an extension specified.
     """
-    if (numobj.extension is not None and len(numobj.extension) > 0):
+    if numobj.extension:
         if num_format == PhoneNumberFormat.RFC3966:
             return number + _RFC3966_EXTN_PREFIX + numobj.extension
         else:
