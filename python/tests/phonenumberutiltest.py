@@ -354,6 +354,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("900 253 0000", phonenumbers.format_number(US_PREMIUM, PhoneNumberFormat.NATIONAL))
         self.assertEqual("+1 900 253 0000", phonenumbers.format_number(US_PREMIUM, PhoneNumberFormat.INTERNATIONAL))
         self.assertEqual("tel:+1-900-253-0000", phonenumbers.format_number(US_PREMIUM, PhoneNumberFormat.RFC3966))
+        self.assertEqual("+1.9002530000", phonenumbers.format_number(US_PREMIUM, PhoneNumberFormat.RFC5733))
         # Numbers with all zeros in the national number part will be formatted by using the raw_input
         # if that is available no matter which format is specified.
         self.assertEqual("000-000-0000",
@@ -376,6 +377,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("030/1234", phonenumbers.format_number(deNumber, PhoneNumberFormat.NATIONAL))
         self.assertEqual("+49 30/1234", phonenumbers.format_number(deNumber, PhoneNumberFormat.INTERNATIONAL))
         self.assertEqual("tel:+49-30-1234", phonenumbers.format_number(deNumber, PhoneNumberFormat.RFC3966))
+        self.assertEqual("+49.301234", phonenumbers.format_number(deNumber, PhoneNumberFormat.RFC5733))
 
         deNumber.clear()
         deNumber.country_code = 49
@@ -789,6 +791,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("tel:+1-650-253-0000", phonenumbers.format_by_pattern(US_NUMBER,
                                                                                PhoneNumberFormat.RFC3966,
                                                                                newNumberFormats))
+        self.assertEqual("+1.6502530000", phonenumbers.format_by_pattern(US_NUMBER,
+                                                                         PhoneNumberFormat.RFC5733,
+                                                                         newNumberFormats))
 
         # $NP is set to '1' for the US. Here we check that for other NANPA
         # countries the US rules are followed.
@@ -853,6 +858,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("03-331 6005 ext. 1234", phonenumbers.format_number(nzNumber, PhoneNumberFormat.NATIONAL))
         # Uses RFC 3966 syntax.
         self.assertEqual("tel:+64-3-331-6005;ext=1234", phonenumbers.format_number(nzNumber, PhoneNumberFormat.RFC3966))
+        self.assertEqual("+64.33316005x1234", phonenumbers.format_number(nzNumber, PhoneNumberFormat.RFC5733))
         # Extension prefix overridden in the territory information for the US:
         usNumberWithExtension = PhoneNumber()
         usNumberWithExtension.merge_from(US_NUMBER)

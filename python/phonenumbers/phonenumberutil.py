@@ -32,7 +32,7 @@ import re
 
 from .re_util import fullmatch   # Extra regexp function; see README
 from .util import UnicodeMixin, u, unicod, prnt, to_long
-from .util import U_EMPTY_STRING, U_SPACE, U_DASH, U_TILDE, U_ZERO, U_SEMICOLON
+from .util import U_EMPTY_STRING, U_SPACE, U_DASH, U_TILDE, U_ZERO, U_SEMICOLON, U_DOT, U_X_LOWER
 from .unicode_util import digit as unicode_digit
 
 # Data class definitions
@@ -366,6 +366,7 @@ class PhoneNumberFormat(object):
     INTERNATIONAL = 1
     NATIONAL = 2
     RFC3966 = 3
+    RFC5733 = 4  # https://tools.ietf.org/html/rfc5733#section-2.5
 
 
 class PhoneNumberType(object):
@@ -1463,6 +1464,14 @@ def _prefix_number_with_country_calling_code(country_code, num_format, formatted
         return _PLUS_SIGN + unicod(country_code) + U_SPACE + formatted_number
     elif num_format == PhoneNumberFormat.RFC3966:
         return _RFC3966_PREFIX + _PLUS_SIGN + unicod(country_code) + U_DASH + formatted_number
+    elif num_format == PhoneNumberFormat.RFC5733:
+        splits = formatted_number.split(_DEFAULT_EXTN_PREFIX)
+        result = _PLUS_SIGN + unicod(country_code) + U_DOT + re.sub(NON_DIGITS_PATTERN,
+                                                                    U_EMPTY_STRING,
+                                                                    splits[0])
+        if len(splits) > 1:
+            result += U_X_LOWER + splits[1]
+        return result
     else:
         return formatted_number
 
