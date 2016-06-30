@@ -3280,6 +3280,8 @@ data = {
  '861359811':{'en': 'Anyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u5b89\u9633\u5e02')},
  '861339319':{'en': 'Xingtai, Hebei', 'zh': u('\u6cb3\u5317\u7701\u90a2\u53f0\u5e02')},
  '861339318':{'en': 'Hengshui, Hebei', 'zh': u('\u6cb3\u5317\u7701\u8861\u6c34\u5e02')},
+ '861339317':{'en': 'Cangzhou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u6ca7\u5dde\u5e02')},
+ '861339316':{'en': 'Langfang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5eca\u574a\u5e02')},
  '861359816':{'en': 'Luoyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u6d1b\u9633\u5e02')},
  '861347648':{'en': 'Ezhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u9102\u5dde\u5e02')},
  '861347649':{'en': 'Xiaogan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5b5d\u611f\u5e02')},
@@ -10017,6 +10019,4 @@ data = {
  '861360578':{'en': 'Ningbo, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u5b81\u6ce2\u5e02')},
  '861361351':{'en': 'Taiyuan, Shanxi', 'zh': u('\u5c71\u897f\u7701\u592a\u539f\u5e02')},
  '861357950':{'en': 'Karamay, Xinjiang', 'zh': u('\u65b0\u7586\u514b\u62c9\u739b\u4f9d\u5e02')},
- '861361378':{'en': 'Kaifeng, Henan', 'zh': u('\u6cb3\u5357\u7701\u5f00\u5c01\u5e02')},
- '861361379':{'en': 'Luoyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u6d1b\u9633\u5e02')},
 }
