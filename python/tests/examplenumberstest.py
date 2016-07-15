@@ -317,11 +317,11 @@ class ExampleNumbersTest(unittest.TestCase):
         # Python version extra test.  Print string representation of short metadata.
         short_metadata = PhoneMetadata.short_metadata_for_region("GB")
         self.assertEqual(r"""PhoneMetadata(id='GB', country_code=None, international_prefix=None,
-    general_desc=PhoneNumberDesc(national_number_pattern='[1-4679]\\d{2,5}', possible_number_pattern='\\d{3,6}'),
-    toll_free=PhoneNumberDesc(national_number_pattern='116(?:000|1(?:11|23))', possible_number_pattern='\\d{6}', example_number='116000'),
+    general_desc=PhoneNumberDesc(national_number_pattern='[1-467-9]\\d{2,5}', possible_number_pattern='\\d{3,6}'),
+    toll_free=PhoneNumberDesc(national_number_pattern='1(?:16\\d{3}|7[56]0|8000)|2(?:202|48)|4444', possible_number_pattern='\\d{3,6}', example_number='116000'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='112|999', possible_number_pattern='\\d{3}', example_number='112'),
-    short_code=PhoneNumberDesc(national_number_pattern='1(?:0[01]|1(?:[12]|[68]\\d{3})|2[123]|33|4(?:1|7\\d)|5\\d|70\\d|800\\d|9[15])|2(?:02|2(?:02|11|2)|3(?:02|45)|425)|3[13]3|4(?:0[02]|35[01]|44[45]|5\\d)|650|789|9(?:01|99)', possible_number_pattern='\\d{3,6}', example_number='150'),
+    short_code=PhoneNumberDesc(national_number_pattern='1(?:0[01]|1(?:[12]|6(?:000|1(?:11|23))|8\\d{3})|2[123]|33|4(?:1|7\\d)|5(?:\\d|71)|7(?:0\\d|[56]0)|800\\d|9[15])|2(?:02(?:02)?|1300|2(?:02|11|2)|3(?:02|336|45)|4(?:25|8))|3[13]3|4(?:0[02]|35[01]|44[45]|5\\d)|6(?:50|\\d{4})|7(?:0\\d{3}|8(?:9|\\d{3})|9\\d{3})|8\\d{4}|9(?:01|99)', possible_number_pattern='\\d{3,6}', example_number='150'),
     standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='1(?:571|7[56]0)|2(?:02(?:02)?|1300|3336|48)|4444|901', possible_number_pattern='\\d{3,5}', example_number='1571'),
     short_data=True)""", str(short_metadata))
