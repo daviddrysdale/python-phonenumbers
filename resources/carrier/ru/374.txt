@@ -1,4 +1,4 @@
-# Copyright (C) 2013 The Libphonenumber Authors
+# Copyright (C) 2016 The Libphonenumber Authors
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,16 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-992411|Megafon
-992418|Megafon
-992501|Tcell
-992502|Tcell
-99255|Megafon
-99288|Megafon
-99290|Megafon
-992917|Tacom
-992918|Babilon-M
-992919|Tacom
-992927|Tcell
-99293|Tcell
-99298|Babilon-M
+# Translated manually from en/374.txt.
+
+37441|Юком
+37443|Билайн
+37449|ВиваСелл-МТС
+37455|Юком
+37477|ВиваСелл-МТС
+37491|Билайн
+37493|ВиваСелл-МТС
+37494|ВиваСелл-МТС
+37495|Юком
+37496|Билайн
+37498|ВиваСелл-МТС
+37499|Билайн
