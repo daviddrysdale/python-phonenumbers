@@ -49,6 +49,7 @@ from .phonenumberutil import region_code_for_number, PhoneNumberType, PhoneNumbe
 from .phonenumberutil import country_mobile_token, national_significant_number, number_type
 from .phonenumberutil import region_code_for_country_code, region_codes_for_country_code
 from .phonenumberutil import is_valid_number_for_region, parse, NumberParseException
+from .phonenumberutil import is_number_type_geographical
 from .prefix import _prefix_description_for_number
 try:
     from .geodata import GEOCODE_DATA, GEOCODE_LONGEST_PREFIX
@@ -209,19 +210,10 @@ def description_for_number(numobj, lang, script=None, region=None):
     ntype = number_type(numobj)
     if ntype == PhoneNumberType.UNKNOWN:
         return ""
-    elif not _can_be_geocoded(ntype):
+    elif not is_number_type_geographical(ntype, numobj.country_code):
         return country_name_for_number(numobj, lang, script, region)
     return description_for_valid_number(numobj, lang, script, region)
 
-
-# A similar method is implemented as phonenumberutil._is_number_geographical,
-# which performs a stricter check, as it determines if a number has a
-# geographical association. Also, if new phone number types were added, we
-# should check if this other method should be updated too.
-def _can_be_geocoded(ntype):
-    return (ntype == PhoneNumberType.FIXED_LINE or
-            ntype == PhoneNumberType.MOBILE or
-            ntype == PhoneNumberType.FIXED_LINE_OR_MOBILE)
 
 if __name__ == '__main__':  # pragma no cover
     import doctest

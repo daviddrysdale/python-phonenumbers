@@ -50,6 +50,7 @@ KO_NUMBER1 = FrozenPhoneNumber(country_code=82, national_number=22123456)
 KO_NUMBER2 = FrozenPhoneNumber(country_code=82, national_number=322123456)
 KO_NUMBER3 = FrozenPhoneNumber(country_code=82, national_number=6421234567)
 KO_INVALID_NUMBER = FrozenPhoneNumber(country_code=82, national_number=1234)
+KO_MOBILE = FrozenPhoneNumber(country_code=82, national_number=101234567)
 US_NUMBER1 = FrozenPhoneNumber(country_code=1, national_number=6502530000)
 US_NUMBER2 = FrozenPhoneNumber(country_code=1, national_number=6509600000)
 US_NUMBER3 = FrozenPhoneNumber(country_code=1, national_number=2128120000)
@@ -173,6 +174,10 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
     def testGetDescriptionForInvalidNumber(self):
         self.assertEqual("", description_for_number(KO_INVALID_NUMBER, _ENGLISH))
         self.assertEqual("", description_for_number(US_INVALID_NUMBER, _ENGLISH))
+
+    def testGetDescriptionForNonGeographicalNumberWithGeocodingPrefix(self):
+        # We have a geocoding prefix, but we shouldn't use it since this is not geographical.
+        self.assertEqual("South Korea", description_for_number(KO_MOBILE, _ENGLISH))
 
     def testCoverage(self):
         # Python version extra tests

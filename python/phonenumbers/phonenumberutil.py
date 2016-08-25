@@ -90,13 +90,24 @@ _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = unicod("3")
 # the national destination code, which should be the length of the area code
 # plus the length of the mobile token.
 _MOBILE_TOKEN_MAPPINGS = {52: u('1'), 54: u('9')}
+# Set of country codes that have geographically assigned mobile numbers (see
+# GEO_MOBILE_COUNTRIES below) which are not based on *area codes*. For example,
+# in China mobile numbers start with a carrier indicator, and beyond that are
+# geographically assigned: this carrier indicator is not considered to be an
+# area code.
+_GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES = set((
+    86,))  # China
 # Set of country calling codes that have geographically assigned mobile
 # numbers. This may not be complete; we add calling codes case by case, as we
-# find geographical mobile numbers or hear from user reports.
-_GEO_MOBILE_COUNTRIES = (
+# find geographical mobile numbers or hear from user reports.  Note that
+# countries like the US, where we can't distinguish between fixed-line or
+# mobile numbers, are not listed here, since we consider FIXED_LINE_OR_MOBILE
+# to be a possibly geographically-related type anyway (like FIXED_LINE).
+_GEO_MOBILE_COUNTRIES = _GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES | set((
     52,  # Mexico
     54,  # Argentina
-    55)  # Brazil
+    55,  # Brazil
+    62))  # Indonesia: some prefixes only (fixed CMDA wireless)
 # The PLUS_SIGN signifies the international prefix.
 _PLUS_SIGN = u("+")
 _STAR_SIGN = u('*')
@@ -658,7 +669,17 @@ def length_of_geographical_area_code(numobj):
     if metadata.national_prefix is None and not numobj.italian_leading_zero:
         return 0
 
-    if not _is_number_geographical(numobj):
+    ntype = number_type(numobj)
+    country_code = numobj.country_code
+    if (ntype == PhoneNumberType.MOBILE and
+        (country_code in _GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES)):
+        # Note this is a rough heuristic; it doesn't cover Indonesia well, for
+        # example, where area codes are present for some mobile phones but not
+        # for others. We have no better way of representing this in the
+        # metadata at this point.
+        return 0
+
+    if not is_number_type_geographical(ntype, country_code):
         return 0
 
     return length_of_national_destination_code(numobj)
@@ -776,23 +797,28 @@ def _formatting_rule_has_first_group_only(national_prefix_formatting_rule):
                           national_prefix_formatting_rule))
 
 
-def _is_number_geographical(numobj):
+def is_number_geographical(numobj):
     """Tests whether a phone number has a geographical association.
 
     It checks if the number is associated to a certain region in the country
     where it belongs to. Note that this doesn't verify if the number is
     actually in use.
-
-    A similar method is implemented as geocoder._can_be_geocoded, which
-    performs a looser check, since it only prevents cases where prefixes
-    overlap for geocodable and non-geocodable numbers. Also, if new phone
-    number types were added, we should check if this other method should be
-    updated too.
+    country_code -- the country calling code for which we want the mobile token
     """
-    num_type = number_type(numobj)
+    return is_number_type_geographical(number_type(numobj), numobj.country_code)
+
+
+def is_number_type_geographical(num_type, country_code):
+    """Tests whether a phone number has a geographical association,
+    as represented by its type and the country it belongs to.
+
+    This version of isNumberGeographical exists since calculating the phone
+    number type is expensive; if we have already done this, we don't want to
+    do it again.
+    """
     return (num_type == PhoneNumberType.FIXED_LINE or
             num_type == PhoneNumberType.FIXED_LINE_OR_MOBILE or
-            ((numobj.country_code in _GEO_MOBILE_COUNTRIES) and
+            ((country_code in _GEO_MOBILE_COUNTRIES) and
              num_type == PhoneNumberType.MOBILE))
 
 

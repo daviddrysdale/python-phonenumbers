@@ -159,15 +159,15 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("12345678", metadata.toll_free.example_number)
 
     def testIsNumberGeographical(self):
-        self.assertFalse(phonenumberutil._is_number_geographical(BS_MOBILE))  # Bahamas, mobile phone number.
-        self.assertTrue(phonenumberutil._is_number_geographical(AU_NUMBER))  # Australian fixed line number.
-        self.assertFalse(phonenumberutil._is_number_geographical(INTERNATIONAL_TOLL_FREE))  # International toll free number
+        self.assertFalse(phonenumberutil.is_number_geographical(BS_MOBILE))  # Bahamas, mobile phone number.
+        self.assertTrue(phonenumberutil.is_number_geographical(AU_NUMBER))  # Australian fixed line number.
+        self.assertFalse(phonenumberutil.is_number_geographical(INTERNATIONAL_TOLL_FREE))  # International toll free number
 
         # We test that mobile phone numbers in relevant regions are indeed
         # considered geographical.
-        self.assertTrue(phonenumberutil._is_number_geographical(AR_MOBILE))  # Argentina, mobile phone number.
-        self.assertTrue(phonenumberutil._is_number_geographical(MX_MOBILE1))  # Mexico, mobile phone number.
-        self.assertTrue(phonenumberutil._is_number_geographical(MX_MOBILE2))  # Mexico, another mobile phone number.
+        self.assertTrue(phonenumberutil.is_number_geographical(AR_MOBILE))  # Argentina, mobile phone number.
+        self.assertTrue(phonenumberutil.is_number_geographical(MX_MOBILE1))  # Mexico, mobile phone number.
+        self.assertTrue(phonenumberutil.is_number_geographical(MX_MOBILE2))  # Mexico, another mobile phone number.
 
     def testIsLeadingZeroPossible(self):
         self.assertTrue(phonenumberutil._is_leading_zero_possible(39))  # Italy
@@ -183,10 +183,14 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(0, phonenumbers.length_of_geographical_area_code(US_TOLLFREE))
         # Google London, which has area code "20".
         self.assertEqual(2, phonenumbers.length_of_geographical_area_code(GB_NUMBER))
-        # A UK mobile phone, which has no area code.
+        # A mobile number in the UK does not have an area code (by default,
+        # mobile numbers do not, unless they have been added to our list of
+        # exceptions).
         self.assertEqual(0, phonenumbers.length_of_geographical_area_code(GB_MOBILE))
         # Google Buenos Aires, which has area code "11".
         self.assertEqual(2, phonenumbers.length_of_geographical_area_code(AR_NUMBER))
+        # A mobile number in Argentina also has an area code.
+        self.assertEqual(3, phonenumbers.length_of_geographical_area_code(AR_MOBILE))
         # Google Sydney, which has area code "2".
         self.assertEqual(1, phonenumbers.length_of_geographical_area_code(AU_NUMBER))
         # Italian numbers - there is no national prefix, but it still has an area code.
@@ -197,6 +201,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(0, phonenumbers.length_of_geographical_area_code(US_SHORT_BY_ONE_NUMBER))
         # An international toll free number, which has no area code.
         self.assertEqual(0, phonenumbers.length_of_geographical_area_code(INTERNATIONAL_TOLL_FREE))
+        # A mobile number from China is geographical, but does not have an area code.
+        cnMobile = PhoneNumber(country_code=86, national_number=18912341234)
+        self.assertEqual(0, phonenumbers.length_of_geographical_area_code(cnMobile))
 
     def testGetLengthOfNationalDestinationCode(self):
         # Google MTV, which has national destination code (NDC) "650".
@@ -232,6 +239,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # An international toll free number, which has NDC "1234".
         self.assertEqual(4, phonenumbers.length_of_national_destination_code(INTERNATIONAL_TOLL_FREE))
+
+        # A mobile number from China is geographical, but does not have an area
+        # code: however it still can be considered to have a national
+        # destination code.
+        cnMobile = PhoneNumber(country_code=86, national_number=18912341234)
+        self.assertEqual(3, phonenumbers.length_of_national_destination_code(cnMobile))
 
         # Python version extra test
         # A number with an extension; still has NDC "7912"
