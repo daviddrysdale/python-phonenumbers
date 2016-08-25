@@ -25,6 +25,7 @@ data = {
  '8251':{'en': 'Busan', 'ko': u('\ubd80\uc0b0')},
  '8253':{'en': 'Daegu', 'ko': u('\ub300\uad6c')},
  '8252':{'en': 'Ulsan', 'ko': u('\uc6b8\uc0b0')},
+ '8210':{'en': 'Mobile prefix, should not be geocoded.'},
  '1650960':{'en': 'Mountain View, CA'},
  '1201':{'de': 'New Jersey', 'en': 'NJ'},
  '8264':{'en': 'Jeju'},

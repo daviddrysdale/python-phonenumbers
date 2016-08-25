@@ -4649,7 +4649,7 @@ data = {
  '1951817':{'en': 'Corona, CA'},
  '1931474':{'en': 'McMinnville, TN'},
  '212532':{'en': u('F\u00e8s/Errachidia/Mekn\u00e8s/Nador/Oujda/Taza'), 'fr': u('F\u00e8s/Oujda/Mekn\u00e8s/Taza/Nador/Errachidia')},
- '212531':{'en': u('Tangier/Al Hoceima/Larache/T\u00e8touan'), 'fr': u('Tanger/T\u00e9touan/Larache/Al Hoceima/Cherfchaouen')},
+ '212531':{'en': u('Tangier/Al Hoceima/Larache/T\u00e8touan/Chefchaouen'), 'fr': u('Tanger/T\u00e9touan/Larache/Al Hoceima/Cherfchaouen')},
  '212530':{'en': u('Rabat/K\u00e8nitra'), 'fr': u('Rabat/K\u00e9nitra')},
  '264625390':{'en': 'Klein Aub'},
  '1906847':{'en': 'Mackinac Island, MI'},
