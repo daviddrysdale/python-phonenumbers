@@ -1,11 +1,20 @@
 
 ====================
+ What's new in 7.6.0
+====================
+
+Merge to upstream commit ddf60b1c175e; code changes:
+   - Made is_number_geographical() public and added is_number_type_geographical(),
+     and changed the geocoder to use this when checking whether to give a detailed
+     answer or country-level only.
+
+
+====================
  What's new in 7.5.0
 ====================
 
 Merge to upstream commit 3f83454ed62b; no code changes that affect the Python
 version so this is just a version bump to stay in sync with upstream.
-
 
 
 ====================
