@@ -1,5 +1,18 @@
 
 ====================
+ What's new in 7.6.1
+====================
+
+Merge to upstream commit 7cc500f588db; code changes:
+   - phonemetadata.py has two more fields to represent possible lengths of phone
+     numbers. Changed buildmetadatafromxml.py to alter the way
+     that metadata about possible-lengths information is consumed when constructing
+     metadata to populate these.
+     Discussion list email:
+     https://groups.google.com/forum/#!topic/libphonenumber-discuss/75TOpTFVi08
+
+
+====================
  What's new in 7.6.0
 ====================
 
