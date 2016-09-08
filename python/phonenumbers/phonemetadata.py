@@ -148,7 +148,9 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
     def __init__(self,
                  national_number_pattern=None,
                  possible_number_pattern=None,
-                 example_number=None):
+                 example_number=None,
+                 possible_length=None,
+                 possible_length_local_only=None):
         # The national_number_pattern is the pattern that a valid national
         # significant number would match. This specifies information such as
         # its total length and leading digits.
@@ -166,6 +168,33 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         # An example national significant number for the specific type. It
         # should not contain any formatting information.
         self.example_number = force_unicode(example_number)  # None or Unicode string
+
+        # These represent the lengths a phone number from this region can be. They
+        # will be sorted from smallest to biggest. Note that these lengths are for
+        # the full number, without country calling code or national prefix. For
+        # example, for the Swiss number +41789270000, in local format 0789270000,
+        # this would be 9.
+        # This could be used to highlight tokens in a text that may be a phone
+        # number, or to quickly prune numbers that could not possibly be a phone
+        # number for this locale.
+        if possible_length is None:
+            possible_length = []
+        self.possible_length = possible_length  # list of int
+
+        # These represent the lengths that only local phone numbers (without an area
+        # code) from this region can be. They will be sorted from smallest to
+        # biggest. For example, since the American number 456-1234 may be locally
+        # diallable, although not diallable from outside the area, 7 could be a
+        # possible value.
+        # This could be used to highlight tokens in a text that may be a phone
+        # number.
+        # To our knowledge, area codes are usually only relevant for some fixed-line
+        # and mobile numbers, so this field should only be set for those types of
+        # numbers (and the general description) - however there are exceptions for
+        # NANPA countries.
+        if possible_length_local_only is None:
+            possible_length_local_only = []
+        self.possible_length_local_only = possible_length_local_only  # list of int
 
     def merge_from(self, other):
         """Merge information from another PhoneNumberDesc object into this one."""
@@ -199,6 +228,12 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
             sep = unicod(", ")
         if self.example_number is not None:
             result += unicod("%sexample_number=%s") % (sep, rpr(self.example_number))
+            sep = unicod(", ")
+        if len(self.possible_length) > 0:
+            result += unicod("%spossible_length=[%s]") % (sep, ",".join(["%d" % l for l in self.possible_length]))
+            sep = unicod(", ")
+        if len(self.possible_length_local_only) > 0:
+            result += unicod("%spossible_length_local_only=[%s]") % (sep, ",".join(["%d" % l for l in self.possible_length_local_only]))
             sep = unicod(", ")
         result += unicod(")")
         return result
