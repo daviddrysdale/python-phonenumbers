@@ -2,14 +2,14 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MG = PhoneMetadata(id='MG', country_code=261, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[23]\\d{8}', possible_number_pattern='\\d{7,9}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='20(?:2\\d{2}|4[47]\\d|5[3467]\\d|6[279]\\d|7(?:2[29]|[35]\\d)|8[268]\\d|9[245]\\d)\\d{4}', possible_number_pattern='\\d{7,9}', example_number='202123456'),
-    mobile=PhoneNumberDesc(national_number_pattern='3[2-49]\\d{7}', possible_number_pattern='\\d{9}', example_number='321234567'),
+    general_desc=PhoneNumberDesc(national_number_pattern='[23]\\d{8}', possible_number_pattern='\\d{7,9}', possible_length=[9], possible_length_local_only=[7]),
+    fixed_line=PhoneNumberDesc(national_number_pattern='20(?:2\\d{2}|4[47]\\d|5[3467]\\d|6[279]\\d|7(?:2[29]|[35]\\d)|8[268]\\d|9[245]\\d)\\d{4}', possible_number_pattern='\\d{7,9}', example_number='202123456', possible_length=[9], possible_length_local_only=[7]),
+    mobile=PhoneNumberDesc(national_number_pattern='3[2-49]\\d{7}', possible_number_pattern='\\d{9}', example_number='321234567', possible_length=[9]),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    voip=PhoneNumberDesc(national_number_pattern='22\\d{7}', possible_number_pattern='\\d{9}', example_number='221234567'),
+    voip=PhoneNumberDesc(national_number_pattern='22\\d{7}', possible_number_pattern='\\d{9}', example_number='221234567', possible_length=[9]),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

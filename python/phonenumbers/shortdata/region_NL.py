@@ -3,10 +3,10 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_NL = PhoneMetadata(id='NL', country_code=None, international_prefix=None,
     general_desc=PhoneNumberDesc(national_number_pattern='[19]\\d{2,5}', possible_number_pattern='\\d{3,6}'),
-    toll_free=PhoneNumberDesc(national_number_pattern='116(?:00[06]|123)', possible_number_pattern='\\d{6}', example_number='116000'),
+    toll_free=PhoneNumberDesc(national_number_pattern='116(?:00[06]|1(?:11|23))', possible_number_pattern='\\d{6}', example_number='116000'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     emergency=PhoneNumberDesc(national_number_pattern='112|911', possible_number_pattern='\\d{3}', example_number='112'),
-    short_code=PhoneNumberDesc(national_number_pattern='1(?:1(?:2|6(?:00[06]|123))|833)|911', possible_number_pattern='\\d{3,6}', example_number='1833'),
+    short_code=PhoneNumberDesc(national_number_pattern='1(?:1(?:2|6(?:00[06]|1(?:11|23)))|2(?:0[0-4]|3[34]|44)|3[03-9]\\d|400|8(?:[02-9]\\d|1[0-79]))|911', possible_number_pattern='\\d{3,6}', example_number='1833'),
     standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='120[0-4]', possible_number_pattern='\\d{4}', example_number='1202'),
     short_data=True)
