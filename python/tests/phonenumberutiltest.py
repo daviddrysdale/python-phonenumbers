@@ -110,6 +110,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("\\d{7}(?:\\d{3})?", metadata.general_desc.possible_number_pattern)
         self.assertTrue(metadata.general_desc == metadata.fixed_line)
         self.assertEqual("\\d{10}", metadata.toll_free.possible_number_pattern)
+        self.assertEqual(10, metadata.general_desc.possible_length[0])
+        self.assertEqual(1, len(metadata.toll_free.possible_length))
+        self.assertEqual(10, metadata.toll_free.possible_length[0])
         self.assertEqual("900\\d{7}", metadata.premium_rate.national_number_pattern)
         # No shared-cost data is available, so it should be initialised to "NA".
         self.assertEqual("NA", metadata.shared_cost.national_number_pattern)
@@ -127,7 +130,11 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("(\\d{3})(\\d{3,4})(\\d{4})",
                          metadata.number_format[5].pattern)
         self.assertEqual("\\1 \\2 \\3", metadata.number_format[5].format)
-        self.assertEqual("(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:[1-9]\\d|0[2-9]))\\d{1,8}",
+        self.assertEqual(2, len(metadata.general_desc.possible_length_local_only))
+        self.assertEqual(8, len(metadata.general_desc.possible_length))
+        self.assertEqual(8, len(metadata.fixed_line.possible_length))
+        self.assertEqual(2, len(metadata.mobile.possible_length))
+        self.assertEqual("(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:0[2-9]|[1-9]\\d))\\d{1,8}",
                          metadata.fixed_line.national_number_pattern)
         self.assertEqual("\\d{2,14}", metadata.fixed_line.possible_number_pattern)
         self.assertEqual("30123456", metadata.fixed_line.example_number)
@@ -2605,7 +2612,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          str(metadata.number_format[0]))
         self.assertEqual(repr(metadata.number_format[0]),
                          str(metadata.number_format[0]))
-        self.assertEqual(r"""PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}')""",
+        self.assertEqual(r"""PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}', possible_length=[9,10])""",
                          str(metadata.general_desc))
         self.assertEqual(repr(metadata.general_desc), str(metadata.general_desc))
 
@@ -2656,11 +2663,11 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # And now the grand finale: check a real metadata example
         self.assertEqual(r"""PhoneMetadata(id='AU', country_code=61, international_prefix='001[12]',
-    general_desc=PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}'),
-    fixed_line=PhoneNumberDesc(national_number_pattern='[2378]\\d{8}', possible_number_pattern='\\d{9}'),
-    mobile=PhoneNumberDesc(national_number_pattern='4\\d{8}', possible_number_pattern='\\d{9}'),
-    toll_free=PhoneNumberDesc(national_number_pattern='1800\\d{6}', possible_number_pattern='\\d{10}'),
-    premium_rate=PhoneNumberDesc(national_number_pattern='190[0126]\\d{6}', possible_number_pattern='\\d{10}'),
+    general_desc=PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}', possible_length=[9,10]),
+    fixed_line=PhoneNumberDesc(national_number_pattern='[2378]\\d{8}', possible_number_pattern='\\d{9}', possible_length=[9]),
+    mobile=PhoneNumberDesc(national_number_pattern='4\\d{8}', possible_number_pattern='\\d{9}', possible_length=[9]),
+    toll_free=PhoneNumberDesc(national_number_pattern='1800\\d{6}', possible_number_pattern='\\d{10}', possible_length=[10]),
+    premium_rate=PhoneNumberDesc(national_number_pattern='190[0126]\\d{6}', possible_number_pattern='\\d{10}', possible_length=[10]),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
