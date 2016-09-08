@@ -40,6 +40,7 @@ from __future__ import with_statement
 
 import sys
 import os
+import copy
 import re
 import getopt
 import datetime
@@ -154,6 +155,30 @@ def _dews_re(re_str):
         return re.sub(r'\s', '', re_str)
 
 
+_NUM_RE = re.compile('\d+')
+_RANGE_RE = re.compile(r'\[(?P<min>\d+)-(?P<max>\d+)\]')
+
+
+def _extract_lengths(ll):
+    """Extract list of possible lengths from string"""
+    results = set()
+    if ll is None:
+        return []
+    for val in ll.split(','):
+        m = _NUM_RE.match(val)
+        if m:
+            results.add(int(val))
+        else:
+            m = _RANGE_RE.match(val)
+            if m is None:
+                raise Exception("Unrecognized length specification %s" % ll)
+            min = int(m.group('min'))
+            max = int(m.group('max'))
+            for ii in range(min, max + 1):
+                results.add(ii)
+    return sorted(list(results))
+
+
 def _expand_formatting_rule(rule, national_prefix):
     """Formatting rules can include terms "$NP" and "$FG",
     These get replaced with:
@@ -216,7 +241,7 @@ class XNumberFormat(UnicodeMixin):
             if self.o.national_prefix_formatting_rule is not None:
                 # expand abbreviations
                 self.o.national_prefix_formatting_rule = _expand_formatting_rule(self.o.national_prefix_formatting_rule,
-                                                                                   national_prefix)
+                                                                                 national_prefix)
             else:
                 # set to territory-wide formatting rule
                 self.o.national_prefix_formatting_rule = national_prefix_formatting_rule
@@ -231,7 +256,7 @@ class XNumberFormat(UnicodeMixin):
             if self.o.domestic_carrier_code_formatting_rule is not None:
                 # expand abbreviations
                 self.o.domestic_carrier_code_formatting_rule = _expand_formatting_rule(self.o.domestic_carrier_code_formatting_rule,
-                                                                                         national_prefix)
+                                                                                       national_prefix)
             else:
                 # set to territory-wide formatting rule
                 self.o.domestic_carrier_code_formatting_rule = carrier_code_formatting_rule
@@ -278,11 +303,16 @@ class XNumberFormat(UnicodeMixin):
 
 class XPhoneNumberDesc(UnicodeMixin):
     """Parse PhoneNumberDesc object from XML element"""
-    def __init__(self, xtag, template=None, fill_na=True):
+    def __init__(self, xtag, template=None, fill_na=True, lengths_expected=True):
+        self.xtag = xtag
         self.o = PhoneNumberDesc()
         self.o._mutable = True
         self.o.national_number_pattern = None
         self.o.possible_number_pattern = None
+        # Set possible length info to None for now, to mark that it wasn't specified
+        # for this numberDesc.
+        self.o.possible_length = None
+        self.o.possible_length_local_only = None
         self.o.example_number = None
         if xtag is None:
             if fill_na:
@@ -305,6 +335,21 @@ class XPhoneNumberDesc(UnicodeMixin):
             example_number = _get_unique_child_value(xtag, 'exampleNumber')
             if example_number is not None:
                 self.o.example_number = example_number
+            possible_lengths = _get_unique_child(xtag, 'possibleLengths')
+            if possible_lengths is not None:
+                if not lengths_expected:
+                    raise Exception("Found unexpected possibleLengths element in %s" % xtag.tag)
+                national_lengths = possible_lengths.attrib['national']  # REQUIRED attribute
+                if national_lengths == "-1":
+                    # A value of -1 for possibleLengths.national is a special marker to indicate
+                    # that this sub-type of number doesn't actually exist.
+                    if fill_na:
+                        raise Exception("Found possibleLengths -1 for unexpected number type")
+                    self.o.possible_length = [-1]
+                    return
+                self.o.possible_length = _extract_lengths(national_lengths)
+                local_lengths = possible_lengths.get('localOnly', None)  # IMPLIED attribute
+                self.o.possible_length_local_only = _extract_lengths(local_lengths)
 
     def __unicode__(self):
         return u(self.o)
@@ -374,10 +419,19 @@ class XTerritory(UnicodeMixin):
         # first and most important; it will be used to fill out missing fields in
         # many of the other PhoneNumberDesc elements.
         self.o.general_desc = XPhoneNumberDesc(_get_unique_child(xterritory, 'generalDesc'),
-                                               fill_na=False)
+                                               fill_na=False, lengths_expected=False)
+        # As a special case, the possible lengths for the general_desc should be empty
+        # (they will be deduced below).
+        if self.o.general_desc.o.possible_length is not None or self.o.general_desc.o.possible_length_local_only is not None:
+            raise Exception("Found generalDesc for %s with unexpected possibleLength element" % self.o.general_desc.id)
+
         # areaCodeOptional is in the XML but not used in the code.
         self.o.area_code_optional = XPhoneNumberDesc(_get_unique_child(xterritory, 'areaCodeOptional'),
                                                      template=self.o.general_desc.o)
+        self.o.toll_free = XPhoneNumberDesc(_get_unique_child(xterritory, 'tollFree'),
+                                            template=self.o.general_desc.o)
+        self.o.premium_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'premiumRate'),
+                                               template=self.o.general_desc.o)
         if not short_data:
             self.o.fixed_line = XPhoneNumberDesc(_get_unique_child(xterritory, 'fixedLine'),
                                                  template=self.o.general_desc.o, fill_na=False)
@@ -397,6 +451,14 @@ class XTerritory(UnicodeMixin):
                                                 template=self.o.general_desc.o)
             self.o.no_international_dialling = XPhoneNumberDesc(_get_unique_child(xterritory, 'noInternationalDialling'),
                                                                 template=self.o.general_desc.o)
+            # Skip noInternationalDialling when combining possible length information
+            sub_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
+                         self.o.fixed_line, self.o.mobile, self.o.pager, self.o.shared_cost,
+                         self.o.personal_number, self.o.voip, self.o.uan, self.o.voicemail)
+            all_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
+                         self.o.fixed_line, self.o.mobile, self.o.pager, self.o.shared_cost,
+                         self.o.personal_number, self.o.voip, self.o.uan, self.o.voicemail,
+                         self.o.no_international_dialling)
         else:
             self.o.standard_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'standardRate'),
                                                     template=self.o.general_desc.o)
@@ -406,10 +468,39 @@ class XTerritory(UnicodeMixin):
                                                        template=self.o.general_desc.o)
             self.o.emergency = XPhoneNumberDesc(_get_unique_child(xterritory, 'emergency'),
                                                 template=self.o.general_desc.o)
-        self.o.toll_free = XPhoneNumberDesc(_get_unique_child(xterritory, 'tollFree'),
-                                            template=self.o.general_desc.o)
-        self.o.premium_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'premiumRate'),
-                                               template=self.o.general_desc.o)
+            # For short number metadata, copy the lengths from the "short code" section only.
+            sub_descs = (self.o.short_code,)
+            all_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
+                         self.o.standard_rate, self.o.short_code, self.o.carrier_specific,
+                         self.o.emergency)
+
+        # Build the possible length information for general_desc based on all the different types of number.
+        possible_lengths = set()
+        local_lengths = set()
+        for desc in sub_descs:
+            if desc.o is None:
+                continue
+            if desc.o.possible_length is not None:
+                possible_lengths.update(desc.o.possible_length)
+            if desc.o.possible_length_local_only is not None:
+                local_lengths.update(desc.o.possible_length_local_only)
+        self.o.general_desc.o.possible_length = list(possible_lengths)
+        self.o.general_desc.o.possible_length_local_only = list(local_lengths)
+
+        # Now that the union of length information is available, trickle it back down to those types
+        # of number that didn't specify any length information (indicated by having those fields set
+        # to None).  But only if they're non
+        for desc in all_descs:
+            if desc.o is not None:
+                if desc.o.national_number_pattern == DATA_NA:
+                    desc.o.possible_length = []
+                    desc.o.possible_length_local_only = []
+                    continue
+                if desc.o.possible_length is None:
+                    desc.o.possible_length = copy.copy(self.o.general_desc.o.possible_length)
+                if desc.o.possible_length_local_only is None:
+                    desc.o.possible_length_local_only = copy.copy(self.o.general_desc.o.possible_length_local_only)
+
         # Look for available formats
         self.has_explicit_intl_format = False
         formats = _get_unique_child(xterritory, "availableFormats")
