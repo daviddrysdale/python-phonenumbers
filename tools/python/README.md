@@ -107,10 +107,8 @@ Some other mappings between the Java and Python versions:
 |Java                                      | Python                                     |
 |------------------------------------------|--------------------------------------------|
 |`countryCallingCodeToRegionCodeMap`       |`COUNTRY_CODE_TO_REGION_CODE`               |
-|`getSupportedRegions()`                   |N/A                                         |
-|`supportedRegions`                        |`SUPPORTED_REGIONS`                         |
-|`getSupportedGlobalNetworkCallingCodes()` |N/A                                         |
-|`countryCodesForNonGeographicalRegions`   |`COUNTRY_CODES_FOR_NON_GEO_REGIONS`         |
+|`getSupportedRegions()`                   |`SUPPORTED_REGIONS`                         |
+|`getSupportedGlobalNetworkCallingCodes()` |`COUNTRY_CODES_FOR_NON_GEO_REGIONS`         |
 |`getMetadataForNonGeographicalRegion()`   |`PhoneMetadata.metadata_for_nongeo_region()`|
 
 
