@@ -95,7 +95,7 @@ _MOBILE_TOKEN_MAPPINGS = {52: u('1'), 54: u('9')}
 # in China mobile numbers start with a carrier indicator, and beyond that are
 # geographically assigned: this carrier indicator is not considered to be an
 # area code.
-_GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES = set((
+_GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES = frozenset((
     86,))  # China
 # Set of country calling codes that have geographically assigned mobile
 # numbers. This may not be complete; we add calling codes case by case, as we
