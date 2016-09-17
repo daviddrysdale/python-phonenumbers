@@ -484,8 +484,8 @@ class XTerritory(UnicodeMixin):
                 possible_lengths.update(desc.o.possible_length)
             if desc.o.possible_length_local_only is not None:
                 local_lengths.update(desc.o.possible_length_local_only)
-        self.o.general_desc.o.possible_length = list(possible_lengths)
-        self.o.general_desc.o.possible_length_local_only = list(local_lengths)
+        self.o.general_desc.o.possible_length = sorted(list(possible_lengths))
+        self.o.general_desc.o.possible_length_local_only = sorted(list(local_lengths))
 
         # Now that the union of length information is available, trickle it back down to those types
         # of number that didn't specify any length information (indicated by having those fields set
