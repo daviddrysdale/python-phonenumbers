@@ -117,7 +117,7 @@ Some other mappings between the Java and Python versions:
 Release Procedure
 -----------------
 
- - Ensure that `python/HISTORY` file is up-to-date, and includes
+ - Ensure that `python/HISTORY.md` file is up-to-date, and includes
    descriptions of changes in this version (adapted from the
    upstream [release notes](https://github.com/googlei18n/libphonenumber/blob/master/java/release_notes.txt),
    skipping the metadata changes chunks).
