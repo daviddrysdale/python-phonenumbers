@@ -139,6 +139,6 @@ Release Procedure
  - Push the tag to Github with:
      `git push <github-remote> release-<version>`
  - Push the package to PyPI with:
-     `cd python && setup.py sdist bdist_wheel upload`
+     `cd python && ./setup.py sdist bdist_wheel upload`
  - Push the lite package to PyPI with:
-     `cd python && setup.py lite sdist bdist_wheel upload`
+     `cd python && ./setup.py lite sdist bdist_wheel upload`
