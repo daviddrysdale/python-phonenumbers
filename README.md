@@ -9,7 +9,7 @@ It supports Python 2.5-2.7 and Python 3.x (in the same codebase, with no
 
 Original Java code is Copyright (C) 2009-2015 The Libphonenumber Authors.
 
-Release [HISTORY](python/HISTORY), derived from [upstream release notes](https://github.com/googlei18n/libphonenumber/blob/master/java/release_notes.txt).
+Release [HISTORY](python/HISTORY.md), derived from [upstream release notes](https://github.com/googlei18n/libphonenumber/blob/master/java/release_notes.txt).
 
 
 Example Usage
