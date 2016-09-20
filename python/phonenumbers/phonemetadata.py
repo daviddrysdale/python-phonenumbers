@@ -129,7 +129,7 @@ class NumberFormat(UnicodeMixin, ImmutableMixin):
         # Generate a string that is valid Python input for the constructor.
         # Note that we use rpr (variant of repr), which generates its own quotes.
         result = unicod("NumberFormat(pattern=%s, format=%s") % (rpr(self.pattern), rpr(self.format))
-        if len(self.leading_digits_pattern) > 0:
+        if self.leading_digits_pattern:
             result += (unicod(", leading_digits_pattern=[%s]") %
                        unicod(", ").join([rpr(ld) for ld in self.leading_digits_pattern]))
         if self.national_prefix_formatting_rule is not None:
@@ -229,10 +229,10 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         if self.example_number is not None:
             result += unicod("%sexample_number=%s") % (sep, rpr(self.example_number))
             sep = unicod(", ")
-        if len(self.possible_length) > 0:
+        if self.possible_length:
             result += unicod("%spossible_length=[%s]") % (sep, ",".join(["%d" % l for l in self.possible_length]))
             sep = unicod(", ")
-        if len(self.possible_length_local_only) > 0:
+        if self.possible_length_local_only:
             result += unicod("%spossible_length_local_only=[%s]") % (sep, ",".join(["%d" % l for l in self.possible_length_local_only]))
             sep = unicod(", ")
         result += unicod(")")
@@ -605,9 +605,9 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         if self.national_prefix_transform_rule is not None:
             # Note that we use rpr() on self.national_prefix_transform_rule, which generates its own quotes
             result += unicod(",\n    national_prefix_transform_rule=%s") % rpr(self.national_prefix_transform_rule)
-        if len(self.number_format) > 0:
+        if self.number_format:
             result += unicod(",\n    number_format=[%s]") % unicod(',\n        ').join(map(u, self.number_format))
-        if len(self.intl_number_format) > 0:
+        if self.intl_number_format:
             result += unicod(",\n    intl_number_format=[%s]") % unicod(',\n        ').join(map(u, self.intl_number_format))
         if self.main_country_for_code:
             result += unicod(",\n    main_country_for_code=True")
