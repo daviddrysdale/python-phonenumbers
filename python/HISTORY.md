@@ -1,4 +1,13 @@
 
+What's new in 7.7.0
+-------------------
+
+Merge to
+[upstream commit 1ec4d341c3cd](https://github.com/googlei18n/libphonenumber/commit/1ec4d341c3cd);
+no code changes that affect the Python version so this is just a version bump to
+stay in sync with upstream.
+
+
 What's new in 7.6.1
 -------------------
 
