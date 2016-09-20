@@ -26,6 +26,7 @@ from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 from phonenumbers import region_code_for_country_code
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil, shortnumberinfo
+from phonenumbers.phonemetadata import RegionCode
 from phonenumbers.util import u, to_long
 from .testmetadatatest import TestMetadataTestCase
 
@@ -1181,18 +1182,38 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertFalse(phonenumbers.is_valid_number(INTERNATIONAL_TOLL_FREE_TOO_LONG))
 
     def testGetRegionCodeForCountryCode(self):
-        self.assertEqual("US", phonenumbers.region_code_for_country_code(1))
-        self.assertEqual("GB", phonenumbers.region_code_for_country_code(44))
-        self.assertEqual("DE", phonenumbers.region_code_for_country_code(49))
-        self.assertEqual("001", phonenumbers.region_code_for_country_code(800))
-        self.assertEqual("001", phonenumbers.region_code_for_country_code(979))
+        region_code = phonenumbers.region_code_for_country_code(1)
+        self.assertEqual("US", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
+        region_code = phonenumbers.region_code_for_country_code(44)
+        self.assertEqual("GB", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
+        region_code = phonenumbers.region_code_for_country_code(49)
+        self.assertEqual("DE", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
+        region_code = phonenumbers.region_code_for_country_code(800)
+        self.assertEqual("001", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
+        region_code = phonenumbers.region_code_for_country_code(979)
+        self.assertEqual("001", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
 
     def testGetRegionCodeForNumber(self):
-        self.assertEqual("BS", phonenumbers.region_code_for_number(BS_NUMBER))
-        self.assertEqual("US", phonenumbers.region_code_for_number(US_NUMBER))
-        self.assertEqual("GB", phonenumbers.region_code_for_number(GB_MOBILE))
-        self.assertEqual("001", phonenumbers.region_code_for_number(INTERNATIONAL_TOLL_FREE))
-        self.assertEqual("001", phonenumbers.region_code_for_number(UNIVERSAL_PREMIUM_RATE))
+        region_code = phonenumbers.region_code_for_number(BS_NUMBER)
+        self.assertEqual("BS", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
+        region_code = phonenumbers.region_code_for_number(US_NUMBER)
+        self.assertEqual("US", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
+        region_code = phonenumbers.region_code_for_number(GB_MOBILE)
+        self.assertEqual("GB", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
+        region_code = phonenumbers.region_code_for_number(INTERNATIONAL_TOLL_FREE)
+        self.assertEqual("001", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
+        region_code = phonenumbers.region_code_for_number(UNIVERSAL_PREMIUM_RATE)
+        self.assertEqual("001", region_code)
+        self.assertTrue(isinstance(region_code, RegionCode))
 
     def testGetRegionCodesForCountryCode(self):
         regionCodesForNANPA = phonenumbers.region_codes_for_country_code(1)
@@ -1203,6 +1224,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue("001" in phonenumbers.region_codes_for_country_code(800))
         # Test with invalid country calling code.
         self.assertEqual(0, len(phonenumbers.region_codes_for_country_code(-1)))
+
+        for regionCode in regionCodesForNANPA:
+            self.assertTrue(isinstance(regionCode, RegionCode))
 
     def testGetCountryCodeForRegion(self):
         self.assertEqual(1, phonenumbers.country_code_for_region("US"))
@@ -2655,7 +2679,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # Coverage test: invalid example number for region
         PhoneMetadata._region_metadata['XX'] = metadataXX
-        phonenumberutil.SUPPORTED_REGIONS.add("XX")
+        phonenumberutil.SUPPORTED_REGIONS.add(RegionCode("XX"))
         self.assertTrue(phonenumbers.example_number_for_type("XX", PhoneNumberType.PERSONAL_NUMBER) is None)
         phonenumberutil.SUPPORTED_REGIONS.remove('XX')
         del PhoneMetadata._region_metadata['XX']

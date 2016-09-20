@@ -19,7 +19,13 @@
 from .util import UnicodeMixin, ImmutableMixin, mutating_method
 from .util import u, unicod, rpr, force_unicode
 
-REGION_CODE_FOR_NON_GEO_ENTITY = u("001")
+
+class RegionCode(unicod):
+  """A region code string, in ISO 3166-1 two-letter country-code format."""
+  pass
+
+
+REGION_CODE_FOR_NON_GEO_ENTITY = RegionCode("001")
 
 
 class NumberFormat(UnicodeMixin, ImmutableMixin):
@@ -392,7 +398,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # (+800). These are all given the ID "001", since this is the numeric
         # region code for the world according to UN M.49:
         # http://en.wikipedia.org/wiki/UN_M.49
-        self.id = force_unicode(id)  # None or Unicode string
+        self.id = RegionCode(id) if id else None
 
         # The country calling code that one would dial from overseas when
         # trying to dial a phone number in this country. For example, this

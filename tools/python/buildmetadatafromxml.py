@@ -65,7 +65,7 @@ DATA_NA = "NA"
 
 # Boilerplate text for generated Python files
 METADATA_FILE_PROLOG = '"""Auto-generated file, do not edit by hand."""'
-METADATA_FILE_IMPORT = "from %(module)s.phonemetadata import PhoneMetadata\n"
+METADATA_FILE_IMPORT = "from %(module)s.phonemetadata import RegionCode, PhoneMetadata\n"
 METADATA_FILE_LOOP = '''
 def _load_region(code):
     __import__("region_%%s" %% code, globals(), locals(),
@@ -630,9 +630,9 @@ class XPhoneNumberMetadata(UnicodeMixin):
                     nongeo_codes.append(country_id)  # int
                 else:
                     country_codes.append("'%s'" % country_id)  # quoted string
-            prnt("_AVAILABLE_REGION_CODES = [%s]" % ",".join(country_codes), file=outfile)
+            prnt("_AVAILABLE_REGION_CODES = tuple(map(RegionCode, (%s)))" % ",".join(country_codes), file=outfile)
             if len(nongeo_codes) > 0:
-                prnt("_AVAILABLE_NONGEO_COUNTRY_CODES = [%s]" % ", ".join(nongeo_codes), file=outfile)
+                prnt("_AVAILABLE_NONGEO_COUNTRY_CODES = (%s)" % ", ".join(nongeo_codes), file=outfile)
             register_prefix = "short_" if self.short_data else ""
             prnt(METADATA_FILE_LOOP % {'prefix': register_prefix}, file=outfile)
             if len(nongeo_codes) > 0:
@@ -661,11 +661,11 @@ class XPhoneNumberMetadata(UnicodeMixin):
             # Emit the mapping from country code to region code if nonempty.
             if len(country_code_to_region_code.keys()) > 0:
                 prnt(_COUNTRY_CODE_TO_REGION_CODE_PROLOG, file=outfile)
-                prnt("_COUNTRY_CODE_TO_REGION_CODE = {", file=outfile)
+                prnt("_COUNTRY_CODE_TO_REGION_CODE = dict((k, tuple(map(RegionCode, v))) for (k, v) in (", file=outfile)
                 for country_code in sorted(country_code_to_region_code.keys()):
                     country_ids = country_code_to_region_code[country_code]
-                    prnt('    %d: ("%s",),' % (country_code, '", "'.join(country_ids)), file=outfile)
-                prnt("}", file=outfile)
+                    prnt('    (%d, ("%s",)),' % (country_code, '", "'.join(country_ids)), file=outfile)
+                prnt("))", file=outfile)
 
 
 def _standalone(argv):

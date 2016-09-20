@@ -75,7 +75,7 @@ PhoneNumberMatch [51,62) 703-4800500
 
 # Data class definitions
 from .phonenumber import PhoneNumber, CountryCodeSource, FrozenPhoneNumber
-from .phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY, NumberFormat, PhoneNumberDesc, PhoneMetadata
+from .phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY, RegionCode, NumberFormat, PhoneNumberDesc, PhoneMetadata
 # Functionality
 from .asyoutypeformatter import AsYouTypeFormatter
 from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS,
@@ -140,7 +140,7 @@ from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 __version__ = "7.7.0"
 
 __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
-           'REGION_CODE_FOR_NON_GEO_ENTITY', 'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
+           'REGION_CODE_FOR_NON_GEO_ENTITY', 'RegionCode', 'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
            'AsYouTypeFormatter',
            # items from phonenumberutil.py
            'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS',
