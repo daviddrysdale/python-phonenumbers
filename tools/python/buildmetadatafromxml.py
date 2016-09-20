@@ -345,7 +345,7 @@ class XPhoneNumberDesc(UnicodeMixin):
                     # that this sub-type of number doesn't actually exist.
                     if fill_na:
                         raise Exception("Found possibleLengths -1 for unexpected number type")
-                    self.o.possible_length = [-1]
+                    self.o.possible_length = (-1,)
                     return
                 self.o.possible_length = _extract_lengths(national_lengths)
                 local_lengths = possible_lengths.get('localOnly', None)  # IMPLIED attribute
@@ -480,12 +480,16 @@ class XTerritory(UnicodeMixin):
         for desc in sub_descs:
             if desc.o is None:
                 continue
-            if desc.o.possible_length is not None:
+            if desc.o.possible_length is not None and desc.o.possible_length != (-1,):
                 possible_lengths.update(desc.o.possible_length)
-            if desc.o.possible_length_local_only is not None:
+            if desc.o.possible_length_local_only is not None and desc.o.possible_length_local_only != (-1, ):
                 local_lengths.update(desc.o.possible_length_local_only)
         self.o.general_desc.o.possible_length = sorted(list(possible_lengths))
         self.o.general_desc.o.possible_length_local_only = sorted(list(local_lengths))
+        if -1 in self.o.general_desc.o.possible_length:
+            raise Exception("Found -1 length in general_desc.possible_length")
+        if -1 in self.o.general_desc.o.possible_length_local_only:
+            raise Exception("Found -1 length in general_desc.possible_length_local_only")
 
         # Now that the union of length information is available, trickle it back down to those types
         # of number that didn't specify any length information (indicated by having those fields set
