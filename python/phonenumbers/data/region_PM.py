@@ -2,9 +2,9 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_PM = PhoneMetadata(id='PM', country_code=508, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[45]\\d{5}', possible_number_pattern='\\d{6}', possible_length=[6]),
-    fixed_line=PhoneNumberDesc(national_number_pattern='41\\d{4}', possible_number_pattern='\\d{6}', example_number='411234', possible_length=[6]),
-    mobile=PhoneNumberDesc(national_number_pattern='55\\d{4}', possible_number_pattern='\\d{6}', example_number='551234', possible_length=[6]),
+    general_desc=PhoneNumberDesc(national_number_pattern='[45]\\d{5}', possible_number_pattern='\\d{6}', possible_length=(6,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='41\\d{4}', possible_number_pattern='\\d{6}', example_number='411234', possible_length=(6,)),
+    mobile=PhoneNumberDesc(national_number_pattern='55\\d{4}', possible_number_pattern='\\d{6}', example_number='551234', possible_length=(6,)),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

@@ -2,11 +2,11 @@
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_MX = PhoneMetadata(id='MX', country_code=52, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{9,10}', possible_number_pattern='\\d{7,11}', possible_length=[10,11], possible_length_local_only=[7]),
-    fixed_line=PhoneNumberDesc(national_number_pattern='[2-9]\\d{9}', possible_number_pattern='\\d{7,10}', possible_length=[10], possible_length_local_only=[7]),
-    mobile=PhoneNumberDesc(national_number_pattern='1\\d{10}', possible_number_pattern='\\d{11}', possible_length=[11]),
-    toll_free=PhoneNumberDesc(national_number_pattern='800\\d{7}', possible_number_pattern='\\d{10}', possible_length=[10]),
-    premium_rate=PhoneNumberDesc(national_number_pattern='900\\d{7}', possible_number_pattern='\\d{10}', possible_length=[10]),
+    general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{9,10}', possible_number_pattern='\\d{7,11}', possible_length=(10, 11), possible_length_local_only=(7,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='[2-9]\\d{9}', possible_number_pattern='\\d{7,10}', possible_length=(10,), possible_length_local_only=(7,)),
+    mobile=PhoneNumberDesc(national_number_pattern='1\\d{10}', possible_number_pattern='\\d{11}', possible_length=(11,)),
+    toll_free=PhoneNumberDesc(national_number_pattern='800\\d{7}', possible_number_pattern='\\d{10}', possible_length=(10,)),
+    premium_rate=PhoneNumberDesc(national_number_pattern='900\\d{7}', possible_number_pattern='\\d{10}', possible_length=(10,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

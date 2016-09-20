@@ -2,11 +2,11 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_KM = PhoneMetadata(id='KM', country_code=269, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[379]\\d{6}', possible_number_pattern='\\d{7}', possible_length=[7]),
-    fixed_line=PhoneNumberDesc(national_number_pattern='7(?:6[0-37-9]|7[0-57-9])\\d{4}', possible_number_pattern='\\d{7}', example_number='7712345', possible_length=[7]),
-    mobile=PhoneNumberDesc(national_number_pattern='3[234]\\d{5}', possible_number_pattern='\\d{7}', example_number='3212345', possible_length=[7]),
+    general_desc=PhoneNumberDesc(national_number_pattern='[379]\\d{6}', possible_number_pattern='\\d{7}', possible_length=(7,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='7(?:6[0-37-9]|7[0-57-9])\\d{4}', possible_number_pattern='\\d{7}', example_number='7712345', possible_length=(7,)),
+    mobile=PhoneNumberDesc(national_number_pattern='3[234]\\d{5}', possible_number_pattern='\\d{7}', example_number='3212345', possible_length=(7,)),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    premium_rate=PhoneNumberDesc(national_number_pattern='(?:39[01]|9[01]0)\\d{4}', possible_number_pattern='\\d{7}', example_number='9001234', possible_length=[7]),
+    premium_rate=PhoneNumberDesc(national_number_pattern='(?:39[01]|9[01]0)\\d{4}', possible_number_pattern='\\d{7}', example_number='9001234', possible_length=(7,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

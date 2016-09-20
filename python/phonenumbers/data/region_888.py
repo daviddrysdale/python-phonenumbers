@@ -2,7 +2,7 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_888 = PhoneMetadata(id='001', country_code=888, international_prefix=None,
-    general_desc=PhoneNumberDesc(national_number_pattern='\\d{11}', possible_number_pattern='\\d{11}', example_number='12345678901', possible_length=[11]),
+    general_desc=PhoneNumberDesc(national_number_pattern='\\d{11}', possible_number_pattern='\\d{11}', example_number='12345678901', possible_length=(11,)),
     fixed_line=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA', example_number='12345678901'),
     mobile=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA', example_number='12345678901'),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
@@ -11,7 +11,7 @@ PHONE_METADATA_888 = PhoneMetadata(id='001', country_code=888, international_pre
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    uan=PhoneNumberDesc(national_number_pattern='\\d{11}', possible_number_pattern='\\d{11}', example_number='12345678901', possible_length=[11]),
+    uan=PhoneNumberDesc(national_number_pattern='\\d{11}', possible_number_pattern='\\d{11}', example_number='12345678901', possible_length=(11,)),
     voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{5})', format='\\1 \\2 \\3')],

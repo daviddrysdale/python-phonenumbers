@@ -2,11 +2,11 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CG = PhoneMetadata(id='CG', country_code=242, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[028]\\d{8}', possible_number_pattern='\\d{9}', possible_length=[9]),
-    fixed_line=PhoneNumberDesc(national_number_pattern='222[1-589]\\d{5}', possible_number_pattern='\\d{9}', example_number='222123456', possible_length=[9]),
-    mobile=PhoneNumberDesc(national_number_pattern='0[14-6]\\d{7}', possible_number_pattern='\\d{9}', example_number='061234567', possible_length=[9]),
+    general_desc=PhoneNumberDesc(national_number_pattern='[028]\\d{8}', possible_number_pattern='\\d{9}', possible_length=(9,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='222[1-589]\\d{5}', possible_number_pattern='\\d{9}', example_number='222123456', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='0[14-6]\\d{7}', possible_number_pattern='\\d{9}', example_number='061234567', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    premium_rate=PhoneNumberDesc(national_number_pattern='800\\d{6}', possible_number_pattern='\\d{9}', example_number='800123456', possible_length=[9]),
+    premium_rate=PhoneNumberDesc(national_number_pattern='800\\d{6}', possible_number_pattern='\\d{9}', example_number='800123456', possible_length=(9,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

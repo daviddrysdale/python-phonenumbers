@@ -2,11 +2,11 @@
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix='001[12]',
-    general_desc=PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}', possible_length=[9,10]),
-    fixed_line=PhoneNumberDesc(national_number_pattern='[2378]\\d{8}', possible_number_pattern='\\d{9}', possible_length=[9]),
-    mobile=PhoneNumberDesc(national_number_pattern='4\\d{8}', possible_number_pattern='\\d{9}', possible_length=[9]),
-    toll_free=PhoneNumberDesc(national_number_pattern='1800\\d{6}', possible_number_pattern='\\d{10}', possible_length=[10]),
-    premium_rate=PhoneNumberDesc(national_number_pattern='190[0126]\\d{6}', possible_number_pattern='\\d{10}', possible_length=[10]),
+    general_desc=PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}', possible_length=(9, 10)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='[2378]\\d{8}', possible_number_pattern='\\d{9}', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='4\\d{8}', possible_number_pattern='\\d{9}', possible_length=(9,)),
+    toll_free=PhoneNumberDesc(national_number_pattern='1800\\d{6}', possible_number_pattern='\\d{10}', possible_length=(10,)),
+    premium_rate=PhoneNumberDesc(national_number_pattern='190[0126]\\d{6}', possible_number_pattern='\\d{10}', possible_length=(10,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

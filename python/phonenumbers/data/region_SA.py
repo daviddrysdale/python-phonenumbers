@@ -2,12 +2,12 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_SA = PhoneMetadata(id='SA', country_code=966, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='1\\d{7,8}|(?:[2-467]|92)\\d{7}|5\\d{8}|8\\d{9}', possible_number_pattern='\\d{7,10}', possible_length=[8,9,10], possible_length_local_only=[7]),
-    fixed_line=PhoneNumberDesc(national_number_pattern='11\\d{7}|1?(?:2[24-8]|3[35-8]|4[3-68]|6[2-5]|7[235-7])\\d{6}', possible_number_pattern='\\d{7,9}', example_number='112345678', possible_length=[8,9], possible_length_local_only=[7]),
-    mobile=PhoneNumberDesc(national_number_pattern='(?:5(?:[013-689]\\d|7[0-26-8])|811\\d)\\d{6}', possible_number_pattern='\\d{9,10}', example_number='512345678', possible_length=[9,10]),
-    toll_free=PhoneNumberDesc(national_number_pattern='800\\d{7}', possible_number_pattern='\\d{10}', example_number='8001234567', possible_length=[10]),
+    general_desc=PhoneNumberDesc(national_number_pattern='1\\d{7,8}|(?:[2-467]|92)\\d{7}|5\\d{8}|8\\d{9}', possible_number_pattern='\\d{7,10}', possible_length=(8, 9, 10), possible_length_local_only=(7,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='11\\d{7}|1?(?:2[24-8]|3[35-8]|4[3-68]|6[2-5]|7[235-7])\\d{6}', possible_number_pattern='\\d{7,9}', example_number='112345678', possible_length=(8, 9), possible_length_local_only=(7,)),
+    mobile=PhoneNumberDesc(national_number_pattern='(?:5(?:[013-689]\\d|7[0-26-8])|811\\d)\\d{6}', possible_number_pattern='\\d{9,10}', example_number='512345678', possible_length=(9, 10)),
+    toll_free=PhoneNumberDesc(national_number_pattern='800\\d{7}', possible_number_pattern='\\d{10}', example_number='8001234567', possible_length=(10,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    shared_cost=PhoneNumberDesc(national_number_pattern='92[05]\\d{6}', possible_number_pattern='\\d{9}', example_number='920012345', possible_length=[9]),
+    shared_cost=PhoneNumberDesc(national_number_pattern='92[05]\\d{6}', possible_number_pattern='\\d{9}', example_number='920012345', possible_length=(9,)),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

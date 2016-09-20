@@ -2,9 +2,9 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_NP = PhoneMetadata(id='NP', country_code=977, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[1-8]\\d{7}|9(?:[1-69]\\d{6,8}|7[2-6]\\d{5,7}|8\\d{8})', possible_number_pattern='\\d{6,10}', possible_length=[8,10], possible_length_local_only=[6,7]),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:1[0-6]\\d|2[13-79][2-6]|3[135-8][2-6]|4[146-9][2-6]|5[135-7][2-6]|6[13-9][2-6]|7[15-9][2-6]|8[1-46-9][2-6]|9[1-79][2-6])\\d{5}', possible_number_pattern='\\d{6,8}', example_number='14567890', possible_length=[8], possible_length_local_only=[6,7]),
-    mobile=PhoneNumberDesc(national_number_pattern='9(?:6[013]|7[245]|8[0-24-6])\\d{7}', possible_number_pattern='\\d{10}', example_number='9841234567', possible_length=[10]),
+    general_desc=PhoneNumberDesc(national_number_pattern='[1-8]\\d{7}|9(?:[1-69]\\d{6,8}|7[2-6]\\d{5,7}|8\\d{8})', possible_number_pattern='\\d{6,10}', possible_length=(8, 10), possible_length_local_only=(6, 7)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:1[0-6]\\d|2[13-79][2-6]|3[135-8][2-6]|4[146-9][2-6]|5[135-7][2-6]|6[13-9][2-6]|7[15-9][2-6]|8[1-46-9][2-6]|9[1-79][2-6])\\d{5}', possible_number_pattern='\\d{6,8}', example_number='14567890', possible_length=(8,), possible_length_local_only=(6, 7)),
+    mobile=PhoneNumberDesc(national_number_pattern='9(?:6[013]|7[245]|8[0-24-6])\\d{7}', possible_number_pattern='\\d{10}', example_number='9841234567', possible_length=(10,)),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

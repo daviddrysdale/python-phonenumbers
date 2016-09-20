@@ -2,9 +2,9 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_YE = PhoneMetadata(id='YE', country_code=967, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[1-7]\\d{6,8}', possible_number_pattern='\\d{6,9}', possible_length=[7,8,9], possible_length_local_only=[6]),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:1(?:7\\d|[2-68])|2[2-68]|3[2358]|4[2-58]|5[2-6]|6[3-58]|7[24-68])\\d{5}', possible_number_pattern='\\d{6,8}', example_number='1234567', possible_length=[7,8], possible_length_local_only=[6]),
-    mobile=PhoneNumberDesc(national_number_pattern='7[0137]\\d{7}', possible_number_pattern='\\d{9}', example_number='712345678', possible_length=[9]),
+    general_desc=PhoneNumberDesc(national_number_pattern='[1-7]\\d{6,8}', possible_number_pattern='\\d{6,9}', possible_length=(7, 8, 9), possible_length_local_only=(6,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:1(?:7\\d|[2-68])|2[2-68]|3[2358]|4[2-58]|5[2-6]|6[3-58]|7[24-68])\\d{5}', possible_number_pattern='\\d{6,8}', example_number='1234567', possible_length=(7, 8), possible_length_local_only=(6,)),
+    mobile=PhoneNumberDesc(national_number_pattern='7[0137]\\d{7}', possible_number_pattern='\\d{9}', example_number='712345678', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),

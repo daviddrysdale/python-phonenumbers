@@ -2,11 +2,11 @@
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_DE = PhoneMetadata(id='DE', country_code=49, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='\\d{4,14}', possible_number_pattern='\\d{2,14}', possible_length=[4,5,6,7,8,9,10,11], possible_length_local_only=[2,3]),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:0[2-9]|[1-9]\\d))\\d{1,8}', possible_number_pattern='\\d{2,14}', example_number='30123456', possible_length=[4,5,6,7,8,9,10,11], possible_length_local_only=[2,3]),
-    mobile=PhoneNumberDesc(national_number_pattern='1(5\\d{9}|7\\d{8}|6[02]\\d{8}|63\\d{7})', possible_number_pattern='\\d{10,11}', possible_length=[10,11]),
-    toll_free=PhoneNumberDesc(national_number_pattern='800\\d{7}', possible_number_pattern='\\d{10}', possible_length=[10]),
-    premium_rate=PhoneNumberDesc(national_number_pattern='900([135]\\d{6}|9\\d{7})', possible_number_pattern='\\d{10,11}', possible_length=[10,11]),
+    general_desc=PhoneNumberDesc(national_number_pattern='\\d{4,14}', possible_number_pattern='\\d{2,14}', possible_length=(4, 5, 6, 7, 8, 9, 10, 11), possible_length_local_only=(2, 3)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:0[2-9]|[1-9]\\d))\\d{1,8}', possible_number_pattern='\\d{2,14}', example_number='30123456', possible_length=(4, 5, 6, 7, 8, 9, 10, 11), possible_length_local_only=(2, 3)),
+    mobile=PhoneNumberDesc(national_number_pattern='1(5\\d{9}|7\\d{8}|6[02]\\d{8}|63\\d{7})', possible_number_pattern='\\d{10,11}', possible_length=(10, 11)),
+    toll_free=PhoneNumberDesc(national_number_pattern='800\\d{7}', possible_number_pattern='\\d{10}', possible_length=(10,)),
+    premium_rate=PhoneNumberDesc(national_number_pattern='900([135]\\d{6}|9\\d{7})', possible_number_pattern='\\d{10,11}', possible_length=(10, 11)),
     shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
     voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
