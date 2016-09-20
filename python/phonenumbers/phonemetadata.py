@@ -178,8 +178,8 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         # number, or to quickly prune numbers that could not possibly be a phone
         # number for this locale.
         if possible_length is None:
-            possible_length = []
-        self.possible_length = possible_length  # list of int
+            possible_length = ()
+        self.possible_length = possible_length  # sequence of int
 
         # These represent the lengths that only local phone numbers (without an area
         # code) from this region can be. They will be sorted from smallest to
@@ -193,8 +193,8 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         # numbers (and the general description) - however there are exceptions for
         # NANPA countries.
         if possible_length_local_only is None:
-            possible_length_local_only = []
-        self.possible_length_local_only = possible_length_local_only  # list of int
+            possible_length_local_only = ()
+        self.possible_length_local_only = possible_length_local_only  # sequence of int
 
     def merge_from(self, other):
         """Merge information from another PhoneNumberDesc object into this one."""
@@ -230,10 +230,10 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
             result += unicod("%sexample_number=%s") % (sep, rpr(self.example_number))
             sep = unicod(", ")
         if self.possible_length:
-            result += unicod("%spossible_length=[%s]") % (sep, ",".join(["%d" % l for l in self.possible_length]))
+            result += unicod("%spossible_length=%s") % (sep, tuple(self.possible_length))
             sep = unicod(", ")
         if self.possible_length_local_only:
-            result += unicod("%spossible_length_local_only=[%s]") % (sep, ",".join(["%d" % l for l in self.possible_length_local_only]))
+            result += unicod("%spossible_length_local_only=%s") % (sep, tuple(self.possible_length_local_only))
             sep = unicod(", ")
         result += unicod(")")
         return result
