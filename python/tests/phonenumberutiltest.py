@@ -111,6 +111,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue(metadata.general_desc == metadata.fixed_line)
         self.assertEqual("\\d{10}", metadata.toll_free.possible_number_pattern)
         self.assertEqual(10, metadata.general_desc.possible_length[0])
+        # Python version: each number type description has its own possible_length value,
+        # rather than inheriting from the general_desc (like the Java code does).
         self.assertEqual(1, len(metadata.toll_free.possible_length))
         self.assertEqual(10, metadata.toll_free.possible_length[0])
         self.assertEqual("900\\d{7}", metadata.premium_rate.national_number_pattern)
@@ -132,6 +134,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("\\1 \\2 \\3", metadata.number_format[5].format)
         self.assertEqual(2, len(metadata.general_desc.possible_length_local_only))
         self.assertEqual(8, len(metadata.general_desc.possible_length))
+        # Python version: each number type description has its own possible_length value,
+        # rather than inheriting from the general_desc (like the Java code does).
         self.assertEqual(8, len(metadata.fixed_line.possible_length))
         self.assertEqual(2, len(metadata.mobile.possible_length))
         self.assertEqual("(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:0[2-9]|[1-9]\\d))\\d{1,8}",
