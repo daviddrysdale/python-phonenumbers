@@ -1,4 +1,22 @@
 
+What's new in 7.7.1
+-------------------
+
+Merge to
+[upstream commit 8c37310deb49](https://github.com/googlei18n/libphonenumber/commit/8c37310deb49);
+code changes:
+
+ - Switching the internal implementation of `is_possible_number` and related functions
+   to use the new `possibleLengths` metadata. This affects a lot of countries,
+   making `is_possible_number` more restrictive as more precise data is available. It
+   also affects parsing ambiguous and invalid numbers, as we decide whether
+   to strip a possible national prefix (1) or country code based on the length
+   of the number and whether it is possible before or after this.
+ - Formatting, naming and comment tweaks to follow style guide
+ - Removal of unneeded `_can_be_geocoded` method in the
+   `timezone.py` file, using `phonenumberutil.py` instead
+
+
 What's new in 7.7.0
 -------------------
 
