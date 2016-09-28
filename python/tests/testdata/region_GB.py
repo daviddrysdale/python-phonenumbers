@@ -2,8 +2,8 @@
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_GB = PhoneMetadata(id='GB', country_code=44, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='\\d{10}', possible_number_pattern='\\d{6,10}', possible_length=(10,), possible_length_local_only=(6,)),
-    fixed_line=PhoneNumberDesc(national_number_pattern='[1-6]\\d{9}', possible_number_pattern='\\d{6,10}', possible_length=(10,), possible_length_local_only=(6,)),
+    general_desc=PhoneNumberDesc(national_number_pattern='\\d{10}', possible_number_pattern='\\d{6,10}', possible_length=(9, 10), possible_length_local_only=(6, 7, 8)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='[1-6]\\d{9}', possible_number_pattern='\\d{6,10}', possible_length=(9, 10), possible_length_local_only=(6, 7, 8)),
     mobile=PhoneNumberDesc(national_number_pattern='7[1-57-9]\\d{8}', possible_number_pattern='\\d{10}', possible_length=(10,)),
     toll_free=PhoneNumberDesc(national_number_pattern='80\\d{8}', possible_number_pattern='\\d{10}', possible_length=(10,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='9[018]\\d{8}', possible_number_pattern='\\d{10}', possible_length=(10,)),
