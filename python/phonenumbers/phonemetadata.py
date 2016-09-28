@@ -244,6 +244,13 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
 
     This class is hand created based on phonemetadata.proto. Please refer to that file
     for detailed descriptions of the meaning of each field.
+
+    WARNING: This API isn't stable. It is considered libphonenumber-internal
+    and can change at any time. We only declare it as public for easy
+    inclusion in our build tools not in this package.  Clients should not
+    refer to this file, we do not commit to support backwards-compatibility or
+    to warn about breaking changes.
+
     """
     # If a region code is a key in this dict, metadata for that region is available.
     # The corresponding value of the map is either:

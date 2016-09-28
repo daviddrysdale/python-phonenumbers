@@ -108,8 +108,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("[13-689]\\d{9}|2[0-35-9]\\d{8}",
                          metadata.general_desc.national_number_pattern)
         self.assertEqual("\\d{7}(?:\\d{3})?", metadata.general_desc.possible_number_pattern)
-        self.assertTrue(metadata.general_desc == metadata.fixed_line)
+        # Fixed-line data should be inherited from the general desc for the
+        # national number since it wasn't overridden.
+        self.assertEqual(metadata.general_desc.national_number_pattern,
+                         metadata.fixed_line.national_number_pattern)
         self.assertEqual("\\d{10}", metadata.toll_free.possible_number_pattern)
+        self.assertEqual(1, len(metadata.general_desc.possible_length))
         self.assertEqual(10, metadata.general_desc.possible_length[0])
         # Python version: each number type description has its own possible_length value,
         # rather than inheriting from the general_desc (like the Java code does).
@@ -1254,7 +1258,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue(phonenumbers.is_possible_number_string("253-0000", "US"))
         self.assertTrue(phonenumbers.is_possible_number_string("+1 650 253 0000", "GB"))
         self.assertTrue(phonenumbers.is_possible_number_string("+44 20 7031 3000", "GB"))
-        self.assertTrue(phonenumbers.is_possible_number_string("(020) 7031 3000", "GB"))
+        self.assertTrue(phonenumbers.is_possible_number_string("(020) 7031 300", "GB"))
         self.assertTrue(phonenumbers.is_possible_number_string("7031 3000", "GB"))
         self.assertTrue(phonenumbers.is_possible_number_string("3331 6005", "NZ"))
         self.assertTrue(phonenumbers.is_possible_number_string("+800 1234 5678", "001"))
@@ -2354,7 +2358,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
                          phonenumbers.is_number_match("asdfasdf", nzNumber))
         self.assertFalse(phonenumberutil._is_number_matching_desc(1234, None))
-        self.assertFalse(phonenumberutil._is_number_possible_for_desc(1234, None))
 
     def testIsNumberMatchNonMatches(self):
         # Non-matches.
@@ -2652,13 +2655,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     leading_zero_possible=True,
     short_data=True)""",
                          str(metadataXX))
-
-        # Coverage test: invalid example number for region
-        PhoneMetadata._region_metadata['XX'] = metadataXX
-        phonenumberutil.SUPPORTED_REGIONS.add("XX")
-        self.assertTrue(phonenumbers.example_number_for_type("XX", PhoneNumberType.PERSONAL_NUMBER) is None)
-        phonenumberutil.SUPPORTED_REGIONS.remove('XX')
-        del PhoneMetadata._region_metadata['XX']
 
         # Coverage test: short_code desc has no example number
         PhoneMetadata._short_region_metadata['XX'] = metadataXX

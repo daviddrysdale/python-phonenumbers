@@ -27,7 +27,7 @@ from .phonenumber import PhoneNumber
 from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
 from .phonenumberutil import normalize_digits_only, region_codes_for_country_code
 from .phonenumberutil import national_significant_number
-from .phonenumberutil import _is_number_possible_for_desc, _is_number_matching_desc
+from .phonenumberutil import _is_number_matching_desc
 
 
 # In these countries, if extra digits are added to an emergency number, it no longer connects
@@ -41,6 +41,22 @@ class ShortNumberCost(object):
     STANDARD_RATE = 1
     PREMIUM_RATE = 2
     UNKNOWN_COST = 3
+
+def _matches_national_number(national_number, number_desc, allow_prefix_match):
+    """Returns whether the given national number (a string containing only decimal digits) matches
+    the national number pattern defined in the given PhoneNumberDesc object.
+    """
+    nnp_matcher = re.compile(number_desc.national_number_pattern)
+    return (fullmatch(nnp_matcher, national_number) or
+            (allow_prefix_match and nnp_matcher.match(national_number)))
+
+def _matches_possible_number(national_number, number_desc):
+    """Returns whether the given national number (a string containing only decimal
+    digits) matches the possible number pattern defined in the given
+    PhoneNumberDesc object.
+    """
+    pnp_matcher = re.compile(number_desc.possible_number_pattern or U_EMPTY_STRING)
+    return fullmatch(pnp_matcher, national_number)
 
 
 def is_possible_short_number_for_region(short_number, region_dialing_from):
@@ -61,8 +77,7 @@ def is_possible_short_number_for_region(short_number, region_dialing_from):
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
         return False
-    general_desc = metadata.general_desc
-    return _is_number_possible_for_desc(short_number, general_desc)
+    return _matches_possible_number(short_number, metadata.general_desc)
 
 
 def is_possible_short_number(numobj):
@@ -84,7 +99,7 @@ def is_possible_short_number(numobj):
         metadata = PhoneMetadata.short_metadata_for_region(region)
         if metadata is None:
             continue
-        if _is_number_possible_for_desc(short_number, metadata.general_desc):
+        if _matches_possible_number(short_number, metadata.general_desc):
             return True
     return False
 
@@ -109,13 +124,12 @@ def is_valid_short_number_for_region(short_number, region_dialing_from):
     if metadata is None:
         return False
     general_desc = metadata.general_desc
-    if (general_desc.national_number_pattern is None or
-        not _is_number_matching_desc(short_number, general_desc)):
+    if not _matches_possible_number_and_national_number(short_number, general_desc):
         return False
     short_number_desc = metadata.short_code
     if short_number_desc.national_number_pattern is None:  # pragma no cover
         return False
-    return _is_number_matching_desc(short_number, short_number_desc)
+    return _matches_possible_number_and_national_number(short_number, short_number_desc)
 
 
 def is_valid_short_number(numobj):
@@ -175,11 +189,11 @@ def expected_cost_for_region(short_number, region_dialing_from):
     # The cost categories are tested in order of decreasing expense, since if
     # for some reason the patterns overlap the most expensive matching cost
     # category should be returned.
-    if _is_number_matching_desc(short_number, metadata.premium_rate):
+    if _matches_possible_number_and_national_number(short_number, metadata.premium_rate):
         return ShortNumberCost.PREMIUM_RATE
-    if _is_number_matching_desc(short_number, metadata.standard_rate):
+    if _matches_possible_number_and_national_number(short_number, metadata.standard_rate):
         return ShortNumberCost.STANDARD_RATE
-    if _is_number_matching_desc(short_number, metadata.toll_free):
+    if _matches_possible_number_and_national_number(short_number, metadata.toll_free):
         return ShortNumberCost.TOLL_FREE
     if is_emergency_number(short_number, region_dialing_from):
         # Emergency numbers are implicitly toll-free.
@@ -247,7 +261,7 @@ def _region_code_for_short_number_from_region_list(numobj, region_codes):
     national_number = national_significant_number(numobj)
     for region_code in region_codes:
         metadata = PhoneMetadata.short_metadata_for_region(region_code)
-        if metadata is not None and _is_number_matching_desc(national_number, metadata.short_code):
+        if metadata is not None and _matches_possible_number_and_national_number(national_number, metadata.short_code):
             # The number is valid for this region.
             return region_code
     return None
@@ -353,15 +367,13 @@ def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
     metadata = PhoneMetadata.short_metadata_for_region(region_code.upper(), None)
     if metadata is None or metadata.emergency is None:
         return False
-    emergency_number_pattern = re.compile(metadata.emergency.national_number_pattern)
-    normalized_number = normalize_digits_only(number)
 
+    normalized_number = normalize_digits_only(number)
+    emergency_desc = metadata.emergency
     allow_prefix_match_for_region = (allow_prefix_match and
                                      (region_code not in _REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT))
-    if allow_prefix_match_for_region:
-        return emergency_number_pattern.match(normalized_number) is not None
-    else:
-        return fullmatch(emergency_number_pattern, normalized_number) is not None
+    return _matches_national_number(normalized_number, emergency_desc,
+                                    allow_prefix_match_for_region)
 
 
 def is_carrier_specific(numobj):
@@ -380,4 +392,13 @@ def is_carrier_specific(numobj):
     region_code = _region_code_for_short_number_from_region_list(numobj, region_codes)
     national_number = national_significant_number(numobj)
     metadata = PhoneMetadata.short_metadata_for_region(region_code)
-    return (metadata is not None and _is_number_matching_desc(national_number, metadata.carrier_specific))
+    return (metadata is not None and
+            _matches_possible_number_and_national_number(national_number, metadata.carrier_specific))
+
+
+# TODO: Once we have benchmarked ShortNumberInfo, consider if it is worth
+# keeping this performance optimization, and if so move this into the matcher
+# implementation.
+def _matches_possible_number_and_national_number(number, number_desc):
+    return (_matches_possible_number(number, number_desc) and
+            _matches_national_number(number, number_desc, False))

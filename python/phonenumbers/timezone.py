@@ -37,6 +37,7 @@
 from .util import prnt, u, U_PLUS
 from .phonenumberutil import PhoneNumberType, number_type
 from .phonenumberutil import PhoneNumberFormat, format_number
+from .phonenumberutil import is_number_type_geographical
 try:
     from .tzdata import TIMEZONE_DATA, TIMEZONE_LONGEST_PREFIX
 except ImportError:  # pragma no cover
@@ -96,7 +97,7 @@ def time_zones_for_number(numobj):
     ntype = number_type(numobj)
     if ntype == PhoneNumberType.UNKNOWN:
         return _UNKNOWN_TIME_ZONE_LIST
-    elif not _can_be_geocoded(ntype):
+    elif not is_number_type_geographical(ntype, numobj.country_code):
         return _country_level_time_zones_for_number(numobj)
     return time_zones_for_geographical_number(numobj)
 
@@ -113,18 +114,6 @@ def _country_level_time_zones_for_number(numobj):
         if prefix in TIMEZONE_DATA:
             return TIMEZONE_DATA[prefix]
     return _UNKNOWN_TIME_ZONE_LIST
-
-
-# A similar method is implemented as phonenumberutil._is_number_geographical,
-# which performs a stricter check, as it determines if a number has a
-# geographical association. Also, if new phone number types were added, we
-# should check if this other method should be updated too.
-# TODO: Remove duplication by completing the login in the method in phonenumberutil.
-# For more information, see the comments in that method.
-def _can_be_geocoded(ntype):
-    return (ntype == PhoneNumberType.FIXED_LINE or
-            ntype == PhoneNumberType.MOBILE or
-            ntype == PhoneNumberType.FIXED_LINE_OR_MOBILE)
 
 
 if __name__ == '__main__':  # pragma no cover

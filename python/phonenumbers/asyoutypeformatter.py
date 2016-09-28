@@ -391,7 +391,7 @@ class AsYouTypeFormatter(object):
                  fullmatch(_PLUS_CHARS_PATTERN, next_char)))
 
     def _attempt_to_format_accrued_digits(self):
-        """Check to see if there is an exact pattern match for these digits. If so, we should use this
+        """Checks to see if there is an exact pattern match for these digits. If so, we should use this
         instead of any other formatting template whose leadingDigitsPattern also matches the input.
         """
         for number_format in self._possible_formats:

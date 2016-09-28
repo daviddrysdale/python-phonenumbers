@@ -1090,7 +1090,8 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             # which are always dialled in national format.
             metadata = PhoneMetadata.metadata_for_region(region_calling_from)
             if (_can_be_internationally_dialled(numobj_no_ext) and
-                not _is_shorter_than_possible_normal_number(metadata, national_significant_number(numobj_no_ext))):
+                _test_number_length(national_significant_number(numobj_no_ext),
+                                    metadata.general_desc) != ValidationResult.TOO_SHORT):
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
             else:
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
@@ -1684,7 +1685,7 @@ def example_number_for_type(region_code, num_type):
     if desc.example_number is not None:
         try:
             return parse(desc.example_number, region_code)
-        except NumberParseException:
+        except NumberParseException:  # pragma no cover
             pass
     return None
 
@@ -1833,20 +1834,19 @@ def _number_type_helper(national_number, metadata):
     return PhoneNumberType.UNKNOWN
 
 
-def _is_number_possible_for_desc(national_number, number_desc):
-    if number_desc is None:
-        return False
-    possible_re = re.compile(number_desc.possible_number_pattern or U_EMPTY_STRING)
-    return fullmatch(possible_re, national_number)
-
-
 def _is_number_matching_desc(national_number, number_desc):
     """Determine if the number matches the given PhoneNumberDesc"""
+    # Check if any possible number lengths are present; if so, we use them to avoid checking the
+    # validation pattern if they don't match. If they are absent, this means they match the general
+    # description, which we have already checked before checking a specific number type.
     if number_desc is None:
         return False
+    actual_length = len(national_number)
+    possible_lengths = number_desc.possible_length
+    if len(possible_lengths) > 0 and not actual_length in possible_lengths:
+        return False
     national_re = re.compile(number_desc.national_number_pattern or U_EMPTY_STRING)
-    return (_is_number_possible_for_desc(national_number, number_desc) and
-            fullmatch(national_re, national_number))
+    return fullmatch(national_re, national_number)
 
 
 def is_valid_number(numobj):
@@ -2097,30 +2097,38 @@ def is_possible_number(numobj):
     return is_possible_number_with_reason(numobj) == ValidationResult.IS_POSSIBLE
 
 
-def _test_number_length_against_pattern(possible_re, national_number):
-    """Helper method to check a number against a particular pattern and
-    determine whether it matches, or is too short or too long. Currently, if a
-    number pattern suggests that numbers of length 7 and 10 are possible, and
-    a number in between these possible lengths is entered, such as of length
-    8, this will return TOO_LONG.
+def _test_number_length(national_number, number_desc):
+    """Helper method to check a number against possible lengths for this number,
+    and determine whether it matches, or is too short or too long. Currently,
+    if a number pattern suggests that numbers of length 7 and 10 are possible,
+    and a number in between these possible lengths is entered, such as of
+    length 8, this will return TOO_LONG.
     """
-    match = fullmatch(possible_re, national_number)
-    if match:
+    possible_lengths = number_desc.possible_length
+    local_lengths = number_desc.possible_length_local_only
+    actual_length = len(national_number)
+    if actual_length in local_lengths:
         return ValidationResult.IS_POSSIBLE
-    search = possible_re.match(national_number)
-    if search:
-        return ValidationResult.TOO_LONG
-    else:
+    # There should always be "possible_lengths" set for every element. This
+    # will be a build-time check once ShortNumberMetadata.xml is migrated to
+    # contain this information as well.
+    minimum_length = possible_lengths[0]
+    if minimum_length == actual_length:
+        return ValidationResult.IS_POSSIBLE
+    elif minimum_length > actual_length:
         return ValidationResult.TOO_SHORT
-
-
-def _is_shorter_than_possible_normal_number(metadata, number):
-    """Helper method to check whether a number is too short to be a regular
-    length phone number in a region.
-    """
-    possible_number_pattern = re.compile(metadata.general_desc.possible_number_pattern or U_EMPTY_STRING)
-    return (_test_number_length_against_pattern(possible_number_pattern, number) ==
-            ValidationResult.TOO_SHORT)
+    elif possible_lengths[-1] < actual_length:
+        return ValidationResult.TOO_LONG
+    # Note that actually the number is not too long if possibleLengths does
+    # not contain the length: we know it is less than the highest possible
+    # number length, and higher than the lowest possible number
+    # length. However, we don't currently have an enum to express this, so we
+    # return TOO_LONG in the short-term.
+    # We skip the first element; we've already checked it.
+    if actual_length in possible_lengths[1:]:
+        return ValidationResult.IS_POSSIBLE
+    else:
+        return ValidationResult.TOO_LONG
 
 
 def is_possible_number_with_reason(numobj):
@@ -2164,8 +2172,7 @@ def is_possible_number_with_reason(numobj):
     region_code = region_code_for_country_code(country_code)
     # Metadata cannot be None because the country calling code is valid.
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
-    possible_re = re.compile(metadata.general_desc.possible_number_pattern or U_EMPTY_STRING)
-    return _test_number_length_against_pattern(possible_re, national_number)
+    return _test_number_length(national_number, metadata.general_desc)
 
 
 def is_possible_number_string(number, region_dialing_from):
@@ -2335,7 +2342,6 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
             valid_pattern = re.compile(general_desc.national_number_pattern or U_EMPTY_STRING)
             _, potential_national_number, _ = _maybe_strip_national_prefix_carrier_code(potential_national_number,
                                                                                         metadata)
-            possible_pattern = re.compile(general_desc.possible_number_pattern or U_EMPTY_STRING)
 
             # If the number was not valid before but is valid now, or if it
             # was too long before, we consider the number with the country
@@ -2343,8 +2349,7 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
             # instead.
             if ((fullmatch(valid_pattern, full_number) is None and
                  fullmatch(valid_pattern, potential_national_number)) or
-                (_test_number_length_against_pattern(possible_pattern, full_number) ==
-                 ValidationResult.TOO_LONG)):
+                (_test_number_length(full_number, general_desc) == ValidationResult.TOO_LONG)):
                 if keep_raw_input:
                     numobj.country_code_source = CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN
                 numobj.country_code = default_country_code
@@ -2666,10 +2671,10 @@ def parse(number, region=None, keep_raw_input=False,
         carrier_code, potential_national_number, _ = _maybe_strip_national_prefix_carrier_code(potential_national_number,
                                                                                                metadata)
         # We require that the NSN remaining after stripping the national
-        # prefix and carrier code be of a possible length for the
-        # region. Otherwise, we don't do the stripping, since the original
+        # prefix and carrier code be long enough to be a possible length for
+        # the region. Otherwise, we don't do the stripping, since the original
         # number could be a valid short number.
-        if not _is_shorter_than_possible_normal_number(metadata, potential_national_number):
+        if _test_number_length(potential_national_number, metadata.general_desc) != ValidationResult.TOO_SHORT:
             normalized_national_number = potential_national_number
             if keep_raw_input:
                 numobj.preferred_domestic_carrier_code = carrier_code
@@ -2945,24 +2950,29 @@ def is_mobile_number_portable_region(region_code):
 
 class NumberParseException(UnicodeMixin, Exception):
     """Exception when attempting to parse a putative phone number"""
-    # Invalid country code specified
+
+    # The reason a string could not be interpreted as a phone number.
+
+    # The country code supplied did not belong to a supported country or
+    # non-geographical entity.
     INVALID_COUNTRY_CODE = 0
 
-    # The string passed in had fewer than 3 digits in it.
-    # The number failed to match the regular expression
+    # This generally indicates the string passed in had fewer than 3 digits in
+    # it.  The number failed to match the regular expression
     # _VALID_PHONE_NUMBER in phonenumberutil.py.
     NOT_A_NUMBER = 1
 
-    # The string started with an international dialing prefix
-    # but after this was removed, it had fewer digits than any
-    # valid phone number (including country code) could have.
+    # This indicates the string started with an international dialing prefix,
+    # but after this was removed, it had fewer digits than any valid phone
+    # number (including country code) could have.
     TOO_SHORT_AFTER_IDD = 2
 
-    # After any country code has been stripped, the string
+    # This indicates the string, after any country code has been stripped,
     # had fewer digits than any valid phone number could have.
     TOO_SHORT_NSN = 3
 
-    # String had more digits than any valid phone number could have
+    # This indicates the string had more digits than any valid phone number
+    # could have
     TOO_LONG = 4
 
     def __init__(self, error_type, msg):
