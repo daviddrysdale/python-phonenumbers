@@ -681,11 +681,15 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          "italian_leading_zero=None, number_of_leading_zeros=None, "
                          "country_code_source=None, preferred_domestic_carrier_code='19')",
                          repr(arNumber))
-        # When the preferred_domestic_carrier_code is present (even when it
-        # contains an empty string), use it instead of the default carrier
-        # code passed in.
+        # When the preferred_domestic_carrier_code is present (even when it is
+        # just a space), use it instead of the default carrier code passed in.
+        arNumber.preferred_domestic_carrier_code = " "
+        self.assertEqual("01234   12-5678",
+                         phonenumbers.format_national_number_with_preferred_carrier_code(arNumber, "15"))
+        # When the preferred_domestic_carrier_code is present but empty, treat
+        # it as unset and use instead the default carrier code passed in.
         arNumber.preferred_domestic_carrier_code = ""
-        self.assertEqual("01234 12-5678",
+        self.assertEqual("01234 15 12-5678",
                          phonenumbers.format_national_number_with_preferred_carrier_code(arNumber, "15"))
         # We don't support this for the US so there should be no change.
         usNumber = PhoneNumber(country_code=1, national_number=4241231234, preferred_domestic_carrier_code="99")
@@ -2123,13 +2127,10 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("  tel:03-331-6005;phone-context=+64", "ZZ"))
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:03-331-6005;isub=12345;phone-context=+64", "ZZ"))
 
-        # It is important that we set the carrier code to an empty string, since we used
-        # parse_number(leep_raw_input = True) and no carrier code was found.
         nzNumberWithRawInput = PhoneNumber()
         nzNumberWithRawInput.merge_from(NZ_NUMBER)
         nzNumberWithRawInput.raw_input = "+64 3 331 6005"
         nzNumberWithRawInput.country_code_source = CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN
-        nzNumberWithRawInput.preferred_domestic_carrier_code = ""
         self.assertEqual(nzNumberWithRawInput, phonenumbers.parse("+64 3 331 6005", "ZZ", keep_raw_input=True))
         # Null is also allowed for the region code in these cases.
         self.assertEqual(nzNumberWithRawInput, phonenumbers.parse("+64 3 331 6005", None, keep_raw_input=True))
@@ -2222,14 +2223,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         alphaNumericNumber.merge_from(ALPHA_NUMERIC_NUMBER)
         alphaNumericNumber.raw_input = "800 six-flags"
         alphaNumericNumber.country_code_source = CountryCodeSource.FROM_DEFAULT_COUNTRY
-        alphaNumericNumber.preferred_domestic_carrier_code = ""
         self.assertEqual(alphaNumericNumber,
                          phonenumbers.parse("800 six-flags", "US", keep_raw_input=True))
 
         shorterAlphaNumber = PhoneNumber(country_code=1, national_number=8007493524,
                                          raw_input="1800 six-flag",
-                                         country_code_source=CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN,
-                                         preferred_domestic_carrier_code="")
+                                         country_code_source=CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN)
         self.assertEqual(shorterAlphaNumber,
                          phonenumbers.parse("1800 six-flag", "US", keep_raw_input=True))
 
