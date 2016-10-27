@@ -16,7 +16,8 @@ PHONE_METADATA_TR = PhoneMetadata(id='TR', country_code=90, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='444\\d{4}', possible_number_pattern='\\d{7}', example_number='4441444', possible_length=(7,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[23]|4(?:[0-35-9]|4[0-35-9])'], national_prefix_formatting_rule='(0\\1)', national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[589]'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[23]|4(?:[0-35-9]|4[0-35-9])'], national_prefix_formatting_rule='(0\\1)', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['5[02-69]'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['51|[89]'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(444)(\\d{1})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['444'])],
     mobile_number_portable_region=True)
