@@ -1,4 +1,15 @@
 
+What's new in 7.7.2
+-------------------
+
+Merge to
+[upstream commit 2d0d216f6032](https://github.com/googlei18n/libphonenumber/commit/2d0d216f6032);
+code changes:
+
+ - Stop setting empty `preferred_domestic_carrier_code`, and if we are passed such
+   a number then treat the empty field as if unset.
+
+
 What's new in 7.7.1
 -------------------
 

@@ -1020,7 +1020,12 @@ def format_national_number_with_preferred_carrier_code(numobj, fallback_carrier_
     the number's preferred_domestic_carrier_code, or the fallback_carrier_code
     pass in if none is found.
     """
-    if numobj.preferred_domestic_carrier_code is not None:
+    # Historically, we set this to an empty string when parsing with raw input
+    # if none was found in the input string. However, this doesn't result in a
+    # number we can dial. For this reason, we treat the empty string the same
+    # as if it isn't set at all.
+    if (numobj.preferred_domestic_carrier_code is not None and
+        len(numobj.preferred_domestic_carrier_code) > 0):
         carrier_code = numobj.preferred_domestic_carrier_code
     else:
         carrier_code = fallback_carrier_code
@@ -1067,7 +1072,12 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             formatted_number = format_national_number_with_carrier_code(numobj_no_ext,
                                                                         _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX)
         elif region_code == "BR" and is_fixed_line_or_mobile:
-            if numobj_no_ext.preferred_domestic_carrier_code is not None:
+            # Historically, we set this to an empty string when parsing with
+            # raw input if none was found in the input string. However, this
+            # doesn't result in a number we can dial. For this reason, we
+            # treat the empty string the same as if it isn't set at all.
+            if (numobj_no_ext.preferred_domestic_carrier_code is not None and
+                len(numobj_no_ext.preferred_domestic_carrier_code) > 0):
                 formatted_number = format_national_number_with_preferred_carrier_code(numobj_no_ext, "")
             else:
                 # Brazilian fixed line and mobile numbers need to be dialed with a
@@ -2676,7 +2686,7 @@ def parse(number, region=None, keep_raw_input=False,
         # number could be a valid short number.
         if _test_number_length(potential_national_number, metadata.general_desc) != ValidationResult.TOO_SHORT:
             normalized_national_number = potential_national_number
-            if keep_raw_input:
+            if keep_raw_input and carrier_code is not None and len(carrier_code) > 0:
                 numobj.preferred_domestic_carrier_code = carrier_code
     len_national_number = len(normalized_national_number)
     if len_national_number < _MIN_LENGTH_FOR_NSN:  # pragma no cover
