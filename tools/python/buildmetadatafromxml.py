@@ -147,6 +147,15 @@ def get_true_attrib(xtag, aname):
         return False
 
 
+def get_optional_true_attrib(xtag, aname):
+    if aname in xtag.attrib:
+        if xtag.attrib[aname] != 'true':
+            raise Exception("Unexpected value %s for %s attribute" % (xtag.attrib[aname], aname))
+        return True
+    else:
+        return None
+
+
 def _dews_re(re_str):
     """Remove all whitespace in given regular expression string"""
     if re_str is None:
@@ -235,7 +244,7 @@ class XNumberFormat(UnicodeMixin):
             # Find the IMPLIED attribute(s)
             self.o.domestic_carrier_code_formatting_rule = xtag.get('carrierCodeFormattingRule', None)
             self.o.national_prefix_formatting_rule = xtag.get('nationalPrefixFormattingRule', None)
-            self.o.national_prefix_optional_when_formatting = get_true_attrib(xtag, 'nationalPrefixOptionalWhenFormatting')
+            self.o.national_prefix_optional_when_formatting = get_optional_true_attrib(xtag, 'nationalPrefixOptionalWhenFormatting')
 
             # Post-process formatting rules for expansions and defaults
             if self.o.national_prefix_formatting_rule is not None:
@@ -249,8 +258,8 @@ class XNumberFormat(UnicodeMixin):
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
                 self.o.national_prefix_formatting_rule = re.sub('\$', r'\\', self.o.national_prefix_formatting_rule)
 
-            if not self.o.national_prefix_optional_when_formatting:
-                # If attrib is False, it was missing and inherits territory-wide value
+            if not self.o.national_prefix_optional_when_formatting and national_prefix_optional_when_formatting:
+                # If attrib is None, it was missing and inherits territory-wide value
                 self.o.national_prefix_optional_when_formatting = national_prefix_optional_when_formatting
 
             if self.o.domestic_carrier_code_formatting_rule is not None:

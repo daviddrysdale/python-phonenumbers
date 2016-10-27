@@ -30,7 +30,7 @@ class NumberFormat(UnicodeMixin, ImmutableMixin):
                  format=None,
                  leading_digits_pattern=None,
                  national_prefix_formatting_rule=None,
-                 national_prefix_optional_when_formatting=False,
+                 national_prefix_optional_when_formatting=None,
                  domestic_carrier_code_formatting_rule=None):
         # pattern is a regex that is used to match the national (significant)
         # number. For example, the pattern "(20)(\d{4})(\d{4})" will match
@@ -93,7 +93,10 @@ class NumberFormat(UnicodeMixin, ImmutableMixin):
         # set to true. This will be inherited from the value set for the
         # territory in the XML file, unless a national_prefix_formatting_rule
         # is defined specifically for this NumberFormat.
-        self.national_prefix_optional_when_formatting = bool(national_prefix_optional_when_formatting)
+        if national_prefix_optional_when_formatting is not None:
+            self.national_prefix_optional_when_formatting = bool(national_prefix_optional_when_formatting)
+        else:
+            self.national_prefix_optional_when_formatting = None
 
         # This field specifies how any carrier code ($CC) together with the
         # first group ($FG) in the national significant number should be
@@ -110,7 +113,8 @@ class NumberFormat(UnicodeMixin, ImmutableMixin):
         self.leading_digits_pattern.extend(other.leading_digits_pattern)
         if other.national_prefix_formatting_rule is not None:
             self.national_prefix_formatting_rule = other.national_prefix_formatting_rule
-        self.national_prefix_optional_when_formatting = other.national_prefix_optional_when_formatting
+        if other.national_prefix_optional_when_formatting is not None:
+            self.national_prefix_optional_when_formatting = other.national_prefix_optional_when_formatting
         if other.domestic_carrier_code_formatting_rule is not None:
             self.domestic_carrier_code_formatting_rule = other.domestic_carrier_code_formatting_rule
 
@@ -134,7 +138,7 @@ class NumberFormat(UnicodeMixin, ImmutableMixin):
                        unicod(", ").join([rpr(ld) for ld in self.leading_digits_pattern]))
         if self.national_prefix_formatting_rule is not None:
             result += unicod(", national_prefix_formatting_rule=%s") % rpr(self.national_prefix_formatting_rule)
-        if self.national_prefix_optional_when_formatting:
+        if self.national_prefix_optional_when_formatting is not None:
             result += unicod(", national_prefix_optional_when_formatting=%s") % str(self.national_prefix_optional_when_formatting)
         if self.domestic_carrier_code_formatting_rule is not None:
             result += unicod(", domestic_carrier_code_formatting_rule=%s") % rpr(self.domestic_carrier_code_formatting_rule)

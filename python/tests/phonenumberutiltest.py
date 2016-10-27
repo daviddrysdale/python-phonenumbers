@@ -2530,7 +2530,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         nf2._mutable = True
         nf3 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['2'],
                            national_prefix_formatting_rule='$NP',
-                           domestic_carrier_code_formatting_rule='$NP')
+                           domestic_carrier_code_formatting_rule='$NP',
+                           national_prefix_optional_when_formatting=True)
         nf3._mutable = True
         self.assertEqual(nf1, nf2)
         self.assertNotEqual(nf1, nf3)
