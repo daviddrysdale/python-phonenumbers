@@ -1,4 +1,15 @@
 
+What's new in 7.7.3
+-------------------
+
+Merge to
+[upstream commit ad0ce0c94501](https://github.com/googlei18n/libphonenumber/commit/ad0ce0c94501);
+code changes:
+
+ - Fixed `phonemetadata.py` not to merge from a `NumberFormat`'s unset bool
+   `national_prefix_optional_when_formatting`.
+
+
 What's new in 7.7.2
 -------------------
 
