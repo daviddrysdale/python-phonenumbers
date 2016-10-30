@@ -132,10 +132,10 @@ Release Procedure
      `cd tools/python && make PYTHON=python3 test`
  - Check that Python 2.5 is still supported:
      `cd tools/python && make PYTHON=python2.5 test`
- - Create a release-<version> tag:
-     `git tag release-<version>`
+ - Create a vX.Y.Z tag:
+     `git tag vX.Y.Z`
  - Push the tag to Github with:
-     `git push <github-remote> release-<version>`
+     `git push <github-remote> vX.Y.Z`
  - Push the package to PyPI with:
      `cd python && ./setup.py sdist bdist_wheel upload`
  - Push the lite package to PyPI with:
