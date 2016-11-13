@@ -50,14 +50,6 @@ def _matches_national_number(national_number, number_desc, allow_prefix_match):
     return (fullmatch(nnp_matcher, national_number) or
             (allow_prefix_match and nnp_matcher.match(national_number)))
 
-def _matches_possible_number(national_number, number_desc):
-    """Returns whether the given national number (a string containing only decimal
-    digits) matches the possible number pattern defined in the given
-    PhoneNumberDesc object.
-    """
-    pnp_matcher = re.compile(number_desc.possible_number_pattern or U_EMPTY_STRING)
-    return fullmatch(pnp_matcher, national_number)
-
 
 def is_possible_short_number_for_region(short_number, region_dialing_from):
     """Check whether a short number is a possible number when dialled from a
@@ -77,7 +69,7 @@ def is_possible_short_number_for_region(short_number, region_dialing_from):
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
         return False
-    return _matches_possible_number(short_number, metadata.general_desc)
+    return (len(short_number) in metadata.general_desc.possible_length)
 
 
 def is_possible_short_number(numobj):
@@ -93,13 +85,13 @@ def is_possible_short_number(numobj):
     Return whether the number is a possible short number.
     """
     region_codes = region_codes_for_country_code(numobj.country_code)
-    short_number = national_significant_number(numobj)
+    short_number_len = len(national_significant_number(numobj))
 
     for region in region_codes:
         metadata = PhoneMetadata.short_metadata_for_region(region)
         if metadata is None:
             continue
-        if _matches_possible_number(short_number, metadata.general_desc):
+        if short_number_len in metadata.general_desc.possible_length:
             return True
     return False
 
@@ -184,6 +176,12 @@ def expected_cost_for_region(short_number, region_dialing_from):
     # Note that region_dialing_from may be None, in which case metadata will also be None.
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
+        return ShortNumberCost.UNKNOWN_COST
+
+    # The possible lengths are not present for a particular sub-type if they match the general
+    # description; for this reason, we check the possible lengths against the general description
+    # first to allow an early exit if possible.
+    if not(len(short_number) in metadata.general_desc.possible_length):
         return ShortNumberCost.UNKNOWN_COST
 
     # The cost categories are tested in order of decreasing expense, since if
@@ -397,8 +395,8 @@ def is_carrier_specific(numobj):
 
 
 # TODO: Once we have benchmarked ShortNumberInfo, consider if it is worth
-# keeping this performance optimization, and if so move this into the matcher
-# implementation.
+# keeping this performance optimization.
 def _matches_possible_number_and_national_number(number, number_desc):
-    return (_matches_possible_number(number, number_desc) and
-            _matches_national_number(number, number_desc, False))
+    if len(number_desc.possible_length) > 0 and not (len(number) in number_desc.possible_length):
+        return False
+    return _matches_national_number(number, number_desc, False)

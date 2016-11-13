@@ -32,7 +32,10 @@ from phonenumbers.re_util import fullmatch
 class ExampleNumbersTest(unittest.TestCase):
     """Verifies all of the example numbers in the metadata are valid and of
     the correct type. If no example number exists for a particular type, the
-    test still passes."""
+    test still passes  since not all types are relevant for all regions.
+    Tests that check the XML schema will ensure that an exampleNumber
+    node is present for every phone number description.
+    """
 
     def setUp(self):
         self.invalid_cases = []
@@ -166,6 +169,8 @@ class ExampleNumbersTest(unittest.TestCase):
 
     def testEveryTypeHasAnExampleNumber(self):
         for num_type in PhoneNumberType.values():
+            if num_type == PhoneNumberType.UNKNOWN:
+                continue
             exampleNumber = phonenumberutil.example_number_for_type(None, num_type)
             self.assertTrue(exampleNumber is not None,
                             msg="No example number found for type %s" % num_type)

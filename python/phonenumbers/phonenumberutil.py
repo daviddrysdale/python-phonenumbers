@@ -158,7 +158,8 @@ _ALPHA_PHONE_MAPPINGS = dict(_ALPHA_MAPPINGS, **_ASCII_DIGITS_MAP)
 # any of the characters in this map must not be removed from a number when
 # dialling, otherwise the call will not reach the intended destination.
 _DIALLABLE_CHAR_MAPPINGS = dict({_PLUS_SIGN: _PLUS_SIGN,
-                                 u('*'): u('*')},
+                                 u('*'): u('*'),
+                                 u('#'): u('#')},
                                 **_ASCII_DIGITS_MAP)
 
 # Separate map of all symbols that we wish to retain when formatting alpha
@@ -1740,13 +1741,17 @@ def example_number_for_non_geo_entity(country_calling_code):
     """
     metadata = PhoneMetadata.metadata_for_nongeo_region(country_calling_code, None)
     if metadata is not None:
-        desc = metadata.general_desc
-        try:
-            if desc.example_number is not None:
-                return parse(_PLUS_SIGN + unicod(country_calling_code) + desc.example_number,
-                             UNKNOWN_REGION)
-        except NumberParseException:
-            pass
+        # For geographical entities, fixed-line data is always present. However, for non-geographical
+        # entities, this is not the case, so we have to go through different types to find the
+        # example number. We don't check fixed-line or personal number since they aren't used by
+        # non-geographical entities (if this changes, a unit-test will catch this.)
+        for desc in (metadata.mobile, metadata.toll_free, metadata.shared_cost, metadata.voip,
+                     metadata.voicemail, metadata.uan, metadata.premium_rate):
+            try:
+                if (desc is not None and desc.example_number is not None):
+                    return parse(_PLUS_SIGN + unicod(country_calling_code) + desc.example_number, UNKNOWN_REGION)
+            except NumberParseException:
+                pass
     return None
 
 

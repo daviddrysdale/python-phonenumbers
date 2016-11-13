@@ -108,10 +108,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("[13-689]\\d{9}|2[0-35-9]\\d{8}",
                          metadata.general_desc.national_number_pattern)
         self.assertEqual("\\d{7}(?:\\d{3})?", metadata.general_desc.possible_number_pattern)
-        # Fixed-line data should be inherited from the general desc for the
-        # national number since it wasn't overridden.
-        self.assertEqual(metadata.general_desc.national_number_pattern,
-                         metadata.fixed_line.national_number_pattern)
+        self.assertEqual("[13-689]\\d{9}|2[0-35-9]\\d{8}", metadata.fixed_line.national_number_pattern)
         self.assertEqual("\\d{10}", metadata.toll_free.possible_number_pattern)
         self.assertEqual(1, len(metadata.general_desc.possible_length))
         self.assertEqual(10, metadata.general_desc.possible_length[0])
@@ -170,7 +167,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(800, metadata.country_code)
         self.assertEqual("\\1 \\2", metadata.number_format[0].format)
         self.assertEqual("(\\d{4})(\\d{4})", metadata.number_format[0].pattern)
-        self.assertEqual("12345678", metadata.general_desc.example_number)
+        self.assertEqual(0, len(metadata.general_desc.possible_length_local_only))
+        self.assertEqual(1, len(metadata.general_desc.possible_length))
         self.assertEqual("12345678", metadata.toll_free.example_number)
 
     def testIsNumberGeographical(self):
@@ -290,15 +288,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.example_number_for_type("DE", PhoneNumberType.FIXED_LINE))
         self.assertEqual(None,
                          phonenumbers.example_number_for_type("DE", PhoneNumberType.MOBILE))
-        # For the US, the example number is placed under general description,
-        # and hence should be used for both fixed line and mobile, so neither
-        # of these should return None.
         self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.FIXED_LINE) is not None)
         self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.MOBILE) is not None)
         # CS is an invalid region, so we have no data for it.
         self.assertTrue(phonenumbers.example_number_for_type("CS", PhoneNumberType.MOBILE) is None)
         # Python version extra test
-        self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.UNKNOWN) is not None)
+        self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.UNKNOWN) is None)
 
         # RegionCode 001 is reserved for supporting non-geographical country
         # calling code. We don't support getting an example number for it with
@@ -366,8 +361,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          msg="Conversion did not correctly remove alpha character")
 
     def testNormaliseStripNonDiallableCharacters(self):
-        inputNumber = "03*4-56&+a#234"
-        expectedOutput = "03*456+234"
+        inputNumber = "03*4-56&+1a#234"
+        expectedOutput = "03*456+1#234"
         self.assertEqual(expectedOutput,
                          phonenumberutil._normalize_diallable_chars_only(inputNumber),
                          msg="Conversion did not correctly remove non-diallable characters")
@@ -2737,12 +2732,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # Temporarily insert invalid example number
         metadata800 = PhoneMetadata.metadata_for_nongeo_region(800)
-        saved_example = metadata800.general_desc.example_number
-        metadata800.general_desc._mutable = True
-        metadata800.general_desc.example_number = ''
-        self.assertTrue(phonenumbers.example_number_for_non_geo_entity(800) is None)
-        metadata800.general_desc.example_number = saved_example
-        metadata800.general_desc._mutable = False
+        saved_example = metadata800.mobile.example_number
+        metadata800.mobile._mutable = True
+        metadata800.mobile.example_number = ''
+        self.assertTrue(phonenumbers.example_number_for_non_geo_entity(800) is not None)
+        metadata800.mobile.example_number = saved_example
+        metadata800.mobile._mutable = False
 
         self.assertFalse(phonenumbers.phonenumberutil._raw_input_contains_national_prefix("07", "0", "JP"))
 
