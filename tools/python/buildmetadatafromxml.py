@@ -54,6 +54,9 @@ from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetad
 from phonenumbers.phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY
 from phonenumbers.util import UnicodeMixin, u, prnt
 
+# Global flag for lax XML parsing
+lax = False
+
 # Convention: variables beginning with 'x' are XML objects
 
 # Top-level XML element containing data
@@ -334,7 +337,11 @@ class XPhoneNumberDesc(UnicodeMixin):
         # Always expect a nationalNumberPattern element
         self.o.national_number_pattern = _dews_re(_get_unique_child_value(xtag, 'nationalNumberPattern'))
         if self.o.national_number_pattern is None:
-            raise Exception("Missing required nationalNumberPattern element in %s.%s" % (id, tag))
+            if lax:
+                if template is not None:
+                    self.o.national_number_pattern = template.national_number_pattern
+            else:
+                raise Exception("Missing required nationalNumberPattern element in %s.%s" % (id, tag))
 
         # A possibleNumberPattern element is optional, except for the general_desc
         self.o.possible_number_pattern = _dews_re(_get_unique_child_value(xtag, 'possibleNumberPattern'))
@@ -346,15 +353,18 @@ class XPhoneNumberDesc(UnicodeMixin):
 
         # An exampleNumber element is present iff this is not the generalDesc
         example_number = _get_unique_child_value(xtag, 'exampleNumber')
-        if not general_desc and example_number is None:
+        if (not lax) and (not general_desc) and (example_number is None):
             raise Exception("Missing required exampleNumber element in %s.%s" % (id, tag))
         if general_desc and example_number is not None:
-            raise Exception("Unexpected exampleNumber element for generalDesc in %s.%s" % (id, tag))
+            if lax:
+                example_number = None
+            else:
+                raise Exception("Unexpected exampleNumber element for generalDesc in %s.%s" % (id, tag))
         self.o.example_number = example_number
 
         # A possibleLengths element is present iff this is not the generalDesc
         possible_lengths = _get_unique_child(xtag, 'possibleLengths')
-        if not general_desc and possible_lengths is None:
+        if (not lax) and (not general_desc) and (possible_lengths is None):
             raise Exception("Missing required possibleLengths element in %s.%s" % (id, tag))
         if general_desc and possible_lengths is not None:
             raise Exception("Unexpected possibleLengths for generalDesc in %s.%s" % (id, tag))
@@ -677,7 +687,7 @@ def _standalone(argv):
     alternate = None
     short_data = False
     try:
-        opts, args = getopt.getopt(argv, "hsa:", ("help", "short", "alt="))
+        opts, args = getopt.getopt(argv, "hlsa:", ("help", "lax", "short", "alt="))
     except getopt.GetoptError:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
@@ -687,6 +697,9 @@ def _standalone(argv):
             sys.exit(1)
         elif opt in ("-s", "--short"):
             short_data = True
+        elif opt in ("-l", "--lax"):
+            global lax
+            lax = True
         elif opt in ("-a", "--alt"):
             alternate = arg
         else:
