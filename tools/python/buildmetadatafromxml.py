@@ -312,7 +312,9 @@ class XNumberFormat(UnicodeMixin):
 
 class XPhoneNumberDesc(UnicodeMixin):
     """Parse PhoneNumberDesc object from XML element"""
-    def __init__(self, xtag, template=None, fill_na=True, lengths_expected=True):
+    def __init__(self, xterritory, tag, template=None, fill_na=True, general_desc=False):
+        id = xterritory.attrib['id']
+        xtag = _get_unique_child(xterritory, tag)
         self.xtag = xtag
         self.o = PhoneNumberDesc()
         self.o._mutable = True
@@ -327,38 +329,47 @@ class XPhoneNumberDesc(UnicodeMixin):
             if fill_na:
                 self.o.national_number_pattern = DATA_NA
                 self.o.possible_number_pattern = DATA_NA
+            return
+
+        # Always expect a nationalNumberPattern element
+        self.o.national_number_pattern = _dews_re(_get_unique_child_value(xtag, 'nationalNumberPattern'))
+        if self.o.national_number_pattern is None:
+            raise Exception("Missing required nationalNumberPattern element in %s.%s" % (id, tag))
+
+        # A possibleNumberPattern element is optional, except for the general_desc
+        self.o.possible_number_pattern = _dews_re(_get_unique_child_value(xtag, 'possibleNumberPattern'))
+        if self.o.possible_number_pattern is None:
+            if general_desc:
+                raise Exception("Missing required possibleNumberPattern element for generalDesc in %s.%s" % (id, tag))
+            if template is not None:
+                self.o.possible_number_pattern = template.possible_number_pattern
+
+        # An exampleNumber element is present iff this is not the generalDesc
+        example_number = _get_unique_child_value(xtag, 'exampleNumber')
+        if not general_desc and example_number is None:
+            raise Exception("Missing required exampleNumber element in %s.%s" % (id, tag))
+        if general_desc and example_number is not None:
+            raise Exception("Unexpected exampleNumber element for generalDesc in %s.%s" % (id, tag))
+        self.o.example_number = example_number
+
+        # A possibleLengths element is present iff this is not the generalDesc
+        possible_lengths = _get_unique_child(xtag, 'possibleLengths')
+        if not general_desc and possible_lengths is None:
+            raise Exception("Missing required possibleLengths element in %s.%s" % (id, tag))
+        if general_desc and possible_lengths is not None:
+            raise Exception("Unexpected possibleLengths for generalDesc in %s.%s" % (id, tag))
+        if possible_lengths is not None:
+            national_lengths = possible_lengths.attrib['national']  # REQUIRED attribute
+            if national_lengths == "-1":
+                # A value of -1 for possibleLengths.national is a special marker to indicate
+                # that this sub-type of number doesn't actually exist.
+                if fill_na:
+                    raise Exception("Found possibleLengths -1 for unexpected number type")
+                self.o.possible_length = (-1,)
                 return
-        # Start with the template values
-        if template is not None:
-            self.o.national_number_pattern = template.national_number_pattern
-            self.o.possible_number_pattern = template.possible_number_pattern
-            self.o.example_number = template.example_number
-        # Overwrite with any values in the XML
-        if xtag is not None:
-            national_number_pattern = _dews_re(_get_unique_child_value(xtag, 'nationalNumberPattern'))
-            if national_number_pattern is not None:
-                self.o.national_number_pattern = national_number_pattern
-            possible_number_pattern = _dews_re(_get_unique_child_value(xtag, 'possibleNumberPattern'))
-            if possible_number_pattern is not None:
-                self.o.possible_number_pattern = possible_number_pattern
-            example_number = _get_unique_child_value(xtag, 'exampleNumber')
-            if example_number is not None:
-                self.o.example_number = example_number
-            possible_lengths = _get_unique_child(xtag, 'possibleLengths')
-            if possible_lengths is not None:
-                if not lengths_expected:
-                    raise Exception("Found unexpected possibleLengths element in %s" % xtag.tag)
-                national_lengths = possible_lengths.attrib['national']  # REQUIRED attribute
-                if national_lengths == "-1":
-                    # A value of -1 for possibleLengths.national is a special marker to indicate
-                    # that this sub-type of number doesn't actually exist.
-                    if fill_na:
-                        raise Exception("Found possibleLengths -1 for unexpected number type")
-                    self.o.possible_length = (-1,)
-                    return
-                self.o.possible_length = _extract_lengths(national_lengths)
-                local_lengths = possible_lengths.get('localOnly', None)  # IMPLIED attribute
-                self.o.possible_length_local_only = _extract_lengths(local_lengths)
+            self.o.possible_length = _extract_lengths(national_lengths)
+            local_lengths = possible_lengths.get('localOnly', None)  # IMPLIED attribute
+            self.o.possible_length_local_only = _extract_lengths(local_lengths)
 
     def __unicode__(self):
         return u(self.o)
@@ -424,42 +435,30 @@ class XTerritory(UnicodeMixin):
         self.o.leading_zero_possible = get_true_attrib(xterritory, 'leadingZeroPossible')
         self.o.mobile_number_portable_region = get_true_attrib(xterritory, 'mobileNumberPortableRegion')
 
-        # Retrieve the various PhoneNumberDesc elements.  The general_desc is
-        # first and most important; it will be used to fill out missing fields in
-        # many of the other PhoneNumberDesc elements.
-        self.o.general_desc = XPhoneNumberDesc(_get_unique_child(xterritory, 'generalDesc'),
-                                               fill_na=False, lengths_expected=False)
-        # As a special case, the possible lengths for the general_desc should be empty
-        # (they will be deduced below).
-        if self.o.general_desc.o.possible_length is not None or self.o.general_desc.o.possible_length_local_only is not None:
-            raise Exception("Found generalDesc for %s with unexpected possibleLength element" % self.o.general_desc.id)
+        # Retrieve the various PhoneNumberDesc elements, which mostly have the form:
+        #   (nationalNumberPattern, possibleNumberPattern?, possibleLengths, exampleNumber)
+        # However the general_desc is first and special; it has form:
+        #   (nationalNumberPattern, possibleNumberPattern)
+        # and it will be used to fill out missing fields in many of the other PhoneNumberDesc elements.
+        self.o.general_desc = XPhoneNumberDesc(xterritory, 'generalDesc', fill_na=False, general_desc=True)
 
         # areaCodeOptional is in the XML but not used in the code.
-        self.o.area_code_optional = XPhoneNumberDesc(_get_unique_child(xterritory, 'areaCodeOptional'),
-                                                     template=self.o.general_desc.o)
-        self.o.toll_free = XPhoneNumberDesc(_get_unique_child(xterritory, 'tollFree'),
-                                            template=self.o.general_desc.o)
-        self.o.premium_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'premiumRate'),
-                                               template=self.o.general_desc.o)
+        self.o.area_code_optional = XPhoneNumberDesc(xterritory, 'areaCodeOptional', template=self.o.general_desc.o)
+        self.o.toll_free = XPhoneNumberDesc(xterritory, 'tollFree', template=self.o.general_desc.o)
+        self.o.premium_rate = XPhoneNumberDesc(xterritory, 'premiumRate', template=self.o.general_desc.o)
         if not short_data:
-            self.o.fixed_line = XPhoneNumberDesc(_get_unique_child(xterritory, 'fixedLine'),
-                                                 template=self.o.general_desc.o, fill_na=False)
-            self.o.mobile = XPhoneNumberDesc(_get_unique_child(xterritory, 'mobile'),
-                                             template=self.o.general_desc.o, fill_na=False)
-            self.o.pager = XPhoneNumberDesc(_get_unique_child(xterritory, 'pager'),
-                                            template=self.o.general_desc.o)
-            self.o.shared_cost = XPhoneNumberDesc(_get_unique_child(xterritory, 'sharedCost'),
-                                                  template=self.o.general_desc.o)
-            self.o.personal_number = XPhoneNumberDesc(_get_unique_child(xterritory, 'personalNumber'),
-                                                      template=self.o.general_desc.o)
-            self.o.voip = XPhoneNumberDesc(_get_unique_child(xterritory, 'voip'),
-                                           template=self.o.general_desc.o)
-            self.o.uan = XPhoneNumberDesc(_get_unique_child(xterritory, 'uan'),
-                                          template=self.o.general_desc.o)
-            self.o.voicemail = XPhoneNumberDesc(_get_unique_child(xterritory, 'voicemail'),
-                                                template=self.o.general_desc.o)
-            self.o.no_international_dialling = XPhoneNumberDesc(_get_unique_child(xterritory, 'noInternationalDialling'),
-                                                                template=self.o.general_desc.o)
+            # Mobile and fixed-line descriptions do not inherit anything from the general_desc
+            self.o.fixed_line = XPhoneNumberDesc(xterritory, 'fixedLine', fill_na=False)
+            self.o.mobile = XPhoneNumberDesc(xterritory, 'mobile', fill_na=False)
+
+            self.o.pager = XPhoneNumberDesc(xterritory, 'pager', template=self.o.general_desc.o)
+            self.o.shared_cost = XPhoneNumberDesc(xterritory, 'sharedCost', template=self.o.general_desc.o)
+            self.o.personal_number = XPhoneNumberDesc(xterritory, 'personalNumber', template=self.o.general_desc.o)
+            self.o.voip = XPhoneNumberDesc(xterritory, 'voip', template=self.o.general_desc.o)
+            self.o.uan = XPhoneNumberDesc(xterritory, 'uan', template=self.o.general_desc.o)
+            self.o.voicemail = XPhoneNumberDesc(xterritory, 'voicemail', template=self.o.general_desc.o)
+            self.o.no_international_dialling = XPhoneNumberDesc(xterritory, 'noInternationalDialling', template=self.o.general_desc.o)
+
             # Skip noInternationalDialling when combining possible length information
             sub_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
                          self.o.fixed_line, self.o.mobile, self.o.pager, self.o.shared_cost,
@@ -469,14 +468,10 @@ class XTerritory(UnicodeMixin):
                          self.o.personal_number, self.o.voip, self.o.uan, self.o.voicemail,
                          self.o.no_international_dialling)
         else:
-            self.o.standard_rate = XPhoneNumberDesc(_get_unique_child(xterritory, 'standardRate'),
-                                                    template=self.o.general_desc.o)
-            self.o.short_code = XPhoneNumberDesc(_get_unique_child(xterritory, 'shortCode'),
-                                                 template=self.o.general_desc.o)
-            self.o.carrier_specific = XPhoneNumberDesc(_get_unique_child(xterritory, 'carrierSpecific'),
-                                                       template=self.o.general_desc.o)
-            self.o.emergency = XPhoneNumberDesc(_get_unique_child(xterritory, 'emergency'),
-                                                template=self.o.general_desc.o)
+            self.o.standard_rate = XPhoneNumberDesc(xterritory, 'standardRate', template=self.o.general_desc.o)
+            self.o.short_code = XPhoneNumberDesc(xterritory, 'shortCode', template=self.o.general_desc.o)
+            self.o.carrier_specific = XPhoneNumberDesc(xterritory, 'carrierSpecific', template=self.o.general_desc.o)
+            self.o.emergency = XPhoneNumberDesc(xterritory, 'emergency', template=self.o.general_desc.o)
             # For short number metadata, copy the lengths from the "short code" section only.
             sub_descs = (self.o.short_code,)
             all_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
