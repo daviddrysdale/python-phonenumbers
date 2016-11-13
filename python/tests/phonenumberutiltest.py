@@ -313,12 +313,20 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     def testGetExampleNumberForNonGeoEntity(self):
         self.assertEqual(INTERNATIONAL_TOLL_FREE, phonenumbers.example_number_for_non_geo_entity(800))
         self.assertEqual(UNIVERSAL_PREMIUM_RATE, phonenumbers.example_number_for_non_geo_entity(979))
+        # Python version extra test
+        self.assertTrue(phonenumbers.example_number_for_non_geo_entity(666) is None)
 
     def testGetExampleNumberWithoutRegion(self):
         # In our test metadata we don't cover all types: in our real metadata, we do.
         self.assertTrue(phonenumbers.example_number_for_type(None, PhoneNumberType.FIXED_LINE) is not None)
         self.assertTrue(phonenumbers.example_number_for_type(None, PhoneNumberType.MOBILE) is not None)
         self.assertTrue(phonenumbers.example_number_for_type(None, PhoneNumberType.PREMIUM_RATE) is not None)
+        # Python version extra test: temporarily drop SUPPORTED_REGIONS to check
+        # that example_number_for_type() falls back to non-geo numbers.
+        saved = phonenumberutil.SUPPORTED_REGIONS
+        phonenumberutil.SUPPORTED_REGIONS = set()
+        self.assertTrue(phonenumbers.example_number_for_type(None, PhoneNumberType.TOLL_FREE) is not None)
+        phonenumberutil.SUPPORTED_REGIONS = saved
 
     def testConvertAlphaCharactersInNumber(self):
         input = "1800-ABC-DEF"
