@@ -1,4 +1,39 @@
 
+What's new in 7.7.4
+-------------------
+
+Merge to
+[upstream commit fedbc7020703](https://github.com/googlei18n/libphonenumber/commit/fedbc7020703);
+code changes:
+
+ - GitHub project changes:
+    - Changed tag to `vX.Y.Z` from `release-X.Y.Z`; this may affect ports and derived projects.
+ - Metadata structure changes in XML file:
+    - Mobile and Fixed-Line blocks are no longer assumed to inherit missing data
+      from the GeneralDesc, but are treated like every other phone number type.
+      This means that for the non-geographical country codes, like +800, the
+      example number has been moved from generalDesc to the relevant number types,
+      and the code in getExampleNumberForNonGeoEntity has been changed to look at
+      these sub-types for an example number.
+      This also means that the "NA" and "-1" blocks present in the metadata to
+      indicate that no mobile or fixed-line numbers appear for the entity have been
+      removed.
+      There should no longer be an `exampleNumber` at the `generalDesc` level, but it
+      should be present at every `PhoneNumberDesc` with data.
+ - Code changes:
+    - Using new `possibleLengthInfo` to decide whether a short number is the right
+      length or not. This could result in more specific results; whereas before, a
+      number from length 3 to length 6 may have been deemed possible, now we may
+      exclude a number of length 5.
+    - Add hash (#) as a diallable character. Numbers with # in them will no longer
+      have formatting applied in `format_n_original_format`, and
+      `normalize_diallable_chars_only` now retains the # symbol.
+    - `example_number_for_non_geo_entity` has been changed to look at the specific
+      number types, not just the generalDesc, for the example numbers; this is a
+      necessary change after the metadata structure change detailed above.
+
+
+
 What's new in 7.7.3
 -------------------
 
