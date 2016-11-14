@@ -117,9 +117,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(1, len(metadata.toll_free.possible_length))
         self.assertEqual(10, metadata.toll_free.possible_length[0])
         self.assertEqual("900\\d{7}", metadata.premium_rate.national_number_pattern)
-        # No shared-cost data is available, so it should be initialised to "NA".
-        self.assertEqual("NA", metadata.shared_cost.national_number_pattern)
-        self.assertEqual("NA", metadata.shared_cost.possible_number_pattern)
+        # No shared-cost data is available, so it should be initialised to None.
+        self.assertEqual(None, metadata.shared_cost.national_number_pattern)
+        self.assertEqual(None, metadata.shared_cost.possible_number_pattern)
 
     def testGetInstanceLoadDEMetadata(self):
         metadata = PhoneMetadata.metadata_for_region("DE")
@@ -2671,13 +2671,13 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     mobile=PhoneNumberDesc(national_number_pattern='4\\d{8}', possible_number_pattern='\\d{9}', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='1800\\d{6}', possible_number_pattern='\\d{10}', possible_length=(10,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='190[0126]\\d{6}', possible_number_pattern='\\d{10}', possible_length=(10,)),
-    shared_cost=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    personal_number=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    voip=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    uan=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    voicemail=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    shared_cost=PhoneNumberDesc(),
+    personal_number=PhoneNumberDesc(),
+    voip=PhoneNumberDesc(),
+    pager=PhoneNumberDesc(),
+    uan=PhoneNumberDesc(),
+    voicemail=PhoneNumberDesc(),
+    no_international_dialling=PhoneNumberDesc(),
     preferred_international_prefix='0011',
     national_prefix='0',
     national_prefix_for_parsing='0',

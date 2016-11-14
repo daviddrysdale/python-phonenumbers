@@ -63,8 +63,6 @@ lax = False
 TOP_XPATH = "territories"
 # XML element name for the territory element
 TERRITORY_TAG = "territory"
-# Marker for unavailable entries
-DATA_NA = "NA"
 
 # Boilerplate text for generated Python files
 METADATA_FILE_PROLOG = '"""Auto-generated file, do not edit by hand."""'
@@ -301,9 +299,7 @@ class XNumberFormat(UnicodeMixin):
                 self.io.format = self.o.format
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
-                intl_format = re.sub('\$', u(r'\\'), intl_format)
-                if intl_format != DATA_NA:
-                    self.io.format = intl_format
+                self.io.format = re.sub('\$', u(r'\\'), intl_format)
                 owning_xterr.has_explicit_intl_format = True
             if self.io.format is not None:
                 # Add this international NumberFormat object into the owning metadata
@@ -329,9 +325,6 @@ class XPhoneNumberDesc(UnicodeMixin):
         self.o.possible_length_local_only = None
         self.o.example_number = None
         if xtag is None:
-            if fill_na:
-                self.o.national_number_pattern = DATA_NA
-                self.o.possible_number_pattern = DATA_NA
             return
 
         # Always expect a nationalNumberPattern element
@@ -510,7 +503,7 @@ class XTerritory(UnicodeMixin):
         # to None).  But only if they're non
         for desc in all_descs:
             if desc.o is not None:
-                if desc.o.national_number_pattern == DATA_NA:
+                if desc.o.national_number_pattern is None:
                     desc.o.possible_length = []
                     desc.o.possible_length_local_only = []
                     continue
