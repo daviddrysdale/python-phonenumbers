@@ -3,10 +3,10 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_EH = PhoneMetadata(id='EH', country_code=None, international_prefix=None,
     general_desc=PhoneNumberDesc(national_number_pattern='1\\d{1,2}', possible_number_pattern='\\d{2,3}', possible_length=(2, 3)),
-    toll_free=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    premium_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    toll_free=PhoneNumberDesc(),
+    premium_rate=PhoneNumberDesc(),
     emergency=PhoneNumberDesc(national_number_pattern='1(?:[59]|77)', possible_number_pattern='\\d{2,3}', example_number='15', possible_length=(2, 3)),
     short_code=PhoneNumberDesc(national_number_pattern='1(?:[59]|77)', possible_number_pattern='\\d{2,3}', example_number='15', possible_length=(2, 3)),
-    standard_rate=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    standard_rate=PhoneNumberDesc(),
+    carrier_specific=PhoneNumberDesc(),
     short_data=True)

@@ -23,5 +23,7 @@ from .data0 import data
 CARRIER_DATA.update(data)
 from .data1 import data
 CARRIER_DATA.update(data)
+from .data2 import data
+CARRIER_DATA.update(data)
 del data
 CARRIER_LONGEST_PREFIX = 9

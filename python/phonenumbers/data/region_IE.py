@@ -10,7 +10,7 @@ PHONE_METADATA_IE = PhoneMetadata(id='IE', country_code=353, international_prefi
     shared_cost=PhoneNumberDesc(national_number_pattern='18[59]0\\d{6}', possible_number_pattern='\\d{10}', example_number='1850123456', possible_length=(10,)),
     personal_number=PhoneNumberDesc(national_number_pattern='700\\d{6}', possible_number_pattern='\\d{9}', example_number='700123456', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='76\\d{7}', possible_number_pattern='\\d{9}', example_number='761234567', possible_length=(9,)),
-    pager=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+    pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(national_number_pattern='818\\d{6}', possible_number_pattern='\\d{9}', example_number='818123456', possible_length=(9,)),
     voicemail=PhoneNumberDesc(national_number_pattern='8[35-9]\\d{8}', possible_number_pattern='\\d{10}', example_number='8501234567', possible_length=(10,)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='18[59]0\\d{6}', possible_number_pattern='\\d{10}', example_number='1850123456', possible_length=(10,)),
