@@ -364,12 +364,8 @@ class XPhoneNumberDesc(UnicodeMixin):
         if possible_lengths is not None:
             national_lengths = possible_lengths.attrib['national']  # REQUIRED attribute
             if national_lengths == "-1":
-                # A value of -1 for possibleLengths.national is a special marker to indicate
-                # that this sub-type of number doesn't actually exist.
-                if fill_na:
-                    raise Exception("Found possibleLengths -1 for unexpected number type")
-                self.o.possible_length = (-1,)
-                return
+                # -1 used to be a special possibleLengths value, no longer allowed.
+                raise Exception("Found unexpected %s.%s.possibleLength.national==-1", (id, tag))
             self.o.possible_length = _extract_lengths(national_lengths)
             local_lengths = possible_lengths.get('localOnly', None)  # IMPLIED attribute
             self.o.possible_length_local_only = _extract_lengths(local_lengths)
@@ -487,9 +483,9 @@ class XTerritory(UnicodeMixin):
         for desc in sub_descs:
             if desc.o is None:
                 continue
-            if desc.o.possible_length is not None and desc.o.possible_length != (-1,):
+            if desc.o.possible_length is not None:
                 possible_lengths.update(desc.o.possible_length)
-            if desc.o.possible_length_local_only is not None and desc.o.possible_length_local_only != (-1, ):
+            if desc.o.possible_length_local_only is not None:
                 local_lengths.update(desc.o.possible_length_local_only)
         self.o.general_desc.o.possible_length = sorted(list(possible_lengths))
         self.o.general_desc.o.possible_length_local_only = sorted(list(local_lengths))
