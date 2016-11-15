@@ -311,7 +311,7 @@ class XNumberFormat(UnicodeMixin):
 
 class XPhoneNumberDesc(UnicodeMixin):
     """Parse PhoneNumberDesc object from XML element"""
-    def __init__(self, xterritory, tag, template=None, fill_na=True, general_desc=False):
+    def __init__(self, xterritory, tag, template=None, general_desc=False):
         id = xterritory.attrib['id']
         xtag = _get_unique_child(xterritory, tag)
         self.xtag = xtag
@@ -439,7 +439,7 @@ class XTerritory(UnicodeMixin):
         # However the general_desc is first and special; it has form:
         #   (nationalNumberPattern, possibleNumberPattern)
         # and it will be used to fill out missing fields in many of the other PhoneNumberDesc elements.
-        self.o.general_desc = XPhoneNumberDesc(xterritory, 'generalDesc', fill_na=False, general_desc=True)
+        self.o.general_desc = XPhoneNumberDesc(xterritory, 'generalDesc', general_desc=True)
 
         # areaCodeOptional is in the XML but not used in the code.
         self.o.area_code_optional = XPhoneNumberDesc(xterritory, 'areaCodeOptional', template=self.o.general_desc.o)
@@ -447,8 +447,8 @@ class XTerritory(UnicodeMixin):
         self.o.premium_rate = XPhoneNumberDesc(xterritory, 'premiumRate', template=self.o.general_desc.o)
         if not short_data:
             # Mobile and fixed-line descriptions do not inherit anything from the general_desc
-            self.o.fixed_line = XPhoneNumberDesc(xterritory, 'fixedLine', fill_na=False)
-            self.o.mobile = XPhoneNumberDesc(xterritory, 'mobile', fill_na=False)
+            self.o.fixed_line = XPhoneNumberDesc(xterritory, 'fixedLine')
+            self.o.mobile = XPhoneNumberDesc(xterritory, 'mobile')
 
             self.o.pager = XPhoneNumberDesc(xterritory, 'pager', template=self.o.general_desc.o)
             self.o.shared_cost = XPhoneNumberDesc(xterritory, 'sharedCost', template=self.o.general_desc.o)
