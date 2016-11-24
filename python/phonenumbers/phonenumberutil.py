@@ -859,7 +859,7 @@ def format_number(numobj, num_format):
         # leading '+' symbol (but the original number wasn't parseable
         # anyway).
         # TODO: Consider removing the 'if' above so that unparseable strings
-        # without raw input format to the empty string instead of "+00"
+        # without raw input format to the empty string instead of "+00".
         if len(numobj.raw_input) > 0:
             return numobj.raw_input
     country_calling_code = numobj.country_code
@@ -915,7 +915,7 @@ def format_by_pattern(numobj, number_format, user_defined_formats):
     # by only one region for performance reasons. For example, for NANPA
     # regions it will be contained in the metadata for US.
     region_code = region_code_for_country_code(country_code)
-    # Metadata cannot be None because the country calling code is valid
+    # Metadata cannot be None because the country calling code is valid.
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
 
     formatted_number = U_EMPTY_STRING

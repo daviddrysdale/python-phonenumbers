@@ -107,9 +107,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("\\1 \\2 \\3", metadata.number_format[1].format)
         self.assertEqual("[13-689]\\d{9}|2[0-35-9]\\d{8}",
                          metadata.general_desc.national_number_pattern)
-        self.assertEqual("\\d{7}(?:\\d{3})?", metadata.general_desc.possible_number_pattern)
         self.assertEqual("[13-689]\\d{9}|2[0-35-9]\\d{8}", metadata.fixed_line.national_number_pattern)
-        self.assertEqual("\\d{10}", metadata.toll_free.possible_number_pattern)
         self.assertEqual(1, len(metadata.general_desc.possible_length))
         self.assertEqual(10, metadata.general_desc.possible_length[0])
         # Python version: each number type description has its own possible_length value,
@@ -119,7 +117,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("900\\d{7}", metadata.premium_rate.national_number_pattern)
         # No shared-cost data is available, so it should be initialised to None.
         self.assertEqual(None, metadata.shared_cost.national_number_pattern)
-        self.assertEqual(None, metadata.shared_cost.possible_number_pattern)
 
     def testGetInstanceLoadDEMetadata(self):
         metadata = PhoneMetadata.metadata_for_region("DE")
@@ -141,9 +138,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(2, len(metadata.mobile.possible_length))
         self.assertEqual("(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:0[2-9]|[1-9]\\d))\\d{1,8}",
                          metadata.fixed_line.national_number_pattern)
-        self.assertEqual("\\d{2,14}", metadata.fixed_line.possible_number_pattern)
         self.assertEqual("30123456", metadata.fixed_line.example_number)
-        self.assertEqual("\\d{10}", metadata.toll_free.possible_number_pattern)
+        self.assertEqual(10, metadata.toll_free.possible_length[0])
         self.assertEqual("900([135]\\d{6}|9\\d{7})", metadata.premium_rate.national_number_pattern)
 
     def testGetInstanceLoadARMetadata(self):
