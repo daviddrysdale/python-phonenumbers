@@ -1,4 +1,16 @@
 
+What's new in 7.7.5
+-------------------
+
+Merge to
+[upstream commit e905483f87cf](https://github.com/googlei18n/libphonenumber/commit/e905483f87cf);
+relevant code changes:
+
+  - Removing all references to `possible_number_pattern` other than in the metadata
+    itself.
+
+
+
 What's new in 7.7.4
 -------------------
 
