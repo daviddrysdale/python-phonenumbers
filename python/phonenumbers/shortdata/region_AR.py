@@ -8,5 +8,5 @@ PHONE_METADATA_AR = PhoneMetadata(id='AR', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='10[017]|911', possible_number_pattern='\\d{3}', example_number='101', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='000|1(?:0[0-35-7]|1[02-5]|2[15]|9)|3372|89338|911', possible_number_pattern='\\d{2,5}', example_number='121', possible_length=(2, 3, 4, 5)),
     standard_rate=PhoneNumberDesc(),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='89338|911', possible_number_pattern='\\d{3,5}', possible_length=(3, 5)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='89338|911', possible_number_pattern='\\d{3,5}', example_number='89338', possible_length=(3, 5)),
     short_data=True)

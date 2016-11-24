@@ -10,7 +10,7 @@ PHONE_METADATA_KY = PhoneMetadata(id='KY', country_code=1, international_prefix=
     shared_cost=PhoneNumberDesc(),
     personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|22|33|44|66|77|88)[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='5002345678', possible_length=(10,)),
     voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(national_number_pattern='345849\\d{4}', possible_number_pattern='\\d{10}', example_number='3458491234', possible_length=(10,), possible_length_local_only=(7,)),
+    pager=PhoneNumberDesc(national_number_pattern='345849\\d{4}', possible_number_pattern='\\d{10}', example_number='3458491234', possible_length=(10,)),
     uan=PhoneNumberDesc(),
     voicemail=PhoneNumberDesc(),
     no_international_dialling=PhoneNumberDesc(),

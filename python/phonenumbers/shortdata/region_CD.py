@@ -8,5 +8,5 @@ PHONE_METADATA_CD = PhoneMetadata(id='CD', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='1(?:1[348]|77|88)', possible_number_pattern='\\d{3}', example_number='113', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='1(?:1[348]|23|77|88)|40404', possible_number_pattern='\\d{3,5}', example_number='40404', possible_length=(3, 5)),
     standard_rate=PhoneNumberDesc(),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='40404', possible_number_pattern='\\d{3,5}', possible_length=(5,)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='40404', possible_number_pattern='\\d{3,5}', example_number='40404', possible_length=(5,)),
     short_data=True)

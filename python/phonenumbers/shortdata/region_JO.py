@@ -8,5 +8,5 @@ PHONE_METADATA_JO = PhoneMetadata(id='JO', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='1(?:12|9[127])|911', possible_number_pattern='\\d{3}', example_number='112', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='1(?:09|1[0-2]|9[0-24-79])|9(?:0903|11|8788)', possible_number_pattern='\\d{3,5}', example_number='111', possible_length=(3, 5)),
     standard_rate=PhoneNumberDesc(),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='9(?:0903|8788)', possible_number_pattern='\\d{5}', possible_length=(5,)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='9(?:0903|8788)', possible_number_pattern='\\d{5}', example_number='90903', possible_length=(5,)),
     short_data=True)

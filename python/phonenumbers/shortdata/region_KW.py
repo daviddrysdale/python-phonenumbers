@@ -8,5 +8,5 @@ PHONE_METADATA_KW = PhoneMetadata(id='KW', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3}', example_number='112', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='1\\d{2}|89887', possible_number_pattern='\\d{3,5}', example_number='177', possible_length=(3, 5)),
     standard_rate=PhoneNumberDesc(),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='89887', possible_number_pattern='\\d{5}', possible_length=(5,)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='89887', possible_number_pattern='\\d{5}', example_number='89887', possible_length=(5,)),
     short_data=True)

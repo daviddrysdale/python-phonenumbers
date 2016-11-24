@@ -13,4 +13,6 @@ PHONE_METADATA_GW = PhoneMetadata(id='GW', country_code=245, international_prefi
     pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(),
     voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc())
+    no_international_dialling=PhoneNumberDesc(),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['44|9[567]']),
+        NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['40'])])

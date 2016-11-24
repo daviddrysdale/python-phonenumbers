@@ -8,5 +8,5 @@ PHONE_METADATA_IE = PhoneMetadata(id='IE', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='112|999', possible_number_pattern='\\d{3}', example_number='112', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='11(?:2|6(?:00[06]|1(?:11|23)))|51210|999', possible_number_pattern='\\d{3,6}', example_number='112', possible_length=(3, 5, 6)),
     standard_rate=PhoneNumberDesc(),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='51210', possible_number_pattern='\\d{5}', possible_length=(5,)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='51210', possible_number_pattern='\\d{5}', example_number='51210', possible_length=(5,)),
     short_data=True)

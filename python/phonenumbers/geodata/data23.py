@@ -1911,6 +1911,7 @@ data = {
  '913787':{'en': 'Seppa, Arunachal Pradesh'},
  '913784':{'en': 'Nefra, Arunachal Pradesh'},
  '913785':{'en': 'Bameng, Arunachal Pradesh'},
+ '913783':{'en': 'Along, Arunachal Pradesh'},
  '9887':{'en': 'Kurdistan', 'fa': u('\u06a9\u0631\u062f\u0633\u062a\u0627\u0646')},
  '9886':{'en': 'Markazi', 'fa': u('\u0645\u0631\u06a9\u0632\u06cc')},
  '9884':{'en': 'Ilam province', 'fa': u('\u0627\u0633\u062a\u0627\u0646 \u0627\u06cc\u0644\u0627\u0645')},

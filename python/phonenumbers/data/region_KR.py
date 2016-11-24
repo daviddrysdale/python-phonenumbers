@@ -40,4 +40,5 @@ PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix
         NumberFormat(pattern='(\\d)(\\d{3,4})', format='\\1-\\2', leading_digits_pattern=['21[0-46-9]']),
         NumberFormat(pattern='(\\d{2})(\\d{3,4})', format='\\1-\\2', leading_digits_pattern=['[3-6][1-9]1', '[3-6][1-9]1(?:[0-46-9])']),
         NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['1(?:5[46-9]|6[04678]|8[03579])', '1(?:5(?:44|66|77|88|99)|6(?:00|44|6[16]|70|88)|8(?:00|33|55|77|99))'])],
+    leading_zero_possible=True,
     mobile_number_portable_region=True)

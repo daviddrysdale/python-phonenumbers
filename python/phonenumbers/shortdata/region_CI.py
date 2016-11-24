@@ -8,5 +8,5 @@ PHONE_METADATA_CI = PhoneMetadata(id='CI', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='1(?:1[01]|[78]0)', possible_number_pattern='\\d{3}', example_number='110', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='1(?:1[01]|[78]0)|4443', possible_number_pattern='\\d{3,4}', example_number='110', possible_length=(3, 4)),
     standard_rate=PhoneNumberDesc(),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='4443', possible_number_pattern='\\d{4}', possible_length=(4,)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='4443', possible_number_pattern='\\d{4}', example_number='4443', possible_length=(4,)),
     short_data=True)

@@ -8,5 +8,5 @@ PHONE_METADATA_SV = PhoneMetadata(id='SV', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='911', possible_number_pattern='\\d{3}', example_number='911', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='40404|911', possible_number_pattern='\\d{3,5}', example_number='911', possible_length=(3, 5)),
     standard_rate=PhoneNumberDesc(),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='40404', possible_number_pattern='\\d{5}', possible_length=(5,)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='40404', possible_number_pattern='\\d{5}', example_number='40404', possible_length=(5,)),
     short_data=True)

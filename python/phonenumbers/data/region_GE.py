@@ -13,7 +13,7 @@ PHONE_METADATA_GE = PhoneMetadata(id='GE', country_code=995, international_prefi
     pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(),
     voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='706\\d{6}', possible_number_pattern='\\d{9}', example_number='706123456', possible_length=(9,), possible_length_local_only=(6,)),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='706\\d{6}', possible_number_pattern='\\d{9}', example_number='706123456', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[348]'], national_prefix_formatting_rule='0\\1'),
