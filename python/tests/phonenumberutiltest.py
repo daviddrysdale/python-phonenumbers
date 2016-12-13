@@ -2191,6 +2191,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         usWithExtension = PhoneNumber(country_code=1, national_number=8009013355, extension="7246433")
         self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 x 7246433", "US"))
         self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 , ext 7246433", "US"))
+        self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 ; 7246433", "US"))
+        # To test an extension character without surrounding spaces.
+        self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355;7246433", "US"))
         self.assertEqual(usWithExtension,
                          phonenumbers.parse("(800) 901-3355 ,extension 7246433", "US"))
         self.assertEqual(usWithExtension,
@@ -2318,6 +2321,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Test numbers with extensions.
         self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
                          phonenumbers.is_number_match("+64 3 331-6005 extn 1234", "+6433316005#1234"))
+        self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
+                         phonenumbers.is_number_match("+64 3 331-6005 ext. 1234", "+6433316005;1234"))
         # Test proto buffers.
         self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
                          phonenumbers.is_number_match(NZ_NUMBER, "+6403 331 6005"))

@@ -298,9 +298,9 @@ _CAPTURING_EXTN_DIGITS = u("(") + _DIGITS + u("{1,7})")
 # One-character symbols that can be used to indicate an extension.
 _SINGLE_EXTN_SYMBOLS_FOR_MATCHING = u("x\uFF58#\uFF03~\uFF5E")
 # For parsing, we are slightly more lenient in our interpretation than for
-# matching. Here we allow a "comma" as a possible extension indicator. When
-# matching, this is hardly ever used to indicate this.
-_SINGLE_EXTN_SYMBOLS_FOR_PARSING = u(",") + _SINGLE_EXTN_SYMBOLS_FOR_MATCHING
+# matching. Here we allow "comma" and "semicolon" as a possible extension
+# indicator. When matching, these are hardly ever used to indicate this.
+_SINGLE_EXTN_SYMBOLS_FOR_PARSING = u(",;") + _SINGLE_EXTN_SYMBOLS_FOR_MATCHING
 
 
 def _create_extn_pattern(single_extn_symbols):
@@ -310,15 +310,15 @@ def _create_extn_pattern(single_extn_symbols):
     # There are three regular expressions here. The first covers RFC 3966
     # format, where the extension is added using ";ext=". The second more
     # generic one starts with optional white space and ends with an optional
-    # full stop (.), followed by zero or more spaces/tabs and then the numbers
-    # themselves. The other one covers the special case of American numbers
-    # where the extension is written with a hash at the end, such as "- 503#".
-    # Note that the only capturing groups should be around the digits that you
-    # want to capture as part of the extension, or else parsing will fail!
-    # Canonical-equivalence doesn't seem to be an option with Android java, so
-    # we allow two options for representing the accented o - the character
-    # itself, and one in the unicode decomposed form with the combining acute
-    # accent.
+    # full stop (.), followed by zero or more spaces/tabs/commas and then the
+    # numbers themselves. The other one covers the special case of American
+    # numbers where the extension is written with a hash at the end, such as
+    # "- 503#".  Note that the only capturing groups should be around the
+    # digits that you want to capture as part of the extension, or else
+    # parsing will fail!  Canonical-equivalence doesn't seem to be an option
+    # with Android java, so we allow two options for representing the accented
+    # o - the character itself, and one in the unicode decomposed form with
+    # the combining acute accent.
     return (_RFC3966_EXTN_PREFIX + _CAPTURING_EXTN_DIGITS + u("|") +
             u("[ \u00A0\\t,]*(?:e?xt(?:ensi(?:o\u0301?|\u00F3))?n?|") +
             u("\uFF45?\uFF58\uFF54\uFF4E?|") +
@@ -1868,7 +1868,13 @@ def is_valid_number(numobj):
     """Tests whether a phone number matches a valid pattern.
 
     Note this doesn't verify the number is actually in use, which is
-    impossible to tell by just looking at a number itself.
+    impossible to tell by just looking at a number itself.  It only verifies
+    whether the parsed, canonicalised number is valid: not whether a
+    particular series of digits entered by the user is diallable from the
+    region provided when parsing. For example, the number +41 (0) 78 927 2696
+    can be parsed into a number with country code "41" and national
+    significant number "789272696". This is valid, while the original string
+    is not diallable.
 
     Arguments:
     numobj -- The phone number object that we want to validate

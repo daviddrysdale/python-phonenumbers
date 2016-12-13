@@ -24,7 +24,7 @@ import unittest
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber, is_emergency_number
 from phonenumbers import shortnumberinfo, ShortNumberCost, AsYouTypeFormatter
-from phonenumbers import PhoneNumberMatcher, Leniency
+from phonenumbers import PhoneNumberMatcher, Leniency, is_possible_short_number_for_region
 from phonenumbers.util import prnt
 from phonenumbers.re_util import fullmatch
 
@@ -208,11 +208,12 @@ class ExampleNumbersTest(unittest.TestCase):
             desc = metadata.emergency
             if desc.example_number is not None:
                 exampleNumber = desc.example_number
-                if (not fullmatch(re.compile(desc.possible_number_pattern), exampleNumber) or
+                phoneNumber = phonenumberutil.parse(exampleNumber, regionCode)
+                if (not is_possible_short_number_for_region(phoneNumber, regionCode) or
                     not is_emergency_number(exampleNumber, regionCode)):
                     wrongTypeCounter += 1
                     prnt("Emergency example number test failed for %s" % regionCode, file=sys.stderr)
-                elif shortnumberinfo.expected_cost_for_region(exampleNumber, regionCode) != ShortNumberCost.TOLL_FREE:
+                elif shortnumberinfo.expected_cost_for_region(phoneNumber, regionCode) != ShortNumberCost.TOLL_FREE:
                     wrongTypeCounter += 1
                     prnt("Emergency example number not toll free for %s" % regionCode, file=sys.stderr)
         self.assertEqual(0, wrongTypeCounter)

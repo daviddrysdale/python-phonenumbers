@@ -51,7 +51,7 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertTrue(is_possible_short_number(PhoneNumber(country_code=44, national_number=11001)))
 
         # Python version extra test: check invalid region code
-        self.assertFalse(is_possible_short_number_for_region("123456", "XY"))
+        self.assertFalse(is_possible_short_number_for_region(_parse("123456", "US"), "XY"))
 
     def testIsValidShortNumber(self):
         self.assertTrue(is_valid_short_number(PhoneNumber(country_code=33, national_number=1010)))
@@ -63,7 +63,7 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertTrue(is_valid_short_number(PhoneNumber(country_code=44, national_number=18001)))
 
         # Python version extra test: check invalid region code
-        self.assertFalse(is_valid_short_number_for_region("123456", "XY"))
+        self.assertFalse(is_valid_short_number_for_region(_parse("123456", "US"), "XY"))
         self.assertFalse(is_valid_short_number(PhoneNumber(country_code=99, national_number=123)))
         # Python version extra test: not matching general desc
         self.assertFalse(is_valid_short_number_for_region(_parse("2123456", "US"), "US"))
@@ -91,7 +91,7 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost(unknownCostNumber))
 
         # Test that an invalid number may nevertheless have a cost other than UNKNOWN_COST.
-        self.assertFalse(is_valid_short_number_for_region("116123", "FR"))
+        self.assertFalse(is_valid_short_number_for_region(_parse("116123", "FR"), "FR"))
         invalidNumber = PhoneNumber(country_code=33, national_number=116123)
         self.assertEqual(ShortNumberCost.TOLL_FREE, expected_cost_for_region(_parse("116123", "FR"), "FR"))
         self.assertFalse(is_valid_short_number(invalidNumber))

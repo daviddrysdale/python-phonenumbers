@@ -42,6 +42,14 @@ class ShortNumberCost(object):
     PREMIUM_RATE = 2
     UNKNOWN_COST = 3
 
+
+def _region_dialing_from_matches_number(numobj, region_dialing_from):
+    """Helper method to check that the country calling code of the number matches
+    the region it's being dialed from."""
+    region_codes = region_codes_for_country_code(numobj.country_code)
+    return (region_dialing_from in region_codes)
+
+
 def _matches_national_number(national_number, number_desc, allow_prefix_match):
     """Returns whether the given national number (a string containing only decimal digits) matches
     the national number pattern defined in the given PhoneNumberDesc object.
@@ -53,25 +61,24 @@ def _matches_national_number(national_number, number_desc, allow_prefix_match):
             (allow_prefix_match and nnp_matcher.match(national_number)))
 
 
-def is_possible_short_number_for_region(short_number, region_dialing_from):
+def is_possible_short_number_for_region(short_numobj, region_dialing_from):
     """Check whether a short number is a possible number when dialled from a
     region. This provides a more lenient check than
     is_valid_short_number_for_region.
 
     Arguments:
-    short_number -- the short number to check as a PhoneNumber object or as
-              a string.  (The string variant is deprecated, and will be
-              removed in the next release.)
+    short_numobj -- the short number to check as a PhoneNumber object.
     region_dialing_from -- the region from which the number is dialed
 
     Return whether the number is a possible short number.
     """
-    if isinstance(short_number, PhoneNumber):
-        short_number = national_significant_number(short_number)
+    if not _region_dialing_from_matches_number(short_numobj, region_dialing_from):
+        return False
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
         return False
-    return (len(short_number) in metadata.general_desc.possible_length)
+    short_numlen = len(national_significant_number(short_numobj))
+    return (short_numlen in metadata.general_desc.possible_length)
 
 
 def is_possible_short_number(numobj):
@@ -98,25 +105,24 @@ def is_possible_short_number(numobj):
     return False
 
 
-def is_valid_short_number_for_region(short_number, region_dialing_from):
+def is_valid_short_number_for_region(short_numobj, region_dialing_from):
     """Tests whether a short number matches a valid pattern in a region.
 
     Note that this doesn't verify the number is actually in use, which is
     impossible to tell by just looking at the number itself.
 
     Arguments:
-    short_number -- the short number to check as a PhoneNumber object or as
-              a string.  (The string variant is deprecated, and will be
-              removed in the next release.)
+    short_numobj -- the short number to check as a PhoneNumber object.
     region_dialing_from -- the region from which the number is dialed
 
     Return whether the short number matches a valid pattern
     """
-    if isinstance(short_number, PhoneNumber):
-        short_number = national_significant_number(short_number)
+    if not _region_dialing_from_matches_number(short_numobj, region_dialing_from):
+        return False
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
         return False
+    short_number = national_significant_number(short_numobj)
     general_desc = metadata.general_desc
     if not _matches_possible_number_and_national_number(short_number, general_desc):
         return False
@@ -140,16 +146,15 @@ def is_valid_short_number(numobj):
     Return whether the short number matches a valid pattern
     """
     region_codes = region_codes_for_country_code(numobj.country_code)
-    short_number = national_significant_number(numobj)
     region_code = _region_code_for_short_number_from_region_list(numobj, region_codes)
     if len(region_codes) > 1 and region_code is not None:
         # If a matching region had been found for the phone number from among two or more regions,
         # then we have already implicitly verified its validity for that region.
         return True
-    return is_valid_short_number_for_region(short_number, region_code)
+    return is_valid_short_number_for_region(numobj, region_code)
 
 
-def expected_cost_for_region(short_number, region_dialing_from):
+def expected_cost_for_region(short_numobj, region_dialing_from):
     """Gets the expected cost category of a short number when dialled from a
     region (however, nothing is implied about its validity). If it is
     important that the number is valid, then its validity must first be
@@ -164,21 +169,21 @@ def expected_cost_for_region(short_number, region_dialing_from):
         # Do something with the cost information here.
 
     Arguments:
-    short_number -- the short number for which we want to know the expected cost category
-              as a PhoneNumber object or as a string.  (The string variant is deprecated,
-              and will be removed in the next release.)
+    short_numobj -- the short number for which we want to know the expected cost category
+              as a PhoneNumber object.
     region_dialing_from -- the region from which the number is dialed
 
     Return the expected cost category for that region of the short
     number. Returns UNKNOWN_COST if the number does not match a cost
     category. Note that an invalid number may match any cost category.
     """
-    if isinstance(short_number, PhoneNumber):
-        short_number = national_significant_number(short_number)
+    if not _region_dialing_from_matches_number(short_numobj, region_dialing_from):
+        return ShortNumberCost.UNKNOWN_COST
     # Note that region_dialing_from may be None, in which case metadata will also be None.
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     if metadata is None:
         return ShortNumberCost.UNKNOWN_COST
+    short_number = national_significant_number(short_numobj)
 
     # The possible lengths are not present for a particular sub-type if they match the general
     # description; for this reason, we check the possible lengths against the general description
