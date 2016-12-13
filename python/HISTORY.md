@@ -1,4 +1,20 @@
 
+What's new in 8.0.0
+-------------------
+
+Merge to
+[upstream commit 1eb06f31e1dd](https://github.com/googlei18n/libphonenumber/commit/1eb06f31e1dd);
+relevant code changes:
+
+  - Removing the ability for `.._for_region` methods in `shortnumberinfo.py` to work
+    on strings, as well of phone number objects. These have been marked deprecated
+    for months. Any users of these methods should call `phonenumbers.parse` first to
+    create a `PhoneNumber` object, and pass this in.
+  - Support semicolon as extension character while parsing phone numbers. This
+    is not applicable when you are trying to find the phone numbers.
+
+
+
 What's new in 7.7.5
 -------------------
 
