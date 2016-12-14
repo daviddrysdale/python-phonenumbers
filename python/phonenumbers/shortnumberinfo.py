@@ -75,7 +75,7 @@ def is_possible_short_number_for_region(short_numobj, region_dialing_from):
     if not _region_dialing_from_matches_number(short_numobj, region_dialing_from):
         return False
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
-    if metadata is None:
+    if metadata is None:  # pragma no cover
         return False
     short_numlen = len(national_significant_number(short_numobj))
     return (short_numlen in metadata.general_desc.possible_length)
@@ -120,7 +120,7 @@ def is_valid_short_number_for_region(short_numobj, region_dialing_from):
     if not _region_dialing_from_matches_number(short_numobj, region_dialing_from):
         return False
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
-    if metadata is None:
+    if metadata is None:  # pragma no cover
         return False
     short_number = national_significant_number(short_numobj)
     general_desc = metadata.general_desc
@@ -181,7 +181,7 @@ def expected_cost_for_region(short_numobj, region_dialing_from):
         return ShortNumberCost.UNKNOWN_COST
     # Note that region_dialing_from may be None, in which case metadata will also be None.
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
-    if metadata is None:
+    if metadata is None:  # pragma no cover
         return ShortNumberCost.UNKNOWN_COST
     short_number = national_significant_number(short_numobj)
 
