@@ -8,9 +8,10 @@ Processes all of the per-prefix data under the given input directory and emit
 generated Python code.
 
 Options:
-  --var XXX : use this prefix for variable names in generated code
-  --flat    : don't do per-locale processing
-  --sep C   : expect metadata to be a list with C as separator
+  --var XXX  : use this prefix for variable names in generated code
+  --flat     : don't do per-locale processing
+  --sep C    : expect metadata to be a list with C as separator
+  --chunks N : divide metadata into N chunks
 """
 
 # Based on original metadata data files from libphonenumber:
@@ -160,17 +161,22 @@ def _tuple_repr(data):
         return "(%s)" % ", ".join([rpr(x) for x in data])
 
 
-def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, per_locale):
+def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, per_locale, chunks):
     """Output the per-prefix data in Python form to the given file """
     sorted_keys = sorted(prefixdata.keys())
     total_keys = len(sorted_keys)
-    total_chunks = int(math.ceil(total_keys / float(PREFIXDATA_CHUNK_SIZE)))
+    if chunks == -1:
+        chunk_size = PREFIXDATA_CHUNK_SIZE
+        total_chunks = int(math.ceil(total_keys / float(chunk_size)))
+    else:
+        chunk_size = int(math.ceil(total_keys / float(chunks)))
+        total_chunks = chunks
 
     outdirname = os.path.dirname(outfilename)
     longest_prefix = 0
     for chunk_num in range(total_chunks):
-        chunk_index = PREFIXDATA_CHUNK_SIZE * chunk_num
-        chunk_keys = sorted_keys[chunk_index:chunk_index + PREFIXDATA_CHUNK_SIZE]
+        chunk_index = chunk_size * chunk_num
+        chunk_keys = sorted_keys[chunk_index:chunk_index + chunk_size]
         chunk_data = {}
         for key in chunk_keys:
             chunk_data[key] = prefixdata[key]
@@ -219,8 +225,9 @@ def _standalone(argv):
     varprefix = "GEOCODE"
     per_locale = True
     separator = None
+    chunks = -1
     try:
-        opts, args = getopt.getopt(argv, "hv:fs:", ("help", "var=", "flat", "sep="))
+        opts, args = getopt.getopt(argv, "hv:fs:c:", ("help", "var=", "flat", "sep=", "chunks="))
     except getopt.GetoptError:
         prnt(__doc__, file=sys.stderr)
         sys.exit(1)
@@ -234,6 +241,8 @@ def _standalone(argv):
             per_locale = False
         elif opt in ("-s", "--sep"):
             separator = arg
+        elif opt in ("-c", "--chunks"):
+            chunks = int(arg)
         else:
             prnt("Unknown option %s" % opt, file=sys.stderr)
             prnt(__doc__, file=sys.stderr)
@@ -246,7 +255,7 @@ def _standalone(argv):
     else:
         prefixdata = {}
         load_locale_prefixdata_file(prefixdata, args[0], separator=separator)
-    output_prefixdata_code(prefixdata, args[1], args[2], varprefix, per_locale)
+    output_prefixdata_code(prefixdata, args[1], args[2], varprefix, per_locale, chunks)
 
 
 if __name__ == "__main__":
