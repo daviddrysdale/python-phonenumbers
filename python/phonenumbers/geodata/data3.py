@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2016 The Libphonenumber Authors
+# Copyright (C) 2011-2017 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -5526,7 +5526,6 @@ data = {
  '24033706':{'en': 'Continental Region'},
  '24033704':{'en': 'Bioko'},
  '3314178':{'en': u('Cr\u00e9teil'), 'fr': u('Cr\u00e9teil')},
- '3314179':{'en': 'Maisons-Alfort', 'fr': 'Maisons-Alfort'},
  '237233360':{'en': 'Bamenda'},
  '237233361':{'en': 'Bamenda'},
  '237233362':{'en': 'Bamenda'},
@@ -5982,7 +5981,9 @@ data = {
  '1914244':{'en': 'Mount Kisco, NY'},
  '1912564':{'en': 'Sylvania, GA'},
  '1914245':{'en': 'Yorktown Heights, NY'},
- '2521':{'en': 'Hargeisa'},
+ '2524':{'en': 'Garowe'},
+ '2521':{'en': 'Mogadishu'},
+ '2523':{'en': 'Hargeisa'},
  '31342':{'en': 'Barneveld', 'nl': 'Barneveld'},
  '31343':{'en': 'Driebergen-Rijsenburg', 'nl': 'Driebergen-Rijsenburg'},
  '24033264':{'en': 'Bioko'},
@@ -9999,7 +10000,6 @@ data = {
  '1919894':{'en': 'Benson, NC'},
  '1919896':{'en': 'Raleigh, NC'},
  '1859858':{'en': 'Wilmore, KY'},
- '3314180':{'en': 'Rungis Complexe', 'fr': 'Rungis Complexe'},
  '245352':{'pt': 'Sonaco'},
  '264637100':{'en': 'Keetmanshoop'},
  '1941488':{'en': 'Venice, FL'},

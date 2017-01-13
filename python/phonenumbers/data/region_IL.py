@@ -9,7 +9,7 @@ PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='1(?:212|(?:9(?:0[01]|19)|200)\\d{2})\\d{4}', possible_number_pattern='\\d{8,10}', example_number='1919123456', possible_length=(8, 9, 10)),
     shared_cost=PhoneNumberDesc(national_number_pattern='1700\\d{6}', possible_number_pattern='\\d{10}', example_number='1700123456', possible_length=(10,)),
     personal_number=PhoneNumberDesc(),
-    voip=PhoneNumberDesc(national_number_pattern='7(?:18\\d|2[23]\\d|3[237]\\d|47\\d|6(?:5\\d|8[0168])|7\\d{2}|8(?:2\\d|33|55|77|81)|9[29]\\d)\\d{5}', possible_number_pattern='\\d{9}', example_number='771234567', possible_length=(9,)),
+    voip=PhoneNumberDesc(national_number_pattern='7(?:18\\d|2[23]\\d|3[237]\\d|47\\d|6[58]\\d|7\\d{2}|8(?:2\\d|33|55|77|81)|9[2579]\\d)\\d{5}', possible_number_pattern='\\d{9}', example_number='771234567', possible_length=(9,)),
     pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(national_number_pattern='[2-689]\\d{3}|1599\\d{6}', possible_number_pattern='\\d{4}(?:\\d{6})?', example_number='1599123456', possible_length=(4, 10)),
     voicemail=PhoneNumberDesc(),
