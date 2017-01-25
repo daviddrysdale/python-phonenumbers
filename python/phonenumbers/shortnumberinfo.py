@@ -383,9 +383,11 @@ def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
 
 def is_carrier_specific(numobj):
     """Given a valid short number, determines whether it is carrier-specific
-    (however, nothing is implied about its validity).  If it is important that
-    the number is valid, then its validity must first be checked using
-    is_valid_short_number or is_valid_short_number_for_region.
+    (however, nothing is implied about its validity).  Carrier-specific numbers
+    may connect to a different end-point, or + * not connect at all, depending
+    on the user's carrier. If it is important that the number is valid, then
+    its validity must first be checked using is_valid_short_number or
+    is_valid_short_number_for_region.
 
     Arguments:
     numobj -- the valid short number to check
@@ -400,6 +402,28 @@ def is_carrier_specific(numobj):
     return (metadata is not None and
             _matches_possible_number_and_national_number(national_number, metadata.carrier_specific))
 
+def is_carrier_specific_for_region(numobj, region_dialing_from):
+    """Given a valid short number, determines whether it is carrier-specific when
+    dialed from the given region (however, nothing is implied about its
+    validity). Carrier-specific numbers may connect to a different end-point,
+    or not connect at all, depending on the user's carrier. If it is important
+    that the number is valid, then its validity must first be checked using
+    isValidShortNumber or isValidShortNumberForRegion. Returns false if the
+    number doesn't match the region provided.
+
+    Arguments:
+    numobj -- the valid short number to check
+    region_dialing_from -- the region from which the number is dialed
+
+    Returns whether the short number is carrier-specific (assuming the input
+    was a valid short number).
+    """
+    if not _region_dialing_from_matches_number(numobj, region_dialing_from):
+        return False
+    national_number = national_significant_number(numobj)
+    metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
+    return (metadata is not None and
+            _matches_possible_number_and_national_number(national_number, metadata.carrier_specific))
 
 # TODO: Once we have benchmarked ShortNumberInfo, consider if it is worth
 # keeping this performance optimization.

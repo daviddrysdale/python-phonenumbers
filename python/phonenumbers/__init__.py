@@ -131,7 +131,8 @@ from .shortnumberinfo import (ShortNumberCost,
                               expected_cost,
                               connects_to_emergency_number,
                               is_emergency_number,
-                              is_carrier_specific)
+                              is_carrier_specific,
+                              is_carrier_specific_for_region)
 from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 
 
@@ -198,6 +199,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'connects_to_emergency_number',
            'is_emergency_number',
            'is_carrier_specific',
+           'is_carrier_specific_for_region',
            # end of items from shortnumberinfo.py
            'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency',
            ]

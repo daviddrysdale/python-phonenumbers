@@ -70,6 +70,20 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         # Python version extra test: shared country code (44 => GB+GG) but not valid in either
         self.assertFalse(is_valid_short_number(PhoneNumber(country_code=44, national_number=58001)))
 
+    def testIsCarrierSpecific(self):
+        carrierSpecificNumber = PhoneNumber(country_code=1, national_number=33669);
+        self.assertTrue(shortnumberinfo.is_carrier_specific(carrierSpecificNumber));
+        self.assertTrue(shortnumberinfo.is_carrier_specific_for_region(_parse("33669", "US"), "US"))
+
+        notCarrierSpecificNumber = PhoneNumber(country_code=1, national_number=911)
+        self.assertFalse(shortnumberinfo.is_carrier_specific(notCarrierSpecificNumber))
+        self.assertFalse(shortnumberinfo.is_carrier_specific_for_region(_parse("911", "US"), "US"))
+
+        carrierSpecificNumberForSomeRegion = PhoneNumber(country_code=1, national_number=211)
+        self.assertTrue(shortnumberinfo.is_carrier_specific(carrierSpecificNumberForSomeRegion))
+        self.assertTrue(shortnumberinfo.is_carrier_specific_for_region(carrierSpecificNumberForSomeRegion, "US"))
+        self.assertFalse(shortnumberinfo.is_carrier_specific_for_region(carrierSpecificNumberForSomeRegion, "BB"))
+
     def testGetExpectedCost(self):
         premiumRateExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE)
         self.assertEqual(ShortNumberCost.PREMIUM_RATE, expected_cost_for_region(_parse(premiumRateExample, "FR"), "FR"))
