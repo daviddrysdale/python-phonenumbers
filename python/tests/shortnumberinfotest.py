@@ -83,6 +83,8 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertTrue(shortnumberinfo.is_carrier_specific(carrierSpecificNumberForSomeRegion))
         self.assertTrue(shortnumberinfo.is_carrier_specific_for_region(carrierSpecificNumberForSomeRegion, "US"))
         self.assertFalse(shortnumberinfo.is_carrier_specific_for_region(carrierSpecificNumberForSomeRegion, "BB"))
+        # Python version extra test: check invalid region code
+        self.assertFalse(shortnumberinfo.is_carrier_specific_for_region(carrierSpecificNumberForSomeRegion, "XY"))
 
     def testGetExpectedCost(self):
         premiumRateExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE)
