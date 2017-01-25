@@ -1,4 +1,17 @@
 
+What's new in 8.1.0
+-------------------
+
+Merge to
+[upstream commit c210dbca4e93](https://github.com/googlei18n/libphonenumber/commit/c210dbca4e93);
+relevant code changes:
+
+  - Introduced new `is_carrier_specific_for_region` API in `shortnumberinfo`.
+    This determines whether the provided short code is carrier-specific or
+    not when dialed from the given region.
+
+
+
 What's new in 8.0.0
 -------------------
 
