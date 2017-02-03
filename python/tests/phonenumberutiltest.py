@@ -368,7 +368,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         inputNumber = "03*4-56&+1a#234"
         expectedOutput = "03*456+1#234"
         self.assertEqual(expectedOutput,
-                         phonenumberutil._normalize_diallable_chars_only(inputNumber),
+                         phonenumberutil.normalize_diallable_chars_only(inputNumber),
                          msg="Conversion did not correctly remove non-diallable characters")
 
     def testFormatUSNumber(self):

@@ -600,7 +600,7 @@ def normalize_digits_only(number, keep_non_digits=False):
     return normalized_digits
 
 
-def _normalize_diallable_chars_only(number):
+def normalize_diallable_chars_only(number):
     """Normalizes a string of characters representing a phone number.
 
     This strips all characters which are not diallable on a mobile phone
@@ -1136,7 +1136,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
     if with_formatting:
         return formatted_number
     else:
-        return _normalize_diallable_chars_only(formatted_number)
+        return normalize_diallable_chars_only(formatted_number)
 
 
 def format_out_of_country_calling_number(numobj, region_calling_from):
@@ -1257,8 +1257,8 @@ def format_in_original_format(numobj, region_calling_from):
     # we return the formatted phone number; otherwise we return the raw input
     # the user entered.
     if (formatted_number is not None and num_raw_input):
-        normalized_formatted_number = _normalize_diallable_chars_only(formatted_number)
-        normalized_raw_input = _normalize_diallable_chars_only(num_raw_input)
+        normalized_formatted_number = normalize_diallable_chars_only(formatted_number)
+        normalized_raw_input = normalize_diallable_chars_only(num_raw_input)
         if normalized_formatted_number != normalized_raw_input:
             formatted_number = num_raw_input
     return formatted_number
