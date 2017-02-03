@@ -13,7 +13,7 @@ PHONE_METADATA_BY = PhoneMetadata(id='BY', country_code=375, international_prefi
     pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(),
     voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='8(?:[013]|[12]0)\\d{8}|800\\d{3,7}|902\\d{7}', possible_number_pattern='\\d{5,11}', example_number='82012345678', possible_length=(6, 7, 8, 9, 10, 11)),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='8(?:0[13]|10|20\\d)\\d{7}|800\\d{3,7}|902\\d{7}', possible_number_pattern='\\d{5,11}', example_number='82012345678', possible_length=(6, 7, 8, 9, 10, 11)),
     preferred_international_prefix='8~10',
     national_prefix='8',
     national_prefix_for_parsing='8?0?',

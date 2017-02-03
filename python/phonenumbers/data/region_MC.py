@@ -13,7 +13,7 @@ PHONE_METADATA_MC = PhoneMetadata(id='MC', country_code=377, international_prefi
     pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(),
     voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='8\\d{7}', possible_number_pattern='\\d{8}', example_number='81234567', possible_length=(8,)),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='870\\d{5}', possible_number_pattern='\\d{8}', example_number='87012345', possible_length=(8,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[39]'], national_prefix_formatting_rule='\\1'),

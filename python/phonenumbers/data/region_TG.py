@@ -14,4 +14,4 @@ PHONE_METADATA_TG = PhoneMetadata(id='TG', country_code=228, international_prefi
     uan=PhoneNumberDesc(),
     voicemail=PhoneNumberDesc(),
     no_international_dialling=PhoneNumberDesc(),
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4')])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[29]'])])
