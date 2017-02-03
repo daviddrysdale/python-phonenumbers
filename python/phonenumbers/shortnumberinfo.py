@@ -384,7 +384,7 @@ def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
 def is_carrier_specific(numobj):
     """Given a valid short number, determines whether it is carrier-specific
     (however, nothing is implied about its validity).  Carrier-specific numbers
-    may connect to a different end-point, or  not connect at all, depending
+    may connect to a different end-point, or not connect at all, depending
     on the user's carrier. If it is important that the number is valid, then
     its validity must first be checked using is_valid_short_number or
     is_valid_short_number_for_region.

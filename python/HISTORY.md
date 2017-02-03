@@ -1,4 +1,15 @@
 
+What's new in 8.2.0
+-------------------
+
+Merge to
+[upstream commit 3b16d6b06497](https://github.com/googlei18n/libphonenumber/commit/3b16d6b06497);
+relevant code changes:
+
+ - Exported `normalize_diallable_chars_only`. This method is already public in the C++
+   implementation. It has also now been added to the Javascript implementation.
+
+
 What's new in 8.1.0
 -------------------
 
