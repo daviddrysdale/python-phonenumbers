@@ -448,9 +448,22 @@ class MatchType(object):
 
 class ValidationResult(object):
     """Possible outcomes when testing if a PhoneNumber is a possible number."""
+    # The number length matches that of valid numbers for this region.
     IS_POSSIBLE = 0
+    # The number length matches that of local numbers for this region only
+    # (i.e. numbers that may be able to be dialled within an area, but do not
+    # have all the information to be dialled from anywhere inside or outside
+    # the country).
+    IS_POSSIBLE_LOCAL_ONLY = 4
+    # The number has an invalid country calling code.
     INVALID_COUNTRY_CODE = 1
+    # The number is shorter than all valid numbers for this region.
     TOO_SHORT = 2
+    # The number is longer than the shortest valid numbers for this region,
+    # shorter than the longest valid numbers for this region, and does not
+    # itself have a number length that matches valid numbers for this region.
+    INVALID_LENGTH = 5
+    # The number is longer than all valid numbers for this region.
     TOO_LONG = 3
 
 
@@ -2585,6 +2598,10 @@ def parse(number, region=None, keep_raw_input=False,
     number is actually a valid number for a particular region is not
     performed. This can be done separately with is_valid_number.
 
+    Note if any new field is added to this method that should always be filled
+    in, even when keep_raw_input is False, it should also be handled in the
+    _copy_core_fields_only() function.
+
     Arguments:
     number -- The number that we are attempting to parse. This can
               contain formatting such as +, ( and -, as well as a phone
@@ -2611,6 +2628,7 @@ def parse(number, region=None, keep_raw_input=False,
     phone number (e.g.  too few or too many digits) or if no default
     region was supplied and the number is not in international format
     (does not start with +).
+
     """
     if numobj is None:
         numobj = PhoneNumber()
@@ -2760,28 +2778,31 @@ def _build_national_number_for_parsing(number):
     return national_number
 
 
+def _copy_core_fields_only(inobj):
+    """Returns a new phone number containing only the fields needed to uniquely
+    identify a phone number, rather than any fields that capture the context in
+    which the phone number was created.
+    """
+    numobj = PhoneNumber()
+    numobj.country_code = inobj.country_code
+    numobj.national_number = inobj.national_number
+    if inobj.extension is not None and len(inobj.extension) > 0:
+        numobj.extension = inobj.extension
+    if inobj.italian_leading_zero:
+        numobj.italian_leading_zero = True
+        # This field is only relevant if there are leading zeros at all.
+        numobj.number_of_leading_zeros = inobj.number_of_leading_zeros
+        if numobj.number_of_leading_zeros is None:
+            # No number set is implicitly a count of 1; make it explicit.
+            numobj.number_of_leading_zeros = 1
+    return numobj
+
+
 def _is_number_match_OO(numobj1_in, numobj2_in):
     """Takes two phone number objects and compares them for equality."""
-    # Make copies of the phone number so that the numbers passed in are not edited.
-    numobj1 = PhoneNumber()
-    numobj1.merge_from(numobj1_in)
-    numobj2 = PhoneNumber()
-    numobj2.merge_from(numobj2_in)
-    # First clear raw_input, country_code_source and
-    # preferred_domestic_carrier_code fields and any empty-string extensions
-    # so that we can use the PhoneNumber equality method.
-    numobj1.raw_input = None
-    numobj1.country_code_source = None
-    numobj1.preferred_domestic_carrier_code = None
-    numobj2.raw_input = None
-    numobj2.country_code_source = None
-    numobj2.preferred_domestic_carrier_code = None
-    if (numobj1.extension is not None and
-        len(numobj1.extension) == 0):
-        numobj1.extension = None
-    if (numobj2.extension is not None and
-        len(numobj2.extension) == 0):
-        numobj2.extension = None
+    # We only care about the fields that uniquely define a number, so we copy these across explicitly.
+    numobj1 = _copy_core_fields_only(numobj1_in)
+    numobj2 = _copy_core_fields_only(numobj2_in)
 
     # Early exit if both had extensions and these are different.
     if (numobj1.extension is not None and

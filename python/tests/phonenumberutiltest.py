@@ -2341,16 +2341,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.is_number_match(nzNumber, NZ_NUMBER),
                          msg="Number " + str(nzNumber) + " did not match " + str(NZ_NUMBER))
 
-        # Check raw_input, country_code_source and preferred_domestic_carrier_code are ignored.
-        brNumberOne = PhoneNumber(country_code=55, national_number=3121286979,
-                                  country_code_source=CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN,
-                                  preferred_domestic_carrier_code="12", raw_input="012 3121286979")
-        brNumberTwo = PhoneNumber(country_code=55, national_number=3121286979,
-                                  country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY,
-                                  preferred_domestic_carrier_code="14", raw_input="143121286979")
-        self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
-                         phonenumbers.is_number_match(brNumberOne, brNumberTwo))
-
         # Python version extra tests
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
                          phonenumbers.is_number_match("+9991234567", "+99943211234"))
@@ -2361,6 +2351,65 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(phonenumbers.MatchType.NOT_A_NUMBER,
                          phonenumbers.is_number_match("asdfasdf", nzNumber))
         self.assertFalse(phonenumberutil._is_number_matching_desc(1234, None))
+
+    def testIsNumberMatchShortMatchIfDiffNumLeadingZeros(self):
+        nzNumberOne = PhoneNumber(country_code=64, national_number=33316005, italian_leading_zero=True)
+        nzNumberTwo = PhoneNumber(country_code=64, national_number=33316005, italian_leading_zero=True, number_of_leading_zeros=2)
+        self.assertEqual(phonenumbers.MatchType.SHORT_NSN_MATCH,
+                         phonenumbers.is_number_match(nzNumberOne, nzNumberTwo))
+
+        nzNumberOne.italian_leading_zero = False
+        nzNumberOne.number_of_leading_zeros = 1
+        nzNumberTwo.italian_leading_zero = True
+        nzNumberTwo.number_of_leading_zeros = 1
+        # Since one doesn't have the "italian_leading_zero" set to true, we ignore the number of
+        # leading zeros present (1 is in any case the default value).
+        self.assertEqual(phonenumbers.MatchType.SHORT_NSN_MATCH,
+                         phonenumbers.is_number_match(nzNumberOne, nzNumberTwo))
+
+    def testIsNumberMatchAcceptsProtoDefaultsAsMatch(self):
+        nzNumberOne = PhoneNumber(country_code=64, national_number=33316005, italian_leading_zero=True)
+        # The default for number_of_leading_zeros is 1, so it shouldn't normally be set, however if it
+        # is it should be considered equivalent.
+        nzNumberTwo = PhoneNumber(country_code=64, national_number=33316005, italian_leading_zero=True, number_of_leading_zeros=1)
+        self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
+                         phonenumbers.is_number_match(nzNumberOne, nzNumberTwo))
+
+    def testIsNumberMatchMatchesDiffLeadingZerosIfItalianLeadingZeroFalse(self):
+        nzNumberOne = PhoneNumber(country_code=64, national_number=33316005)
+        # The default for number_of_leading_zeros is 1, so it shouldn't normally be set, however if it
+        # is it should be considered equivalent.
+        nzNumberTwo = PhoneNumber(country_code=64, national_number=33316005, number_of_leading_zeros=1)
+        self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
+                         phonenumbers.is_number_match(nzNumberOne, nzNumberTwo))
+
+        # Even if it is set to ten, it is still equivalent because in both cases
+        # italian_leading_zero is not true.
+        nzNumberTwo.number_of_leading_zeros = 10
+        self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
+                         phonenumbers.is_number_match(nzNumberOne, nzNumberTwo))
+
+    def testIsNumberMatchIgnoresSomeFields(self):
+        # Check raw_input, country_code_source and preferred_domestic_carrier_code are ignored.
+        brNumberOne = PhoneNumber(country_code=55, national_number=3121286979,
+                                  country_code_source=CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN,
+                                  preferred_domestic_carrier_code=12, raw_input="012 3121286979")
+        brNumberTwo = PhoneNumber(country_code=55, national_number=3121286979,
+                                  country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY,
+                                  preferred_domestic_carrier_code=14, raw_input="143121286979")
+        self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
+                         phonenumbers.is_number_match(brNumberOne, brNumberTwo))
+
+    def testIsNumberMatchIgnoresSomeFields(self):
+        # Check raw_input, country_code_source and preferred_domestic_carrier_code are ignored.
+        brNumberOne = PhoneNumber(country_code=55, national_number=3121286979,
+                                  country_code_source=CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN,
+                                  preferred_domestic_carrier_code="12", raw_input="012 3121286979")
+        brNumberTwo = PhoneNumber(country_code=55, national_number=3121286979,
+                                  country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY,
+                                  preferred_domestic_carrier_code="14", raw_input="143121286979")
+        self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
+                         phonenumbers.is_number_match(brNumberOne, brNumberTwo))
 
     def testIsNumberMatchNonMatches(self):
         # Non-matches.
