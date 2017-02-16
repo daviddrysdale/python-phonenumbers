@@ -402,6 +402,7 @@ def is_carrier_specific(numobj):
     return (metadata is not None and
             _matches_possible_number_and_national_number(national_number, metadata.carrier_specific))
 
+
 def is_carrier_specific_for_region(numobj, region_dialing_from):
     """Given a valid short number, determines whether it is carrier-specific when
     dialed from the given region (however, nothing is implied about its
@@ -424,6 +425,7 @@ def is_carrier_specific_for_region(numobj, region_dialing_from):
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     return (metadata is not None and
             _matches_possible_number_and_national_number(national_number, metadata.carrier_specific))
+
 
 # TODO: Once we have benchmarked ShortNumberInfo, consider if it is worth
 # keeping this performance optimization.

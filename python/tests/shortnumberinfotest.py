@@ -71,8 +71,8 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertFalse(is_valid_short_number(PhoneNumber(country_code=44, national_number=58001)))
 
     def testIsCarrierSpecific(self):
-        carrierSpecificNumber = PhoneNumber(country_code=1, national_number=33669);
-        self.assertTrue(shortnumberinfo.is_carrier_specific(carrierSpecificNumber));
+        carrierSpecificNumber = PhoneNumber(country_code=1, national_number=33669)
+        self.assertTrue(shortnumberinfo.is_carrier_specific(carrierSpecificNumber))
         self.assertTrue(shortnumberinfo.is_carrier_specific_for_region(_parse("33669", "US"), "US"))
 
         notCarrierSpecificNumber = PhoneNumber(country_code=1, national_number=911)
