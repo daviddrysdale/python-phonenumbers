@@ -1,4 +1,25 @@
 
+What's new in 8.3.0
+-------------------
+
+Merge to
+[upstream commit ad297a10ba19](https://github.com/googlei18n/libphonenumber/commit/ad297a10ba19);
+relevant code changes:
+
+ - Added two new enum values to `ValidationResult` - `IS_POSSIBLE_LOCAL_ONLY` and
+   `INVALID_LENGTH`. Added more documentation to the existing values; see the
+   docstrings for when these are going to be used. Note that the API for
+   `is_possible_number_with_reason` has not yet been changed to return these values.
+   `IS_POSSIBLE_LOCAL_ONLY` will be returned for some values which currently
+   return `IS_POSSIBLE`, and `INVALID_LENGTH` will be returned for some values which
+   currently return `TOO_LONG`.
+ - Fix for `is_number_match` to ignore the `number_of_leading_zeros` field when comparing
+   numbers unless `italian_leading_zero` is `True`, and to consider default values
+   to match the same value when explicitly set for these two fields. This fix
+   shouldn't be needed for anyone correctly creating phone numbers using "parse"
+   as recommended.
+
+
 What's new in 8.2.0
 -------------------
 
