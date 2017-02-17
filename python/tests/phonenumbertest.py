@@ -119,6 +119,17 @@ class PhoneNumberTest(unittest.TestCase):
         self.assertNotEqual(numberA, "+16502530000")
         self.assertNotEqual(numberA, to_long(6502530000))
 
+    def testMergeFrom(self):
+        # Python version extra test
+        full_number = PhoneNumber(country_code=44, national_number=7912345678, extension=123,
+                                  italian_leading_zero=True, number_of_leading_zeros=3,
+                                  raw_input="+440007912345678 ext 123",
+                                  country_code_source=CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN,
+                                  preferred_domestic_carrier_code="7912")
+        other = PhoneNumber()
+        other.merge_from(full_number)
+        self.assertEqual(other, full_number)
+
     def testFrozenPhoneNumber(self):
         # Python version extra tests
         gb_mobile = PhoneNumber(country_code=44, national_number=7912345678)
