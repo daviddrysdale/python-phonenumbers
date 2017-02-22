@@ -1501,7 +1501,8 @@ def national_significant_number(numobj):
         num_zeros = numobj.number_of_leading_zeros
         if num_zeros is None:
             num_zeros = 1
-        national_number = U_ZERO * num_zeros
+        if num_zeros > 0:
+            national_number = U_ZERO * num_zeros
     national_number += str(numobj.national_number)
     return national_number
 

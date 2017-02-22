@@ -278,6 +278,14 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         self.assertEqual("12345678", phonenumbers.national_significant_number(INTERNATIONAL_TOLL_FREE))
 
+    def testGetNationalSignificantNumber_ManyLeadingZeros(self):
+        number = PhoneNumber(country_code=1, national_number=650, italian_leading_zero=True, number_of_leading_zeros=2)
+        self.assertEqual("00650", phonenumbers.national_significant_number(number))
+
+        # Set a bad value; we shouldn't crash, we shouldn't output any leading zeros at all.
+        number.number_of_leading_zeros = -3
+        self.assertEqual("650", phonenumbers.national_significant_number(number))
+
     def testGetExampleNumber(self):
         self.assertEqual(DE_NUMBER, phonenumbers.example_number("DE"))
         self.assertEqual(DE_NUMBER,
