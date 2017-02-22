@@ -22,4 +22,4 @@ TIMEZONE_DATA = {}
 from .data0 import data
 TIMEZONE_DATA.update(data)
 del data
-TIMEZONE_LONGEST_PREFIX = 7
+TIMEZONE_LONGEST_PREFIX = 8
