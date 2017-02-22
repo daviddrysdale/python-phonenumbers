@@ -1,3 +1,14 @@
+What's new in 8.3.1
+-------------------
+
+Merge to
+[upstream commit 5507fdbf623f](https://github.com/googlei18n/libphonenumber/commit/5507fdbf623f);
+relevant code changes:
+
+ - Making `national_significant_number` more robust in the face of malicious
+   input. This now ignores the `number_of_leading_zeros` if they are less than
+   zero.
+
 
 What's new in 8.3.0
 -------------------
