@@ -72,8 +72,33 @@ except ImportError:  # pragma no cover
 __all__ = ['country_name_for_number', 'description_for_valid_number', 'description_for_number']
 
 
+def country_code_for_number(numobj):
+    """Returns the ISO-3166-1 country code for the given territory the given
+    PhoneNumber object is from.  If it could be from many territories, nothing
+    is returned.
+
+    Arguments:
+    numobj -- The PhoneNumber object for which we want to get a text description.
+
+    Returns an ISO-3166-1 country code indicating the given phone number's
+    region, or an empty string if no such code is available."""
+    region_codes = region_codes_for_country_code(numobj.country_code)
+    if len(region_codes) == 1:
+        return region_codes[0]
+    else:
+        region_where_number_is_valid = u("ZZ")
+        for region_code in region_codes:
+            if is_valid_number_for_region(numobj, region_code):
+                if region_where_number_is_valid != u("ZZ"):
+                    # If we can't assign the phone number as definitely belonging
+                    # to only one territory, then we return nothing.
+                    return U_EMPTY_STRING
+                region_where_number_is_valid = region_code
+        return region_where_number_is_valid
+
+
 def country_name_for_number(numobj, lang, script=None, region=None):
-    """Returns the customary display name in the given langauge for the given
+    """Returns the customary display name in the given language for the given
     territory the given PhoneNumber object is from.  If it could be from many
     territories, nothing is returned.
 
@@ -90,19 +115,10 @@ def country_name_for_number(numobj, lang, script=None, region=None):
 
     Returns a text description in the given language code, for the given phone
     number's region, or an empty string if no description is available."""
-    region_codes = region_codes_for_country_code(numobj.country_code)
-    if len(region_codes) == 1:
-        return _region_display_name(region_codes[0], lang, script, region)
-    else:
-        region_where_number_is_valid = u("ZZ")
-        for region_code in region_codes:
-            if is_valid_number_for_region(numobj, region_code):
-                if region_where_number_is_valid != u("ZZ"):
-                    # If we can't assign the phone number as definitely belonging
-                    # to only one territory, then we return nothing.
-                    return U_EMPTY_STRING
-                region_where_number_is_valid = region_code
-        return _region_display_name(region_where_number_is_valid, lang, script, region)
+    region_code = country_code_for_number(numobj)
+    if region_code == U_EMPTY_STRING:
+        return U_EMPTY_STRING
+    return _region_display_name(region_code, lang, script, region)
 
 
 def _region_display_name(region_code, lang, script=None, region=None):
