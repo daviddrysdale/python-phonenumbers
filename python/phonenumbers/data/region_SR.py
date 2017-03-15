@@ -9,11 +9,11 @@ PHONE_METADATA_SR = PhoneMetadata(id='SR', country_code=597, international_prefi
     premium_rate=PhoneNumberDesc(),
     shared_cost=PhoneNumberDesc(),
     personal_number=PhoneNumberDesc(),
-    voip=PhoneNumberDesc(national_number_pattern='5(?:6\\d{4}|90[0-4]\\d{3})', possible_number_pattern='\\d{6,7}', example_number='561234', possible_length=(6, 7)),
+    voip=PhoneNumberDesc(national_number_pattern='56\\d{4}', possible_number_pattern='\\d{6,7}', example_number='561234', possible_length=(6,)),
     pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(),
     voicemail=PhoneNumberDesc(),
     no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})', format='\\1-\\2', leading_digits_pattern=['[2-4]|5[2-58]']),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})', format='\\1-\\2-\\3', leading_digits_pattern=['56']),
-        NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['59|[6-8]'])])
+        NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['[6-8]'])])
