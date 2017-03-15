@@ -1,3 +1,19 @@
+What's new in 8.3.3
+-------------------
+
+Merge to
+[upstream commit 46a38545ba01](https://github.com/googlei18n/libphonenumber/commit/46a38545ba01);
+relevant code changes:
+
+ - Doc fix for `geocoder.py` to explain the cases where an empty string might be returned.
+
+
+What's new in 8.3.2
+-------------------
+
+Metadata changes only.
+
+
 What's new in 8.3.1
 -------------------
 
