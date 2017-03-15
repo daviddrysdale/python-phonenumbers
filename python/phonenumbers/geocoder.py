@@ -97,9 +97,10 @@ def country_name_for_number(numobj, lang, script=None, region=None):
         region_where_number_is_valid = u("ZZ")
         for region_code in region_codes:
             if is_valid_number_for_region(numobj, region_code):
+                # If the number has already been found valid for one region,
+                # then we don't know which region it belongs to so we return
+                # nothing.
                 if region_where_number_is_valid != u("ZZ"):
-                    # If we can't assign the phone number as definitely belonging
-                    # to only one territory, then we return nothing.
                     return U_EMPTY_STRING
                 region_where_number_is_valid = region_code
         return _region_display_name(region_where_number_is_valid, lang, script, region)
@@ -151,11 +152,12 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
                   underscore (e.g. "Hant")
     region -- The region code for a given user. This region will be omitted
                   from the description if the phone number comes from this
-                  region. It is a two-letter uppercase ISO country code as
-                  defined by ISO 3166-1.
+                  region. It should be a two-letter uppercase ISO country
+                  code as defined by ISO 3166-1.
 
     Returns a text description in the given language code, for the given phone
-    number, or an empty string if no description is available."""
+    number, or an empty string if the number could come from multiple countries,
+    or the country code is in fact invalid."""
     number_region = region_code_for_number(numobj)
     if region is None or region == number_region:
         mobile_token = country_mobile_token(numobj.country_code)
