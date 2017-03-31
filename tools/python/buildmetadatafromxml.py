@@ -339,7 +339,7 @@ class XPhoneNumberDesc(UnicodeMixin):
         # A possibleNumberPattern element is optional, except for the general_desc
         self.o.possible_number_pattern = _dews_re(_get_unique_child_value(xtag, 'possibleNumberPattern'))
         if self.o.possible_number_pattern is None:
-            if general_desc:
+            if general_desc and not lax:
                 raise Exception("Missing required possibleNumberPattern element for generalDesc in %s.%s" % (id, tag))
             if template is not None:
                 self.o.possible_number_pattern = template.possible_number_pattern
