@@ -1,3 +1,25 @@
+What's new in 8.4.0
+-------------------
+
+Merge to
+[upstream commit 77affd08f65f](https://github.com/googlei18n/libphonenumber/commit/77affd08f65f);
+relevant code changes:
+
+ - Doc changes to update references to ISO country codes to CLDR region codes,
+   which are what we actually use. Notice in some of the mapper files the
+   country code is still the ISO one, because it's used as part of a description
+   of a language only (e.g. zh-TW vs zh-CN). Edited the language comments there
+   since they can be two *or* three letters (c.f. fil for filipino). Also edited
+   the comment for leadingDigits at the territory level in the
+   `phonemetadata.proto` file.
+ - New API methods: `is_possible_number_for_type` and
+   `is_possible_number_for_type_with_reason`, along with `supported_types_for_region` and
+   `supported_types_for_non_geo_entity`. These allow you to query which types (e.g.
+   Mobile) exist for a particular region, and work out if a number is possible
+   for that type (this is a simple length check) rather than for the region as a
+   whole.
+
+
 What's new in 8.3.3
 -------------------
 
