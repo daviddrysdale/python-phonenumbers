@@ -96,6 +96,29 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             self.assertTrue(callingCode > 0)
             self.assertEqual("001", region_code_for_country_code(callingCode))
 
+    def testGetSupportedTypesForRegion(self):
+        self.assertTrue(PhoneNumberType.FIXED_LINE in phonenumbers.supported_types_for_region("BR"))
+        # Our test data has no mobile numbers for Brazil.
+        self.assertFalse(PhoneNumberType.MOBILE in phonenumbers.supported_types_for_region("BR"))
+        # UNKNOWN should never be returned.
+        self.assertFalse(PhoneNumberType.UNKNOWN in phonenumbers.supported_types_for_region("BR"))
+        # In the US, many numbers are classified as FIXED_LINE_OR_MOBILE; but we don't want to expose
+        # this as a supported type, instead we say FIXED_LINE and MOBILE are both present.
+        self.assertTrue(PhoneNumberType.FIXED_LINE in phonenumbers.supported_types_for_region("US"))
+        self.assertTrue(PhoneNumberType.MOBILE in phonenumbers.supported_types_for_region("US"))
+        self.assertFalse(PhoneNumberType.FIXED_LINE_OR_MOBILE in phonenumbers.supported_types_for_region("US"))
+
+        # Test the invalid region code.
+        self.assertEqual(0, len(phonenumbers.supported_types_for_region("ZZ")))
+
+    def testGetSupportedTypesForNonGeoEntity(self):
+        # No data exists for 999 at all, no types should be returned.
+        self.assertEqual(0, len(phonenumbers.supported_types_for_non_geo_entity(999)))
+        typesFor979 = phonenumbers.supported_types_for_non_geo_entity(979)
+        self.assertTrue(PhoneNumberType.PREMIUM_RATE in typesFor979)
+        self.assertFalse(PhoneNumberType.MOBILE in typesFor979)
+        self.assertFalse(PhoneNumberType.UNKNOWN in typesFor979)
+
     def testGetInstanceLoadUSMetadata(self):
         metadata = PhoneMetadata.metadata_for_region("US")
         self.assertEqual("US", metadata.id)
@@ -288,12 +311,15 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
     def testGetExampleNumber(self):
         self.assertEqual(DE_NUMBER, phonenumbers.example_number("DE"))
+
+        self.assertEqual(DE_NUMBER, phonenumbers.example_number_for_type("DE", PhoneNumberType.FIXED_LINE))
+        # Should return the same response if asked for FIXED_LINE_OR_MOBILE too.
         self.assertEqual(DE_NUMBER,
-                         phonenumbers.example_number_for_type("DE", PhoneNumberType.FIXED_LINE))
-        self.assertEqual(None,
-                         phonenumbers.example_number_for_type("DE", PhoneNumberType.MOBILE))
+                         phonenumbers.example_number_for_type("DE", PhoneNumberType.FIXED_LINE_OR_MOBILE))
         self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.FIXED_LINE) is not None)
         self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.MOBILE) is not None)
+        # We have data for the US, but no data for VOICEMAIL, so return null.
+        self.assertTrue(phonenumbers.example_number_for_type("US", PhoneNumberType.VOICEMAIL) is None)
         # CS is an invalid region, so we have no data for it.
         self.assertTrue(phonenumbers.example_number_for_type("CS", PhoneNumberType.MOBILE) is None)
         # Python version extra test
@@ -1274,6 +1300,81 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue(phonenumbers.is_possible_number_string("3331 6005", "NZ"))
         self.assertTrue(phonenumbers.is_possible_number_string("+800 1234 5678", "001"))
 
+    def testIsPossibleNumberForType_DifferentTypeLengths(self):
+        # We use Argentinian numbers since they have different possible lengths for different types.
+        number = PhoneNumber(country_code=54, national_number=12345)
+        # Too short for any Argentinian number, including fixed-line.
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.UNKNOWN))
+
+        # 6-digit numbers are okay for fixed-line.
+        number.national_number = 123456
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.UNKNOWN))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+        # But too short for mobile.
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.MOBILE))
+        # And too short for toll-free.
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.TOLL_FREE))
+
+        # The same applies to 9-digit numbers.
+        number.national_number = 123456789
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.UNKNOWN))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.MOBILE))
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.TOLL_FREE))
+
+        # 10-digit numbers are universally possible.
+        number.national_number = 1234567890
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.UNKNOWN))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.MOBILE))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.TOLL_FREE))
+
+        # 11-digit numbers are only possible for mobile numbers. Note we don't require the leading 9,
+        # which all mobile numbers start with, and would be required for a valid mobile number.
+        number.national_number = 12345678901
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.UNKNOWN))
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.MOBILE))
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.TOLL_FREE))
+
+    def testIsPossibleNumberForType_LocalOnly(self):
+        # Here we test a number length which matches a local-only length.
+        number = PhoneNumber(country_code=49, national_number=12)
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.UNKNOWN))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+        # Mobile numbers must be 10 or 11 digits, and there are no local-only lengths.
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.MOBILE))
+
+    def testIsPossibleNumberForType_DataMissingForSizeReasons(self):
+        # Here we test something where the possible lengths match the possible lengths of the country
+        # as a whole, and hence aren't present in the binary for size reasons - this should still work.
+        # Local-only number.
+        number = PhoneNumber(country_code=55, national_number=12345678)
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.UNKNOWN))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+
+        number.national_number = 1234567890
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.UNKNOWN))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+
+    def testIsPossibleNumberForType_NumberTypeNotSupportedForRegion(self):
+        # There are *no* mobile numbers for this region at all, so we return false.
+        number = PhoneNumber(country_code=55, national_number=12345678)
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.MOBILE))
+        # This matches a fixed-line length though.
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+
+        # There are *no* fixed-line OR mobile numbers for this country calling code at all, so we
+        # return false for these.
+        number.country_code = 979
+        number.national_number = 123456789
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.MOBILE))
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE))
+        self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+        self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.PREMIUM_RATE))
+
     def testIsPossibleNumberWithReason(self):
         # National numbers for country calling code +1 that are within 7 to 10 digits are possible.
         self.assertEqual(ValidationResult.IS_POSSIBLE,
@@ -1303,6 +1404,175 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         self.assertEqual(ValidationResult.TOO_LONG,
                          phonenumbers.is_possible_number_with_reason(INTERNATIONAL_TOLL_FREE_TOO_LONG))
+
+    def testIsPossibleNumberForTypeWithReason_DifferentTypeLengths(self):
+        # We use Argentinian numbers since they have different possible lengths for different types.
+        number = PhoneNumber(country_code=54, national_number=12345)
+        # Too short for any Argentinian number.
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+
+        # 6-digit numbers are okay for fixed-line.
+        number.national_number = 123456
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        # But too short for mobile.
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        # And too short for toll-free.
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.TOLL_FREE))
+
+        # The same applies to 9-digit numbers.
+        number.national_number = 123456789
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.TOLL_FREE))
+
+        # 10-digit numbers are universally possible.
+        number.national_number = 1234567890
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.TOLL_FREE))
+
+        # 11-digit numbers are only possible for mobile numbers. Note we don't require the leading 9,
+        # which all mobile numbers start with, and would be required for a valid mobile number.
+        number.national_number = 12345678901
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
+        self.assertEqual(ValidationResult.TOO_LONG,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        self.assertEqual(ValidationResult.TOO_LONG,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.TOLL_FREE))
+
+    def testIsPossibleNumberForTypeWithReason_LocalOnly(self):
+        # Here we test a number length which matches a local-only length.
+        number = PhoneNumber(country_code=49, national_number=12)
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        # Mobile numbers must be 10 or 11 digits, and there are no local-only lengths.
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+
+    def testIsPossibleNumberForTypeWithReason_DataMissingForSizeReasons(self):
+        # Here we test something where the possible lengths match the possible lengths of the country
+        # as a whole, and hence aren't present in the binary for size reasons - this should still work.
+        # Local-only number.
+        number = PhoneNumber(country_code=55, national_number=12345678)
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+
+        # Normal-length number.
+        number.national_number = 1234567890
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+
+    def testIsPossibleNumberForTypeWithReason_NumberTypeNotSupportedForRegion(self):
+        # There are *no* mobile numbers for this region at all, so we return INVALID_LENGTH.
+        number = PhoneNumber(country_code=55, national_number=12345678)
+        self.assertEqual(ValidationResult.INVALID_LENGTH,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        # This matches a fixed-line length though.
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+        # This is too short for fixed-line, and no mobile numbers exist.
+        number.country_code = 55
+        number.national_number = 1234567
+        self.assertEqual(ValidationResult.INVALID_LENGTH,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+
+        # This is too short for mobile, and no fixed-line numbers exist.
+        number.country_code = 882
+        number.national_number = 1234567
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+        self.assertEqual(ValidationResult.INVALID_LENGTH,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+
+        # There are *no* fixed-line OR mobile numbers for this country calling code at all, so we
+        # return INVALID_LENGTH.
+        number.country_code = 979
+        number.national_number = 123456789
+        self.assertEqual(ValidationResult.INVALID_LENGTH,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        self.assertEqual(ValidationResult.INVALID_LENGTH,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        self.assertEqual(ValidationResult.INVALID_LENGTH,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.PREMIUM_RATE))
+
+    def testIsPossibleNumberForTypeWithReason_FixedLineOrMobile(self):
+        # For FIXED_LINE_OR_MOBILE, a number should be considered valid if it matches the possible
+        # lengths for mobile *or* fixed-line numbers.
+        number = PhoneNumber(country_code=290, national_number=1234)
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+
+        number.national_number = 12345
+        self.assertEqual(ValidationResult.TOO_SHORT,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        self.assertEqual(ValidationResult.TOO_LONG,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        # This will change to INVALID_LENGTH once we start returning this type in the main
+        # isPossibleNumberWithReason API.
+        self.assertEqual(ValidationResult.TOO_LONG,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+
+        number.national_number = 123456
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        self.assertEqual(ValidationResult.TOO_LONG,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+
+        number.national_number = 1234567
+        self.assertEqual(ValidationResult.TOO_LONG,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
+        self.assertEqual(ValidationResult.TOO_LONG,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
+        self.assertEqual(ValidationResult.TOO_LONG,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+
+        # 8-digit numbers are possible for toll-free and premium-rate numbers only.
+        number.national_number = 12345678
+        self.assertEqual(ValidationResult.IS_POSSIBLE,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.TOLL_FREE))
+        self.assertEqual(ValidationResult.TOO_LONG,
+                         phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
 
     def testIsNotPossibleNumber(self):
         self.assertFalse(phonenumbers.is_possible_number(US_LONG_NUMBER))

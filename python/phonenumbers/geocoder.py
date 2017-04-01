@@ -152,8 +152,8 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
                   underscore (e.g. "Hant")
     region -- The region code for a given user. This region will be omitted
                   from the description if the phone number comes from this
-                  region. It should be a two-letter uppercase ISO country
-                  code as defined by ISO 3166-1.
+                  region. It should be a two-letter upper-case CLDR region
+                  code.
 
     Returns a text description in the given language code, for the given phone
     number, or an empty string if the number could come from multiple countries,
@@ -205,7 +205,10 @@ def description_for_number(numobj, lang, script=None, region=None):
     script -- A 4-letter titlecase (first letter uppercase, rest lowercase)
                   ISO script code as defined in ISO 15924, separated by an
                   underscore (e.g. "Hant")
-    region --  A 2-letter uppercase ISO 3166-1 country code (e.g. "GB")
+    region -- The region code for a given user. This region will be omitted
+                  from the description if the phone number comes from this
+                  region. It should be a two-letter upper-case CLDR region
+                  code.
 
     Returns a text description in the given language code, for the given phone
     number, or an empty string if no description is available."""
