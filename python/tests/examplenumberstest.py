@@ -131,7 +131,7 @@ class ExampleNumbersTest(unittest.TestCase):
             if metadata is not None:
                 desc = metadata.no_international_dialling
             try:
-                if desc.example_number is not None:
+                if desc is not None and desc.example_number is not None:
                     exampleNumber = phonenumberutil.parse(desc.example_number, regionCode)
 
             except NumberParseException:
@@ -206,7 +206,7 @@ class ExampleNumbersTest(unittest.TestCase):
         for regionCode in phonenumberutil.SUPPORTED_SHORT_REGIONS:
             metadata = PhoneMetadata.short_metadata_for_region(regionCode, None)
             desc = metadata.emergency
-            if desc.example_number is not None:
+            if desc is not None and desc.example_number is not None:
                 exampleNumber = desc.example_number
                 phoneNumber = phonenumberutil.parse(exampleNumber, regionCode)
                 if (not is_possible_short_number_for_region(phoneNumber, regionCode) or
@@ -224,7 +224,7 @@ class ExampleNumbersTest(unittest.TestCase):
             # Test the carrier-specific tag.
             metadata = PhoneMetadata.short_metadata_for_region(regionCode, None)
             desc = metadata.carrier_specific
-            if desc.example_number is not None:
+            if desc is not None and desc.example_number is not None:
                 exampleNumber = desc.example_number
                 carrierSpecificNumber = phonenumberutil.parse(exampleNumber, regionCode)
                 if (not fullmatch(re.compile(desc.possible_number_pattern), exampleNumber) or

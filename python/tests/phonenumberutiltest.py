@@ -116,7 +116,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(10, metadata.toll_free.possible_length[0])
         self.assertEqual("900\\d{7}", metadata.premium_rate.national_number_pattern)
         # No shared-cost data is available, so it should be initialised to None.
-        self.assertEqual(None, metadata.shared_cost.national_number_pattern)
+        self.assertEqual(None, metadata.shared_cost)
 
     def testGetInstanceLoadDEMetadata(self):
         metadata = PhoneMetadata.metadata_for_region("DE")
@@ -2781,12 +2781,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         # Temporarily insert invalid example number
         metadata800 = PhoneMetadata.metadata_for_nongeo_region(800)
-        saved_example = metadata800.mobile.example_number
-        metadata800.mobile._mutable = True
-        metadata800.mobile.example_number = ''
+        saved_mobile = metadata800.mobile
+        metadata800._mutable = True
+        metadata800.mobile = PhoneNumberDesc(example_number = '')
         self.assertTrue(phonenumbers.example_number_for_non_geo_entity(800) is not None)
-        metadata800.mobile.example_number = saved_example
-        metadata800.mobile._mutable = False
+        metadata800.mobile = saved_mobile
+        metadata800._mutable = False
 
         self.assertFalse(phonenumbers.phonenumberutil._raw_input_contains_national_prefix("07", "0", "JP"))
 

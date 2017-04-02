@@ -54,7 +54,7 @@ def _matches_national_number(national_number, number_desc, allow_prefix_match):
     """Returns whether the given national number (a string containing only decimal digits) matches
     the national number pattern defined in the given PhoneNumberDesc object.
     """
-    if number_desc.national_number_pattern is None:
+    if number_desc is None or number_desc.national_number_pattern is None:
         return False
     nnp_matcher = re.compile(number_desc.national_number_pattern)
     return (fullmatch(nnp_matcher, national_number) or
@@ -430,6 +430,8 @@ def is_carrier_specific_for_region(numobj, region_dialing_from):
 # TODO: Once we have benchmarked ShortNumberInfo, consider if it is worth
 # keeping this performance optimization.
 def _matches_possible_number_and_national_number(number, number_desc):
+    if number_desc is None:
+        return False
     if len(number_desc.possible_length) > 0 and not (len(number) in number_desc.possible_length):
         return False
     return _matches_national_number(number, number_desc, False)

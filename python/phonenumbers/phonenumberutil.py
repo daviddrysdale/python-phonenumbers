@@ -1647,7 +1647,7 @@ def invalid_example_number(region_code):
     # invalid number.
     metadata = PhoneMetadata.metadata_for_region(region_code.upper())
     desc = _number_desc_by_type(metadata, PhoneNumberType.FIXED_LINE)
-    if desc.example_number is None:
+    if desc is None or desc.example_number is None:
         # This shouldn't happen; we have a test for this.
         return None  # pragma no cover
     example_number = desc.example_number
@@ -1707,7 +1707,7 @@ def example_number_for_type(region_code, num_type):
         return None
     metadata = PhoneMetadata.metadata_for_region(region_code.upper())
     desc = _number_desc_by_type(metadata, num_type)
-    if desc.example_number is not None:
+    if desc is not None and desc.example_number is not None:
         try:
             return parse(desc.example_number, region_code)
         except NumberParseException:  # pragma no cover
@@ -1733,7 +1733,7 @@ def _example_number_anywhere_for_type(num_type):
     for country_calling_code in COUNTRY_CODES_FOR_NON_GEO_REGIONS:
         metadata = PhoneMetadata.metadata_for_nongeo_region(country_calling_code, None)
         desc = _number_desc_by_type(metadata, num_type)
-        if desc.example_number is not None:
+        if desc is not None and desc.example_number is not None:
             try:
                 return parse(_PLUS_SIGN + unicod(country_calling_code) + desc.example_number, UNKNOWN_REGION)
             except NumberParseException:  # pragma no cover
