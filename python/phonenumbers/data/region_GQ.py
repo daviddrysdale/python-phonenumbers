@@ -7,12 +7,5 @@ PHONE_METADATA_GQ = PhoneMetadata(id='GQ', country_code=240, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='(?:222|55[15])\\d{6}', example_number='222123456', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='80\\d[1-9]\\d{5}', possible_number_pattern='\\d{9}', example_number='800123456', possible_length=(9,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='90\\d[1-9]\\d{5}', possible_number_pattern='\\d{9}', example_number='900123456', possible_length=(9,)),
-    shared_cost=PhoneNumberDesc(),
-    personal_number=PhoneNumberDesc(),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
-    uan=PhoneNumberDesc(),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[235]']),
         NumberFormat(pattern='(\\d{3})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['[89]'])])

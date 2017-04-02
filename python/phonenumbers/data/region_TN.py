@@ -8,10 +8,4 @@ PHONE_METADATA_TN = PhoneMetadata(id='TN', country_code=216, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='8010\\d{4}', possible_number_pattern='\\d{8}', example_number='80101234', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='88\\d{6}', possible_number_pattern='\\d{8}', example_number='88123456', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='8[12]10\\d{4}', possible_number_pattern='\\d{8}', example_number='81101234', possible_length=(8,)),
-    personal_number=PhoneNumberDesc(),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
-    uan=PhoneNumberDesc(),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3')])

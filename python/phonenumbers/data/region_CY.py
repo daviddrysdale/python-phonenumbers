@@ -9,10 +9,6 @@ PHONE_METADATA_CY = PhoneMetadata(id='CY', country_code=357, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='90[09]\\d{5}', possible_number_pattern='\\d{8}', example_number='90012345', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='80[1-9]\\d{5}', possible_number_pattern='\\d{8}', example_number='80112345', possible_length=(8,)),
     personal_number=PhoneNumberDesc(national_number_pattern='700\\d{5}', possible_number_pattern='\\d{8}', example_number='70012345', possible_length=(8,)),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(national_number_pattern='(?:50|77)\\d{6}', possible_number_pattern='\\d{8}', example_number='77123456', possible_length=(8,)),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{6})', format='\\1 \\2')],
     mobile_number_portable_region=True)

@@ -8,10 +8,4 @@ PHONE_METADATA_GI = PhoneMetadata(id='GI', country_code=350, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='80\\d{6}', possible_number_pattern='\\d{8}', example_number='80123456', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='8[1-689]\\d{6}', possible_number_pattern='\\d{8}', example_number='88123456', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='87\\d{6}', possible_number_pattern='\\d{8}', example_number='87123456', possible_length=(8,)),
-    personal_number=PhoneNumberDesc(),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
-    uan=PhoneNumberDesc(),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['2'])])

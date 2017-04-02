@@ -7,13 +7,6 @@ PHONE_METADATA_NE = PhoneMetadata(id='NE', country_code=227, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='(?:8[089]|9\\d)\\d{6}', example_number='93123456', possible_length=(8,)),
     toll_free=PhoneNumberDesc(national_number_pattern='08\\d{6}', possible_number_pattern='\\d{8}', example_number='08123456', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='09\\d{6}', possible_number_pattern='\\d{8}', example_number='09123456', possible_length=(8,)),
-    shared_cost=PhoneNumberDesc(),
-    personal_number=PhoneNumberDesc(),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
-    uan=PhoneNumberDesc(),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[289]|09']),
         NumberFormat(pattern='(08)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['08'])],
     leading_zero_possible=True)

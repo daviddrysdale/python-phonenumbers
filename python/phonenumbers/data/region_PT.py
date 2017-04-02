@@ -10,10 +10,8 @@ PHONE_METADATA_PT = PhoneMetadata(id='PT', country_code=351, international_prefi
     shared_cost=PhoneNumberDesc(national_number_pattern='80(?:8\\d|9[1579])\\d{5}', possible_number_pattern='\\d{9}', example_number='808123456', possible_length=(9,)),
     personal_number=PhoneNumberDesc(national_number_pattern='884[0-4689]\\d{5}', possible_number_pattern='\\d{9}', example_number='884123456', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='30\\d{7}', possible_number_pattern='\\d{9}', example_number='301234567', possible_length=(9,)),
-    pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(national_number_pattern='7(?:0(?:7\\d|8[17]))\\d{5}', possible_number_pattern='\\d{9}', example_number='707123456', possible_length=(9,)),
     voicemail=PhoneNumberDesc(national_number_pattern='600\\d{6}', possible_number_pattern='\\d{9}', example_number='600110000', possible_length=(9,)),
-    no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='(2\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['2[12]']),
         NumberFormat(pattern='([2-46-9]\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['2[3-9]|[346-9]'])],
     mobile_number_portable_region=True)

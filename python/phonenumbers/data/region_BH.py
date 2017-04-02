@@ -8,11 +8,5 @@ PHONE_METADATA_BH = PhoneMetadata(id='BH', country_code=973, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='80\\d{6}', possible_number_pattern='\\d{8}', example_number='80123456', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='(?:87|9[014578])\\d{6}', possible_number_pattern='\\d{8}', example_number='90123456', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='84\\d{6}', possible_number_pattern='\\d{8}', example_number='84123456', possible_length=(8,)),
-    personal_number=PhoneNumberDesc(),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
-    uan=PhoneNumberDesc(),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2')],
     mobile_number_portable_region=True)

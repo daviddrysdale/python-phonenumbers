@@ -7,13 +7,8 @@ PHONE_METADATA_ME = PhoneMetadata(id='ME', country_code=382, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='6(?:00\\d|3[024]\\d|6[0-25]\\d|[7-9]\\d{2})\\d{4}', possible_number_pattern='\\d{8}', example_number='67622901', possible_length=(8,)),
     toll_free=PhoneNumberDesc(national_number_pattern='80[0-258]\\d{5}', possible_number_pattern='\\d{8}', example_number='80080002', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='(?:9(?:4[1568]|5[178]))\\d{5}', possible_number_pattern='\\d{8}', example_number='94515151', possible_length=(8,)),
-    shared_cost=PhoneNumberDesc(),
-    personal_number=PhoneNumberDesc(),
     voip=PhoneNumberDesc(national_number_pattern='78[1-49]\\d{5}', possible_number_pattern='\\d{8}', example_number='78108780', possible_length=(8,)),
-    pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(national_number_pattern='77[1-9]\\d{5}', possible_number_pattern='\\d{8}', example_number='77273012', possible_length=(8,)),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-57-9]|6[036-9]'], national_prefix_formatting_rule='0\\1')])

@@ -7,13 +7,6 @@ PHONE_METADATA_PA = PhoneMetadata(id='PA', country_code=507, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='(?:1[16]1|21[89]|8(?:1[01]|7[23]))\\d{4}|6(?:[024-9]\\d|1[0-5]|3[0-24-9])\\d{5}', example_number='60012345', possible_length=(7, 8)),
     toll_free=PhoneNumberDesc(national_number_pattern='80[09]\\d{4}', possible_number_pattern='\\d{7}', example_number='8001234', possible_length=(7,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='(?:779|8(?:55|60|7[78])|9(?:00|81))\\d{4}', possible_number_pattern='\\d{7}', example_number='8601234', possible_length=(7,)),
-    shared_cost=PhoneNumberDesc(),
-    personal_number=PhoneNumberDesc(),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
-    uan=PhoneNumberDesc(),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['[1-57-9]']),
         NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['6'])],
     mobile_number_portable_region=True)

@@ -7,6 +7,5 @@ PHONE_METADATA_IS = PhoneMetadata(id='IS', country_code=None, international_pref
     premium_rate=PhoneNumberDesc(national_number_pattern='1848', possible_number_pattern='\\d{4}', example_number='1848', possible_length=(4,)),
     emergency=PhoneNumberDesc(national_number_pattern='112', possible_number_pattern='\\d{3,6}', example_number='112', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='1(?:1(?:[28]|6(?:1(?:23|16)))|4(?:00|1[145]|4[0146])|55|7(?:00|17|7[07-9])|8(?:0[08]|1[016-9]|20|48|8[018])|900)', possible_number_pattern='\\d{3,6}', example_number='112', possible_length=(3, 4, 6)),
-    standard_rate=PhoneNumberDesc(),
     carrier_specific=PhoneNumberDesc(national_number_pattern='1441', possible_number_pattern='\\d{4}', example_number='1441', possible_length=(4,)),
     short_data=True)

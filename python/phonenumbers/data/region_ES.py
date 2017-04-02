@@ -9,11 +9,7 @@ PHONE_METADATA_ES = PhoneMetadata(id='ES', country_code=34, international_prefix
     premium_rate=PhoneNumberDesc(national_number_pattern='80[367]\\d{6}', possible_number_pattern='\\d{9}', example_number='803123456', possible_length=(9,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='90[12]\\d{6}', possible_number_pattern='\\d{9}', example_number='901123456', possible_length=(9,)),
     personal_number=PhoneNumberDesc(national_number_pattern='70\\d{7}', possible_number_pattern='\\d{9}', example_number='701234567', possible_length=(9,)),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
     uan=PhoneNumberDesc(national_number_pattern='51\\d{7}', possible_number_pattern='\\d{9}', example_number='511234567', possible_length=(9,)),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     number_format=[NumberFormat(pattern='([89]00)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[89]00']),
         NumberFormat(pattern='([5-9]\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[568]|[79][0-8]'])],
     mobile_number_portable_region=True)

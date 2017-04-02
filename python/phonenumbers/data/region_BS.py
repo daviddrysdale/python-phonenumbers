@@ -7,13 +7,7 @@ PHONE_METADATA_BS = PhoneMetadata(id='BS', country_code=1, international_prefix=
     mobile=PhoneNumberDesc(national_number_pattern='242(?:3(?:5[79]|[79]5)|4(?:[2-4][1-9]|5[1-8]|6[2-8]|7\\d|81)|5(?:2[45]|3[35]|44|5[1-9]|65|77)|6[34]6|7(?:27|38)|8(?:0[1-9]|1[02-9]|2\\d|99))\\d{4}', example_number='2423591234', possible_length=(10,), possible_length_local_only=(7,)),
     toll_free=PhoneNumberDesc(national_number_pattern='242300\\d{4}|8(?:00|33|44|55|66|77|88)[2-9]\\d{6}', possible_number_pattern='\\d{7}(?:\\d{3})?', example_number='8002123456', possible_length=(10,), possible_length_local_only=(7,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='9002123456', possible_length=(10,)),
-    shared_cost=PhoneNumberDesc(),
     personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|22|33|44|66|77|88)[2-9]\\d{6}', possible_number_pattern='\\d{10}', example_number='5002345678', possible_length=(10,)),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
-    uan=PhoneNumberDesc(),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc(),
     national_prefix='1',
     national_prefix_for_parsing='1',
     leading_digits='242')

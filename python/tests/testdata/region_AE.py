@@ -3,14 +3,4 @@ from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetad
 
 PHONE_METADATA_AE = PhoneMetadata(id='AE', country_code=971, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{8}', possible_number_pattern='\\d{9}', possible_length=(9,)),
-    fixed_line=PhoneNumberDesc(),
-    mobile=PhoneNumberDesc(),
-    toll_free=PhoneNumberDesc(),
-    premium_rate=PhoneNumberDesc(),
-    shared_cost=PhoneNumberDesc(),
-    personal_number=PhoneNumberDesc(),
-    voip=PhoneNumberDesc(),
-    pager=PhoneNumberDesc(),
-    uan=PhoneNumberDesc(national_number_pattern='600\\d{6}', possible_number_pattern='\\d{9}', example_number='600123456', possible_length=(9,)),
-    voicemail=PhoneNumberDesc(),
-    no_international_dialling=PhoneNumberDesc())
+    uan=PhoneNumberDesc(national_number_pattern='600\\d{6}', possible_number_pattern='\\d{9}', example_number='600123456', possible_length=(9,)))
