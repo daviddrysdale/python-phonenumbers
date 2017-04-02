@@ -1646,7 +1646,7 @@ def invalid_example_number(region_code):
     # number lengths and we may have to make it very short before we get an
     # invalid number.
     metadata = PhoneMetadata.metadata_for_region(region_code.upper())
-    desc = _number_desc_for_type(metadata, PhoneNumberType.FIXED_LINE)
+    desc = _number_desc_by_type(metadata, PhoneNumberType.FIXED_LINE)
     if desc.example_number is None:
         # This shouldn't happen; we have a test for this.
         return None  # pragma no cover
@@ -1706,7 +1706,7 @@ def example_number_for_type(region_code, num_type):
     if not _is_valid_region_code(region_code):
         return None
     metadata = PhoneMetadata.metadata_for_region(region_code.upper())
-    desc = _number_desc_for_type(metadata, num_type)
+    desc = _number_desc_by_type(metadata, num_type)
     if desc.example_number is not None:
         try:
             return parse(desc.example_number, region_code)
@@ -1732,7 +1732,7 @@ def _example_number_anywhere_for_type(num_type):
     # If there wasn't an example number for a region, try the non-geographical entities.
     for country_calling_code in COUNTRY_CODES_FOR_NON_GEO_REGIONS:
         metadata = PhoneMetadata.metadata_for_nongeo_region(country_calling_code, None)
-        desc = _number_desc_for_type(metadata, num_type)
+        desc = _number_desc_by_type(metadata, num_type)
         if desc.example_number is not None:
             try:
                 return parse(_PLUS_SIGN + unicod(country_calling_code) + desc.example_number, UNKNOWN_REGION)
@@ -1784,7 +1784,7 @@ def _maybe_append_formatted_extension(numobj, metadata, num_format, number):
     return number
 
 
-def _number_desc_for_type(metadata, num_type):
+def _number_desc_by_type(metadata, num_type):
     """Return the PhoneNumberDesc of the metadata for the given number type"""
     if num_type == PhoneNumberType.PREMIUM_RATE:
         return metadata.premium_rate
