@@ -315,6 +315,13 @@ class XPhoneNumberDesc(UnicodeMixin):
         id = xterritory.attrib['id']
         xtag = _get_unique_child(xterritory, tag)
         self.xtag = xtag
+        if xtag is None:
+            # When a PhoneNumberDesc is absent, the upstream Java code builds an object
+            # of form PhoneNumberDesc(national_number_pattern="NA", possible_length=(-1,)).
+            # The Python code uses a desc of None for this case, to keep the generated
+            # code size smaller.
+            self.o = None
+            return
         self.o = PhoneNumberDesc()
         self.o._mutable = True
         self.o.national_number_pattern = None
@@ -324,8 +331,6 @@ class XPhoneNumberDesc(UnicodeMixin):
         self.o.possible_length = None
         self.o.possible_length_local_only = None
         self.o.example_number = None
-        if xtag is None:
-            return
 
         # Always expect a nationalNumberPattern element
         self.o.national_number_pattern = _dews_re(_get_unique_child_value(xtag, 'nationalNumberPattern'))
@@ -439,24 +444,24 @@ class XTerritory(UnicodeMixin):
         # However the general_desc is first and special; it has form:
         #   (nationalNumberPattern, possibleNumberPattern)
         # and it will be used to fill out missing fields in many of the other PhoneNumberDesc elements.
-        self.o.general_desc = XPhoneNumberDesc(xterritory, 'generalDesc', general_desc=True)
+        self.o.general_desc = XPhoneNumberDesc(xterritory, 'generalDesc', general_desc=True).o
 
         # areaCodeOptional is in the XML but not used in the code.
-        self.o.area_code_optional = XPhoneNumberDesc(xterritory, 'areaCodeOptional', template=self.o.general_desc.o)
-        self.o.toll_free = XPhoneNumberDesc(xterritory, 'tollFree', template=self.o.general_desc.o)
-        self.o.premium_rate = XPhoneNumberDesc(xterritory, 'premiumRate', template=self.o.general_desc.o)
+        self.o.area_code_optional = XPhoneNumberDesc(xterritory, 'areaCodeOptional', template=self.o.general_desc).o
+        self.o.toll_free = XPhoneNumberDesc(xterritory, 'tollFree', template=self.o.general_desc).o
+        self.o.premium_rate = XPhoneNumberDesc(xterritory, 'premiumRate', template=self.o.general_desc).o
         if not short_data:
             # Mobile and fixed-line descriptions do not inherit anything from the general_desc
-            self.o.fixed_line = XPhoneNumberDesc(xterritory, 'fixedLine')
-            self.o.mobile = XPhoneNumberDesc(xterritory, 'mobile')
+            self.o.fixed_line = XPhoneNumberDesc(xterritory, 'fixedLine').o
+            self.o.mobile = XPhoneNumberDesc(xterritory, 'mobile').o
 
-            self.o.pager = XPhoneNumberDesc(xterritory, 'pager', template=self.o.general_desc.o)
-            self.o.shared_cost = XPhoneNumberDesc(xterritory, 'sharedCost', template=self.o.general_desc.o)
-            self.o.personal_number = XPhoneNumberDesc(xterritory, 'personalNumber', template=self.o.general_desc.o)
-            self.o.voip = XPhoneNumberDesc(xterritory, 'voip', template=self.o.general_desc.o)
-            self.o.uan = XPhoneNumberDesc(xterritory, 'uan', template=self.o.general_desc.o)
-            self.o.voicemail = XPhoneNumberDesc(xterritory, 'voicemail', template=self.o.general_desc.o)
-            self.o.no_international_dialling = XPhoneNumberDesc(xterritory, 'noInternationalDialling', template=self.o.general_desc.o)
+            self.o.pager = XPhoneNumberDesc(xterritory, 'pager', template=self.o.general_desc).o
+            self.o.shared_cost = XPhoneNumberDesc(xterritory, 'sharedCost', template=self.o.general_desc).o
+            self.o.personal_number = XPhoneNumberDesc(xterritory, 'personalNumber', template=self.o.general_desc).o
+            self.o.voip = XPhoneNumberDesc(xterritory, 'voip', template=self.o.general_desc).o
+            self.o.uan = XPhoneNumberDesc(xterritory, 'uan', template=self.o.general_desc).o
+            self.o.voicemail = XPhoneNumberDesc(xterritory, 'voicemail', template=self.o.general_desc).o
+            self.o.no_international_dialling = XPhoneNumberDesc(xterritory, 'noInternationalDialling', template=self.o.general_desc).o
 
             # Skip noInternationalDialling when combining possible length information
             sub_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
@@ -467,10 +472,10 @@ class XTerritory(UnicodeMixin):
                          self.o.personal_number, self.o.voip, self.o.uan, self.o.voicemail,
                          self.o.no_international_dialling)
         else:
-            self.o.standard_rate = XPhoneNumberDesc(xterritory, 'standardRate', template=self.o.general_desc.o)
-            self.o.short_code = XPhoneNumberDesc(xterritory, 'shortCode', template=self.o.general_desc.o)
-            self.o.carrier_specific = XPhoneNumberDesc(xterritory, 'carrierSpecific', template=self.o.general_desc.o)
-            self.o.emergency = XPhoneNumberDesc(xterritory, 'emergency', template=self.o.general_desc.o)
+            self.o.standard_rate = XPhoneNumberDesc(xterritory, 'standardRate', template=self.o.general_desc).o
+            self.o.short_code = XPhoneNumberDesc(xterritory, 'shortCode', template=self.o.general_desc).o
+            self.o.carrier_specific = XPhoneNumberDesc(xterritory, 'carrierSpecific', template=self.o.general_desc).o
+            self.o.emergency = XPhoneNumberDesc(xterritory, 'emergency', template=self.o.general_desc).o
             # For short number metadata, copy the lengths from the "short code" section only.
             sub_descs = (self.o.short_code,)
             all_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
@@ -481,32 +486,33 @@ class XTerritory(UnicodeMixin):
         possible_lengths = set()
         local_lengths = set()
         for desc in sub_descs:
-            if desc.o is None:
+            if desc is None:
                 continue
-            if desc.o.possible_length is not None:
-                possible_lengths.update(desc.o.possible_length)
-            if desc.o.possible_length_local_only is not None:
-                local_lengths.update(desc.o.possible_length_local_only)
-        self.o.general_desc.o.possible_length = sorted(list(possible_lengths))
-        self.o.general_desc.o.possible_length_local_only = sorted(list(local_lengths))
-        if -1 in self.o.general_desc.o.possible_length:
+            if desc.possible_length is not None:
+                possible_lengths.update(desc.possible_length)
+            if desc.possible_length_local_only is not None:
+                local_lengths.update(desc.possible_length_local_only)
+        self.o.general_desc.possible_length = sorted(list(possible_lengths))
+        self.o.general_desc.possible_length_local_only = sorted(list(local_lengths))
+        if -1 in self.o.general_desc.possible_length:
             raise Exception("Found -1 length in general_desc.possible_length")
-        if -1 in self.o.general_desc.o.possible_length_local_only:
+        if -1 in self.o.general_desc.possible_length_local_only:
             raise Exception("Found -1 length in general_desc.possible_length_local_only")
 
         # Now that the union of length information is available, trickle it back down to those types
         # of number that didn't specify any length information (indicated by having those fields set
         # to None).  But only if they're non
         for desc in all_descs:
-            if desc.o is not None:
-                if desc.o.national_number_pattern is None:
-                    desc.o.possible_length = []
-                    desc.o.possible_length_local_only = []
-                    continue
-                if desc.o.possible_length is None:
-                    desc.o.possible_length = copy.copy(self.o.general_desc.o.possible_length)
-                if desc.o.possible_length_local_only is None:
-                    desc.o.possible_length_local_only = copy.copy(self.o.general_desc.o.possible_length_local_only)
+            if desc is None:
+                continue
+            if desc.national_number_pattern is None:
+                desc.possible_length = []
+                desc.possible_length_local_only = []
+                continue
+            if desc.possible_length is None:
+                desc.possible_length = copy.copy(self.o.general_desc.possible_length)
+            if desc.possible_length_local_only is None:
+                desc.possible_length_local_only = copy.copy(self.o.general_desc.o.possible_length_local_only)
 
         # Look for available formats
         self.has_explicit_intl_format = False
