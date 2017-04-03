@@ -22,7 +22,7 @@ from phonenumbers import connects_to_emergency_number, is_emergency_number, Shor
 from phonenumbers import is_possible_short_number_for_region, is_possible_short_number
 from phonenumbers import is_valid_short_number_for_region, is_valid_short_number
 from phonenumbers import expected_cost, expected_cost_for_region, PhoneMetadata
-from phonenumbers import shortnumberinfo, ShortNumberCost, PhoneNumber
+from phonenumbers import shortnumberinfo, ShortNumberCost, PhoneNumber, NumberParseException
 from phonenumbers.util import u
 from .testmetadatatest import TestMetadataTestCase
 
