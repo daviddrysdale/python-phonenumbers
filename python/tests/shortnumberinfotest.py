@@ -321,3 +321,7 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         for region_code in PhoneMetadata._short_region_available.keys():
             metadata = PhoneMetadata.short_metadata_for_region(region_code)
             str(metadata)
+
+    def testMetadataAbsent(self):
+        # Python version extra test: check internal fn. copes with missing PhoneNumberDesc
+        self.assertFalse(shortnumberinfo._matches_national_number("123456", None, False))
