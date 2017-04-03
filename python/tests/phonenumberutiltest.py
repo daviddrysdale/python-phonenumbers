@@ -2783,7 +2783,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         metadata800 = PhoneMetadata.metadata_for_nongeo_region(800)
         saved_mobile = metadata800.mobile
         metadata800._mutable = True
-        metadata800.mobile = PhoneNumberDesc(example_number = '')
+        metadata800.mobile = PhoneNumberDesc(example_number='')
         self.assertTrue(phonenumbers.example_number_for_non_geo_entity(800) is not None)
         metadata800.mobile = saved_mobile
         metadata800._mutable = False

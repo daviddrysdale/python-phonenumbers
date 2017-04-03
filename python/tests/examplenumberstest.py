@@ -264,8 +264,10 @@ class ExampleNumbersTest(unittest.TestCase):
         self.assertEqual("Country Code: 692 National Number: 7654321", str(number))
 
     def testMetadataPrint(self):
-        for callingCode in PhoneMetadata._region_available.keys():
-            metadata = PhoneMetadata.metadata_for_region("GB")
+        # Python version extra test
+        # Convert all metadata to strings to check the printing code doesn't blow up.
+        for region_code in PhoneMetadata._region_available.keys():
+            metadata = PhoneMetadata.metadata_for_region(region_code)
             str(metadata)
 
     def testWhitespaceInNationalPrefixForParsing(self):

@@ -21,7 +21,7 @@ import phonenumbers
 from phonenumbers import connects_to_emergency_number, is_emergency_number, ShortNumberCost
 from phonenumbers import is_possible_short_number_for_region, is_possible_short_number
 from phonenumbers import is_valid_short_number_for_region, is_valid_short_number
-from phonenumbers import expected_cost, expected_cost_for_region
+from phonenumbers import expected_cost, expected_cost_for_region, PhoneMetadata
 from phonenumbers import shortnumberinfo, ShortNumberCost, PhoneNumber
 from phonenumbers.util import u
 from .testmetadatatest import TestMetadataTestCase
@@ -314,3 +314,10 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertFalse(is_emergency_number("211", "CA"))
         self.assertEqual(ShortNumberCost.TOLL_FREE,
                          shortnumberinfo.expected_cost_for_region(_parse("211", "CA"), "CA"))
+
+    def testMetadataPrint(self):
+        # Python version extra test
+        # Convert all metadata to strings to check the printing code doesn't blow up.
+        for region_code in PhoneMetadata._short_region_available.keys():
+            metadata = PhoneMetadata.short_metadata_for_region(region_code)
+            str(metadata)
