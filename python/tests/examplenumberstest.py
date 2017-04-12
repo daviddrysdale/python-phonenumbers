@@ -227,7 +227,7 @@ class ExampleNumbersTest(unittest.TestCase):
             if desc is not None and desc.example_number is not None:
                 exampleNumber = desc.example_number
                 carrierSpecificNumber = phonenumberutil.parse(exampleNumber, regionCode)
-                if (not fullmatch(re.compile(desc.possible_number_pattern), exampleNumber) or
+                if (not shortnumberinfo.is_possible_short_number_for_region(carrierSpecificNumber, regionCode) or
                     not shortnumberinfo.is_carrier_specific_for_region(carrierSpecificNumber, regionCode)):
                     wrongTagCounter += 1
                     prnt("Carrier-specific test failed for %s" % regionCode, file=sys.stderr)

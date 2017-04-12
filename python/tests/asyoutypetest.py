@@ -1168,9 +1168,9 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
     def testEdgeCases(self):
         # Python version extra tests for coverage
         metadataXX = PhoneMetadata(id='XX', country_code=384, international_prefix='011',
-                                   general_desc=PhoneNumberDesc(national_number_pattern='\\d{10}', possible_number_pattern='\\d{6,10}'),
-                                   fixed_line=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
-                                   mobile=PhoneNumberDesc(national_number_pattern='NA', possible_number_pattern='NA'),
+                                   general_desc=PhoneNumberDesc(national_number_pattern='\\d{10}'),
+                                   fixed_line=PhoneNumberDesc(national_number_pattern='NA'),
+                                   mobile=PhoneNumberDesc(national_number_pattern='NA'),
                                    national_prefix=u("0"),
                                    national_prefix_for_parsing=u("0"),
                                    number_format=[NumberFormat(pattern='([135][246]|[246][123])(\\d{4})(\\d{4})',

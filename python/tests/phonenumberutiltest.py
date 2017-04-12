@@ -2842,7 +2842,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         desc2 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
         desc2._mutable = True
         desc3 = PhoneNumberDesc(national_number_pattern="\\d{4,7}",
-                                possible_number_pattern="\\d{7}",
                                 example_number="1234567")
         desc3._mutable = True
         self.assertNotEqual(desc1, None)
@@ -2853,7 +2852,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         desc1.merge_from(desc3)
         self.assertEqual(desc1, desc3)
         self.assertEqual(r"PhoneNumberDesc(national_number_pattern='\\d{4,7}', " +
-                         r"possible_number_pattern='\\d{7}', example_number='1234567')",
+                         r"example_number='1234567')",
                          str(desc3))
         nf1 = NumberFormat(pattern=r'\d{3}', format=r'\1', leading_digits_pattern=['1'])
         nf1._mutable = True
@@ -2950,7 +2949,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          str(metadata.number_format[0]))
         self.assertEqual(repr(metadata.number_format[0]),
                          str(metadata.number_format[0]))
-        self.assertEqual(r"""PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_number_pattern='\\d{5,15}', possible_length=(9, 10))""",
+        self.assertEqual(r"""PhoneNumberDesc(national_number_pattern='[1-578]\\d{4,14}', possible_length=(9, 10))""",
                          str(metadata.general_desc))
         self.assertEqual(repr(metadata.general_desc), str(metadata.general_desc))
 
@@ -2959,7 +2958,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                    international_prefix='9123',
                                    general_desc=PhoneNumberDesc(example_number='12'),
                                    personal_number=PhoneNumberDesc(example_number='12'),
-                                   short_code=PhoneNumberDesc(national_number_pattern='[123]', possible_number_pattern='[123]'),
+                                   short_code=PhoneNumberDesc(national_number_pattern='[123]'),
                                    preferred_international_prefix='9123',
                                    national_prefix='1',
                                    preferred_extn_prefix='2',
@@ -2974,7 +2973,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("""PhoneMetadata(id='XX', country_code=None, international_prefix='9123',
     general_desc=PhoneNumberDesc(example_number='12'),
     personal_number=PhoneNumberDesc(example_number='12'),
-    short_code=PhoneNumberDesc(national_number_pattern='[123]', possible_number_pattern='[123]'),
+    short_code=PhoneNumberDesc(national_number_pattern='[123]'),
     preferred_international_prefix='9123',
     national_prefix='1',
     preferred_extn_prefix='2',
@@ -3008,10 +3007,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
 
         PhoneMetadata("XY",
                       general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
-                                                   possible_number_pattern='\\d{4,10}',
                                                    example_number='123'),
                       personal_number=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
-                                                      possible_number_pattern='\\d{4,10}',
                                                       example_number='123'),
                       preferred_international_prefix=u('9123'),
                       register=True)
@@ -3037,8 +3034,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertFalse(phonenumberutil._check_region_for_parsing("", "cs"))
 
         metadataXY = PhoneMetadata("XY",
-                                   general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
-                                                                possible_number_pattern='\\d{4,10}'),
+                                   general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}'),
                                    national_prefix_for_parsing=u('0(1|2|3)(4|5|6)'),
                                    national_prefix_transform_rule=u('\\2'),
                                    register=False)

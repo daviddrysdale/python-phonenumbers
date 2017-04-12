@@ -151,7 +151,6 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
     @mutating_method
     def __init__(self,
                  national_number_pattern=None,
-                 possible_number_pattern=None,
                  example_number=None,
                  possible_length=None,
                  possible_length_local_only=None):
@@ -160,14 +159,8 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         # its total length and leading digits.
         self.national_number_pattern = force_unicode(national_number_pattern)  # None or Unicode string holding regexp
 
-        # The possible_number_pattern represents what a potentially valid
-        # phone number for this region may be written as. This is a superset
-        # of the national_number_pattern above and includes numbers that have
-        # the area code omitted. Typically the only restrictions here are in
-        # the number of digits.  This could be used to highlight tokens in a
-        # text that may be a phone number, or to quickly prune numbers that
-        # could not possibly be a phone number for this locale.
-        self.possible_number_pattern = force_unicode(possible_number_pattern)  # None or Unicode string holding regexp
+        # The possible_number_pattern is now retired.
+        self.possible_number_pattern = None
 
         # An example national significant number for the specific type. It
         # should not contain any formatting information.
@@ -204,8 +197,6 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         """Merge information from another PhoneNumberDesc object into this one."""
         if other.national_number_pattern is not None:
             self.national_number_pattern = other.national_number_pattern
-        if other.possible_number_pattern is not None:
-            self.possible_number_pattern = other.possible_number_pattern
         if other.example_number is not None:
             self.example_number = other.example_number
 
@@ -226,9 +217,6 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         sep = unicod("")
         if self.national_number_pattern is not None:
             result += unicod("%snational_number_pattern=%s") % (sep, rpr(self.national_number_pattern))
-            sep = unicod(", ")
-        if self.possible_number_pattern is not None:
-            result += unicod("%spossible_number_pattern=%s") % (sep, rpr(self.possible_number_pattern))
             sep = unicod(", ")
         if self.example_number is not None:
             result += unicod("%sexample_number=%s") % (sep, rpr(self.example_number))
@@ -375,8 +363,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # are missing altogether, they will inherit all fields from the
         # general_desc. For all other types, if the whole type is missing and
         # it is relevant for the metadata, it will be given a
-        # national_number_pattern of "NA" and a possible_number_pattern of
-        # "NA".
+        # national_number_pattern of "NA".
         self.general_desc = general_desc  # None or PhoneNumberDesc
         self.fixed_line = fixed_line  # None or PhoneNumberDesc
         self.mobile = mobile  # None or PhoneNumberDesc

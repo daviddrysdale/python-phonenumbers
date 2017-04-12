@@ -325,7 +325,7 @@ class XPhoneNumberDesc(UnicodeMixin):
         self.o = PhoneNumberDesc()
         self.o._mutable = True
         self.o.national_number_pattern = None
-        self.o.possible_number_pattern = None
+        self.o.possible_number_pattern = None  # retired
         # Set possible length info to None for now, to mark that it wasn't specified
         # for this numberDesc.
         self.o.possible_length = None
@@ -340,14 +340,6 @@ class XPhoneNumberDesc(UnicodeMixin):
                     self.o.national_number_pattern = template.national_number_pattern
             else:
                 raise Exception("Missing required nationalNumberPattern element in %s.%s" % (id, tag))
-
-        # A possibleNumberPattern element is optional, except for the general_desc
-        self.o.possible_number_pattern = _dews_re(_get_unique_child_value(xtag, 'possibleNumberPattern'))
-        if self.o.possible_number_pattern is None:
-            if general_desc and not lax:
-                raise Exception("Missing required possibleNumberPattern element for generalDesc in %s.%s" % (id, tag))
-            if template is not None:
-                self.o.possible_number_pattern = template.possible_number_pattern
 
         # An exampleNumber element is present iff this is not the generalDesc
         example_number = _get_unique_child_value(xtag, 'exampleNumber')
@@ -440,9 +432,9 @@ class XTerritory(UnicodeMixin):
         self.o.mobile_number_portable_region = get_true_attrib(xterritory, 'mobileNumberPortableRegion')
 
         # Retrieve the various PhoneNumberDesc elements, which mostly have the form:
-        #   (nationalNumberPattern, possibleNumberPattern?, possibleLengths, exampleNumber)
+        #   (nationalNumberPattern, possibleLengths, exampleNumber)
         # However the general_desc is first and special; it has form:
-        #   (nationalNumberPattern, possibleNumberPattern)
+        #   (nationalNumberPattern)
         # and it will be used to fill out missing fields in many of the other PhoneNumberDesc elements.
         self.o.general_desc = XPhoneNumberDesc(xterritory, 'generalDesc', general_desc=True).o
 
