@@ -2012,13 +2012,16 @@ def is_valid_number_for_region(numobj, region_code):
 def region_code_for_number(numobj):
     """Returns the region where a phone number is from.
 
-    This could be used for geocoding at the region level.
+    This could be used for geocoding at the region level. Only guarantees
+    correct results for valid, full numbers (not short-codes, or invalid
+    numbers).
 
     Arguments:
     numobj -- The phone number object whose origin we want to know
 
     Returns the region where the phone number is from, or None if no region
     matches this calling code.
+
     """
     country_code = numobj.country_code
     regions = COUNTRY_CODE_TO_REGION_CODE.get(country_code, None)
@@ -2195,29 +2198,46 @@ def is_alpha_number(number):
 def is_possible_number(numobj):
     """Convenience wrapper around is_possible_number_with_reason.
 
-    Instead of returning the reason for failure, this method returns a boolean
-    value.
+    Instead of returning the reason for failure, this method returns true if
+    the number is either a possible fully-qualified number (containing the area
+    code and country code), or if the number could be a possible local number
+    (with a country code, but missing an area code). Local numbers are
+    considered possible if they could be possibly dialled in this format: if
+    the area code is needed for a call to connect, the number is not considered
+    possible without it.
 
     Arguments:
     numobj -- the number object that needs to be checked
 
     Returns True if the number is possible
+
     """
-    return is_possible_number_with_reason(numobj) == ValidationResult.IS_POSSIBLE
+    result = is_possible_number_with_reason(numobj)
+    return (result == ValidationResult.IS_POSSIBLE or
+            result == ValidationResult.IS_POSSIBLE_LOCAL_ONLY)
 
 
 def is_possible_number_for_type(numobj, numtype):
     """Convenience wrapper around is_possible_number_for_type_with_reason.
 
-    Instead of returning the reason for failure, this method returns a boolean value.
+    Instead of returning the reason for failure, this method returns true if
+    the number is either a possible fully-qualified number (containing the area
+    code and country code), or if the number could be a possible local number
+    (with a country code, but missing an area code). Local numbers are
+    considered possible if they could be possibly dialled in this format: if
+    the area code is needed for a call to connect, the number is not considered
+    possible without it.
 
     Arguments:
     numobj -- the number object that needs to be checked
     numtype -- the type we are interested in
 
     Returns True if the number is possible
+
     """
-    return is_possible_number_for_type_with_reason(numobj, numtype) == ValidationResult.IS_POSSIBLE
+    result = is_possible_number_for_type_with_reason(numobj, numtype)
+    return (result == ValidationResult.IS_POSSIBLE or
+            result == ValidationResult.IS_POSSIBLE_LOCAL_ONLY)
 
 
 def _test_number_length(national_number, metadata, numtype=PhoneNumberType.UNKNOWN):
@@ -2276,8 +2296,10 @@ def _test_number_length(national_number, metadata, numtype=PhoneNumberType.UNKNO
         return ValidationResult.INVALID_LENGTH
 
     actual_length = len(national_number)
+    # This is safe because there is never an overlap beween the possible lengths and the local-only
+    # lengths; this is checked at build time.
     if actual_length in local_lengths:
-        return ValidationResult.IS_POSSIBLE
+        return ValidationResult.IS_POSSIBLE_LOCAL_ONLY
 
     minimum_length = possible_lengths[0]
     if minimum_length == actual_length:
@@ -2286,16 +2308,11 @@ def _test_number_length(national_number, metadata, numtype=PhoneNumberType.UNKNO
         return ValidationResult.TOO_SHORT
     elif possible_lengths[-1] < actual_length:
         return ValidationResult.TOO_LONG
-    # Note that actually the number is not too long if possibleLengths does
-    # not contain the length: we know it is less than the highest possible
-    # number length, and higher than the lowest possible number
-    # length. However, we don't currently have an enum to express this, so we
-    # return TOO_LONG in the short-term.
     # We skip the first element; we've already checked it.
     if actual_length in possible_lengths[1:]:
         return ValidationResult.IS_POSSIBLE
     else:
-        return ValidationResult.TOO_LONG
+        return ValidationResult.INVALID_LENGTH
 
 
 def is_possible_number_with_reason(numobj):
@@ -2316,15 +2333,16 @@ def is_possible_number_for_type_with_reason(numobj, numtype):
      - It only checks the length of phone numbers. In particular, it doesn't
        check starting digits of the number.
 
-     - For fixed line numbers, many regions have the concept of area code,
-       which together with subscriber number constitute the national
-       significant number. It is sometimes okay to dial the subscriber number
-       only when dialing in the same area. This function will return true if
-       the subscriber-number-only version is passed in. On the other hand,
-       because is_valid_number validates using information on both starting
-       digits (for fixed line numbers, that would most likely be area codes)
-       and length (obviously includes the length of area codes for fixed line
-       numbers), it will return false for the subscriber-number-only version.
+     - For some numbers (particularly fixed-line), many regions have the
+       concept of area code, which together with subscriber number constitute
+       the national significant number. It is sometimes okay to dial only the
+       subscriber number when dialing in the same area. This function will
+       return IS_POSSIBLE_LOCAL_ONLY if the subscriber-number-only version is
+       passed in. On the other hand, because is_valid_number validates using
+       information on both starting digits (for fixed line numbers, that would
+       most likely be area codes) and length (obviously includes the length of
+       area codes for fixed line numbers), it will return false for the
+       subscriber-number-only version.
 
     Arguments:
     numobj -- The number object that needs to be checked

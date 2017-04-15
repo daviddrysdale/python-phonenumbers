@@ -1380,7 +1380,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(ValidationResult.IS_POSSIBLE,
                          phonenumbers.is_possible_number_with_reason(US_NUMBER))
 
-        self.assertEqual(ValidationResult.IS_POSSIBLE,
+        self.assertEqual(ValidationResult.IS_POSSIBLE_LOCAL_ONLY,
                          phonenumbers.is_possible_number_with_reason(US_LOCAL_NUMBER))
 
         self.assertEqual(ValidationResult.TOO_LONG,
@@ -1464,9 +1464,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     def testIsPossibleNumberForTypeWithReason_LocalOnly(self):
         # Here we test a number length which matches a local-only length.
         number = PhoneNumber(country_code=49, national_number=12)
-        self.assertEqual(ValidationResult.IS_POSSIBLE,
+        self.assertEqual(ValidationResult.IS_POSSIBLE_LOCAL_ONLY,
                          phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
-        self.assertEqual(ValidationResult.IS_POSSIBLE,
+        self.assertEqual(ValidationResult.IS_POSSIBLE_LOCAL_ONLY,
                          phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
         # Mobile numbers must be 10 or 11 digits, and there are no local-only lengths.
         self.assertEqual(ValidationResult.TOO_SHORT,
@@ -1477,9 +1477,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # as a whole, and hence aren't present in the binary for size reasons - this should still work.
         # Local-only number.
         number = PhoneNumber(country_code=55, national_number=12345678)
-        self.assertEqual(ValidationResult.IS_POSSIBLE,
+        self.assertEqual(ValidationResult.IS_POSSIBLE_LOCAL_ONLY,
                          phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.UNKNOWN))
-        self.assertEqual(ValidationResult.IS_POSSIBLE,
+        self.assertEqual(ValidationResult.IS_POSSIBLE_LOCAL_ONLY,
                          phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
 
         # Normal-length number.
@@ -1495,7 +1495,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(ValidationResult.INVALID_LENGTH,
                          phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
         # This matches a fixed-line length though.
-        self.assertEqual(ValidationResult.IS_POSSIBLE,
+        self.assertEqual(ValidationResult.IS_POSSIBLE_LOCAL_ONLY,
                          phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
         # This is too short for fixed-line, and no mobile numbers exist.
         number.country_code = 55
@@ -1546,9 +1546,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE))
         self.assertEqual(ValidationResult.TOO_LONG,
                          phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.MOBILE))
-        # This will change to INVALID_LENGTH once we start returning this type in the main
-        # isPossibleNumberWithReason API.
-        self.assertEqual(ValidationResult.TOO_LONG,
+        self.assertEqual(ValidationResult.INVALID_LENGTH,
                          phonenumbers.is_possible_number_for_type_with_reason(number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
 
         number.national_number = 123456
