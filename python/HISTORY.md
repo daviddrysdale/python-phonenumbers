@@ -1,3 +1,19 @@
+What's new in 8.4.1
+-------------------
+
+Merge to
+[upstream commit 02dbc0921cf5](https://github.com/googlei18n/libphonenumber/commit/02dbc0921cf5);
+relevant code changes:
+
+Code changes:
+ - Changing `is_possible_with_reason` to return the enums `INVALID_LENGTH` and
+   `IS_POSSIBLE_LOCAL_ONLY`, where these apply. `is_possible_number` continues to
+   consider `IS_POSSIBLE` or `IS_POSSIBLE_LOCAL_ONLY` numbers as possible to dial.
+   Announcement: https://groups.google.com/d/msg/libphonenumber-discuss/sPhYzdzFCmg/6tYsS1f6DgAJ
+ - Doc updates for `region_code_for_number` to clarify that it does not
+   work for short-codes or invalid numbers.
+
+
 What's new in 8.4.0
 -------------------
 
