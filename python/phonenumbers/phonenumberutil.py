@@ -2259,7 +2259,7 @@ def _test_number_length(national_number, metadata, numtype=PhoneNumberType.UNKNO
         # type exist at all, there is one possible length (-1) which is guaranteed not to match the
         # length of any real phone number).
         possible_lengths = desc_for_type.possible_length
-        if len(possible_lengths) == 0:
+        if len(possible_lengths) == 0:  # pragma no cover: Python sub-descs all have possible_length
             possible_lengths = metadata.general_desc.possible_length
         local_lengths = desc_for_type.possible_length_local_only
 
@@ -2276,7 +2276,7 @@ def _test_number_length(national_number, metadata, numtype=PhoneNumberType.UNKNO
                 # Note that when adding the possible lengths from mobile, we have to again check they
                 # aren't empty since if they are this indicates they are the same as the general desc and
                 # should be obtained from there.
-                if len(mobile_desc.possible_length) == 0:
+                if len(mobile_desc.possible_length) == 0:  # pragma no cover: Python sub-descs all have possible_length
                     possible_lengths += metadata.general_desc.possible_length
                 else:
                     possible_lengths += mobile_desc.possible_length

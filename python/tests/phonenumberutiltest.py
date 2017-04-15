@@ -1338,6 +1338,13 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.MOBILE))
         self.assertFalse(phonenumbers.is_possible_number_for_type(number, PhoneNumberType.TOLL_FREE))
 
+        # Python version extra test:
+        # AM numbers have both mobile and fixed-line data, both have local-only lengths
+        am_number = PhoneNumber(country_code=374, national_number=12345678)
+        self.assertTrue(phonenumbers.is_possible_number_for_type(am_number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+        am_number = PhoneNumber(country_code=374, national_number=12345)
+        self.assertTrue(phonenumbers.is_possible_number_for_type(am_number, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+
     def testIsPossibleNumberForType_LocalOnly(self):
         # Here we test a number length which matches a local-only length.
         number = PhoneNumber(country_code=49, national_number=12)
