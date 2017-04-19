@@ -16,6 +16,5 @@ PHONE_METADATA_FR = PhoneMetadata(id='FR', country_code=33, international_prefix
         NumberFormat(pattern='(1\\d{2})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['11'], national_prefix_formatting_rule='\\1'),
         NumberFormat(pattern='(8\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['8'], national_prefix_formatting_rule='0 \\1')],
     intl_number_format=[NumberFormat(pattern='([1-79])(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4 \\5', leading_digits_pattern=['[1-79]']),
-        NumberFormat(pattern='(1\\d{2})(\\d{3})', format='NA', leading_digits_pattern=['11']),
         NumberFormat(pattern='(8\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['8'])],
     mobile_number_portable_region=True)
