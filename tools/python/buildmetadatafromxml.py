@@ -63,6 +63,8 @@ lax = False
 TOP_XPATH = "territories"
 # XML element name for the territory element
 TERRITORY_TAG = "territory"
+# Marker for unavailable entries
+DATA_NA = "NA"
 
 # Boilerplate text for generated Python files
 METADATA_FILE_PROLOG = '"""Auto-generated file, do not edit by hand."""'
@@ -299,7 +301,9 @@ class XNumberFormat(UnicodeMixin):
                 self.io.format = self.o.format
             else:
                 # Replace '$1' etc  with '\1' to match Python regexp group reference format
-                self.io.format = re.sub('\$', u(r'\\'), intl_format)
+                intl_format = re.sub('\$', u(r'\\'), intl_format)
+                if intl_format != DATA_NA:
+                    self.io.format = intl_format
                 owning_xterr.has_explicit_intl_format = True
             if self.io.format is not None:
                 # Add this international NumberFormat object into the owning metadata
