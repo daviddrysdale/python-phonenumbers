@@ -2895,11 +2895,12 @@ def _build_national_number_for_parsing(number):
     """Converts number to a form that we can parse and return it if it is
     written in RFC3966; otherwise extract a possible number out of it and return it."""
     index_of_phone_context = number.find(_RFC3966_PHONE_CONTEXT)
-    if index_of_phone_context > 0:
+    if index_of_phone_context >= 0:
         phone_context_start = index_of_phone_context + len(_RFC3966_PHONE_CONTEXT)
         # If the phone context contains a phone number prefix, we need to
         # capture it, whereas domains will be ignored.
-        if number[phone_context_start] == _PLUS_SIGN:
+        if (phone_context_start < (len(number) - 1) and
+            number[phone_context_start] == _PLUS_SIGN):
             # Additional parameters might follow the phone context. If so, we
             # will remove them here because the parameters after phone context
             # are not important for parsing the phone number.

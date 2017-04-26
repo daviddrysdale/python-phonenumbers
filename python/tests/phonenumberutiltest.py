@@ -2392,6 +2392,18 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                              e.error_type,
                              msg="Wrong error type stored in exception.")
 
+        try:
+            # Only the phone-context symbol is present, but no data.
+            invalidRfcPhoneContext = ";phone-context="
+            phonenumbers.parse(invalidRfcPhoneContext, "ZZ")
+            self.fail("No number is present: should fail.")
+        except NumberParseException:
+            # Expected this exception.
+            e = sys.exc_info()[1]
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+
     def testParseNumbersWithPlusWithNoRegion(self):
         # "ZZ" is allowed only if the number starts with a '+' - then the country calling code
         # can be calculated.
