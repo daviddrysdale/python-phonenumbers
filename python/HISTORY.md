@@ -1,3 +1,14 @@
+What's new in 8.4.2
+-------------------
+
+Merge to
+[upstream commit 9923d9211432](https://github.com/googlei18n/libphonenumber/commit/9923d9211432);
+relevant code changes:
+
+ - Small fix for possible out-of-bounds exception on RFC3966 input where no
+   phone context was actually provided.
+
+
 What's new in 8.4.1
 -------------------
 
@@ -5,7 +16,6 @@ Merge to
 [upstream commit 02dbc0921cf5](https://github.com/googlei18n/libphonenumber/commit/02dbc0921cf5);
 relevant code changes:
 
-Code changes:
  - Changing `is_possible_with_reason` to return the enums `INVALID_LENGTH` and
    `IS_POSSIBLE_LOCAL_ONLY`, where these apply. `is_possible_number` continues to
    consider `IS_POSSIBLE` or `IS_POSSIBLE_LOCAL_ONLY` numbers as possible to dial.
