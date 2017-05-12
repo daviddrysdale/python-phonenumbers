@@ -102,6 +102,7 @@ else:  # pragma no cover
 U_EMPTY_STRING = unicod("")
 U_SPACE = unicod(" ")
 U_DASH = unicod("-")
+U_DOT = unicod(".")
 U_TILDE = unicod("~")
 U_PLUS = unicod("+")
 U_STAR = unicod("*")
