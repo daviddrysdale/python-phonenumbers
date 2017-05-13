@@ -167,7 +167,7 @@ _DIALLABLE_CHAR_MAPPINGS = dict({_PLUS_SIGN: _PLUS_SIGN,
 # numbers. This includes digits, ASCII letters and number grouping symbols
 # such as "-" and " ".
 _ALL_PLUS_NUMBER_GROUPING_SYMBOLS = dict({u("-"): u("-"),  # Add grouping symbols.
-                                          u("\uFF0D"): u("-"),
+                                          u("\uff0d"): u("-"),
                                           u("\u2010"): u("-"),
                                           u("\u2011"): u("-"),
                                           u("\u2012"): u("-"),
@@ -175,6 +175,14 @@ _ALL_PLUS_NUMBER_GROUPING_SYMBOLS = dict({u("-"): u("-"),  # Add grouping symbol
                                           u("\u2014"): u("-"),
                                           u("\u2015"): u("-"),
                                           u("\u2212"): u("-"),
+                                          u('\u208b'): u('-'),
+                                          u('\u2212'): u('-'),
+                                          u('\u2500'): u('-'),
+                                          u('\uff70'): u('-'),
+                                          u('\u2796'): u('-'),
+                                          u('\u306f'): u('-'),
+                                          u('\u0305'): u('-'),
+                                          u('\u30fc'): u('-'),
                                           u("/"): u("/"),
                                           u("\uFF0F"): u("/"),
                                           u(" "): u(" "),
