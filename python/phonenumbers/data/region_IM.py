@@ -10,7 +10,7 @@ PHONE_METADATA_IM = PhoneMetadata(id='IM', country_code=44, international_prefix
     shared_cost=PhoneNumberDesc(national_number_pattern='8(?:4(?:40[49]06|5624\\d)|70624\\d)\\d{3}', example_number='8456247890', possible_length=(10,)),
     personal_number=PhoneNumberDesc(national_number_pattern='70\\d{8}', example_number='7012345678', possible_length=(10,)),
     voip=PhoneNumberDesc(national_number_pattern='56\\d{8}', example_number='5612345678', possible_length=(10,)),
-    pager=PhoneNumberDesc(national_number_pattern='76242\\d{5}', example_number='7624212345', possible_length=(10,)),
+    pager=PhoneNumberDesc(national_number_pattern='7624[0-4689]\\d{5}', example_number='7624212345', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='3(?:08162\\d|3\\d{5}|4(?:40[49]06|5624\\d)|7(?:0624\\d|2299\\d))\\d{3}|55\\d{8}', example_number='5512345678', possible_length=(10,)),
     national_prefix='0',
     preferred_extn_prefix=' x',
