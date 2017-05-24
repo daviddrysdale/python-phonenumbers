@@ -1,3 +1,13 @@
+What's new in 8.5.0
+-------------------
+
+Merge to
+[upstream commit 52cff9d8837f](https://github.com/googlei18n/libphonenumber/commit/52cff9d8837f;
+relevant code changes:
+
+ - Add `can_be_internationally_dialled` public API; This was already in JS.
+
+
 What's new in 8.4.2
 -------------------
 
