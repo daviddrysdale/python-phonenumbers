@@ -12,11 +12,11 @@ with Java regular expression code.
 <...SRE_Match object...>
 >>> fullmatch(r2, string)
 >>> fullmatch(r3, string)
->>> r = re.compile('\\d{8}|\\d{10,11}')
+>>> r = re.compile(r'\\d{8}|\\d{10,11}')
 >>> m = fullmatch(r, '1234567890')
 >>> m.end()
 10
->>> r = re.compile(u('[+\uff0b\\d]'), re.UNICODE)
+>>> r = re.compile(u(r'[+\uff0b\\d]'), re.UNICODE)
 >>> m = fullmatch(r, u('\uff10'))
 >>> m.end()
 1
