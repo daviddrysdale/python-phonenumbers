@@ -358,12 +358,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # The general_desc contains information which is a superset of
         # descriptions for all types of phone numbers. If any element is
         # missing in the description of a specific type of number, the element
-        # will inherit from its counterpart in the general_desc. Every locale
-        # is assumed to have fixed line and mobile numbers - if these types
-        # are missing altogether, they will inherit all fields from the
-        # general_desc. For all other types, if the whole type is missing and
-        # it is relevant for the metadata, it will be given a
-        # national_number_pattern of "NA".
+        # will inherit from its counterpart in the general_desc. For all types
+        # that are generally relevant to normal phone numbers, if the whole
+        # type is missing in the PhoneNumberMetadata XML file, it will not have
+        # national number data, and the possible lengths will be [-1].
         self.general_desc = general_desc  # None or PhoneNumberDesc
         self.fixed_line = fixed_line  # None or PhoneNumberDesc
         self.mobile = mobile  # None or PhoneNumberDesc

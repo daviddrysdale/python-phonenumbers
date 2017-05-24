@@ -139,7 +139,7 @@ class ExampleNumbersTest(unittest.TestCase):
                 prnt("Failed parse: %s" % e, file=sys.stderr)
 
             if (exampleNumber is not None and
-                phonenumberutil._can_be_internationally_dialled(exampleNumber)):
+                phonenumberutil.can_be_internationally_dialled(exampleNumber)):
                 self.wrong_type_cases.append(exampleNumber)
                 prnt("Number %s should not be internationally diallable" % exampleNumber, file=sys.stderr)
         self.assertEqual(0, len(self.wrong_type_cases))

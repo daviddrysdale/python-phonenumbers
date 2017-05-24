@@ -2819,17 +2819,17 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     def testCanBeInternationallyDialled(self):
         # We have no-international-dialling rules for the US in our test metadata that say that
         # toll-free numbers cannot be dialled internationally.
-        self.assertFalse(phonenumberutil._can_be_internationally_dialled(US_TOLLFREE))
+        self.assertFalse(phonenumberutil.can_be_internationally_dialled(US_TOLLFREE))
 
         # Normal US numbers can be internationally dialled.
-        self.assertTrue(phonenumberutil._can_be_internationally_dialled(US_NUMBER))
+        self.assertTrue(phonenumberutil.can_be_internationally_dialled(US_NUMBER))
 
         # Invalid number.
-        self.assertTrue(phonenumberutil._can_be_internationally_dialled(US_LOCAL_NUMBER))
+        self.assertTrue(phonenumberutil.can_be_internationally_dialled(US_LOCAL_NUMBER))
 
         # We have no data for NZ - should return True.
-        self.assertTrue(phonenumberutil._can_be_internationally_dialled(NZ_NUMBER))
-        self.assertTrue(phonenumberutil._can_be_internationally_dialled(INTERNATIONAL_TOLL_FREE))
+        self.assertTrue(phonenumberutil.can_be_internationally_dialled(NZ_NUMBER))
+        self.assertTrue(phonenumberutil.can_be_internationally_dialled(INTERNATIONAL_TOLL_FREE))
 
     def testIsAlphaNumber(self):
         self.assertTrue(phonenumbers.is_alpha_number("1800 six-flags"))

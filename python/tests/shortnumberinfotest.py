@@ -324,4 +324,4 @@ class ShortNumberInfoTest(TestMetadataTestCase):
 
     def testMetadataAbsent(self):
         # Python version extra test: check internal fn. copes with missing PhoneNumberDesc
-        self.assertFalse(shortnumberinfo._matches_national_number("123456", None, False))
+        self.assertFalse(shortnumberinfo._match_national_number("123456", None, False))

@@ -27,7 +27,7 @@ from .phonenumber import PhoneNumber
 from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
 from .phonenumberutil import normalize_digits_only, region_codes_for_country_code
 from .phonenumberutil import national_significant_number
-from .phonenumberutil import _is_number_matching_desc
+from .phonenumberutil import _is_number_matching_desc, _match_national_number
 
 
 # In these countries, if extra digits are added to an emergency number, it no longer connects
@@ -48,17 +48,6 @@ def _region_dialing_from_matches_number(numobj, region_dialing_from):
     the region it's being dialed from."""
     region_codes = region_codes_for_country_code(numobj.country_code)
     return (region_dialing_from in region_codes)
-
-
-def _matches_national_number(national_number, number_desc, allow_prefix_match):
-    """Returns whether the given national number (a string containing only decimal digits) matches
-    the national number pattern defined in the given PhoneNumberDesc object.
-    """
-    if number_desc is None or number_desc.national_number_pattern is None:
-        return False
-    nnp_matcher = re.compile(number_desc.national_number_pattern)
-    return (fullmatch(nnp_matcher, national_number) or
-            (allow_prefix_match and nnp_matcher.match(national_number)))
 
 
 def is_possible_short_number_for_region(short_numobj, region_dialing_from):
@@ -377,8 +366,8 @@ def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
     emergency_desc = metadata.emergency
     allow_prefix_match_for_region = (allow_prefix_match and
                                      (region_code not in _REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT))
-    return _matches_national_number(normalized_number, emergency_desc,
-                                    allow_prefix_match_for_region)
+    return _match_national_number(normalized_number, emergency_desc,
+                                  allow_prefix_match_for_region)
 
 
 def is_carrier_specific(numobj):
@@ -434,4 +423,4 @@ def _matches_possible_number_and_national_number(number, number_desc):
         return False
     if len(number_desc.possible_length) > 0 and not (len(number) in number_desc.possible_length):
         return False
-    return _matches_national_number(number, number_desc, False)
+    return _match_national_number(number, number_desc, False)

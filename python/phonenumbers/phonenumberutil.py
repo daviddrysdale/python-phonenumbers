@@ -828,7 +828,7 @@ def _desc_has_data(desc):
     # support the type at all: no type-specific methods will work with only this data.
     return ((desc.example_number is not None) or
             _desc_has_possible_number_data(desc) or
-            ((desc.national_number_pattern is not None) and (desc.national_number_pattern != "NA")))
+            (desc.national_number_pattern is not None))
 
 
 def _supported_types_for_metadata(metadata):
@@ -1187,7 +1187,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             # except for numbers which might potentially be short numbers,
             # which are always dialled in national format.
             metadata = PhoneMetadata.metadata_for_region(region_calling_from)
-            if (_can_be_internationally_dialled(numobj_no_ext) and
+            if (can_be_internationally_dialled(numobj_no_ext) and
                 _test_number_length(national_significant_number(numobj_no_ext),
                                     metadata) != ValidationResult.TOO_SHORT):
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
@@ -1200,7 +1200,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             if ((region_code == REGION_CODE_FOR_NON_GEO_ENTITY or
                  ((region_code == unicod("MX") or region_code == unicod("CL")) and
                   is_fixed_line_or_mobile)) and
-                _can_be_internationally_dialled(numobj_no_ext)):
+                can_be_internationally_dialled(numobj_no_ext)):
                 # MX fixed line and mobile numbers should always be formatted
                 # in international format, even when dialed within MX. For
                 # national format to work, a carrier code needs to be used,
@@ -1211,7 +1211,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
             else:
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
-    elif is_valid_number and _can_be_internationally_dialled(numobj_no_ext):
+    elif is_valid_number and can_be_internationally_dialled(numobj_no_ext):
         # We assume that short numbers are not diallable from outside their
         # region, so if a number is not a valid regular length phone number,
         # we treat it as if it cannot be internationally dialled.
@@ -1948,8 +1948,7 @@ def _is_number_matching_desc(national_number, number_desc):
     possible_lengths = number_desc.possible_length
     if len(possible_lengths) > 0 and not actual_length in possible_lengths:
         return False
-    national_re = re.compile(number_desc.national_number_pattern or U_EMPTY_STRING)
-    return fullmatch(national_re, national_number)
+    return _match_national_number(national_number, number_desc, False)
 
 
 def is_valid_number(numobj):
@@ -2533,7 +2532,6 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
         if normalized_number.startswith(default_country_code_str):
             potential_national_number = full_number[len(default_country_code_str):]
             general_desc = metadata.general_desc
-            valid_pattern = re.compile(general_desc.national_number_pattern or U_EMPTY_STRING)
             _, potential_national_number, _ = _maybe_strip_national_prefix_carrier_code(potential_national_number,
                                                                                         metadata)
 
@@ -2541,8 +2539,8 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
             # was too long before, we consider the number with the country
             # calling code stripped to be a better result and keep that
             # instead.
-            if ((fullmatch(valid_pattern, full_number) is None and
-                 fullmatch(valid_pattern, potential_national_number)) or
+            if ((not _match_national_number(full_number, general_desc, False) and
+                 _match_national_number(potential_national_number, general_desc, False)) or
                 (_test_number_length(full_number, metadata) == ValidationResult.TOO_LONG)):
                 if keep_raw_input:
                     numobj.country_code_source = CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN
@@ -2642,9 +2640,9 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
     prefix_pattern = re.compile(possible_national_prefix)
     prefix_match = prefix_pattern.match(number)
     if prefix_match:
-        national_number_pattern = re.compile(metadata.general_desc.national_number_pattern or U_EMPTY_STRING)
+        general_desc = metadata.general_desc
         # Check if the original number is viable.
-        is_viable_original_number = fullmatch(national_number_pattern, number)
+        is_viable_original_number = _match_national_number(number, general_desc, False)
         # prefix_match.groups() == () implies nothing was captured by the
         # capturing groups in possible_national_prefix; therefore, no
         # transformation is necessary, and we just remove the national prefix.
@@ -2655,8 +2653,7 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
             prefix_match.groups()[num_groups - 1] is None):
             # If the original number was viable, and the resultant number is not, we return.
             # Check that the resultant number is viable. If not, return.
-            national_number_match = fullmatch(national_number_pattern,
-                                              number[prefix_match.end():])
+            national_number_match = _match_national_number(number[prefix_match.end():], general_desc, False)
             if (is_viable_original_number and not national_number_match):
                 return (U_EMPTY_STRING, number, False)
 
@@ -2669,8 +2666,7 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
             # return. Check this by copying the number and making the
             # transformation on the copy first.
             transformed_number = re.sub(prefix_pattern, transform_rule, number, count=1)
-            national_number_match = fullmatch(national_number_pattern,
-                                              transformed_number)
+            national_number_match = _match_national_number(transformed_number, general_desc, False)
             if (is_viable_original_number and not national_number_match):
                 return ("", number, False)
             if num_groups > 1:
@@ -3112,15 +3108,14 @@ def is_number_match(num1, num2):
         return _is_number_match_SS(num1, num2)
 
 
-def _can_be_internationally_dialled(numobj):
+def can_be_internationally_dialled(numobj):
     """Returns True if the number can only be dialled from outside the region,
     or unknown.
 
     If the number can only be dialled from within the region
     as well, returns False. Does not check the number is a valid number.
-
-    TODO: Make this method public when we have enough metadata to make it
-    worthwhile.
+    Note that, at the moment, this method does not handle short numbers (which
+    are currently all presumed to not be diallable from outside their country).
 
     Arguments:
     numobj -- the phone number objectfor which we want to know whether it is
@@ -3185,3 +3180,24 @@ class NumberParseException(UnicodeMixin, Exception):
 
     def __unicode__(self):
         return unicod("(%s) %s") % (self.error_type, self._msg)
+
+
+def _match_national_number(number, number_desc, allow_prefix_match):
+    """Returns whether the given national number (a string containing only decimal digits) matches
+    the national number pattern defined in the given PhoneNumberDesc object.
+    """
+    # We don't want to consider it a prefix match when matching non-empty input against an empty
+    # pattern.
+    if number_desc is None or number_desc.national_number_pattern is None or len(number_desc.national_number_pattern) == 0:
+        return False
+    return _match(number, re.compile(number_desc.national_number_pattern), allow_prefix_match)
+
+
+def _match(number, pattern, allow_prefix_match):
+    if not pattern.match(number):
+        return False
+    else:
+        if fullmatch(pattern, number):
+            return True
+        else:
+            return allow_prefix_match
