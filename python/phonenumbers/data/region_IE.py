@@ -11,7 +11,7 @@ PHONE_METADATA_IE = PhoneMetadata(id='IE', country_code=353, international_prefi
     personal_number=PhoneNumberDesc(national_number_pattern='700\\d{6}', example_number='700123456', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='76\\d{7}', example_number='761234567', possible_length=(9,)),
     uan=PhoneNumberDesc(national_number_pattern='818\\d{6}', example_number='818123456', possible_length=(9,)),
-    voicemail=PhoneNumberDesc(national_number_pattern='8[35-9]\\d{8}', example_number='8501234567', possible_length=(10,)),
+    voicemail=PhoneNumberDesc(national_number_pattern='8[35-9]5\\d{7}', example_number='8551234567', possible_length=(10,)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='18[59]0\\d{6}', example_number='1850123456', possible_length=(10,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
@@ -21,7 +21,8 @@ PHONE_METADATA_IE = PhoneMetadata(id='IE', country_code=353, international_prefi
         NumberFormat(pattern='(48)(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['48'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(818)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['81'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['[24-69]|7[14]'], national_prefix_formatting_rule='(0\\1)'),
-        NumberFormat(pattern='([78]\\d)(\\d{3,4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['76|8[35-9]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['76|8[35-9]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(8\\d)(\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['8[35-9]5'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(700)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['70'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1(?:8[059]|5)', '1(?:8[059]0|5)'], national_prefix_formatting_rule='\\1')],
     mobile_number_portable_region=True)

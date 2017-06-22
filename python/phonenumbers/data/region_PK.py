@@ -14,9 +14,9 @@ PHONE_METADATA_PK = PhoneMetadata(id='PK', country_code=92, international_prefix
     number_format=[NumberFormat(pattern='(\\d{2})(111)(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['(?:2[125]|4[0-246-9]|5[1-35-7]|6[1-8]|7[14]|8[16]|91)1', '(?:2[125]|4[0-246-9]|5[1-35-7]|6[1-8]|7[14]|8[16]|91)11', '(?:2[125]|4[0-246-9]|5[1-35-7]|6[1-8]|7[14]|8[16]|91)111'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(\\d{3})(111)(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['2[349]|45|54|60|72|8[2-5]|9[2-9]', '(?:2[349]|45|54|60|72|8[2-5]|9[2-9])\\d1', '(?:2[349]|45|54|60|72|8[2-5]|9[2-9])\\d11', '(?:2[349]|45|54|60|72|8[2-5]|9[2-9])\\d111'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(\\d{2})(\\d{7,8})', format='\\1 \\2', leading_digits_pattern=['(?:2[125]|4[0-246-9]|5[1-35-7]|6[1-8]|7[14]|8[16]|91)[2-9]'], national_prefix_formatting_rule='(0\\1)'),
-        NumberFormat(pattern='(\\d{3})(\\d{6,7})', format='\\1 \\2', leading_digits_pattern=['2[349]|45|54|60|72|8[2-5]|9[2-9]', '(?:2[349]|45|54|60|72|8[2-5]|9[2-9])\\d[2-9]'], national_prefix_formatting_rule='(0\\1)'),
+        NumberFormat(pattern='(\\d{3})(\\d{6,7})', format='\\1 \\2', leading_digits_pattern=['2[349]|45|5(?:4|8[12])|60|72|8[2-5]|9[2-9]', '(?:2[349]|45|5(?:4|8[12])|60|72|8[2-5]|9[2-9])\\d[2-9]'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(3\\d{2})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['3'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='([15]\\d{3})(\\d{5,6})', format='\\1 \\2', leading_digits_pattern=['58[12]|1'], national_prefix_formatting_rule='(0\\1)'),
+        NumberFormat(pattern='(1\\d{3})(\\d{5,6})', format='\\1 \\2', leading_digits_pattern=['1'], national_prefix_formatting_rule='\\1'),
         NumberFormat(pattern='(586\\d{2})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['586'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='([89]00)(\\d{3})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['[89]00'], national_prefix_formatting_rule='0\\1')],
     mobile_number_portable_region=True)

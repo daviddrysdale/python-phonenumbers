@@ -15,5 +15,6 @@ PHONE_METADATA_JO = PhoneMetadata(id='JO', country_code=962, international_prefi
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2356]|87'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(7)(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['7[457-9]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{5,6})', format='\\1 \\2', leading_digits_pattern=['70|8[0158]|9'], national_prefix_formatting_rule='0\\1')],
+        NumberFormat(pattern='(\\d{2})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['70'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{5,6})', format='\\1 \\2', leading_digits_pattern=['8[0158]|9'], national_prefix_formatting_rule='0\\1')],
     mobile_number_portable_region=True)

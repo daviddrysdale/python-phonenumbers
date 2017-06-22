@@ -6,7 +6,7 @@ PHONE_METADATA_UA = PhoneMetadata(id='UA', country_code=380, international_prefi
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:3[1-8]|4[13-8]|5[1-7]|6[12459])\\d{7}', example_number='311234567', possible_length=(9,), possible_length_local_only=(5, 6, 7)),
     mobile=PhoneNumberDesc(national_number_pattern='(?:39|50|6[36-8]|7[13]|9[1-9])\\d{7}', example_number='391234567', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6}', example_number='800123456', possible_length=(9,)),
-    premium_rate=PhoneNumberDesc(national_number_pattern='900\\d{6}', example_number='900123456', possible_length=(9,)),
+    premium_rate=PhoneNumberDesc(national_number_pattern='900[2-49]\\d{5}', example_number='900212345', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='89\\d{7}', example_number='891234567', possible_length=(9,)),
     preferred_international_prefix='0~0',
     national_prefix='0',
