@@ -1421,13 +1421,6 @@ def _raw_input_contains_national_prefix(raw_input, national_prefix, region_code)
     return False
 
 
-def _has_unexpected_italian_leading_zero(numobj):
-    """Returns true if a number is from a region whose national significant number couldn't contain a
-    leading zero, but has the italian_leading_zero field set to true."""
-    return (numobj.italian_leading_zero and
-            not _is_leading_zero_possible(numobj.country_code))
-
-
 def _has_formatting_pattern_for_number(numobj):
     country_code = numobj.country_code
     phone_number_region = region_code_for_country_code(country_code)
@@ -2159,17 +2152,6 @@ def is_nanpa_country(region_code):
     Numbering Plan Administration (NANPA).
     """
     return region_code in _NANPA_REGIONS
-
-
-def _is_leading_zero_possible(country_code):
-    """Checks whether the country calling code is from a region whose national
-    significant number could contain a leading zero. An example of such a
-    region is Italy.  Returns False if no metadata for the country is found."""
-    region_code = region_code_for_country_code(country_code)
-    metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
-    if metadata is None:
-        return False
-    return metadata.leading_zero_possible
 
 
 def is_alpha_number(number):
