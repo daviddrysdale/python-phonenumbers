@@ -1,8 +1,35 @@
+What's new in 8.6.0
+-------------------
+
+Merge to
+[upstream commit 242a186f1fbf](https://github.com/googlei18n/libphonenumber/commit/242a186f1fbf);
+relevant code changes:
+
+ - Removing `leading_zero_possible` from the metadata and all the places it is
+   referenced in the build and prod code. Will be removed from the metadata
+   proto itself in a subsequent release. This should not affect users of the
+   library - the only place it was used was `format_in_original_format`, and only
+   initially to try and avoid modifying the input number by removing/adding
+   digits inadvertently. Now this is checked at the end of the method anyway.
+   However slight formatting differences with this method on invalid numbers
+   starting with 0s may be noticed in some countries.
+ - Updated the documentation for the `is_number_geographical` API.
+ - Small comment improvements for `parse()` method to point users at
+   `keep_raw_input` parameter.
+ - Added a new enum for `CountryCodeSource` called `UNSPECIFIED`. This is used as a
+   default value, and will be returned if someone calls `parse(keep_raw_input=False)` and then
+   `.country_code_sourc` on the result. If users want an actual value for this
+   then they should call `parse(keep_raw_input=True)` instead; the values that were
+   previously returned after calling this method will not change.
+ - Deletion of the possible number pattern in the phonemetadata.proto file and
+   all generated code. This has not been used for a long time.
+
+
 What's new in 8.5.0
 -------------------
 
 Merge to
-[upstream commit 52cff9d8837f](https://github.com/googlei18n/libphonenumber/commit/52cff9d8837f;
+[upstream commit 52cff9d8837f](https://github.com/googlei18n/libphonenumber/commit/52cff9d8837f);
 relevant code changes:
 
  - Add `can_be_internationally_dialled` public API; This was already in JS.
