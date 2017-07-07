@@ -8,5 +8,4 @@ PHONE_METADATA_TO = PhoneMetadata(id='TO', country_code=676, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='0800\\d{3}', example_number='0800222', possible_length=(7,)),
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})', format='\\1-\\2', leading_digits_pattern=['[1-6]|7[0-4]|8[05]']),
         NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['7[5-9]|8[47-9]']),
-        NumberFormat(pattern='(\\d{4})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['0'])],
-    leading_zero_possible=True)
+        NumberFormat(pattern='(\\d{4})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['0'])])

@@ -10,5 +10,4 @@ PHONE_METADATA_IT = PhoneMetadata(id='IT', country_code=39, international_prefix
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['0[26]']),
         NumberFormat(pattern='(\\d{3})(\\d{4})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['0[13-57-9]']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['3']),
-        NumberFormat(pattern='(\\d{3})(\\d{3,6})', format='\\1 \\2', leading_digits_pattern=['8'])],
-    leading_zero_possible=True)
+        NumberFormat(pattern='(\\d{3})(\\d{3,6})', format='\\1 \\2', leading_digits_pattern=['8'])])

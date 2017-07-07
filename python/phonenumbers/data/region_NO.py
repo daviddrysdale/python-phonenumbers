@@ -15,5 +15,4 @@ PHONE_METADATA_NO = PhoneMetadata(id='NO', country_code=47, international_prefix
     number_format=[NumberFormat(pattern='([489]\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[489]']),
         NumberFormat(pattern='([235-7]\\d)(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[235-7]'])],
     main_country_for_code=True,
-    leading_zero_possible=True,
     mobile_number_portable_region=True)

@@ -14,5 +14,4 @@ PHONE_METADATA_JP = PhoneMetadata(id='JP', country_code=81, international_prefix
         NumberFormat(pattern='(\\d{4})(\\d)(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['222|333', '2221|3332', '22212|3332', '222120|3332'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[23]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['077'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{4})', format='*\\1', leading_digits_pattern=['[23]'], national_prefix_formatting_rule='\\1')],
-    leading_zero_possible=True)
+        NumberFormat(pattern='(\\d{4})', format='*\\1', leading_digits_pattern=['[23]'], national_prefix_formatting_rule='\\1')])

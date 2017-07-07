@@ -7,5 +7,4 @@ PHONE_METADATA_SZ = PhoneMetadata(id='SZ', country_code=268, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='7[6-8]\\d{6}', example_number='76123456', possible_length=(8,)),
     toll_free=PhoneNumberDesc(national_number_pattern='0800\\d{4}', example_number='08001234', possible_length=(8,)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='0800\\d{4}', example_number='08001234', possible_length=(8,)),
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[027]'])],
-    leading_zero_possible=True)
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[027]'])])

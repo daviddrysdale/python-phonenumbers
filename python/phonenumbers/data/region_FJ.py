@@ -8,5 +8,4 @@ PHONE_METADATA_FJ = PhoneMetadata(id='FJ', country_code=679, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='0800\\d{7}', example_number='08001234567', possible_length=(11,)),
     preferred_international_prefix='00',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[35-9]']),
-        NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['0'])],
-    leading_zero_possible=True)
+        NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['0'])])

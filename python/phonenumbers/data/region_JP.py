@@ -39,5 +39,4 @@ PHONE_METADATA_JP = PhoneMetadata(id='JP', country_code=81, international_prefix
         NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['2(?:9[14-79]|74|[34]7|[56]9)|82|993']),
         NumberFormat(pattern='(\\d)(\\d{4})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['3|4(?:2[09]|7[01])|6[1-9]']),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['[2479][1-9]'])],
-    leading_zero_possible=True,
     mobile_number_portable_region=True)

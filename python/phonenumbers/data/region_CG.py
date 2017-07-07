@@ -8,5 +8,4 @@ PHONE_METADATA_CG = PhoneMetadata(id='CG', country_code=242, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='80(?:0\\d{2}|11[01])\\d{4}', example_number='800123456', possible_length=(9,)),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['801']),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[02]']),
-        NumberFormat(pattern='(\\d)(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['800'])],
-    leading_zero_possible=True)
+        NumberFormat(pattern='(\\d)(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['800'])])

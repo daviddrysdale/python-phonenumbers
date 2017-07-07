@@ -22,5 +22,4 @@ PHONE_METADATA_IT = PhoneMetadata(id='IT', country_code=39, international_prefix
         NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['894', '894[5-9]']),
         NumberFormat(pattern='(\\d{3})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['3'])],
     main_country_for_code=True,
-    leading_zero_possible=True,
     mobile_number_portable_region=True)
