@@ -201,13 +201,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertTrue(phonenumberutil.is_number_geographical(MX_MOBILE1))  # Mexico, mobile phone number.
         self.assertTrue(phonenumberutil.is_number_geographical(MX_MOBILE2))  # Mexico, another mobile phone number.
 
-    def testIsLeadingZeroPossible(self):
-        self.assertTrue(phonenumberutil._is_leading_zero_possible(39))  # Italy
-        self.assertFalse(phonenumberutil._is_leading_zero_possible(1))  # USA
-        self.assertTrue(phonenumberutil._is_leading_zero_possible(800))  # International toll free
-        self.assertFalse(phonenumberutil._is_leading_zero_possible(979))  # International premium-rate
-        self.assertFalse(phonenumberutil._is_leading_zero_possible(888))  # Not in metadata file, just default to False
-
     def testGetLengthOfGeographicalAreaCode(self):
         # Google MTV, which has area code "650".
         self.assertEqual(3, phonenumbers.length_of_geographical_area_code(US_NUMBER))
@@ -712,7 +705,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          str(arNumber))
         self.assertEqual("PhoneNumber(country_code=54, national_number=91234125678, extension=None, "
                          "italian_leading_zero=None, number_of_leading_zeros=None, "
-                         "country_code_source=None, preferred_domestic_carrier_code='19')",
+                         "country_code_source=0, preferred_domestic_carrier_code='19')",
                          repr(arNumber))
         # When the preferred_domestic_carrier_code is present (even when it is
         # just a space), use it instead of the default carrier code passed in.
@@ -1896,8 +1889,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             ccc, numberToFill = phonenumberutil._maybe_extract_country_code(phoneNumber, metadata, False, number)
             self.assertEqual(countryCallingCode, ccc,
                              msg="Should have extracted the country calling code of the region passed in")
-            self.assertFalse(number.country_code_source is not None,
-                             msg="Should not contain CountryCodeSource.")
+            self.assertEqual(CountryCodeSource.UNSPECIFIED, number.country_code_source)
         except NumberParseException:
             e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
@@ -1909,8 +1901,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             self.assertEqual(0, ccc,
                              msg=("Should not have extracted a country calling code - invalid number after " +
                                   "extraction of uncertain country calling code."))
-            self.assertFalse(number.country_code_source is not None,
-                             msg="Should not contain CountryCodeSource.")
+            self.assertEqual(CountryCodeSource.UNSPECIFIED, number.country_code_source)
         except NumberParseException:
             e = sys.exc_info()[1]
             self.fail("Should not have thrown an exception: %s" % e)
@@ -1931,6 +1922,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     def testParseNationalNumber(self):
         # National prefix attached.
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("033316005", "NZ"))
+        # Some fields are not filled in by parse when keep_raw_input is not set.
+        self.assertEqual(CountryCodeSource.UNSPECIFIED, NZ_NUMBER.country_code_source)
+
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("33316005", "NZ"))
         # National prefix attached and some formatting present.
         self.assertEqual(NZ_NUMBER, phonenumbers.parse("03-331 6005", "NZ"))

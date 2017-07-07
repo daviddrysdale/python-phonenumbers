@@ -22,6 +22,9 @@ from .util import to_long, unicod, rpr, force_unicode
 
 class CountryCodeSource(object):
     """The source from which a country code is derived."""
+    # Default value returned if this is not set, because the phone number was
+    # created using parse(keep_raw_input=False).
+    UNSPECIFIED = 0
 
     # The country_code is derived based on a phone number with a leading "+",
     # e.g. the French number "+33 1 42 68 53 00".
@@ -60,7 +63,7 @@ class PhoneNumber(UnicodeMixin):
                  italian_leading_zero=None,
                  number_of_leading_zeros=None,
                  raw_input=None,
-                 country_code_source=None,
+                 country_code_source=CountryCodeSource.UNSPECIFIED,
                  preferred_domestic_carrier_code=None):
         # The country calling code for this number, as defined by the
         # International Telecommunication Union (ITU). For example, this would
@@ -146,8 +149,9 @@ class PhoneNumber(UnicodeMixin):
         # The source from which the country_code is derived. This is not set
         # in the general parsing method, but in the method that parses and
         # keeps raw_input. New fields could be added upon request.
-        self.country_code_source = country_code_source
-        # None or CountryCodeSource.VALUE
+        self.country_code_source = country_code_source  # CountryCodeSource.VALUE
+        if self.country_code_source is None:  # pragma no cover
+            self.country_code_source = CountryCodeSource.UNSPECIFIED
 
         # The carrier selection code that is preferred when calling this
         # phone number domestically. This also includes codes that need to
@@ -169,7 +173,7 @@ class PhoneNumber(UnicodeMixin):
         self.italian_leading_zero = None
         self.number_of_leading_zeros = None
         self.raw_input = None
-        self.country_code_source = None
+        self.country_code_source = CountryCodeSource.UNSPECIFIED
         self.preferred_domestic_carrier_code = None
 
     def merge_from(self, other):
@@ -186,7 +190,7 @@ class PhoneNumber(UnicodeMixin):
             self.number_of_leading_zeros = other.number_of_leading_zeros
         if other.raw_input is not None:
             self.raw_input = other.raw_input
-        if other.country_code_source is not None:
+        if other.country_code_source is not CountryCodeSource.UNSPECIFIED:
             self.country_code_source = other.country_code_source
         if other.preferred_domestic_carrier_code is not None:
             self.preferred_domestic_carrier_code = other.preferred_domestic_carrier_code
@@ -227,7 +231,7 @@ class PhoneNumber(UnicodeMixin):
             result += unicod(" Number of leading zeros: %d") % self.number_of_leading_zeros
         if self.extension is not None:
             result += unicod(" Extension: %s") % self.extension
-        if self.country_code_source is not None:
+        if self.country_code_source is not CountryCodeSource.UNSPECIFIED:
             result += unicod(" Country Code Source: %s") % self.country_code_source
         if self.preferred_domestic_carrier_code is not None:
             result += (unicod(" Preferred Domestic Carrier Code: %s") %

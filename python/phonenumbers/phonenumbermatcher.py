@@ -690,7 +690,7 @@ class PhoneNumberMatcher(object):
                 # TODO: stop clearing all values here and switch all users
                 # over to using raw_input rather than the raw_string of
                 # PhoneNumberMatch.
-                numobj.country_code_source = None
+                numobj.country_code_source = CountryCodeSource.UNSPECIFIED
                 numobj.raw_input = None
                 numobj.preferred_domestic_carrier_code = None
                 return PhoneNumberMatch(offset, candidate, numobj)

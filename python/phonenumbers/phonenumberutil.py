@@ -888,8 +888,8 @@ def _formatting_rule_has_first_group_only(national_prefix_formatting_rule):
 def is_number_geographical(numobj):
     """Tests whether a phone number has a geographical association.
 
-    It checks if the number is associated to a certain region in the country
-    where it belongs to. Note that this doesn't verify if the number is
+    It checks if the number is associated with a certain region in the country
+    to which it belongs. Note that this doesn't verify if the number is
     actually in use.
     country_code -- the country calling code for which we want the mobile token
     """
@@ -1315,8 +1315,7 @@ def format_in_original_format(numobj, region_calling_from):
     PhoneNumber object passed in. If such information is missing, the number
     will be formatted into the NATIONAL format by default.
 
-    When the number contains a leading zero and this is unexpected for this
-    country, or we don't have a formatting pattern for the number, the method
+    When  we don't have a formatting pattern for the number, the method
     returns the raw input when it is available.
 
     Note this method guarantees no digit will be inserted, removed or modified
@@ -1330,12 +1329,11 @@ def format_in_original_format(numobj, region_calling_from):
 
     Returns the formatted phone number in its original number format.
     """
-    if (numobj.raw_input is not None and
-        (_has_unexpected_italian_leading_zero(numobj) or not _has_formatting_pattern_for_number(numobj))):
+    if (numobj.raw_input is not None and not _has_formatting_pattern_for_number(numobj)):
         # We check if we have the formatting pattern because without that, we
         # might format the number as a group without national prefix.
         return numobj.raw_input
-    if numobj.country_code_source is None:
+    if numobj.country_code_source is CountryCodeSource.UNSPECIFIED:
         return format_number(numobj, PhoneNumberFormat.NATIONAL)
 
     formatted_number = _format_original_allow_mods(numobj, region_calling_from)
@@ -2754,6 +2752,13 @@ def parse(number, region=None, keep_raw_input=False,
     number is actually a valid number for a particular region is not
     performed. This can be done separately with is_valid_number.
 
+    Note this method canonicalizes the phone number such that different
+    representations can be easily compared, no matter what form it was
+    originally entered in (e.g. national, international). If you want to
+    record context about the number being parsed, such as the raw input that
+    was entered, how the country code was derived etc. then ensure
+    keep_raw_input is set.
+
     Note if any new field is added to this method that should always be filled
     in, even when keep_raw_input is False, it should also be handled in the
     _copy_core_fields_only() function.
@@ -2856,7 +2861,7 @@ def parse(number, region=None, keep_raw_input=False,
             country_code = metadata.country_code
             numobj.country_code = country_code
         elif keep_raw_input:
-            numobj.country_code_source = None
+            numobj.country_code_source = CountryCodeSource.UNSPECIFIED
 
     if len(normalized_national_number) < _MIN_LENGTH_FOR_NSN:
         raise NumberParseException(NumberParseException.TOO_SHORT_NSN,

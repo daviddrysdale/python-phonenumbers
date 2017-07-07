@@ -159,9 +159,6 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         # its total length and leading digits.
         self.national_number_pattern = force_unicode(national_number_pattern)  # None or Unicode string holding regexp
 
-        # The possible_number_pattern is now retired.
-        self.possible_number_pattern = None
-
         # An example national significant number for the specific type. It
         # should not contain any formatting information.
         self.example_number = force_unicode(example_number)  # None or Unicode string
@@ -507,13 +504,8 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # match.
         self.leading_digits = force_unicode(leading_digits)  # None or Unicode string holding regexp
 
-        # The leading zero in a phone number is meaningful in some countries
-        # (e.g.  Italy). This means they cannot be dropped from the national
-        # number when converting into international format. If leading zeros
-        # are possible for valid international numbers for this region/country
-        # then set this to true.  This only needs to be set for the region
-        # that is the main_country_for_code and all regions associated with
-        # that calling code will use the same setting.
+        # Deprecated: do not use. Will be deleted when there are no references
+        # to this later.
         self.leading_zero_possible = bool(leading_zero_possible)
 
         # This field is set when this country has implemented mobile number
