@@ -21,7 +21,7 @@ Note most commercial short numbers are not handled here, but by phonenumberutil.
 import re
 
 from .re_util import fullmatch
-from .util import U_EMPTY_STRING
+from .util import U_EMPTY_STRING, prnt
 from .phonemetadata import PhoneMetadata
 from .phonenumber import PhoneNumber
 from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
@@ -29,6 +29,24 @@ from .phonenumberutil import normalize_digits_only, region_codes_for_country_cod
 from .phonenumberutil import national_significant_number
 from .phonenumberutil import _is_number_matching_desc, _match_national_number
 
+
+# Import auto-generated data structures
+try:
+    from .shortdata import _AVAILABLE_REGION_CODES as _AVAILABLE_SHORT_REGION_CODES
+except ImportError:  # pragma no cover
+    # Before the generated code exists, the shortdata/ directory is empty.
+    # The generation process imports this module, creating a circular
+    # dependency.  The hack below works around this.
+    import os
+    import sys
+    if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
+        os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
+        prnt("Failed to import generated shortdata (but OK as during autogeneration)", file=sys.stderr)
+        _AVAILABLE_SHORT_REGION_CODES = []
+    else:
+        raise
+
+SUPPORTED_SHORT_REGIONS = _AVAILABLE_SHORT_REGION_CODES
 
 # In these countries, if extra digits are added to an emergency number, it no longer connects
 # to the emergency service.

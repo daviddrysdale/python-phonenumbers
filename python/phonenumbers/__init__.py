@@ -79,7 +79,7 @@ from .phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY, NumberFormat, PhoneNu
 # Functionality
 from .asyoutypeformatter import AsYouTypeFormatter
 from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS,
-                              SUPPORTED_SHORT_REGIONS, UNKNOWN_REGION, COUNTRY_CODES_FOR_NON_GEO_REGIONS,
+                              UNKNOWN_REGION, COUNTRY_CODES_FOR_NON_GEO_REGIONS,
                               NON_DIGITS_PATTERN,
                               MatchType, NumberParseException, PhoneNumberFormat,
                               PhoneNumberType, ValidationResult,
@@ -127,7 +127,8 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS,
                               supported_types_for_non_geo_entity,
                               truncate_too_long_number,
                               is_mobile_number_portable_region,)
-from .shortnumberinfo import (ShortNumberCost,
+from .shortnumberinfo import (SUPPORTED_SHORT_REGIONS,
+                              ShortNumberCost,
                               is_possible_short_number_for_region,
                               is_possible_short_number,
                               is_valid_short_number_for_region,
@@ -150,7 +151,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'AsYouTypeFormatter',
            # items from phonenumberutil.py
            'COUNTRY_CODE_TO_REGION_CODE', 'SUPPORTED_REGIONS',
-           'SUPPORTED_SHORT_REGIONS', 'UNKNOWN_REGION', 'COUNTRY_CODES_FOR_NON_GEO_REGIONS',
+           'UNKNOWN_REGION', 'COUNTRY_CODES_FOR_NON_GEO_REGIONS',
            'NON_DIGITS_PATTERN',
            'MatchType', 'NumberParseException', 'PhoneNumberFormat',
            'PhoneNumberType', 'ValidationResult',
@@ -199,6 +200,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'is_mobile_number_portable_region',
            # end of items from phonenumberutil.py
            # items from shortnumberinfo.py
+           'SUPPORTED_SHORT_REGIONS',
            'ShortNumberCost',
            'is_possible_short_number_for_region',
            'is_possible_short_number',

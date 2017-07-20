@@ -177,7 +177,7 @@ class ExampleNumbersTest(unittest.TestCase):
 
     def testShortNumbersValidAndCorrectCost(self):
         invalid_string_cases = []
-        for regionCode in phonenumberutil.SUPPORTED_SHORT_REGIONS:
+        for regionCode in shortnumberinfo.SUPPORTED_SHORT_REGIONS:
             exampleShortNumber = shortnumberinfo._example_short_number(regionCode)
             phoneNumber = phonenumberutil.parse(exampleShortNumber, regionCode)
             if not shortnumberinfo.is_valid_short_number_for_region(phoneNumber, regionCode):
@@ -203,7 +203,7 @@ class ExampleNumbersTest(unittest.TestCase):
 
     def testEmergency(self):
         wrongTypeCounter = 0
-        for regionCode in phonenumberutil.SUPPORTED_SHORT_REGIONS:
+        for regionCode in shortnumberinfo.SUPPORTED_SHORT_REGIONS:
             metadata = PhoneMetadata.short_metadata_for_region(regionCode, None)
             desc = metadata.emergency
             if desc is not None and desc.example_number is not None:
@@ -220,7 +220,7 @@ class ExampleNumbersTest(unittest.TestCase):
 
     def testCarrierSpecificShortNumbers(self):
         wrongTagCounter = 0
-        for regionCode in phonenumberutil.SUPPORTED_SHORT_REGIONS:
+        for regionCode in shortnumberinfo.SUPPORTED_SHORT_REGIONS:
             # Test the carrier-specific tag.
             metadata = PhoneMetadata.short_metadata_for_region(regionCode, None)
             desc = metadata.carrier_specific

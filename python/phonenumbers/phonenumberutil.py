@@ -43,7 +43,6 @@ from .phonemetadata import NumberFormat, PhoneMetadata, REGION_CODE_FOR_NON_GEO_
 # Import auto-generated data structures
 try:
     from .data import _COUNTRY_CODE_TO_REGION_CODE
-    from .shortdata import _AVAILABLE_REGION_CODES as _AVAILABLE_SHORT_REGION_CODES
 except ImportError:  # pragma no cover
     # Before the generated code exists, the data/ directory is empty.
     # The generation process imports this module, creating a circular
@@ -54,7 +53,6 @@ except ImportError:  # pragma no cover
         os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
         prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
-        _AVAILABLE_SHORT_REGION_CODES = []
     else:
         raise
 
@@ -475,7 +473,6 @@ class ValidationResult(object):
 SUPPORTED_REGIONS = set()
 COUNTRY_CODES_FOR_NON_GEO_REGIONS = set()
 _NANPA_REGIONS = set()
-SUPPORTED_SHORT_REGIONS = _AVAILABLE_SHORT_REGION_CODES
 
 
 def _regenerate_derived_data():
