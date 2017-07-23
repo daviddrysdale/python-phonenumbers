@@ -9,4 +9,5 @@ PHONE_METADATA_CH = PhoneMetadata(id='CH', country_code=None, international_pref
     short_code=PhoneNumberDesc(national_number_pattern='1(?:0[78]\\d{2}|1(?:[278]|45|6(?:000|111))|4(?:[03457]|1[45])|6(?:00|[1-46])|8(?:02|1[189]|50|7|8[08]|99))|[2-9]\\d{2,4}', example_number='147', possible_length=(3, 4, 5, 6)),
     standard_rate=PhoneNumberDesc(national_number_pattern='1(?:4(?:[035]|1\\d)|6\\d{1,2})', example_number='1600', possible_length=(3, 4)),
     carrier_specific=PhoneNumberDesc(national_number_pattern='5(?:200|35)', example_number='535', possible_length=(3, 4)),
+    sms_services=PhoneNumberDesc(national_number_pattern='[2-9]\\d{2,4}', example_number='600', possible_length=(3, 4, 5)),
     short_data=True)

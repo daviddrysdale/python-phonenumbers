@@ -5030,7 +5030,7 @@ data = {
  '223216':{'en': 'Sikasso'},
  '223214':{'en': 'Mopti'},
  '223215':{'en': 'Kayes'},
- '223218':{'en': 'Gao and Kidal'},
+ '223218':{'en': 'Gao/Kidal'},
  '223219':{'en': 'Tombouctou'},
  '1920593':{'en': 'Green Bay, WI'},
  '1864366':{'en': 'Abbeville, SC'},

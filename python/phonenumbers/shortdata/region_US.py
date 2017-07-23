@@ -9,4 +9,5 @@ PHONE_METADATA_US = PhoneMetadata(id='US', country_code=None, international_pref
     short_code=PhoneNumberDesc(national_number_pattern='1(?:1(?:2|5[1-47]|[68]\\d|7[0-57]|98))|[2-9](?:11|\\d{3,5})', example_number='911', possible_length=(3, 4, 5, 6)),
     standard_rate=PhoneNumberDesc(national_number_pattern='2(?:3333|42242|56447|6688|75622)|3(?:1010|2665|7404)|40404|560560|6(?:0060|22639|5246|7622)|7(?:0701|3822|4666)|8(?:38255|4816|72265)|99099', example_number='73822', possible_length=(5, 6)),
     carrier_specific=PhoneNumberDesc(national_number_pattern='[2-9]\\d{3}|33669|[2356]11', example_number='33669', possible_length=(3, 4, 5)),
+    sms_services=PhoneNumberDesc(national_number_pattern='[2-9]\\d{4,5}', example_number='20566', possible_length=(5, 6)),
     short_data=True)

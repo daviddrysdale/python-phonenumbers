@@ -13,5 +13,4 @@ PHONE_METADATA_GG = PhoneMetadata(id='GG', country_code=44, international_prefix
     pager=PhoneNumberDesc(national_number_pattern='76(?:0[012]|2[356]|4[0134]|5[49]|6[0-369]|77|81|9[39])\\d{6}', example_number='7640123456', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='(?:3[0347]|55)\\d{8}', example_number='5512345678', possible_length=(10,)),
     national_prefix='0',
-    preferred_extn_prefix=' x',
     national_prefix_for_parsing='0')

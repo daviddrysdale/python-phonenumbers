@@ -8,4 +8,5 @@ PHONE_METADATA_SE = PhoneMetadata(id='SE', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='112|90000', example_number='112', possible_length=(3, 5)),
     short_code=PhoneNumberDesc(national_number_pattern='11(?:[25]|313|4\\d{2}|6(?:00[06]|11[17]|123)|7[0-8]|8(?:1(?:[02-9]\\d|1[013-9])|[02-46-9]\\d{2}))|2(?:2[02358]|33|4[01]|50|6[1-4])|32[13]|7\\d{4}|8(?:22|88)|9(?:0(?:000|1(?:[02-9]\\d|1[013-9])|[2-4]\\d{2}|510)|12)', example_number='11313', possible_length=(3, 4, 5, 6)),
     carrier_specific=PhoneNumberDesc(national_number_pattern='2(?:2[02358]|33|4[01]|50|6[1-4])|32[13]|8(?:22|88)|912', example_number='222', possible_length=(3,)),
+    sms_services=PhoneNumberDesc(national_number_pattern='7\\d{4}', example_number='72123', possible_length=(5,)),
     short_data=True)

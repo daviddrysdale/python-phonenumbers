@@ -13,5 +13,4 @@ PHONE_METADATA_IM = PhoneMetadata(id='IM', country_code=44, international_prefix
     pager=PhoneNumberDesc(national_number_pattern='7624[01689]\\d{5}', example_number='7624012345', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='3(?:08162\\d|3\\d{5}|4(?:40[49]06|5624\\d)|7(?:0624\\d|2299\\d))\\d{3}|55\\d{8}', example_number='5512345678', possible_length=(10,)),
     national_prefix='0',
-    preferred_extn_prefix=' x',
     national_prefix_for_parsing='0')

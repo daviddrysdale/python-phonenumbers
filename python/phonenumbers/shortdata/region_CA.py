@@ -7,4 +7,5 @@ PHONE_METADATA_CA = PhoneMetadata(id='CA', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='112|911', example_number='911', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='1(?:12|\\d{4,5})|[25-9](?:11|\\d{4,5})|3(?:\\d{4,5}|0000\\d{3}|11)|411', example_number='12345', possible_length=(3, 5, 6, 8)),
     carrier_specific=PhoneNumberDesc(national_number_pattern='[23567]11', example_number='611', possible_length=(3,)),
+    sms_services=PhoneNumberDesc(national_number_pattern='[125-9]\\d{4,5}|3(?:\\d{4,5}|0000\\d{3})', example_number='30001', possible_length=(5, 6, 8)),
     short_data=True)

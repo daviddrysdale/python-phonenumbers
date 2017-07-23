@@ -9,6 +9,7 @@ PHONE_METADATA_HK = PhoneMetadata(id='HK', country_code=852, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='900(?:[0-24-9]\\d{7}|3\\d{1,4})', example_number='90012345678', possible_length=(5, 6, 7, 8, 11)),
     personal_number=PhoneNumberDesc(national_number_pattern='8(?:1[1-4679]|2[0-367]|3[02-47])\\d{5}', example_number='81123456', possible_length=(8,)),
     pager=PhoneNumberDesc(national_number_pattern='7(?:1[0-369]|[23][0-37-9]|47|5[1578]|6[0235]|7[278]|8[236-9]|9[025-9])\\d{5}', example_number='71234567', possible_length=(8,)),
+    uan=PhoneNumberDesc(national_number_pattern='30(?:0[1-9]|[15-7]\\d|2[047]|89)\\d{4}', example_number='30161234', possible_length=(8,)),
     preferred_international_prefix='00',
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[235-7]|[89](?:0[1-9]|[1-9])']),
         NumberFormat(pattern='(800)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['800']),

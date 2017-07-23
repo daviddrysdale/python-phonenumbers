@@ -6,4 +6,5 @@ PHONE_METADATA_CW = PhoneMetadata(id='CW', country_code=None, international_pref
     emergency=PhoneNumberDesc(national_number_pattern='112|911', example_number='112', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='1(?:12|76)|911', example_number='112', possible_length=(3,)),
     carrier_specific=PhoneNumberDesc(national_number_pattern='176', example_number='176', possible_length=(3,)),
+    sms_services=PhoneNumberDesc(national_number_pattern='176', example_number='176', possible_length=(3,)),
     short_data=True)
