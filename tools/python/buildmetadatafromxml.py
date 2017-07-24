@@ -471,6 +471,7 @@ class XTerritory(UnicodeMixin):
             self.o.standard_rate = XPhoneNumberDesc(xterritory, 'standardRate', template=self.o.general_desc).o
             self.o.short_code = XPhoneNumberDesc(xterritory, 'shortCode', template=self.o.general_desc).o
             self.o.carrier_specific = XPhoneNumberDesc(xterritory, 'carrierSpecific', template=self.o.general_desc).o
+            self.o.sms_services = XPhoneNumberDesc(xterritory, 'smsServices', template=self.o.general_desc).o
             self.o.emergency = XPhoneNumberDesc(xterritory, 'emergency', template=self.o.general_desc).o
             # For short number metadata, copy the lengths from the "short code" section only.
             sub_descs = (self.o.short_code,)
