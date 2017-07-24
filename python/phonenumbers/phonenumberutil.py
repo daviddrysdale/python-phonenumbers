@@ -3,15 +3,12 @@
 
 If you use this library, and want to be notified about important changes,
 please sign up to the libphonenumber mailing list at
-http://groups.google.com/group/libphonenumber-discuss/about.
+https://groups.google.com/forum/#!aboutgroup/libphonenumber-discuss.
 
 NOTE: A lot of methods in this module require Region Code strings. These must
 be provided using CLDR two-letter region-code format. These should be in
 upper-case. The list of the codes can be found here:
 http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm
-
-author: Shaopeng Jia (original Java version)
-author: David Drysdale (Python version)
 """
 # Based on original Java code:
 #     java/src/com/google/i18n/phonenumbers/PhoneNumberUtil.java
@@ -186,21 +183,22 @@ _ALL_PLUS_NUMBER_GROUPING_SYMBOLS = dict({u("-"): u("-"),  # Add grouping symbol
                                                 [(_c, _c) for _c in _ALPHA_MAPPINGS.keys()],
                                                 **_ASCII_DIGITS_MAP))
 
-# Pattern that makes it easy to distinguish whether a region has a unique
-# international dialing prefix or not. If a region has a unique international
-# prefix (e.g. 011 in USA), it will be represented as a string that contains a
-# sequence of ASCII digits. If there are multiple available international
-# prefixes in a region, they will be represented as a regex string that always
-# contains character(s) other than ASCII digits.  Note this regex also
-# includes tilde, which signals waiting for the tone.
-_UNIQUE_INTERNATIONAL_PREFIX = re.compile(u("[\\d]+(?:[~\u2053\u223C\uFF5E][\\d]+)?"))
+# Pattern that makes it easy to distinguish whether a region has a single international dialing
+# prefix or not. If a region has a single international prefix (e.g. 011 in USA), it will be
+# represented as a string that contains a sequence of ASCII digits, and possibly a tilde, which
+# signals waiting for the tone. If there are multiple available international prefixes in a
+# region, they will be represented as a regex string that always contains one or more characters
+# that are not ASCII digits or a tilde.
+_SINGLE_INTERNATIONAL_PREFIX = re.compile(u("[\\d]+(?:[~\u2053\u223C\uFF5E][\\d]+)?"))
 
 # Regular expression of acceptable punctuation found in phone numbers. This
-# excludes punctuation found as a leading character only.  This consists of
-# dash characters, white space characters, full stops, slashes, square
-# brackets, parentheses and tildes. It also includes the letter 'x' as that is
-# found as a placeholder for carrier information in some phone numbers. Full-width
-# variants are also present.
+# excludes punctuation found as a leading character only.
+
+# Regular expression of acceptable punctuation found in phone numbers, used to find numbers in
+# text and to decide what is a viable phone number. This excludes diallable characters.
+# This consists of dash characters, white space characters, full stops, slashes, square brackets,
+# parentheses and tildes. It also includes the letter 'x' as that is found as a placeholder for
+# carrier information in some phone numbers. Full-width variants are also present.
 _VALID_PUNCTUATION = (u("-x\u2010-\u2015\u2212\u30FC\uFF0D-\uFF0F ") +
                       u("\u00A0\u00AD\u200B\u2060\u3000()\uFF08\uFF09\uFF3B\uFF3D.\\[\\]/~\u2053\u223C\uFF5E"))
 
@@ -346,9 +344,11 @@ NON_DIGITS_PATTERN = re.compile(u("(?:\\D+)"))
 # use \d, so that the first group actually used in the pattern will be
 # matched.
 _FIRST_GROUP_PATTERN = re.compile(u(r"(\\\d)"))
-_NP_PATTERN = re.compile(u("\\$NP"))
-_FG_PATTERN = re.compile(u("\\$FG"))
-_CC_PATTERN = re.compile(u("\\$CC"))
+# Constants used in the formatting rules to represent the national prefix, first group and
+# carrier code respectively.
+_NP_STRING = "$NP"
+_FG_STRING = "$FG"
+_CC_STRING = "$CC"
 
 # A pattern that is used to determine if the national prefix formatting rule
 # has the first group only, i.e., does not start with the national
@@ -572,7 +572,7 @@ def _normalize(number):
           keypad. The keypad used here is the one defined in ITU
           Recommendation E.161. This is only done if there are 3 or more
           letters in the number, to lessen the risk that such letters are
-          typos - otherwise alpha characters are stripped.
+          typos.
      - For other numbers:
         - Wide-ascii digits are converted to normal ASCII (European) digits.
         - Arabic-Indic numerals are converted to European numerals.
@@ -802,7 +802,20 @@ def _normalize_helper(number, replacements, remove_non_matches):
     return U_EMPTY_STRING.join(normalized_number)
 
 
+def supported_calling_codes():
+    """Returns all country calling codes the library has metadata for, covering
+    both non-geographical entities (global network calling codes) and those
+    used for geographical entities. This could be used to populate a drop-down
+    box of country calling codes for a phone-number widget, for instance.
+
+    Returns an unordered set of the country calling codes for every geographica
+    and non-geographical entity the library supports.
+    """
+    return set(COUNTRY_CODE_TO_REGION_CODE.keys())
+
+
 def _desc_has_possible_number_data(desc):
+
     """Returns true if there is any possible number data set for a particular PhoneNumberDesc."""
     # If this is empty, it means numbers of this type inherit from the "general desc" -> the value
     # "-1" means that no numbers exist for this type.
@@ -915,7 +928,7 @@ def _is_valid_region_code(region_code):
 
 
 def _has_valid_country_calling_code(country_calling_code):
-    return (country_calling_code in _COUNTRY_CODE_TO_REGION_CODE)
+    return (country_calling_code in COUNTRY_CODE_TO_REGION_CODE)
 
 
 def format_number(numobj, num_format):
@@ -1019,14 +1032,8 @@ def format_by_pattern(numobj, number_format, user_defined_formats):
             if national_prefix:
                 # Replace $NP with national prefix and $FG with the first
                 # group (\1) matcher.
-                np_formatting_rule = re.sub(_NP_PATTERN,
-                                            national_prefix,
-                                            np_formatting_rule,
-                                            count=1)
-                np_formatting_rule = re.sub(_FG_PATTERN,
-                                            unicod("\\\\1"),
-                                            np_formatting_rule,
-                                            count=1)
+                np_formatting_rule = np_formatting_rule.replace(_NP_STRING, national_prefix)
+                np_formatting_rule = np_formatting_rule.replace(_FG_STRING, unicod("\\1"))
                 num_format_copy.national_prefix_formatting_rule = np_formatting_rule
             else:
                 # We don't want to have a rule for how to format the national
@@ -1279,7 +1286,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
     # format of the number is returned, unless there is a preferred
     # international prefix.
     i18n_prefix_for_formatting = U_EMPTY_STRING
-    i18n_match = fullmatch(_UNIQUE_INTERNATIONAL_PREFIX, international_prefix)
+    i18n_match = fullmatch(_SINGLE_INTERNATIONAL_PREFIX, international_prefix)
     if i18n_match:
         i18n_prefix_for_formatting = international_prefix
     elif metadata_for_region_calling_from.preferred_international_prefix is not None:
@@ -1517,7 +1524,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
     # is returned, unless there is a preferred international prefix.
     if metadata_for_region_calling_from is not None:
         international_prefix = metadata_for_region_calling_from.international_prefix
-        i18n_match = fullmatch(_UNIQUE_INTERNATIONAL_PREFIX, international_prefix)
+        i18n_match = fullmatch(_SINGLE_INTERNATIONAL_PREFIX, international_prefix)
         if i18n_match:
             i18n_prefix_for_formatting = international_prefix
         else:
@@ -1633,10 +1640,7 @@ def _format_nsn_using_pattern(national_number, formatting_pattern, number_format
         # Replace the $CC in the formatting rule with the desired
         # carrier code.
         cc_format_rule = formatting_pattern.domestic_carrier_code_formatting_rule
-        cc_format_rule = re.sub(_CC_PATTERN,
-                                carrier_code,
-                                cc_format_rule,
-                                count=1)
+        cc_format_rule = cc_format_rule.replace(_CC_STRING, carrier_code)
 
         # Now replace the $FG in the formatting rule with the
         # first group and the carrier code combined in the
@@ -2834,8 +2838,7 @@ def parse(number, region=None, keep_raw_input=False,
         # If no extracted country calling code, use the region supplied
         # instead. The national number is just the normalized version of the
         # number we were given to parse.
-        national_number = _normalize(national_number)
-        normalized_national_number += national_number
+        normalized_national_number += _normalize(national_number)
         if region is not None:
             country_code = metadata.country_code
             numobj.country_code = country_code

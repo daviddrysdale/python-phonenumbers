@@ -369,8 +369,8 @@ def is_emergency_number(number, region_code):
 
 
 def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
-    number = _extract_possible_number(number)
-    if _PLUS_CHARS_PATTERN.match(number):
+    possible_number = _extract_possible_number(number)
+    if _PLUS_CHARS_PATTERN.match(possible_number):
         # Returns False if the number starts with a plus sign. We don't
         # believe dialing the country code before emergency numbers
         # (e.g. +1911) works, but later, if that proves to work, we can add
@@ -380,11 +380,10 @@ def _matches_emergency_number_helper(number, region_code, allow_prefix_match):
     if metadata is None or metadata.emergency is None:
         return False
 
-    normalized_number = normalize_digits_only(number)
-    emergency_desc = metadata.emergency
+    normalized_number = normalize_digits_only(possible_number)
     allow_prefix_match_for_region = (allow_prefix_match and
                                      (region_code not in _REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT))
-    return _match_national_number(normalized_number, emergency_desc,
+    return _match_national_number(normalized_number, metadata.emergency,
                                   allow_prefix_match_for_region)
 
 
@@ -399,8 +398,8 @@ def is_carrier_specific(numobj):
     Arguments:
     numobj -- the valid short number to check
 
-    Returns whether the short number is carrier-specific (assuming the input
-    was a valid short number).
+    Returns whether the short number is carrier-specific, assuming the input
+    was a valid short number.
     """
     region_codes = region_codes_for_country_code(numobj.country_code)
     region_code = _region_code_for_short_number_from_region_list(numobj, region_codes)
@@ -423,8 +422,8 @@ def is_carrier_specific_for_region(numobj, region_dialing_from):
     numobj -- the valid short number to check
     region_dialing_from -- the region from which the number is dialed
 
-    Returns whether the short number is carrier-specific (assuming the input
-    was a valid short number).
+    Returns whether the short number is carrier-specific, assuming the input
+    was a valid short number.
     """
     if not _region_dialing_from_matches_number(numobj, region_dialing_from):
         return False
@@ -432,6 +431,30 @@ def is_carrier_specific_for_region(numobj, region_dialing_from):
     metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
     return (metadata is not None and
             _matches_possible_number_and_national_number(national_number, metadata.carrier_specific))
+
+
+def is_sms_service_for_region(numobj, region_dialing_from):
+    """Given a valid short number, determines whether it is an SMS service
+    (however, nothing is implied about its validity). An SMS service is where
+    the primary or only intended usage is to receive and/or send text messages
+    (SMSs). This includes MMS as MMS numbers downgrade to SMS if the other
+    party isn't MMS-capable. If it is important that the number is valid, then
+    its validity must first be checked using is_valid_short_number or
+    is_valid_short_number_for_region.  Returns False if the number doesn't
+    match the region provided.
+
+    Arguments:
+    numobj -- the valid short number to check
+    region_dialing_from -- the region from which the number is dialed
+
+    Returns whether the short number is an SMS service in the provided region,
+    assuming the input was a valid short number.
+    """
+    if not _region_dialing_from_matches_number(numobj, region_dialing_from):
+        return False
+    metadata = PhoneMetadata.short_metadata_for_region(region_dialing_from)
+    return (metadata is not None and
+            _matches_possible_number_and_national_number(national_significant_number(numobj), metadata.sms_services))
 
 
 # TODO: Once we have benchmarked ShortNumberInfo, consider if it is worth

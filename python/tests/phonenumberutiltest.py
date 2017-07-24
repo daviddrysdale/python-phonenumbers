@@ -96,6 +96,17 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             self.assertTrue(callingCode > 0)
             self.assertEqual("001", region_code_for_country_code(callingCode))
 
+    def testGetSupportedCallingCodes(self):
+        callingCodes = phonenumbers.supported_calling_codes()
+        self.assertTrue(len(callingCodes) > 0)
+        for callingCode in callingCodes:
+            self.assertTrue(callingCode > 0)
+            self.assertTrue(region_code_for_country_code(callingCode) != "ZZ")
+        # There should be more than just the global network calling codes in this set.
+        self.assertTrue(len(callingCodes) > len(phonenumbers.COUNTRY_CODES_FOR_NON_GEO_REGIONS))
+        # But they should be included. Testing one of them.
+        self.assertTrue(979 in callingCodes)
+
     def testGetSupportedTypesForRegion(self):
         self.assertTrue(PhoneNumberType.FIXED_LINE in phonenumbers.supported_types_for_region("BR"))
         # Our test data has no mobile numbers for Brazil.

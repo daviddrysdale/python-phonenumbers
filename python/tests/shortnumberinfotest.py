@@ -86,6 +86,13 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         # Python version extra test: check invalid region code
         self.assertFalse(shortnumberinfo.is_carrier_specific_for_region(carrierSpecificNumberForSomeRegion, "XY"))
 
+    def testIsSmsService(self):
+        smsServiceNumberForSomeRegion = PhoneNumber(country_code=1, national_number=21234)
+        self.assertTrue(shortnumberinfo.is_sms_service_for_region(smsServiceNumberForSomeRegion, "US"))
+        self.assertFalse(shortnumberinfo.is_sms_service_for_region(smsServiceNumberForSomeRegion, "BB"))
+        # Python version extra test: check invalid region code
+        self.assertFalse(shortnumberinfo.is_sms_service_for_region(smsServiceNumberForSomeRegion, "XY"))
+
     def testGetExpectedCost(self):
         premiumRateExample = shortnumberinfo._example_short_number_for_cost("FR", ShortNumberCost.PREMIUM_RATE)
         self.assertEqual(ShortNumberCost.PREMIUM_RATE, expected_cost_for_region(_parse(premiumRateExample, "FR"), "FR"))

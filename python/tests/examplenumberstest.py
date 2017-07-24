@@ -221,7 +221,6 @@ class ExampleNumbersTest(unittest.TestCase):
     def testCarrierSpecificShortNumbers(self):
         wrongTagCounter = 0
         for regionCode in shortnumberinfo.SUPPORTED_SHORT_REGIONS:
-            # Test the carrier-specific tag.
             metadata = PhoneMetadata.short_metadata_for_region(regionCode, None)
             desc = metadata.carrier_specific
             if desc is not None and desc.example_number is not None:
@@ -231,7 +230,20 @@ class ExampleNumbersTest(unittest.TestCase):
                     not shortnumberinfo.is_carrier_specific_for_region(carrierSpecificNumber, regionCode)):
                     wrongTagCounter += 1
                     prnt("Carrier-specific test failed for %s" % regionCode, file=sys.stderr)
-            # TODO: Test other tags here
+        self.assertEqual(0, wrongTagCounter)
+
+    def testSmsServiceShortNumbers(self):
+        wrongTagCounter = 0
+        for regionCode in shortnumberinfo.SUPPORTED_SHORT_REGIONS:
+            metadata = PhoneMetadata.short_metadata_for_region(regionCode, None)
+            desc = metadata.sms_services
+            if desc is not None and desc.example_number is not None:
+                exampleNumber = desc.example_number
+                smsServiceNumber = phonenumberutil.parse(exampleNumber, regionCode)
+                if (not shortnumberinfo.is_possible_short_number_for_region(smsServiceNumber, regionCode) or
+                    not shortnumberinfo.is_sms_service_for_region(smsServiceNumber, regionCode)):
+                    wrongTagCounter += 1
+                    prnt("SMS service test failed for %s" % regionCode, file=sys.stderr)
         self.assertEqual(0, wrongTagCounter)
 
     def testIsCarrierSpecific(self):

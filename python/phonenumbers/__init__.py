@@ -124,6 +124,7 @@ from .phonenumberutil import (COUNTRY_CODE_TO_REGION_CODE, SUPPORTED_REGIONS,
                               region_code_for_country_code,
                               region_codes_for_country_code,
                               region_code_for_number,
+                              supported_calling_codes,
                               supported_types_for_region,
                               supported_types_for_non_geo_entity,
                               truncate_too_long_number,
@@ -139,7 +140,8 @@ from .shortnumberinfo import (SUPPORTED_SHORT_REGIONS,
                               connects_to_emergency_number,
                               is_emergency_number,
                               is_carrier_specific,
-                              is_carrier_specific_for_region)
+                              is_carrier_specific_for_region,
+                              is_sms_service_for_region)
 from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 
 
@@ -196,6 +198,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'region_code_for_country_code',
            'region_codes_for_country_code',
            'region_code_for_number',
+           'supported_calling_codes',
            'supported_types_for_region',
            'supported_types_for_non_geo_entity',
            'truncate_too_long_number',
@@ -214,6 +217,7 @@ __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'is_emergency_number',
            'is_carrier_specific',
            'is_carrier_specific_for_region',
+           'is_sms_service_for_region',
            # end of items from shortnumberinfo.py
            'PhoneNumberMatch', 'PhoneNumberMatcher', 'Leniency',
            ]
