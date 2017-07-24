@@ -1,3 +1,24 @@
+What's new in 8.7.0
+-------------------
+
+Merge to
+[upstream commit 1ad92eb35a44](https://github.com/googlei18n/libphonenumber/commit/1ad92eb35a44);
+relevant code changes:
+
+
+ - New method `supported_calling_codes()` API to return all the calling codes
+   that the library considers valid, both for geographical and non-geographical
+   entities.
+ - Added `is_sms_service_for_region(numobj, region_dialing_from)` API in
+   short number info library. An SMS service is where the primary or only
+   intended usage is to receive and/or send text messages (SMSs). This includes
+   MMS as MMS numbers downgrade to SMS if the other party isn't MMS-capable. The
+   `is_sms_service` metadata is also serialized for the first time.
+ - Documentation update for private variables `_VALID_PUNCTUATION` and
+   `_SINGLE_INTERNATIONAL_PREFIX`, also renaming the latter from
+   `_UNIQUE_INTERNATIONAL_PREFIX`.
+
+
 What's new in 8.6.0
 -------------------
 
