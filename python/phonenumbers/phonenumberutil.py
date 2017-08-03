@@ -1878,12 +1878,13 @@ def _number_desc_by_type(metadata, num_type):
 
 
 def number_type(numobj):
-    """Gets the type of a phone number.
+    """Gets the type of a valid phone number.
 
     Arguments:
     numobj -- The PhoneNumber object that we want to know the type of.
 
-    Returns the type of the phone number, as a PhoneNumberType value.
+    Returns the type of the phone number, as a PhoneNumberType value;
+    returns PhoneNumberType.UNKNOWN if it is invalid.
     """
     region_code = region_code_for_number(numobj)
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(numobj.country_code, region_code)
