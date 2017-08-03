@@ -1,3 +1,13 @@
+What's new in 8.7.1
+-------------------
+
+Merge to
+[upstream commit fb9aa53ecfa3](https://github.com/googlei18n/libphonenumber/commit/fb9aa53ecfa3);
+relevant code changes:
+
+ - Documentation fix for `number_type`
+
+
 What's new in 8.7.0
 -------------------
 
