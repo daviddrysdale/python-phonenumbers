@@ -2857,7 +2857,10 @@ def parse(number, region=None, keep_raw_input=False,
         # prefix and carrier code be long enough to be a possible length for
         # the region. Otherwise, we don't do the stripping, since the original
         # number could be a valid short number.
-        if _test_number_length(potential_national_number, metadata) != ValidationResult.TOO_SHORT:
+        validation_result = _test_number_length(potential_national_number, metadata)
+        if (validation_result != ValidationResult.TOO_SHORT and
+            validation_result != ValidationResult.IS_POSSIBLE_LOCAL_ONLY and
+            validation_result != ValidationResult.INVALID_LENGTH):
             normalized_national_number = potential_national_number
             if keep_raw_input and carrier_code is not None and len(carrier_code) > 0:
                 numobj.preferred_domestic_carrier_code = carrier_code
