@@ -1996,6 +1996,14 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         shortNumber = PhoneNumber(country_code=64, national_number=12)
         self.assertEqual(shortNumber, phonenumbers.parse("12", "NZ"))
 
+        # Test for short-code with leading zero for a country which has 0 as national prefix. Ensure
+        # it's not interpreted as national prefix if the remaining number length is local-only in
+        # terms of length. Example: In GB, length 6-7 are only possible local-only.
+        shortNumber.country_code = 44
+        shortNumber.national_number = 123456
+        shortNumber.italian_leading_zero = True
+        self.assertEqual(shortNumber, phonenumbers.parse("0123456", "GB"))
+
     def testParseNumberWithAlphaCharacters(self):
         # Test case with alpha characters.
         tollfreeNumber = PhoneNumber(country_code=64, national_number=800332005)

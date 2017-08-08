@@ -2223,10 +2223,7 @@ def is_possible_number_for_type(numobj, numtype):
 
 def _test_number_length(national_number, metadata, numtype=PhoneNumberType.UNKNOWN):
     """Helper method to check a number against possible lengths for this number,
-    and determine whether it matches, or is too short or too long. Currently,
-    if a number pattern suggests that numbers of length 7 and 10 are possible,
-    and a number in between these possible lengths is entered, such as of
-    length 8, this will return TOO_LONG.
+    and determine whether it matches, or is too short or too long.
     """
     desc_for_type = _number_desc_by_type(metadata, numtype)
     if desc_for_type is None:
@@ -2858,9 +2855,9 @@ def parse(number, region=None, keep_raw_input=False,
         # the region. Otherwise, we don't do the stripping, since the original
         # number could be a valid short number.
         validation_result = _test_number_length(potential_national_number, metadata)
-        if (validation_result != ValidationResult.TOO_SHORT and
-            validation_result != ValidationResult.IS_POSSIBLE_LOCAL_ONLY and
-            validation_result != ValidationResult.INVALID_LENGTH):
+        if validation_result not in (ValidationResult.TOO_SHORT,
+                                     ValidationResult.IS_POSSIBLE_LOCAL_ONLY,
+                                     ValidationResult.INVALID_LENGTH):
             normalized_national_number = potential_national_number
             if keep_raw_input and carrier_code is not None and len(carrier_code) > 0:
                 numobj.preferred_domestic_carrier_code = carrier_code
