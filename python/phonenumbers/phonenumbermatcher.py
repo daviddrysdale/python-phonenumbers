@@ -99,7 +99,7 @@ _BLOCK_LIMIT = _limit(0, _DIGIT_BLOCK_LIMIT)
 # A punctuation sequence allowing white space.
 _PUNCTUATION = u("[") + _VALID_PUNCTUATION + u("]") + _PUNCTUATION_LIMIT
 # A digits block without punctuation.
-_DIGIT_SEQUENCE = u("(?u)\\d") + _limit(1, _DIGIT_BLOCK_LIMIT)
+_DIGIT_SEQUENCE = u("\\d") + _limit(1, _DIGIT_BLOCK_LIMIT)
 # Punctuation that may be at the start of a phone number - brackets and plus signs.
 _LEAD_CLASS_CHARS = _OPENING_PARENS + _PLUS_CHARS
 _LEAD_CLASS = u("[") + _LEAD_CLASS_CHARS + u("]")
