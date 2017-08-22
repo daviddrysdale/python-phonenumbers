@@ -1,3 +1,16 @@
+What's new in 8.8.0
+-------------------
+
+Merge to
+[upstream commit 7e4e754bda09](https://github.com/googlei18n/libphonenumber/commit/7e4e754bda09);
+relevant code changes:
+
+ - Improve parsing logic to be smarter about national-prefix detection &
+   stripping based on possible-lengths (`IS_POSSIBLE_LOCAL_ONLY` and
+   `INVALID_LENGTH`). Enables e.g. adding Iran short-codes starting with "096"
+   without the need to hack IR's national prefix parsing config.
+
+
 What's new in 8.7.1
 -------------------
 
