@@ -7,6 +7,7 @@ PHONE_METADATA_RU = PhoneMetadata(id='RU', country_code=7, international_prefix=
     mobile=PhoneNumberDesc(national_number_pattern='9\\d{9}', example_number='9123456789', possible_length=(10,)),
     toll_free=PhoneNumberDesc(national_number_pattern='80[04]\\d{7}', example_number='8001234567', possible_length=(10,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='80[39]\\d{7}', example_number='8091234567', possible_length=(10,)),
+    personal_number=PhoneNumberDesc(national_number_pattern='808\\d{7}', example_number='8081234567', possible_length=(10,)),
     preferred_international_prefix='8~10',
     national_prefix='8',
     national_prefix_for_parsing='8',

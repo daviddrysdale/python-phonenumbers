@@ -12,4 +12,5 @@ PHONE_METADATA_IR = PhoneMetadata(id='IR', country_code=98, international_prefix
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[1-8]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{4,5})', format='\\1 \\2', leading_digits_pattern=['[1-8]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{4,5})', format='\\1', leading_digits_pattern=['96'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['9'], national_prefix_formatting_rule='0\\1')])
