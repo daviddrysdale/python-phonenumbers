@@ -8,6 +8,6 @@ PHONE_METADATA_BO = PhoneMetadata(id='BO', country_code=591, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='80017\\d{4}', example_number='800171234', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0(1\\d)?',
-    number_format=[NumberFormat(pattern='([234])(\\d{7})', format='\\1 \\2', leading_digits_pattern=['[234]'], domestic_carrier_code_formatting_rule='0$CC \\1'),
+    number_format=[NumberFormat(pattern='([234])(\\d{7})', format='\\1 \\2', leading_digits_pattern=['[2-4]'], domestic_carrier_code_formatting_rule='0$CC \\1'),
         NumberFormat(pattern='([67]\\d{7})', format='\\1', leading_digits_pattern=['[67]'], domestic_carrier_code_formatting_rule='0$CC \\1'),
         NumberFormat(pattern='(800)(\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['800'], domestic_carrier_code_formatting_rule='0$CC \\1')])

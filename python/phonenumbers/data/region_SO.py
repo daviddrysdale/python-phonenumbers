@@ -8,7 +8,7 @@ PHONE_METADATA_SO = PhoneMetadata(id='SO', country_code=252, international_prefi
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{6})', format='\\1', leading_digits_pattern=['[134]']),
-        NumberFormat(pattern='(\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['2[0-79]|[13-5]']),
+        NumberFormat(pattern='(\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['[13-5]|2[0-79]']),
         NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['24|[67]']),
         NumberFormat(pattern='(\\d{2})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['8[125]']),
         NumberFormat(pattern='(\\d{2})(\\d{5,7})', format='\\1 \\2', leading_digits_pattern=['15|28|6[1-35-9]|799|9[2-9]']),

@@ -9,7 +9,7 @@ PHONE_METADATA_NA = PhoneMetadata(id='NA', country_code=264, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='8(?:3\\d{2}|86)\\d{5}', example_number='88612345', possible_length=(8, 9)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(8\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['8[1235]'], national_prefix_formatting_rule='0\\1'),
+    number_format=[NumberFormat(pattern='(8\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['8[1-35]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(6\\d)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['6'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(88)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['88'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(870)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['870'], national_prefix_formatting_rule='0\\1')])

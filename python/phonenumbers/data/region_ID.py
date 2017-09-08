@@ -13,7 +13,7 @@ PHONE_METADATA_ID = PhoneMetadata(id='ID', country_code=62, international_prefix
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{5,8})', format='\\1 \\2', leading_digits_pattern=['2[124]|[36]1'], national_prefix_formatting_rule='(0\\1)'),
-        NumberFormat(pattern='(\\d{3})(\\d{5,8})', format='\\1 \\2', leading_digits_pattern=['[4579]|2[035-9]|[36][02-9]'], national_prefix_formatting_rule='(0\\1)'),
+        NumberFormat(pattern='(\\d{3})(\\d{5,8})', format='\\1 \\2', leading_digits_pattern=['2[035-9]|[36][02-9]|[4579]'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(8\\d{2})(\\d{3,4})(\\d{3})', format='\\1-\\2-\\3', leading_digits_pattern=['8[1-35-9]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(8\\d{2})(\\d{4})(\\d{4,5})', format='\\1-\\2-\\3', leading_digits_pattern=['8[1-35-9]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(1)(500)(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['15'], national_prefix_formatting_rule='\\1'),

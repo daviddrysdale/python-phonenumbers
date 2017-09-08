@@ -17,6 +17,6 @@ PHONE_METADATA_AT = PhoneMetadata(id='AT', country_code=43, international_prefix
         NumberFormat(pattern='(5\\d)(\\d{3,5})', format='\\1 \\2', leading_digits_pattern=['5[079]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(5\\d)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['5[079]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(5\\d)(\\d{4})(\\d{4,7})', format='\\1 \\2 \\3', leading_digits_pattern=['5[079]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{3,10})', format='\\1 \\2', leading_digits_pattern=['316|46|51|732|6(?:5[0-3579]|[6-9])|7(?:[28]0)|[89]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{4})(\\d{3,9})', format='\\1 \\2', leading_digits_pattern=['2|3(?:1[1-578]|[3-8])|4[2378]|5[2-6]|6(?:[12]|4[1-9]|5[468])|7(?:2[1-8]|35|4[1-8]|[5-79])'], national_prefix_formatting_rule='0\\1')],
+        NumberFormat(pattern='(\\d{3})(\\d{3,10})', format='\\1 \\2', leading_digits_pattern=['(?:31|4)6|51|6(?:5[0-3579]|[6-9])|7(?:[28]0|32)|[89]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{4})(\\d{3,9})', format='\\1 \\2', leading_digits_pattern=['2|3(?:1[1-578]|[3-8])|4[2378]|5[2-6]|6(?:[12]|4[1-9]|5[468])|7(?:[24][1-8]|35|[5-79])'], national_prefix_formatting_rule='0\\1')],
     mobile_number_portable_region=True)

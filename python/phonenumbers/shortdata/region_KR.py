@@ -5,6 +5,6 @@ PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=None, international_pref
     general_desc=PhoneNumberDesc(national_number_pattern='1\\d{2,3}', possible_length=(3, 4)),
     toll_free=PhoneNumberDesc(national_number_pattern='1(?:1[78]|28|330|82)', example_number='118', possible_length=(3, 4)),
     emergency=PhoneNumberDesc(national_number_pattern='11[29]', example_number='112', possible_length=(3,)),
-    short_code=PhoneNumberDesc(national_number_pattern='1(?:0[01]|1[027-9]|2[01389]|3(?:2|3[039]|45|66|88|9[18])|82)', example_number='112', possible_length=(3, 4)),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='10[01]', example_number='100', possible_length=(3,)),
+    short_code=PhoneNumberDesc(national_number_pattern='1(?:0[01]|1[0247-9]|2[01389]|3(?:2|3[039]|45|66|88|9[18])|82)', example_number='112', possible_length=(3, 4)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='1(?:0[01]|14)', example_number='100', possible_length=(3,)),
     short_data=True)

@@ -19,5 +19,5 @@ PHONE_METADATA_SK = PhoneMetadata(id='SK', country_code=421, international_prefi
         NumberFormat(pattern='(2)(\\d{3})(\\d{3})(\\d{2})', format='\\1/\\2 \\3 \\4', leading_digits_pattern=['2'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='([3-5]\\d)(\\d{3})(\\d{2})(\\d{2})', format='\\1/\\2 \\3 \\4', leading_digits_pattern=['[3-5]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='([689]\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[689]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(9090)(\\d{3})', format='\\1 \\2', leading_digits_pattern=['9090'], national_prefix_formatting_rule='0\\1')],
+        NumberFormat(pattern='(9090)(\\d{3})', format='\\1 \\2', leading_digits_pattern=['909', '9090'], national_prefix_formatting_rule='0\\1')],
     mobile_number_portable_region=True)

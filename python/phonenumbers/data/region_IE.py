@@ -24,5 +24,5 @@ PHONE_METADATA_IE = PhoneMetadata(id='IE', country_code=353, international_prefi
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['76|8[35-9]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(8\\d)(\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['8[35-9]5'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(700)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['70'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1(?:8[059]|5)', '1(?:8[059]0|5)'], national_prefix_formatting_rule='\\1')],
+        NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1(?:5|8[059])', '1(?:5|8[059]0)'], national_prefix_formatting_rule='\\1')],
     mobile_number_portable_region=True)
