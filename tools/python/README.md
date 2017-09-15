@@ -136,7 +136,7 @@ Release Procedure
      `git tag vX.Y.Z`
  - Push the tag to Github with:
      `git push <github-remote> vX.Y.Z`
- - Push the package to PyPI with:
-     `cd python && ./setup.py sdist bdist_wheel upload`
  - Push the lite package to PyPI with:
-     `cd python && ./setup.py lite sdist bdist_wheel upload`
+     `cd python && rm -rf build && ./setup.py lite sdist bdist_wheel upload`
+ - Push the package to PyPI with:
+     `cd python && rm -rf build && ./setup.py sdist bdist_wheel upload`
