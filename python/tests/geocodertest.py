@@ -212,8 +212,8 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         TEST_GEOCODE_DATA['1650960'] = {'en': u("Mountain View, CA")}
 
         # Test the locale mapping
-        TEST_GEOCODE_DATA['8868'] = {'zh': u("Chinese"), 'zh_Hant': u("Hant-specific")}
-        tw_number = FrozenPhoneNumber(country_code=886, national_number=810080123)
+        TEST_GEOCODE_DATA['8862'] = {'zh': u("Chinese"), 'zh_Hant': u("Hant-specific")}
+        tw_number = FrozenPhoneNumber(country_code=886, national_number=221234567)
         self.assertEqual("Hant-specific",
                          description_for_number(tw_number, "zh", region="TW"))
-        del TEST_GEOCODE_DATA['8868']
+        del TEST_GEOCODE_DATA['8862']
