@@ -8,7 +8,6 @@ PHONE_METADATA_LU = PhoneMetadata(id='LU', country_code=352, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{5}', example_number='80012345', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='90[015]\\d{5}', example_number='90012345', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='801\\d{5}', example_number='80112345', possible_length=(8,)),
-    personal_number=PhoneNumberDesc(national_number_pattern='70\\d{6}', example_number='70123456', possible_length=(8,)),
     voip=PhoneNumberDesc(national_number_pattern='20(?:1\\d{5}|[2-689]\\d{1,7})', example_number='20201234', possible_length=(4, 5, 6, 7, 8, 9, 10)),
     national_prefix_for_parsing='(15(?:0[06]|1[12]|35|4[04]|55|6[26]|77|88|99)\\d)',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['[2-5]|7[1-9]|[89](?:0[2-9]|[1-9])'], domestic_carrier_code_formatting_rule='$CC \\1'),

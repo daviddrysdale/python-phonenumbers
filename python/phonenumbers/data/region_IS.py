@@ -9,7 +9,7 @@ PHONE_METADATA_IS = PhoneMetadata(id='IS', country_code=354, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='90\\d{5}', example_number='9011234', possible_length=(7,)),
     voip=PhoneNumberDesc(national_number_pattern='49\\d{5}', example_number='4921234', possible_length=(7,)),
     uan=PhoneNumberDesc(national_number_pattern='809\\d{4}', example_number='8091234', possible_length=(7,)),
-    voicemail=PhoneNumberDesc(national_number_pattern='(?:6(?:2[78]|49|8\\d)|8(?:7[0189]|80)|95[48])\\d{4}', example_number='6271234', possible_length=(7,)),
+    voicemail=PhoneNumberDesc(national_number_pattern='(?:6(?:2[78]|8\\d)|8(?:7[0189]|80)|95[48])\\d{4}', example_number='6271234', possible_length=(7,)),
     preferred_international_prefix='00',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[4-9]']),
         NumberFormat(pattern='(3\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['3'])],
