@@ -29,11 +29,6 @@ __init__.py and per-region data files will be created in the directory.
 # This code was originally developed from the XML file, and the DTD within it.
 # Subsequently, post-processing code was added to match the behaviour of
 # BuildMetadataFromXml.java
-#
-# OPEN QUERIES/ISSUES
-#  - The XML includes territory/areaCodeOptional? elements, which are
-#    PhoneNumberDesc instances; these do not appear to be used in the
-#    libphonenumber Java source code.
 
 # import to allow this code to work with Python2.5
 from __future__ import with_statement
@@ -442,8 +437,6 @@ class XTerritory(UnicodeMixin):
         # and it will be used to fill out missing fields in many of the other PhoneNumberDesc elements.
         self.o.general_desc = XPhoneNumberDesc(xterritory, 'generalDesc', general_desc=True).o
 
-        # areaCodeOptional is in the XML but not used in the code.
-        self.o.area_code_optional = XPhoneNumberDesc(xterritory, 'areaCodeOptional', template=self.o.general_desc).o
         self.o.toll_free = XPhoneNumberDesc(xterritory, 'tollFree', template=self.o.general_desc).o
         self.o.premium_rate = XPhoneNumberDesc(xterritory, 'premiumRate', template=self.o.general_desc).o
         if not short_data:
@@ -460,13 +453,12 @@ class XTerritory(UnicodeMixin):
             self.o.no_international_dialling = XPhoneNumberDesc(xterritory, 'noInternationalDialling', template=self.o.general_desc).o
 
             # Skip noInternationalDialling when combining possible length information
-            sub_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
-                         self.o.fixed_line, self.o.mobile, self.o.pager, self.o.shared_cost,
-                         self.o.personal_number, self.o.voip, self.o.uan, self.o.voicemail)
-            all_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
-                         self.o.fixed_line, self.o.mobile, self.o.pager, self.o.shared_cost,
-                         self.o.personal_number, self.o.voip, self.o.uan, self.o.voicemail,
-                         self.o.no_international_dialling)
+            sub_descs = (self.o.toll_free, self.o.premium_rate, self.o.fixed_line, self.o.mobile,
+                         self.o.pager, self.o.shared_cost, self.o.personal_number, self.o.voip,
+                         self.o.uan, self.o.voicemail)
+            all_descs = (self.o.toll_free, self.o.premium_rate, self.o.fixed_line, self.o.mobile,
+                         self.o.pager, self.o.shared_cost, self.o.personal_number, self.o.voip,
+                         self.o.uan, self.o.voicemail, self.o.no_international_dialling)
         else:
             self.o.standard_rate = XPhoneNumberDesc(xterritory, 'standardRate', template=self.o.general_desc).o
             self.o.short_code = XPhoneNumberDesc(xterritory, 'shortCode', template=self.o.general_desc).o
@@ -475,9 +467,8 @@ class XTerritory(UnicodeMixin):
             self.o.emergency = XPhoneNumberDesc(xterritory, 'emergency', template=self.o.general_desc).o
             # For short number metadata, copy the lengths from the "short code" section only.
             sub_descs = (self.o.short_code,)
-            all_descs = (self.o.area_code_optional, self.o.toll_free, self.o.premium_rate,
-                         self.o.standard_rate, self.o.short_code, self.o.carrier_specific,
-                         self.o.emergency)
+            all_descs = (self.o.toll_free, self.o.premium_rate, self.o.standard_rate,
+                         self.o.short_code, self.o.carrier_specific, self.o.emergency)
 
         # Build the possible length information for general_desc based on all the different types of number.
         possible_lengths = set()
