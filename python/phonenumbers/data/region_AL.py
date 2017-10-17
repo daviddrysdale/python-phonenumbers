@@ -3,7 +3,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AL = PhoneMetadata(id='AL', country_code=355, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-57]\\d{7}|6\\d{8}|8\\d{5,7}|9\\d{5}', possible_length=(6, 7, 8, 9), possible_length_local_only=(5, 6, 7)),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:2(?:1(?:0[2-9]|[1-9]\\d)|[247]\\d{2}|[35][2-9]\\d|[68](?:0[2-9]|[1-9]\\d)|9(?:[089][2-9]|[1-7]\\d))|3(?:1(?:[04-9][2-9]|[1-3]\\d)|[2-6]\\d{2}|[79](?:[09][2-9]|[1-8]\\d)|8(?:0[2-9]|[1-9]\\d))|4\\d{3}|5(?:1(?:[05-9][2-9]|[1-4]\\d)|[2-578]\\d{2}|6(?:[06-9][2-9]|[1-5]\\d)|9(?:[089][2-9]|[1-7]\\d))|8(?:[19](?:[06-9][2-9]|[1-5]\\d)|[2-6]\\d{2}|[78](?:[089][2-9]|[1-7]\\d)))\\d{4}', example_number='22345678', possible_length=(8,), possible_length_local_only=(5, 6, 7)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:[2358](?:[16-9]\\d[2-9]|[2-5][2-9]\\d)|4(?:[2-57-9][2-9]\\d|6\\d{2}))\\d{4}', example_number='22345678', possible_length=(8,), possible_length_local_only=(5, 6, 7)),
     mobile=PhoneNumberDesc(national_number_pattern='6(?:[689][2-9]|7[2-6])\\d{6}', example_number='662123456', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{4}', example_number='8001234', possible_length=(7,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[1-9]\\d{2}', example_number='900123', possible_length=(6,)),

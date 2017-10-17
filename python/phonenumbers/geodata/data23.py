@@ -403,6 +403,8 @@ data = {
  '915673':{'en': 'Bhogaon, Uttar Pradesh'},
  '915676':{'en': 'Shikohabad, Uttar Pradesh'},
  '915677':{'en': 'Karhal, Uttar Pradesh'},
+ '861899971':{'en': 'Ili, Xinjiang', 'zh': u('\u65b0\u7586\u4f0a\u7281\u54c8\u8428\u514b\u81ea\u6cbb\u5dde')},
+ '861899972':{'en': 'Ili, Xinjiang', 'zh': u('\u65b0\u7586\u4f0a\u7281\u54c8\u8428\u514b\u81ea\u6cbb\u5dde')},
  '861899973':{'en': 'Shihezi, Xinjiang', 'zh': u('\u65b0\u7586\u77f3\u6cb3\u5b50\u5e02')},
  '861899974':{'en': 'Tacheng, Xinjiang', 'zh': u('\u65b0\u7586\u5854\u57ce\u5730\u533a')},
  '861899975':{'en': 'Tacheng, Xinjiang', 'zh': u('\u65b0\u7586\u5854\u57ce\u5730\u533a')},
