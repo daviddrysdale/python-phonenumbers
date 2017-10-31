@@ -10,7 +10,7 @@ PHONE_METADATA_NL = PhoneMetadata(id='NL', country_code=31, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='(?:6760|85\\d{2})\\d{5}', example_number='851234567', possible_length=(9,)),
     pager=PhoneNumberDesc(national_number_pattern='66\\d{7}', example_number='662345678', possible_length=(9,)),
     uan=PhoneNumberDesc(national_number_pattern='140(?:1(?:[035]|[16-8]\\d)|2(?:[0346]|[259]\\d)|3(?:[03568]|[124]\\d)|4(?:[0356]|[17-9]\\d)|5(?:[0358]|[124679]\\d)|7\\d|8[458])', example_number='14020', possible_length=(5, 6)),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='14\\d{3,4}', example_number='14123', possible_length=(5, 6)),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='140(?:1(?:[035]|[16-8]\\d)|2(?:[0346]|[259]\\d)|3(?:[03568]|[124]\\d)|4(?:[0356]|[17-9]\\d)|5(?:[0358]|[124679]\\d)|7\\d|8[458])', example_number='14023', possible_length=(5, 6)),
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='([1-578]\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1[035]|2[0346]|3[03568]|4[0356]|5[0358]|7|8[4578]'], national_prefix_formatting_rule='0\\1'),

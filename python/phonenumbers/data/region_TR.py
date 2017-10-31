@@ -15,5 +15,5 @@ PHONE_METADATA_TR = PhoneMetadata(id='TR', country_code=90, international_prefix
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[23]|4(?:[0-35-9]|4[0-35-9])'], national_prefix_formatting_rule='(0\\1)', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['5[02-69]'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['51|[89]'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(444)(\\d{1})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['444'])],
+        NumberFormat(pattern='(444)(\\d{1})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['444'], national_prefix_optional_when_formatting=True)],
     mobile_number_portable_region=True)
