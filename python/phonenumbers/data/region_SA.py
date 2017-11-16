@@ -13,6 +13,6 @@ PHONE_METADATA_SA = PhoneMetadata(id='SA', country_code=966, international_prefi
         NumberFormat(pattern='(1\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1[1-467]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(5\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['5'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(92\\d{2})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['92'], national_prefix_formatting_rule='\\1'),
-        NumberFormat(pattern='(800)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['80'], national_prefix_formatting_rule='\\1'),
-        NumberFormat(pattern='(811)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['81'], national_prefix_formatting_rule='0\\1')],
+        NumberFormat(pattern='(800)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['800'], national_prefix_formatting_rule='\\1'),
+        NumberFormat(pattern='(811)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['811'], national_prefix_formatting_rule='0\\1')],
     mobile_number_portable_region=True)

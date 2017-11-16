@@ -8,4 +8,4 @@ PHONE_METADATA_UZ = PhoneMetadata(id='UZ', country_code=998, international_prefi
     preferred_international_prefix='8~10',
     national_prefix='8',
     national_prefix_for_parsing='8',
-    number_format=[NumberFormat(pattern='([679]\\d)(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', national_prefix_formatting_rule='8 \\1')])
+    number_format=[NumberFormat(pattern='([679]\\d)(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[679]'], national_prefix_formatting_rule='8 \\1')])

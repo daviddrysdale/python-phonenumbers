@@ -14,5 +14,5 @@ PHONE_METADATA_PH = PhoneMetadata(id='PH', country_code=63, international_prefix
         NumberFormat(pattern='(\\d{5})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['346|4(?:27|9[35])|883', '3469|4(?:279|9(?:30|56))|8834'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='([3-8]\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[3-8]'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['81|9'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(1800)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1']),
-        NumberFormat(pattern='(1800)(\\d{1,2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['1'])])
+        NumberFormat(pattern='(1800)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['180', '1800']),
+        NumberFormat(pattern='(1800)(\\d{1,2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['180', '1800'])])

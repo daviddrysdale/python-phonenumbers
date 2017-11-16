@@ -5,4 +5,4 @@ PHONE_METADATA_BN = PhoneMetadata(id='BN', country_code=673, international_prefi
     general_desc=PhoneNumberDesc(national_number_pattern='[2-578]\\d{6}', possible_length=(7,)),
     fixed_line=PhoneNumberDesc(national_number_pattern='2(?:[013-9]\\d|2[0-7])\\d{4}|[3-5]\\d{6}', example_number='2345678', possible_length=(7,)),
     mobile=PhoneNumberDesc(national_number_pattern='22[89]\\d{4}|[78]\\d{6}', example_number='7123456', possible_length=(7,)),
-    number_format=[NumberFormat(pattern='([2-578]\\d{2})(\\d{4})', format='\\1 \\2')])
+    number_format=[NumberFormat(pattern='([2-578]\\d{2})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[2-578]'])])

@@ -19,4 +19,4 @@ PHONE_METADATA_VN = PhoneMetadata(id='VN', country_code=84, international_prefix
         NumberFormat(pattern='([89]\\d)(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['8(?:8|9[89])|9'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(1[2689]\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1(?:[26]|8[68]|99)'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(86[89])(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['86[89]'], national_prefix_formatting_rule='0\\1', national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(1[89]00)(\\d{4,6})', format='\\1 \\2', leading_digits_pattern=['1[89]0'], national_prefix_formatting_rule='\\1', national_prefix_optional_when_formatting=True)])
+        NumberFormat(pattern='(1[89]00)(\\d{4,6})', format='\\1 \\2', leading_digits_pattern=['1[89]0', '1[89]00'], national_prefix_formatting_rule='\\1', national_prefix_optional_when_formatting=True)])

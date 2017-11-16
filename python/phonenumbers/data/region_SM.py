@@ -10,8 +10,8 @@ PHONE_METADATA_SM = PhoneMetadata(id='SM', country_code=378, international_prefi
     national_prefix_for_parsing='(?:0549)?([89]\\d{5})',
     national_prefix_transform_rule='0549\\1',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[5-7]']),
-        NumberFormat(pattern='(0549)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['0']),
+        NumberFormat(pattern='(0549)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['054', '0549']),
         NumberFormat(pattern='(\\d{6})', format='0549 \\1', leading_digits_pattern=['[89]'])],
     intl_number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[5-7]']),
-        NumberFormat(pattern='(0549)(\\d{6})', format='(\\1) \\2', leading_digits_pattern=['0']),
+        NumberFormat(pattern='(0549)(\\d{6})', format='(\\1) \\2', leading_digits_pattern=['054', '0549']),
         NumberFormat(pattern='(\\d{6})', format='(0549) \\1', leading_digits_pattern=['[89]'])])

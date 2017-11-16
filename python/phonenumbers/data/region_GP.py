@@ -7,5 +7,5 @@ PHONE_METADATA_GP = PhoneMetadata(id='GP', country_code=590, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='690(?:0[05-9]|[1-9]\\d)\\d{4}', example_number='690001234', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([56]90)(\\d{2})(\\d{4})', format='\\1 \\2-\\3', national_prefix_formatting_rule='0\\1')],
+    number_format=[NumberFormat(pattern='([56]90)(\\d{2})(\\d{4})', format='\\1 \\2-\\3', leading_digits_pattern=['[56]90'], national_prefix_formatting_rule='0\\1')],
     main_country_for_code=True)

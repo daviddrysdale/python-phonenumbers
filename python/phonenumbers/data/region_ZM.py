@@ -9,4 +9,4 @@ PHONE_METADATA_ZM = PhoneMetadata(id='ZM', country_code=260, international_prefi
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='([29]\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['[29]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(800)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['8'], national_prefix_formatting_rule='0\\1')])
+        NumberFormat(pattern='(800)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['800'], national_prefix_formatting_rule='0\\1')])

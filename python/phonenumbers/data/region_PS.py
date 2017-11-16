@@ -9,6 +9,6 @@ PHONE_METADATA_PS = PhoneMetadata(id='PS', country_code=970, international_prefi
     shared_cost=PhoneNumberDesc(national_number_pattern='1700\\d{6}', example_number='1700123456', possible_length=(10,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([2489])(2\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2489]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(5[69]\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['5'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(1[78]00)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule='\\1')])
+    number_format=[NumberFormat(pattern='([2489])(2\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2489]2'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(5[69]\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['5[69]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(1[78]00)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1[78]0', '1[78]00'], national_prefix_formatting_rule='\\1')])
