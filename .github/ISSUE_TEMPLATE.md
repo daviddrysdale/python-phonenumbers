@@ -3,6 +3,6 @@ derived from the
 [upstream Java project](https://github.com/googlei18n/libphonenumber).
 
 As a result, any changes to the phonenumber metadata or to the API should be
-[submitted there](https://github.com/googlei18n/libphonenumber/issues) rather
-than here; only issues or contributions that are specific to the Python version
-are likely to be relevant here.
+[submitted there](https://github.com/googlei18n/libphonenumber/blob/master/CONTRIBUTING.md#checklist-before-filing-an-issue)
+rather than here; only issues or contributions that are specific to the Python
+version are likely to be relevant here.
