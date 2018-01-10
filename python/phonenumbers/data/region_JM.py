@@ -7,7 +7,7 @@ PHONE_METADATA_JM = PhoneMetadata(id='JM', country_code=1, international_prefix=
     mobile=PhoneNumberDesc(national_number_pattern='876(?:2[14-9]\\d|[348]\\d{2}|5(?:0[3-9]|[2-57-9]\\d|6[0-24-9])|7(?:0[07]|7\\d|8[1-47-9]|9[0-36-9])|9(?:[01]9|9[0579]))\\d{4}', example_number='8762101234', possible_length=(10,), possible_length_local_only=(7,)),
     toll_free=PhoneNumberDesc(national_number_pattern='8(?:00|33|44|55|66|77|88)[2-9]\\d{6}', example_number='8002123456', possible_length=(10,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[2-9]\\d{6}', example_number='9002123456', possible_length=(10,)),
-    personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|22|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
+    personal_number=PhoneNumberDesc(national_number_pattern='5(?:(?:00|22|33|44|66|77|88)[2-9]|21[23])\\d{6}', example_number='5002345678', possible_length=(10,)),
     national_prefix='1',
     national_prefix_for_parsing='1',
     leading_digits='876',

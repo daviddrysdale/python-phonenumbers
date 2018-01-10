@@ -3,7 +3,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_NL = PhoneMetadata(id='NL', country_code=31, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='1\\d{4,8}|[2-7]\\d{8}|[89]\\d{6,9}', possible_length=(5, 6, 7, 8, 9, 10)),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:1[0135-8]|2[02-69]|3[0-68]|4[0135-9]|[57]\\d|8[478])\\d{7}', example_number='101234567', possible_length=(9,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:1(?:[035]\\d|1[13-578]|6[124-8]|7[24]|8[0-467])|2(?:[0346]\\d|2[2-46-9]|5[125]|9[479])|3(?:[03568]\\d|1[3-8]|2[01]|4[1-8])|4(?:[0356]\\d|1[1-368]|7[58]|8[15-8]|9[23579])|5(?:[0358]\\d|[19][1-9]|2[1-57-9]|4[13-8]|6[126]|7[0-3578])|7\\d{2}|8[478]\\d)\\d{6}', example_number='101234567', possible_length=(9,)),
     mobile=PhoneNumberDesc(national_number_pattern='6[1-58]\\d{7}', example_number='612345678', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{4,7}', example_number='8001234', possible_length=(7, 8, 9, 10)),
     premium_rate=PhoneNumberDesc(national_number_pattern='90[069]\\d{4,7}', example_number='9061234', possible_length=(7, 8, 9, 10)),

@@ -7,7 +7,7 @@ PHONE_METADATA_TC = PhoneMetadata(id='TC', country_code=1, international_prefix=
     mobile=PhoneNumberDesc(national_number_pattern='649(?:2(?:3[129]|4[1-7])|3(?:3[1-389]|4[1-8])|4[34][1-3])\\d{4}', example_number='6492311234', possible_length=(10,), possible_length_local_only=(7,)),
     toll_free=PhoneNumberDesc(national_number_pattern='8(?:00|33|44|55|66|77|88)[2-9]\\d{6}', example_number='8002345678', possible_length=(10,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[2-9]\\d{6}', example_number='9002345678', possible_length=(10,)),
-    personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|22|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
+    personal_number=PhoneNumberDesc(national_number_pattern='5(?:(?:00|22|33|44|66|77|88)[2-9]|21[23])\\d{6}', example_number='5002345678', possible_length=(10,)),
     voip=PhoneNumberDesc(national_number_pattern='64971[01]\\d{4}', example_number='6497101234', possible_length=(10,), possible_length_local_only=(7,)),
     national_prefix='1',
     national_prefix_for_parsing='1',

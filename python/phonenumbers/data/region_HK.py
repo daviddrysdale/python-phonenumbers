@@ -7,7 +7,7 @@ PHONE_METADATA_HK = PhoneMetadata(id='HK', country_code=852, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='(?:464|5(?:[1-59][0-46-9]|6[0-4689]|7[0-469])|6(?:0[1-9]|[1459]\\d|[2368][0-57-9]|7[0-79])|9(?:0[1-9]|1[02-9]|[2358][0-8]|[467]\\d))\\d{5}', example_number='51234567', possible_length=(8,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6}', example_number='800123456', possible_length=(9,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900(?:[0-24-9]\\d{7}|3\\d{1,4})', example_number='90012345678', possible_length=(5, 6, 7, 8, 11)),
-    personal_number=PhoneNumberDesc(national_number_pattern='8(?:1[1-4679]|2[0-367]|3[02-47])\\d{5}', example_number='81123456', possible_length=(8,)),
+    personal_number=PhoneNumberDesc(national_number_pattern='8(?:1[0-4679]|2[0-367]|3[02-47])\\d{5}', example_number='81123456', possible_length=(8,)),
     pager=PhoneNumberDesc(national_number_pattern='7(?:1[0-369]|[23][0-37-9]|47|5[1578]|6[0235]|7[278]|8[236-9]|9[025-9])\\d{5}', example_number='71234567', possible_length=(8,)),
     uan=PhoneNumberDesc(national_number_pattern='30(?:0[1-9]|[15-7]\\d|2[047]|89)\\d{4}', example_number='30161234', possible_length=(8,)),
     preferred_international_prefix='00',
