@@ -12,31 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Source: http://www.arcep.fr/index.php?id=interactivenumeros&no_cache=1
-# Search using prefix 0694X. Ex: 06945
+# Data taken from ITU doc: https://www.itu.int/oth/T020200001B/en
+# Translated names are taken from Wikipedia page of respective cities (when
+# available).
 
-# Ranges that are assigned to Outremer Telecom are mentioned as "SFR".
-# http://www.outremer-telecom.fr/fr/activites-et-services
-
-5946940|SFR
-59469408|Digicel
-59469409|Digicel
-59469412|Digicel
-59469413|Digicel
-59469414|Digicel
-59469415|Digicel
-59469416|Digicel
-59469417|SFR
-59469418|SFR
-59469419|SFR
-5946942|Orange
-59469430|Orange
-59469431|Orange
-59469432|Orange
-59469433|Orange
-59469434|Orange
-59469438|Orange
-5946944|Orange
-59469446|SFR
-59469447|SFR
-5946949|Digicel
+38730|Srednjobosanski kanton
+38731|Posavski kanton
+38732|Zeničko-dobojski kanton
+38733|Kanton Sarajevo
+38734|kanton 10
+38735|Tuzlanski kanton
+38736|Hercegovačko-neretvanski kanton
+38737|Unsko-sanski kanton
+38738|Bosansko-podrinjski kanton Goražde
+38739|Zapadnohercegovački kanton
+38749|Brčko Distrikt
+38752|Prijedor
+38753|Doboj
+38754|Šamac
+38755|Bijeljina
+38756|Zvornik
+38757|Istočno Sarajevo
+38758|Foča
+38759|Trebinje
