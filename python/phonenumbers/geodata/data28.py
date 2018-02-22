@@ -2604,6 +2604,7 @@ data = {
  '912968':{'en': 'Bagidora, Rajasthan'},
  '912187':{'en': 'Sangola, Maharashtra'},
  '912186':{'en': 'Pandharpur, Maharashtra'},
+ '912185':{'en': 'Malsuras, Maharashtra'},
  '912189':{'en': 'Mohol, Maharashtra'},
  '912188':{'en': 'Mangalwedha, Maharashtra'},
  '91241':{'en': 'Ahmednagar, Maharashtra'},
