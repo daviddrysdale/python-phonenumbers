@@ -6,7 +6,7 @@ PHONE_METADATA_TR = PhoneMetadata(id='TR', country_code=90, international_prefix
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:2(?:[13][26]|[28][2468]|[45][268]|[67][246])|3(?:[13][28]|[24-6][2468]|[78][02468]|92)|4(?:[16][246]|[23578][2468]|4[26]))\\d{7}', example_number='2123456789', possible_length=(10,)),
     mobile=PhoneNumberDesc(national_number_pattern='5(?:(?:0[1-7]|22|[34]\\d|5[1-59]|9[246])\\d{2}|1616|6161)\\d{5}', example_number='5012345678', possible_length=(10,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{7}', example_number='8001234567', possible_length=(10,)),
-    premium_rate=PhoneNumberDesc(national_number_pattern='900\\d{7}', example_number='9001234567', possible_length=(10,)),
+    premium_rate=PhoneNumberDesc(national_number_pattern='(?:8[89]8|900)\\d{7}', example_number='9001234567', possible_length=(10,)),
     pager=PhoneNumberDesc(national_number_pattern='512\\d{7}', example_number='5123456789', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='444\\d{4}|850\\d{7}', example_number='4441444', possible_length=(7, 10)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='444\\d{4}', example_number='4441444', possible_length=(7,)),

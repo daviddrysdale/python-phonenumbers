@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_KE = PhoneMetadata(id='KE', country_code=254, international_prefix='000',
     general_desc=PhoneNumberDesc(national_number_pattern='20\\d{6,7}|[4-9]\\d{6,9}', possible_length=(7, 8, 9, 10)),
     fixed_line=PhoneNumberDesc(national_number_pattern='20\\d{6,7}|4(?:0\\d{6,7}|[136]\\d{7}|[245]\\d{5,7})|5(?:[08]\\d{7}|[1-79]\\d{5,7})|6(?:[01457-9]\\d{5,7}|2\\d{7}|6\\d{6,7})', example_number='202012345', possible_length=(7, 8, 9)),
-    mobile=PhoneNumberDesc(national_number_pattern='7(?:[0-3679]\\d|4[0-46-9]|5[0-6]|8[0-25-9])\\d{6}', example_number='712123456', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='7(?:[0-3679]\\d|4[0-9]|5[0-7]|8[0-25-9])\\d{6}', example_number='712123456', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800[24-8]\\d{5,6}', example_number='800223456', possible_length=(9, 10)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[02-9]\\d{5}', example_number='900223456', possible_length=(9,)),
     national_prefix='0',
