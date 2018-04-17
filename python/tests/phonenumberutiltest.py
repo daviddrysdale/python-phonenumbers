@@ -63,6 +63,8 @@ US_SHORT_BY_ONE_NUMBER = FrozenPhoneNumber(country_code=1, national_number=65025
 US_TOLLFREE = FrozenPhoneNumber(country_code=1, national_number=8002530000)
 US_SPOOF = FrozenPhoneNumber(country_code=1, national_number=0)
 US_SPOOF_WITH_RAW_INPUT = FrozenPhoneNumber(country_code=1, national_number=0, raw_input="000-000-0000")
+UZ_FIXED_LINE = FrozenPhoneNumber(country_code=998, national_number=612201234)
+UZ_MOBILE = FrozenPhoneNumber(country_code=998, national_number=950123456)
 INTERNATIONAL_TOLL_FREE = FrozenPhoneNumber(country_code=800, national_number=12345678)
 # We set this to be the same length as numbers for the other non-geographical
 # country prefix that we have in our test metadata. However, this is not
@@ -800,6 +802,15 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.format_number_for_mobile_dialing(MX_NUMBER1, "MX", False))
         self.assertEqual("+523312345678",
                          phonenumbers.format_number_for_mobile_dialing(MX_NUMBER1, "US", False))
+
+        # Test whether Uzbek phone numbers are returned in international format even when dialled from
+        # same region or other regions.
+        self.assertEqual("+998612201234",
+                         phonenumbers.format_number_for_mobile_dialing(UZ_FIXED_LINE, "UZ", False))
+        self.assertEqual("+998950123456",
+                         phonenumbers.format_number_for_mobile_dialing(UZ_MOBILE, "UZ", False))
+        self.assertEqual("+998950123456",
+                         phonenumbers.format_number_for_mobile_dialing(UZ_MOBILE, "US", False))
 
         # Non-geographical numbers should always be dialed in international format.
         self.assertEqual("+80012345678",

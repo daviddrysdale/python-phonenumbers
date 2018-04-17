@@ -1199,11 +1199,12 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             else:
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
         else:
-            # For non-geographical countries, and Mexican and Chilean fixed
-            # line and mobile numbers, we output international format for
+            # For non-geographical countries, and Mexican, Chilean, and Uzbek
+            # fixed line and mobile numbers, we output international format for
             # numbers that can be dialed internationally as that always works.
             if ((region_code == REGION_CODE_FOR_NON_GEO_ENTITY or
-                 ((region_code == unicod("MX") or region_code == unicod("CL")) and
+                 ((region_code == unicod("MX") or region_code == unicod("CL") or
+                   region_code == unicod("UZ")) and
                   is_fixed_line_or_mobile)) and
                 can_be_internationally_dialled(numobj_no_ext)):
                 # MX fixed line and mobile numbers should always be formatted
@@ -1213,6 +1214,18 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                 # callee are from the same local area. It is trickier to get
                 # that to work correctly than using international format,
                 # which is tested to work fine on all carriers.
+                # CL fixed line numbers need the national prefix when dialing
+                # in the national format, but don't have it when used for
+                # display. The reverse is true for mobile numbers.  As a
+                # result, we output them in the international format to make
+                # it work.
+                # UZ mobile and fixed-line numbers have to be formatted in
+                # international format or prefixed with special codes like 03,
+                # 04 (for fixed-line) and 05 (for mobile) for dialling
+                # successfully from mobile devices. As we do not have complete
+                # information on special codes and to be consistent with
+                # formatting across all phone types we return the number in
+                # international format here.
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.INTERNATIONAL)
             else:
                 formatted_number = format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL)
