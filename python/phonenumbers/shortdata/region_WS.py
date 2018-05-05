@@ -2,7 +2,8 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_WS = PhoneMetadata(id='WS', country_code=None, international_prefix=None,
-    general_desc=PhoneNumberDesc(national_number_pattern='9\\d{2}', possible_length=(3,)),
-    emergency=PhoneNumberDesc(national_number_pattern='99[4-6]', example_number='994', possible_length=(3,)),
-    short_code=PhoneNumberDesc(national_number_pattern='99[4-6]', example_number='994', possible_length=(3,)),
+    general_desc=PhoneNumberDesc(national_number_pattern='[19]\\d{2}', possible_length=(3,)),
+    emergency=PhoneNumberDesc(national_number_pattern='9(?:11|9[4-69])', example_number='994', possible_length=(3,)),
+    short_code=PhoneNumberDesc(national_number_pattern='1(?:1[12]|2[0-6])|9(?:11|9[4-79])', example_number='994', possible_length=(3,)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='12[0-6]', example_number='121', possible_length=(3,)),
     short_data=True)
