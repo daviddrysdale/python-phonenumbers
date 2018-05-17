@@ -10,9 +10,11 @@ Country Code: 44 National Number: 7912345678
 >>> y_pb = phonenumber_pb2.PhoneNumber()
 >>> y_pb.country_code = 44
 >>> y_pb.national_number = 7912345678
+>>> y_pb.country_code_source = phonenumber_pb2.PhoneNumber.UNSPECIFIED
 >>> print str(y_pb).strip()
 country_code: 44
 national_number: 7912345678
+country_code_source: UNSPECIFIED
 >>> # Check italian_leading_zero default value when not set
 >>> y_pb.italian_leading_zero
 False
@@ -23,6 +25,7 @@ Country Code: 44 National Number: 7912345678
 >>> print str(x_pb).strip()
 country_code: 44
 national_number: 7912345678
+country_code_source: UNSPECIFIED
 >>> x_py == y_py
 True
 >>> x_pb == y_pb
@@ -33,8 +36,8 @@ True
 False
 """
 
-from phonenumber_pb2 import PhoneNumber as PhoneNumberPB
-from phonenumbers import PhoneNumber
+from .phonenumber_pb2 import PhoneNumber as PhoneNumberPB
+from phonenumbers import PhoneNumber, CountryCodeSource
 
 def PBToPy(numpb):
     """Convert phonenumber_pb2.PhoneNumber to phonenumber.PhoneNumber"""
@@ -44,7 +47,7 @@ def PBToPy(numpb):
                        italian_leading_zero=numpb.italian_leading_zero if numpb.HasField("italian_leading_zero") else None,
                        number_of_leading_zeros=numpb.number_of_leading_zeros if numpb.HasField("number_of_leading_zeros") else None,
                        raw_input=numpb.raw_input if numpb.HasField("raw_input") else None,
-                       country_code_source=numpb.country_code_source if numpb.HasField("country_code_source") else None,
+                       country_code_source=numpb.country_code_source if numpb.HasField("country_code_source") else CountryCodeSource.UNSPECIFIED,
                        preferred_domestic_carrier_code=numpb.preferred_domestic_carrier_code if numpb.HasField("preferred_domestic_carrier_code") else None)
 
 def PyToPB(numobj):
@@ -62,8 +65,7 @@ def PyToPB(numobj):
         numpb.number_of_leading_zeros = numobj.number_of_leading_zeros
     if numobj.raw_input is not None:
         numpb.raw_input = numobj.raw_input
-    if numobj.country_code_source is not None:
-        numpb.country_code_source = numobj.country_code_source
+    numpb.country_code_source = numobj.country_code_source
     if numobj.preferred_domestic_carrier_code is not None:
         numpb.preferred_domestic_carrier_code = numobj.preferred_domestic_carrier_code
     return numpb

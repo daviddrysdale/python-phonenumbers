@@ -54,8 +54,7 @@ class PB2ConvertTest(unittest.TestCase):
                               preferred_domestic_carrier_code="123")
         fieldnames = ('country_code', 'national_number', 'extension',
                       'italian_leading_zero', 'number_of_leading_zeros',
-                      'raw_input', 'country_code_source',
-                      'preferred_domestic_carrier_code')
+                      'raw_input', 'preferred_domestic_carrier_code')
         for field in fieldnames:
             numobj = PhoneNumber()
             numobj.merge_from(fullobj)
