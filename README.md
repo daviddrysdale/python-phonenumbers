@@ -14,7 +14,7 @@ Release [HISTORY](python/HISTORY.md), derived from [upstream release notes](http
 
 Installation
 -------------
-Install using [pip](https://pypi.org/) with:
+Install using [pip](https://pypi.org/project/phonenumbers/) with:
 ```
 pip install phonenumbers
 ```
