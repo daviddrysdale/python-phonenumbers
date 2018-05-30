@@ -12,6 +12,13 @@ Original Java code is Copyright (C) 2009-2015 The Libphonenumber Authors.
 Release [HISTORY](python/HISTORY.md), derived from [upstream release notes](https://github.com/googlei18n/libphonenumber/blob/master/release_notes.txt).
 
 
+Installation
+-------------
+Install using [pip](https://pypi.org/project/phonenumbers/) with:
+```
+pip install phonenumbers
+```
+
 Example Usage
 -------------
 
