@@ -1,7 +1,7 @@
 """Auto-generated file, do not edit by hand. FI metadata"""
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_FI = PhoneMetadata(id='FI', country_code=358, international_prefix='00|99(?:[02469]|5(?:11|33|5[59]|88|9[09]))',
+PHONE_METADATA_FI = PhoneMetadata(id='FI', country_code=358, international_prefix='00|99(?:[01469]|5(?:11|3[23]|41|5[59]|77|88|9[09]))',
     general_desc=PhoneNumberDesc(national_number_pattern='1\\d{4,11}|[2-9]\\d{4,10}', possible_length=(5, 6, 7, 8, 9, 10, 11, 12)),
     fixed_line=PhoneNumberDesc(national_number_pattern='1(?:[3569][1-8]\\d{3,9}|[47]\\d{5,10})|2[1-8]\\d{3,9}|3(?:[1-8]\\d{3,9}|9\\d{4,8})|[5689][1-8]\\d{3,9}', example_number='1312345678', possible_length=(5, 6, 7, 8, 9, 10, 11, 12)),
     mobile=PhoneNumberDesc(national_number_pattern='4(?:[0-8]\\d{4,9}|9\\d{3,8})|50\\d{4,8}', example_number='412345678', possible_length=(6, 7, 8, 9, 10, 11)),
