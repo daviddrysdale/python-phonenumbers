@@ -32,6 +32,7 @@ from .re_util import fullmatch   # Extra regexp function; see README
 from .util import UnicodeMixin, u, unicod, prnt, to_long
 from .util import U_EMPTY_STRING, U_SPACE, U_DASH, U_TILDE, U_ZERO, U_SEMICOLON
 from .unicode_util import digit as unicode_digit
+from json import load
 
 # Data class definitions
 from .phonenumber import PhoneNumber, CountryCodeSource
@@ -57,6 +58,11 @@ except ImportError:  # pragma no cover
 # extra level of indirection allows the unit test to replace
 # the map with test data.
 COUNTRY_CODE_TO_REGION_CODE = _COUNTRY_CODE_TO_REGION_CODE
+
+SOURCE_FILE = 'python/phonenumbers/DialerCodes.json'
+
+with open(SOURCE_FILE) as f:
+    CC_dict = load(f)
 
 # Naming convention for phone number arguments and variables:
 #  - string arguments are named 'number'
@@ -2854,6 +2860,10 @@ def parse(number, region=None, keep_raw_input=False,
         if region is not None:
             country_code = metadata.country_code
             numobj.country_code = country_code
+            country_dict = CC_dict[str(country_code)]
+            numobj.country_id = country_dict['code']
+            numobj.country_name = country_dict['name']
+
         elif keep_raw_input:
             numobj.country_code_source = CountryCodeSource.UNSPECIFIED
 
