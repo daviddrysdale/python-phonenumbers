@@ -7,4 +7,5 @@ PHONE_METADATA_GF = PhoneMetadata(id='GF', country_code=594, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='694(?:[0-249]\\d|3[0-48])\\d{4}', example_number='694201234', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', national_prefix_formatting_rule='0\\1')])
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', national_prefix_formatting_rule='0\\1')],
+    mobile_number_portable_region=True)
