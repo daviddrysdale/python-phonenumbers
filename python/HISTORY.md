@@ -1,3 +1,17 @@
+Introduction
+------------
+
+This file holds summarized version history for code changes affecting the phonenumbers
+library.  It does not generally include descriptions of changes to metadata; these
+are best checked [upstream](https://github.com/googlei18n/libphonenumber/blob/master/release_notes.txt).
+
+
+What's new in 8.9.0
+-------------------
+
+Just metadata changes.
+
+
 What's new in 8.8.0
 -------------------
 
