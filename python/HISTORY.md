@@ -2,8 +2,12 @@ Introduction
 ------------
 
 This file holds summarized version history for code changes affecting the phonenumbers
-library.  It does not generally include descriptions of changes to metadata; these
-are best checked [upstream](https://github.com/googlei18n/libphonenumber/blob/master/release_notes.txt).
+library.
+
+This file does not generally include descriptions of patch releases (vX.Y.Z
+=> vX.Y.Z+1) unless there are significant changes to code, not just metadata
+changes.  (Metadata updates are best checked
+[upstream](https://github.com/googlei18n/libphonenumber/blob/master/release_notes.txt).)
 
 
 What's new in 8.9.0
