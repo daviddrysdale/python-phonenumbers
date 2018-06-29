@@ -5906,7 +5906,7 @@ data = {
  '437766':{'de': 'Andorf', 'en': 'Andorf'},
  '542928':{'en': 'Pedro Luro, Buenos Aires', 'es': 'Pedro Luro, Buenos Aires'},
  '542929':{'en': u('Guamin\u00ed, Buenos Aires'), 'es': u('Guamin\u00ed, Buenos Aires')},
- '5255':{'en': 'Mexico City, FD', 'es': u('Cuidad de M\u00e9xico, CDMX')},
+ '5255':{'en': 'Mexico City, FD', 'es': u('Ciudad de M\u00e9xico, CDMX')},
  '55112489':{'en': 'Guarulhos - SP', 'pt': 'Guarulhos - SP'},
  '497274':{'de': 'Germersheim', 'en': 'Germersheim'},
  '4938876':{'de': 'Roggendorf', 'en': 'Roggendorf'},
