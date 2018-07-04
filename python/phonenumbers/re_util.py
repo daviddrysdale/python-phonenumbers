@@ -9,7 +9,7 @@ with Java regular expression code.
 >>> r2 = re.compile('bc')
 >>> r3 = re.compile('abc')
 >>> fullmatch(r1, string)  # doctest: +ELLIPSIS
-<...SRE_Match object...>
+<...Match object...>
 >>> fullmatch(r2, string)
 >>> fullmatch(r3, string)
 >>> r = re.compile(r'\\d{8}|\\d{10,11}')
