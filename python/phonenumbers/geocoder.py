@@ -44,8 +44,8 @@ True
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .util import prnt, unicod, u, U_EMPTY_STRING, U_ZERO
-from .phonenumberutil import region_code_for_number, PhoneNumberType, PhoneNumber
+from .util import prnt, unicod, u, U_EMPTY_STRING
+from .phonenumberutil import region_code_for_number, PhoneNumberType
 from .phonenumberutil import country_mobile_token, national_significant_number, number_type
 from .phonenumberutil import region_code_for_country_code, region_codes_for_country_code
 from .phonenumberutil import is_valid_number_for_region, parse, NumberParseException

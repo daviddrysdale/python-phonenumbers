@@ -18,16 +18,11 @@ Note most commercial short numbers are not handled here, but by phonenumberutil.
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import re
-
-from .re_util import fullmatch
 from .util import U_EMPTY_STRING, prnt
 from .phonemetadata import PhoneMetadata
-from .phonenumber import PhoneNumber
 from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
 from .phonenumberutil import normalize_digits_only, region_codes_for_country_code
-from .phonenumberutil import national_significant_number
-from .phonenumberutil import _is_number_matching_desc, _match_national_number
+from .phonenumberutil import national_significant_number, _match_national_number
 
 
 # Import auto-generated data structures

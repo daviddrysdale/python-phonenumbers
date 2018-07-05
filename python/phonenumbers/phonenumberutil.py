@@ -45,7 +45,6 @@ except ImportError:  # pragma no cover
     # The generation process imports this module, creating a circular
     # dependency.  The hack below works around this.
     import os
-    import sys
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
         prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
