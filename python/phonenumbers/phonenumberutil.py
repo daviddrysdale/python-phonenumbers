@@ -1952,7 +1952,7 @@ def _is_number_matching_desc(national_number, number_desc):
         return False
     actual_length = len(national_number)
     possible_lengths = number_desc.possible_length
-    if len(possible_lengths) > 0 and not actual_length in possible_lengths:
+    if len(possible_lengths) > 0 and actual_length not in possible_lengths:
         return False
     return _match_national_number(national_number, number_desc, False)
 

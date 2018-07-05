@@ -139,6 +139,7 @@ def _is_mobile(ntype):
             ntype == PhoneNumberType.FIXED_LINE_OR_MOBILE or
             ntype == PhoneNumberType.PAGER)
 
+
 if __name__ == '__main__':  # pragma no cover
     import doctest
     doctest.testmod()
