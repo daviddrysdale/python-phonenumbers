@@ -23,7 +23,7 @@ import unittest
 from phonenumbers import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 from phonenumbers import PhoneNumber, NumberFormat, phonenumberutil
 from phonenumbers import phonenumbermatcher, CountryCodeSource
-from phonenumbers.util import u
+from phonenumbers.util import prnt, u
 from .testmetadatatest import TestMetadataTestCase
 
 
