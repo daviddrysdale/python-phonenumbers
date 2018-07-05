@@ -17,6 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+
 import phonenumbers
 from phonenumbers import connects_to_emergency_number, is_emergency_number, ShortNumberCost
 from phonenumbers import is_possible_short_number_for_region, is_possible_short_number
