@@ -146,7 +146,7 @@ from .phonenumbermatcher import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 
 # Version number is taken from the upstream libphonenumber version
 # together with an indication of the version of the Python-specific code.
-__version__ = "8.9.9"
+__version__ = "8.9.10"
 
 __all__ = ['PhoneNumber', 'CountryCodeSource', 'FrozenPhoneNumber',
            'REGION_CODE_FOR_NON_GEO_ENTITY', 'NumberFormat', 'PhoneNumberDesc', 'PhoneMetadata',
