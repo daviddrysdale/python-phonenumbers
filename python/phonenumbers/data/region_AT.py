@@ -8,8 +8,7 @@ PHONE_METADATA_AT = PhoneMetadata(id='AT', country_code=43, international_prefix
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6,10}', example_number='800123456', possible_length=(9, 10, 11, 12, 13)),
     premium_rate=PhoneNumberDesc(national_number_pattern='9(?:0[01]|3[019])\\d{6,10}', example_number='900123456', possible_length=(9, 10, 11, 12, 13)),
     shared_cost=PhoneNumberDesc(national_number_pattern='8(?:10\\d|2(?:[01]\\d|8\\d?))\\d{5,9}', example_number='810123456', possible_length=(8, 9, 10, 11, 12, 13)),
-    voip=PhoneNumberDesc(national_number_pattern='780\\d{6,10}', example_number='780123456', possible_length=(9, 10, 11, 12, 13)),
-    uan=PhoneNumberDesc(national_number_pattern='5(?:(?:0[1-9]|17)\\d{2,10}|[79]\\d{3,11})|720\\d{6,10}', example_number='50123', possible_length=(5, 6, 7, 8, 9, 10, 11, 12, 13)),
+    voip=PhoneNumberDesc(national_number_pattern='5(?:(?:0[1-9]|17)\\d{2,10}|[79]\\d{3,11})|7[28]0\\d{6,10}', example_number='780123456', possible_length=(5, 6, 7, 8, 9, 10, 11, 12, 13)),
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(116\\d{3})', format='\\1', leading_digits_pattern=['116'], national_prefix_formatting_rule='\\1'),
@@ -18,5 +17,6 @@ PHONE_METADATA_AT = PhoneMetadata(id='AT', country_code=43, international_prefix
         NumberFormat(pattern='(5\\d)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['5[079]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(5\\d)(\\d{4})(\\d{4,7})', format='\\1 \\2 \\3', leading_digits_pattern=['5[079]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3,10})', format='\\1 \\2', leading_digits_pattern=['(?:31|4)6|51|6(?:5[0-3579]|[6-9])|7(?:[28]0|32)|[89]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{2})', format='\\1 \\2', leading_digits_pattern=['517'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{4})(\\d{3,9})', format='\\1 \\2', leading_digits_pattern=['2|3(?:1[1-578]|[3-8])|4[2378]|5[2-6]|6(?:[12]|4[1-9]|5[468])|7(?:[24][1-8]|35|[5-79])'], national_prefix_formatting_rule='0\\1')],
     mobile_number_portable_region=True)

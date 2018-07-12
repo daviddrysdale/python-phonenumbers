@@ -3801,7 +3801,7 @@ data = {
  '1731':('America/Chicago',),
  '1732':('America/New_York',),
  '1734':('America/New_York',),
- '1737':('|America/Chicago',),
+ '1737':('America/Chicago',),
  '62556':('Asia/Makassar',),
  '521486':('America/Mexico_City',),
  '62554':('Asia/Makassar',),
