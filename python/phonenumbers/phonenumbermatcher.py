@@ -785,7 +785,7 @@ class PhoneNumberMatch(UnicodeMixin):
                  self.number))
 
     def __unicode__(self):
-        return unicod("<phonenumber.PhoneNumberMatch; span=({},{}), raw_string={}>".format(
+        return unicod("<phonenumber.PhoneNumberMatch; span=(%s,%s), raw_string=%s>")%(
             self.start, 
             self.end, 
-            self.raw_string))
+            self.raw_string)
