@@ -92,7 +92,7 @@ class PhoneNumberMatchTest(unittest.TestCase):
         number = PhoneNumber()
         match = PhoneNumberMatch(10, "1 800 234 45 67", number)
 
-        self.assertEqual("PhoneNumberMatch [10,25) 1 800 234 45 67", str(match))
+        self.assertEqual("<phonenumber.PhoneNumberMatch; span=(10,25), raw_string=1 800 234 45 67>", str(match))
         # Python version extra test
         self.assertEqual("PhoneNumberMatch(start=10, raw_string='1 800 234 45 67', "
                          "numobj=PhoneNumber(country_code=None, national_number=None, extension=None, "

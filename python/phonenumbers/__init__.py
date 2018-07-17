@@ -47,8 +47,8 @@ True
 >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
 ...     prnt(match)
 ...
-PhoneNumberMatch [11,23) 510-748-8230
-PhoneNumberMatch [51,62) 703-4800500
+<phonenumber.PhoneNumberMatch; span=(11,23), raw_string=510-748-8230>
+<phonenumber.PhoneNumberMatch; span=(51,62), raw_string=703-4800500>
 >>> for match in phonenumbers.PhoneNumberMatcher(text, "US"):
 ...     prnt(phonenumbers.format_number(match.number, phonenumbers.PhoneNumberFormat.E164))
 ...
