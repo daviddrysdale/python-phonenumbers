@@ -98,26 +98,26 @@ applied as the user types.   The `AsYouTypeFormatter` object allows this.
 
 ```pycon
 >>> formatter = phonenumbers.AsYouTypeFormatter("US")
->>> print(formatter.input_digit("6"))
-6
->>> print(formatter.input_digit("5"))
-65
->>> print(formatter.input_digit("0"))
-(650
->>> print(formatter.input_digit("2"))
-(650) 2
->>> print(formatter.input_digit("5"))
-(650) 25
->>> print(formatter.input_digit("3"))
-(650) 253
->>> print(formatter.input_digit("2"))
-650-2532
->>> print(formatter.input_digit("2"))
-(650) 253-22
->>> print(formatter.input_digit("2"))
-(650) 253-222
->>> print(formatter.input_digit("2"))
-(650) 253-2222
+>>> formatter.input_digit("6")
+'6'
+>>> formatter.input_digit("5")
+'65'
+>>> formatter.input_digit("0")
+'650'
+>>> formatter.input_digit("2")
+'650 2'
+>>> formatter.input_digit("5")
+'650 25'
+>>> formatter.input_digit("3")
+'650 253'
+>>> formatter.input_digit("2")
+'650-2532'
+>>> formatter.input_digit("2")
+'(650) 253-22'
+>>> formatter.input_digit("2")
+'(650) 253-222'
+>>> formatter.input_digit("2")
+'(650) 253-2222'
 ```
 
 Sometimes, you've got a larger block of text that may or may not have some phone numbers inside it.  For this,
@@ -145,13 +145,13 @@ You might want to get some information about the location that corresponds to a 
 ```pycon
 >>> from phonenumbers import geocoder
 >>> ch_number = phonenumbers.parse("0431234567", "CH")
->>> print(repr(geocoder.description_for_number(ch_number, "de")))
-'Z\\xfcrich'
->>> print(repr(geocoder.description_for_number(ch_number, "en")))
+>>> geocoder.description_for_number(ch_number, "de")
+'Zürich'
+>>> geocoder.description_for_number(ch_number, "en")
 'Zurich'
->>> print(repr(geocoder.description_for_number(ch_number, "fr")))
+>>> geocoder.description_for_number(ch_number, "fr")
 'Zurich'
->>> print(repr(geocoder.description_for_number(ch_number, "it")))
+>>> geocoder.description_for_number(ch_number, "it")
 'Zurigo'
 ```
 
@@ -161,7 +161,7 @@ originally owned a phone number.
 ```pycon
 >>> from phonenumbers import carrier
 >>> ro_number = phonenumbers.parse("+40721234567", "RO")
->>> print(repr(carrier.name_for_number(ro_number, "en")))
+>>> carrier.name_for_number(ro_number, "en")
 'Vodafone'
 ```
 
@@ -171,8 +171,8 @@ belongs to.
 ```pycon
 >>> from phonenumbers import timezone
 >>> gb_number = phonenumbers.parse("+447986123456", "GB")
->>> str(timezone.time_zones_for_number(gb_number))
-"('Atlantic/Reykjavik', 'Europe/London')"
+>>> timezone.time_zones_for_number(gb_number)
+('Atlantic/Reykjavik', 'Europe/London')
 ```
 
 For more information about the other functionality available from the library, look in the unit tests or in the original
