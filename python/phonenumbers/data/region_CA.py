@@ -2,7 +2,7 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CA = PhoneMetadata(id='CA', country_code=1, international_prefix='011',
-    general_desc=PhoneNumberDesc(national_number_pattern='[2-9]\\d{9}', possible_length=(10,), possible_length_local_only=(7,)),
+    general_desc=PhoneNumberDesc(national_number_pattern='(?:[2-8]\\d|90)\\d{8}', possible_length=(10,), possible_length_local_only=(7,)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:2(?:04|[23]6|[48]9|50)|3(?:06|43|65)|4(?:03|1[68]|3[178]|50)|5(?:06|1[49]|48|79|8[17])|6(?:04|13|39|47)|7(?:0[59]|78|8[02])|8(?:[06]7|19|25|73)|90[25])[2-9]\\d{6}', example_number='5062345678', possible_length=(10,), possible_length_local_only=(7,)),
     mobile=PhoneNumberDesc(national_number_pattern='(?:2(?:04|[23]6|[48]9|50)|3(?:06|43|65)|4(?:03|1[68]|3[178]|50)|5(?:06|1[49]|48|79|8[17])|6(?:04|13|39|47)|7(?:0[59]|78|8[02])|8(?:[06]7|19|25|73)|90[25])[2-9]\\d{6}', example_number='2042345678', possible_length=(10,), possible_length_local_only=(7,)),
     toll_free=PhoneNumberDesc(national_number_pattern='8(?:00|33|44|55|66|77|88)[2-9]\\d{6}', example_number='8002123456', possible_length=(10,)),

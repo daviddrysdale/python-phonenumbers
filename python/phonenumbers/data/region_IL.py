@@ -2,7 +2,7 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefix='0(?:0|1[2-9])',
-    general_desc=PhoneNumberDesc(national_number_pattern='1\\d{6,11}|[2-589]\\d{3}(?:\\d{3,6})?|6\\d{3}|7\\d{6,9}', possible_length=(4, 7, 8, 9, 10, 11, 12), possible_length_local_only=(7,)),
+    general_desc=PhoneNumberDesc(national_number_pattern='1\\d{6}(?:\\d{3,5})?|[57]\\d{8}|[1-489]\\d{7}|[2-689]\\d{3}', possible_length=(4, 7, 8, 9, 10, 11, 12), possible_length_local_only=(7,)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:153\\d{1,2}|[2-489])\\d{7}', example_number='21234567', possible_length=(8, 11, 12), possible_length_local_only=(7,)),
     mobile=PhoneNumberDesc(national_number_pattern='5(?:[0-489][2-9]\\d|5(?:01|2[2-5]|3[23]|4[45]|5[015689]|6[6-8]|7[0-267]|8[7-9]|9[1-9])|6\\d{2})\\d{5}', example_number='502345678', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='1(?:80[019]\\d{3}|255)\\d{3}', example_number='1800123456', possible_length=(7, 10)),
@@ -11,7 +11,7 @@ PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='7(?:18\\d|2[23]\\d|3[237]\\d|47\\d|6[58]\\d|7\\d{2}|8(?:2\\d|33|55|77|81)|9[2579]\\d)\\d{5}', example_number='771234567', possible_length=(9,)),
     uan=PhoneNumberDesc(national_number_pattern='[2-689]\\d{3}|1599\\d{6}', example_number='1599123456', possible_length=(4, 10)),
     voicemail=PhoneNumberDesc(national_number_pattern='151\\d{8,9}', example_number='15112340000', possible_length=(11, 12)),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='1700\\d{6}|[2-689]\\d{3}', example_number='1700123456', possible_length=(4, 10)),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='1700\\d{6}|[2-689]\\d{3}', possible_length=(4, 10)),
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='([2-489])(\\d{3})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['[2-489]'], national_prefix_formatting_rule='0\\1'),

@@ -2,7 +2,7 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_RS = PhoneMetadata(id='RS', country_code=381, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[126-9]\\d{4,11}|3(?:[0-79]\\d{3,10}|8[2-9]\\d{2,9})', possible_length=(6, 7, 8, 9, 10, 11, 12), possible_length_local_only=(5, 6)),
+    general_desc=PhoneNumberDesc(national_number_pattern='[127]\\d{6,11}|3(?:[0-79]\\d{5,10}|8(?:[02-9]\\d{4,9}|1\\d{4,5}))|6\\d{7,9}|800\\d{3,9}|90\\d{4,8}|7\\d{5}', possible_length=(6, 7, 8, 9, 10, 11, 12), possible_length_local_only=(5, 6)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:1(?:[02-9][2-9]|1[1-9])\\d|2(?:[0-24-7][2-9]\\d|[389](?:0[2-9]|[2-9]\\d))|3(?:[0-8][2-9]\\d|9(?:[2-9]\\d|0[2-9])))\\d{3,8}', example_number='10234567', possible_length=(7, 8, 9, 10, 11, 12), possible_length_local_only=(5, 6)),
     mobile=PhoneNumberDesc(national_number_pattern='6(?:[0-689]|7\\d)\\d{6,7}', example_number='601234567', possible_length=(8, 9, 10)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{3,9}', example_number='80012345', possible_length=(6, 7, 8, 9, 10, 11, 12)),

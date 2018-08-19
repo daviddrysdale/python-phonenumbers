@@ -2,7 +2,7 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_GG = PhoneMetadata(id='GG', country_code=44, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[135789]\\d{6,9}', possible_length=(7, 9, 10), possible_length_local_only=(6,)),
+    general_desc=PhoneNumberDesc(national_number_pattern='(?:1481|[357-9]\\d{3})\\d{6}|8\\d{6}(?:\\d{2})?', possible_length=(7, 9, 10), possible_length_local_only=(6,)),
     fixed_line=PhoneNumberDesc(national_number_pattern='1481[25-9]\\d{5}', example_number='1481256789', possible_length=(10,), possible_length_local_only=(6,)),
     mobile=PhoneNumberDesc(national_number_pattern='7(?:781\\d|839\\d|911[17])\\d{5}', example_number='7781123456', possible_length=(10,)),
     toll_free=PhoneNumberDesc(national_number_pattern='80(?:0(?:1111|\\d{6,7})|8\\d{7})', example_number='8001234567', possible_length=(7, 9, 10)),

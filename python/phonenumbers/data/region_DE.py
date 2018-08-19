@@ -2,7 +2,7 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_DE = PhoneMetadata(id='DE', country_code=49, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[1-35-9]\\d{3,14}|4(?:[0-8]\\d{3,12}|9(?:[0-37]\\d|4(?:[1-35-8]|4\\d?)|5\\d{1,2}|6[1-8]\\d?)\\d{2,8})', possible_length=(4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), possible_length_local_only=(3, 4)),
+    general_desc=PhoneNumberDesc(national_number_pattern='(?:1|[358]\\d{11})\\d{3}|[1-35689]\\d{13}|4(?:[0-8]\\d{5,12}|9(?:[05]\\d|44|6[1-8])\\d{9})|[1-35-9]\\d{6,12}|49(?:[0-357]\\d|[46][1-8])\\d{4,8}|49(?:[0-3579]\\d|4[1-9]|6[0-8])\\d{3}|[1-9]\\d{5}|[13-68]\\d{4}', possible_length=(4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), possible_length_local_only=(3, 4)),
     fixed_line=PhoneNumberDesc(national_number_pattern='2\\d{5,13}|3(?:0\\d{3,13}|2\\d{9}|[3-9]\\d{4,13})|4(?:0\\d{3,12}|[1-8]\\d{4,12}|9(?:[0-37]\\d|4(?:[1-35-8]|4\\d?)|5\\d{1,2}|6[1-8]\\d?)\\d{2,8})|5(?:0[2-8]|[1256]\\d|[38][0-8]|4\\d{0,2}|[79][0-7])\\d{3,11}|6(?:\\d{5,13}|9\\d{3,12})|7(?:0[2-8]|[1-9]\\d)\\d{3,10}|8(?:0[2-9]|[1-8]\\d|9\\d?)\\d{3,10}|9(?:0[6-9]\\d{3,10}|1\\d{4,12}|[2-9]\\d{4,11})', example_number='30123456', possible_length=(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), possible_length_local_only=(3, 4)),
     mobile=PhoneNumberDesc(national_number_pattern='1(?:5[0-25-9]\\d{8}|6[023]\\d{7,8}|7\\d{8,9})', example_number='15123456789', possible_length=(10, 11)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{7,12}', example_number='8001234567890', possible_length=(10, 11, 12, 13, 14, 15)),
