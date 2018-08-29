@@ -10,6 +10,15 @@ changes.  (Metadata updates are best checked
 [upstream](https://github.com/googlei18n/libphonenumber/blob/master/release_notes.txt).)
 
 
+What's new in 8.9.12
+--------------------
+
+Merge to
+[upstream commit d56bf9da349b](https://github.com/googlei18n/libphonenumber/commit/d56bf9da349b);
+relevant code changes:
+ - Support Russian extension character "доб" as a valid one while parsing the numbers.
+
+
 What's new in 8.9.0
 -------------------
 

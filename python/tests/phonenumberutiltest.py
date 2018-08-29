@@ -2522,6 +2522,15 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.parse(u("(800) 901-3355 ,extensio\u0301n 7246433"), "US"))
         self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 , 7246433", "US"))
         self.assertEqual(usWithExtension, phonenumbers.parse("(800) 901-3355 ext: 7246433", "US"))
+        # Testing Russian extension \u0434\u043E\u0431 with variants found online.
+        ruWithExtension = PhoneNumber(country_code=7, national_number=4232022511, extension="100")
+        self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11, \u0434\u043E\u0431. 100"), "RU"))
+        self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11 \u0434\u043E\u0431. 100"), "RU"))
+        self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11, \u0434\u043E\u0431 100"), "RU"))
+        self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11 \u0434\u043E\u0431 100"), "RU"))
+        self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11\u0434\u043E\u0431100"), "RU"))
+        # In upper case
+        self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11, \u0414\u041E\u0431. 100"), "RU"))
 
         # Test that if a number has two extensions specified, we ignore the second.
         usWithTwoExtensionsNumber = PhoneNumber(country_code=1, national_number=2121231234, extension="508")
@@ -2642,6 +2651,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.is_number_match("+64 3 331-6005 extn 1234", "+6433316005#1234"))
         self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
                          phonenumbers.is_number_match("+64 3 331-6005 ext. 1234", "+6433316005;1234"))
+        self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
+                         phonenumbers.is_number_match("+7 423 202-25-11 ext 100", u("+7 4232022511 \u0434\u043E\u0431. 100")))
         # Test proto buffers.
         self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
                          phonenumbers.is_number_match(NZ_NUMBER, "+6403 331 6005"))

@@ -318,7 +318,7 @@ def _create_extn_pattern(single_extn_symbols):
     return (_RFC3966_EXTN_PREFIX + _CAPTURING_EXTN_DIGITS + u("|") +
             u("[ \u00A0\\t,]*(?:e?xt(?:ensi(?:o\u0301?|\u00F3))?n?|") +
             u("\uFF45?\uFF58\uFF54\uFF4E?|") +
-            u("[") + single_extn_symbols + u("]|int|anexo|\uFF49\uFF4E\uFF54)") +
+            u("\u0434\u043e\u0431|") + u("[") + single_extn_symbols + u("]|int|anexo|\uFF49\uFF4E\uFF54)") +
             u("[:\\.\uFF0E]?[ \u00A0\\t,-]*") + _CAPTURING_EXTN_DIGITS + u("#?|") +
             u("[- ]+(") + _DIGITS + u("{1,5})#"))
 
