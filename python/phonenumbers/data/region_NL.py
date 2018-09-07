@@ -7,7 +7,7 @@ PHONE_METADATA_NL = PhoneMetadata(id='NL', country_code=31, international_prefix
     mobile=PhoneNumberDesc(national_number_pattern='6[1-58]\\d{7}', example_number='612345678', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{4,7}', example_number='8001234', possible_length=(7, 8, 9, 10)),
     premium_rate=PhoneNumberDesc(national_number_pattern='90[069]\\d{4,7}', example_number='9061234', possible_length=(7, 8, 9, 10)),
-    voip=PhoneNumberDesc(national_number_pattern='(?:6760|(?:85|91)\\d{2})\\d{5}', example_number='851234567', possible_length=(9,)),
+    voip=PhoneNumberDesc(national_number_pattern='(?:85|91)\\d{7}', example_number='851234567', possible_length=(9,)),
     pager=PhoneNumberDesc(national_number_pattern='66\\d{7}', example_number='662345678', possible_length=(9,)),
     uan=PhoneNumberDesc(national_number_pattern='140(?:1(?:[035]|[16-8]\\d)|2(?:[0346]|[259]\\d)|3(?:[03568]|[124]\\d)|4(?:[0356]|[17-9]\\d)|5(?:[0358]|[124679]\\d)|7\\d|8[458])|8[478]\\d{7}', example_number='14020', possible_length=(5, 6, 9)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='140(?:1(?:[035]|[16-8]\\d)|2(?:[0346]|[259]\\d)|3(?:[03568]|[124]\\d)|4(?:[0356]|[17-9]\\d)|5(?:[0358]|[124679]\\d)|7\\d|8[458])', possible_length=(5, 6)),
