@@ -2530,7 +2530,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11 \u0434\u043E\u0431 100"), "RU"))
         self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11\u0434\u043E\u0431100"), "RU"))
         # In upper case
-        self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11, \u0414\u041E\u0431. 100"), "RU"))
+        self.assertEqual(ruWithExtension, phonenumbers.parse(u("8 (423) 202-25-11, \u0414\u041E\u0411. 100"), "RU"))
 
         # Test that if a number has two extensions specified, we ignore the second.
         usWithTwoExtensionsNumber = PhoneNumber(country_code=1, national_number=2121231234, extension="508")
