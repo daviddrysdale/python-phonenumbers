@@ -681,7 +681,7 @@ class PhoneNumberMatcher(object):
             # but that would be slower.
             if (region_code_for_country_code(numobj.country_code) == "IL" and
                 len(national_significant_number(numobj)) == 4 and
-                (offset == 0 or (offset > 0 and self.text[offset - 1] != U_STAR))):
+                (offset == 0 or (offset > 0 and self.text[offset - 1] != U_STAR))): # pragma no cover
                 # No match.
                 return None
             if _verify(self.leniency, numobj, candidate):

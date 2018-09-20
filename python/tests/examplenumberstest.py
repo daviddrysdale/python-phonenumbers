@@ -254,14 +254,6 @@ class ExampleNumbersTest(unittest.TestCase):
         self.assertFalse(shortnumberinfo.is_carrier_specific(esNumber))
 
     # Extra tests that need access to the real metadata
-    def testIsraelShortNumber(self):
-        # Python version extra test:
-        # Send in a 4-digit Israel phone number
-        matcher = PhoneNumberMatcher("1234", "IL", leniency=Leniency.POSSIBLE)
-        self.assertFalse(matcher.has_next())
-        matcher2 = PhoneNumberMatcher("*1234", "IL", leniency=Leniency.POSSIBLE)
-        self.assertTrue(matcher2.has_next())
-
     def testMissingShortMetadata(self):
         # Python version extra test:
         # Check a short number for a country (GQ) that has no short metadata
