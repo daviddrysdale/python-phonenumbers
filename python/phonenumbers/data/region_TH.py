@@ -10,7 +10,7 @@ PHONE_METADATA_TH = PhoneMetadata(id='TH', country_code=66, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='6[08]\\d{7}', example_number='601234567', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(2)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['2'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='([13-9]\\d)(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['14|[3-9]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(1[89]00)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1[89]0', '1[89]00'], national_prefix_formatting_rule='\\1')],
+    number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['2'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['14|[3-9]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1'])],
     mobile_number_portable_region=True)

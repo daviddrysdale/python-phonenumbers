@@ -14,7 +14,7 @@ PHONE_METADATA_CH = PhoneMetadata(id='CH', country_code=41, international_prefix
     voicemail=PhoneNumberDesc(national_number_pattern='860\\d{9}', example_number='860123456789', possible_length=(12,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([2-9]\\d)(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[2-7]|[89]1'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='([89]\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['8[047]|90'], national_prefix_formatting_rule='0\\1'),
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['2[12467]|3[1-4]|4[134]|5[12568]|6[12]|7(?:[15-9]|4[0248])|[89]1'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['8(?:00|4[0248]|78)|90[016]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4 \\5', leading_digits_pattern=['860'], national_prefix_formatting_rule='0\\1')],
     mobile_number_portable_region=True)

@@ -8,5 +8,5 @@ PHONE_METADATA_LV = PhoneMetadata(id='LV', country_code=371, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='80\\d{6}', example_number='80123456', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='90\\d{6}', example_number='90123456', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='81\\d{6}', example_number='81123456', possible_length=(8,)),
-    number_format=[NumberFormat(pattern='([2689]\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[2689]'])],
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[269]|8[01]'])],
     mobile_number_portable_region=True)

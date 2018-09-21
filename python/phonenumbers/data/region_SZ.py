@@ -10,4 +10,4 @@ PHONE_METADATA_SZ = PhoneMetadata(id='SZ', country_code=268, international_prefi
     voip=PhoneNumberDesc(national_number_pattern='70\\d{6}', example_number='70012345', possible_length=(8,)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='0800\\d{4}', possible_length=(8,)),
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[0237]']),
-        NumberFormat(pattern='(\\d{5})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['900'])])
+        NumberFormat(pattern='(\\d{5})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['9'])])

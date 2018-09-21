@@ -7,4 +7,4 @@ PHONE_METADATA_GL = PhoneMetadata(id='GL', country_code=299, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='(?:[25][1-9]|4[2-9])\\d{4}', example_number='221234', possible_length=(6,)),
     toll_free=PhoneNumberDesc(national_number_pattern='80\\d{4}', example_number='801234', possible_length=(6,)),
     voip=PhoneNumberDesc(national_number_pattern='3[89]\\d{4}', example_number='381234', possible_length=(6,)),
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3')])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['19|[2-689]'])])

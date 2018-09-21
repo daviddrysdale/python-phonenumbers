@@ -9,4 +9,4 @@ PHONE_METADATA_TL = PhoneMetadata(id='TL', country_code=670, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='90\\d{5}', example_number='9012345', possible_length=(7,)),
     personal_number=PhoneNumberDesc(national_number_pattern='70\\d{5}', example_number='7012345', possible_length=(7,)),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[2-489]|70']),
-        NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['7[3-8]'])])
+        NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['7'])])

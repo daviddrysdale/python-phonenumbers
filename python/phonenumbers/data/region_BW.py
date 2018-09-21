@@ -8,5 +8,5 @@ PHONE_METADATA_BW = PhoneMetadata(id='BW', country_code=267, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='90\\d{5}', example_number='9012345', possible_length=(7,)),
     voip=PhoneNumberDesc(national_number_pattern='79[12][01]\\d{4}', example_number='79101234', possible_length=(8,)),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[2-6]']),
-        NumberFormat(pattern='(7\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['7']),
-        NumberFormat(pattern='(90)(\\d{5})', format='\\1 \\2', leading_digits_pattern=['90'])])
+        NumberFormat(pattern='(\\d{2})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['90']),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['7'])])

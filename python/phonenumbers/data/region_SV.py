@@ -7,6 +7,6 @@ PHONE_METADATA_SV = PhoneMetadata(id='SV', country_code=503, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='[67]\\d{7}', example_number='70123456', possible_length=(8,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{4}(?:\\d{4})?', example_number='8001234', possible_length=(7, 11)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900\\d{4}(?:\\d{4})?', example_number='9001234', possible_length=(7, 11)),
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[267]']),
-        NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[89]']),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[89]']),
+        NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[267]']),
         NumberFormat(pattern='(\\d{3})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[89]'])])
