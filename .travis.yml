@@ -19,7 +19,10 @@ jobs:
       dist: xenial   # required for "3.7"
       sudo: true     # required for "3.7"
 install:
-  - pip install coveralls
+  - |
+        if [ "$TRAVIS_PYTHON_VERSION" = "2.7" ]; then
+           pip install coveralls
+        fi
   - pip install protobuf
 script:
   - make -C tools/python test
