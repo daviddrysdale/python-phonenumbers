@@ -173,7 +173,7 @@ class ShortNumberInfoTest(TestMetadataTestCase):
                          shortnumberinfo.expected_cost(ambiguousTollFreeNumber))
 
     def testGetExampleShortNumber(self):
-        self.assertEqual("8711", shortnumberinfo._example_short_number("AM"))
+        self.assertEqual("110", shortnumberinfo._example_short_number("AD"))
         self.assertEqual("1010", shortnumberinfo._example_short_number("FR"))
         self.assertEqual("", shortnumberinfo._example_short_number("001"))
         self.assertEqual("", shortnumberinfo._example_short_number(None))

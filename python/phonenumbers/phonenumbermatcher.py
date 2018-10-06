@@ -662,28 +662,6 @@ class PhoneNumberMatcher(object):
                         return None
 
             numobj = parse(candidate, self.preferred_region, keep_raw_input=True)
-            # Check Israel * numbers: these are a special case in that they
-            # are four-digit numbers that our library supports, but they can
-            # only be dialled with a leading *. Since we don't actually store
-            # or detect the * in our phone number library, this means in
-            # practice we detect most four digit numbers as being valid for
-            # Israel. We are considering moving these numbers to
-            # ShortNumberInfo instead, in which case this problem would go
-            # away, but in the meantime we want to restrict the false matches
-            # so we only allow these numbers if they are preceded by a
-            # star. We enforce this for all leniency levels even though these
-            # numbers are technically accepted by isPossibleNumber and
-            # isValidNumber since we consider it to be a deficiency in those
-            # methods that they accept these numbers without the *.
-            # TODO: Remove this or make it significantly less hacky once we've
-            # decided how to handle these short codes going forward in
-            # ShortNumberInfo. We could use the formatting rules for instance,
-            # but that would be slower.
-            if (region_code_for_country_code(numobj.country_code) == "IL" and
-                len(national_significant_number(numobj)) == 4 and
-                (offset == 0 or (offset > 0 and self.text[offset - 1] != U_STAR))): # pragma no cover
-                # No match.
-                return None
             if _verify(self.leniency, numobj, candidate):
                 # We used parse(keep_raw_input=True) to create this number,
                 # but for now we don't return the extra values parsed.
