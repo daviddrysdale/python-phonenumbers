@@ -8,6 +8,6 @@ PHONE_METADATA_LR = PhoneMetadata(id='LR', country_code=231, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='332(?:02|[2-5]\\d)\\d{4}', example_number='332021234', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['4[67]|5'], national_prefix_formatting_rule='0\\1'),
+    number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[45]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['2'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[257]|33|88'], national_prefix_formatting_rule='0\\1')])
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[23578]'], national_prefix_formatting_rule='0\\1')])

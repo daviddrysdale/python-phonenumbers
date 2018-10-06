@@ -10,4 +10,4 @@ PHONE_METADATA_LB = PhoneMetadata(id='LB', country_code=961, international_prefi
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[13-69]|7(?:[2-57]|62|8[0-7]|9[04-9])|8[02-9]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[78]|9[01]'])])
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[7-9]'])])

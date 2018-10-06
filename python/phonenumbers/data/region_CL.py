@@ -3,8 +3,8 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_CL = PhoneMetadata(id='CL', country_code=56, international_prefix='(?:0|1(?:1[0-69]|2[0-57]|5[13-58]|69|7[0167]|8[018]))0',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:1230|[2-57-9]\\d|6\\d{1,3})\\d{7}', possible_length=(9, 10, 11)),
-    fixed_line=PhoneNumberDesc(national_number_pattern='2(?:1962\\d{4}|2\\d{7}|32[0-46-8]\\d{5})|(?:3[2-5]\\d|[47][1-35]\\d|5[1-3578]\\d|6[13-57]\\d|8(?:0[1-9]|[1-9]\\d)|9[3-9]\\d)\\d{6}', example_number='221234567', possible_length=(9,)),
-    mobile=PhoneNumberDesc(national_number_pattern='2(?:1962\\d{4}|2\\d{7}|32[0-46-8]\\d{5})|(?:3[2-5]\\d|[47][1-35]\\d|5[1-3578]\\d|6[13-57]\\d|8(?:0[1-9]|[1-9]\\d)|9[3-9]\\d)\\d{6}', example_number='961234567', possible_length=(9,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='2(?:1962\\d{4}|2\\d{7}|32[0-46-8]\\d{5})|(?:3[2-5]\\d|[47][1-35]\\d|5[1-3578]\\d|6[13-57]\\d|8(?:0[1-9]|[1-9]\\d)|9[2-9]\\d)\\d{6}', example_number='221234567', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='2(?:1962\\d{4}|2\\d{7}|32[0-46-8]\\d{5})|(?:3[2-5]\\d|[47][1-35]\\d|5[1-3578]\\d|6[13-57]\\d|8(?:0[1-9]|[1-9]\\d)|9[2-9]\\d)\\d{6}', example_number='961234567', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6}|1230\\d{7}', example_number='800123456', possible_length=(9, 11)),
     shared_cost=PhoneNumberDesc(national_number_pattern='600\\d{7,8}', example_number='6001234567', possible_length=(10, 11)),
     voip=PhoneNumberDesc(national_number_pattern='44\\d{7}', example_number='441234567', possible_length=(9,)),

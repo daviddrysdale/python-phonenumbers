@@ -15,5 +15,5 @@ PHONE_METADATA_ZA = PhoneMetadata(id='ZA', country_code=27, international_prefix
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['8[1-4]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2,3})', format='\\1 \\2 \\3', leading_digits_pattern=['8[1-4]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['860'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1[0-8]|[24-9]|3[1-69]'], national_prefix_formatting_rule='0\\1')],
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[1-9]'], national_prefix_formatting_rule='0\\1')],
     mobile_number_portable_region=True)
