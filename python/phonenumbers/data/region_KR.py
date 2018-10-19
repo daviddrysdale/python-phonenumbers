@@ -1,7 +1,7 @@
 """Auto-generated file, do not edit by hand. KR metadata"""
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix='00(?:[1259]|3(?:[46]5|91)|7(?:00|27|3|55|6[126]))',
+PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix='00(?:[125689]|3(?:[46]5|91)|7(?:00|27|3|55|6[126]))',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:00[1-9]\\d{2,4}|[12]|5\\d{3})\\d{7}|(?:(?:00|[13-6])\\d|70)\\d{8}|(?:[1-6]\\d|80)\\d{7}|[3-6]\\d{4,5}', possible_length=(5, 6, 8, 9, 10, 11, 12, 13, 14), possible_length_local_only=(3, 7)),
     fixed_line=PhoneNumberDesc(national_number_pattern='2[1-9]\\d{6,7}|(?:3[1-3]|[46][1-4]|5[1-5])(?:1\\d{2,3}|[1-9]\\d{6,7})', example_number='22123456', possible_length=(5, 6, 8, 9, 10), possible_length_local_only=(3, 7)),
     mobile=PhoneNumberDesc(national_number_pattern='1[0-26-9]\\d{7,8}', example_number='1000000000', possible_length=(9, 10)),

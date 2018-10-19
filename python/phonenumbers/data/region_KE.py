@@ -8,7 +8,7 @@ PHONE_METADATA_KE = PhoneMetadata(id='KE', country_code=254, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='800[24-8]\\d{5,6}', example_number='800223456', possible_length=(9, 10)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[02-9]\\d{5}', example_number='900223456', possible_length=(9,)),
     national_prefix='0',
-    national_prefix_for_parsing='005|0',
+    national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{5,7})', format='\\1 \\2', leading_digits_pattern=['[24-6]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['7'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['[89]'], national_prefix_formatting_rule='0\\1')],

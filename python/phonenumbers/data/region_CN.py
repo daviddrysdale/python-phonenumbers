@@ -11,7 +11,7 @@ PHONE_METADATA_CN = PhoneMetadata(id='CN', country_code=86, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:4|(?:10)?8)00\\d{7}|950\\d{7,8}', possible_length=(10, 11, 12)),
     preferred_international_prefix='00',
     national_prefix='0',
-    national_prefix_for_parsing='(1(?:[12]\\d{3}|79\\d{2}|9[0-7]\\d{2}))|0',
+    national_prefix_for_parsing='0|(1(?:[12]\\d{3}|79\\d{2}|9[0-7]\\d{2}))',
     number_format=[NumberFormat(pattern='([48]00)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[48]00']),
         NumberFormat(pattern='(\\d{5,6})', format='\\1', leading_digits_pattern=['100|95']),
         NumberFormat(pattern='(\\d{2})(\\d{5,6})', format='\\1 \\2', leading_digits_pattern=['(?:10|2\\d)[19]', '(?:10|2\\d)(?:10|9[56])', '(?:10|2\\d)(?:100|9[56])'], national_prefix_formatting_rule='0\\1', domestic_carrier_code_formatting_rule='$CC \\1'),
