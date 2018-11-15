@@ -10,6 +10,19 @@ changes.  (Metadata updates are best checked
 [upstream](https://github.com/googlei18n/libphonenumber/blob/master/release_notes.txt).)
 
 
+What's new in 8.10.0
+---------------------
+
+Merge to
+[upstream commit d62a8fb2b719](https://github.com/googlei18n/libphonenumber/commit/d62a8fb2b719);
+relevant code changes:
+ - AsYouTypeFormatter changed to better choose between rules when dialling
+   locally; previously we used the international rules when the national prefix
+   was present since this would exclude the local-only rules. However, there are
+   some numbers that are not internationally diallable that *do* use the
+   national prefix, and this logic precluded formatting them correctly.
+
+
 What's new in 8.9.12
 --------------------
 
