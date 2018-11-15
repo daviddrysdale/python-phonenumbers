@@ -135,22 +135,35 @@ class AsYouTypeFormatter(object):
         return False
 
     def _get_available_formats(self, leading_digits):
-        if (self._is_complete_number and
+        # First decide whether we should use international or national number rules.
+        is_international_number = (self._is_complete_number and len(self._extracted_national_prefix) == 0)
+        if (is_international_number and
             len(self._current_metadata.intl_number_format) > 0):
             format_list = self._current_metadata.intl_number_format
         else:
             format_list = self._current_metadata.number_format
-        national_prefix_is_used_by_country = (self._current_metadata.national_prefix is not None)
         for this_format in format_list:
-            if (not national_prefix_is_used_by_country or self._is_complete_number or
-                this_format.national_prefix_optional_when_formatting or
-                _formatting_rule_has_first_group_only(this_format.national_prefix_formatting_rule)):
-                if self._is_format_eligible(this_format.format):
-                    self._possible_formats.append(this_format)
+            # Discard a few formats that we know are not relevant based on the presence of the national
+            # prefix.
+            if (len(self._extracted_national_prefix) > 0 and
+                _formatting_rule_has_first_group_only(this_format.national_prefix_formatting_rule) and
+                not this_format.national_prefix_optional_when_formatting and
+                not (this_format.domestic_carrier_code_formatting_rule is not None)):
+                # If it is a national number that had a national prefix, any rules that aren't valid with a
+                # national prefix should be excluded. A rule that has a carrier-code formatting rule is
+                # kept since the national prefix might actually be an extracted carrier code - we don't
+                # distinguish between these when extracting it in the AYTF.
+                continue
+            elif (len(self._extracted_national_prefix) == 0 and
+                  not self._is_complete_number and
+                  not _formatting_rule_has_first_group_only(this_format.national_prefix_formatting_rule) and
+                  not this_format.national_prefix_optional_when_formatting):
+                # This number was entered without a national prefix, and this formatting rule requires one,
+                # so we discard it.
+                continue
+            if fullmatch(_ELIGIBLE_FORMAT_PATTERN, this_format.format):
+                self._possible_formats.append(this_format)
         self._narrow_down_possible_formats(leading_digits)
-
-    def _is_format_eligible(self, format):
-        return fullmatch(_ELIGIBLE_FORMAT_PATTERN, format)
 
     def _narrow_down_possible_formats(self, leading_digits):
         index_of_leading_digits_pattern = len(leading_digits) - _MIN_LEADING_DIGITS_LENGTH
