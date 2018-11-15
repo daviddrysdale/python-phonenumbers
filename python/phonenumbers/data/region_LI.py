@@ -10,7 +10,7 @@ PHONE_METADATA_LI = PhoneMetadata(id='LI', country_code=423, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='870(?:28|87)\\d{2}', example_number='8702812', possible_length=(7,)),
     voicemail=PhoneNumberDesc(national_number_pattern='697(?:42|56|[78]\\d)\\d{4}', example_number='697861234', possible_length=(9,)),
     national_prefix='0',
-    national_prefix_for_parsing='0|10(?:01|20|66)',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['[237-9]']),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6[56]']),
-        NumberFormat(pattern='(69)(7\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['697'])])
+    national_prefix_for_parsing='0|(10(?:01|20|66))',
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['[237-9]'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6[56]'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(69)(7\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['697'], domestic_carrier_code_formatting_rule='$CC \\1')])

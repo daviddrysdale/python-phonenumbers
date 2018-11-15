@@ -7,4 +7,4 @@ PHONE_METADATA_SL = PhoneMetadata(id='SL', country_code=232, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='(?:2[15]|3[013-5]|4[04]|5[05]|66|7[5-9]|8[08]|99)\\d{6}', example_number='25123456', possible_length=(8,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{6})', format='\\1 \\2', national_prefix_formatting_rule='(0\\1)')])
+    number_format=[NumberFormat(pattern='(\\d{2})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['[2-9]'], national_prefix_formatting_rule='(0\\1)')])

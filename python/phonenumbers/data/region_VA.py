@@ -10,6 +10,5 @@ PHONE_METADATA_VA = PhoneMetadata(id='VA', country_code=39, international_prefix
     shared_cost=PhoneNumberDesc(national_number_pattern='84(?:[08]\\d{3}|[17])\\d{3}', example_number='848123456', possible_length=(6, 9)),
     personal_number=PhoneNumberDesc(national_number_pattern='1(?:78\\d|99)\\d{6}', example_number='1781234567', possible_length=(9, 10)),
     voip=PhoneNumberDesc(national_number_pattern='55\\d{8}', example_number='5512345678', possible_length=(10,)),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='848\\d{6}', possible_length=(9,)),
     leading_digits='06698',
     mobile_number_portable_region=True)
