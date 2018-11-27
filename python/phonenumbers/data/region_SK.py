@@ -20,4 +20,9 @@ PHONE_METADATA_SK = PhoneMetadata(id='SK', country_code=421, international_prefi
         NumberFormat(pattern='(\\d)(\\d{3})(\\d{3})(\\d{2})', format='\\1/\\2 \\3 \\4', leading_digits_pattern=['2'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2})(\\d{2})', format='\\1/\\2 \\3 \\4', leading_digits_pattern=['[3-5]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[689]'], national_prefix_formatting_rule='0\\1')],
+    intl_number_format=[NumberFormat(pattern='(\\d)(\\d{2})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['21']),
+        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2,3})', format='\\1 \\2 \\3', leading_digits_pattern=['[3-5][1-8]1', '[3-5][1-8]1[67]']),
+        NumberFormat(pattern='(\\d)(\\d{3})(\\d{3})(\\d{2})', format='\\1/\\2 \\3 \\4', leading_digits_pattern=['2']),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2})(\\d{2})', format='\\1/\\2 \\3 \\4', leading_digits_pattern=['[3-5]']),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[689]'])],
     mobile_number_portable_region=True)

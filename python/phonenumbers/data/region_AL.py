@@ -11,7 +11,7 @@ PHONE_METADATA_AL = PhoneMetadata(id='AL', country_code=355, international_prefi
     personal_number=PhoneNumberDesc(national_number_pattern='700[2-9]\\d{4}', example_number='70021234', possible_length=(8,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['80|9'], national_prefix_formatting_rule='0\\1'),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['80[08]|900', '80(?:0|8[1-9])|900[1-9]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['4[2-6]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[2358][2-5]|4'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['[23578]'], national_prefix_formatting_rule='0\\1'),
