@@ -128,6 +128,9 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         unknownCostNumber.national_number = 911
         self.assertEqual(ShortNumberCost.UNKNOWN_COST, expected_cost(unknownCostNumber))
 
+        # Python version extra test: ask for short number for invalid region
+        self.assertEqual(len(shortnumberinfo._example_short_number_for_cost("Bogus", ShortNumberCost.PREMIUM_RATE)), 0)
+
     def testGetExpectedCostForSharedCountryCallingCode(self):
         # Test some numbers which have different costs in countries sharing
         # the same country calling code. In Australia, 1234 is premium-rate,
@@ -177,7 +180,7 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertFalse(len(shortnumberinfo._example_short_number("FR")) == 0)
         self.assertTrue(len(shortnumberinfo._example_short_number("001")) == 0)
         self.assertTrue(len(shortnumberinfo._example_short_number(None)) == 0)
-        
+
     def testConnectsToEmergencyNumber_US(self):
         self.assertTrue(connects_to_emergency_number("911", "US"))
         self.assertTrue(connects_to_emergency_number("112", "US"))
