@@ -3,5 +3,6 @@ include MANIFEST.in
 include MANIFEST
 include HISTORY
 include LICENSE
+include README.md
 include setup.py
 exclude .*ignore
