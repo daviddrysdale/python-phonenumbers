@@ -19,13 +19,13 @@ jobs:
       dist: trusty
     - python: "pypy-5.4"
       dist: trusty
-    - python: "pypy"
+    - python: "pypy2.7-5.8.0" # "pypy" on Trusty
       dist: trusty
     - python: "3.2"
       dist: trusty
     - python: "3.3"
       dist: trusty
-    - python: "pypy3"
+    - python: "pypy3.5-5.8.0" # "pypy3" on Trusty
       dist: trusty
 install:
   - |
