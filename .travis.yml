@@ -1,3 +1,5 @@
+dist: xenial
+sudo: false
 language: python
 python:
 #  - "2.5"
@@ -11,13 +13,13 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
+  - "3.7"
   - "pypy3"
-sudo: false
-jobs:
-  include:
-    - python: "3.7"  # 3.7.0  pip 10.0.1
-      dist: xenial   # required for "3.7"
-      sudo: true     # required for "3.7"
+# jobs:
+#   include:
+#     - python: "3.7"  # 3.7.0  pip 10.0.1
+#       dist: xenial   # required for "3.7"
+#       sudo: true     # required for "3.7"
 install:
   - |
         if [ "$TRAVIS_PYTHON_VERSION" = "2.7" ]; then
