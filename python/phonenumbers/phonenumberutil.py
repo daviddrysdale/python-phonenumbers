@@ -708,8 +708,11 @@ def length_of_national_destination_code(numobj):
     national significant number into NDC and subscriber number. The NDC of a
     phone number is normally the first group of digit(s) right after the
     country calling code when the number is formatted in the international
-    format, if there is a subscriber number part that follows. An example of
-    how this could be used:
+    format, if there is a subscriber number part that follows.
+
+    N.B.: similar to an area code, not all numbers have an NDC!
+
+    An example of how this could be used:
 
     >>> import phonenumbers
     >>> numobj = phonenumbers.parse("18002530000", "US")
@@ -728,7 +731,8 @@ def length_of_national_destination_code(numobj):
     Arguments:
     numobj -- The PhoneNumber object to find the length of the NDC from.
 
-    Returns the length of NDC of the PhoneNumber object passed in.
+    Returns the length of NDC of the PhoneNumber object passed in, which
+    could be zero.
     """
     if numobj.extension is not None:
         # We don't want to alter the object given to us, but we don't want to

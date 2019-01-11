@@ -43,16 +43,6 @@ _EMPTY_METADATA = PhoneMetadata(id=unicod(""),
                                 international_prefix=unicod("NA"),
                                 register=False)
 
-# A pattern that is used to match character classes in regular expressions. An
-# example of a character class is [1-4].
-_CHARACTER_CLASS_PATTERN = re.compile(unicod("\\[([^\\[\\]])*\\]"))
-# Any digit in a regular expression that actually denotes a digit. For
-# example, in the regular expression 80[0-2]\d{6,10}, the first 2 digits (8
-# and 0) are standalone digits, but the rest are not.
-# Two look-aheads are needed because the number following \\d could be a
-# two-digit number, since the phone number can be as long as 15 digits.
-_STANDALONE_DIGIT_PATTERN = re.compile(unicod("\\d(?=[^,}][^,}])"))
-
 # A set of characters that, if found in a national prefix formatting rules, are an indicator to
 # us that we should separate the national prefix from the number when formatting.
 _NATIONAL_PREFIX_SEPARATORS_PATTERN = re.compile("[- ]")
@@ -185,17 +175,6 @@ class AsYouTypeFormatter(object):
 
     def _create_formatting_template(self, num_format):
         number_pattern = num_format.pattern
-
-        # The formatter doesn't format numbers when number_pattern contains
-        # "|", e.g.  (20|3)\d{4}. In those cases we quickly return.
-        if number_pattern.find('|') != -1:
-            return False
-
-        # Replace anything in the form of [..] with \d
-        number_pattern = re.sub(_CHARACTER_CLASS_PATTERN, unicod("\\\\d"), number_pattern)
-
-        # Replace any standalone digit (not the one in d{}) with \d
-        number_pattern = re.sub(_STANDALONE_DIGIT_PATTERN, unicod("\\\\d"), number_pattern)
         self.formatting_template = U_EMPTY_STRING
         temp_template = self._get_formatting_template(number_pattern, num_format.format)
         if len(temp_template) > 0:

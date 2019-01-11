@@ -187,9 +187,9 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("0(?:(11|343|3715)15)?", metadata.national_prefix_for_parsing)
         self.assertEqual("9\\1", metadata.national_prefix_transform_rule)
         self.assertEqual("\\2 15 \\3-\\4", metadata.number_format[2].format)
-        self.assertEqual("(9)(\\d{4})(\\d{2})(\\d{4})",
+        self.assertEqual("(\\d)(\\d{4})(\\d{2})(\\d{4})",
                          metadata.number_format[3].pattern)
-        self.assertEqual("(9)(\\d{4})(\\d{2})(\\d{4})",
+        self.assertEqual("(\\d)(\\d{4})(\\d{2})(\\d{4})",
                          metadata.intl_number_format[3].pattern)
         self.assertEqual("\\1 \\2 \\3 \\4", metadata.intl_number_format[3].format)
 
