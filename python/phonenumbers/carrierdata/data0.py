@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2018 The Libphonenumber Authors
+# Copyright (C) 2011-2019 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -4467,7 +4467,6 @@ data = {
  '551799631':{'en': 'Vivo'},
  '459340':{'en': 'Justfone'},
  '1939865':{'en': 'SunCom Wireless Puerto Rico'},
- '554998419':{'en': 'Brasil Telecom GSM'},
  '554998412':{'en': 'Brasil Telecom GSM'},
  '554998413':{'en': 'Brasil Telecom GSM'},
  '554998411':{'en': 'Brasil Telecom GSM'},
@@ -5056,7 +5055,7 @@ data = {
  '554899911':{'en': 'TIM'},
  '553199231':{'en': 'TIM'},
  '2318':{'en': 'Lonestar Cell'},
- '2317':{'en': 'Cellcom'},
+ '2317':{'en': 'Orange'},
  '2626934':{'en': 'Only'},
  '553898427':{'en': 'Claro BR'},
  '551196913':{'en': 'Vivo'},
@@ -6949,8 +6948,10 @@ data = {
  '553598457':{'en': 'Claro BR'},
  '553598456':{'en': 'Claro BR'},
  '553598451':{'en': 'Claro BR'},
+ '5519993':{'en': 'Claro BR'},
  '553598453':{'en': 'Claro BR'},
  '553598452':{'en': 'Claro BR'},
+ '5519992':{'en': 'Claro BR'},
  '553598459':{'en': 'Claro BR'},
  '553598458':{'en': 'Claro BR'},
  '3630':{'en': 'T-Mobile'},
@@ -7317,7 +7318,6 @@ data = {
  '4476818':{'en': 'PageOne'},
  '5532985':{'en': 'Oi'},
  '5025819':{'en': 'Tigo'},
- '554998418':{'en': 'Brasil Telecom GSM'},
  '551898151':{'en': 'TIM'},
  '51539539':{'en': 'Movistar'},
  '4476810':{'en': 'PageOne'},
@@ -9441,8 +9441,8 @@ data = {
  '491579':{'en': 'Eplus/Sipgate'},
  '554899183':{'en': 'Vivo'},
  '5519991':{'en': 'Claro BR'},
- '5519993':{'en': 'Claro BR'},
- '5519992':{'en': 'Claro BR'},
+ '22050':{'en': 'QCell'},
+ '22051':{'en': 'QCell'},
  '491570':{'en': 'Eplus/Telogic'},
  '491573':{'en': 'Eplus'},
  '491575':{'en': 'Eplus'},

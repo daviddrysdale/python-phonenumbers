@@ -9,5 +9,5 @@ PHONE_METADATA_RE = PhoneMetadata(id='RE', country_code=262, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='8(?:1[01]|2[0156]|84|9[0-37-9])\\d{6}', example_number='810123456', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='([268]\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', national_prefix_formatting_rule='0\\1')],
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', national_prefix_formatting_rule='0\\1')],
     leading_digits='262|6(?:9[23]|47)|8')

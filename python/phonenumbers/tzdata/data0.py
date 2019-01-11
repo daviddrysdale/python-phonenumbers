@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2018 The Libphonenumber Authors
+# Copyright (C) 2011-2019 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -735,7 +735,7 @@ data = {
  '1978':('America/New_York',),
  '1601':('America/Chicago',),
  '1603':('America/New_York',),
- '1602':('America/Denver',),
+ '1602':('America/Denver', 'America/Phoenix'),
  '1605':('America/Denver', 'America/North_Dakota/Center'),
  '1604':('America/Vancouver',),
  '1607':('America/New_York',),
@@ -1027,7 +1027,7 @@ data = {
  '1605399':('America/Denver',),
  '55933532':('America/Sao_Paulo',),
  '1605397':('America/Chicago',),
- '1520':('America/Denver',),
+ '1520':('America/Denver', 'America/Phoenix'),
  '55814131':('America/Sao_Paulo',),
  '1605394':('America/Denver',),
  '1605393':('America/Denver',),
@@ -1398,7 +1398,7 @@ data = {
  '86976':('Asia/Shanghai',),
  '3909':('Europe/Rome',),
  '1850537':('America/Chicago',),
- '1928':('America/Denver',),
+ '1928':('America/Denver', 'America/Phoenix'),
  '1850535':('America/Chicago',),
  '5594981':('America/Sao_Paulo',),
  '55943385':('America/Sao_Paulo',),
@@ -3889,7 +3889,7 @@ data = {
  '521723':('America/Mexico_City',),
  '1423209':('America/New_York',),
  '55813493':('America/Sao_Paulo',),
- '1480':('America/Denver',),
+ '1480':('America/Denver', 'America/Phoenix'),
  '1208729':('America/Boise', 'America/Los_Angeles'),
  '1208728':('America/Boise', 'America/Los_Angeles'),
  '5635':('America/Santiago',),

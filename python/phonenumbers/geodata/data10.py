@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2018 The Libphonenumber Authors
+# Copyright (C) 2011-2019 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1877,7 +1877,6 @@ data = {
  '61888030':{'en': 'Burra'},
  '61888031':{'en': 'Burra'},
  '618847':{'en': 'Adelaide'},
- '6188852':{'en': 'Yorketown'},
  '6188635':{'en': 'Port Broughton'},
  '61888159':{'en': 'Paskeville'},
  '61888158':{'en': 'Moonta'},
@@ -6663,10 +6662,14 @@ data = {
  '61886138':{'en': 'Marla'},
  '61877248':{'en': 'Tintinara'},
  '61748608':{'en': 'Rockhampton'},
- '61748609':{'en': 'Rockhampton'},
+ '61746113':{'en': 'Quilpie'},
+ '61746116':{'en': 'Roma'},
+ '61746117':{'en': 'Southwood'},
+ '61746114':{'en': 'Ravensbourne'},
+ '61746115':{'en': 'Robinson Gorge'},
  '61748600':{'en': 'Belyando'},
  '61748601':{'en': 'Bingegang/Blackwater/Broadsound/Buckland/Byfield/Calen/Calliope/Cannon Valley/Capella/Carbine Creek'},
- '61748602':{'en': 'Carmila/Clermont/Colston Park/Comet/Connors Range/Cracow/Dingo/Dingo Beach/Duaringa/Dysart'},
+ '61746118':{'en': 'St George'},
  '61746119':{'en': 'Stanthorpe'},
  '61748604':{'en': 'Yakapari'},
  '61748605':{'en': 'Cannon Valley'},
@@ -8127,7 +8130,6 @@ data = {
  '61754663':{'en': 'Gatton'},
  '61754662':{'en': 'Gatton'},
  '61754661':{'en': 'Gatton'},
- '6188853':{'en': 'Minlaton'},
  '61887198':{'en': 'Frances'},
  '61887199':{'en': 'Keilira'},
  '61754660':{'en': 'Gatton'},
@@ -8531,7 +8533,6 @@ data = {
  '6174865':{'en': 'Mackay'},
  '6174864':{'en': 'Mackay'},
  '6174862':{'en': 'Mackay'},
- '61888536':{'en': 'Curramulka'},
  '61877250':{'en': 'Willalooka'},
  '61877251':{'en': 'Wirrega'},
  '61752078':{'en': 'Rosevale'},
@@ -8882,8 +8883,6 @@ data = {
  '61887602':{'en': 'Naracoorte'},
  '61886609':{'en': 'Wandearah East'},
  '61886608':{'en': 'Yeelanna'},
- '61888519':{'en': 'Booborowie'},
- '61888518':{'en': 'South Hummocks'},
  '6174842':{'en': 'Mackay'},
  '61851117':{'en': 'Christmas Island'},
  '6174844':{'en': 'Gladstone'},
@@ -8893,8 +8892,6 @@ data = {
  '61851118':{'en': 'Cocos Island'},
  '61888515':{'en': 'Nantawarra'},
  '61888514':{'en': 'Yorketown'},
- '61888517':{'en': 'Snowtown'},
- '61888516':{'en': 'Port Wakefield'},
  '61862025':{'en': 'Perth'},
  '61748888':{'en': 'Rockhampton'},
  '61862024':{'en': 'Perth'},
@@ -9857,10 +9854,13 @@ data = {
  '61756668':{'en': 'Tweed Heads'},
  '6186118':{'en': 'Perth'},
  '6186119':{'en': 'Perth'},
+ '61746112':{'en': 'Pittsworth'},
  '61868346':{'en': 'Albany'},
+ '61748609':{'en': 'Rockhampton'},
  '61887831':{'en': 'Thornlea'},
  '61887098':{'en': 'Rendelsham'},
  '6175342':{'en': 'Caboolture'},
+ '61748602':{'en': 'Carmila/Clermont/Colston Park/Comet/Connors Range/Cracow/Dingo/Dingo Beach/Duaringa/Dysart'},
  '61748603':{'en': 'Biloela'},
  '61875270':{'en': 'Mypolonga'},
  '61885169':{'en': 'Penneshaw'},

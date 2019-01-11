@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2018 The Libphonenumber Authors
+# Copyright (C) 2011-2019 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -867,6 +867,13 @@ data = {
  '861539252':{'en': 'Datong, Shanxi', 'zh': u('\u5c71\u897f\u7701\u5927\u540c\u5e02')},
  '861529329':{'en': 'Jiuquan, Gansu', 'zh': u('\u7518\u8083\u7701\u9152\u6cc9\u5e02')},
  '861529328':{'en': 'Jiuquan, Gansu', 'zh': u('\u7518\u8083\u7701\u9152\u6cc9\u5e02')},
+ '861529325':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
+ '861529324':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
+ '861529327':{'en': 'Jiuquan, Gansu', 'zh': u('\u7518\u8083\u7701\u9152\u6cc9\u5e02')},
+ '861529326':{'en': 'Jiuquan, Gansu', 'zh': u('\u7518\u8083\u7701\u9152\u6cc9\u5e02')},
+ '861529321':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
+ '861529323':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
+ '861529322':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
  '861550461':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
  '861551748':{'en': 'Zhoukou, Henan', 'zh': u('\u6cb3\u5357\u7701\u5468\u53e3\u5e02')},
  '86155531':{'en': 'Jinan, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6d4e\u5357\u5e02')},
@@ -5929,7 +5936,7 @@ data = {
  '861529337':{'en': 'Longnan, Gansu', 'zh': u('\u7518\u8083\u7701\u9647\u5357\u5e02')},
  '861529334':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
  '861529335':{'en': 'Longnan, Gansu', 'zh': u('\u7518\u8083\u7701\u9647\u5357\u5e02')},
- '86153180':{'en': 'Zaozhuang, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u67a3\u5e84\u5e02')},
+ '861529332':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
  '861529333':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
  '861529330':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
  '861529331':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
@@ -6114,7 +6121,7 @@ data = {
  '861550909':{'en': 'Bortala, Xinjiang', 'zh': u('\u65b0\u7586\u535a\u5c14\u5854\u62c9\u8499\u53e4\u81ea\u6cbb\u5dde')},
  '861550908':{'en': 'Kizilsu, Xinjiang', 'zh': u('\u65b0\u7586\u514b\u5b5c\u52d2\u82cf\u67ef\u5c14\u514b\u5b5c\u81ea\u6cbb\u5dde')},
  '86153187':{'en': 'Qingdao, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u9752\u5c9b\u5e02')},
- '861529332':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
+ '86153180':{'en': 'Zaozhuang, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u67a3\u5e84\u5e02')},
  '861539085':{'en': 'Jiujiang, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u4e5d\u6c5f\u5e02')},
  '861552577':{'en': u('L\u00fcliang, Shanxi'), 'zh': u('\u5c71\u897f\u7701\u5415\u6881\u5e02')},
  '86153183':{'en': 'Dongying, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u4e1c\u8425\u5e02')},
@@ -6506,11 +6513,6 @@ data = {
  '861556435':{'en': 'Binzhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6ee8\u5dde\u5e02')},
  '861556434':{'en': 'Binzhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6ee8\u5dde\u5e02')},
  '861539187':{'en': 'Suzhou, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u5bbf\u5dde\u5e02')},
- '861556444':{'en': 'Zibo, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6dc4\u535a\u5e02')},
- '861556442':{'en': 'Dezhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u5fb7\u5dde\u5e02')},
- '861556443':{'en': 'Dezhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u5fb7\u5dde\u5e02')},
- '861556440':{'en': 'Dezhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u5fb7\u5dde\u5e02')},
- '861556441':{'en': 'Dezhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u5fb7\u5dde\u5e02')},
  '86152958':{'en': 'Guilin, Guangxi', 'zh': u('\u5e7f\u897f\u6842\u6797\u5e02')},
  '86152959':{'en': 'Guilin, Guangxi', 'zh': u('\u5e7f\u897f\u6842\u6797\u5e02')},
  '86152955':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
@@ -6524,7 +6526,6 @@ data = {
  '861535318':{'en': 'Yulin, Shaanxi', 'zh': u('\u9655\u897f\u7701\u6986\u6797\u5e02')},
  '861530769':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
  '861530768':{'en': 'Chaozhou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6f6e\u5dde\u5e02')},
- '861556439':{'en': 'Zibo, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6dc4\u535a\u5e02')},
  '861530763':{'en': 'Qingyuan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6e05\u8fdc\u5e02')},
  '861530762':{'en': 'Heyuan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6cb3\u6e90\u5e02')},
  '861530761':{'en': 'Zhongshan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e2d\u5c71\u5e02')},
@@ -7983,7 +7984,6 @@ data = {
  '86155388':{'en': 'Luoyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u6d1b\u9633\u5e02')},
  '861550520':{'en': 'Suqian, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5bbf\u8fc1\u5e02')},
  '861550839':{'en': 'Guangyuan, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u5e7f\u5143\u5e02')},
- '861556438':{'en': 'Zibo, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6dc4\u535a\u5e02')},
  '861550838':{'en': 'Deyang, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u5fb7\u9633\u5e02')},
  '861534518':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
  '861534519':{'en': 'Changzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5e38\u5dde\u5e02')},

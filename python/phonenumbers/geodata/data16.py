@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2018 The Libphonenumber Authors
+# Copyright (C) 2011-2019 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -2063,6 +2063,12 @@ data = {
  '861378557':{'en': 'Tangshan, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5510\u5c71\u5e02')},
  '861375702':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
  '861375703':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
+ '861370497':{'en': 'Yingkou, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u8425\u53e3\u5e02')},
+ '861370496':{'en': 'Jinzhou, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u9526\u5dde\u5e02')},
+ '861370495':{'en': 'Dandong, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u4e39\u4e1c\u5e02')},
+ '861370494':{'en': 'Dalian, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u5927\u8fde\u5e02')},
+ '861370499':{'en': 'Liaoyang, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u8fbd\u9633\u5e02')},
+ '861370498':{'en': 'Fuxin, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u961c\u65b0\u5e02')},
  '86137591':{'en': 'Kunming, Yunnan', 'zh': u('\u4e91\u5357\u7701\u6606\u660e\u5e02')},
  '86137593':{'en': 'Lincang, Yunnan', 'zh': u('\u4e91\u5357\u7701\u4e34\u6ca7\u5e02')},
  '86137595':{'en': 'Kunming, Yunnan', 'zh': u('\u4e91\u5357\u7701\u6606\u660e\u5e02')},
@@ -2394,6 +2400,7 @@ data = {
  '861389476':{'en': 'Changchun, Jilin', 'zh': u('\u5409\u6797\u7701\u957f\u6625\u5e02')},
  '861390019':{'en': 'Shanghai', 'zh': u('\u4e0a\u6d77\u5e02')},
  '861390018':{'en': 'Shanghai', 'zh': u('\u4e0a\u6d77\u5e02')},
+ '861387280':{'en': 'Shiyan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5341\u5830\u5e02')},
  '861383442':{'en': 'Shuozhou, Shanxi', 'zh': u('\u5c71\u897f\u7701\u6714\u5dde\u5e02')},
  '861383443':{'en': 'Shuozhou, Shanxi', 'zh': u('\u5c71\u897f\u7701\u6714\u5dde\u5e02')},
  '861383440':{'en': 'Shuozhou, Shanxi', 'zh': u('\u5c71\u897f\u7701\u6714\u5dde\u5e02')},
@@ -3751,7 +3758,7 @@ data = {
  '861387285':{'en': 'Suizhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u968f\u5dde\u5e02')},
  '861387286':{'en': 'Suizhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u968f\u5dde\u5e02')},
  '861387287':{'en': 'Suizhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u968f\u5dde\u5e02')},
- '861387280':{'en': 'Shiyan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5341\u5830\u5e02')},
+ '86137050':{'en': 'Fuzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u798f\u5dde\u5e02')},
  '861387281':{'en': 'Shiyan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5341\u5830\u5e02')},
  '861387282':{'en': 'Shiyan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5341\u5830\u5e02')},
  '861387283':{'en': 'Shiyan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5341\u5830\u5e02')},
@@ -4264,9 +4271,7 @@ data = {
  '861396612':{'en': 'Huaibei, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u6dee\u5317\u5e02')},
  '861396619':{'en': 'Xuancheng, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u5ba3\u57ce\u5e02')},
  '861396618':{'en': 'Xuancheng, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u5ba3\u57ce\u5e02')},
- '861399401':{'en': 'Linfen, Shanxi', 'zh': u('\u5c71\u897f\u7701\u4e34\u6c7e\u5e02')},
  '861399400':{'en': 'Linfen, Shanxi', 'zh': u('\u5c71\u897f\u7701\u4e34\u6c7e\u5e02')},
- '861399404':{'en': 'Linfen, Shanxi', 'zh': u('\u5c71\u897f\u7701\u4e34\u6c7e\u5e02')},
  '861373236':{'en': 'Huzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u6e56\u5dde\u5e02')},
  '861373237':{'en': 'Huzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u6e56\u5dde\u5e02')},
  '861373234':{'en': 'Taizhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u53f0\u5dde\u5e02')},
@@ -5729,12 +5734,7 @@ data = {
  '861387438':{'en': 'Yongzhou, Hunan', 'zh': u('\u6e56\u5357\u7701\u6c38\u5dde\u5e02')},
  '861372239':{'en': 'Handan, Hebei', 'zh': u('\u6cb3\u5317\u7701\u90af\u90f8\u5e02')},
  '861372238':{'en': 'Handan, Hebei', 'zh': u('\u6cb3\u5317\u7701\u90af\u90f8\u5e02')},
- '861399403':{'en': 'Linfen, Shanxi', 'zh': u('\u5c71\u897f\u7701\u4e34\u6c7e\u5e02')},
- '861399402':{'en': 'Linfen, Shanxi', 'zh': u('\u5c71\u897f\u7701\u4e34\u6c7e\u5e02')},
- '861399405':{'en': 'Xinzhou, Shanxi', 'zh': u('\u5c71\u897f\u7701\u5ffb\u5dde\u5e02')},
  '861389806':{'en': 'Anshan, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u978d\u5c71\u5e02')},
- '861399407':{'en': 'Xinzhou, Shanxi', 'zh': u('\u5c71\u897f\u7701\u5ffb\u5dde\u5e02')},
- '861399406':{'en': 'Xinzhou, Shanxi', 'zh': u('\u5c71\u897f\u7701\u5ffb\u5dde\u5e02')},
  '861372231':{'en': 'Zhangjiakou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5f20\u5bb6\u53e3\u5e02')},
  '861372230':{'en': 'Zhangjiakou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5f20\u5bb6\u53e3\u5e02')},
  '861372233':{'en': 'Zhangjiakou, Hebei', 'zh': u('\u6cb3\u5317\u7701\u5f20\u5bb6\u53e3\u5e02')},

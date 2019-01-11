@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2018 The Libphonenumber Authors
+# Copyright (C) 2011-2019 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1178,13 +1178,7 @@ data = {
  '861839338':{'en': 'Tianshui, Gansu', 'zh': u('\u7518\u8083\u7701\u5929\u6c34\u5e02')},
  '861839339':{'en': 'Tianshui, Gansu', 'zh': u('\u7518\u8083\u7701\u5929\u6c34\u5e02')},
  '861836913':{'en': 'Heze, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u83cf\u6cfd\u5e02')},
- '861844948':{'en': 'Turpan, Xinjiang', 'zh': u('\u65b0\u7586\u5410\u9c81\u756a\u5730\u533a')},
- '861844947':{'en': 'Karamay, Xinjiang', 'zh': u('\u65b0\u7586\u514b\u62c9\u739b\u4f9d\u5e02')},
- '861844946':{'en': 'Karamay, Xinjiang', 'zh': u('\u65b0\u7586\u514b\u62c9\u739b\u4f9d\u5e02')},
  '861836912':{'en': 'Heze, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u83cf\u6cfd\u5e02')},
- '861844944':{'en': 'Hotan, Xinjiang', 'zh': u('\u65b0\u7586\u548c\u7530\u5730\u533a')},
- '861844943':{'en': 'Kizilsu, Xinjiang', 'zh': u('\u65b0\u7586\u514b\u5b5c\u52d2\u82cf\u67ef\u5c14\u514b\u5b5c\u81ea\u6cbb\u5dde')},
- '861844942':{'en': 'Kizilsu, Xinjiang', 'zh': u('\u65b0\u7586\u514b\u5b5c\u52d2\u82cf\u67ef\u5c14\u514b\u5b5c\u81ea\u6cbb\u5dde')},
  '861844941':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
  '861844940':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
  '861836915':{'en': 'Heze, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u83cf\u6cfd\u5e02')},
@@ -1719,7 +1713,6 @@ data = {
  '861839440':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
  '861834588':{'en': 'Yichun, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4f0a\u6625\u5e02')},
  '861834589':{'en': 'Yichun, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4f0a\u6625\u5e02')},
- '861844945':{'en': 'Hotan, Xinjiang', 'zh': u('\u65b0\u7586\u548c\u7530\u5730\u533a')},
  '861837294':{'en': 'Jingzhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u8346\u5dde\u5e02')},
  '861834580':{'en': 'Shuangyashan, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u53cc\u9e2d\u5c71\u5e02')},
  '861834581':{'en': 'Shuangyashan, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u53cc\u9e2d\u5c71\u5e02')},
@@ -2032,6 +2025,7 @@ data = {
  '861818705':{'en': 'Kunming, Yunnan', 'zh': u('\u4e91\u5357\u7701\u6606\u660e\u5e02')},
  '861818706':{'en': 'Kunming, Yunnan', 'zh': u('\u4e91\u5357\u7701\u6606\u660e\u5e02')},
  '86182835':{'en': 'YaAn, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u96c5\u5b89\u5e02')},
+ '861818700':{'en': 'Yuxi, Yunnan', 'zh': u('\u4e91\u5357\u7701\u7389\u6eaa\u5e02')},
  '861818701':{'en': 'Kunming, Yunnan', 'zh': u('\u4e91\u5357\u7701\u6606\u660e\u5e02')},
  '861818702':{'en': 'Kunming, Yunnan', 'zh': u('\u4e91\u5357\u7701\u6606\u660e\u5e02')},
  '861818703':{'en': 'Honghe, Yunnan', 'zh': u('\u4e91\u5357\u7701\u7ea2\u6cb3\u54c8\u5c3c\u65cf\u5f5d\u65cf\u81ea\u6cbb\u5dde')},
@@ -3539,6 +3533,12 @@ data = {
  '8618421':{'en': 'Shanghai', 'zh': u('\u4e0a\u6d77\u5e02')},
  '8618426':{'en': 'Chongqing', 'zh': u('\u91cd\u5e86\u5e02')},
  '8618425':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
+ '861818696':{'en': 'Jingmen, Hubei', 'zh': u('\u6e56\u5317\u7701\u8346\u95e8\u5e02')},
+ '861818697':{'en': 'Jingmen, Hubei', 'zh': u('\u6e56\u5317\u7701\u8346\u95e8\u5e02')},
+ '861818694':{'en': 'Xiaogan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5b5d\u611f\u5e02')},
+ '861818695':{'en': 'Xiaogan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5b5d\u611f\u5e02')},
+ '861818698':{'en': 'Shennongjia, Hubei', 'zh': u('\u6e56\u5317\u7701\u795e\u519c\u67b6\u6797\u533a')},
+ '861818699':{'en': 'Huanggang, Hubei', 'zh': u('\u6e56\u5317\u7701\u9ec4\u5188\u5e02')},
  '861839529':{'en': 'Yinchuan, Ningxia', 'zh': u('\u5b81\u590f\u94f6\u5ddd\u5e02')},
  '861839528':{'en': 'Yinchuan, Ningxia', 'zh': u('\u5b81\u590f\u94f6\u5ddd\u5e02')},
  '861839521':{'en': 'Yinchuan, Ningxia', 'zh': u('\u5b81\u590f\u94f6\u5ddd\u5e02')},
