@@ -1173,21 +1173,19 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
                                    mobile=PhoneNumberDesc(national_number_pattern='NA'),
                                    national_prefix=u("0"),
                                    national_prefix_for_parsing=u("0"),
-                                   number_format=[NumberFormat(pattern='([135][246]|[246][123])(\\d{4})(\\d{4})',
+                                   number_format=[NumberFormat(pattern='([1359][2469]|[2469][1239])(\\d{4})(\\d{4})',
                                                                format=u("\\1 \\2 \\3"),
                                                                leading_digits_pattern=['[1-59]|[78]0'],
                                                                national_prefix_formatting_rule=u("\\1"))])
         PhoneMetadata._region_metadata['XX'] = metadataXX
         phonenumberutil.SUPPORTED_REGIONS.add("XX")
         phonenumberutil.COUNTRY_CODE_TO_REGION_CODE[384] = ("XX",)
-        formatter = AsYouTypeFormatter('XX')
-        # A pattern with "|" in it doesn't get formatting
-        self.assertEqual('1', formatter.input_digit('1'))
-        self.assertEqual('12', formatter.input_digit('2'))
-        self.assertEqual('123', formatter.input_digit('3'))
-        self.assertEqual('1234', formatter.input_digit('4'))
         # Hit internal error arms
-        self.assertEqual("1234", formatter._input_accrued_national_number())
+        formatter = AsYouTypeFormatter('XX')
+        self.assertEqual('1', formatter.input_digit('1'))
+        self.assertEqual("1", formatter._input_accrued_national_number())
+        self.assertEqual('1x', formatter.input_digit('x'))
+        self.assertEqual("1x", formatter._input_accrued_national_number())
         formatter._national_number = ""
         self.assertEqual("", formatter._input_accrued_national_number())
         # Restore normality
