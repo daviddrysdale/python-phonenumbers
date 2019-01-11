@@ -10,6 +10,18 @@ changes.  (Metadata updates are best checked
 [upstream](https://github.com/googlei18n/libphonenumber/blob/master/release_notes.txt).)
 
 
+What's new in 8.10.3
+---------------------
+
+Merge to
+[upstream commit 45953266d45d](https://github.com/googlei18n/libphonenumber/commit/45953266d45d);
+relevant code changes:
+ - Better documentation for length_of_national_destination_code to emphasise that
+   not every number has one.
+ - Removed unused code in the AsYouTypeFormatter: We no longer have numbers in
+   formatting matching patterns, only \d.
+
+
 What's new in 8.10.0
 ---------------------
 
