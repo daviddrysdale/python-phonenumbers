@@ -21,7 +21,7 @@ PHONE_METADATA_DE = PhoneMetadata(id='DE', country_code=49, international_prefix
         NumberFormat(pattern='(\\d{3})(\\d{5,11})', format='\\1 \\2', leading_digits_pattern=['181'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d)(\\d{4,10})', format='\\1 \\2 \\3', leading_digits_pattern=['1(?:3|80)|9'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{5})(\\d{3,10})', format='\\1 \\2', leading_digits_pattern=['3'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{7,8})', format='\\1 \\2', leading_digits_pattern=['1(?:6[02-489]|7)'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{7,8})', format='\\1 \\2', leading_digits_pattern=['1[67]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{7,12})', format='\\1 \\2', leading_digits_pattern=['8'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{4})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['15[1279]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{5})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['15[0568]'], national_prefix_formatting_rule='0\\1'),

@@ -17,5 +17,5 @@ PHONE_METADATA_ZW = PhoneMetadata(id='ZW', country_code=263, international_prefi
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['2(?:1[39]|2[0157]|[378]|[56][14])|3(?:12|29)', '2(?:1[39]|2[0157]|[378]|[56][14])|3(?:123|29)'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{4})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['8'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3,5})', format='\\1 \\2', leading_digits_pattern=['[16]|2(?:[0-256]|9[0-79])|3(?:[09][0-79]|1[0-689]|[24-6]|3[0-69])|5[0-35-9]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['29|3|54'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['29|[35]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{4})(\\d{3,5})', format='\\1 \\2', leading_digits_pattern=['[25]'], national_prefix_formatting_rule='0\\1')])
