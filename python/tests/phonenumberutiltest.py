@@ -2956,6 +2956,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             self.fail("Expected exception on __delattr__")
         except TypeError:
             pass
+        self.assertEqual(repr(frozen1), "FrozenPhoneNumber(country_code=39, national_number=236618300, extension=None, italian_leading_zero=True, number_of_leading_zeros=None, country_code_source=0, preferred_domestic_carrier_code=None)")
 
     def testMetadataImmutable(self):
         desc = PhoneNumberDesc(national_number_pattern="\\d{4,8}")

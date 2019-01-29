@@ -211,10 +211,11 @@ class PhoneNumber(UnicodeMixin):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return (unicod("PhoneNumber(country_code=%s, national_number=%s, extension=%s, " +
+        return (unicod("%s(country_code=%s, national_number=%s, extension=%s, " +
                        "italian_leading_zero=%s, number_of_leading_zeros=%s, " +
                        "country_code_source=%s, preferred_domestic_carrier_code=%s)") %
-                (self.country_code,
+                (type(self).__name__,
+                 self.country_code,
                  self.national_number,
                  rpr(self.extension),
                  self.italian_leading_zero,
@@ -258,3 +259,4 @@ class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
             super(FrozenPhoneNumber, self).__init__(**args[0].__dict__)
         else:
             super(FrozenPhoneNumber, self).__init__(*args, **kwargs)
+
