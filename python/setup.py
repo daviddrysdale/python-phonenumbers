@@ -16,6 +16,7 @@
 # limitations under the License.
 
 import distutils.core
+import io
 import sys
 # Importing setuptools adds some features like "setup.py test", but
 # it's optional so swallow the error if it's not there.
@@ -44,7 +45,7 @@ if not lite:
     except ImportError:
         lite = True
 
-with open("README.md", "r") as readme:
+with io.open("README.md", mode="r", encoding="utf-8") as readme:
     long_description = readme.read()
 
 # Various parameters depend on whether we are the lite package or not
