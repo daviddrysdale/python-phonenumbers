@@ -9,10 +9,10 @@ PHONE_METADATA_CO = PhoneMetadata(id='CO', country_code=57, international_prefix
     premium_rate=PhoneNumberDesc(national_number_pattern='19(?:0[01]|4[78])\\d{7}', example_number='19001234567', possible_length=(11,)),
     national_prefix='0',
     national_prefix_for_parsing='0([3579]|4(?:[14]4|56))?',
-    number_format=[NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['1(?:[2-79]|8[2-9])|[24-8]'], national_prefix_formatting_rule='(\\1)', domestic_carrier_code_formatting_rule='0$CC \\1'),
+    number_format=[NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['1(?:[2-79]|8[2-9])|[25-8]|4[2-9]'], national_prefix_formatting_rule='(\\1)', domestic_carrier_code_formatting_rule='0$CC \\1'),
         NumberFormat(pattern='(\\d{3})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['3'], domestic_carrier_code_formatting_rule='0$CC \\1'),
         NumberFormat(pattern='(\\d)(\\d{3})(\\d{7})', format='\\1-\\2-\\3', leading_digits_pattern=['1(?:80|9)', '1(?:800|9)'], national_prefix_formatting_rule='0\\1')],
-    intl_number_format=[NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['1(?:[2-79]|8[2-9])|[24-8]']),
+    intl_number_format=[NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['1(?:[2-79]|8[2-9])|[25-8]|4[2-9]']),
         NumberFormat(pattern='(\\d{3})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['3']),
         NumberFormat(pattern='(\\d)(\\d{3})(\\d{7})', format='\\1 \\2 \\3', leading_digits_pattern=['1(?:80|9)', '1(?:800|9)'])],
     mobile_number_portable_region=True)

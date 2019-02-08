@@ -9,5 +9,6 @@ PHONE_METADATA_KN = PhoneMetadata(id='KN', country_code=1, international_prefix=
     premium_rate=PhoneNumberDesc(national_number_pattern='900[2-9]\\d{6}', example_number='9002123456', possible_length=(10,)),
     personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|2[12]|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
     national_prefix='1',
-    national_prefix_for_parsing='1',
+    national_prefix_for_parsing='1|([2-7]\\d{6})$',
+    national_prefix_transform_rule='869\\1',
     leading_digits='869')

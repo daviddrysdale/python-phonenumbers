@@ -10,6 +10,7 @@ PHONE_METADATA_BS = PhoneMetadata(id='BS', country_code=1, international_prefix=
     personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|2[12]|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='242225[0-46-9]\\d{3}', example_number='2422250123', possible_length=(10,)),
     national_prefix='1',
-    national_prefix_for_parsing='1',
+    national_prefix_for_parsing='1|([3-8]\\d{6})$',
+    national_prefix_transform_rule='242\\1',
     leading_digits='242',
     mobile_number_portable_region=True)

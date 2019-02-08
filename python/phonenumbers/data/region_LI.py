@@ -12,5 +12,5 @@ PHONE_METADATA_LI = PhoneMetadata(id='LI', country_code=423, international_prefi
     national_prefix='0',
     national_prefix_for_parsing='0|(10(?:01|20|66))',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['[237-9]'], domestic_carrier_code_formatting_rule='$CC \\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6[56]'], domestic_carrier_code_formatting_rule='$CC \\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['6'], domestic_carrier_code_formatting_rule='$CC \\1')])
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['69'], domestic_carrier_code_formatting_rule='$CC \\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6'], domestic_carrier_code_formatting_rule='$CC \\1')])

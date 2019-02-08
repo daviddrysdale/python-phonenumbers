@@ -15,11 +15,11 @@ PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefi
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{4})(\\d{3})', format='\\1-\\2', leading_digits_pattern=['125']),
-        NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['[2-489]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{4})(\\d{2})(\\d{2})', format='\\1-\\2-\\3', leading_digits_pattern=['121']),
+        NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['[2-489]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1-\\2-\\3', leading_digits_pattern=['[57]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1-\\2-\\3', leading_digits_pattern=['12']),
         NumberFormat(pattern='(\\d{4})(\\d{6})', format='\\1-\\2', leading_digits_pattern=['159']),
         NumberFormat(pattern='(\\d)(\\d{3})(\\d{3})(\\d{3})', format='\\1-\\2-\\3-\\4', leading_digits_pattern=['1[7-9]']),
-        NumberFormat(pattern='(\\d{3})(\\d{1,2})(\\d{3})(\\d{4})', format='\\1-\\2 \\3-\\4', leading_digits_pattern=['1'])],
+        NumberFormat(pattern='(\\d{3})(\\d{1,2})(\\d{3})(\\d{4})', format='\\1-\\2 \\3-\\4', leading_digits_pattern=['15'])],
     mobile_number_portable_region=True)

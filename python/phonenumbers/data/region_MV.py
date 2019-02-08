@@ -9,5 +9,5 @@ PHONE_METADATA_MV = PhoneMetadata(id='MV', country_code=960, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='900\\d{7}', example_number='9001234567', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='4[05]0\\d{4}', example_number='4001234', possible_length=(7,)),
     preferred_international_prefix='00',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['[367]|4(?:00|[56])|9[14-9]']),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['[3467]|9[14-9]']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[89]'])])

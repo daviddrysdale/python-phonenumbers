@@ -18,5 +18,5 @@ PHONE_METADATA_LU = PhoneMetadata(id='LU', country_code=352, international_prefi
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['20'], domestic_carrier_code_formatting_rule='$CC \\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6'], domestic_carrier_code_formatting_rule='$CC \\1'),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{1,2})', format='\\1 \\2 \\3 \\4 \\5', leading_digits_pattern=['2(?:[0367]|4[3-8])'], domestic_carrier_code_formatting_rule='$CC \\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{1,5})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['2[2-9]|[3-57-9]'], domestic_carrier_code_formatting_rule='$CC \\1')],
+        NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{1,5})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['2[2-9]|[3-57]|8(?:0[2-9]|[13-9])|9(?:0[89]|[2-579])'], domestic_carrier_code_formatting_rule='$CC \\1')],
     mobile_number_portable_region=True)

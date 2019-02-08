@@ -9,6 +9,6 @@ PHONE_METADATA_UG = PhoneMetadata(id='UG', country_code=256, international_prefi
     premium_rate=PhoneNumberDesc(national_number_pattern='90[1-3]\\d{6}', example_number='901123456', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d{2})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['3|4(?:[0-5]|6[0-36-9])'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{4})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['202', '2024'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['[247-9]'], national_prefix_formatting_rule='0\\1')])
+    number_format=[NumberFormat(pattern='(\\d{4})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['202', '2024'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['[27-9]|4(?:6[45]|[7-9])'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['[34]'], national_prefix_formatting_rule='0\\1')])

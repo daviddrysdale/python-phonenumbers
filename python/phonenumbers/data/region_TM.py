@@ -9,5 +9,5 @@ PHONE_METADATA_TM = PhoneMetadata(id='TM', country_code=993, international_prefi
     national_prefix='8',
     national_prefix_for_parsing='8',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2-\\3-\\4', leading_digits_pattern=['12'], national_prefix_formatting_rule='(8 \\1)'),
-        NumberFormat(pattern='(\\d{2})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['6'], national_prefix_formatting_rule='8 \\1'),
-        NumberFormat(pattern='(\\d{3})(\\d)(\\d{2})(\\d{2})', format='\\1 \\2-\\3-\\4', leading_digits_pattern=['[1-5]'], national_prefix_formatting_rule='(8 \\1)')])
+        NumberFormat(pattern='(\\d{3})(\\d)(\\d{2})(\\d{2})', format='\\1 \\2-\\3-\\4', leading_digits_pattern=['[1-5]'], national_prefix_formatting_rule='(8 \\1)'),
+        NumberFormat(pattern='(\\d{2})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['6'], national_prefix_formatting_rule='8 \\1')])

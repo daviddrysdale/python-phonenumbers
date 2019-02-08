@@ -9,7 +9,7 @@ PHONE_METADATA_SO = PhoneMetadata(id='SO', country_code=252, international_prefi
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['8[125]']),
         NumberFormat(pattern='(\\d{6})', format='\\1', leading_digits_pattern=['[134]']),
-        NumberFormat(pattern='(\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['[15]|2[0-79]|3[0-46-8]|4[0-7]']),
+        NumberFormat(pattern='(\\d)(\\d{6})', format='\\1 \\2', leading_digits_pattern=['1|2[0-79]|3[0-46-8]|4[0-7]|59']),
         NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['24|[67]']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[348]|64|79[0-8]|90']),
-        NumberFormat(pattern='(\\d{2})(\\d{5,7})', format='\\1 \\2', leading_digits_pattern=['[12679]'])])
+        NumberFormat(pattern='(\\d{2})(\\d{5,7})', format='\\1 \\2', leading_digits_pattern=['1|28|6[1-35-9]|799|9[2-9]'])])

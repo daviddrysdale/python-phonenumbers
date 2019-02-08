@@ -12,10 +12,10 @@ PHONE_METADATA_BA = PhoneMetadata(id='BA', country_code=387, international_prefi
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})', format='\\1-\\2', leading_digits_pattern=['[2-9]']),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2-\\3', leading_digits_pattern=['[3-5]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6[1-356]|[7-9]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2-\\3', leading_digits_pattern=['[3-5]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['6'], national_prefix_formatting_rule='0\\1')],
-    intl_number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2-\\3', leading_digits_pattern=['[3-5]']),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6[1-356]|[7-9]']),
+    intl_number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['6[1-356]|[7-9]']),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2-\\3', leading_digits_pattern=['[3-5]']),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['6'])],
     mobile_number_portable_region=True)

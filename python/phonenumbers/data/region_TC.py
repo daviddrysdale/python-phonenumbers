@@ -10,5 +10,6 @@ PHONE_METADATA_TC = PhoneMetadata(id='TC', country_code=1, international_prefix=
     personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|2[12]|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
     voip=PhoneNumberDesc(national_number_pattern='64971[01]\\d{4}', example_number='6497101234', possible_length=(10,), possible_length_local_only=(7,)),
     national_prefix='1',
-    national_prefix_for_parsing='1',
+    national_prefix_for_parsing='1|([2-479]\\d{6})$',
+    national_prefix_transform_rule='649\\1',
     leading_digits='649')

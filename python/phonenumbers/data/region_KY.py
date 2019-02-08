@@ -10,6 +10,7 @@ PHONE_METADATA_KY = PhoneMetadata(id='KY', country_code=1, international_prefix=
     personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|2[12]|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
     pager=PhoneNumberDesc(national_number_pattern='345849\\d{4}', example_number='3458491234', possible_length=(10,)),
     national_prefix='1',
-    national_prefix_for_parsing='1',
+    national_prefix_for_parsing='1|([2-9]\\d{6})$',
+    national_prefix_transform_rule='345\\1',
     leading_digits='345',
     mobile_number_portable_region=True)

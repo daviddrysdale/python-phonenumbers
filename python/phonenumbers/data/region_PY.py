@@ -13,7 +13,7 @@ PHONE_METADATA_PY = PhoneMetadata(id='PY', country_code=595, international_prefi
         NumberFormat(pattern='(\\d{2})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['[26]1|3[289]|4[1246-8]|7[1-3]|8[1-36]'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(\\d{3})(\\d{4,5})', format='\\1 \\2', leading_digits_pattern=['2[279]|3[13-5]|4[359]|5|6[347]|7[46-8]|85'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['[26]1|3[289]|4[1246-8]|7[1-3]|8[1-36]'], national_prefix_formatting_rule='(0\\1)'),
-        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-7]|85'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['87']),
         NumberFormat(pattern='(\\d{3})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['9'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['8'])],
+        NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-8]'], national_prefix_formatting_rule='0\\1')],
     mobile_number_portable_region=True)

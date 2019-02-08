@@ -13,5 +13,5 @@ PHONE_METADATA_AE = PhoneMetadata(id='AE', country_code=971, international_prefi
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{2,9})', format='\\1 \\2', leading_digits_pattern=['60|8']),
         NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[236]|[479][2-8]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['5'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d)(\\d{5})', format='\\1 \\2 \\3', leading_digits_pattern=['[479]'])])
+        NumberFormat(pattern='(\\d{3})(\\d)(\\d{5})', format='\\1 \\2 \\3', leading_digits_pattern=['[479]']),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['5'], national_prefix_formatting_rule='0\\1')])

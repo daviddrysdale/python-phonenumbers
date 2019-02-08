@@ -11,5 +11,6 @@ PHONE_METADATA_BB = PhoneMetadata(id='BB', country_code=1, international_prefix=
     voip=PhoneNumberDesc(national_number_pattern='24631\\d{5}', example_number='2463101234', possible_length=(10,), possible_length_local_only=(7,)),
     uan=PhoneNumberDesc(national_number_pattern='246(?:292|367|4(?:1[7-9]|3[01]|44|67)|7(?:36|53))\\d{4}', example_number='2464301234', possible_length=(10,), possible_length_local_only=(7,)),
     national_prefix='1',
-    national_prefix_for_parsing='1',
+    national_prefix_for_parsing='1|([2-9]\\d{6})$',
+    national_prefix_transform_rule='246\\1',
     leading_digits='246')

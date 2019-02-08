@@ -10,5 +10,6 @@ PHONE_METADATA_TT = PhoneMetadata(id='TT', country_code=1, international_prefix=
     personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|2[12]|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
     voicemail=PhoneNumberDesc(national_number_pattern='868619\\d{4}', example_number='8686191234', possible_length=(10,), possible_length_local_only=(7,)),
     national_prefix='1',
-    national_prefix_for_parsing='1',
+    national_prefix_for_parsing='1|([2-46-8]\\d{6})$',
+    national_prefix_transform_rule='868\\1',
     leading_digits='868')

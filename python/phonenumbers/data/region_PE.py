@@ -12,8 +12,8 @@ PHONE_METADATA_PE = PhoneMetadata(id='PE', country_code=51, international_prefix
     national_prefix='0',
     preferred_extn_prefix=' Anexo ',
     national_prefix_for_parsing='0',
-    number_format=[NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['1'], national_prefix_formatting_rule='(0\\1)'),
-        NumberFormat(pattern='(\\d{2})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['[4-7]|8[2-4]'], national_prefix_formatting_rule='(0\\1)'),
-        NumberFormat(pattern='(\\d{3})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['8'], national_prefix_formatting_rule='(0\\1)'),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['80'], national_prefix_formatting_rule='(0\\1)'),
+        NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['1'], national_prefix_formatting_rule='(0\\1)'),
+        NumberFormat(pattern='(\\d{2})(\\d{6})', format='\\1 \\2', leading_digits_pattern=['[4-8]'], national_prefix_formatting_rule='(0\\1)'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['9'])],
     mobile_number_portable_region=True)

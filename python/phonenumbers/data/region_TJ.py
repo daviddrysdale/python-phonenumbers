@@ -8,7 +8,7 @@ PHONE_METADATA_TJ = PhoneMetadata(id='TJ', country_code=992, international_prefi
     preferred_international_prefix='8~10',
     national_prefix='8',
     national_prefix_for_parsing='8',
-    number_format=[NumberFormat(pattern='(\\d{4})(\\d)(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['3(?:[1245]|3[12])', '3(?:[1245]|3(?:1[0-689]|2))'], national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(\\d{6})(\\d)(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['33'], national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['4[148]|[578]|9(?:[0235-9]|1[0-69])'], national_prefix_optional_when_formatting=True),
-        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[349]'], national_prefix_optional_when_formatting=True)])
+    number_format=[NumberFormat(pattern='(\\d{6})(\\d)(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['331', '3317'], national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[34]7|91[78]'], national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(\\d{4})(\\d)(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['3'], national_prefix_optional_when_formatting=True),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[457-9]'], national_prefix_optional_when_formatting=True)])

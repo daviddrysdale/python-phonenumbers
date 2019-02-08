@@ -11,7 +11,7 @@ PHONE_METADATA_RU = PhoneMetadata(id='RU', country_code=7, international_prefix=
     preferred_international_prefix='8~10',
     national_prefix='8',
     national_prefix_for_parsing='8',
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})', format='\\1-\\2-\\3'),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})', format='\\1-\\2-\\3', leading_digits_pattern=['[0-79]']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['7'], national_prefix_formatting_rule='8 (\\1)', national_prefix_optional_when_formatting=True),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2-\\3-\\4', leading_digits_pattern=['[3489]'], national_prefix_formatting_rule='8 (\\1)', national_prefix_optional_when_formatting=True)],
     intl_number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['7']),
