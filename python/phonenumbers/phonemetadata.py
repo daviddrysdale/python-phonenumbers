@@ -228,6 +228,14 @@ class PhoneNumberDesc(UnicodeMixin, ImmutableMixin):
         return result
 
 
+def _same_pattern(left, right):
+    if left is None and right is None:
+        return True
+    if left is None or right is None:
+        return False
+    return (left.national_number_pattern == right.national_number_pattern)
+
+
 class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     """Class representing metadata for international telephone numbers for a region.
 
@@ -449,7 +457,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         # not.  This is used to speed up determining phone number type in
         # countries where these two types of phone numbers can never be
         # distinguished.
-        self.same_mobile_and_fixed_line_pattern = (self.mobile == self.fixed_line)
+        self.same_mobile_and_fixed_line_pattern = _same_pattern(self.mobile, self.fixed_line)
 
         # Note that the number format here is used for formatting only, not
         # parsing.  Hence all the varied ways a user *may* write a number need
