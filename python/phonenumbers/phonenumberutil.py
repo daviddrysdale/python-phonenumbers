@@ -2854,7 +2854,7 @@ def parse(number, region=None, keep_raw_input=False,
         # instead. The national number is just the normalized version of the
         # number we were given to parse.
         normalized_national_number += _normalize(national_number)
-        if region is not None:
+        if region is not None and metadata is not None:
             country_code = metadata.country_code
             numobj.country_code = country_code
         elif keep_raw_input:
