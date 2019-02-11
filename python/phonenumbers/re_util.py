@@ -38,6 +38,7 @@ def fullmatch(pattern, string, flags=0):
         m = None  # pragma no cover
     return m
 
+
 if __name__ == '__main__':  # pragma no cover
     import doctest
     doctest.testmod()

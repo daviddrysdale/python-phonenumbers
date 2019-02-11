@@ -259,4 +259,3 @@ class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
             super(FrozenPhoneNumber, self).__init__(**args[0].__dict__)
         else:
             super(FrozenPhoneNumber, self).__init__(*args, **kwargs)
-

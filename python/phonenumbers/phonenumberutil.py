@@ -322,6 +322,7 @@ def _create_extn_pattern(single_extn_symbols):
             u("[:\\.\uFF0E]?[ \u00A0\\t,-]*") + _CAPTURING_EXTN_DIGITS + u("#?|") +
             u("[- ]+(") + _DIGITS + u("{1,5})#"))
 
+
 _EXTN_PATTERNS_FOR_PARSING = _create_extn_pattern(_SINGLE_EXTN_SYMBOLS_FOR_PARSING)
 _EXTN_PATTERNS_FOR_MATCHING = _create_extn_pattern(_SINGLE_EXTN_SYMBOLS_FOR_MATCHING)
 

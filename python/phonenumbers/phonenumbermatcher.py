@@ -60,9 +60,9 @@ def _limit(lower, upper):
         raise Exception("Illegal argument to _limit")
     return unicod("{%d,%d}") % (lower, upper)
 
+
 # Build the MATCHING_BRACKETS and PATTERN regular expression patterns. The
 # building blocks below exist to make the patterns more easily understood.
-
 _OPENING_PARENS = u("(\\[\uFF08\uFF3B")
 _CLOSING_PARENS = u(")\\]\uFF09\uFF3D")
 _NON_PARENS = u("[^") + _OPENING_PARENS + _CLOSING_PARENS + u("]")

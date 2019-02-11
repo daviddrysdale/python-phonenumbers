@@ -404,6 +404,7 @@ def digit(uni_char, default_value=None):
     else:
         return unicodedata.digit(uni_char)
 
+
 if __name__ == '__main__':  # pragma no cover
     import doctest
     doctest.testmod()
