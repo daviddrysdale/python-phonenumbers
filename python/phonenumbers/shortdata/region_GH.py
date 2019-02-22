@@ -6,6 +6,6 @@ PHONE_METADATA_GH = PhoneMetadata(id='GH', country_code=None, international_pref
     toll_free=PhoneNumberDesc(national_number_pattern='19[1-3]|999', example_number='191', possible_length=(3,)),
     emergency=PhoneNumberDesc(national_number_pattern='19[1-3]|999', example_number='191', possible_length=(3,)),
     short_code=PhoneNumberDesc(national_number_pattern='19[1-3]|40404|(?:54|83)00|999', example_number='191', possible_length=(3, 4, 5)),
-    carrier_specific=PhoneNumberDesc(national_number_pattern='(?:404\\d|(?:54|83)0)\\d', example_number='5400', possible_length=(4, 5)),
-    sms_services=PhoneNumberDesc(national_number_pattern='(?:404\\d|(?:54|83)0)\\d', example_number='5400', possible_length=(4, 5)),
+    carrier_specific=PhoneNumberDesc(national_number_pattern='404\\d\\d|(?:54|83)0\\d', example_number='5400', possible_length=(4, 5)),
+    sms_services=PhoneNumberDesc(national_number_pattern='404\\d\\d|(?:54|83)0\\d', example_number='5400', possible_length=(4, 5)),
     short_data=True)

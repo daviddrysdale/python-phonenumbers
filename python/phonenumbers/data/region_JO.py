@@ -2,7 +2,7 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_JO = PhoneMetadata(id='JO', country_code=962, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='(?:(?:(?:[268]|7\\d)\\d|32|53)\\d|900)\\d{5}', possible_length=(8, 9)),
+    general_desc=PhoneNumberDesc(national_number_pattern='900\\d{5}|(?:(?:[268]|7\\d)\\d|32|53)\\d{6}', possible_length=(8, 9)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:2(?:6(?:2[0-35-9]|3[0-578]|4[24-7]|5[0-24-8]|[6-8][023]|9[0-3])|7(?:0[1-79]|10|2[014-7]|3[0-689]|4[019]|5[0-3578]))|32(?:0[1-69]|1[1-35-7]|2[024-7]|3\\d|4[0-3]|[57][023]|6[03])|53(?:0[0-3]|[13][023]|2[0-59]|49|5[0-35-9]|6[15]|7[45]|8[1-6]|9[0-36-9])|6(?:2(?:[05]0|22)|3(?:00|33)|4(?:0[0-25]|1[2-7]|2[0569]|[38][07-9]|4[025689]|6[0-589]|7\\d|9[0-2])|5(?:[01][056]|2[034]|3[0-57-9]|4[178]|5[0-69]|6[0-35-9]|7[1-379]|8[0-68]|9[0239]))|87(?:[029]0|7[08]))\\d{4}', example_number='62001234', possible_length=(8,)),
     mobile=PhoneNumberDesc(national_number_pattern='7(?:55[0-49]|(?:7[025-9]|[89][0-25-9])\\d)\\d{5}', example_number='790123456', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='80\\d{6}', example_number='80012345', possible_length=(8,)),

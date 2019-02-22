@@ -8,7 +8,7 @@ PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix
     toll_free=PhoneNumberDesc(national_number_pattern='180(?:0\\d{3}|2)\\d{3}', example_number='1800123456', possible_length=(7, 10)),
     premium_rate=PhoneNumberDesc(national_number_pattern='190[0-26]\\d{6}', example_number='1900123456', possible_length=(10,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='13(?:00\\d{3}|45[0-4])\\d{3}|13\\d{4}', example_number='1300123456', possible_length=(6, 8, 10)),
-    voip=PhoneNumberDesc(national_number_pattern='(?:14(?:5\\d|71)|550\\d)\\d{5}', example_number='550123456', possible_length=(9,)),
+    voip=PhoneNumberDesc(national_number_pattern='1471\\d{5}|(?:145|550)\\d{6}', example_number='550123456', possible_length=(9,)),
     pager=PhoneNumberDesc(national_number_pattern='16\\d{3,7}', example_number='1612345', possible_length=(5, 6, 7, 8, 9)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1[38]00\\d{6}|1(?:345[0-4]|802)\\d{3}|13\\d{4}', possible_length=(6, 7, 8, 10)),
     preferred_international_prefix='0011',

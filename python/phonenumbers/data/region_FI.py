@@ -8,7 +8,7 @@ PHONE_METADATA_FI = PhoneMetadata(id='FI', country_code=358, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{4,6}', example_number='800123456', possible_length=(7, 8, 9)),
     premium_rate=PhoneNumberDesc(national_number_pattern='[67]00\\d{5,6}', example_number='600123456', possible_length=(8, 9)),
     uan=PhoneNumberDesc(national_number_pattern='(?:10|[23][09])\\d{4,8}|60(?:[12]\\d{5,6}|6\\d{7})|7(?:(?:1|3\\d)\\d{7}|5[03-9]\\d{3,7})|20[2-59]\\d\\d', example_number='10112345', possible_length=(5, 6, 7, 8, 9, 10)),
-    no_international_dialling=PhoneNumberDesc(national_number_pattern='[13]00\\d{3,7}|20(?:0\\d{3,7}|(?:2[023]|9[89])\\d{1,6})|60(?:[12]\\d{5,6}|6\\d{7})|7(?:(?:1|3\\d)\\d{7}|5[03-9]\\d{3,7})', possible_length=(5, 6, 7, 8, 9, 10)),
+    no_international_dialling=PhoneNumberDesc(national_number_pattern='20(?:2[023]|9[89])\\d{1,6}|60[12]\\d{5,6}|(?:606|7(?:1|3\\d))\\d{7}|(?:[1-3]00|75[03-9])\\d{3,7}', possible_length=(5, 6, 7, 8, 9, 10)),
     preferred_international_prefix='00',
     national_prefix='0',
     national_prefix_for_parsing='0',

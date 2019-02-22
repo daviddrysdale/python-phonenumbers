@@ -10,7 +10,7 @@ PHONE_METADATA_NO = PhoneMetadata(id='NO', country_code=47, international_prefix
     shared_cost=PhoneNumberDesc(national_number_pattern='810(?:0[0-6]|[2-8]\\d)\\d{3}', example_number='81021234', possible_length=(8,)),
     personal_number=PhoneNumberDesc(national_number_pattern='880\\d{5}', example_number='88012345', possible_length=(8,)),
     voip=PhoneNumberDesc(national_number_pattern='85[0-5]\\d{5}', example_number='85012345', possible_length=(8,)),
-    uan=PhoneNumberDesc(national_number_pattern='(?:0\\d|81(?:0(?:0[7-9]|1\\d)|5\\d\\d))\\d{3}', example_number='01234', possible_length=(5, 8)),
+    uan=PhoneNumberDesc(national_number_pattern='8100[7-9]\\d{3}|(?:0|81(?:01|5\\d))\\d{4}', example_number='01234', possible_length=(5, 8)),
     voicemail=PhoneNumberDesc(national_number_pattern='81[23]\\d{5}', example_number='81212345', possible_length=(8,)),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[489]']),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[235-7]'])],
