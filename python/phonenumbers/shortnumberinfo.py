@@ -202,7 +202,7 @@ def expected_cost_for_region(short_numobj, region_dialing_from):
         return ShortNumberCost.STANDARD_RATE
     if _matches_possible_number_and_national_number(short_number, metadata.toll_free):
         return ShortNumberCost.TOLL_FREE
-    if is_emergency_number(short_number, region_dialing_from):
+    if is_emergency_number(short_number, region_dialing_from):  # pragma no cover
         # Emergency numbers are implicitly toll-free.
         return ShortNumberCost.TOLL_FREE
     return ShortNumberCost.UNKNOWN_COST
