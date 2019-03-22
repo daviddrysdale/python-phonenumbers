@@ -10,6 +10,19 @@ changes.  (Metadata updates are best checked
 [upstream](https://github.com/googlei18n/libphonenumber/blob/master/release_notes.txt).)
 
 
+What's new in 8.10.8
+---------------------
+
+Merge to
+[upstream commit aa1e7af6d637](https://github.com/googlei18n/libphonenumber/commit/aa1e7af6d637);
+relevant code changes:
+  - Making the application of alternate formats when finding phone numbers in
+    text in strict-grouping and exact-match mode depend on the leading digits
+    for each rule. This was always assumed but never actually done. This means
+    that the false positive rate will decrease but also that more valid numbers
+    are skipped. A subsequent CL will update patterns to increase recall.
+
+
 What's new in 8.10.3
 ---------------------
 
