@@ -206,7 +206,7 @@ class Leniency(object):
     EXACT_GROUPING = 3
 
 
-def _verify(leniency, numobj, candidate):
+def _verify(leniency, numobj, candidate, matcher):
     """Returns True if number is a verified number according to the
     leniency."""
     if leniency == Leniency.POSSIBLE:
@@ -217,21 +217,21 @@ def _verify(leniency, numobj, candidate):
             return False
         return _is_national_prefix_present_if_required(numobj)
     elif leniency == Leniency.STRICT_GROUPING:
-        return _verify_strict_grouping(numobj, candidate)
+        return _verify_strict_grouping(numobj, candidate, matcher)
     elif leniency == Leniency.EXACT_GROUPING:
-        return _verify_exact_grouping(numobj, candidate)
+        return _verify_exact_grouping(numobj, candidate, matcher)
     else:
         raise Exception("Error: unsupported Leniency value %s" % leniency)
 
 
-def _verify_strict_grouping(numobj, candidate):
+def _verify_strict_grouping(numobj, candidate, matcher):
     if (not is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
         _contains_more_than_one_slash_in_national_number(numobj, candidate) or
         not _is_national_prefix_present_if_required(numobj)):
         return False
-    return _check_number_grouping_is_valid(numobj, candidate,
-                                           _all_number_groups_remain_grouped)
+    return matcher._check_number_grouping_is_valid(numobj, candidate,
+                                                   _all_number_groups_remain_grouped)
 
 
 def _all_number_groups_remain_grouped(numobj, normalized_candidate, formatted_number_groups):
@@ -284,14 +284,14 @@ def _all_number_groups_remain_grouped(numobj, normalized_candidate, formatted_nu
     return (normalized_candidate[from_index:].find(numobj.extension or U_EMPTY_STRING) != -1)
 
 
-def _verify_exact_grouping(numobj, candidate):
+def _verify_exact_grouping(numobj, candidate, matcher):
     if (not is_valid_number(numobj) or
         not _contains_only_valid_x_chars(numobj, candidate) or
         _contains_more_than_one_slash_in_national_number(numobj, candidate) or
         not _is_national_prefix_present_if_required(numobj)):
         return False
-    return _check_number_grouping_is_valid(numobj, candidate,
-                                           _all_number_groups_are_exactly_present)
+    return matcher._check_number_grouping_is_valid(numobj, candidate,
+                                                   _all_number_groups_are_exactly_present)
 
 
 def _all_number_groups_are_exactly_present(numobj, normalized_candidate, formatted_number_groups):
@@ -334,43 +334,32 @@ def _all_number_groups_are_exactly_present(numobj, normalized_candidate, formatt
             candidate_groups[candidate_number_group_index].endswith(formatted_number_groups[0]))
 
 
-def _get_national_number_groups(numobj, formatting_pattern=None):
+def _get_national_number_groups_without_pattern(numobj):
     """Helper method to get the national-number part of a number, formatted without any national
-    prefix, and return it as a set of digit blocks that would be formatted together."""
-    if formatting_pattern is None:
-        # This will be in the format +CC-DG;ext=EXT where DG represents groups of digits.
-        rfc3966_format = format_number(numobj, PhoneNumberFormat.RFC3966)
-        # We remove the extension part from the formatted string before splitting
-        # it into different groups.
-        end_index = rfc3966_format.find(U_SEMICOLON)
-        if end_index < 0:
-            end_index = len(rfc3966_format)
+    prefix, and return it as a set of digit blocks that would be formatted together following
+    standard formatting rules."""
+    # This will be in the format +CC-DG1-DG2-DGX;ext=EXT where DG1..DGX represents groups of
+    # digits.
+    rfc3966_format = format_number(numobj, PhoneNumberFormat.RFC3966)
+    # We remove the extension part from the formatted string before splitting
+    # it into different groups.
+    end_index = rfc3966_format.find(U_SEMICOLON)
+    if end_index < 0:
+        end_index = len(rfc3966_format)
 
-        # The country-code will have a '-' following it.
-        start_index = rfc3966_format.find(U_DASH) + 1
-        return rfc3966_format[start_index:end_index].split(U_DASH)
-    else:
-        # We format the NSN only, and split that according to the separator.
-        nsn = national_significant_number(numobj)
-        return _format_nsn_using_pattern(nsn, formatting_pattern,
-                                         PhoneNumberFormat.RFC3966).split(U_DASH)
+    # The country-code will have a '-' following it.
+    start_index = rfc3966_format.find(U_DASH) + 1
+    return rfc3966_format[start_index:end_index].split(U_DASH)
 
 
-def _check_number_grouping_is_valid(numobj, candidate, checker):
-    # TODO: Evaluate how this works for other locales (testing has been
-    # limited to NANPA regions) and optimise if necessary.
-    normalized_candidate = normalize_digits_only(candidate, True)  # keep non-digits
-    formatted_number_groups = _get_national_number_groups(numobj, None)
-    if checker(numobj, normalized_candidate, formatted_number_groups):
-        return True
-    # If this didn't pass, see if there are any alternate formats, and try them instead.
-    alternate_formats = _ALT_NUMBER_FORMATS.get(numobj.country_code, None)
-    if alternate_formats is not None:
-        for alternate_format in alternate_formats:
-            formatted_number_groups = _get_national_number_groups(numobj, alternate_format)
-            if checker(numobj, normalized_candidate, formatted_number_groups):
-                return True
-    return False
+def _get_national_number_groups(numobj, formatting_pattern):
+    """Helper method to get the national-number part of a number, formatted without any national
+    prefix, and return it as a set of digit blocks that should be formatted together according to
+    the formatting pattern passed in."""
+    # If a format is provided, we format the NSN only, and split that according to the separator.
+    nsn = national_significant_number(numobj)
+    return _format_nsn_using_pattern(nsn, formatting_pattern,
+                                     PhoneNumberFormat.RFC3966).split(U_DASH)
 
 
 def _contains_more_than_one_slash_in_national_number(numobj, candidate):
@@ -662,7 +651,7 @@ class PhoneNumberMatcher(object):
                         return None
 
             numobj = parse(candidate, self.preferred_region, keep_raw_input=True)
-            if _verify(self.leniency, numobj, candidate):
+            if _verify(self.leniency, numobj, candidate, self):
                 # We used parse(keep_raw_input=True) to create this number,
                 # but for now we don't return the extra values parsed.
                 # TODO: stop clearing all values here and switch all users
@@ -676,6 +665,28 @@ class PhoneNumberMatcher(object):
             # ignore and continue
             pass
         return None
+
+    def _check_number_grouping_is_valid(self, numobj, candidate, checker):
+        normalized_candidate = normalize_digits_only(candidate, True)  # keep non-digits
+        formatted_number_groups = _get_national_number_groups_without_pattern(numobj)
+        if checker(numobj, normalized_candidate, formatted_number_groups):
+            return True
+        # If this didn't pass, see if there are any alternate formats that match, and try them instead.
+        alternate_formats = _ALT_NUMBER_FORMATS.get(numobj.country_code, None)
+        nsn = national_significant_number(numobj)
+        if alternate_formats is not None:
+            for alternate_format in alternate_formats:
+                if len(alternate_format.leading_digits_pattern) > 0:
+                  # There is only one leading digits pattern for alternate formats.
+                  pattern = re.compile(alternate_format.leading_digits_pattern[0])
+                  if not pattern.match(nsn):
+                    # Leading digits don't match; try another one.
+                    continue
+                formatted_number_groups = _get_national_number_groups(numobj, alternate_format)
+                if checker(numobj, normalized_candidate, formatted_number_groups):
+                    return True
+        return False
+
 
     def has_next(self):
         """Indicates whether there is another match available"""

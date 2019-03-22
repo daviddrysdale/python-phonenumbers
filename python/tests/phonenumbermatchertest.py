@@ -171,6 +171,8 @@ VALID_CASES = [NumberTest("65 02 53 00 00", "US"),
                NumberTest("03 0 -3 2 23 12 34", "DE"),
                NumberTest("(0)3 0 -3 2 23 12 34", "DE"),
                NumberTest("0 3 0 -3 2 23 12 34", "DE"),
+               # Fits an alternate pattern, but the leading digits don't match.
+               NumberTest("+52 332 123 23 23", "MX"),
                ]
 
 # Strings with number-like things that should only be found up to and
@@ -973,7 +975,7 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
         self.assertRaises(Exception, _limit, *(1, 0))
         self.assertRaises(Exception, _limit, *(2, 1))
         number = PhoneNumber(country_code=44, national_number=7912345678)
-        self.assertRaises(Exception, _verify, *(99, number, "12345678"))
+        self.assertRaises(Exception, _verify, *(99, number, "12345678", None))
         self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"leniency": None})
         self.assertRaises(ValueError, PhoneNumberMatcher, *("text", "US"), **{"max_tries": -2})
         # Invalid country looks like national prefix is present (no way to tell)
