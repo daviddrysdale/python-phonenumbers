@@ -2,7 +2,7 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix='001[14-689]|14(?:1[14]|34|4[17]|[56]6|7[47]|88)0011',
-    general_desc=PhoneNumberDesc(national_number_pattern='1\\d{4,9}|(?:[2-478]\\d\\d|550)\\d{6}', possible_length=(5, 6, 7, 8, 9, 10), possible_length_local_only=(8,)),
+    general_desc=PhoneNumberDesc(national_number_pattern='1(?:[0-79]\\d{7,8}|8[0-24-9]\\d{7})|(?:[2-478]\\d\\d|550)\\d{6}|1\\d{4,7}', possible_length=(5, 6, 7, 8, 9, 10), possible_length_local_only=(8,)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:[237]\\d{5}|8(?:51(?:0(?:0[03-9]|[1247]\\d|3[2-9]|5[0-8]|6[1-9]|8[0-6])|1(?:1[69]|[23]\\d|4[0-4]))|(?:[6-8]\\d{3}|9(?:[02-9]\\d\\d|1(?:[0-57-9]\\d|6[0135-9])))\\d))\\d{3}', example_number='212345678', possible_length=(9,), possible_length_local_only=(8,)),
     mobile=PhoneNumberDesc(national_number_pattern='4(?:[0-3]\\d|4[047-9]|5[0-25-9]|6[6-9]|7[02-9]|8[0-2457-9]|9[017-9])\\d{6}', example_number='412345678', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='180(?:0\\d{3}|2)\\d{3}', example_number='1800123456', possible_length=(7, 10)),
@@ -13,7 +13,7 @@ PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1[38]00\\d{6}|1(?:345[0-4]|802)\\d{3}|13\\d{4}', possible_length=(6, 7, 8, 10)),
     preferred_international_prefix='0011',
     national_prefix='0',
-    national_prefix_for_parsing='0',
+    national_prefix_for_parsing='0|(183[12])',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['16'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['13']),
         NumberFormat(pattern='(\\d{3})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['19']),
@@ -21,7 +21,7 @@ PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix
         NumberFormat(pattern='(\\d{4})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['19']),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2,4})', format='\\1 \\2 \\3', leading_digits_pattern=['16'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['14|[45]'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d)(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2378]'], national_prefix_formatting_rule='(0\\1)'),
+        NumberFormat(pattern='(\\d)(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2378]'], national_prefix_formatting_rule='(0\\1)', domestic_carrier_code_formatting_rule='$CC (\\1)'),
         NumberFormat(pattern='(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['1(?:30|[89])'])],
     intl_number_format=[NumberFormat(pattern='(\\d{2})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['16']),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{2,4})', format='\\1 \\2 \\3', leading_digits_pattern=['16']),
