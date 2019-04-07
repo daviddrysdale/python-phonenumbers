@@ -17,7 +17,7 @@ INTERNAL_FILES = ['../../python/phonenumbers/util.py',
                   '../../python/phonenumbers/re_util.py',
                   '../../python/phonenumbers/unicode_util.py']
 CLASS_RE = re.compile(r"^class +([A-Za-z][_A-Za-z0-9]+)[ \(:]")
-FUNCTION_RE = re.compile("^def +([A-Za-z][_A-Za-z0-9]+)[ \(]")
+FUNCTION_RE = re.compile(r"^def +([A-Za-z][_A-Za-z0-9]+)[ \(]")
 CONSTANT_RE = re.compile("^([A-Z][_A-Z0-9]+) *= *")
 
 grepped_all = set()
