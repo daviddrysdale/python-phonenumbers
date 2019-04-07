@@ -19,7 +19,7 @@
 
 import unittest
 
-from phonenumbers import PhoneNumber, FrozenPhoneNumber
+from phonenumbers import FrozenPhoneNumber
 from phonenumbers import carrier
 from phonenumbers.carrier import name_for_number, name_for_valid_number, safe_display_name
 from phonenumbers.util import u
