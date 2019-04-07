@@ -18,7 +18,8 @@ Note most commercial short numbers are not handled here, but by phonenumberutil.
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import U_EMPTY_STRING, prnt
+from __future__ import print_function
+from .util import U_EMPTY_STRING
 from .phonemetadata import PhoneMetadata
 from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
 from .phonenumberutil import normalize_digits_only, region_codes_for_country_code
@@ -36,7 +37,7 @@ except ImportError:  # pragma no cover
     import sys
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
-        prnt("Failed to import generated shortdata (but OK as during autogeneration)", file=sys.stderr)
+        print("Failed to import generated shortdata (but OK as during autogeneration)", file=sys.stderr)
         _AVAILABLE_SHORT_REGION_CODES = []
     else:
         raise

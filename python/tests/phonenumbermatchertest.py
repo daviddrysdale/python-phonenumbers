@@ -17,13 +17,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 import sys
 import unittest
 
 from phonenumbers import PhoneNumberMatch, PhoneNumberMatcher, Leniency
 from phonenumbers import PhoneNumber, NumberFormat, phonenumberutil
 from phonenumbers import phonenumbermatcher, CountryCodeSource
-from phonenumbers.util import prnt, u
+from phonenumbers.util import u
 from .testmetadatatest import TestMetadataTestCase
 
 
@@ -627,11 +628,11 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
             match = iterator.next() if iterator.has_next() else None
             if match is None:
                 noMatchFoundCount += 1
-                prnt("No match found in  %s for leniency: %s" % (test, leniency), file=sys.stderr)
+                print("No match found in  %s for leniency: %s" % (test, leniency), file=sys.stderr)
             else:
                 if test.rawString != match.raw_string:
                     wrongMatchFoundCount += 1
-                    prnt("Found wrong match in test %s. Found %s" % (test, match), file=sys.stderr)
+                    print("Found wrong match in test %s. Found %s" % (test, match), file=sys.stderr)
         self.assertEqual(0, noMatchFoundCount)
         self.assertEqual(0, wrongMatchFoundCount)
 
@@ -642,7 +643,7 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
             match = iterator.next() if iterator.has_next() else None
             if match is not None:
                 matchFoundCount += 1
-                prnt("Match found in %s for leniency: %s" % (test, leniency), file=sys.stderr)
+                print("Match found in %s for leniency: %s" % (test, leniency), file=sys.stderr)
         self.assertEqual(0, matchFoundCount)
 
     def findMatchesInContexts(self, contexts, isValid, isPossible,

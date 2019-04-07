@@ -33,8 +33,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from .util import prnt, u, U_PLUS
+from __future__ import print_function
+from .util import u, U_PLUS
 from .phonenumberutil import PhoneNumberType, number_type
 from .phonenumberutil import PhoneNumberFormat, format_number
 from .phonenumberutil import is_number_type_geographical
@@ -48,7 +48,7 @@ except ImportError:  # pragma no cover
     import sys
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
-        prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
+        print("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         TIMEZONE_DATA = {'4411': u('Europe/London')}
         TIMEZONE_LONGEST_PREFIX = 4
     else:

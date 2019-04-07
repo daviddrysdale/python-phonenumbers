@@ -25,11 +25,12 @@ http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 import sys
 import re
 
 from .re_util import fullmatch   # Extra regexp function; see README
-from .util import UnicodeMixin, u, unicod, prnt, to_long
+from .util import UnicodeMixin, u, unicod, to_long
 from .util import U_EMPTY_STRING, U_SPACE, U_DASH, U_TILDE, U_ZERO, U_SEMICOLON
 from .unicode_util import digit as unicode_digit
 
@@ -47,7 +48,7 @@ except ImportError:  # pragma no cover
     import os
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
-        prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
+        print("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         _COUNTRY_CODE_TO_REGION_CODE = {1: ("US",)}
     else:
         raise

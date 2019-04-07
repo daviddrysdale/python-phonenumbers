@@ -17,14 +17,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 import sys
 import unittest
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber, is_emergency_number
 from phonenumbers import shortnumberinfo, ShortNumberCost, AsYouTypeFormatter
-from phonenumbers import is_possible_short_number_for_region
-from phonenumbers.util import prnt
+from phonenumbers import PhoneNumberMatcher, Leniency, is_possible_short_number_for_region
+from phonenumbers.re_util import fullmatch
 
 
 class ExampleNumbersTest(unittest.TestCase):
@@ -56,16 +57,16 @@ class ExampleNumbersTest(unittest.TestCase):
             if exampleNumber is not None:
                 if not phonenumberutil.is_valid_number(exampleNumber):
                     self.invalid_cases.append(exampleNumber)
-                    prnt("Failed validation for %s" % exampleNumber, file=sys.stderr)
+                    print("Failed validation for %s" % exampleNumber, file=sys.stderr)
                 else:
                     # We know the number is valid, now we check the type.
                     exampleNumberType = phonenumberutil.number_type(exampleNumber)
                     if exampleNumberType not in possibleExpectedTypes:
                         self.wrong_type_cases.append(exampleNumber)
-                        prnt("Wrong type for %s: got %s" % (exampleNumber, exampleNumberType), file=sys.stderr)
-                        prnt("Expected types: ", file=sys.stderr)
+                        print("Wrong type for %s: got %s" % (exampleNumber, exampleNumberType), file=sys.stderr)
+                        print("Expected types: ", file=sys.stderr)
                         for phone_type in possibleExpectedTypes:
-                            prnt("  %s" % phone_type, file=sys.stderr)
+                            print("  %s" % phone_type, file=sys.stderr)
 
     def testFixedLine(self):
         fixedLineTypes = {PhoneNumberType.FIXED_LINE, PhoneNumberType.FIXED_LINE_OR_MOBILE}
@@ -134,12 +135,12 @@ class ExampleNumbersTest(unittest.TestCase):
 
             except NumberParseException:
                 _, e, _ = sys.exc_info()
-                prnt("Failed parse: %s" % e, file=sys.stderr)
+                print("Failed parse: %s" % e, file=sys.stderr)
 
             if (exampleNumber is not None and
                 phonenumberutil.can_be_internationally_dialled(exampleNumber)):
                 self.wrong_type_cases.append(exampleNumber)
-                prnt("Number %s should not be internationally diallable" % exampleNumber, file=sys.stderr)
+                print("Number %s should not be internationally diallable" % exampleNumber, file=sys.stderr)
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testGlobalNetworkNumbers(self):
@@ -150,7 +151,7 @@ class ExampleNumbersTest(unittest.TestCase):
                             msg="No example phone number for calling code %s" % callingCode)
             if not phonenumberutil.is_valid_number(exampleNumber):
                 self.invalid_cases.append(exampleNumber)
-                prnt("Failed validation for %s" % exampleNumber, file=sys.stderr)
+                print("Failed validation for %s" % exampleNumber, file=sys.stderr)
         self.assertEqual(0, len(self.invalid_cases))
 
     def testEveryRegionHasAnExampleNumber(self):
@@ -181,10 +182,10 @@ class ExampleNumbersTest(unittest.TestCase):
             if not shortnumberinfo.is_valid_short_number_for_region(phoneNumber, regionCode):
                 invalid_string_case = "region_code: %s, national_number: %s" % (regionCode, exampleShortNumber)
                 invalid_string_cases.append(invalid_string_case)
-                prnt("Failed validation from string %s" % invalid_string_case, file=sys.stderr)
+                print("Failed validation from string %s" % invalid_string_case, file=sys.stderr)
             if not shortnumberinfo.is_valid_short_number(phoneNumber):
                 self.invalid_cases.append(phoneNumber)
-                prnt("Failed validation for %s" % phoneNumber, file=sys.stderr)
+                print("Failed validation for %s" % phoneNumber, file=sys.stderr)
             for cost in [ShortNumberCost.TOLL_FREE, ShortNumberCost.STANDARD_RATE,
                          ShortNumberCost.PREMIUM_RATE, ShortNumberCost.UNKNOWN_COST]:
                 exampleShortNumber = shortnumberinfo._example_short_number_for_cost(regionCode, cost)
@@ -193,8 +194,8 @@ class ExampleNumbersTest(unittest.TestCase):
                     exampleCost = shortnumberinfo.expected_cost_for_region(phoneNumber, regionCode)
                     if cost != exampleCost:
                         self.wrong_type_cases.append(phoneNumber)
-                        prnt("Wrong cost for %s: got %s, expected: %s" %
-                             (phoneNumber, exampleCost, cost), file=sys.stderr)
+                        print("Wrong cost for %s: got %s, expected: %s" %
+                              (phoneNumber, exampleCost, cost), file=sys.stderr)
         self.assertEqual(0, len(invalid_string_cases))
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
@@ -210,10 +211,10 @@ class ExampleNumbersTest(unittest.TestCase):
                 if (not is_possible_short_number_for_region(phoneNumber, regionCode) or
                     not is_emergency_number(exampleNumber, regionCode)):
                     wrongTypeCounter += 1
-                    prnt("Emergency example number test failed for %s" % regionCode, file=sys.stderr)
+                    print("Emergency example number test failed for %s" % regionCode, file=sys.stderr)
                 elif shortnumberinfo.expected_cost_for_region(phoneNumber, regionCode) != ShortNumberCost.TOLL_FREE:
                     wrongTypeCounter += 1
-                    prnt("Emergency example number not toll free for %s" % regionCode, file=sys.stderr)
+                    print("Emergency example number not toll free for %s" % regionCode, file=sys.stderr)
         self.assertEqual(0, wrongTypeCounter)
 
     def testCarrierSpecificShortNumbers(self):
@@ -227,7 +228,7 @@ class ExampleNumbersTest(unittest.TestCase):
                 if (not shortnumberinfo.is_possible_short_number_for_region(carrierSpecificNumber, regionCode) or
                     not shortnumberinfo.is_carrier_specific_for_region(carrierSpecificNumber, regionCode)):
                     wrongTagCounter += 1
-                    prnt("Carrier-specific test failed for %s" % regionCode, file=sys.stderr)
+                    print("Carrier-specific test failed for %s" % regionCode, file=sys.stderr)
         self.assertEqual(0, wrongTagCounter)
 
     def testSmsServiceShortNumbers(self):
@@ -241,7 +242,7 @@ class ExampleNumbersTest(unittest.TestCase):
                 if (not shortnumberinfo.is_possible_short_number_for_region(smsServiceNumber, regionCode) or
                     not shortnumberinfo.is_sms_service_for_region(smsServiceNumber, regionCode)):
                     wrongTagCounter += 1
-                    prnt("SMS service test failed for %s" % regionCode, file=sys.stderr)
+                    print("SMS service test failed for %s" % regionCode, file=sys.stderr)
         self.assertEqual(0, wrongTagCounter)
 
     def testIsCarrierSpecific(self):

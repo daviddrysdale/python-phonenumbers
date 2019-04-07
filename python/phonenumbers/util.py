@@ -4,7 +4,6 @@
 This module defines a collection of functions that allow the same Python
 source code to be used in both Python 2.x and Python 3.x.
 
- - prnt() prints its arguments to a file, with given separator and ending.
  - to_long() creates a (long) integer object from its input parameter.
  - u() allows string literals involving non-ASCII characters to be
    used in both Python 2.x / 3.x, e.g. u("\u0101 is a-with-macron")
@@ -14,15 +13,7 @@ source code to be used in both Python 2.x and Python 3.x.
  - rpr() generates a representation of a string that can be parsed in either
    Python 2.x or 3.x, assuming use of the u() function above.
 
->>> from .util import prnt, u, uchr, rpr
->>> prnt("hello")
-hello
->>> prnt("hello", "world")
-hello world
->>> prnt("hello", "world", sep=":")
-hello:world
->>> prnt("hello", "world", sep=":", end='!\\n')
-hello:world!
+>>> from .util import u, uchr, rpr
 >>> u('\u0101') == uchr(0x0101)
 True
 >>> u('\u0101') == u('\U00000101')
@@ -41,19 +32,10 @@ import sys
 
 
 if sys.version_info >= (3, 0):  # pragma no cover
-    import builtins
-    print3 = builtins.__dict__['print']
-
     unicod = str
     u = str
     uchr = chr
     to_long = int
-
-    def prnt(*args, **kwargs):
-        sep = kwargs.get('sep', ' ')
-        end = kwargs.get('end', '\n')
-        file = kwargs.get('file', None)
-        print3(*args, **{'sep': sep, 'end': end, 'file': file})
 
     class UnicodeMixin(object):
         """Mixin class to define a __str__ method in terms of __unicode__ method"""
@@ -86,14 +68,6 @@ else:  # pragma no cover
 
     uchr = unichr
     to_long = long
-
-    def prnt(*args, **kwargs):
-        sep = kwargs.get('sep', ' ')
-        end = kwargs.get('end', '\n')
-        file = kwargs.get('file', None)
-        if file is None:
-            file = sys.stdout
-        print >> file, sep.join([str(arg) for arg in args]) + end,
 
     class UnicodeMixin(object):  # pragma no cover
         """Mixin class to define a __str__ method in terms of __unicode__ method"""

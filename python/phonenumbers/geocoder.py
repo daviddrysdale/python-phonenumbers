@@ -43,8 +43,8 @@ True
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from .util import prnt, unicod, u, U_EMPTY_STRING
+from __future__ import print_function
+from .util import unicod, u, U_EMPTY_STRING
 from .phonenumberutil import region_code_for_number, PhoneNumberType
 from .phonenumberutil import country_mobile_token, national_significant_number, number_type
 from .phonenumberutil import region_code_for_country_code, region_codes_for_country_code
@@ -62,7 +62,7 @@ except ImportError:  # pragma no cover
     import sys
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
-        prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
+        print("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         GEOCODE_DATA = {'1': {'en': u('United States')}}
         GEOCODE_LONGEST_PREFIX = 1
         LOCALE_DATA = {'US': {'en': u('United States')}}

@@ -30,6 +30,7 @@ Options:
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import print_function
 import os
 import sys
 import glob
@@ -41,7 +42,7 @@ import math
 # Use the local code in preference to any pre-installed version
 sys.path.insert(0, '../../python')
 
-from phonenumbers.util import prnt, rpr
+from phonenumbers.util import rpr
 
 PREFIXDATA_CHUNK_SIZE = 10000
 PREFIXDATA_SUFFIX = ".txt"
@@ -188,35 +189,35 @@ def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, pe
 
     with open(outfilename, "w") as outfile:
         if per_locale:
-            prnt(PREFIXDATA_LOCALE_FILE_PROLOG % {'module': module_prefix}, file=outfile)
+            print(PREFIXDATA_LOCALE_FILE_PROLOG % {'module': module_prefix}, file=outfile)
         else:
-            prnt(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
-        prnt(COPYRIGHT_NOTICE, file=outfile)
-        prnt("%s_DATA = {}" % varprefix, file=outfile)
+            print(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
+        print(COPYRIGHT_NOTICE, file=outfile)
+        print("%s_DATA = {}" % varprefix, file=outfile)
         for chunk_num in range(total_chunks):
-            prnt("from .data%d import data" % chunk_num, file=outfile)
-            prnt("%s_DATA.update(data)" % varprefix, file=outfile)
-        prnt("del data", file=outfile)
-        prnt("%s_LONGEST_PREFIX = %d" % (varprefix, longest_prefix), file=outfile)
+            print("from .data%d import data" % chunk_num, file=outfile)
+            print("%s_DATA.update(data)" % varprefix, file=outfile)
+        print("del data", file=outfile)
+        print("%s_LONGEST_PREFIX = %d" % (varprefix, longest_prefix), file=outfile)
 
 
 def output_prefixdata_chunk(prefixdata, outfilename, module_prefix, per_locale):
     with open(outfilename, "w") as outfile:
         longest_prefix = 0
         if per_locale:
-            prnt(PREFIXDATA_LOCALE_FILE_PROLOG % {'module': module_prefix}, file=outfile)
+            print(PREFIXDATA_LOCALE_FILE_PROLOG % {'module': module_prefix}, file=outfile)
         else:
-            prnt(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
-        prnt(COPYRIGHT_NOTICE, file=outfile)
-        prnt("data = {", file=outfile)
+            print(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
+        print(COPYRIGHT_NOTICE, file=outfile)
+        print("data = {", file=outfile)
         for prefix in sorted(prefixdata.keys()):
             if len(prefix) > longest_prefix:
                 longest_prefix = len(prefix)
             if per_locale:
-                prnt(" '%s':%s," % (prefix, _stable_dict_repr(prefixdata[prefix])), file=outfile)
+                print(" '%s':%s," % (prefix, _stable_dict_repr(prefixdata[prefix])), file=outfile)
             else:
-                prnt(" '%s':%s," % (prefix, _tuple_repr(prefixdata[prefix])), file=outfile)
-        prnt("}", file=outfile)
+                print(" '%s':%s," % (prefix, _tuple_repr(prefixdata[prefix])), file=outfile)
+        print("}", file=outfile)
     return longest_prefix
 
 
@@ -229,11 +230,11 @@ def _standalone(argv):
     try:
         opts, args = getopt.getopt(argv, "hv:fs:c:", ("help", "var=", "flat", "sep=", "chunks="))
     except getopt.GetoptError:
-        prnt(__doc__, file=sys.stderr)
+        print(__doc__, file=sys.stderr)
         sys.exit(1)
     for opt, arg in opts:
         if opt in ("-h", "--help"):
-            prnt(__doc__, file=sys.stderr)
+            print(__doc__, file=sys.stderr)
             sys.exit(1)
         elif opt in ("-v", "--var"):
             varprefix = arg
@@ -244,11 +245,11 @@ def _standalone(argv):
         elif opt in ("-c", "--chunks"):
             chunks = int(arg)
         else:
-            prnt("Unknown option %s" % opt, file=sys.stderr)
-            prnt(__doc__, file=sys.stderr)
+            print("Unknown option %s" % opt, file=sys.stderr)
+            print(__doc__, file=sys.stderr)
             sys.exit(1)
     if len(args) != 3:
-        prnt(__doc__, file=sys.stderr)
+        print(__doc__, file=sys.stderr)
         sys.exit(1)
     if per_locale:
         prefixdata = load_locale_prefixdata(args[0], separator=separator)

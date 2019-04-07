@@ -16,12 +16,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from __future__ import print_function
 import re
 
 # Extra regexp function; see README
 from .re_util import fullmatch
-from .util import UnicodeMixin, u, unicod, prnt
-from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER, U_PERCENT
+from .util import UnicodeMixin, u, unicod
+from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER, U_PERCENT, U_STAR
 from .unicode_util import Category, Block, is_letter
 from .phonenumberutil import _MAX_LENGTH_FOR_NSN, _MAX_LENGTH_COUNTRY_CODE
 from .phonenumberutil import _VALID_PUNCTUATION, _PLUS_CHARS, NON_DIGITS_PATTERN
@@ -48,7 +49,7 @@ except ImportError:  # pragma no cover
     import os
     import sys
     if os.path.basename(sys.argv[0]) in ("buildmetadatafromxml.py", "buildprefixdata.py"):
-        prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
+        print("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
         _ALT_NUMBER_FORMATS = {}
     else:
         raise

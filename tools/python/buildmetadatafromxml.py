@@ -31,7 +31,7 @@ __init__.py and per-region data files will be created in the directory.
 # BuildMetadataFromXml.java
 
 # import to allow this code to work with Python2.5
-from __future__ import with_statement
+from __future__ import with_statement, print_function
 
 import sys
 import os
@@ -47,7 +47,7 @@ sys.path.insert(0, '../../python')
 # Pull in the data structure definitions
 from phonenumbers.phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 from phonenumbers.phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY
-from phonenumbers.util import UnicodeMixin, u, prnt
+from phonenumbers.util import UnicodeMixin, u
 
 # Global flag for lax XML parsing
 lax = False
@@ -587,15 +587,15 @@ class XPhoneNumberMetadata(UnicodeMixin):
         """Emit Python code generating the metadata for the given region"""
         terrobj = self.territory[region]
         with open(region_filename, "w") as outfile:
-            prnt(_REGION_METADATA_PROLOG % {'region': terrobj.identifier(), 'module': module_prefix}, file=outfile)
-            prnt("PHONE_METADATA_%s = %s" % (terrobj.identifier(), terrobj), file=outfile)
+            print(_REGION_METADATA_PROLOG % {'region': terrobj.identifier(), 'module': module_prefix}, file=outfile)
+            print("PHONE_METADATA_%s = %s" % (terrobj.identifier(), terrobj), file=outfile)
 
     def emit_alt_formats_for_cc_py(self, cc, cc_filename, module_prefix):
         """Emit Python code generating the alternate format metadata for the given country code"""
         terrobj = self.alt_territory[cc]
         with open(cc_filename, "w") as outfile:
-            prnt(_ALT_FORMAT_METADATA_PROLOG % (cc, module_prefix), file=outfile)
-            prnt("PHONE_ALT_FORMAT_%s = %s" % (cc, terrobj), file=outfile)
+            print(_ALT_FORMAT_METADATA_PROLOG % (cc, module_prefix), file=outfile)
+            print("PHONE_ALT_FORMAT_%s = %s" % (cc, terrobj), file=outfile)
 
     def emit_metadata_py(self, datadir, module_prefix):
         """Emit Python code for the phone number metadata to the given file, and
@@ -618,9 +618,9 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
         # Now build a module file that includes them all
         with open(modulefilename, "w") as outfile:
-            prnt(METADATA_FILE_PROLOG, file=outfile)
-            prnt(COPYRIGHT_NOTICE, file=outfile)
-            prnt(METADATA_FILE_IMPORT % {'module': module_prefix}, file=outfile)
+            print(METADATA_FILE_PROLOG, file=outfile)
+            print(COPYRIGHT_NOTICE, file=outfile)
+            print(METADATA_FILE_IMPORT % {'module': module_prefix}, file=outfile)
             nongeo_codes = []
             country_codes = []
             for country_id in sorted(self.territory.keys()):
@@ -629,18 +629,18 @@ class XPhoneNumberMetadata(UnicodeMixin):
                     nongeo_codes.append(country_id)  # int
                 else:
                     country_codes.append("'%s'" % country_id)  # quoted string
-            prnt("_AVAILABLE_REGION_CODES = [%s]" % ",".join(country_codes), file=outfile)
+            print("_AVAILABLE_REGION_CODES = [%s]" % ",".join(country_codes), file=outfile)
             if len(nongeo_codes) > 0:
-                prnt("_AVAILABLE_NONGEO_COUNTRY_CODES = [%s]" % ", ".join(nongeo_codes), file=outfile)
+                print("_AVAILABLE_NONGEO_COUNTRY_CODES = [%s]" % ", ".join(nongeo_codes), file=outfile)
             register_prefix = "short_" if self.short_data else ""
-            prnt(METADATA_FILE_LOOP % {'prefix': register_prefix}, file=outfile)
+            print(METADATA_FILE_LOOP % {'prefix': register_prefix}, file=outfile)
             if len(nongeo_codes) > 0:
-                prnt(METADATA_NONGEO_FILE_LOOP, file=outfile)
+                print(METADATA_NONGEO_FILE_LOOP, file=outfile)
 
             if self.alt_territory is not None:
                 for country_code in sorted(self.alt_territory.keys()):
-                    prnt("from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code), file=outfile)
-                prnt("_ALT_NUMBER_FORMATS = {%s}" %
+                    print("from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code), file=outfile)
+                print("_ALT_NUMBER_FORMATS = {%s}" %
                      ", ".join(["%s: PHONE_ALT_FORMAT_%s" % (cc, cc) for cc in sorted(self.alt_territory.keys())]),
                      file=outfile)
 
@@ -659,12 +659,12 @@ class XPhoneNumberMetadata(UnicodeMixin):
 
             # Emit the mapping from country code to region code if nonempty.
             if len(country_code_to_region_code.keys()) > 0:
-                prnt(_COUNTRY_CODE_TO_REGION_CODE_PROLOG, file=outfile)
-                prnt("_COUNTRY_CODE_TO_REGION_CODE = {", file=outfile)
+                print(_COUNTRY_CODE_TO_REGION_CODE_PROLOG, file=outfile)
+                print("_COUNTRY_CODE_TO_REGION_CODE = {", file=outfile)
                 for country_code in sorted(country_code_to_region_code.keys()):
                     country_ids = country_code_to_region_code[country_code]
-                    prnt('    %d: ("%s",),' % (country_code, '", "'.join(country_ids)), file=outfile)
-                prnt("}", file=outfile)
+                    print('    %d: ("%s",),' % (country_code, '", "'.join(country_ids)), file=outfile)
+                print("}", file=outfile)
 
 
 def _standalone(argv):
@@ -674,11 +674,11 @@ def _standalone(argv):
     try:
         opts, args = getopt.getopt(argv, "hlsa:", ("help", "lax", "short", "alt="))
     except getopt.GetoptError:
-        prnt(__doc__, file=sys.stderr)
+        print(__doc__, file=sys.stderr)
         sys.exit(1)
     for opt, arg in opts:
         if opt in ("-h", "--help"):
-            prnt(__doc__, file=sys.stderr)
+            print(__doc__, file=sys.stderr)
             sys.exit(1)
         elif opt in ("-s", "--short"):
             short_data = True
@@ -688,12 +688,12 @@ def _standalone(argv):
         elif opt in ("-a", "--alt"):
             alternate = arg
         else:
-            prnt("Unknown option %s" % opt, file=sys.stderr)
-            prnt(__doc__, file=sys.stderr)
+            print("Unknown option %s" % opt, file=sys.stderr)
+            print(__doc__, file=sys.stderr)
             sys.exit(1)
 
     if len(args) != 3:
-        prnt(__doc__, file=sys.stderr)
+        print(__doc__, file=sys.stderr)
         sys.exit(1)
     pmd = XPhoneNumberMetadata(args[0], short_data)
     if alternate is not None:
