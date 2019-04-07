@@ -18,15 +18,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys
-import re
 import unittest
 
 from phonenumbers import PhoneNumberType, PhoneMetadata, NumberParseException
 from phonenumbers import phonenumberutil, PhoneNumber, is_emergency_number
 from phonenumbers import shortnumberinfo, ShortNumberCost, AsYouTypeFormatter
-from phonenumbers import PhoneNumberMatcher, Leniency, is_possible_short_number_for_region
+from phonenumbers import is_possible_short_number_for_region
 from phonenumbers.util import prnt
-from phonenumbers.re_util import fullmatch
 
 
 class ExampleNumbersTest(unittest.TestCase):

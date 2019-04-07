@@ -19,7 +19,7 @@
 
 import unittest
 
-from phonenumbers import PhoneNumber, FrozenPhoneNumber
+from phonenumbers import FrozenPhoneNumber
 from phonenumbers import timezone
 from phonenumbers.timezone import time_zones_for_geographical_number
 from phonenumbers.timezone import time_zones_for_number
