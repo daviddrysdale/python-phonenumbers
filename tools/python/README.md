@@ -130,8 +130,8 @@ Release Procedure
      `cd tools/python && make PYTHON=python3 metaclean alldata`
  - Check that the unit tests all run successfully in Py3k:
      `cd tools/python && make PYTHON=python3 test`
- - Check that Python 2.5 is still supported:
-     `cd tools/python && make PYTHON=python2.5 test`
+ - Check that Python 2 is still supported:
+     `cd tools/python && make PYTHON=python2 test`
  - Create a vX.Y.Z tag:
      `git tag vX.Y.Z`
  - Push the tag to Github with:

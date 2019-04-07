@@ -24,10 +24,8 @@ try:
 except ImportError:
     pass
 
-major, minor = sys.version_info[:2]
-python_25 = (major > 2 or (major == 2 and minor >= 5))
-if not python_25:
-    raise RuntimeError("Python 2.5 or newer is required")
+if sys.version_info < (2, 7):
+    raise RuntimeError("Python 2.7 or newer is required")
 
 # Add ./python/ subdirectory to path
 sys.path.append('python')
@@ -53,11 +51,8 @@ distutils.core.setup(name='phonenumbers',
                                   'Operating System :: OS Independent',
                                   'Topic :: Communications :: Telephony',
                                   'Programming Language :: Python :: 2',
-                                  'Programming Language :: Python :: 2.5',
-                                  'Programming Language :: Python :: 2.6',
                                   'Programming Language :: Python :: 2.7',
                                   'Programming Language :: Python :: 3',
-                                  'Programming Language :: Python :: 3.3',
                                   'Programming Language :: Python :: 3.4',
                                   'Programming Language :: Python :: 3.5',
                                   'Programming Language :: Python :: 3.6',
