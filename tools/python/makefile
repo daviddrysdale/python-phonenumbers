@@ -72,6 +72,15 @@ coverage_report:
 coverage_annotate:
 	cd $(PYDIR) && $(COVERAGE) annotate $(COVERAGE_FILES)
 
+# Lint: requires pycodestyle
+# Explicitly allow:
+#   E501 line too long
+#   E129 visually indented line with same indent as next logical line
+#   E402 module level import not at top of file
+#   W504 line break after binary operator
+lint:
+	cd $(PYDIR) && pycodestyle --ignore E501,E129,E402,W504 phonenumbers/*.py tests/*.py
+
 # Profile
 profile: alldata $(PYDIR)/tests/testdata/__init__.py profile_clean profile_report
 profile_clean:

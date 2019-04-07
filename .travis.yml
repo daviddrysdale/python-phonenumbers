@@ -23,8 +23,10 @@ install:
            pip install coveralls
         fi
   - pip install protobuf
+  - pip install pycodestyle
 script:
   - make -C tools/python test
+  - make -C tools/python lint
   - |
         if [ "$TRAVIS_PYTHON_VERSION" = "2.7" ]; then
            cd python
