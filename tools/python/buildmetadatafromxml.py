@@ -30,8 +30,7 @@ __init__.py and per-region data files will be created in the directory.
 # Subsequently, post-processing code was added to match the behaviour of
 # BuildMetadataFromXml.java
 
-# import to allow this code to work with Python2.5
-from __future__ import with_statement, print_function
+from __future__ import print_function
 
 import sys
 import os
