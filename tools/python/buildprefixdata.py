@@ -209,7 +209,7 @@ def output_prefixdata_chunk(prefixdata, outfilename, module_prefix, per_locale):
             prnt(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
         prnt(COPYRIGHT_NOTICE, file=outfile)
         prnt("data = {", file=outfile)
-        for prefix in prefixdata.keys():
+        for prefix in sorted(prefixdata.keys()):
             if len(prefix) > longest_prefix:
                 longest_prefix = len(prefix)
             if per_locale:
