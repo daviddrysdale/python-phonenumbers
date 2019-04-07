@@ -25,8 +25,18 @@ install:
   - pip install protobuf
   - pip install pycodestyle
 script:
+  - make -C tools/python metaclean
   - make -C tools/python test
   - make -C tools/python lint
+  - |
+      # Check re-generation didn't change anything (except locale.py)
+      git checkout --  python/phonenumbers/geodata/locale.py
+      status=$(git status --porcelain ) || :
+      if [[ -n ${status} ]]; then
+        echo "Regenerated files differ from checked-in versions: ${status}"
+        git status
+        exit 1
+      fi
   - |
         if [ "$TRAVIS_PYTHON_VERSION" = "2.7" ]; then
            cd python
