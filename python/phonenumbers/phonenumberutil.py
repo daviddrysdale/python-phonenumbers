@@ -98,11 +98,11 @@ _GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES = frozenset((
 # countries like the US, where we can't distinguish between fixed-line or
 # mobile numbers, are not listed here, since we consider FIXED_LINE_OR_MOBILE
 # to be a possibly geographically-related type anyway (like FIXED_LINE).
-_GEO_MOBILE_COUNTRIES = _GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES | set((
+_GEO_MOBILE_COUNTRIES = _GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES | {
     52,  # Mexico
     54,  # Argentina
     55,  # Brazil
-    62))  # Indonesia: some prefixes only (fixed CMDA wireless)
+    62}  # Indonesia: some prefixes only (fixed CMDA wireless)
 # The PLUS_SIGN signifies the international prefix.
 _PLUS_SIGN = u("+")
 _STAR_SIGN = u('*')

@@ -45,7 +45,7 @@ SUPPORTED_SHORT_REGIONS = _AVAILABLE_SHORT_REGION_CODES
 
 # In these countries, if extra digits are added to an emergency number, it no longer connects
 # to the emergency service.
-_REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT = set(["BR", "CL", "NI"])
+_REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT = {"BR", "CL", "NI"}
 
 
 class ShortNumberCost(object):

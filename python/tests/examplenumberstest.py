@@ -68,55 +68,55 @@ class ExampleNumbersTest(unittest.TestCase):
                             prnt("  %s" % phone_type, file=sys.stderr)
 
     def testFixedLine(self):
-        fixedLineTypes = set((PhoneNumberType.FIXED_LINE, PhoneNumberType.FIXED_LINE_OR_MOBILE))
+        fixedLineTypes = {PhoneNumberType.FIXED_LINE, PhoneNumberType.FIXED_LINE_OR_MOBILE}
         self._checkNumbersValidAndCorrectType(PhoneNumberType.FIXED_LINE, fixedLineTypes)
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testMobile(self):
-        mobileTypes = set((PhoneNumberType.MOBILE, PhoneNumberType.FIXED_LINE_OR_MOBILE,))
+        mobileTypes = {PhoneNumberType.MOBILE, PhoneNumberType.FIXED_LINE_OR_MOBILE}
         self._checkNumbersValidAndCorrectType(PhoneNumberType.MOBILE, mobileTypes)
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testTollFree(self):
-        tollFreeTypes = set((PhoneNumberType.TOLL_FREE,))
+        tollFreeTypes = {PhoneNumberType.TOLL_FREE}
         self._checkNumbersValidAndCorrectType(PhoneNumberType.TOLL_FREE, tollFreeTypes)
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testPremiumRate(self):
-        premiumRateTypes = set((PhoneNumberType.PREMIUM_RATE,))
+        premiumRateTypes = {PhoneNumberType.PREMIUM_RATE}
         self._checkNumbersValidAndCorrectType(PhoneNumberType.PREMIUM_RATE, premiumRateTypes)
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testVoip(self):
-        voipTypes = set((PhoneNumberType.VOIP,))
+        voipTypes = {PhoneNumberType.VOIP}
         self._checkNumbersValidAndCorrectType(PhoneNumberType.VOIP, voipTypes)
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testPager(self):
-        pagerTypes = set((PhoneNumberType.PAGER,))
+        pagerTypes = {PhoneNumberType.PAGER}
         self._checkNumbersValidAndCorrectType(PhoneNumberType.PAGER, pagerTypes)
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testUan(self):
-        uanTypes = set((PhoneNumberType.UAN,))
+        uanTypes = {PhoneNumberType.UAN}
         self._checkNumbersValidAndCorrectType(PhoneNumberType.UAN, uanTypes)
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testVoicemail(self):
-        voicemailTypes = set((PhoneNumberType.VOICEMAIL,))
+        voicemailTypes = {PhoneNumberType.VOICEMAIL}
         self._checkNumbersValidAndCorrectType(PhoneNumberType.VOICEMAIL, voicemailTypes)
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
 
     def testSharedCost(self):
-        sharedCostTypes = set((PhoneNumberType.SHARED_COST,))
+        sharedCostTypes = {PhoneNumberType.SHARED_COST}
         self._checkNumbersValidAndCorrectType(PhoneNumberType.SHARED_COST, sharedCostTypes)
         self.assertEqual(0, len(self.invalid_cases))
         self.assertEqual(0, len(self.wrong_type_cases))
