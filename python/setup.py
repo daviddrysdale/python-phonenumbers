@@ -52,13 +52,10 @@ with io.open("README.md", mode="r", encoding="utf-8") as readme:
 if lite:
     pkgname = 'phonenumberslite'
     pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.shortdata']
-    pkgstatus = 'Development Status :: 4 - Beta'
-    lite = True
 else:
     pkgname = 'phonenumbers'
     pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.geodata', 'phonenumbers.shortdata',
             'phonenumbers.carrierdata', 'phonenumbers.tzdata']
-    pkgstatus = 'Development Status :: 5 - Production/Stable'
 
 distutils.core.setup(name=pkgname,
                      version=__version__,
