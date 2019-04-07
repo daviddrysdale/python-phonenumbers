@@ -57,7 +57,8 @@ if sys.version_info >= (3, 0):  # pragma no cover
 
     class UnicodeMixin(object):
         """Mixin class to define a __str__ method in terms of __unicode__ method"""
-        __str__ = lambda x: x.__unicode__()
+        def __str__(self):
+            return self.__unicode__()
 
 else:  # pragma no cover
     unicod = unicode
@@ -96,7 +97,8 @@ else:  # pragma no cover
 
     class UnicodeMixin(object):  # pragma no cover
         """Mixin class to define a __str__ method in terms of __unicode__ method"""
-        __str__ = lambda x: unicode(x).encode('utf-8')
+        def __str__(self):
+            return unicode(self).encode('utf-8')
 
 # Constants for Unicode strings
 U_EMPTY_STRING = unicod("")
