@@ -677,16 +677,15 @@ class PhoneNumberMatcher(object):
         if alternate_formats is not None:
             for alternate_format in alternate_formats:
                 if len(alternate_format.leading_digits_pattern) > 0:
-                  # There is only one leading digits pattern for alternate formats.
-                  pattern = re.compile(alternate_format.leading_digits_pattern[0])
-                  if not pattern.match(nsn):
-                    # Leading digits don't match; try another one.
-                    continue
+                    # There is only one leading digits pattern for alternate formats.
+                    pattern = re.compile(alternate_format.leading_digits_pattern[0])
+                    if not pattern.match(nsn):
+                        # Leading digits don't match; try another one.
+                        continue
                 formatted_number_groups = _get_national_number_groups(numobj, alternate_format)
                 if checker(numobj, normalized_candidate, formatted_number_groups):
                     return True
         return False
-
 
     def has_next(self):
         """Indicates whether there is another match available"""
