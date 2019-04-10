@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Unit tests for geocoder.py"""
 
 # Based on original Java code:

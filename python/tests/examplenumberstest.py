@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Unit tests for phonenumberutil.py"""
 
 # Based on original Java code:

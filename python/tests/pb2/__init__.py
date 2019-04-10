@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import unittest
 
 from .converttest import PB2ConvertTest

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Unit tests for asyoutypeformatter.py"""
 
 # Based on original Java code:
