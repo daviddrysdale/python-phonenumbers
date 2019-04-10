@@ -8,13 +8,11 @@ source code to be used in both Python 2.x and Python 3.x.
  - to_long() creates a (long) integer object from its input parameter.
  - u() allows string literals involving non-ASCII characters to be
    used in both Python 2.x / 3.x, e.g. u("\u0101 is a-with-macron")
- - uchr() generates a single character Unicode string whose point code
-   is the given (integer) argument, e.g. uchr(257).
  - unicod() forces its argument to a Unicode string.
  - rpr() generates a representation of a string that can be parsed in either
    Python 2.x or 3.x, assuming use of the u() function above.
 
->>> from .util import prnt, u, uchr, rpr
+>>> from .util import prnt, u, rpr
 >>> prnt("hello")
 hello
 >>> prnt("hello", "world")
@@ -23,8 +21,6 @@ hello world
 hello:world
 >>> prnt("hello", "world", sep=":", end='!\\n')
 hello:world!
->>> u('\u0101') == uchr(0x0101)
-True
 >>> u('\u0101') == u('\U00000101')
 True
 >>> u('\u0101') == u('\N{LATIN SMALL LETTER A WITH MACRON}')
@@ -46,7 +42,6 @@ if sys.version_info >= (3, 0):  # pragma no cover
 
     unicod = str
     u = str
-    uchr = chr
     to_long = int
 
     def prnt(*args, **kwargs):
@@ -84,7 +79,6 @@ else:  # pragma no cover
         us = re.sub(_UNAME_RE, lambda m: unicodedata.lookup(m.group('name')), us)
         return us
 
-    uchr = unichr
     to_long = long
 
     def prnt(*args, **kwargs):
