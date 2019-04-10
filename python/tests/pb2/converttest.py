@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Unit tests for phonenumbers.pb2"""
 import unittest
 

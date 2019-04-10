@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Unit tests for shortnumberinfo.py"""
 
 # Based on original Java code:
