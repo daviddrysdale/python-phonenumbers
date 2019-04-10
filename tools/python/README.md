@@ -126,9 +126,9 @@ Release Procedure
      `cd tools/python && make metaclean alldata`
  - Check that the unit tests all run successfully:
      `cd tools/python && make test`
- - Optionally, check that metadata regeneration works in Py3k:
+ - Optionally, check that metadata regeneration works in Python 3:
      `cd tools/python && make PYTHON=python3 metaclean alldata`
- - Check that the unit tests all run successfully in Py3k:
+ - Check that the unit tests all run successfully in Python 3:
      `cd tools/python && make PYTHON=python3 test`
  - Check that Python 2.5 is still supported:
      `cd tools/python && make PYTHON=python2.5 test`
