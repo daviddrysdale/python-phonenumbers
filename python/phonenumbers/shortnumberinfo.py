@@ -18,7 +18,7 @@ Note most commercial short numbers are not handled here, but by phonenumberutil.
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .util import U_EMPTY_STRING, prnt
+from .util import prnt
 from .phonemetadata import PhoneMetadata
 from .phonenumberutil import _extract_possible_number, _PLUS_CHARS_PATTERN
 from .phonenumberutil import normalize_digits_only, region_codes_for_country_code
@@ -285,11 +285,11 @@ def _example_short_number(region_code):
     """
     metadata = PhoneMetadata.short_metadata_for_region(region_code)
     if metadata is None:
-        return U_EMPTY_STRING
+        return ""
     desc = metadata.short_code
     if desc.example_number is not None:
         return desc.example_number
-    return U_EMPTY_STRING
+    return ""
 
 
 def _example_short_number_for_cost(region_code, cost):
@@ -305,7 +305,7 @@ def _example_short_number_for_cost(region_code, cost):
     """
     metadata = PhoneMetadata.short_metadata_for_region(region_code)
     if metadata is None:
-        return U_EMPTY_STRING
+        return ""
     desc = None
     if cost == ShortNumberCost.TOLL_FREE:
         desc = metadata.toll_free
@@ -319,7 +319,7 @@ def _example_short_number_for_cost(region_code, cost):
         pass
     if desc is not None and desc.example_number is not None:
         return desc.example_number
-    return U_EMPTY_STRING
+    return ""
 
 
 def connects_to_emergency_number(number, region_code):

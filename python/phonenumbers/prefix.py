@@ -1,6 +1,5 @@
 """Utilities for handling prefix dictionaries"""
 
-from .util import U_EMPTY_STRING, U_PLUS
 from .phonenumberutil import format_number, PhoneNumberFormat
 
 _LOCALE_NORMALIZATION_MAP = {"zh_TW": "zh_Hant", "zh_HK": "zh_Hant", "zh_MO": "zh_Hant"}
@@ -73,7 +72,7 @@ def _prefix_description_for_number(data, longest_prefix, numobj, lang, script=No
     Returns a text description in the given language code, for the given phone
     number's area, or an empty string if no description is available."""
     e164_num = format_number(numobj, PhoneNumberFormat.E164)
-    if not e164_num.startswith(U_PLUS):  # pragma no cover
+    if not e164_num.startswith("+"):  # pragma no cover
         # Can only hit this arm if there's an internal error in the rest of
         # the library
         raise Exception("Expect E164 number to start with +")
@@ -86,5 +85,5 @@ def _prefix_description_for_number(data, longest_prefix, numobj, lang, script=No
             if name is not None:
                 return name
             else:
-                return U_EMPTY_STRING
-    return U_EMPTY_STRING
+                return ""
+    return ""

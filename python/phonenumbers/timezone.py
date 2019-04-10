@@ -34,7 +34,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .util import prnt, u, U_PLUS
+from .util import prnt, u
 from .phonenumberutil import PhoneNumberType, number_type
 from .phonenumberutil import PhoneNumberFormat, format_number
 from .phonenumberutil import is_number_type_geographical
@@ -75,7 +75,7 @@ def time_zones_for_geographical_number(numobj):
     with the default unknown time zone if no other time zone was found or if
     the number was invalid"""
     e164_num = format_number(numobj, PhoneNumberFormat.E164)
-    if not e164_num.startswith(U_PLUS):  # pragma no cover
+    if not e164_num.startswith("+"):  # pragma no cover
         # Can only hit this arm if there's an internal error in the rest of
         # the library
         raise Exception("Expect E164 number to start with +")

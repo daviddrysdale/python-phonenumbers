@@ -21,7 +21,6 @@ import re
 # Extra regexp function; see README
 from .re_util import fullmatch
 from .util import UnicodeMixin, u, unicod, prnt
-from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER, U_PERCENT
 from .unicode_util import Category, Block, is_letter
 from .phonenumberutil import _MAX_LENGTH_FOR_NSN, _MAX_LENGTH_COUNTRY_CODE
 from .phonenumberutil import _VALID_PUNCTUATION, _PLUS_CHARS, NON_DIGITS_PATTERN
@@ -281,7 +280,7 @@ def _all_number_groups_remain_grouped(numobj, normalized_candidate, formatted_nu
     # The check here makes sure that we haven't mistakenly already used the extension to
     # match the last group of the subscriber number. Note the extension cannot have
     # formatting in-between digits.
-    return (normalized_candidate[from_index:].find(numobj.extension or U_EMPTY_STRING) != -1)
+    return (normalized_candidate[from_index:].find(numobj.extension or "") != -1)
 
 
 def _verify_exact_grouping(numobj, candidate, matcher):
@@ -343,13 +342,13 @@ def _get_national_number_groups_without_pattern(numobj):
     rfc3966_format = format_number(numobj, PhoneNumberFormat.RFC3966)
     # We remove the extension part from the formatted string before splitting
     # it into different groups.
-    end_index = rfc3966_format.find(U_SEMICOLON)
+    end_index = rfc3966_format.find(";")
     if end_index < 0:
         end_index = len(rfc3966_format)
 
     # The country-code will have a '-' following it.
-    start_index = rfc3966_format.find(U_DASH) + 1
-    return rfc3966_format[start_index:end_index].split(U_DASH)
+    start_index = rfc3966_format.find("-") + 1
+    return rfc3966_format[start_index:end_index].split("-")
 
 
 def _get_national_number_groups(numobj, formatting_pattern):
@@ -359,16 +358,16 @@ def _get_national_number_groups(numobj, formatting_pattern):
     # If a format is provided, we format the NSN only, and split that according to the separator.
     nsn = national_significant_number(numobj)
     return _format_nsn_using_pattern(nsn, formatting_pattern,
-                                     PhoneNumberFormat.RFC3966).split(U_DASH)
+                                     PhoneNumberFormat.RFC3966).split("-")
 
 
 def _contains_more_than_one_slash_in_national_number(numobj, candidate):
-    first_slash_in_body_index = candidate.find(U_SLASH)
+    first_slash_in_body_index = candidate.find("/")
     if first_slash_in_body_index < 0:
         # No slashes, this is okay.
         return False
     # Now look for a second one.
-    second_slash_in_body_index = candidate.find(U_SLASH, first_slash_in_body_index + 1)
+    second_slash_in_body_index = candidate.find("/", first_slash_in_body_index + 1)
     if second_slash_in_body_index < 0:
         # Only one slash, this is okay.,
         return False
@@ -380,7 +379,7 @@ def _contains_more_than_one_slash_in_national_number(numobj, candidate):
         normalize_digits_only(candidate[:first_slash_in_body_index]) ==
         unicod(numobj.country_code)):
         # Any more slashes and this is illegal.
-        return (candidate[(second_slash_in_body_index + 1):].find(U_SLASH) != -1)
+        return (candidate[(second_slash_in_body_index + 1):].find("/") != -1)
     return True
 
 
@@ -394,9 +393,9 @@ def _contains_only_valid_x_chars(numobj, candidate):
     # character of the string.
     ii = 0
     while ii < (len(candidate) - 1):
-        if (candidate[ii] == U_X_LOWER or candidate[ii] == U_X_UPPER):
+        if (candidate[ii] == "x" or candidate[ii] == "X"):
             next_char = candidate[ii + 1]
-            if (next_char == U_X_LOWER or next_char == U_X_UPPER):
+            if (next_char == "x" or next_char == "X"):
                 # This is the carrier code case, in which the 'X's always
                 # precede the national significant number.
                 ii += 1
@@ -479,7 +478,7 @@ class PhoneNumberMatcher(object):
         # The text searched for phone numbers.
         self.text = text
         if self.text is None:
-            self.text = U_EMPTY_STRING
+            self.text = ""
         # The region (country) to assume for phone numbers without an
         # international prefix, possibly None.
         self.preferred_region = region
@@ -550,7 +549,7 @@ class PhoneNumberMatcher(object):
 
     @classmethod
     def _is_invalid_punctuation_symbol(cls, character):
-        return (character == U_PERCENT or
+        return (character == "%" or
                 Category.get(character) == Category.CURRENCY_SYMBOL)
 
     def _extract_match(self, candidate, offset):

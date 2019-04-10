@@ -44,7 +44,7 @@ True
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .util import prnt, unicod, u, U_EMPTY_STRING
+from .util import prnt, unicod, u
 from .phonenumberutil import region_code_for_number, PhoneNumberType
 from .phonenumberutil import country_mobile_token, national_significant_number, number_type
 from .phonenumberutil import region_code_for_country_code, region_codes_for_country_code
@@ -101,7 +101,7 @@ def country_name_for_number(numobj, lang, script=None, region=None):
                 # then we don't know which region it belongs to so we return
                 # nothing.
                 if region_where_number_is_valid != u("ZZ"):
-                    return U_EMPTY_STRING
+                    return ""
                 region_where_number_is_valid = region_code
         return _region_display_name(region_where_number_is_valid, lang, script, region)
 
@@ -116,7 +116,7 @@ def _region_display_name(region_code, lang, script=None, region=None):
             other_lang = name[1:]
             name = LOCALE_DATA[region_code].get(other_lang, "")
         return unicod(name)
-    return U_EMPTY_STRING
+    return ""
 
 
 def description_for_valid_number(numobj, lang, script=None, region=None):
@@ -162,7 +162,7 @@ def description_for_valid_number(numobj, lang, script=None, region=None):
     if region is None or region == number_region:
         mobile_token = country_mobile_token(numobj.country_code)
         national_number = national_significant_number(numobj)
-        if mobile_token != U_EMPTY_STRING and national_number.startswith(mobile_token):
+        if mobile_token != "" and national_number.startswith(mobile_token):
             # In some countries, eg. Argentina, mobile numbers have a mobile token
             # before the national destination code, this should be removed before
             # geocoding.

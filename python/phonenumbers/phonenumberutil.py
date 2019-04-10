@@ -30,7 +30,6 @@ import re
 
 from .re_util import fullmatch   # Extra regexp function; see README
 from .util import UnicodeMixin, u, unicod, prnt, to_long
-from .util import U_EMPTY_STRING, U_SPACE, U_DASH, U_TILDE, U_ZERO, U_SEMICOLON
 from .unicode_util import digit as unicode_digit
 
 # Data class definitions
@@ -204,8 +203,8 @@ _VALID_PUNCTUATION = (u("-x\u2010-\u2015\u2212\u30FC\uFF0D-\uFF0F ") +
 _DIGITS = unicod('\\d')  # Java "\\p{Nd}", so need "(?u)" or re.UNICODE wherever this is used
 # We accept alpha characters in phone numbers, ASCII only, upper and lower
 # case.
-_VALID_ALPHA = (U_EMPTY_STRING.join(_ALPHA_MAPPINGS.keys()) +
-                U_EMPTY_STRING.join([_k.lower() for _k in _ALPHA_MAPPINGS.keys()]))
+_VALID_ALPHA = ("".join(_ALPHA_MAPPINGS.keys()) +
+                "".join([_k.lower() for _k in _ALPHA_MAPPINGS.keys()]))
 _PLUS_CHARS = u("+\uFF0B")
 _PLUS_CHARS_PATTERN = re.compile(u("[") + _PLUS_CHARS + u("]+"))
 _SEPARATOR_PATTERN = re.compile(u("[") + _VALID_PUNCTUATION + u("]+"))
@@ -539,7 +538,7 @@ def _extract_possible_number(number):
             number = number[:second_number_match.start()]
         return number
     else:
-        return U_EMPTY_STRING
+        return ""
 
 
 def _is_viable_phone_number(number):
@@ -605,7 +604,7 @@ def normalize_digits_only(number, keep_non_digits=False):
     """
     number = unicod(number)
     number_length = len(number)
-    normalized_digits = U_EMPTY_STRING
+    normalized_digits = ""
     for ii in range(number_length):
         d = unicode_digit(number[ii], -1)
         if d != -1:
@@ -764,7 +763,7 @@ def length_of_national_destination_code(numobj):
         # the mobile token is always formatted separately from the rest of the
         # phone number.
         mobile_token = country_mobile_token(numobj.country_code)
-        if mobile_token != U_EMPTY_STRING:
+        if mobile_token != "":
             return len(number_groups[2]) + len(number_groups[3])
     return len(number_groups[2])
 
@@ -778,7 +777,7 @@ def country_mobile_token(country_code):
     country_code -- the country calling code for which we want the mobile token
     Returns the mobile token, as a string, for the given country calling code.
     """
-    return _MOBILE_TOKEN_MAPPINGS.get(country_code, U_EMPTY_STRING)
+    return _MOBILE_TOKEN_MAPPINGS.get(country_code, "")
 
 
 def _normalize_helper(number, replacements, remove_non_matches):
@@ -804,7 +803,7 @@ def _normalize_helper(number, replacements, remove_non_matches):
         elif not remove_non_matches:
             normalized_number.append(char)
         # If neither of the above are true, we remove this character
-    return U_EMPTY_STRING.join(normalized_number)
+    return "".join(normalized_number)
 
 
 def supported_calling_codes():
@@ -1020,7 +1019,7 @@ def format_by_pattern(numobj, number_format, user_defined_formats):
     # Metadata cannot be None because the country calling code is valid.
     metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_code)
 
-    formatted_number = U_EMPTY_STRING
+    formatted_number = ""
     formatting_pattern = _choose_formatting_pattern_for_number(user_defined_formats, nsn)
     if formatting_pattern is None:
         # If no pattern above is matched, we format the number as a whole.
@@ -1149,10 +1148,10 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
     country_calling_code = numobj.country_code
     if not _has_valid_country_calling_code(country_calling_code):
         if numobj.raw_input is None:
-            return U_EMPTY_STRING
+            return ""
         else:
             return numobj.raw_input
-    formatted_number = U_EMPTY_STRING
+    formatted_number = ""
     # Clear the extension, as that part cannot normally be dialed together with the main number.
     numobj_no_ext = PhoneNumber()
     numobj_no_ext.merge_from(numobj)
@@ -1181,7 +1180,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                 # carrier code when called within Brazil. Without that, most of
                 # the carriers won't connect the call.  Because of that, we return
                 # an empty string here.
-                formatted_number = U_EMPTY_STRING
+                formatted_number = ""
         elif is_valid_number and region_code == "HU":
             # The national format for HU numbers doesn't contain the national
             # prefix, because that is how numbers are normally written
@@ -1189,7 +1188,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             # from a mobile phone, except for short numbers. As a result, we
             # add it back here if it is a valid regular length phone number.
             formatted_number = (ndd_prefix_for_region(region_code, True) +  # strip non-digits
-                                U_SPACE + format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL))
+                                " " + format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL))
         elif country_calling_code == _NANPA_COUNTRY_CODE:
             # For NANPA countries, we output international format for numbers
             # that can be dialed internationally, since that always works,
@@ -1282,7 +1281,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
         if is_nanpa_country(region_calling_from):
             # For NANPA regions, return the national format for these regions
             # but prefix it with the country calling code.
-            return (unicod(country_code) + U_SPACE +
+            return (unicod(country_code) + " " +
                     format_number(numobj, PhoneNumberFormat.NATIONAL))
     elif country_code == country_code_for_valid_region(region_calling_from):
         # If regions share a country calling code, the country calling code
@@ -1303,7 +1302,7 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
     # For regions that have multiple international prefixes, the international
     # format of the number is returned, unless there is a preferred
     # international prefix.
-    i18n_prefix_for_formatting = U_EMPTY_STRING
+    i18n_prefix_for_formatting = ""
     i18n_match = fullmatch(_SINGLE_INTERNATIONAL_PREFIX, international_prefix)
     if i18n_match:
         i18n_prefix_for_formatting = international_prefix
@@ -1321,8 +1320,8 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
                                                          PhoneNumberFormat.INTERNATIONAL,
                                                          formatted_national_number)
     if len(i18n_prefix_for_formatting) > 0:
-        formatted_number = (i18n_prefix_for_formatting + U_SPACE +
-                            unicod(country_code) + U_SPACE + formatted_number)
+        formatted_number = (i18n_prefix_for_formatting + " " +
+                            unicod(country_code) + " " + formatted_number)
     else:
         formatted_number = _prefix_number_with_country_calling_code(country_code,
                                                                     PhoneNumberFormat.INTERNATIONAL,
@@ -1512,7 +1511,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
     metadata_for_region_calling_from = PhoneMetadata.metadata_for_region(region_calling_from.upper(), None)
     if country_code == _NANPA_COUNTRY_CODE:
         if is_nanpa_country(region_calling_from):
-            return unicod(country_code) + U_SPACE + num_raw_input
+            return unicod(country_code) + " " + num_raw_input
     elif (metadata_for_region_calling_from is not None and
           country_code == country_code_for_region(region_calling_from)):
         formatting_pattern = _choose_formatting_pattern_for_number(metadata_for_region_calling_from.number_format,
@@ -1536,7 +1535,7 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
         return _format_nsn_using_pattern(num_raw_input,
                                          new_format,
                                          PhoneNumberFormat.NATIONAL)
-    i18n_prefix_for_formatting = U_EMPTY_STRING
+    i18n_prefix_for_formatting = ""
     # If an unsupported region-calling-from is entered, or a country with
     # multiple international prefixes, the international format of the number
     # is returned, unless there is a preferred international prefix.
@@ -1556,8 +1555,8 @@ def format_out_of_country_keeping_alpha_chars(numobj, region_calling_from):
                                                          PhoneNumberFormat.INTERNATIONAL,
                                                          num_raw_input)
     if i18n_prefix_for_formatting:
-        formatted_number = (i18n_prefix_for_formatting + U_SPACE +
-                            unicod(country_code) + U_SPACE + formatted_number)
+        formatted_number = (i18n_prefix_for_formatting + " " +
+                            unicod(country_code) + " " + formatted_number)
     else:
         # Invalid region entered as country-calling-from (so no metadata was
         # found for it) or the region chosen has multiple international
@@ -1583,13 +1582,13 @@ def national_significant_number(numobj):
     """
     # If leading zero(s) have been set, we prefix this now. Note this is not a
     # national prefix.
-    national_number = U_EMPTY_STRING
+    national_number = ""
     if numobj.italian_leading_zero:
         num_zeros = numobj.number_of_leading_zeros
         if num_zeros is None:
             num_zeros = 1
         if num_zeros > 0:
-            national_number = U_ZERO * num_zeros
+            national_number = "0" * num_zeros
     national_number += str(numobj.national_number)
     return national_number
 
@@ -1599,9 +1598,9 @@ def _prefix_number_with_country_calling_code(country_code, num_format, formatted
     if num_format == PhoneNumberFormat.E164:
         return _PLUS_SIGN + unicod(country_code) + formatted_number
     elif num_format == PhoneNumberFormat.INTERNATIONAL:
-        return _PLUS_SIGN + unicod(country_code) + U_SPACE + formatted_number
+        return _PLUS_SIGN + unicod(country_code) + " " + formatted_number
     elif num_format == PhoneNumberFormat.RFC3966:
-        return _RFC3966_PREFIX + _PLUS_SIGN + unicod(country_code) + U_DASH + formatted_number
+        return _RFC3966_PREFIX + _PLUS_SIGN + unicod(country_code) + "-" + formatted_number
     else:
         return formatted_number
 
@@ -1651,7 +1650,7 @@ def _format_nsn_using_pattern(national_number, formatting_pattern, number_format
     # carrier code replacement will take place.
     number_format_rule = formatting_pattern.format
     m_re = re.compile(formatting_pattern.pattern)
-    formatted_national_number = U_EMPTY_STRING
+    formatted_national_number = ""
 
     if (number_format == PhoneNumberFormat.NATIONAL and carrier_code and
         formatting_pattern.domestic_carrier_code_formatting_rule):
@@ -1685,9 +1684,9 @@ def _format_nsn_using_pattern(national_number, formatting_pattern, number_format
         # Strip any leading punctuation.
         m = _SEPARATOR_PATTERN.match(formatted_national_number)
         if m:
-            formatted_national_number = re.sub(_SEPARATOR_PATTERN, U_EMPTY_STRING, formatted_national_number, count=1)
+            formatted_national_number = re.sub(_SEPARATOR_PATTERN, "", formatted_national_number, count=1)
         # Replace the rest with a dash between each number group
-        formatted_national_number = re.sub(_SEPARATOR_PATTERN, U_DASH, formatted_national_number)
+        formatted_national_number = re.sub(_SEPARATOR_PATTERN, "-", formatted_national_number)
 
     return formatted_national_number
 
@@ -2161,7 +2160,7 @@ def ndd_prefix_for_region(region_code, strip_non_digits):
     if strip_non_digits:
         # Note: if any other non-numeric symbols are ever used in national
         # prefixes, these would have to be removed here as well.
-        national_prefix = re.sub(U_TILDE, U_EMPTY_STRING, national_prefix)
+        national_prefix = re.sub("~", "", national_prefix)
     return national_prefix
 
 
@@ -2437,7 +2436,7 @@ def _extract_country_code(number):
     number) if number doesn't start with a valid country calling code.
     """
 
-    if len(number) == 0 or number[0] == U_ZERO:
+    if len(number) == 0 or number[0] == "0":
         # Country codes do not begin with a '0'.
         return (0, number)
     for ii in range(1, min(len(number), _MAX_LENGTH_COUNTRY_CODE) + 1):
@@ -2493,7 +2492,7 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
         was extracted, this will be empty.
     """
     if len(number) == 0:
-        return (0, U_EMPTY_STRING)
+        return (0, "")
     full_number = number
     # Set the default prefix to be something that will never match.
     possible_country_idd_prefix = unicod("NonMatch")
@@ -2546,7 +2545,7 @@ def _maybe_extract_country_code(number, metadata, keep_raw_input, numobj):
 
     # No country calling code present.
     numobj.country_code = 0
-    return (0, U_EMPTY_STRING)
+    return (0, "")
 
 
 def _parse_prefix_as_idd(idd_pattern, number):
@@ -2566,7 +2565,7 @@ def _parse_prefix_as_idd(idd_pattern, number):
         digit_match = _CAPTURING_DIGIT_PATTERN.search(number[match_end:])
         if digit_match:
             normalized_group = normalize_digits_only(digit_match.group(1))
-            if normalized_group == U_ZERO:
+            if normalized_group == "0":
                 return (False, number)
         return (True, number[match_end:])
     return (False, number)
@@ -2625,13 +2624,13 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
      - The number with the prefix stripped.
      - Boolean indicating if a national prefix or carrier code (or both) could be extracted.
      """
-    carrier_code = U_EMPTY_STRING
+    carrier_code = ""
     possible_national_prefix = metadata.national_prefix_for_parsing
     if (len(number) == 0 or
         possible_national_prefix is None or
         len(possible_national_prefix) == 0):
         # Early return for numbers of zero length.
-        return (U_EMPTY_STRING, number, False)
+        return ("", number, False)
 
     # Attempt to parse the first digits as a national prefix.
     prefix_pattern = re.compile(possible_national_prefix)
@@ -2652,7 +2651,7 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
             # Check that the resultant number is viable. If not, return.
             national_number_match = _match_national_number(number[prefix_match.end():], general_desc, False)
             if (is_viable_original_number and not national_number_match):
-                return (U_EMPTY_STRING, number, False)
+                return ("", number, False)
 
             if (num_groups > 0 and
                 prefix_match.groups(num_groups) is not None):
@@ -2720,13 +2719,13 @@ def _check_region_for_parsing(number, default_region):
 def _set_italian_leading_zeros_for_phone_number(national_number, numobj):
     """A helper function to set the values related to leading zeros in a
     PhoneNumber."""
-    if len(national_number) > 1 and national_number[0] == U_ZERO:
+    if len(national_number) > 1 and national_number[0] == "0":
         numobj.italian_leading_zero = True
         number_of_leading_zeros = 1
         # Note that if the number is all "0"s, the last "0" is not counted as
         # a leading zero.
         while (number_of_leading_zeros < len(national_number) - 1 and
-               national_number[number_of_leading_zeros] == U_ZERO):
+               national_number[number_of_leading_zeros] == "0"):
             number_of_leading_zeros += 1
         if number_of_leading_zeros != 1:
             numobj.number_of_leading_zeros = number_of_leading_zeros
@@ -2906,13 +2905,13 @@ def _build_national_number_for_parsing(number):
             # Additional parameters might follow the phone context. If so, we
             # will remove them here because the parameters after phone context
             # are not important for parsing the phone number.
-            phone_context_end = number.find(U_SEMICOLON, phone_context_start)
+            phone_context_end = number.find(";", phone_context_start)
             if phone_context_end > 0:
                 national_number = number[phone_context_start:phone_context_end]
             else:
                 national_number = number[phone_context_start:]
         else:
-            national_number = U_EMPTY_STRING
+            national_number = ""
         # Now append everything between the "tel:" prefix and the
         # phone-context. This should include the national number, an optional
         # extension or isdn-subaddress component. Note we also handle the case

@@ -100,20 +100,6 @@ else:  # pragma no cover
         def __str__(self):
             return unicode(self).encode('utf-8')
 
-# Constants for Unicode strings
-U_EMPTY_STRING = unicod("")
-U_SPACE = unicod(" ")
-U_DASH = unicod("-")
-U_TILDE = unicod("~")
-U_PLUS = unicod("+")
-U_STAR = unicod("*")
-U_ZERO = unicod("0")
-U_SLASH = unicod("/")
-U_SEMICOLON = unicod(";")
-U_X_LOWER = unicod("x")
-U_X_UPPER = unicod("X")
-U_PERCENT = unicod("%")
-
 
 def rpr(s):
     """Create a representation of a Unicode string that can be used in both
