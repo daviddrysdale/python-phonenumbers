@@ -1,7 +1,0 @@
-.coverage
-*.pyc
-dist
-deb_dist
-MANIFEST
-phonenumbers.egg-info
-build
