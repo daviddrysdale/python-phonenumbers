@@ -71,7 +71,7 @@ True
 '...'
 """
 import bisect
-import unicodedata  # Python 2.5 onward
+import unicodedata
 
 from .util import UnicodeMixin, unicod, u
 
