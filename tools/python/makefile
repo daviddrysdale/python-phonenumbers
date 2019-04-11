@@ -133,7 +133,7 @@ metaclean:
 distclean: clean metaclean
 	rm -rf $(PYDIR)/$(PACKAGE).egg-info
 	rm -rf $(PYDIR)/build
-	rm -f $(PYDIR)/DumpLocale.class
+	rm -f DumpLocale.class
 
 # Create Debian package.  Requires py2dsc, included in the python-stdeb package.
 DEB_PACKAGE=python-$(PACKAGE)
