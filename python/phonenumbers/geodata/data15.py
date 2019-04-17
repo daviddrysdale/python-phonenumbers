@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '86136799':{'en': 'Ili, Xinjiang', 'zh': u('\u65b0\u7586\u4f0a\u7281\u54c8\u8428\u514b\u81ea\u6cbb\u5dde')},
  '861367996':{'en': 'Bortala, Xinjiang', 'zh': u('\u65b0\u7586\u535a\u5c14\u5854\u62c9\u8499\u53e4\u81ea\u6cbb\u5dde')},
  '861367997':{'en': 'Bortala, Xinjiang', 'zh': u('\u65b0\u7586\u535a\u5c14\u5854\u62c9\u8499\u53e4\u81ea\u6cbb\u5dde')},
  '861367998':{'en': 'Tacheng, Xinjiang', 'zh': u('\u65b0\u7586\u5854\u57ce\u5730\u533a')},
@@ -10018,5 +10019,4 @@ data = {
  '861450278':{'en': 'Bayannur, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5df4\u5f66\u6dd6\u5c14\u5e02')},
  '861450279':{'en': 'Xilin, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9521\u6797\u90ed\u52d2\u76df')},
  '86145028':{'en': 'Hohhot, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u547c\u548c\u6d69\u7279\u5e02')},
- '861450280':{'en': 'Ordos, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9102\u5c14\u591a\u65af\u5e02')},
 }

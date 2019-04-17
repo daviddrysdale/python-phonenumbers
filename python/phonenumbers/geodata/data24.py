@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861887295':{'en': 'Jingzhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u8346\u5dde\u5e02')},
  '861887296':{'en': 'Jingzhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u8346\u5dde\u5e02')},
  '861887297':{'en': 'Jingzhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u8346\u5dde\u5e02')},
  '861887298':{'en': 'Suizhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u968f\u5dde\u5e02')},
@@ -5646,6 +5647,7 @@ data = {
  '88680':{'en': 'Pingtung', 'zh': u('\u5c4f\u4e1c'), 'zh_Hant': u('\u5c4f\u6771')},
  '886823':{'en': 'Kinmen', 'zh': u('\u91d1\u95e8'), 'zh_Hant': u('\u91d1\u9580')},
  '886826':{'en': 'Wuqiu', 'zh': u('\u4e4c\u4e18'), 'zh_Hant': u('\u70cf\u5775')},
+ '88683':{'en': 'Matsu', 'zh': u('\u9a6c\u7956'), 'zh_Hant': u('\u99ac\u7956')},
  '88687':{'en': 'Pingtung', 'zh': u('\u5c4f\u4e1c'), 'zh_Hant': u('\u5c4f\u6771')},
  '88688':{'en': 'Pingtung', 'zh': u('\u5c4f\u4e1c'), 'zh_Hant': u('\u5c4f\u6771')},
  '88689':{'en': 'Taitung', 'zh': u('\u53f0\u4e1c'), 'zh_Hant': u('\u81fa\u6771')},
