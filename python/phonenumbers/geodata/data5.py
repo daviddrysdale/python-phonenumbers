@@ -3610,7 +3610,7 @@ data = {
  '5343':{'en': 'Cienfuegos Province'},
  '5345':{'en': 'Matanzas Province'},
  '5346':{'en': 'Isle of Youth'},
- '5347':{'en': 'Havana Province'},
+ '5347':{'en': 'Mayabeque and Artemisa'},
  '5348':{'en': u('Pinar del R\u00edo Province')},
  '537':{'en': 'Havana City'},
  '541':{'en': 'Buenos Aires', 'es': 'Buenos Aires'},
