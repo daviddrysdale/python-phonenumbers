@@ -137,6 +137,14 @@ Release Procedure
  - Push the tag to Github with:
      `git push <github-remote> vX.Y.Z`
  - Push the lite package to PyPI with:
-     `cd python && rm -rf build && ./setup.py lite sdist bdist_wheel upload`
+     ```
+     cd python && rm -rf build dist && ./setup.py lite sdist bdist_wheel
+     twine check dist/*
+     twine upload dist/*
+     ```
  - Push the package to PyPI with:
-     `cd python && rm -rf build && ./setup.py sdist bdist_wheel upload`
+     ```
+     cd python && rm -rf build dist && ./setup.py sdist bdist_wheel
+     twine check dist/*
+     twine upload dist/*
+     ```
