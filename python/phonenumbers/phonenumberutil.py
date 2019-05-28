@@ -993,7 +993,7 @@ def format_number(numobj, num_format):
 
 
 def format_by_pattern(numobj, number_format, user_defined_formats):
-    """Formats a phone number using client-defined formatting rules."
+    """Formats a phone number using client-defined formatting rules.
 
     Note that if the phone number has a country calling code of zero or an
     otherwise invalid country calling code, we cannot work out things like
@@ -1003,8 +1003,10 @@ def format_by_pattern(numobj, number_format, user_defined_formats):
 
     Arguments:
     numobj -- The phone number to be formatted
-    num_format -- The format the phone number should be formatted into
-    user_defined_formats -- formatting rules specified by clients
+    number_format -- The format the phone number should be formatted into,
+              as a PhoneNumberFormat value.
+    user_defined_formats -- formatting rules specified by clients, as a list
+              of NumberFormat objects.
 
     Returns the formatted phone number.
     """
