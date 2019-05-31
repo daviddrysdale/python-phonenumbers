@@ -792,6 +792,7 @@ data = {
  '22567':{'en': 'Orange'},
  '22568':{'en': 'Orange'},
  '22569':{'en': 'Aircom'},
+ '22570':{'en': 'Moov'},
  '22571':{'en': 'Moov'},
  '22572':{'en': 'Moov'},
  '22573':{'en': 'Moov'},
@@ -10018,5 +10019,4 @@ data = {
  '554998404':{'en': 'Brasil Telecom GSM'},
  '554998405':{'en': 'Brasil Telecom GSM'},
  '554998406':{'en': 'Brasil Telecom GSM'},
- '554998407':{'en': 'Brasil Telecom GSM'},
 }
