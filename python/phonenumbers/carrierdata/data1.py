@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '554998404':{'en': 'Brasil Telecom GSM'},
+ '554998405':{'en': 'Brasil Telecom GSM'},
+ '554998406':{'en': 'Brasil Telecom GSM'},
  '554998407':{'en': 'Brasil Telecom GSM'},
  '554998408':{'en': 'Brasil Telecom GSM'},
  '554998409':{'en': 'Brasil Telecom GSM'},
@@ -5668,6 +5671,7 @@ data = {
  '63908':{'en': 'Smart'},
  '63909':{'en': 'Smart'},
  '63910':{'en': 'Smart'},
+ '63911':{'en': 'Smart'},
  '63912':{'en': 'Smart'},
  '63914':{'en': 'Globe'},
  '63915':{'en': 'Globe'},
@@ -6255,6 +6259,7 @@ data = {
  '7701':{'en': 'Kcell/Activ', 'ru': 'Kcell/Activ'},
  '7702':{'en': 'Kcell/Activ', 'ru': 'Kcell/Activ'},
  '7705':{'en': 'Beeline', 'ru': u('\u0411\u0438\u043b\u0430\u0439\u043d')},
+ '7706':{'en': 'Beeline', 'ru': u('\u0411\u0438\u043b\u0430\u0439\u043d')},
  '7707':{'en': 'Tele2', 'ru': 'Tele2'},
  '7708':{'en': 'Altel', 'ru': u('\u0410\u041b\u0422\u0415\u041b')},
  '774':{'en': 'Tele2', 'ru': 'Tele2'},
@@ -10014,9 +10019,4 @@ data = {
  '9183278':{'en': 'Vodafone'},
  '918328':{'en': 'Reliance Jio'},
  '9183287':{'en': 'Vodafone'},
- '918329':{'en': 'Reliance Jio'},
- '91833':{'en': 'Vodafone'},
- '918330':{'en': 'BSNL MOBILE'},
- '918331':{'en': 'BSNL MOBILE'},
- '918332':{'en': 'BSNL MOBILE'},
 }

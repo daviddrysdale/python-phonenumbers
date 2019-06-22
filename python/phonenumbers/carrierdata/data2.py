@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '918329':{'en': 'Reliance Jio'},
+ '91833':{'en': 'Vodafone'},
+ '918330':{'en': 'BSNL MOBILE'},
+ '918331':{'en': 'BSNL MOBILE'},
+ '918332':{'en': 'BSNL MOBILE'},
  '918333':{'en': 'BSNL MOBILE'},
  '918340':{'en': 'Reliance Jio'},
  '9183400':{'en': 'Idea'},
@@ -1579,6 +1584,7 @@ data = {
  '97689':{'en': 'Unitel'},
  '97690':{'en': 'Skytel'},
  '97691':{'en': 'Skytel'},
+ '97692':{'en': 'Skytel'},
  '97693':{'en': 'G-Mobile'},
  '97694':{'en': 'Mobicom'},
  '97695':{'en': 'Mobicom'},

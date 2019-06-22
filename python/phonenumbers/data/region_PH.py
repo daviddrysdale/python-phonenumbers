@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_PH = PhoneMetadata(id='PH', country_code=63, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:1800|8)\\d{7,9}|2\\d{5}(?:\\d{2})?|(?:[3-7]|9\\d)\\d{8}', possible_length=(6, 8, 9, 10, 11, 12, 13), possible_length_local_only=(4, 5, 7)),
     fixed_line=PhoneNumberDesc(national_number_pattern='2\\d{5}(?:\\d{2})?|88(?:22\\d\\d|42)\\d{4}|88\\d{7}|(?:3[2-68]|4[2-9]|5[2-6]|6[2-58]|7[24578]|8[2-7])\\d{7}', example_number='21234567', possible_length=(6, 8, 9, 10), possible_length_local_only=(4, 5, 7)),
-    mobile=PhoneNumberDesc(national_number_pattern='(?:81[37]|9(?:0[5-9]|1[024-9]|2[0-35-9]|[35]\\d|4[235-9]|6[0-25-8]|7[1-9]|8[19]|9[4-9]))\\d{7}', example_number='9051234567', possible_length=(10,)),
+    mobile=PhoneNumberDesc(national_number_pattern='(?:81[37]|9(?:0[5-9]|1[0-24-9]|2[0-35-9]|[35]\\d|4[235-9]|6[0-25-8]|7[1-9]|8[19]|9[4-9]))\\d{7}', example_number='9051234567', possible_length=(10,)),
     toll_free=PhoneNumberDesc(national_number_pattern='1800\\d{7,9}', example_number='180012345678', possible_length=(11, 12, 13)),
     national_prefix='0',
     national_prefix_for_parsing='0',
