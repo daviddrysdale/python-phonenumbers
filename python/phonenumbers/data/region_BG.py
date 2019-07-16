@@ -7,7 +7,7 @@ PHONE_METADATA_BG = PhoneMetadata(id='BG', country_code=359, international_prefi
     mobile=PhoneNumberDesc(national_number_pattern='43[07-9]\\d{5}|(?:48|8[7-9]\\d|9(?:8\\d|9[69]))\\d{6}', example_number='48123456', possible_length=(8, 9)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{5}', example_number='80012345', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='90\\d{6}', example_number='90123456', possible_length=(8,)),
-    personal_number=PhoneNumberDesc(national_number_pattern='700\\d{5}', example_number='70012345', possible_length=(8,)),
+    shared_cost=PhoneNumberDesc(national_number_pattern='700\\d{5}', example_number='70012345', possible_length=(8,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{6})', format='\\1', leading_digits_pattern=['1']),

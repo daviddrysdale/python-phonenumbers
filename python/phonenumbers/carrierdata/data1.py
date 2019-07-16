@@ -19,16 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '554998404':{'en': 'Brasil Telecom GSM'},
- '554998405':{'en': 'Brasil Telecom GSM'},
- '554998406':{'en': 'Brasil Telecom GSM'},
- '554998407':{'en': 'Brasil Telecom GSM'},
- '554998408':{'en': 'Brasil Telecom GSM'},
- '554998409':{'en': 'Brasil Telecom GSM'},
- '554998411':{'en': 'Brasil Telecom GSM'},
- '554998412':{'en': 'Brasil Telecom GSM'},
- '554998413':{'en': 'Brasil Telecom GSM'},
- '554998414':{'en': 'Brasil Telecom GSM'},
  '554998415':{'en': 'Brasil Telecom GSM'},
  '554998416':{'en': 'Brasil Telecom GSM'},
  '554998417':{'en': 'Brasil Telecom GSM'},
@@ -10019,4 +10009,14 @@ data = {
  '9183278':{'en': 'Vodafone'},
  '918328':{'en': 'Reliance Jio'},
  '9183287':{'en': 'Vodafone'},
+ '918329':{'en': 'Reliance Jio'},
+ '91833':{'en': 'Vodafone'},
+ '918330':{'en': 'BSNL MOBILE'},
+ '918331':{'en': 'BSNL MOBILE'},
+ '918332':{'en': 'BSNL MOBILE'},
+ '918333':{'en': 'BSNL MOBILE'},
+ '918340':{'en': 'Reliance Jio'},
+ '9183400':{'en': 'Idea'},
+ '9183408':{'en': 'Idea'},
+ '9183409':{'en': 'Idea'},
 }

@@ -19,16 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '918329':{'en': 'Reliance Jio'},
- '91833':{'en': 'Vodafone'},
- '918330':{'en': 'BSNL MOBILE'},
- '918331':{'en': 'BSNL MOBILE'},
- '918332':{'en': 'BSNL MOBILE'},
- '918333':{'en': 'BSNL MOBILE'},
- '918340':{'en': 'Reliance Jio'},
- '9183400':{'en': 'Idea'},
- '9183408':{'en': 'Idea'},
- '9183409':{'en': 'Idea'},
  '918341':{'en': 'Telewings'},
  '918342':{'en': 'Vodafone'},
  '918343':{'en': 'Idea'},
@@ -1408,6 +1398,7 @@ data = {
  '95947':{'en': 'MPT'},
  '95949':{'en': 'MPT'},
  '9595':{'en': 'MPT'},
+ '95967':{'en': 'Mytel'},
  '95968':{'en': 'Mytel'},
  '95969':{'en': 'MNTC'},
  '95973':{'en': 'MPT'},

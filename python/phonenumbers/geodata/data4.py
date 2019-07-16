@@ -19,8 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '3349319':{'en': 'Saint-Laurent-du-Var', 'fr': 'Saint-Laurent-du-Var'},
- '3349320':{'en': 'Cagnes-sur-Mer', 'fr': 'Cagnes-sur-Mer'},
  '3349321':{'en': 'Nice', 'fr': 'Nice'},
  '3349322':{'en': 'Cagnes-sur-Mer', 'fr': 'Cagnes-sur-Mer'},
  '3349323':{'en': 'Isola', 'fr': 'Isola'},
@@ -4024,6 +4022,7 @@ data = {
  '37410':{'am': u('\u0535\u0580\u0587\u0561\u0576/\u054b\u0580\u057e\u0565\u056a'), 'en': 'Yerevan/Jrvezh', 'hy': u('\u0535\u0580\u0587\u0561\u0576/\u054b\u0580\u057e\u0565\u056a'), 'ru': u('\u0415\u0440\u0435\u0432\u0430\u043d/\u0414\u0436\u0440\u0432\u0435\u0436')},
  '37411':{'am': u('\u0535\u0580\u0587\u0561\u0576'), 'en': 'Yerevan', 'hy': u('\u0535\u0580\u0587\u0561\u0576'), 'ru': u('\u0415\u0440\u0435\u0432\u0430\u043d')},
  '37412':{'en': 'Yerevan', 'hy': u('\u0535\u0580\u0587\u0561\u0576'), 'ru': u('\u0415\u0440\u0435\u0432\u0430\u043d')},
+ '37415':{'en': 'Yerevan', 'hy': u('\u0535\u0580\u0587\u0561\u0576'), 'ru': u('\u0415\u0440\u0435\u0432\u0430\u043d')},
  '374222':{'am': u('\u0531\u0562\u0578\u057e\u0575\u0561\u0576/\u0531\u056f\u0578\u0582\u0576\u0584/\u0532\u0575\u0578\u0582\u0580\u0565\u0572\u0561\u057e\u0561\u0576/\u0546\u0578\u0580 \u0533\u0575\u0578\u0582\u0572/\u054e\u0565\u0580\u056b\u0576 \u054a\u057f\u0572\u0576\u056b')},
  '3742220':{'en': 'Abovyan/Akunk/Byureghavan/Nor Gyugh/Verin Ptghni, Kotayk', 'hy': u('\u0531\u0562\u0578\u057e\u0575\u0561\u0576/\u0531\u056f\u0578\u0582\u0576\u0584/\u0532\u0575\u0578\u0582\u0580\u0565\u0572\u0561\u057e\u0561\u0576/\u0546\u0578\u0580 \u0533\u0575\u0578\u0582\u0572/\u054e\u0565\u0580\u056b\u0576 \u054a\u057f\u0572\u0576\u056b, \u053f\u0578\u057f\u0561\u0575\u0584'), 'ru': u('\u0410\u0431\u043e\u0432\u044f\u043d/\u0410\u043a\u0443\u043d\u043a/\u0411\u044e\u0440\u0435\u0433\u0430\u0432\u0430\u043d/\u041d\u043e\u0440 \u0413\u044e\u0445/\u0412\u0435\u0440\u0438\u043d \u041f\u0442\u0445\u043d\u0438, \u041a\u043e\u0442\u0430\u0439\u043a')},
  '3742221':{'en': 'Abovyan/Akunk/Byureghavan/Nor Gyugh/Verin Ptghni, Kotayk', 'hy': u('\u0531\u0562\u0578\u057e\u0575\u0561\u0576/\u0531\u056f\u0578\u0582\u0576\u0584/\u0532\u0575\u0578\u0582\u0580\u0565\u0572\u0561\u057e\u0561\u0576/\u0546\u0578\u0580 \u0533\u0575\u0578\u0582\u0572/\u054e\u0565\u0580\u056b\u0576 \u054a\u057f\u0572\u0576\u056b, \u053f\u0578\u057f\u0561\u0575\u0584'), 'ru': u('\u0410\u0431\u043e\u0432\u044f\u043d/\u0410\u043a\u0443\u043d\u043a/\u0411\u044e\u0440\u0435\u0433\u0430\u0432\u0430\u043d/\u041d\u043e\u0440 \u0413\u044e\u0445/\u0412\u0435\u0440\u0438\u043d \u041f\u0442\u0445\u043d\u0438, \u041a\u043e\u0442\u0430\u0439\u043a')},
@@ -10019,4 +10018,5 @@ data = {
  '494247':{'de': 'Affinghausen', 'en': 'Affinghausen'},
  '494248':{'de': 'Bassum-Neubruchhausen', 'en': 'Bassum-Neubruchhausen'},
  '494249':{'de': 'Bassum-Nordwohlde', 'en': 'Bassum-Nordwohlde'},
+ '494251':{'de': 'Hoya', 'en': 'Hoya'},
 }
