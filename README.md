@@ -3,13 +3,13 @@ phonenumbers Python Library
 
 [![Coverage Status](https://coveralls.io/repos/daviddrysdale/python-phonenumbers/badge.svg?branch=dev&service=github)](https://coveralls.io/github/daviddrysdale/python-phonenumbers?branch=dev)
 
-This is a Python port of [Google's libphonenumber library](https://github.com/googlei18n/libphonenumber)
+This is a Python port of [Google's libphonenumber library](https://github.com/google/libphonenumber)
 It supports Python 2.5-2.7 and Python 3.x (in the same codebase, with no
 [2to3](http://docs.python.org/2/library/2to3.html) conversion needed).
 
 Original Java code is Copyright (C) 2009-2015 The Libphonenumber Authors.
 
-Release [HISTORY](python/HISTORY.md), derived from [upstream release notes](https://github.com/googlei18n/libphonenumber/blob/master/release_notes.txt).
+Release [HISTORY](python/HISTORY.md), derived from [upstream release notes](https://github.com/google/libphonenumber/blob/master/release_notes.txt).
 
 
 Installation
@@ -176,7 +176,7 @@ belongs to.
 ```
 
 For more information about the other functionality available from the library, look in the unit tests or in the original
-[libphonenumber project](https://github.com/googlei18n/libphonenumber).
+[libphonenumber project](https://github.com/google/libphonenumber).
 
 Memory Usage
 ------------
@@ -211,7 +211,7 @@ Project Layout
 * The `python/` directory holds the Python code.
 * The `resources/` directory is a copy of the `resources/`
   directory from
-  [libphonenumber](https://github.com/googlei18n/libphonenumber/tree/master/resources).
+  [libphonenumber](https://github.com/google/libphonenumber/tree/master/resources).
   This is not needed to run the Python code, but is needed when upstream
   changes to the master metadata need to be incorporated.
 * The `tools/` directory holds the tools that are used to process upstream

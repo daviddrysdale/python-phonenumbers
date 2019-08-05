@@ -1,7 +1,7 @@
 phonenumbers Python Library
 ===========================
 
-This is a Python port of [libphonenumber](https://github.com/googlei18n/libphonenumber).
+This is a Python port of [libphonenumber](https://github.com/google/libphonenumber).
 
 Original Java code is Copyright (C) 2009-2016 The Libphonenumber Authors
 
@@ -117,7 +117,7 @@ Release Procedure
 
  - Ensure that `python/HISTORY.md` file is up-to-date, and includes
    descriptions of changes in this version (adapted from the
-   upstream [release notes](https://github.com/googlei18n/libphonenumber/blob/master/java/release_notes.txt),
+   upstream [release notes](https://github.com/google/libphonenumber/blob/master/java/release_notes.txt),
    skipping the metadata changes chunks).
  - Set the `__version__` field in `python/phonenumbers/__init__.py`
  - Check that the list of symbols in `python/phonenumbers/__init__.py` `__all__` is
