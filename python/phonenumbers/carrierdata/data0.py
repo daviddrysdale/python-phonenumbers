@@ -422,6 +422,7 @@ data = {
  '180997':{'en': 'Orange'},
  '180998':{'en': 'Orange'},
  '180999':{'en': 'Tricom'},
+ '186824':{'en': 'Digicel'},
  '186826':{'en': 'bmobile'},
  '186827':{'en': 'bmobile'},
  '186828':{'en': 'bmobile'},
@@ -837,6 +838,7 @@ data = {
  '22678':{'en': 'Telecel Faso'},
  '22679':{'en': 'Telecel Faso'},
  '22780':{'en': 'Orange'},
+ '22781':{'en': 'Orange'},
  '22788':{'en': 'Airtel'},
  '22789':{'en': 'Airtel'},
  '22790':{'en': 'Orange'},
@@ -10017,6 +10019,4 @@ data = {
  '554998409':{'en': 'Brasil Telecom GSM'},
  '554998411':{'en': 'Brasil Telecom GSM'},
  '554998412':{'en': 'Brasil Telecom GSM'},
- '554998413':{'en': 'Brasil Telecom GSM'},
- '554998414':{'en': 'Brasil Telecom GSM'},
 }
