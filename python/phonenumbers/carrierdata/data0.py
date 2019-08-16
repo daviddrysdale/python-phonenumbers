@@ -2356,6 +2356,7 @@ data = {
  '373787':{'en': 'Moldcell'},
  '373788':{'en': 'Moldcell'},
  '37379':{'en': 'Moldcell'},
+ '37433':{'en': 'Beeline', 'ru': u('\u0411\u0438\u043b\u0430\u0439\u043d')},
  '37441':{'en': 'Ucom', 'ru': u('\u042e\u043a\u043e\u043c')},
  '37443':{'en': 'Beeline', 'ru': u('\u0411\u0438\u043b\u0430\u0439\u043d')},
  '37444':{'en': 'Ucom', 'ru': u('\u042e\u043a\u043e\u043c')},
@@ -10018,5 +10019,4 @@ data = {
  '554998408':{'en': 'Brasil Telecom GSM'},
  '554998409':{'en': 'Brasil Telecom GSM'},
  '554998411':{'en': 'Brasil Telecom GSM'},
- '554998412':{'en': 'Brasil Telecom GSM'},
 }

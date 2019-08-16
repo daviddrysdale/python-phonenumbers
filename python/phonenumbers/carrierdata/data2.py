@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '9183278':{'en': 'Vodafone'},
+ '918328':{'en': 'Reliance Jio'},
  '9183287':{'en': 'Vodafone'},
  '918329':{'en': 'Reliance Jio'},
  '91833':{'en': 'Vodafone'},
@@ -1424,6 +1426,9 @@ data = {
  '95985':{'en': 'MPT'},
  '95986':{'en': 'MPT'},
  '95987':{'en': 'MPT'},
+ '959887':{'en': 'MPT'},
+ '959888':{'en': 'MPT'},
+ '959889':{'en': 'MPT'},
  '95989':{'en': 'MPT'},
  '95991':{'en': 'MPT'},
  '95995':{'en': 'Ooredoo'},
