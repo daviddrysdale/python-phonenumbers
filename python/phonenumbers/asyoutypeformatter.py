@@ -33,7 +33,7 @@ from .phonemetadata import PhoneMetadata
 from .phonenumberutil import _VALID_PUNCTUATION, REGION_CODE_FOR_NON_GEO_ENTITY
 from .phonenumberutil import _PLUS_SIGN, _PLUS_CHARS_PATTERN
 from .phonenumberutil import _extract_country_code, region_code_for_country_code
-from .phonenumberutil import country_code_for_region
+from .phonenumberutil import country_code_for_region, normalize_diallable_chars_only
 from .phonenumberutil import _formatting_rule_has_first_group_only
 
 # Character used when appropriate to separate a prefix, such as a long NDD or
@@ -394,7 +394,18 @@ class AsYouTypeFormatter(object):
                 else:
                     self._should_add_space_after_national_prefix = bool(_NATIONAL_PREFIX_SEPARATORS_PATTERN.search(number_format.national_prefix_formatting_rule))
                 formatted_number = re.sub(num_re, number_format.format, self._national_number)
-                return self._append_national_number(formatted_number)
+                # Check that we did not remove nor add any extra digits when we matched
+                # this formatting pattern. This usually happens after we entered the last
+                # digit during AYTF. Eg: In case of MX, we swallow mobile token (1) when
+                # formatted but AYTF should retain all the number entered and not change
+                # in order to match a format (of same leading digits and length) display
+                # in that way.
+                full_output = self._append_national_number(formatted_number)
+                formatted_number_digits_only = normalize_diallable_chars_only(full_output)
+                if formatted_number_digits_only == self._accrued_input_without_formatting:
+                    # If it's the same (i.e entered number and format is same), then it's
+                    # safe to return this in formatted number as nothing is lost / added.
+                    return full_output
         return U_EMPTY_STRING
 
     def get_remembered_position(self):

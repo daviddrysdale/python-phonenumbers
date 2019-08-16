@@ -292,7 +292,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(4, phonenumbers.length_of_national_destination_code(number2))
 
     def testGetCountryMobileToken(self):
-        self.assertEqual("1", phonenumbers.country_mobile_token(phonenumbers.country_code_for_region("MX")))
+        self.assertEqual("9", phonenumbers.country_mobile_token(phonenumbers.country_code_for_region("AR")))
         # Country calling code for Sweden, which has no mobile token.
         # Python version change: Use GB instead, which exists in the test metadata
         self.assertEqual("", phonenumbers.country_mobile_token(phonenumbers.country_code_for_region("GB")))

@@ -84,7 +84,7 @@ _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = unicod("3")
 # code. One example of when this is relevant is when determining the length of
 # the national destination code, which should be the length of the area code
 # plus the length of the mobile token.
-_MOBILE_TOKEN_MAPPINGS = {52: u('1'), 54: u('9')}
+_MOBILE_TOKEN_MAPPINGS = {54: u('9')}
 # Set of country codes that have geographically assigned mobile numbers (see
 # GEO_MOBILE_COUNTRIES below) which are not based on *area codes*. For example,
 # in China mobile numbers start with a carrier indicator, and beyond that are
