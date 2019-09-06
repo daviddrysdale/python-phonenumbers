@@ -12,7 +12,7 @@ PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix
     national_prefix='0',
     national_prefix_for_parsing='0(?:(1[245]|2[1-35]|31|4[13]|[56]5|99)(\\d{10,11}))?',
     national_prefix_transform_rule='\\2',
-    number_format=[NumberFormat(pattern='(\\d{3,6})', format='\\1', leading_digits_pattern=['1(?:1[25-8]|2[357-9]|3[02-68]|4[12568]|5|6[0-8]|8[015]|9[0-47-9])|610']),
+    number_format=[NumberFormat(pattern='(\\d{3,6})', format='\\1', leading_digits_pattern=['1(?:1[25-8]|2[357-9]|3[02-68]|4[12568]|5|6[0-8]|8[015]|9[0-47-9])|321|610']),
         NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['300|4(?:0[02]|37)', '4(?:02|37)0|[34]00']),
         NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['[2-57]', '[2357]|4(?:[0-24-9]|3(?:[0-689]|7[1-9]))']),
         NumberFormat(pattern='(\\d{3})(\\d{2,3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['(?:[358]|90)0'], national_prefix_formatting_rule='0\\1'),
