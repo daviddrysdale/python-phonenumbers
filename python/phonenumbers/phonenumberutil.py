@@ -1184,14 +1184,6 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                 # the carriers won't connect the call.  Because of that, we return
                 # an empty string here.
                 formatted_number = U_EMPTY_STRING
-        elif is_valid_number and region_code == "HU":
-            # The national format for HU numbers doesn't contain the national
-            # prefix, because that is how numbers are normally written
-            # down. However, the national prefix is obligatory when dialing
-            # from a mobile phone, except for short numbers. As a result, we
-            # add it back here if it is a valid regular length phone number.
-            formatted_number = (ndd_prefix_for_region(region_code, True) +  # strip non-digits
-                                U_SPACE + format_number(numobj_no_ext, PhoneNumberFormat.NATIONAL))
         elif country_calling_code == _NANPA_COUNTRY_CODE:
             # For NANPA countries, we output international format for numbers
             # that can be dialed internationally, since that always works,

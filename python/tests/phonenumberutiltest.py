@@ -824,15 +824,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("123", phonenumbers.format_number_for_mobile_dialing(deShortNumber, "DE", False))
         self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(deShortNumber, "IT", False))
 
-        # Test the special logic for Hungary, where the national prefix must be added before dialing
-        # from a mobile phone for regular length numbers, but not for short numbers.
-        huRegularNumber = PhoneNumber(country_code=36, national_number=301234567)
-        self.assertEqual("06301234567", phonenumbers.format_number_for_mobile_dialing(huRegularNumber, "HU", False))
-        self.assertEqual("+36301234567", phonenumbers.format_number_for_mobile_dialing(huRegularNumber, "JP", False))
-        huShortNumber = PhoneNumber(country_code=36, national_number=104)
-        self.assertEqual("104", phonenumbers.format_number_for_mobile_dialing(huShortNumber, "HU", False))
-        self.assertEqual("", phonenumbers.format_number_for_mobile_dialing(huShortNumber, "JP", False))
-
         # Test the special logic for NANPA countries, for which regular length phone numbers are always
         # output in international format, but short numbers are in national format.
         self.assertEqual("+16502530000", phonenumbers.format_number_for_mobile_dialing(US_NUMBER, "US", False))
