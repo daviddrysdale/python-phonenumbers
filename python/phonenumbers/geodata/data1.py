@@ -8906,6 +8906,7 @@ data = {
  '1682622':{'en': 'Mansfield, TX'},
  '1682647':{'en': 'Fort Worth, TX'},
  '1682885':{'en': 'Fort Worth, TX'},
+ '1689':{'en': 'Florida'},
  '1701':{'en': 'North Dakota'},
  '1701221':{'en': 'Bismarck, ND'},
  '1701222':{'en': 'Bismarck, ND'},
@@ -10018,5 +10019,4 @@ data = {
  '1708493':{'en': 'Bellwood, IL'},
  '1708524':{'en': 'Oak Park, IL'},
  '1708532':{'en': 'Tinley Park, IL'},
- '1708534':{'en': 'Monee, IL'},
 }

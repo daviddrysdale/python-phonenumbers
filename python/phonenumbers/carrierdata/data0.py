@@ -1698,6 +1698,7 @@ data = {
  '31633':{'en': 'Telfort'},
  '31634':{'en': 'T-Mobile'},
  '316351':{'en': 'Intercity Zakelijk'},
+ '316352':{'en': 'Tismi'},
  '316359':{'en': 'ASPIDER Solutions Nederland B.V.'},
  '31636':{'en': 'Tele2'},
  '31637':{'en': 'Teleena (MVNE)'},
@@ -10018,5 +10019,4 @@ data = {
  '554998407':{'en': 'Brasil Telecom GSM'},
  '554998408':{'en': 'Brasil Telecom GSM'},
  '554998409':{'en': 'Brasil Telecom GSM'},
- '554998411':{'en': 'Brasil Telecom GSM'},
 }

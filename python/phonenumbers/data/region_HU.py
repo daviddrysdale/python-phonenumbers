@@ -13,5 +13,6 @@ PHONE_METADATA_HU = PhoneMetadata(id='HU', country_code=36, international_prefix
     national_prefix='06',
     national_prefix_for_parsing='06',
     number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1'], national_prefix_formatting_rule='(06 \\1)'),
-        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-9]'], national_prefix_formatting_rule='06 \\1')],
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[27][2-9]|3[2-7]|4[24-9]|5[2-79]|6|8[2-57-9]|9[2-69]'], national_prefix_formatting_rule='(06 \\1)'),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-57-9]'], national_prefix_formatting_rule='06 \\1')],
     mobile_number_portable_region=True)

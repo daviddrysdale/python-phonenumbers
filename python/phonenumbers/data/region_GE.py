@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_GE = PhoneMetadata(id='GE', country_code=995, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:[3-57]\\d\\d|800)\\d{6}', possible_length=(9,), possible_length_local_only=(6, 7)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:3(?:[256]\\d|4[124-9]|7[0-4])|4(?:1\\d|2[2-7]|3[1-79]|4[2-8]|7[239]|9[1-7]))\\d{6}', example_number='322123456', possible_length=(9,), possible_length_local_only=(6, 7)),
-    mobile=PhoneNumberDesc(national_number_pattern='(?:5(?:[14]4|5[0157-9]|68|7[0147-9]|9[1-35-9])|790)\\d{6}', example_number='555123456', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='5(?:0(?:0[05]|55)\\d|1111|2222|3333|5200|75(?:00|7[78])|8(?:58[89]|888))\\d{4}|(?:5(?:[14]4|5[0157-9]|68|7[0147-9]|9[1-35-9])|790)\\d{6}', example_number='555123456', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6}', example_number='800123456', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='706\\d{6}', example_number='706123456', possible_length=(9,)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='706\\d{6}', possible_length=(9,)),
