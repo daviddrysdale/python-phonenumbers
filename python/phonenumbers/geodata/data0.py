@@ -7190,6 +7190,7 @@ data = {
  '1337991':{'en': 'Lafayette, LA'},
  '1337993':{'en': 'Lafayette, LA'},
  '1339':{'en': 'Massachusetts'},
+ '1341':{'en': 'California'},
  '1343':{'en': 'Ontario'},
  '1345':{'en': 'Cayman Islands'},
  '1345949':{'en': 'George Town'},
@@ -10018,5 +10019,4 @@ data = {
  '1418335':{'en': 'Thetford Mines, QC'},
  '1418337':{'en': 'Saint-Raymond, QC'},
  '1418338':{'en': 'Thetford Mines, QC'},
- '1418343':{'en': 'Saint-Bruno, QC'},
 }

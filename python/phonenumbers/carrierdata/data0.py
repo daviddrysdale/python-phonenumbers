@@ -720,6 +720,8 @@ data = {
  '2203':{'en': 'QCell'},
  '22050':{'en': 'QCell'},
  '22051':{'en': 'QCell'},
+ '22052':{'en': 'QCell'},
+ '22053':{'en': 'QCell'},
  '2206':{'en': 'Comium'},
  '2207':{'en': 'Africell'},
  '2209':{'en': 'Gamcel'},
@@ -10017,6 +10019,4 @@ data = {
  '554998405':{'en': 'Brasil Telecom GSM'},
  '554998406':{'en': 'Brasil Telecom GSM'},
  '554998407':{'en': 'Brasil Telecom GSM'},
- '554998408':{'en': 'Brasil Telecom GSM'},
- '554998409':{'en': 'Brasil Telecom GSM'},
 }

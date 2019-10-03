@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '554998408':{'en': 'Brasil Telecom GSM'},
+ '554998409':{'en': 'Brasil Telecom GSM'},
  '554998411':{'en': 'Brasil Telecom GSM'},
  '554998412':{'en': 'Brasil Telecom GSM'},
  '554998413':{'en': 'Brasil Telecom GSM'},
@@ -10017,6 +10019,4 @@ data = {
  '9183172':{'en': 'Idea'},
  '9183173':{'en': 'Reliance Jio'},
  '9183174':{'en': 'Reliance Jio'},
- '9183175':{'en': 'Reliance Jio'},
- '9183176':{'en': 'Reliance Jio'},
 }

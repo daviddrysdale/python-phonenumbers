@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861509652':{'en': 'Wenshan, Yunnan', 'zh': u('\u4e91\u5357\u7701\u6587\u5c71\u58ee\u65cf\u82d7\u65cf\u81ea\u6cbb\u5dde')},
  '86150966':{'en': 'Kunming, Yunnan', 'zh': u('\u4e91\u5357\u7701\u6606\u660e\u5e02')},
  '86150967':{'en': 'Yuxi, Yunnan', 'zh': u('\u4e91\u5357\u7701\u7389\u6eaa\u5e02')},
  '861509680':{'en': 'Nujiang, Yunnan', 'zh': u('\u4e91\u5357\u7701\u6012\u6c5f\u5088\u50f3\u65cf\u81ea\u6cbb\u5dde')},
@@ -10018,5 +10019,4 @@ data = {
  '861535314':{'en': 'XiAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u897f\u5b89\u5e02')},
  '861535315':{'en': 'XiAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u897f\u5b89\u5e02')},
  '861535316':{'en': 'Yulin, Shaanxi', 'zh': u('\u9655\u897f\u7701\u6986\u6797\u5e02')},
- '861535317':{'en': 'Yulin, Shaanxi', 'zh': u('\u9655\u897f\u7701\u6986\u6797\u5e02')},
 }

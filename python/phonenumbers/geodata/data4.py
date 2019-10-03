@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3349319':{'en': 'Saint-Laurent-du-Var', 'fr': 'Saint-Laurent-du-Var'},
  '3349320':{'en': 'Cagnes-sur-Mer', 'fr': 'Cagnes-sur-Mer'},
  '3349321':{'en': 'Nice', 'fr': 'Nice'},
  '3349322':{'en': 'Cagnes-sur-Mer', 'fr': 'Cagnes-sur-Mer'},
@@ -10018,5 +10019,4 @@ data = {
  '494246':{'de': 'Twistringen-Heiligenloh', 'en': 'Twistringen-Heiligenloh'},
  '494247':{'de': 'Affinghausen', 'en': 'Affinghausen'},
  '494248':{'de': 'Bassum-Neubruchhausen', 'en': 'Bassum-Neubruchhausen'},
- '494249':{'de': 'Bassum-Nordwohlde', 'en': 'Bassum-Nordwohlde'},
 }
