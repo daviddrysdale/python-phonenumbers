@@ -3547,7 +3547,7 @@ data = {
  '52862':{'en': 'Coahuila', 'es': 'Coahuila'},
  '52864':{'en': 'Coahuila', 'es': 'Coahuila'},
  '52866':{'en': 'Castanos/Monclova, COAH', 'es': u('Casta\u00f1os/Monclova, COAH')},
- '52867':{'en': 'Nuevo Leon/Tamaulipas', 'es': u('Nuevo Le\u00f3n/Tamaulipas')},
+ '52867':{'en': 'Nuevo Laredo/Tamaulipas', 'es': u('Nuevo Le\u00f3n/Tamaulipas')},
  '52868':{'en': 'Tamaulipas', 'es': 'Tamaulipas'},
  '52869':{'en': 'Cuatro Cienegas/San Buenaventura, COAH', 'es': u('Cuatro Ci\u00e9negas/San Buenaventura, COAH')},
  '52871':{'en': 'Coahuila', 'es': 'Coahuila'},

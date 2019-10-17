@@ -19,6 +19,16 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '9183003':{'en': 'BSNL MOBILE'},
+ '918301':{'en': 'BSNL MOBILE'},
+ '918304':{'en': 'BSNL MOBILE'},
+ '918306':{'en': 'Airtel'},
+ '918308':{'en': 'Idea'},
+ '918310':{'en': 'Reliance Jio'},
+ '9183170':{'en': 'Reliance Jio'},
+ '9183172':{'en': 'Idea'},
+ '9183173':{'en': 'Reliance Jio'},
+ '9183174':{'en': 'Reliance Jio'},
  '9183175':{'en': 'Reliance Jio'},
  '9183176':{'en': 'Reliance Jio'},
  '9183177':{'en': 'Idea'},
@@ -1647,6 +1657,7 @@ data = {
  '9899914':{'en': 'Azartel', 'fa': u('\u0622\u0630\u0631\u062a\u0644')},
  '9899998':{'en': 'SamanTel', 'fa': u('\u0633\u0627\u0645\u0627\u0646\u062a\u0644')},
  '9899999':{'en': 'SamanTel', 'fa': u('\u0633\u0627\u0645\u0627\u0646\u062a\u0644')},
+ '9920':{'en': 'Megafon'},
  '99241':{'en': 'Megafon'},
  '99250':{'en': 'Tcell'},
  '99255':{'en': 'Megafon'},
