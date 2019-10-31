@@ -1380,7 +1380,8 @@ data = {
  '25885':{'en': 'Vodacom'},
  '25886':{'en': 'Movitel'},
  '25887':{'en': 'Movitel'},
- '2607':{'en': 'MTN'},
+ '26076':{'en': 'MTN'},
+ '26077':{'en': 'Airtel'},
  '26095':{'en': 'ZAMTEL'},
  '26096':{'en': 'MTN'},
  '26097':{'en': 'Airtel'},
@@ -10018,5 +10019,4 @@ data = {
  '554998402':{'en': 'Brasil Telecom GSM'},
  '554998403':{'en': 'Brasil Telecom GSM'},
  '554998404':{'en': 'Brasil Telecom GSM'},
- '554998405':{'en': 'Brasil Telecom GSM'},
 }

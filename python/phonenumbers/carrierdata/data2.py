@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '9183002':{'en': 'BSNL MOBILE'},
  '9183003':{'en': 'BSNL MOBILE'},
  '918301':{'en': 'BSNL MOBILE'},
  '918304':{'en': 'BSNL MOBILE'},
@@ -1450,6 +1451,9 @@ data = {
  '95985':{'en': 'MPT'},
  '95986':{'en': 'MPT'},
  '95987':{'en': 'MPT'},
+ '959884':{'en': 'MPT'},
+ '959885':{'en': 'MPT'},
+ '959886':{'en': 'MPT'},
  '959887':{'en': 'MPT'},
  '959888':{'en': 'MPT'},
  '959889':{'en': 'MPT'},
@@ -1539,6 +1543,7 @@ data = {
  '96777':{'en': 'Yemen Mobile'},
  '96871':{'en': 'Omantel'},
  '96872':{'en': 'Omantel'},
+ '96878':{'en': 'Ooredoo'},
  '96879':{'en': 'Ooredoo'},
  '968901':{'en': 'Omantel'},
  '968902':{'en': 'Omantel'},
