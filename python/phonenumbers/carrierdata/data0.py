@@ -2444,6 +2444,7 @@ data = {
  '3834713':{'en': 'mts d.o.o.'},
  '3834714':{'en': 'mts d.o.o.'},
  '3834715':{'en': 'mts d.o.o.'},
+ '38348':{'en': 'IPKO'},
  '38349':{'en': 'IPKO'},
  '38590':{'en': 'Tele2'},
  '38591':{'en': 'Vip'},
@@ -10018,5 +10019,4 @@ data = {
  '554998401':{'en': 'Brasil Telecom GSM'},
  '554998402':{'en': 'Brasil Telecom GSM'},
  '554998403':{'en': 'Brasil Telecom GSM'},
- '554998404':{'en': 'Brasil Telecom GSM'},
 }
