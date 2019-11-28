@@ -12,7 +12,7 @@ PHONE_METADATA_NO = PhoneMetadata(id='NO', country_code=47, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='85[0-5]\\d{5}', example_number='85012345', possible_length=(8,)),
     uan=PhoneNumberDesc(national_number_pattern='(?:0[2-9]|81(?:0(?:0[7-9]|1\\d)|5\\d\\d))\\d{3}', example_number='02000', possible_length=(5, 8)),
     voicemail=PhoneNumberDesc(national_number_pattern='81[23]\\d{5}', example_number='81212345', possible_length=(8,)),
-    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[489]']),
+    number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[489]|5[89]']),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['[235-7]'])],
     main_country_for_code=True,
     leading_digits='[02-689]|7[0-8]',
