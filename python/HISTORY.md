@@ -14,7 +14,7 @@ What's new in 8.10.8
 ---------------------
 
 Merge to
-[upstream commit aa1e7af6d637](https://github.com/googlei18n/libphonenumber/commit/aa1e7af6d637);
+[upstream commit aa1e7af6d637](https://github.com/google/libphonenumber/commit/aa1e7af6d637);
 relevant code changes:
   - Making the application of alternate formats when finding phone numbers in
     text in strict-grouping and exact-match mode depend on the leading digits
@@ -27,7 +27,7 @@ What's new in 8.10.3
 ---------------------
 
 Merge to
-[upstream commit 45953266d45d](https://github.com/googlei18n/libphonenumber/commit/45953266d45d);
+[upstream commit 45953266d45d](https://github.com/google/libphonenumber/commit/45953266d45d);
 relevant code changes:
  - Better documentation for length_of_national_destination_code to emphasise that
    not every number has one.
@@ -39,7 +39,7 @@ What's new in 8.10.0
 ---------------------
 
 Merge to
-[upstream commit d62a8fb2b719](https://github.com/googlei18n/libphonenumber/commit/d62a8fb2b719);
+[upstream commit d62a8fb2b719](https://github.com/google/libphonenumber/commit/d62a8fb2b719);
 relevant code changes:
  - AsYouTypeFormatter changed to better choose between rules when dialling
    locally; previously we used the international rules when the national prefix
@@ -52,7 +52,7 @@ What's new in 8.9.12
 --------------------
 
 Merge to
-[upstream commit d56bf9da349b](https://github.com/googlei18n/libphonenumber/commit/d56bf9da349b);
+[upstream commit d56bf9da349b](https://github.com/google/libphonenumber/commit/d56bf9da349b);
 relevant code changes:
  - Support Russian extension character "доб" as a valid one while parsing the numbers.
 
@@ -67,7 +67,7 @@ What's new in 8.8.0
 -------------------
 
 Merge to
-[upstream commit 7e4e754bda09](https://github.com/googlei18n/libphonenumber/commit/7e4e754bda09);
+[upstream commit 7e4e754bda09](https://github.com/google/libphonenumber/commit/7e4e754bda09);
 relevant code changes:
 
  - Improve parsing logic to be smarter about national-prefix detection &
@@ -80,7 +80,7 @@ What's new in 8.7.1
 -------------------
 
 Merge to
-[upstream commit fb9aa53ecfa3](https://github.com/googlei18n/libphonenumber/commit/fb9aa53ecfa3);
+[upstream commit fb9aa53ecfa3](https://github.com/google/libphonenumber/commit/fb9aa53ecfa3);
 relevant code changes:
 
  - Documentation fix for `number_type`
@@ -90,7 +90,7 @@ What's new in 8.7.0
 -------------------
 
 Merge to
-[upstream commit 1ad92eb35a44](https://github.com/googlei18n/libphonenumber/commit/1ad92eb35a44);
+[upstream commit 1ad92eb35a44](https://github.com/google/libphonenumber/commit/1ad92eb35a44);
 relevant code changes:
 
 
@@ -111,7 +111,7 @@ What's new in 8.6.0
 -------------------
 
 Merge to
-[upstream commit 242a186f1fbf](https://github.com/googlei18n/libphonenumber/commit/242a186f1fbf);
+[upstream commit 242a186f1fbf](https://github.com/google/libphonenumber/commit/242a186f1fbf);
 relevant code changes:
 
  - Removing `leading_zero_possible` from the metadata and all the places it is
@@ -138,7 +138,7 @@ What's new in 8.5.0
 -------------------
 
 Merge to
-[upstream commit 52cff9d8837f](https://github.com/googlei18n/libphonenumber/commit/52cff9d8837f);
+[upstream commit 52cff9d8837f](https://github.com/google/libphonenumber/commit/52cff9d8837f);
 relevant code changes:
 
  - Add `can_be_internationally_dialled` public API; This was already in JS.
@@ -148,7 +148,7 @@ What's new in 8.4.2
 -------------------
 
 Merge to
-[upstream commit 9923d9211432](https://github.com/googlei18n/libphonenumber/commit/9923d9211432);
+[upstream commit 9923d9211432](https://github.com/google/libphonenumber/commit/9923d9211432);
 relevant code changes:
 
  - Small fix for possible out-of-bounds exception on RFC3966 input where no
@@ -159,7 +159,7 @@ What's new in 8.4.1
 -------------------
 
 Merge to
-[upstream commit 02dbc0921cf5](https://github.com/googlei18n/libphonenumber/commit/02dbc0921cf5);
+[upstream commit 02dbc0921cf5](https://github.com/google/libphonenumber/commit/02dbc0921cf5);
 relevant code changes:
 
  - Changing `is_possible_with_reason` to return the enums `INVALID_LENGTH` and
@@ -174,7 +174,7 @@ What's new in 8.4.0
 -------------------
 
 Merge to
-[upstream commit 77affd08f65f](https://github.com/googlei18n/libphonenumber/commit/77affd08f65f);
+[upstream commit 77affd08f65f](https://github.com/google/libphonenumber/commit/77affd08f65f);
 relevant code changes:
 
  - Doc changes to update references to ISO country codes to CLDR region codes,
@@ -196,7 +196,7 @@ What's new in 8.3.3
 -------------------
 
 Merge to
-[upstream commit 46a38545ba01](https://github.com/googlei18n/libphonenumber/commit/46a38545ba01);
+[upstream commit 46a38545ba01](https://github.com/google/libphonenumber/commit/46a38545ba01);
 relevant code changes:
 
  - Doc fix for `geocoder.py` to explain the cases where an empty string might be returned.
@@ -212,7 +212,7 @@ What's new in 8.3.1
 -------------------
 
 Merge to
-[upstream commit 5507fdbf623f](https://github.com/googlei18n/libphonenumber/commit/5507fdbf623f);
+[upstream commit 5507fdbf623f](https://github.com/google/libphonenumber/commit/5507fdbf623f);
 relevant code changes:
 
  - Making `national_significant_number` more robust in the face of malicious
@@ -224,7 +224,7 @@ What's new in 8.3.0
 -------------------
 
 Merge to
-[upstream commit ad297a10ba19](https://github.com/googlei18n/libphonenumber/commit/ad297a10ba19);
+[upstream commit ad297a10ba19](https://github.com/google/libphonenumber/commit/ad297a10ba19);
 relevant code changes:
 
  - Added two new enum values to `ValidationResult` - `IS_POSSIBLE_LOCAL_ONLY` and
@@ -245,7 +245,7 @@ What's new in 8.2.0
 -------------------
 
 Merge to
-[upstream commit 3b16d6b06497](https://github.com/googlei18n/libphonenumber/commit/3b16d6b06497);
+[upstream commit 3b16d6b06497](https://github.com/google/libphonenumber/commit/3b16d6b06497);
 relevant code changes:
 
  - Exported `normalize_diallable_chars_only`. This method is already public in the C++
@@ -256,7 +256,7 @@ What's new in 8.1.0
 -------------------
 
 Merge to
-[upstream commit c210dbca4e93](https://github.com/googlei18n/libphonenumber/commit/c210dbca4e93);
+[upstream commit c210dbca4e93](https://github.com/google/libphonenumber/commit/c210dbca4e93);
 relevant code changes:
 
   - Introduced new `is_carrier_specific_for_region` API in `shortnumberinfo`.
@@ -269,7 +269,7 @@ What's new in 8.0.0
 -------------------
 
 Merge to
-[upstream commit 1eb06f31e1dd](https://github.com/googlei18n/libphonenumber/commit/1eb06f31e1dd);
+[upstream commit 1eb06f31e1dd](https://github.com/google/libphonenumber/commit/1eb06f31e1dd);
 relevant code changes:
 
   - Removing the ability for `.._for_region` methods in `shortnumberinfo.py` to work
@@ -285,7 +285,7 @@ What's new in 7.7.5
 -------------------
 
 Merge to
-[upstream commit e905483f87cf](https://github.com/googlei18n/libphonenumber/commit/e905483f87cf);
+[upstream commit e905483f87cf](https://github.com/google/libphonenumber/commit/e905483f87cf);
 relevant code changes:
 
   - Removing all references to `possible_number_pattern` other than in the metadata
@@ -297,7 +297,7 @@ What's new in 7.7.4
 -------------------
 
 Merge to
-[upstream commit fedbc7020703](https://github.com/googlei18n/libphonenumber/commit/fedbc7020703);
+[upstream commit fedbc7020703](https://github.com/google/libphonenumber/commit/fedbc7020703);
 code changes:
 
  - GitHub project changes:
@@ -332,7 +332,7 @@ What's new in 7.7.3
 -------------------
 
 Merge to
-[upstream commit ad0ce0c94501](https://github.com/googlei18n/libphonenumber/commit/ad0ce0c94501);
+[upstream commit ad0ce0c94501](https://github.com/google/libphonenumber/commit/ad0ce0c94501);
 code changes:
 
  - Fixed `phonemetadata.py` not to merge from a `NumberFormat`'s unset bool
@@ -343,7 +343,7 @@ What's new in 7.7.2
 -------------------
 
 Merge to
-[upstream commit 2d0d216f6032](https://github.com/googlei18n/libphonenumber/commit/2d0d216f6032);
+[upstream commit 2d0d216f6032](https://github.com/google/libphonenumber/commit/2d0d216f6032);
 code changes:
 
  - Stop setting empty `preferred_domestic_carrier_code`, and if we are passed such
@@ -354,7 +354,7 @@ What's new in 7.7.1
 -------------------
 
 Merge to
-[upstream commit 8c37310deb49](https://github.com/googlei18n/libphonenumber/commit/8c37310deb49);
+[upstream commit 8c37310deb49](https://github.com/google/libphonenumber/commit/8c37310deb49);
 code changes:
 
  - Switching the internal implementation of `is_possible_number` and related functions
@@ -372,7 +372,7 @@ What's new in 7.7.0
 -------------------
 
 Merge to
-[upstream commit 1ec4d341c3cd](https://github.com/googlei18n/libphonenumber/commit/1ec4d341c3cd);
+[upstream commit 1ec4d341c3cd](https://github.com/google/libphonenumber/commit/1ec4d341c3cd);
 no code changes that affect the Python version so this is just a version bump to
 stay in sync with upstream.
 
@@ -380,7 +380,7 @@ stay in sync with upstream.
 What's new in 7.6.1
 -------------------
 
-Merge to [upstream commit 7cc500f588db](https://github.com/googlei18n/libphonenumber/commit/7cc500f588db); code changes:
+Merge to [upstream commit 7cc500f588db](https://github.com/google/libphonenumber/commit/7cc500f588db); code changes:
 
  - `phonemetadata.py` has two more fields to represent possible lengths of phone
    numbers. Changed `buildmetadatafromxml.py` to alter the way
@@ -392,7 +392,7 @@ Merge to [upstream commit 7cc500f588db](https://github.com/googlei18n/libphonenu
 What's new in 7.6.0
 -------------------
 
-Merge to [upstream commit ddf60b1c175e](https://github.com/googlei18n/libphonenumber/commit/ddf60b1c175e); code changes:
+Merge to [upstream commit ddf60b1c175e](https://github.com/google/libphonenumber/commit/ddf60b1c175e); code changes:
 
  - Made `is_number_geographical()` public and added `is_number_type_geographical()`,
    and changed the geocoder to use this when checking whether to give a detailed
@@ -402,21 +402,21 @@ Merge to [upstream commit ddf60b1c175e](https://github.com/googlei18n/libphonenu
 What's new in 7.5.0
 -------------------
 
-Merge to [upstream commit 3f83454ed62b](https://github.com/googlei18n/libphonenumber/commit/3f83454ed62b); no code changes that affect the Python
+Merge to [upstream commit 3f83454ed62b](https://github.com/google/libphonenumber/commit/3f83454ed62b); no code changes that affect the Python
 version so this is just a version bump to stay in sync with upstream.
 
 
 What's new in 7.4.0
 -------------------
 
-Merge to [upstream commit 598b9a4f89d6](https://github.com/googlei18n/libphonenumber/commit/598b9a4f89d6); no code changes that affect the Python
+Merge to [upstream commit 598b9a4f89d6](https://github.com/google/libphonenumber/commit/598b9a4f89d6); no code changes that affect the Python
 version so this is just a version bump to stay in sync with upstream.
 
 
 What's new in 7.3.0
 -------------------
 
-Merge to [upstream commit d933631fbf15](https://github.com/googlei18n/libphonenumber/commit/d933631fbf15); code changes:
+Merge to [upstream commit d933631fbf15](https://github.com/google/libphonenumber/commit/d933631fbf15); code changes:
 
  - Added support for `region_code of None in example_number_for_type()`
  - Added `invalid_example_number()`
@@ -427,7 +427,7 @@ Merge to [upstream commit d933631fbf15](https://github.com/googlei18n/libphonenu
 What's new in 7.2.0
 -------------------
 
-Merge to [upstream commit ab5e61acc087ec9f5](https://github.com/googlei18n/libphonenumber/commit/ab5e61acc087ec9f5), which is 7.2.1 (7.2.0 had an immediate
+Merge to [upstream commit ab5e61acc087ec9f5](https://github.com/google/libphonenumber/commit/ab5e61acc087ec9f5), which is 7.2.1 (7.2.0 had an immediate
 problem on release); upstream changelog mentions no code changes, but the Java
 implementation includes a change to use nano protobufs.
 
@@ -435,7 +435,7 @@ implementation includes a change to use nano protobufs.
 What's new in 7.1.0
 -------------------
 
-Merge to [upstream commit 903ac5de5b6e1112](https://github.com/googlei18n/libphonenumber/commit/903ac5de5b6e1112); upstream code changelog:
+Merge to [upstream commit 903ac5de5b6e1112](https://github.com/google/libphonenumber/commit/903ac5de5b6e1112); upstream code changelog:
 
  - Only upstream code change doesn't affect python version
    (New `MetadataSource` implementation that reads from a single metadata file with
