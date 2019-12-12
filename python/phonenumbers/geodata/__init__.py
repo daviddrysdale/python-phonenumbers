@@ -71,5 +71,7 @@ from .data24 import data
 GEOCODE_DATA.update(data)
 from .data25 import data
 GEOCODE_DATA.update(data)
+from .data26 import data
+GEOCODE_DATA.update(data)
 del data
 GEOCODE_LONGEST_PREFIX = 9
