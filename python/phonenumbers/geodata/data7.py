@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '55543322':{'en': 'Quinze de Novembro - RS', 'pt': 'Quinze de Novembro - RS'},
+ '55543323':{'en': 'Nova Alvorada - RS', 'pt': 'Nova Alvorada - RS'},
  '55543324':{'en': u('Ibirub\u00e1 - RS'), 'pt': u('Ibirub\u00e1 - RS')},
  '55543325':{'en': u('S\u00e3o Jos\u00e9 do Herval - RS'), 'pt': u('S\u00e3o Jos\u00e9 do Herval - RS')},
  '55543326':{'en': 'Campos Borges - RS', 'pt': 'Campos Borges - RS'},
@@ -10017,6 +10019,4 @@ data = {
  '61243082':{'en': 'Gosford'},
  '61243083':{'en': 'Wyong'},
  '61243084':{'en': 'Wyong'},
- '61243085':{'en': 'Wyong'},
- '61243086':{'en': 'Gosford'},
 }

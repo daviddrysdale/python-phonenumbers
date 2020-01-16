@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -423,7 +423,12 @@ data = {
  '180998':{'en': 'Orange'},
  '180999':{'en': 'Tricom'},
  '186824':{'en': 'Digicel'},
- '186826':{'en': 'bmobile'},
+ '1868263':{'en': 'Digicel'},
+ '1868264':{'en': 'Digicel'},
+ '1868266':{'en': 'bmobile'},
+ '1868267':{'en': 'bmobile'},
+ '1868268':{'en': 'bmobile'},
+ '1868269':{'en': 'bmobile'},
  '186827':{'en': 'bmobile'},
  '186828':{'en': 'bmobile'},
  '186829':{'en': 'bmobile'},
@@ -700,7 +705,10 @@ data = {
  '212697':{'en': 'Maroc Telecom'},
  '212698':{'en': 'Inwi'},
  '212699':{'en': 'Inwi'},
- '21270':{'en': 'Inwi'},
+ '212700':{'en': 'Inwi'},
+ '212706':{'en': 'Inwi'},
+ '212707':{'en': 'Inwi'},
+ '212708':{'en': 'Inwi'},
  '21276':{'en': 'Maroc Telecom'},
  '21277':{'en': u('M\u00e9ditel')},
  '2135':{'en': 'Ooredoo'},
@@ -728,6 +736,8 @@ data = {
  '22051':{'en': 'QCell'},
  '22052':{'en': 'QCell'},
  '22053':{'en': 'QCell'},
+ '22058':{'en': 'QCell'},
+ '22059':{'en': 'QCell'},
  '2206':{'en': 'Comium'},
  '2207':{'en': 'Africell'},
  '2209':{'en': 'Gamcel'},
@@ -819,6 +829,7 @@ data = {
  '22595':{'en': 'MTN'},
  '22597':{'en': 'Orange'},
  '22601':{'en': 'Onatel'},
+ '22602':{'en': 'Onatel'},
  '22607':{'en': 'Orange'},
  '22651':{'en': 'Telmob'},
  '22652':{'en': 'Telmob'},
@@ -1190,6 +1201,7 @@ data = {
  '234901':{'en': 'Airtel'},
  '234902':{'en': 'Airtel'},
  '234903':{'en': 'MTN'},
+ '234904':{'en': 'Airtel'},
  '234905':{'en': 'Glo'},
  '234906':{'en': 'MTN'},
  '234907':{'en': 'Airtel'},
@@ -10007,16 +10019,4 @@ data = {
  '553398441':{'en': 'Claro BR'},
  '553398442':{'en': 'Claro BR'},
  '553398443':{'en': 'Claro BR'},
- '553398444':{'en': 'Claro BR'},
- '553398445':{'en': 'Claro BR'},
- '553398446':{'en': 'Claro BR'},
- '553398447':{'en': 'Claro BR'},
- '553398448':{'en': 'Claro BR'},
- '553398449':{'en': 'Claro BR'},
- '553398451':{'en': 'Claro BR'},
- '553398452':{'en': 'Claro BR'},
- '553398453':{'en': 'Claro BR'},
- '553398454':{'en': 'Claro BR'},
- '553398455':{'en': 'Claro BR'},
- '553398456':{'en': 'Claro BR'},
 }

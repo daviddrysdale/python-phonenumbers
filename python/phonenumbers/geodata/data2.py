@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1708524':{'en': 'Oak Park, IL'},
  '1708532':{'en': 'Tinley Park, IL'},
  '1708534':{'en': 'Monee, IL'},
  '1708535':{'en': 'Oak Forest, IL'},
@@ -10018,5 +10019,4 @@ data = {
  '1925943':{'en': 'Walnut Creek, CA'},
  '1925944':{'en': 'Walnut Creek, CA'},
  '1925945':{'en': 'Walnut Creek, CA'},
- '1925946':{'en': 'Walnut Creek, CA'},
 }

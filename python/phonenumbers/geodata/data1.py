@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -8827,6 +8827,7 @@ data = {
  '1667':{'en': 'Maryland'},
  '1669':{'en': 'California'},
  '1671646':{'en': 'Tamuning'},
+ '1672':{'en': 'British Columbia'},
  '1678':{'en': 'Georgia'},
  '1678208':{'en': 'Cumming, GA'},
  '1678225':{'en': 'Lawrenceville, GA'},
@@ -10018,5 +10019,4 @@ data = {
  '1708484':{'en': 'Berwyn, IL'},
  '1708485':{'en': 'Brookfield, IL'},
  '1708493':{'en': 'Bellwood, IL'},
- '1708524':{'en': 'Oak Park, IL'},
 }

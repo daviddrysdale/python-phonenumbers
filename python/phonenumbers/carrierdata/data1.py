@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,18 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '553398444':{'en': 'Claro BR'},
+ '553398445':{'en': 'Claro BR'},
+ '553398446':{'en': 'Claro BR'},
+ '553398447':{'en': 'Claro BR'},
+ '553398448':{'en': 'Claro BR'},
+ '553398449':{'en': 'Claro BR'},
+ '553398451':{'en': 'Claro BR'},
+ '553398452':{'en': 'Claro BR'},
+ '553398453':{'en': 'Claro BR'},
+ '553398454':{'en': 'Claro BR'},
+ '553398455':{'en': 'Claro BR'},
+ '553398456':{'en': 'Claro BR'},
  '5533985':{'en': 'Oi'},
  '5533986':{'en': 'Oi'},
  '5533987':{'en': 'Oi'},
@@ -8161,7 +8173,14 @@ data = {
  '658908':{'en': 'SingTel'},
  '658909':{'en': 'SingTel'},
  '65891':{'en': 'TPG'},
- '65892':{'en': 'TPG'},
+ '658921':{'en': 'Liberty Wireless'},
+ '658922':{'en': 'Liberty Wireless'},
+ '658923':{'en': 'Liberty Wireless'},
+ '658924':{'en': 'TPG'},
+ '658925':{'en': 'TPG'},
+ '658926':{'en': 'TPG'},
+ '658927':{'en': 'TPG'},
+ '658928':{'en': 'TPG'},
  '65893':{'en': 'TPG'},
  '659001':{'en': 'StarHub'},
  '659002':{'en': 'StarHub'},
@@ -10000,23 +10019,4 @@ data = {
  '799540':{'en': 'Tele2', 'ru': 'Tele2'},
  '799541':{'en': 'Tele2', 'ru': 'Tele2'},
  '799542':{'en': 'Tele2', 'ru': 'Tele2'},
- '799550':{'en': 'Tele2', 'ru': 'Tele2'},
- '799555':{'en': 'MegaFon', 'ru': u('\u041c\u0435\u0433\u0430\u0424\u043e\u043d')},
- '799559':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995600':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995778':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995779':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995895':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995896':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995897':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995898':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995899':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995900':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995901':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995902':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995903':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995904':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995905':{'en': 'Tele2', 'ru': 'Tele2'},
- '799595':{'en': 'MegaFon', 'ru': u('\u041c\u0435\u0433\u0430\u0424\u043e\u043d')},
- '7995996':{'en': 'Tele2', 'ru': 'Tele2'},
 }

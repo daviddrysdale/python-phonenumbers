@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1925946':{'en': 'Walnut Creek, CA'},
  '1925947':{'en': 'Walnut Creek, CA'},
  '1925952':{'en': 'Walnut Creek, CA'},
  '1925954':{'en': 'Walnut Creek, CA'},
@@ -2275,6 +2276,7 @@ data = {
  '2204488':{'en': 'Sibanor'},
  '2204489':{'en': 'Bwiam'},
  '220449':{'en': 'Bakau'},
+ '220553':{'en': 'Soma'},
  '2205540':{'en': 'Kaiaf'},
  '2205541':{'en': 'Kwenella'},
  '2205542':{'en': 'Nyorojattaba'},
@@ -10017,6 +10019,4 @@ data = {
  '3324476':{'en': 'Nantes', 'fr': 'Nantes'},
  '3324477':{'en': 'Nantes', 'fr': 'Nantes'},
  '3324478':{'en': 'Challans', 'fr': 'Challans'},
- '3324479':{'en': u('Ch\u00e2teaubriant'), 'fr': u('Ch\u00e2teaubriant')},
- '3324480':{'en': 'La Roche-sur-Yon', 'fr': 'La Roche-sur-Yon'},
 }

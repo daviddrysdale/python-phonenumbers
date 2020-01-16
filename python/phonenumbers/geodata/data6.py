@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '495939':{'de': 'Sustrum', 'en': 'Sustrum'},
+ '495941':{'de': 'Neuenhaus Dinkel', 'en': 'Neuenhaus Dinkel'},
  '495942':{'de': 'Uelsen', 'en': 'Uelsen'},
  '495943':{'de': 'Emlichheim', 'en': 'Emlichheim'},
  '495944':{'de': 'Hoogstede', 'en': 'Hoogstede'},
@@ -10017,6 +10019,4 @@ data = {
  '5554331':{'en': 'Passo Fundo - RS', 'pt': 'Passo Fundo - RS'},
  '55543319':{'en': 'Montauri - RS', 'pt': 'Montauri - RS'},
  '55543321':{'en': 'Erechim - RS', 'pt': 'Erechim - RS'},
- '55543322':{'en': 'Quinze de Novembro - RS', 'pt': 'Quinze de Novembro - RS'},
- '55543323':{'en': 'Nova Alvorada - RS', 'pt': 'Nova Alvorada - RS'},
 }

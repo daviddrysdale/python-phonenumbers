@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861889421':{'en': 'Tianshui, Gansu', 'zh': u('\u7518\u8083\u7701\u5929\u6c34\u5e02')},
+ '861889422':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
  '861889423':{'en': 'Jiuquan, Gansu', 'zh': u('\u7518\u8083\u7701\u9152\u6cc9\u5e02')},
  '861889424':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
  '861889425':{'en': 'Jinchang, Gansu', 'zh': u('\u7518\u8083\u7701\u91d1\u660c\u5e02')},
@@ -10017,6 +10019,4 @@ data = {
  '917671':{'en': 'Jaitwara, Madhya Pradesh'},
  '917672':{'en': 'Satna, Madhya Pradesh'},
  '917673':{'en': 'Nagod, Madhya Pradesh'},
- '917674':{'en': 'Maihar, Madhya Pradesh'},
- '917675':{'en': 'Amarpatan, Madhya Pradesh'},
 }

@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61897851':{'en': 'Nannup'},
+ '61897852':{'en': 'Margaret River'},
  '61897853':{'en': 'Cundinup'},
  '61897854':{'en': 'Donnybrook'},
  '61897855':{'en': 'Capel'},
@@ -10017,6 +10019,4 @@ data = {
  '861310599':{'en': 'Nanping, Fujian', 'zh': u('\u798f\u5efa\u7701\u5357\u5e73\u5e02')},
  '86131060':{'en': 'Taizhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u53f0\u5dde\u5e02')},
  '861310606':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
- '861310607':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
- '861310608':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
 }

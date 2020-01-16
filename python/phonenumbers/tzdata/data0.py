@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1183,6 +1183,7 @@ data = {
  '1669':('America/Los_Angeles',),
  '1670':('Pacific/Saipan',),
  '1671':('Pacific/Guam',),
+ '1672':('America/Vancouver',),
  '1678':('America/New_York',),
  '1680':('America/New_York',),
  '1681':('America/New_York',),

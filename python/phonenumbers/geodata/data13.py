@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861310607':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
+ '861310608':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
  '861310609':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
  '86131061':{'en': 'Wenzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u6e29\u5dde\u5e02')},
  '86131062':{'en': 'Jinhua, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u91d1\u534e\u5e02')},
@@ -10017,6 +10019,4 @@ data = {
  '861328454':{'en': 'Jiamusi, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4f73\u6728\u65af\u5e02')},
  '861328455':{'en': 'Suihua, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u7ee5\u5316\u5e02')},
  '861328456':{'en': 'Heihe, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9ed1\u6cb3\u5e02')},
- '861328457':{'en': 'Da Hinggan Ling, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u5927\u5174\u5b89\u5cad\u5730\u533a')},
- '861328458':{'en': 'Yichun, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4f0a\u6625\u5e02')},
 }

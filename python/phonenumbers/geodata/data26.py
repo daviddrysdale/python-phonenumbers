@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '917674':{'en': 'Maihar, Madhya Pradesh'},
+ '917675':{'en': 'Amarpatan, Madhya Pradesh'},
  '917680':{'en': 'Niwari, Madhya Pradesh'},
  '9176810':{'en': 'Jatara, Madhya Pradesh'},
  '9176812':{'en': 'Jatara, Madhya Pradesh'},

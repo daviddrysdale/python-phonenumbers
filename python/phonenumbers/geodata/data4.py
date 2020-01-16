@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3324479':{'en': u('Ch\u00e2teaubriant'), 'fr': u('Ch\u00e2teaubriant')},
+ '3324480':{'en': 'La Roche-sur-Yon', 'fr': 'La Roche-sur-Yon'},
  '3324481':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324482':{'en': 'Pornic', 'fr': 'Pornic'},
  '3324483':{'en': 'Segre', 'fr': 'Segre'},
@@ -10017,6 +10019,4 @@ data = {
  '35322':{'en': 'Mallow'},
  '35323':{'en': 'Bandon'},
  '35324':{'en': 'Youghal'},
- '35325':{'en': 'Fermoy'},
- '35326':{'en': 'Macroom'},
 }

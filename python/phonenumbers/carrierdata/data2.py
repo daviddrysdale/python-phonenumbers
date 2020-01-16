@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2019 The Libphonenumber Authors
+# Copyright (C) 2011-2020 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,25 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '799550':{'en': 'Tele2', 'ru': 'Tele2'},
+ '799555':{'en': 'MegaFon', 'ru': u('\u041c\u0435\u0433\u0430\u0424\u043e\u043d')},
+ '799559':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995600':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995778':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995779':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995895':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995896':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995897':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995898':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995899':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995900':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995901':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995902':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995903':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995904':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995905':{'en': 'Tele2', 'ru': 'Tele2'},
+ '799595':{'en': 'MegaFon', 'ru': u('\u041c\u0435\u0433\u0430\u0424\u043e\u043d')},
+ '7995996':{'en': 'Tele2', 'ru': 'Tele2'},
  '7995997':{'en': 'Tele2', 'ru': 'Tele2'},
  '7995998':{'en': 'Tele2', 'ru': 'Tele2'},
  '799600':{'en': 'Tele2', 'ru': 'Tele2'},
@@ -4642,6 +4661,7 @@ data = {
  '9899914':{'en': 'Azartel', 'fa': u('\u0622\u0630\u0631\u062a\u0644')},
  '989999':{'en': 'Rightel', 'fa': u('\u0631\u0627\u06cc\u062a\u0644')},
  '9920':{'en': 'Megafon'},
+ '9921':{'en': 'Tcell'},
  '99241':{'en': 'Megafon'},
  '99250':{'en': 'Tcell'},
  '99255':{'en': 'Megafon'},
@@ -4655,6 +4675,7 @@ data = {
  '99293':{'en': 'Tcell'},
  '99294':{'en': 'Babilon-M'},
  '99298':{'en': 'Babilon-M'},
+ '99299':{'en': 'Tcell'},
  '99361':{'en': 'TM-Cell'},
  '99365':{'en': 'TM-Cell'},
  '99366':{'en': 'MTS (BARASH Communication)'},
