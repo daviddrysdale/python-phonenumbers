@@ -8585,6 +8585,7 @@ data = {
  '1651923':{'en': 'Goodhue, MN'},
  '1651999':{'en': 'Saint Paul, MN'},
  '1657':{'en': 'California'},
+ '1659':{'en': 'Alabama'},
  '1660':{'en': 'Missouri'},
  '1660248':{'en': 'Fayette, MO'},
  '1660258':{'en': 'Brookfield, MO'},
@@ -10018,5 +10019,4 @@ data = {
  '1708479':{'en': 'Mokena, IL'},
  '1708484':{'en': 'Berwyn, IL'},
  '1708485':{'en': 'Brookfield, IL'},
- '1708493':{'en': 'Bellwood, IL'},
 }

@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861310606':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
  '861310607':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
  '861310608':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
  '861310609':{'en': 'Quzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u8862\u5dde\u5e02')},
@@ -10018,5 +10019,4 @@ data = {
  '861328453':{'en': 'Mudanjiang, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u7261\u4e39\u6c5f\u5e02')},
  '861328454':{'en': 'Jiamusi, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4f73\u6728\u65af\u5e02')},
  '861328455':{'en': 'Suihua, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u7ee5\u5316\u5e02')},
- '861328456':{'en': 'Heihe, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9ed1\u6cb3\u5e02')},
 }

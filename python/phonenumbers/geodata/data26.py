@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '917673':{'en': 'Nagod, Madhya Pradesh'},
  '917674':{'en': 'Maihar, Madhya Pradesh'},
  '917675':{'en': 'Amarpatan, Madhya Pradesh'},
  '917680':{'en': 'Niwari, Madhya Pradesh'},

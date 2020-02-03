@@ -1175,6 +1175,7 @@ data = {
  '1651':('America/Chicago',),
  '1657':('America/Los_Angeles',),
  '1658':('America/Jamaica',),
+ '1659':('America/Chicago',),
  '1660':('America/Chicago',),
  '1661':('America/Los_Angeles',),
  '1662':('America/Chicago',),

@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1925945':{'en': 'Walnut Creek, CA'},
  '1925946':{'en': 'Walnut Creek, CA'},
  '1925947':{'en': 'Walnut Creek, CA'},
  '1925952':{'en': 'Walnut Creek, CA'},
@@ -10018,5 +10019,4 @@ data = {
  '3324475':{'en': 'Blain', 'fr': 'Blain'},
  '3324476':{'en': 'Nantes', 'fr': 'Nantes'},
  '3324477':{'en': 'Nantes', 'fr': 'Nantes'},
- '3324478':{'en': 'Challans', 'fr': 'Challans'},
 }
