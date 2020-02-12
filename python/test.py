@@ -10,7 +10,8 @@ valid_strings = ['+6323168971',
                  '+84384813220',
                  '+84357659677',
                  '+56232512653',  # https://switchcomm.atlassian.net/browse/TEL-9285
-                 '+525547808256']
+                 '+525547808256',
+                 '+16892226575']
 
 print '######### - VALID BY LIBRARY - ################'
 for l in valid_strings:
@@ -36,7 +37,6 @@ for l in dialpad_cases:
 invalid_strings = ['+4916190899790',  # https://switchcomm.atlassian.net/browse/TEL-8824  Not Fixed
                    '+2022577744',
                    '+205739250',
-                   '+8412032453',  # https://switchcomm.atlassian.net/browse/DP-13742
                    ]
 
 print '######### - INVALID NUMBERS - ################'
