@@ -19,6 +19,12 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '79952116':{'en': 'Tele2', 'ru': 'Tele2'},
+ '79952117':{'en': 'Tele2', 'ru': 'Tele2'},
+ '7995213':{'en': 'Tele2', 'ru': 'Tele2'},
+ '799540':{'en': 'Tele2', 'ru': 'Tele2'},
+ '799541':{'en': 'Tele2', 'ru': 'Tele2'},
+ '799542':{'en': 'Tele2', 'ru': 'Tele2'},
  '799550':{'en': 'Tele2', 'ru': 'Tele2'},
  '799555':{'en': 'MegaFon', 'ru': u('\u041c\u0435\u0433\u0430\u0424\u043e\u043d')},
  '799559':{'en': 'Tele2', 'ru': 'Tele2'},
@@ -4365,9 +4371,7 @@ data = {
  '95947':{'en': 'MPT'},
  '95949':{'en': 'MPT'},
  '9595':{'en': 'MPT'},
- '959660':{'en': 'Mytel'},
- '959661':{'en': 'Mytel'},
- '959662':{'en': 'Mytel'},
+ '95966':{'en': 'Mytel'},
  '95967':{'en': 'Mytel'},
  '95968':{'en': 'Mytel'},
  '95969':{'en': 'MNTC'},
@@ -4676,6 +4680,7 @@ data = {
  '99366':{'en': 'MTS (BARASH Communication)'},
  '99367':{'en': 'MTS (BARASH Communication)'},
  '99369':{'en': 'MTS (BARASH Communication)'},
+ '99410':{'en': 'Azercell'},
  '99436554':{'en': 'Nakhtel'},
  '99440':{'en': 'FONEX'},
  '99444':{'en': 'Aztelekom'},

@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '553398439':{'en': 'Claro BR'},
+ '553398441':{'en': 'Claro BR'},
+ '553398442':{'en': 'Claro BR'},
+ '553398443':{'en': 'Claro BR'},
  '553398444':{'en': 'Claro BR'},
  '553398445':{'en': 'Claro BR'},
  '553398446':{'en': 'Claro BR'},
@@ -6494,7 +6498,8 @@ data = {
  '5623233':{'en': 'Entel'},
  '5623234':{'en': 'Entel'},
  '5623235':{'en': 'Entel'},
- '56233':{'en': 'Movistar'},
+ '562330':{'en': 'Movistar'},
+ '562332':{'en': 'Gtd Manquehue'},
  '56941':{'en': 'Movistar'},
  '56942':{'en': 'Entel'},
  '569430':{'en': 'Telestar'},
@@ -8947,6 +8952,7 @@ data = {
  '67987':{'en': 'Vodafone'},
  '67989':{'en': 'Vodafone'},
  '6799':{'en': 'Vodafone'},
+ '68045':{'en': 'PMCI'},
  '68077':{'en': 'PalauCel'},
  '68088':{'en': 'PalauTel'},
  '6825':{'en': 'Bluesky'},
@@ -10013,10 +10019,4 @@ data = {
  '79952113':{'en': 'Tele2', 'ru': 'Tele2'},
  '79952114':{'en': 'Tele2', 'ru': 'Tele2'},
  '79952115':{'en': 'Tele2', 'ru': 'Tele2'},
- '79952116':{'en': 'Tele2', 'ru': 'Tele2'},
- '79952117':{'en': 'Tele2', 'ru': 'Tele2'},
- '7995213':{'en': 'Tele2', 'ru': 'Tele2'},
- '799540':{'en': 'Tele2', 'ru': 'Tele2'},
- '799541':{'en': 'Tele2', 'ru': 'Tele2'},
- '799542':{'en': 'Tele2', 'ru': 'Tele2'},
 }

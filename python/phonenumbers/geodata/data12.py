@@ -2306,7 +2306,7 @@ data = {
  '68025':{'en': 'Sonsorol State and Hatohobei State'},
  '68027':{'en': 'Angaur State'},
  '6803':{'en': 'Peleliu State'},
- '6804':{'en': 'Koror State'},
+ '68048':{'en': 'Koror State'},
  '68053':{'en': 'Ngatpang State'},
  '68054':{'en': 'Aimeliik State'},
  '68058':{'en': 'Airai State'},
