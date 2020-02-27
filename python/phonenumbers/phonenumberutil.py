@@ -2286,7 +2286,7 @@ def _test_number_length(national_number, metadata, numtype=PhoneNumberType.UNKNO
         return ValidationResult.INVALID_LENGTH
 
     actual_length = len(national_number)
-    # This is safe because there is never an overlap beween the possible lengths and the local-only
+    # This is safe because there is never an overlap between the possible lengths and the local-only
     # lengths; this is checked at build time.
     if actual_length in local_lengths:
         return ValidationResult.IS_POSSIBLE_LOCAL_ONLY
