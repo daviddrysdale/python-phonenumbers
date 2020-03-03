@@ -8,4 +8,4 @@ PHONE_METADATA_SC = PhoneMetadata(id='SC', country_code=248, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='8000\\d{3}', example_number='8000000', possible_length=(7,)),
     voip=PhoneNumberDesc(national_number_pattern='971\\d{4}|(?:64|95)\\d{5}', example_number='6412345', possible_length=(7,)),
     preferred_international_prefix='00',
-    number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[246]'])])
+    number_format=[NumberFormat(pattern='(\\d)(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[246]|9[57]'])])

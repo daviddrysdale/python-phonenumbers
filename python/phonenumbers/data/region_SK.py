@@ -3,8 +3,8 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_SK = PhoneMetadata(id='SK', country_code=421, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-689]\\d{8}|[2-59]\\d{6}|[2-5]\\d{5}', possible_length=(6, 7, 9)),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:2(?:16|[2-9]\\d{3})|[3-5][1-8]\\d{3})\\d{4}|(?:2|[3-5][1-8])1[67]\\d{3}|[3-5][1-8]16\\d\\d', example_number='221234567', possible_length=(6, 7, 9)),
-    mobile=PhoneNumberDesc(national_number_pattern='909[1-9]\\d{5}|9(?:0[1-8]|1[0-24-9]|[45]\\d)\\d{6}', example_number='912123456', possible_length=(9,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:2(?:16|[2-9]\\d{3})|(?:(?:[3-5][1-8]\\d|819)\\d|601[1-5])\\d)\\d{4}|(?:2|[3-5][1-8])1[67]\\d{3}|[3-5][1-8]16\\d\\d', example_number='221234567', possible_length=(6, 7, 9)),
+    mobile=PhoneNumberDesc(national_number_pattern='909[1-9]\\d{5}|9(?:0[1-8]|1[0-24-9]|4[03-57-9]|5\\d)\\d{6}', example_number='912123456', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6}', example_number='800123456', possible_length=(9,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='9(?:00|[78]\\d)\\d{6}', example_number='900123456', possible_length=(9,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='8[5-9]\\d{7}', example_number='850123456', possible_length=(9,)),

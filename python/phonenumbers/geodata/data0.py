@@ -7704,6 +7704,7 @@ data = {
  '1361994':{'en': 'Corpus Christi, TX'},
  '1364':{'en': 'Kentucky'},
  '1365':{'en': 'Ontario'},
+ '1367':{'en': 'Quebec'},
  '1380':{'en': 'Ohio'},
  '1385':{'en': 'Utah'},
  '1386':{'en': 'Florida'},
@@ -10018,5 +10019,4 @@ data = {
  '1418332':{'en': 'Thetford Mines, QC'},
  '1418335':{'en': 'Thetford Mines, QC'},
  '1418337':{'en': 'Saint-Raymond, QC'},
- '1418338':{'en': 'Thetford Mines, QC'},
 }
