@@ -9,10 +9,7 @@ python:
   - "3.8"
   - "pypy3"
 sudo: false
-jobs:
-  include:
-    - python: "3.7"  # 3.7.0  pip 10.0.1
-      dist: xenial   # required for "3.7"
+dist: xenial
 install:
   - |
         if [ "$TRAVIS_PYTHON_VERSION" = "2.7" ]; then
