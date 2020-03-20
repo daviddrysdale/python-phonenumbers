@@ -1,4 +1,4 @@
-# Copyright (C) 2013 The Libphonenumber Authors
+# Copyright (C) 2020 The Libphonenumber Authors
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,9 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-856202|ETL
-856203|ETL
-856205|Lao Telecom
-856207|Beeline
-856209|Unitel
-856302|ETL
+970222|Jericho/Hebron
+970223|Jerusalem
+970227|Bethlehem
+970229|Ramallah/Al-Bireh
+970424|Jenin
+970820|Khan Yunis
+970821|Rafah
+970824|North Gaza
+970825|Deir al-Balah
+970826|Gaza
+970828|Gaza
+970923|Nablus
+970925|Tubas
+970926|Tulkarm
+970929|Qalqilya/Salfit
