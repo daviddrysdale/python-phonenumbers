@@ -1,17 +1,17 @@
 """Auto-generated file, do not edit by hand. CN metadata"""
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
-PHONE_METADATA_CN = PhoneMetadata(id='CN', country_code=86, international_prefix='00|1(?:[12]\\d|79|9[0235-7])\\d\\d00',
-    general_desc=PhoneNumberDesc(national_number_pattern='1[1279]\\d{8,9}|2\\d{9}(?:\\d{2})?|[12]\\d{6,7}|86\\d{6}|(?:1[03-68]\\d|6)\\d{7,9}|(?:[3-579]\\d|8[0-57-9])\\d{6,9}', possible_length=(7, 8, 9, 10, 11, 12), possible_length_local_only=(5, 6)),
+PHONE_METADATA_CN = PhoneMetadata(id='CN', country_code=86, international_prefix='00|1(?:[12]\\d|79)\\d\\d00',
+    general_desc=PhoneNumberDesc(national_number_pattern='1[127]\\d{8,9}|2\\d{9}(?:\\d{2})?|[12]\\d{6,7}|86\\d{6}|(?:1[03-689]\\d|6)\\d{7,9}|(?:[3-579]\\d|8[0-57-9])\\d{6,9}', possible_length=(7, 8, 9, 10, 11, 12), possible_length_local_only=(5, 6)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:10(?:[02-79]\\d\\d|[18](?:0[1-9]|[1-9]\\d))|21(?:[18](?:0[1-9]|[1-9]\\d)|[2-79]\\d\\d))\\d{5}|(?:43[35]|754)\\d{7,8}|8(?:078\\d{7}|51\\d{7,8})|(?:10|(?:2|85)1|43[35]|754)(?:100\\d\\d|95\\d{3,4})|(?:2[02-57-9]|3(?:11|7[179])|4(?:[15]1|3[12])|5(?:1\\d|2[37]|3[12]|51|7[13-79]|9[15])|7(?:[39]1|5[57]|6[09])|8(?:71|98))(?:[02-8]\\d{7}|1(?:0(?:0\\d\\d(?:\\d{3})?|[1-9]\\d{5})|[1-9]\\d{6})|9(?:[0-46-9]\\d{6}|5\\d{3}(?:\\d(?:\\d{2})?)?))|(?:3(?:1[02-9]|35|49|5\\d|7[02-68]|9[1-68])|4(?:1[02-9]|2[179]|3[46-9]|5[2-9]|6[47-9]|7\\d|8[23])|5(?:3[03-9]|4[36]|5[02-9]|6[1-46]|7[028]|80|9[2-46-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[17]\\d|2[248]|3[04-9]|4[3-6]|5[0-3689]|6[2368]|9[02-9])|8(?:1[236-8]|2[5-7]|3\\d|5[2-9]|7[02-9]|8[36-8]|9[1-7])|9(?:0[1-3689]|1[1-79]|[379]\\d|4[13]|5[1-5]))(?:[02-8]\\d{6}|1(?:0(?:0\\d\\d(?:\\d{2})?|[1-9]\\d{4})|[1-9]\\d{5})|9(?:[0-46-9]\\d{5}|5\\d{3,5}))', example_number='1012345678', possible_length=(7, 8, 9, 10, 11), possible_length_local_only=(5, 6)),
-    mobile=PhoneNumberDesc(national_number_pattern='1740[0-5]\\d{6}|1(?:[38]\\d|4[57]|5[0-35-9]|6[25-7]|7[0-35-8]|9[189])\\d{8}', example_number='13123456789', possible_length=(11,)),
+    mobile=PhoneNumberDesc(national_number_pattern='1740[0-5]\\d{6}|1(?:[38]\\d|4[57]|5[0-35-9]|6[25-7]|7[0-35-8]|9[0135-9])\\d{8}', example_number='13123456789', possible_length=(11,)),
     toll_free=PhoneNumberDesc(national_number_pattern='(?:(?:10|21)8|8)00\\d{7}', example_number='8001234567', possible_length=(10, 12)),
     premium_rate=PhoneNumberDesc(national_number_pattern='16[08]\\d{5}', example_number='16812345', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='400\\d{7}|950\\d{7,8}|(?:10|2[0-57-9]|3(?:[157]\\d|35|49|9[1-68])|4(?:[17]\\d|2[179]|[35][1-9]|6[47-9]|8[23])|5(?:[1357]\\d|2[37]|4[36]|6[1-46]|80|9[1-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]\\d|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:1[236-8]|2[5-7]|[37]\\d|5[14-9]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|[379]\\d|4[13]|5[1-5]))96\\d{3,4}', example_number='4001234567', possible_length=(7, 8, 9, 10, 11), possible_length_local_only=(5, 6)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='(?:(?:10|21)8|[48])00\\d{7}|950\\d{7,8}', possible_length=(10, 11, 12)),
     preferred_international_prefix='00',
     national_prefix='0',
-    national_prefix_for_parsing='0|(1(?:[12]\\d|79|9[0235-7])\\d\\d)',
+    national_prefix_for_parsing='0|(1(?:[12]\\d|79)\\d\\d)',
     number_format=[NumberFormat(pattern='(\\d{5,6})', format='\\1', leading_digits_pattern=['96']),
         NumberFormat(pattern='(\\d{2})(\\d{5,6})', format='\\1 \\2', leading_digits_pattern=['(?:10|2[0-57-9])[19]', '(?:10|2[0-57-9])(?:10|9[56])', '(?:10|2[0-57-9])(?:100|9[56])'], national_prefix_formatting_rule='0\\1', domestic_carrier_code_formatting_rule='$CC \\1'),
         NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['[1-9]', '1[1-9]|26|[3-9]|(?:10|2[0-57-9])(?:[0-8]|9[0-47-9])', '1[1-9]|26|[3-9]|(?:10|2[0-57-9])(?:[02-8]|1(?:0[1-9]|[1-9])|9[0-47-9])']),
