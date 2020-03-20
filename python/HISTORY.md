@@ -10,6 +10,14 @@ changes.  (Metadata updates are best checked
 [upstream](https://github.com/google/libphonenumber/blob/master/release_notes.txt).)
 
 
+What's new in 8.12.0
+---------------------
+
+Merge to
+[upstream commit fbfc3639d484](https://github.com/google/libphonenumber/commit/fbfc3639d484);
+just metadata changes.
+
+
 What's new in 8.11.0
 ---------------------
 
