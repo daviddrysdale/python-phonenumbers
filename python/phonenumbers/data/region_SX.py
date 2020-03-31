@@ -7,8 +7,9 @@ PHONE_METADATA_SX = PhoneMetadata(id='SX', country_code=1, international_prefix=
     mobile=PhoneNumberDesc(national_number_pattern='7215(?:1[02]|2\\d|5[034679]|8[014-8])\\d{4}', example_number='7215205678', possible_length=(10,), possible_length_local_only=(7,)),
     toll_free=PhoneNumberDesc(national_number_pattern='8(?:00|33|44|55|66|77|88)[2-9]\\d{6}', example_number='8002123456', possible_length=(10,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900[2-9]\\d{6}', example_number='9002123456', possible_length=(10,)),
-    personal_number=PhoneNumberDesc(national_number_pattern='5(?:00|2[12]|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
+    personal_number=PhoneNumberDesc(national_number_pattern='52(?:35(?:[02-46-9]\\d|1[02-9]|5[0-46-9])|45(?:[034]\\d|1[02-9]|2[024-9]|5[0-46-9]))\\d{4}|52(?:3[2-46-9]|4[2-4])(?:[02-9]\\d|1[02-9])\\d{4}|5(?:00|2[12]|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
     national_prefix='1',
     national_prefix_for_parsing='1|(5\\d{6})$',
     national_prefix_transform_rule='721\\1',
-    leading_digits='721')
+    leading_digits='721',
+    mobile_number_portable_region=True)
