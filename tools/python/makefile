@@ -64,11 +64,11 @@ COVERAGE=$(shell hash python-coverage 2>&- && echo python-coverage || echo cover
 COVERAGE_FILES=$(subst $(PYDIR),.,$(wildcard $(PYDIR)/phonenumbers/*.py))
 coverage: alldata $(PYDIR)/tests/testdata/__init__.py coverage_clean coverage_generate coverage_report
 coverage_clean:
-	cd $(PYDIR) && $(COVERAGE) -e
+	cd $(PYDIR) && $(COVERAGE) erase
 coverage_generate:
-	cd $(PYDIR) && $(COVERAGE) -x testwrapper.py
+	cd $(PYDIR) && PYTHONPATH=. $(COVERAGE) run testwrapper.py
 coverage_report:
-	cd $(PYDIR) && $(COVERAGE) -m -r $(COVERAGE_FILES)
+	cd $(PYDIR) && $(COVERAGE) report $(COVERAGE_FILES)
 coverage_annotate:
 	cd $(PYDIR) && $(COVERAGE) annotate $(COVERAGE_FILES)
 
