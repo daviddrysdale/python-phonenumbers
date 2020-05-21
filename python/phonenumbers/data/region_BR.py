@@ -10,7 +10,7 @@ PHONE_METADATA_BR = PhoneMetadata(id='BR', country_code=55, international_prefix
     shared_cost=PhoneNumberDesc(national_number_pattern='300\\d{7}|[34]00\\d{5}|4(?:02|37)0\\d{4}', example_number='40041234', possible_length=(8, 10)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='4020\\d{4}|[34]00\\d{5}', possible_length=(8,)),
     national_prefix='0',
-    national_prefix_for_parsing='0(?:(1[245]|2[1-35]|31|4[13]|[56]5|99)(\\d{10,11}))?',
+    national_prefix_for_parsing='(?:0|90)(?:(1[245]|2[1-35]|31|4[13]|[56]5|99)(\\d{10,11}))?',
     national_prefix_transform_rule='\\2',
     number_format=[NumberFormat(pattern='(\\d{3,6})', format='\\1', leading_digits_pattern=['1(?:1[25-8]|2[357-9]|3[02-68]|4[12568]|5|6[0-8]|8[015]|9[0-47-9])|321|610']),
         NumberFormat(pattern='(\\d{4})(\\d{4})', format='\\1-\\2', leading_digits_pattern=['300|4(?:0[02]|37)', '4(?:02|37)0|[34]00']),

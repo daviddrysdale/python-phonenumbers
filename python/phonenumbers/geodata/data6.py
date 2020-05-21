@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '495725':{'de': 'Lindhorst bei Stadthagen', 'en': 'Lindhorst bei Stadthagen'},
  '495726':{'de': 'Wiedensahl', 'en': 'Wiedensahl'},
  '495731':{'de': 'Bad Oeynhausen', 'en': 'Bad Oeynhausen'},
  '495732':{'de': u('L\u00f6hne'), 'en': u('L\u00f6hne')},
@@ -10019,4 +10018,5 @@ data = {
  '55513775':{'en': 'Pouso Novo - RS', 'pt': 'Pouso Novo - RS'},
  '55513776':{'en': 'Relvado - RS', 'pt': 'Relvado - RS'},
  '55513777':{'en': 'Putinga - RS', 'pt': 'Putinga - RS'},
+ '55513778':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
 }

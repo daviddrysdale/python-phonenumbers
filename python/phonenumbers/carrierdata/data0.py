@@ -786,6 +786,7 @@ data = {
  '21644':{'en': 'Tunisie Telecom'},
  '21645':{'en': 'Watany Ettisalat'},
  '21646':{'en': 'Ooredoo'},
+ '21647':{'en': 'Tunisie Telecom'},
  '2165':{'en': 'Orange'},
  '2169':{'en': 'Tunisie Telecom'},
  '21891':{'en': 'Al-Madar'},
@@ -10018,5 +10019,4 @@ data = {
  '553399124':{'en': 'TIM'},
  '553399125':{'en': 'TIM'},
  '553399126':{'en': 'TIM'},
- '553399127':{'en': 'TIM'},
 }

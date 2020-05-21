@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '1925754':{'en': 'Antioch, CA'},
  '1925755':{'en': 'Antioch, CA'},
  '1925756':{'en': 'Antioch, CA'},
  '1925757':{'en': 'Antioch, CA'},
@@ -10019,4 +10018,5 @@ data = {
  '3324406':{'en': 'Pornic', 'fr': 'Pornic'},
  '3324407':{'en': 'Saint-Nazaire', 'fr': 'Saint-Nazaire'},
  '3324408':{'en': u('Baug\u00e9-en-Anjou'), 'fr': u('Baug\u00e9-en-Anjou')},
+ '3324409':{'en': 'Cholet', 'fr': 'Cholet'},
 }

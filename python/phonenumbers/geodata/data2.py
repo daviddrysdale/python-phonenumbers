@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '1708226':{'en': 'Orland Park, IL'},
  '1708245':{'en': 'La Grange, IL'},
  '1708246':{'en': 'Western Springs, IL'},
  '1708258':{'en': 'Peotone, IL'},
@@ -7393,7 +7392,7 @@ data = {
  '1867':{'en': 'Northwest Territories/Nunavut/Yukon'},
  '1867393':{'en': 'Whitehorse, YT'},
  '1867456':{'en': 'Whitehorse, YT'},
- '1867536':{'en': 'Watson Lake Hospital'},
+ '1867536':{'en': 'Watson Lake'},
  '1867633':{'en': 'Whitehorse, YT'},
  '1867645':{'en': 'Rankin Inlet, NU'},
  '1867667':{'en': 'Whitehorse, YT'},
@@ -10019,4 +10018,5 @@ data = {
  '1925735':{'en': 'San Ramon, CA'},
  '1925736':{'en': 'Danville, CA'},
  '1925743':{'en': 'Danville, CA'},
+ '1925754':{'en': 'Antioch, CA'},
 }

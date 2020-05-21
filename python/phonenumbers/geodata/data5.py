@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '3522783':{'de': 'Vianden', 'en': 'Vianden', 'fr': 'Vianden'},
  '3522784':{'de': 'Han/Lesse', 'en': 'Han/Lesse', 'fr': 'Han/Lesse'},
  '3522785':{'de': 'Bissen/Roost', 'en': 'Bissen/Roost', 'fr': 'Bissen/Roost'},
  '3522787':{'de': 'Fels', 'en': 'Larochette', 'fr': 'Larochette'},
@@ -10019,4 +10018,5 @@ data = {
  '495722':{'de': u('B\u00fcckeburg'), 'en': u('B\u00fcckeburg')},
  '495723':{'de': 'Bad Nenndorf', 'en': 'Bad Nenndorf'},
  '495724':{'de': 'Obernkirchen', 'en': 'Obernkirchen'},
+ '495725':{'de': 'Lindhorst bei Stadthagen', 'en': 'Lindhorst bei Stadthagen'},
 }

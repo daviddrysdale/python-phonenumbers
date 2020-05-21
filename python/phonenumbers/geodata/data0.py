@@ -2519,7 +2519,6 @@ data = {
  '1242369':{'en': 'Andros'},
  '1242373':{'en': 'Grand Bahama'},
  '1242374':{'en': 'Grand Bahama'},
- '1242376':{'en': 'Grand Bahama'},
  '1242377':{'en': 'New Providence'},
  '124238':{'en': 'New Providence'},
  '1242392':{'en': 'New Providence'},
@@ -10019,4 +10018,5 @@ data = {
  '1418227':{'en': 'Saint-Georges, QC'},
  '1418228':{'en': 'Saint-Georges, QC'},
  '1418233':{'en': 'Les Escoumins, QC'},
+ '1418247':{'en': 'L\'Islet, QC'},
 }
