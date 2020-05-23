@@ -3,6 +3,7 @@
 *.class
 dist
 deb_dist
+.eggs
 MANIFEST
 phonenumbers*.egg-info
 build
