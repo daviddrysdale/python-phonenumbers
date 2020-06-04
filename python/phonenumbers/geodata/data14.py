@@ -5886,7 +5886,7 @@ data = {
  '819556':{'en': 'Karatsu, Saga', 'ja': u('\u5510\u6d25')},
  '819557':{'en': 'Karatsu, Saga', 'ja': u('\u5510\u6d25')},
  '819558':{'en': 'Karatsu, Saga', 'ja': u('\u5510\u6d25')},
- '81956':{'en': 'Sasebo, Japan', 'ja': u('\u4f50\u4e16\u4fdd')},
+ '81956':{'en': 'Sasebo, Nagasaki', 'ja': u('\u4f50\u4e16\u4fdd')},
  '819572':{'en': 'Isahaya, Nagasaki', 'ja': u('\u8aeb\u65e9')},
  '819573':{'en': 'Isahaya, Nagasaki', 'ja': u('\u8aeb\u65e9')},
  '819574':{'en': 'Isahaya, Nagasaki', 'ja': u('\u8aeb\u65e9')},
