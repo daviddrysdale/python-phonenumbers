@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3522781':{'de': u('Ettelbr\u00fcck/Reckange-sur-Mess'), 'en': 'Ettelbruck/Reckange-sur-Mess', 'fr': 'Ettelbruck/Reckange-sur-Mess'},
+ '3522783':{'de': 'Vianden', 'en': 'Vianden', 'fr': 'Vianden'},
  '3522784':{'de': 'Han/Lesse', 'en': 'Han/Lesse', 'fr': 'Han/Lesse'},
  '3522785':{'de': 'Bissen/Roost', 'en': 'Bissen/Roost', 'fr': 'Bissen/Roost'},
  '3522787':{'de': 'Fels', 'en': 'Larochette', 'fr': 'Larochette'},
@@ -3860,7 +3862,7 @@ data = {
  '3804742':{'en': 'Katerinopil, Cherkasy', 'uk': u('\u041a\u0430\u0442\u0435\u0440\u0438\u043d\u043e\u043f\u0456\u043b\u044c, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804744':{'en': 'Uman, Cherkasy', 'uk': u('\u0423\u043c\u0430\u043d\u044c, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804745':{'en': 'Khrystynivka, Cherkasy', 'uk': u('\u0425\u0440\u0438\u0441\u0442\u0438\u043d\u0456\u0432\u043a\u0430, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
- '3804746':{'en': 'Monastir, Cherkasy', 'uk': u('\u041c\u043e\u043d\u0430\u0441\u0442\u0438\u0440\u0438\u0449\u0435, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
+ '3804746':{'en': 'Monastyrysche, Cherkasy', 'uk': u('\u041c\u043e\u043d\u0430\u0441\u0442\u0438\u0440\u0438\u0449\u0435, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804747':{'en': 'Zhashkiv, Cherkasy', 'uk': u('\u0416\u0430\u0448\u043a\u0456\u0432, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804748':{'en': 'Mankivka, Cherkasy', 'uk': u('\u041c\u0430\u043d\u044c\u043a\u0456\u0432\u043a\u0430, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804749':{'en': 'Lysyanka, Cherkasy', 'uk': u('\u041b\u0438\u0441\u044f\u043d\u043a\u0430, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
@@ -10017,6 +10019,4 @@ data = {
  '495721':{'de': 'Stadthagen', 'en': 'Stadthagen'},
  '495722':{'de': u('B\u00fcckeburg'), 'en': u('B\u00fcckeburg')},
  '495723':{'de': 'Bad Nenndorf', 'en': 'Bad Nenndorf'},
- '495724':{'de': 'Obernkirchen', 'en': 'Obernkirchen'},
- '495725':{'de': 'Lindhorst bei Stadthagen', 'en': 'Lindhorst bei Stadthagen'},
 }

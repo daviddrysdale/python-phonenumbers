@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3324408':{'en': u('Baug\u00e9-en-Anjou'), 'fr': u('Baug\u00e9-en-Anjou')},
+ '3324409':{'en': 'Cholet', 'fr': 'Cholet'},
  '3324410':{'en': 'Angers', 'fr': 'Angers'},
  '3324411':{'en': u('Baug\u00e9-en-Anjou'), 'fr': u('Baug\u00e9-en-Anjou')},
  '3324412':{'en': 'Beaumont-sur-Sarthe', 'fr': 'Beaumont-sur-Sarthe'},
@@ -10017,6 +10019,4 @@ data = {
  '3522778':{'de': 'Junglinster', 'en': 'Junglinster', 'fr': 'Junglinster'},
  '3522779':{'de': 'Berdorf/Consdorf', 'en': 'Berdorf/Consdorf', 'fr': 'Berdorf/Consdorf'},
  '3522780':{'de': 'Diekirch', 'en': 'Diekirch', 'fr': 'Diekirch'},
- '3522781':{'de': u('Ettelbr\u00fcck/Reckange-sur-Mess'), 'en': 'Ettelbruck/Reckange-sur-Mess', 'fr': 'Ettelbruck/Reckange-sur-Mess'},
- '3522783':{'de': 'Vianden', 'en': 'Vianden', 'fr': 'Vianden'},
 }

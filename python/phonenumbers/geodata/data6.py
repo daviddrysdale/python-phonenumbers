@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '495724':{'de': 'Obernkirchen', 'en': 'Obernkirchen'},
+ '495725':{'de': 'Lindhorst bei Stadthagen', 'en': 'Lindhorst bei Stadthagen'},
  '495726':{'de': 'Wiedensahl', 'en': 'Wiedensahl'},
  '495731':{'de': 'Bad Oeynhausen', 'en': 'Bad Oeynhausen'},
  '495732':{'de': u('L\u00f6hne'), 'en': u('L\u00f6hne')},
@@ -2293,7 +2295,7 @@ data = {
  '5042257':{'en': 'Prados Universitarios'},
  '5042290':{'en': 'Toncontin'},
  '5042291':{'en': 'Toncontin'},
- '504240':{'en': u('Roat\u00e1n, Bay Islands')},
+ '5042407':{'en': u('Roat\u00e1n, Bay Islands')},
  '5042423':{'en': 'La Ceiba'},
  '5042424':{'en': u('Sab\u00e1')},
  '5042425':{'en': 'Utila, Bay Islands'},
@@ -10017,6 +10019,4 @@ data = {
  '55513774':{'en': u('Il\u00f3polis - RS'), 'pt': u('Il\u00f3polis - RS')},
  '55513775':{'en': 'Pouso Novo - RS', 'pt': 'Pouso Novo - RS'},
  '55513776':{'en': 'Relvado - RS', 'pt': 'Relvado - RS'},
- '55513777':{'en': 'Putinga - RS', 'pt': 'Putinga - RS'},
- '55513778':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
 }

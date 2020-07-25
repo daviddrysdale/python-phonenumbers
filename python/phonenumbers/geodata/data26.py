@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861855865':{'en': 'Sanming, Fujian', 'zh': u('\u798f\u5efa\u7701\u4e09\u660e\u5e02')},
+ '861855866':{'en': 'Xiamen, Fujian', 'zh': u('\u798f\u5efa\u7701\u53a6\u95e8\u5e02')},
  '861855867':{'en': 'Xiamen, Fujian', 'zh': u('\u798f\u5efa\u7701\u53a6\u95e8\u5e02')},
  '861855868':{'en': 'Quanzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6cc9\u5dde\u5e02')},
  '861855869':{'en': 'Quanzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6cc9\u5dde\u5e02')},
@@ -10017,6 +10019,4 @@ data = {
  '86188282':{'en': 'Chengdu, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u6210\u90fd\u5e02')},
  '861882830':{'en': 'Chengdu, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u6210\u90fd\u5e02')},
  '861882831':{'en': 'Chengdu, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u6210\u90fd\u5e02')},
- '861882832':{'en': 'Chengdu, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u6210\u90fd\u5e02')},
- '861882833':{'en': 'Chengdu, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u6210\u90fd\u5e02')},
 }

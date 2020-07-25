@@ -6584,6 +6584,7 @@ data = {
  '1325944':{'en': 'San Angelo, TX'},
  '1325947':{'en': 'San Angelo, TX'},
  '1325949':{'en': 'San Angelo, TX'},
+ '1326':{'en': 'Ohio'},
  '1330':{'en': 'Ohio'},
  '1330220':{'en': 'Brunswick, OH'},
  '1330225':{'en': 'Brunswick, OH'},
@@ -10018,5 +10019,4 @@ data = {
  '1418227':{'en': 'Saint-Georges, QC'},
  '1418228':{'en': 'Saint-Georges, QC'},
  '1418233':{'en': 'Les Escoumins, QC'},
- '1418247':{'en': 'L\'Islet, QC'},
 }

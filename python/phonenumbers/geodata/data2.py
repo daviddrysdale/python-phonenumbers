@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1708226':{'en': 'Orland Park, IL'},
  '1708245':{'en': 'La Grange, IL'},
  '1708246':{'en': 'Western Springs, IL'},
  '1708258':{'en': 'Peotone, IL'},
@@ -5939,6 +5940,7 @@ data = {
  '1832912':{'en': 'Houston, TX'},
  '1832934':{'en': 'Magnolia, TX'},
  '1838':{'en': 'New York'},
+ '1839':{'en': 'South Carolina'},
  '1843':{'en': 'South Carolina'},
  '1843207':{'en': 'North Charleston, SC'},
  '1843208':{'en': 'Hardeeville, SC'},
@@ -10017,6 +10019,4 @@ data = {
  '1925734':{'en': 'Pleasanton, CA'},
  '1925735':{'en': 'San Ramon, CA'},
  '1925736':{'en': 'Danville, CA'},
- '1925743':{'en': 'Danville, CA'},
- '1925754':{'en': 'Antioch, CA'},
 }
