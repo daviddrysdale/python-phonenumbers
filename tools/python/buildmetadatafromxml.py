@@ -483,7 +483,9 @@ class XTerritory(UnicodeMixin):
             if desc.possible_length_local_only is not None:
                 local_lengths.update(desc.possible_length_local_only)
         self.o.general_desc.possible_length = sorted(list(possible_lengths))
-        self.o.general_desc.possible_length_local_only = sorted(list(local_lengths))
+        # Check that the local-only length isn't also a normal possible length (for
+        # the general-desc) before adding it to the collection of possible local-only lengths.
+        self.o.general_desc.possible_length_local_only = sorted(list(local_lengths - possible_lengths))
         if -1 in self.o.general_desc.possible_length:
             raise Exception("Found -1 length in general_desc.possible_length")
         if -1 in self.o.general_desc.possible_length_local_only:
