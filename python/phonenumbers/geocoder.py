@@ -73,7 +73,7 @@ __all__ = ['country_name_for_number', 'description_for_valid_number', 'descripti
 
 
 def country_name_for_number(numobj, lang, script=None, region=None):
-    """Returns the customary display name in the given langauge for the given
+    """Returns the customary display name in the given language for the given
     territory the given PhoneNumber object is from.  If it could be from many
     territories, nothing is returned.
 
