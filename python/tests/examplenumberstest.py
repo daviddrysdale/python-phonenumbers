@@ -327,3 +327,8 @@ class ExampleNumbersTest(unittest.TestCase):
         short_metadata = PhoneMetadata.short_metadata_for_region("GB")
         result = str(short_metadata)
         self.assertTrue(result.startswith("PhoneMetadata(id='GB', country_code=None, international_prefix=None"))
+
+    def testGBLocalNumberLength(self):
+        # Python version extra test.  Issue #172.
+        numobj = phonenumberutil.parse("+4408001111", "GB")
+        self.assertEqual("+44 800 1111", phonenumberutil.format_number(numobj, phonenumberutil.PhoneNumberFormat.INTERNATIONAL))
