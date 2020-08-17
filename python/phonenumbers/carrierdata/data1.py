@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '553398429':{'en': 'Claro BR'},
+ '553398431':{'en': 'Claro BR'},
+ '553398432':{'en': 'Claro BR'},
+ '553398433':{'en': 'Claro BR'},
+ '553398434':{'en': 'Claro BR'},
+ '553398435':{'en': 'Claro BR'},
+ '553398436':{'en': 'Claro BR'},
+ '553398437':{'en': 'Claro BR'},
  '553398438':{'en': 'Claro BR'},
  '553398439':{'en': 'Claro BR'},
  '553398441':{'en': 'Claro BR'},
@@ -10011,12 +10019,4 @@ data = {
  '5939792':{'en': 'Movistar'},
  '5939793':{'en': 'Movistar'},
  '59398':{'en': 'Claro'},
- '5939820':{'en': 'CNT'},
- '5939821':{'en': 'CNT'},
- '5939822':{'en': 'CNT'},
- '5939823':{'en': 'CNT'},
- '5939824':{'en': 'CNT'},
- '593983':{'en': 'Movistar'},
- '593984':{'en': 'Movistar'},
- '593987':{'en': 'Movistar'},
 }

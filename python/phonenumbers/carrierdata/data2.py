@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '5939820':{'en': 'CNT'},
+ '5939821':{'en': 'CNT'},
+ '5939822':{'en': 'CNT'},
+ '5939823':{'en': 'CNT'},
+ '5939824':{'en': 'CNT'},
+ '593983':{'en': 'Movistar'},
+ '593984':{'en': 'Movistar'},
+ '593987':{'en': 'Movistar'},
  '593990':{'en': 'Claro'},
  '593991':{'en': 'Claro'},
  '5939920':{'en': 'Claro'},
@@ -684,6 +692,7 @@ data = {
  '642899':{'en': 'Devoli'},
  '6429':{'en': 'Vodafone'},
  '65801':{'en': 'TPG'},
+ '65803':{'en': 'SingTel'},
  '6581':{'en': 'StarHub'},
  '65810':{'en': 'M1'},
  '65812':{'en': 'SingTel'},
