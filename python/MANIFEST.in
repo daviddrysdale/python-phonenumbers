@@ -1,2 +1,3 @@
 recursive-include tests *.py
 include HISTORY.md
+include LICENSE
