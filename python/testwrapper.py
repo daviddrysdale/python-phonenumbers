@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+"""
+Wrapper script for executing all phonenumbers tests.
+"""
 import doctest
 import unittest
 import phonenumbers
