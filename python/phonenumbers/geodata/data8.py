@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61240057':{'en': 'Clarence Town'},
+ '61240058':{'en': 'Dungog'},
+ '61240059':{'en': 'East Gresford'},
+ '61240060':{'en': 'Eccleston'},
+ '61240061':{'en': 'Karuah'},
+ '61240062':{'en': 'Laguna'},
+ '61240063':{'en': 'Maitland'},
+ '61240064':{'en': 'Mulbring'},
  '61240065':{'en': 'Nelson Bay'},
  '61240066':{'en': 'Raymond Terrace'},
  '61240067':{'en': 'Stroud'},
@@ -10011,12 +10019,4 @@ data = {
  '61263696':{'en': 'Molong'},
  '6126370':{'en': 'Mudgee'},
  '61263701':{'en': 'Twelve Mile'},
- '61263702':{'en': 'Wollar'},
- '61263703':{'en': 'Dunedoo'},
- '61263704':{'en': 'Windeyer'},
- '61263710':{'en': 'Wollar'},
- '61263711':{'en': 'Wollar'},
- '61263712':{'en': 'Wollar'},
- '61263713':{'en': 'Gulgong'},
- '61263714':{'en': 'Gulgong'},
 }

@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861306989':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
+ '861306990':{'en': 'Shuangyashan, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u53cc\u9e2d\u5c71\u5e02')},
+ '861306991':{'en': 'Shuangyashan, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u53cc\u9e2d\u5c71\u5e02')},
+ '861306992':{'en': 'Jiamusi, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4f73\u6728\u65af\u5e02')},
+ '861306993':{'en': 'Jiamusi, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4f73\u6728\u65af\u5e02')},
+ '861306994':{'en': 'Hegang, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9e64\u5c97\u5e02')},
+ '861306995':{'en': 'Hegang, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9e64\u5c97\u5e02')},
+ '861306996':{'en': 'Suihua, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u7ee5\u5316\u5e02')},
  '861306997':{'en': 'Qiqihar, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9f50\u9f50\u54c8\u5c14\u5e02')},
  '861306998':{'en': 'Qiqihar, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9f50\u9f50\u54c8\u5c14\u5e02')},
  '861306999':{'en': 'Qiqihar, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9f50\u9f50\u54c8\u5c14\u5e02')},
@@ -10011,12 +10019,4 @@ data = {
  '861323931':{'en': 'Lanzhou, Gansu', 'zh': u('\u7518\u8083\u7701\u5170\u5dde\u5e02')},
  '861323932':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
  '861323933':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
- '861323934':{'en': 'Qingyang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e86\u9633\u5e02')},
- '861323935':{'en': 'Jinchang, Gansu', 'zh': u('\u7518\u8083\u7701\u91d1\u660c\u5e02')},
- '861323936':{'en': 'Zhangye, Gansu', 'zh': u('\u7518\u8083\u7701\u5f20\u6396\u5e02')},
- '861323937':{'en': 'Jiuquan, Gansu', 'zh': u('\u7518\u8083\u7701\u9152\u6cc9\u5e02')},
- '861323938':{'en': 'Tianshui, Gansu', 'zh': u('\u7518\u8083\u7701\u5929\u6c34\u5e02')},
- '861323939':{'en': 'Longnan, Gansu', 'zh': u('\u7518\u8083\u7701\u9647\u5357\u5e02')},
- '861323940':{'en': 'Jiayuguan, Gansu', 'zh': u('\u7518\u8083\u7701\u5609\u5cea\u5173\u5e02')},
- '861323941':{'en': 'Gannan, Gansu', 'zh': u('\u7518\u8083\u7701\u7518\u5357\u85cf\u65cf\u81ea\u6cbb\u5dde')},
 }

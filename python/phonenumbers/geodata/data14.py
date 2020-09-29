@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '6189921':{'en': 'Geraldton'},
+ '61899220':{'en': 'Geraldton'},
+ '61899221':{'en': 'Cue'},
+ '61899222':{'en': 'Lake Mason'},
+ '61899223':{'en': 'Mendel'},
+ '61899224':{'en': 'Mount Magnet'},
+ '61899225':{'en': 'Mullewa'},
+ '61899226':{'en': 'Pindar South'},
  '61899227':{'en': 'Carnamah'},
  '618992278':{'en': 'Arrowsmith'},
  '618992279':{'en': 'Balla'},
@@ -10011,12 +10019,4 @@ data = {
  '861306986':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
  '861306987':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
  '861306988':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
- '861306989':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
- '861306990':{'en': 'Shuangyashan, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u53cc\u9e2d\u5c71\u5e02')},
- '861306991':{'en': 'Shuangyashan, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u53cc\u9e2d\u5c71\u5e02')},
- '861306992':{'en': 'Jiamusi, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4f73\u6728\u65af\u5e02')},
- '861306993':{'en': 'Jiamusi, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4f73\u6728\u65af\u5e02')},
- '861306994':{'en': 'Hegang, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9e64\u5c97\u5e02')},
- '861306995':{'en': 'Hegang, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9e64\u5c97\u5e02')},
- '861306996':{'en': 'Suihua, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u7ee5\u5316\u5e02')},
 }

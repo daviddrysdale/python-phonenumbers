@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61350175':{'en': 'Underbool'},
+ '61350176':{'en': 'Swan Hill'},
+ '61350177':{'en': 'Ultima'},
+ '61350178':{'en': 'Waitchie'},
+ '61350179':{'en': 'Berriwillock'},
+ '6135018':{'en': 'Mildura'},
+ '61350190':{'en': 'Culgoa'},
+ '61350191':{'en': 'Cunninyeuk'},
  '61350192':{'en': 'Kyalite'},
  '61350193':{'en': 'Mallan'},
  '61350194':{'en': 'Manangatang'},
@@ -10011,12 +10019,4 @@ data = {
  '6139732':{'en': 'Sunbury'},
  '6139734':{'en': 'Werribee'},
  '6139740':{'en': 'Sunbury'},
- '6139741':{'en': 'Werribee'},
- '6139742':{'en': 'Werribee'},
- '6139743':{'en': 'Sunbury'},
- '6139744':{'en': 'Sunbury'},
- '6139745':{'en': 'Kalkallo'},
- '6139746':{'en': 'Sunbury'},
- '6139747':{'en': 'Sunbury'},
- '6139748':{'en': 'Werribee'},
 }

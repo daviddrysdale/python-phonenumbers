@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61885749':{'en': 'Victor Harbor'},
+ '61885750':{'en': 'Meningie'},
+ '61885751':{'en': 'Meningie'},
+ '61885752':{'en': 'Meningie'},
+ '61885753':{'en': 'Policemans Point'},
+ '61885754':{'en': 'Meningie'},
+ '61885755':{'en': 'Meningie East'},
+ '61885756':{'en': 'Meningie East'},
  '61885757':{'en': 'Policemans Point'},
  '61885758':{'en': 'Culburra'},
  '61885759':{'en': 'Culburra'},
@@ -10011,12 +10019,4 @@ data = {
  '61899207':{'en': 'Geraldton'},
  '61899208':{'en': 'Geraldton'},
  '61899209':{'en': 'Geraldton'},
- '6189921':{'en': 'Geraldton'},
- '61899220':{'en': 'Geraldton'},
- '61899221':{'en': 'Cue'},
- '61899222':{'en': 'Lake Mason'},
- '61899223':{'en': 'Mendel'},
- '61899224':{'en': 'Mount Magnet'},
- '61899225':{'en': 'Mullewa'},
- '61899226':{'en': 'Pindar South'},
 }

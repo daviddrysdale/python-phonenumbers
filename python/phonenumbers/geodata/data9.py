@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61263702':{'en': 'Wollar'},
+ '61263703':{'en': 'Dunedoo'},
+ '61263704':{'en': 'Windeyer'},
+ '61263710':{'en': 'Wollar'},
+ '61263711':{'en': 'Wollar'},
+ '61263712':{'en': 'Wollar'},
+ '61263713':{'en': 'Gulgong'},
+ '61263714':{'en': 'Gulgong'},
  '61263715':{'en': 'Mudgee'},
  '61263716':{'en': 'Mudgee'},
  '61263717':{'en': 'Mudgee'},
@@ -10011,12 +10019,4 @@ data = {
  '61350172':{'en': 'Woomelang'},
  '61350173':{'en': 'Ouyen'},
  '61350174':{'en': 'Tempy'},
- '61350175':{'en': 'Underbool'},
- '61350176':{'en': 'Swan Hill'},
- '61350177':{'en': 'Ultima'},
- '61350178':{'en': 'Waitchie'},
- '61350179':{'en': 'Berriwillock'},
- '6135018':{'en': 'Mildura'},
- '61350190':{'en': 'Culgoa'},
- '61350191':{'en': 'Cunninyeuk'},
 }

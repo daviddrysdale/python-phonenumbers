@@ -7,7 +7,7 @@ Generated from java.util.Locale, generation info:
   java.vendor=AdoptOpenJDK
   os.name=Mac OS X
   os.arch=x86_64
-  os.version=10.15.5
+  os.version=10.15.6
 
 Auto-generated file, do not edit by hand.
 """
