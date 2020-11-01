@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861323920':{'en': 'YanAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u5ef6\u5b89\u5e02')},
+ '861323921':{'en': 'YanAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u5ef6\u5b89\u5e02')},
+ '861323922':{'en': 'YanAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u5ef6\u5b89\u5e02')},
+ '861323923':{'en': 'YanAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u5ef6\u5b89\u5e02')},
+ '861323930':{'en': 'Linxia, Gansu', 'zh': u('\u7518\u8083\u7701\u4e34\u590f\u56de\u65cf\u81ea\u6cbb\u5dde')},
+ '861323931':{'en': 'Lanzhou, Gansu', 'zh': u('\u7518\u8083\u7701\u5170\u5dde\u5e02')},
+ '861323932':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
+ '861323933':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
  '861323934':{'en': 'Qingyang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e86\u9633\u5e02')},
  '861323935':{'en': 'Jinchang, Gansu', 'zh': u('\u7518\u8083\u7701\u91d1\u660c\u5e02')},
  '861323936':{'en': 'Zhangye, Gansu', 'zh': u('\u7518\u8083\u7701\u5f20\u6396\u5e02')},
@@ -10011,12 +10019,4 @@ data = {
  '861340350':{'en': 'Xinzhou, Shanxi', 'zh': u('\u5c71\u897f\u7701\u5ffb\u5dde\u5e02')},
  '861340351':{'en': 'Taiyuan, Shanxi', 'zh': u('\u5c71\u897f\u7701\u592a\u539f\u5e02')},
  '861340352':{'en': 'Datong, Shanxi', 'zh': u('\u5c71\u897f\u7701\u5927\u540c\u5e02')},
- '861340353':{'en': 'Yangquan, Shanxi', 'zh': u('\u5c71\u897f\u7701\u9633\u6cc9\u5e02')},
- '861340354':{'en': 'Jinzhong, Shanxi', 'zh': u('\u5c71\u897f\u7701\u664b\u4e2d\u5e02')},
- '861340355':{'en': 'Changzhi, Shanxi', 'zh': u('\u5c71\u897f\u7701\u957f\u6cbb\u5e02')},
- '861340356':{'en': 'Jincheng, Shanxi', 'zh': u('\u5c71\u897f\u7701\u664b\u57ce\u5e02')},
- '861340357':{'en': 'Linfen, Shanxi', 'zh': u('\u5c71\u897f\u7701\u4e34\u6c7e\u5e02')},
- '861340358':{'en': u('L\u00fcliang, Shanxi'), 'zh': u('\u5c71\u897f\u7701\u5415\u6881\u5e02')},
- '861340359':{'en': 'Yuncheng, Shanxi', 'zh': u('\u5c71\u897f\u7701\u8fd0\u57ce\u5e02')},
- '861340360':{'en': 'Datong, Shanxi', 'zh': u('\u5c71\u897f\u7701\u5927\u540c\u5e02')},
 }

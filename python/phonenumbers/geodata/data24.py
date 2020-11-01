@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861785879':{'en': 'Jiaxing, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u5609\u5174\u5e02')},
+ '861785880':{'en': 'Zhoushan, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u821f\u5c71\u5e02')},
+ '861785881':{'en': 'Jiaxing, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u5609\u5174\u5e02')},
+ '861785882':{'en': 'Jiaxing, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u5609\u5174\u5e02')},
+ '861785883':{'en': 'Hangzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u676d\u5dde\u5e02')},
+ '861785884':{'en': 'Hangzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u676d\u5dde\u5e02')},
+ '861785885':{'en': 'Hangzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u676d\u5dde\u5e02')},
+ '861785886':{'en': 'Hangzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u676d\u5dde\u5e02')},
  '861785887':{'en': 'Ningbo, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u5b81\u6ce2\u5e02')},
  '861785888':{'en': 'Ningbo, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u5b81\u6ce2\u5e02')},
  '861785889':{'en': 'Ningbo, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u5b81\u6ce2\u5e02')},
@@ -10011,12 +10019,4 @@ data = {
  '861820349':{'en': 'Shuozhou, Shanxi', 'zh': u('\u5c71\u897f\u7701\u6714\u5dde\u5e02')},
  '861820350':{'en': 'Xinzhou, Shanxi', 'zh': u('\u5c71\u897f\u7701\u5ffb\u5dde\u5e02')},
  '861820351':{'en': 'Taiyuan, Shanxi', 'zh': u('\u5c71\u897f\u7701\u592a\u539f\u5e02')},
- '861820352':{'en': 'Datong, Shanxi', 'zh': u('\u5c71\u897f\u7701\u5927\u540c\u5e02')},
- '861820353':{'en': 'Yangquan, Shanxi', 'zh': u('\u5c71\u897f\u7701\u9633\u6cc9\u5e02')},
- '861820354':{'en': 'Jinzhong, Shanxi', 'zh': u('\u5c71\u897f\u7701\u664b\u4e2d\u5e02')},
- '861820355':{'en': 'Changzhi, Shanxi', 'zh': u('\u5c71\u897f\u7701\u957f\u6cbb\u5e02')},
- '861820356':{'en': 'Jincheng, Shanxi', 'zh': u('\u5c71\u897f\u7701\u664b\u57ce\u5e02')},
- '861820357':{'en': 'Linfen, Shanxi', 'zh': u('\u5c71\u897f\u7701\u4e34\u6c7e\u5e02')},
- '861820358':{'en': u('L\u00fcliang, Shanxi'), 'zh': u('\u5c71\u897f\u7701\u5415\u6881\u5e02')},
- '861820359':{'en': 'Yuncheng, Shanxi', 'zh': u('\u5c71\u897f\u7701\u8fd0\u57ce\u5e02')},
 }

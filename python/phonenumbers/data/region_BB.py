@@ -7,7 +7,7 @@ PHONE_METADATA_BB = PhoneMetadata(id='BB', country_code=1, international_prefix=
     mobile=PhoneNumberDesc(national_number_pattern='246(?:2(?:[3568]\\d|4[0-57-9])|45\\d|69[5-7]|8(?:[2-5]\\d|83))\\d{4}', example_number='2462501234', possible_length=(10,), possible_length_local_only=(7,)),
     toll_free=PhoneNumberDesc(national_number_pattern='8(?:00|33|44|55|66|77|88)[2-9]\\d{6}', example_number='8002123456', possible_length=(10,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='(?:246976|900[2-9]\\d\\d)\\d{4}', example_number='9002123456', possible_length=(10,), possible_length_local_only=(7,)),
-    personal_number=PhoneNumberDesc(national_number_pattern='52(?:35(?:[02-46-9]\\d|1[02-9]|5[0-46-9])|45(?:[034]\\d|1[02-9]|2[024-9]|5[0-46-9]))\\d{4}|52(?:3[2-46-9]|4[2-4])(?:[02-9]\\d|1[02-9])\\d{4}|5(?:00|2[12]|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
+    personal_number=PhoneNumberDesc(national_number_pattern='52(?:3(?:[2-46-9][02-9]\\d|5(?:[02-46-9]\\d|5[0-46-9]))|4(?:[2-478][02-9]\\d|5(?:[034]\\d|2[024-9]|5[0-46-9])|6(?:0[1-9]|[2-9]\\d)|9(?:[05-9]\\d|2[0-5]|49)))\\d{4}|52[34][2-9]1[02-9]\\d{4}|5(?:00|2[12]|33|44|66|77|88)[2-9]\\d{6}', example_number='5002345678', possible_length=(10,)),
     voip=PhoneNumberDesc(national_number_pattern='24631\\d{5}', example_number='2463101234', possible_length=(10,), possible_length_local_only=(7,)),
     uan=PhoneNumberDesc(national_number_pattern='246(?:292|367|4(?:1[7-9]|3[01]|44|67)|7(?:36|53))\\d{4}', example_number='2464301234', possible_length=(10,), possible_length_local_only=(7,)),
     national_prefix='1',

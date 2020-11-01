@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861306981':{'en': 'Jixi, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u9e21\u897f\u5e02')},
+ '861306982':{'en': 'Mudanjiang, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u7261\u4e39\u6c5f\u5e02')},
+ '861306983':{'en': 'Mudanjiang, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u7261\u4e39\u6c5f\u5e02')},
+ '861306984':{'en': 'Qitaihe, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4e03\u53f0\u6cb3\u5e02')},
+ '861306985':{'en': 'Qitaihe, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u4e03\u53f0\u6cb3\u5e02')},
+ '861306986':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
+ '861306987':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
+ '861306988':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
  '861306989':{'en': 'Harbin, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u54c8\u5c14\u6ee8\u5e02')},
  '861306990':{'en': 'Shuangyashan, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u53cc\u9e2d\u5c71\u5e02')},
  '861306991':{'en': 'Shuangyashan, Heilongjiang', 'zh': u('\u9ed1\u9f99\u6c5f\u7701\u53cc\u9e2d\u5c71\u5e02')},
@@ -10011,12 +10019,4 @@ data = {
  '861323918':{'en': 'YanAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u5ef6\u5b89\u5e02')},
  '861323919':{'en': 'Tongchuan, Shaanxi', 'zh': u('\u9655\u897f\u7701\u94dc\u5ddd\u5e02')},
  '86132392':{'en': 'Yulin, Shaanxi', 'zh': u('\u9655\u897f\u7701\u6986\u6797\u5e02')},
- '861323920':{'en': 'YanAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u5ef6\u5b89\u5e02')},
- '861323921':{'en': 'YanAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u5ef6\u5b89\u5e02')},
- '861323922':{'en': 'YanAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u5ef6\u5b89\u5e02')},
- '861323923':{'en': 'YanAn, Shaanxi', 'zh': u('\u9655\u897f\u7701\u5ef6\u5b89\u5e02')},
- '861323930':{'en': 'Linxia, Gansu', 'zh': u('\u7518\u8083\u7701\u4e34\u590f\u56de\u65cf\u81ea\u6cbb\u5dde')},
- '861323931':{'en': 'Lanzhou, Gansu', 'zh': u('\u7518\u8083\u7701\u5170\u5dde\u5e02')},
- '861323932':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
- '861323933':{'en': 'Pingliang, Gansu', 'zh': u('\u7518\u8083\u7701\u5e73\u51c9\u5e02')},
 }
