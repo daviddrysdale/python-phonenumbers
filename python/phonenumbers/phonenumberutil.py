@@ -283,48 +283,93 @@ _VALID_PHONE_NUMBER = (_DIGITS + (u("{%d}") % _MIN_LENGTH_FOR_NSN) + u("|") +
 # extension prefix. This can be overridden by region-specific preferences.
 _DEFAULT_EXTN_PREFIX = u(" ext. ")
 
-# Pattern to capture digits used in an extension. Places a maximum length of
-# "7" for an extension.
-_CAPTURING_EXTN_DIGITS = u("(") + _DIGITS + u("{1,7})")
+
+# Helper method for constructing regular expressions for parsing. Creates an expression that
+# captures up to max_length digits.
+def _extn_digits(max_length):
+    return u("(") + _DIGITS + (u("{1,%d})") % max_length)
+
+
+# Helper initialiser method to create the regular-expression pattern to match extensions.
+# Note that there are currently six capturing groups for the extension itself. If this number is
+# changed, _maybe_strip_extension needs to be updated.
+def _create_extn_pattern(for_parsing):
+    # We cap the maximum length of an extension based on the ambiguity of the way the extension is
+    # prefixed. As per ITU, the officially allowed length for extensions is actually 40, but we
+    # don't support this since we haven't seen real examples and this introduces many false
+    # interpretations as the extension labels are not standardized.
+    ext_limit_after_explicit_label = 20
+    ext_limit_after_likely_label = 15
+    ext_limit_after_ambiguous_char = 9
+    ext_limit_when_not_sure = 6
+
+    possible_separators_between_number_and_ext_label = u("[ \u00A0\\t,]*")
+    # Optional full stop (.) or colon, followed by zero or more spaces/tabs/commas.
+    possible_chars_after_ext_label = u("[:\\.\uFF0E]?[ \u00A0\\t,-]*")
+    optional_extn_suffix = u("#?")
+
+    # Here the extension is called out in more explicit way, i.e mentioning it obvious patterns
+    # like "ext.". Canonical-equivalence doesn't seem to be an option with Android java, so we
+    # allow two options for representing the accented o - the character itself, and one in the
+    # unicode decomposed form with the combining acute accent.
+    explicit_ext_labels = u("(?:e?xt(?:ensi(?:o\u0301?|\u00F3))?n?|\uFF45?\uFF58\uFF54\uFF4E?|\u0434\u043E\u0431|anexo)")
+    # One-character symbols that can be used to indicate an extension, and less commonly used
+    # or more ambiguous extension labels.
+    ambiguous_ext_labels = u("(?:[x\uFF58#\uFF03~\uFF5E]|int|\uFF49\uFF4E\uFF54)")
+    # When extension is not separated clearly.
+    ambiguous_separator = u("[- ]+")
+
+    rfc_extn = _RFC3966_EXTN_PREFIX + _extn_digits(ext_limit_after_explicit_label)
+    explicit_extn = (possible_separators_between_number_and_ext_label + explicit_ext_labels +
+                     possible_chars_after_ext_label + _extn_digits(ext_limit_after_explicit_label) +
+                     optional_extn_suffix)
+    ambiguous_extn = (possible_separators_between_number_and_ext_label + ambiguous_ext_labels +
+                      possible_chars_after_ext_label + _extn_digits(ext_limit_after_ambiguous_char) + optional_extn_suffix)
+    american_style_extn_with_suffix = (ambiguous_separator + _extn_digits(ext_limit_when_not_sure) + u("#"))
+
+    # The first regular expression covers RFC 3966 format, where the extension is added using
+    # ";ext=". The second more generic where extension is mentioned with explicit labels like
+    # "ext:". In both the above cases we allow more numbers in extension than any other extension
+    # labels. The third one captures when single character extension labels or less commonly used
+    # labels are used. In such cases we capture fewer extension digits in order to reduce the
+    # chance of falsely interpreting two numbers beside each other as a number + extension. The
+    # fourth one covers the special case of American numbers where the extension is written with a
+    # hash at the end, such as "- 503#".
+    extension_pattern = (rfc_extn + u("|") +
+                         explicit_extn + u("|") +
+                         ambiguous_extn + u("|") +
+                         american_style_extn_with_suffix)
+    # Additional pattern that is supported when parsing extensions, not when matching.
+    if for_parsing:
+        # This is same as possible_separators_between_number_and_ext_label, but not matching comma as
+        # extension label may have it.
+        possible_separators_number_ext_label_no_comma = u("[ \u00A0\\t]*")
+        # ",," is commonly used for auto dialling the extension when connected. First comma is matched
+        # through possible_separators_between_number_and_ext_label, so we do not repeat it here. Semi-colon
+        # works in Iphone and Android also to pop up a button with the extension number following.
+        auto_dialling_and_ext_labels_found = u("(?:,{2}|;)")
+
+        auto_dialling_extn = (possible_separators_number_ext_label_no_comma +
+                              auto_dialling_and_ext_labels_found + possible_chars_after_ext_label +
+                              _extn_digits(ext_limit_after_likely_label) + optional_extn_suffix)
+        only_commas_extn = (possible_separators_number_ext_label_no_comma +
+                            u("(?:,)+") + possible_chars_after_ext_label + _extn_digits(ext_limit_after_ambiguous_char) +
+                            optional_extn_suffix)
+        # Here the first pattern is exclusively for extension autodialling formats which are used
+        # when dialling and in this case we accept longer extensions. However, the second pattern
+        # is more liberal on the number of commas that acts as extension labels, so we have a strict
+        # cap on the number of digits in such extensions.
+        return (extension_pattern + u("|") +
+                auto_dialling_extn + u("|") +
+                only_commas_extn)
+    return extension_pattern
+
 
 # Regexp of all possible ways to write extensions, for use when parsing. This
 # will be run as a case-insensitive regexp match. Wide character versions are
 # also provided after each ASCII version.
-
-# One-character symbols that can be used to indicate an extension.
-_SINGLE_EXTN_SYMBOLS_FOR_MATCHING = u("x\uFF58#\uFF03~\uFF5E")
-# For parsing, we are slightly more lenient in our interpretation than for
-# matching. Here we allow "comma" and "semicolon" as a possible extension
-# indicator. When matching, these are hardly ever used to indicate this.
-_SINGLE_EXTN_SYMBOLS_FOR_PARSING = u(",;") + _SINGLE_EXTN_SYMBOLS_FOR_MATCHING
-
-
-def _create_extn_pattern(single_extn_symbols):
-    """Helper initialiser method to create the regular-expression pattern to
-    match extensions, allowing the one-char extension symbols provided by
-    single_extn_symbols."""
-    # There are three regular expressions here. The first covers RFC 3966
-    # format, where the extension is added using ";ext=". The second more
-    # generic one starts with optional white space and ends with an optional
-    # full stop (.), followed by zero or more spaces/tabs/commas and then the
-    # numbers themselves. The other one covers the special case of American
-    # numbers where the extension is written with a hash at the end, such as
-    # "- 503#".  Note that the only capturing groups should be around the
-    # digits that you want to capture as part of the extension, or else
-    # parsing will fail!  Canonical-equivalence doesn't seem to be an option
-    # with Android java, so we allow two options for representing the accented
-    # o - the character itself, and one in the unicode decomposed form with
-    # the combining acute accent.
-    return (_RFC3966_EXTN_PREFIX + _CAPTURING_EXTN_DIGITS + u("|") +
-            u("[ \u00A0\\t,]*(?:e?xt(?:ensi(?:o\u0301?|\u00F3))?n?|") +
-            u("\uFF45?\uFF58\uFF54\uFF4E?|") +
-            u("\u0434\u043e\u0431|") + u("[") + single_extn_symbols + u("]|int|anexo|\uFF49\uFF4E\uFF54)") +
-            u("[:\\.\uFF0E]?[ \u00A0\\t,-]*") + _CAPTURING_EXTN_DIGITS + u("#?|") +
-            u("[- ]+(") + _DIGITS + u("{1,5})#"))
-
-
-_EXTN_PATTERNS_FOR_PARSING = _create_extn_pattern(_SINGLE_EXTN_SYMBOLS_FOR_PARSING)
-_EXTN_PATTERNS_FOR_MATCHING = _create_extn_pattern(_SINGLE_EXTN_SYMBOLS_FOR_MATCHING)
+_EXTN_PATTERNS_FOR_PARSING = _create_extn_pattern(True)
+_EXTN_PATTERNS_FOR_MATCHING = _create_extn_pattern(False)
 
 # Regexp of all known extension prefixes used by different regions followed by
 # 1 or more valid digits, for use when parsing.

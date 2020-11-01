@@ -2539,6 +2539,110 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Retry with the same number in a slightly different format.
         self.assertEqual(usWithExtension, phonenumbers.parse("+1 (645) 123 1234 ext. 910#", "US"))
 
+    def testParseHandlesLongExtensionsWithExplicitLabels(self):
+        # Test lower and upper limits of extension lengths for each type of label.
+        nzNumber = PhoneNumber(country_code=64, national_number=33316005)
+
+        # Firstly, when in RFC format: PhoneNumberUtil.extLimitAfterExplicitLabel
+        nzNumber.extension = "0"
+        self.assertEqual(nzNumber, phonenumbers.parse("tel:+6433316005;ext=0", "NZ"))
+        nzNumber.extension = "01234567890123456789"
+        self.assertEqual(nzNumber, phonenumbers.parse("tel:+6433316005;ext=01234567890123456789", "NZ"))
+        # Extension too long.
+        try:
+            phonenumbers.parse("tel:+6433316005;ext=012345678901234567890", "NZ")
+            self.fail("This should not parse as length of extension is higher than allowed: " +
+                      "tel:+6433316005;ext=012345678901234567890")
+        except NumberParseException:
+            # Expected this exception.
+            e = sys.exc_info()[1]
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+
+        # Explicit extension label: phonenumberutil.ext_limit_after_explicit_label
+        nzNumber.extension = "1"
+        self.assertEqual(nzNumber, phonenumbers.parse("03 3316005ext:1", "NZ"))
+        nzNumber.extension = "12345678901234567890"
+        self.assertEqual(nzNumber, phonenumbers.parse("03 3316005 xtn:12345678901234567890", "NZ"))
+        self.assertEqual(nzNumber, phonenumbers.parse("03 3316005 extension\t12345678901234567890", "NZ"))
+        self.assertEqual(nzNumber, phonenumbers.parse("03 3316005 xtensio:12345678901234567890", "NZ"))
+        self.assertEqual(nzNumber, phonenumbers.parse(u("03 3316005 xtensi\u00F3n, 12345678901234567890#"), "NZ"))
+        self.assertEqual(nzNumber, phonenumbers.parse("03 3316005extension.12345678901234567890", "NZ"))
+        self.assertEqual(nzNumber, phonenumbers.parse(u("03 3316005 \u0434\u043E\u0431:12345678901234567890"), "NZ"))
+        # Extension too long.
+        try:
+            phonenumbers.parse("03 3316005 extension 123456789012345678901", "NZ")
+            self.fail("This should not parse as length of extension is higher than allowed: " +
+                      "03 3316005 extension 123456789012345678901")
+        except NumberParseException:
+            # Expected this exception.
+            e = sys.exc_info()[1]
+            self.assertEqual(NumberParseException.TOO_LONG,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+
+    def testParseHandlesLongExtensionsWithAutoDiallingLabels(self):
+        # Secondly, cases of auto-dialling and other standard extension labels,
+        # phonenumberutil.ext_limit_after_likely_label
+        usNumberUserInput = PhoneNumber(country_code=1, national_number=2679000000, extension="123456789012345")
+        self.assertEqual(usNumberUserInput, phonenumbers.parse("+12679000000,,123456789012345#", "US"))
+        self.assertEqual(usNumberUserInput, phonenumbers.parse("+12679000000;123456789012345#", "US"))
+        ukNumberUserInput = PhoneNumber(country_code=44, national_number=2034000000, extension="123456789")
+        self.assertEqual(ukNumberUserInput, phonenumbers.parse("+442034000000,,123456789#", "GB"))
+        # Extension too long.
+        try:
+            phonenumbers.parse("+12679000000,,1234567890123456#", "US")
+            self.fail("This should not parse as length of extension is higher than allowed: " +
+                      "+12679000000,,1234567890123456#")
+        except NumberParseException:
+            # Expected this exception.
+            e = sys.exc_info()[1]
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+
+    def testParseHandlesShortExtensionsWithAmbiguousChar(self):
+        nzNumber = PhoneNumber(country_code=64, national_number=33316005)
+
+        # Thirdly, for single and non-standard cases:
+        # phonenumberutil.ext_limit_after_ambiguous_char
+        nzNumber.extension = "123456789"
+        self.assertEqual(nzNumber, phonenumbers.parse("03 3316005 x 123456789", "NZ"))
+        self.assertEqual(nzNumber, phonenumbers.parse("03 3316005 x. 123456789", "NZ"))
+        self.assertEqual(nzNumber, phonenumbers.parse("03 3316005 #123456789#", "NZ"))
+        self.assertEqual(nzNumber, phonenumbers.parse("03 3316005 ~ 123456789", "NZ"))
+        # Extension too long.
+        try:
+            phonenumbers.parse("03 3316005 ~ 1234567890", "NZ")
+            self.fail("This should not parse as length of extension is higher than allowed: " +
+                      "03 3316005 ~ 1234567890")
+        except NumberParseException:
+            # Expected this exception.
+            e = sys.exc_info()[1]
+            self.assertEqual(NumberParseException.TOO_LONG,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+
+    def testParseHandlesShortExtensionsWhenNotSureOfLabel(self):
+        # Lastly, when no explicit extension label present, but denoted by tailing #:
+        # PhoneNumberUtil.extLimitWhenNotSure
+        usNumber = PhoneNumber(country_code=1, national_number=1234567890, extension="666666")
+        self.assertEqual(usNumber, phonenumbers.parse("+1123-456-7890 666666#", "US"))
+        usNumber.extension = "6"
+        self.assertEqual(usNumber, phonenumbers.parse("+11234567890-6#", "US"))
+        # Extension too long.
+        try:
+            phonenumbers.parse("+1123-456-7890 7777777#", "US")
+            self.fail("This should not parse as length of extension is higher than allowed: " +
+                      "+1123-456-7890 7777777#")
+        except NumberParseException:
+            # Expected this exception.
+            e = sys.exc_info()[1]
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
+
     def testParseAndKeepRaw(self):
         alphaNumericNumber = PhoneNumber()
         alphaNumericNumber.merge_from(ALPHA_NUMERIC_NUMBER)
