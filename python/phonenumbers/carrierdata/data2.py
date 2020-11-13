@@ -19,8 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '595985':{'en': 'Tigo'},
- '595986':{'en': 'Tigo'},
  '59599':{'en': 'Claro'},
  '5966960':{'en': 'SFR/Rife'},
  '59669610':{'en': 'Digicel'},
@@ -1738,6 +1736,7 @@ data = {
  '67989':{'en': 'Vodafone'},
  '6799':{'en': 'Vodafone'},
  '68045':{'en': 'PMCI'},
+ '68046':{'en': 'PMCI'},
  '68077':{'en': 'PalauCel'},
  '68088':{'en': 'PalauTel'},
  '6817':{'en': u('Service des Postes et T\u00e9l\u00e9communications')},
@@ -1953,6 +1952,7 @@ data = {
  '7901150':{'en': 'Tele2', 'ru': 'Tele2'},
  '7901151':{'en': 'Sberbank-Telecom', 'ru': u('\u041e\u041e\u041e \u0421\u0431\u0435\u0440\u0431\u0430\u043d\u043a-\u0422\u0435\u043b\u0435\u043a\u043e\u043c')},
  '7901152':{'en': 'MTS', 'ru': 'MTS'},
+ '7901155':{'en': 'Tele2', 'ru': 'Tele2'},
  '7901156':{'en': 'Tele2', 'ru': 'Tele2'},
  '7901157':{'en': 'Tele2', 'ru': 'Tele2'},
  '7901158':{'en': 'Apex Telecom', 'ru': u('\u0410\u041e \u0410\u041f\u0415\u041a\u0421')},
@@ -3902,6 +3902,8 @@ data = {
  '8869022':{'en': 'T Star'},
  '8869023':{'en': 'T Star'},
  '8869024':{'en': 'T Star'},
+ '8869025':{'en': 'T Star'},
+ '8869026':{'en': 'T Star'},
  '886903':{'en': 'FarEasTone'},
  '8869040':{'en': 'Taiwan Mobile'},
  '8869041':{'en': 'Taiwan Mobile'},
@@ -7553,7 +7555,8 @@ data = {
  '9725522':{'en': 'Home Cellular'},
  '9725523':{'en': 'Home Cellular'},
  '972553':{'en': 'Free Telecom'},
- '972554':{'en': 'Cellran Cellular Communications'},
+ '9725543':{'en': 'Maskyoo'},
+ '9725544':{'en': 'Cellran Cellular Communications'},
  '9725550':{'en': 'Annatel'},
  '9725551':{'en': 'Annatel'},
  '9725555':{'en': 'Rami Levy'},
