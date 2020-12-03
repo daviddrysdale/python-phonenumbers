@@ -8,7 +8,7 @@ PHONE_METADATA_BA = PhoneMetadata(id='BA', country_code=387, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='8[08]\\d{6}', example_number='80123456', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='9[0246]\\d{6}', example_number='90123456', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='8[12]\\d{6}', example_number='82123456', possible_length=(8,)),
-    uan=PhoneNumberDesc(national_number_pattern='70(?:3[0146]|[56]0)\\d{4}', example_number='70341234', possible_length=(8,)),
+    uan=PhoneNumberDesc(national_number_pattern='703[235]0\\d{3}|70(?:2[0-5]|3[0146]|[56]0)\\d{4}', example_number='70341234', possible_length=(8,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})', format='\\1-\\2', leading_digits_pattern=['[2-9]']),

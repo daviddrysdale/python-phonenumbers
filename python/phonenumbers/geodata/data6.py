@@ -2261,6 +2261,7 @@ data = {
  '5018':{'en': 'Cayo District'},
  '5042200':{'en': 'Polo Paz'},
  '5042201':{'en': 'Polo Paz'},
+ '5042202':{'en': 'Tegucigalpa'},
  '5042203':{'en': 'Polo Paz'},
  '5042209':{'en': u('Res. Centro Am\u00e9rica, Tegucigalpa')},
  '5042211':{'en': 'El Picacho'},
@@ -10018,5 +10019,4 @@ data = {
  '55513773':{'en': u('Po\u00e7o das Antas - RS'), 'pt': u('Po\u00e7o das Antas - RS')},
  '55513774':{'en': u('Il\u00f3polis - RS'), 'pt': u('Il\u00f3polis - RS')},
  '55513775':{'en': 'Pouso Novo - RS', 'pt': 'Pouso Novo - RS'},
- '55513776':{'en': 'Relvado - RS', 'pt': 'Relvado - RS'},
 }

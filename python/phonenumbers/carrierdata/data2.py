@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '595986':{'en': 'Tigo'},
  '59599':{'en': 'Claro'},
  '5966960':{'en': 'SFR/Rife'},
  '59669610':{'en': 'Digicel'},
@@ -7554,7 +7555,10 @@ data = {
  '972552':{'en': 'Telzar'},
  '9725522':{'en': 'Home Cellular'},
  '9725523':{'en': 'Home Cellular'},
- '972553':{'en': 'Free Telecom'},
+ '9725530':{'en': 'Telzar'},
+ '9725531':{'en': 'Telzar'},
+ '9725532':{'en': 'Free Telecom'},
+ '9725533':{'en': 'Free Telecom'},
  '9725543':{'en': 'Maskyoo'},
  '9725544':{'en': 'Cellran Cellular Communications'},
  '9725550':{'en': 'Annatel'},
@@ -7674,6 +7678,7 @@ data = {
  '99250':{'en': 'Tcell'},
  '99255':{'en': 'Megafon'},
  '9927':{'en': 'Tcell'},
+ '99280':{'en': 'Tacom'},
  '99288':{'en': 'Megafon'},
  '99290':{'en': 'Megafon'},
  '992911':{'en': 'Tacom'},
