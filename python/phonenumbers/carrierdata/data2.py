@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '595982':{'en': 'Tigo'},
+ '595983':{'en': 'Tigo'},
+ '595984':{'en': 'Tigo'},
+ '595985':{'en': 'Tigo'},
  '595986':{'en': 'Tigo'},
  '59599':{'en': 'Claro'},
  '5966960':{'en': 'SFR/Rife'},
@@ -637,6 +641,7 @@ data = {
  '6429':{'en': 'Vodafone'},
  '65801':{'en': 'TPG'},
  '658018':{'en': 'SingTel'},
+ '658019':{'en': 'SingTel'},
  '65802':{'en': 'SingTel'},
  '65803':{'en': 'SingTel'},
  '6581':{'en': 'StarHub'},
@@ -948,6 +953,9 @@ data = {
  '658932':{'en': 'TPG'},
  '658933':{'en': 'TPG'},
  '658934':{'en': 'TPG'},
+ '658935':{'en': 'M1'},
+ '658936':{'en': 'M1'},
+ '658937':{'en': 'M1'},
  '658938':{'en': 'SingTel'},
  '658939':{'en': 'SingTel'},
  '658940':{'en': 'SingTel'},
