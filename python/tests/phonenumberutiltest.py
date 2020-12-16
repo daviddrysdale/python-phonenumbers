@@ -17,6 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys
+import pickle
 
 import phonenumbers
 from phonenumbers import PhoneNumber, PhoneMetadata
@@ -26,6 +27,7 @@ from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 from phonenumbers import region_code_for_country_code
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil, shortnumberinfo
+from phonenumbers.phonenumberutil import NumberParseException
 from phonenumbers.util import u, to_long
 from .testmetadatatest import TestMetadataTestCase
 
@@ -3164,6 +3166,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                           **{'preferred_international_prefix': '9999',
                              'register': True})
         self.assertTrue(phonenumbers.example_number_for_type('XY', PhoneNumberType.PERSONAL_NUMBER) is None)
+
+    def testPickledException(self):
+        err = NumberParseException(NumberParseException.TOO_SHORT_AFTER_IDD, 'hello world')
+        pickled = pickle.dumps(err)
+        recovered = pickle.loads(pickled)
+        self.assertEqual("%r" % err, "%r" % recovered)
 
     def testCoverage(self):
         # Python version extra tests

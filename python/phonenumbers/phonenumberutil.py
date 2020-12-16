@@ -3223,6 +3223,9 @@ class NumberParseException(UnicodeMixin, Exception):
         self.error_type = error_type
         self._msg = msg
 
+    def __reduce__(self):
+        return (type(self), (self.error_type, self._msg))
+
     def __unicode__(self):
         return unicod("(%s) %s") % (self.error_type, self._msg)
 
