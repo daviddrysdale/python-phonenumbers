@@ -181,33 +181,37 @@ For more information about the other functionality available from the library, l
 Memory Usage
 ------------
 
-The library includes a lot of metadata, giving a significant memory overhead.  This metadata is loaded on-demand so that
-the memory footprint of applications that only use a subset of the library functionality is not adversely affected.
+The library includes a lot of metadata, potentially giving a significant memory overhead.  There are two mechanisms
+for dealing with this.
 
-In particular:
+* The normal metadata for the core functionality of the library is loaded on-demand, on a region-by-region basis
+  (i.e. the metadata for a region is only loaded on the first time it is needed).
+* Metadata for extended functionality is held in separate packages, which therefore need to be explicitly
+  loaded separately.  This affects:
+    * The geocoding metadata, which is held in `phonenumbers.geocoder` and used by the geocoding functions
+      (`geocoder.description_for_number`, `geocoder.description_for_valid_number` or
+      `geocoder.country_name_for_number`).
+    * The carrier metadata, which is held in `phonenumbers.carrier` and used by the mapping functions (`carrier.name_for_number`
+      or `carrier.name_for_valid_number`).
+    * The timezone metadata, which is held in `phonenumbers.timezone` and used by the timezone functions (`time_zones_for_number`
+      or `time_zones_for_geographical_number`).
 
-* The geocoding metadata (which is over 100 megabytes) is only loaded on the first use of
-  one of the geocoding functions (`geocoder.description_for_number`, `geocoder.description_for_valid_number`
-  or `geocoder.country_name_for_number`).
-* The carrier metadata is only loaded on the first use of one of the mapping functions (`carrier.name_for_number`
-  or `carrier.name_for_valid_number`).
-* The timezone metadata is only loaded on the first use of one of the timezone functions (`time_zones_for_number`
-  or `time_zones_for_geographical_number`).
-* The normal metadata for each region is only loaded on the first time that metadata for that region is needed.
+The `phonenumberslite` version of the library does not include the geocoder, carrier and timezone packages,
+which can be useful if you have problems installing the main `phonenumbers` library due to space/memory limitations.
 
 If you need to ensure that the metadata memory use is accounted for at start of day (i.e. that a subsequent on-demand
 load of metadata will not cause a pause or memory exhaustion):
 
-* Force-load the geocoding metadata by invoking `import phonenumbers.geocoder`.
-* Force-load the carrier metadata by invoking `import phonenumbers.carrier`.
-* Force-load the timezone metadata by invoking `import phonenumbers.timezone`.
 * Force-load the normal metadata by calling `phonenumbers.PhoneMetadata.load_all()`.
+* Force-load the extended metadata by `import`ing the appropriate packages (`phonenumbers.geocoder`,
+  `phonenumbers.carrier`, `phonenumbers.timezone`).
 
 The `phonenumberslite` version of the package does not include the geocoding, carrier and timezone metadata,
 which can be useful if you have problems installing the main `phonenumbers` package due to space/memory limitations.
 
 Project Layout
 --------------
+
 * The `python/` directory holds the Python code.
 * The `resources/` directory is a copy of the `resources/`
   directory from
