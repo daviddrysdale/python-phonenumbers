@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861882783':{'en': 'Yichun, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u5b9c\u6625\u5e02')},
+ '861882784':{'en': 'Yichun, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u5b9c\u6625\u5e02')},
+ '861882785':{'en': 'Yichun, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u5b9c\u6625\u5e02')},
+ '861882786':{'en': 'Ganzhou, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u8d63\u5dde\u5e02')},
+ '861882787':{'en': 'Ganzhou, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u8d63\u5dde\u5e02')},
  '861882788':{'en': 'Ganzhou, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u8d63\u5dde\u5e02')},
  '861882789':{'en': 'Pingxiang, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u840d\u4e61\u5e02')},
  '861882790':{'en': 'Xinyu, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u65b0\u4f59\u5e02')},
@@ -10014,9 +10019,4 @@ data = {
  '9171167':{'en': 'Umrer, Maharashtra'},
  '9171182':{'en': 'Kalmeshwar, Maharashtra'},
  '9171183':{'en': 'Kalmeshwar, Maharashtra'},
- '9171184':{'en': 'Kalmeshwar, Maharashtra'},
- '9171185':{'en': 'Kalmeshwar, Maharashtra'},
- '9171186':{'en': 'Kalmeshwar, Maharashtra'},
- '9171187':{'en': 'Kalmeshwar, Maharashtra'},
- '917122':{'en': 'Nagpur, Maharashtra'},
 }

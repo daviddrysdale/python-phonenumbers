@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '495707':{'de': 'Petershagen Weser', 'en': 'Petershagen Weser'},
+ '49571':{'de': 'Minden Westfalen', 'en': 'Minden Westfalen'},
+ '495721':{'de': 'Stadthagen', 'en': 'Stadthagen'},
+ '495722':{'de': u('B\u00fcckeburg'), 'en': u('B\u00fcckeburg')},
+ '495723':{'de': 'Bad Nenndorf', 'en': 'Bad Nenndorf'},
  '495724':{'de': 'Obernkirchen', 'en': 'Obernkirchen'},
  '495725':{'de': 'Lindhorst bei Stadthagen', 'en': 'Lindhorst bei Stadthagen'},
  '495726':{'de': 'Wiedensahl', 'en': 'Wiedensahl'},
@@ -10014,9 +10019,4 @@ data = {
  '55513768':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
  '55513769':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
  '55513770':{'en': u('S\u00e9rio - RS'), 'pt': u('S\u00e9rio - RS')},
- '55513771':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
- '55513772':{'en': 'Arvorezinha - RS', 'pt': 'Arvorezinha - RS'},
- '55513773':{'en': u('Po\u00e7o das Antas - RS'), 'pt': u('Po\u00e7o das Antas - RS')},
- '55513774':{'en': u('Il\u00f3polis - RS'), 'pt': u('Il\u00f3polis - RS')},
- '55513775':{'en': 'Pouso Novo - RS', 'pt': 'Pouso Novo - RS'},
 }

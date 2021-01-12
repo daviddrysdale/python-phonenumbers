@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61899335':{'en': 'Eneabba South'},
+ '61899336':{'en': 'Arrowsmith'},
+ '61899337':{'en': 'Eneabba South'},
+ '61899338':{'en': 'Arrowsmith'},
+ '61899339':{'en': 'Arrowsmith'},
  '61899340':{'en': 'Northampton'},
  '61899341':{'en': 'Northampton'},
  '61899342':{'en': 'Northampton'},
@@ -10014,9 +10019,4 @@ data = {
  '861307931':{'en': 'Jiayuguan, Gansu', 'zh': u('\u7518\u8083\u7701\u5609\u5cea\u5173\u5e02')},
  '861307932':{'en': 'Jiayuguan, Gansu', 'zh': u('\u7518\u8083\u7701\u5609\u5cea\u5173\u5e02')},
  '861307933':{'en': 'Wuwei, Gansu', 'zh': u('\u7518\u8083\u7701\u6b66\u5a01\u5e02')},
- '861307934':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
- '861307935':{'en': 'Wuwei, Gansu', 'zh': u('\u7518\u8083\u7701\u6b66\u5a01\u5e02')},
- '861307936':{'en': 'Dingxi, Gansu', 'zh': u('\u7518\u8083\u7701\u5b9a\u897f\u5e02')},
- '861307937':{'en': 'Wuwei, Gansu', 'zh': u('\u7518\u8083\u7701\u6b66\u5a01\u5e02')},
- '861307938':{'en': 'Jiayuguan, Gansu', 'zh': u('\u7518\u8083\u7701\u5609\u5cea\u5173\u5e02')},
 }
