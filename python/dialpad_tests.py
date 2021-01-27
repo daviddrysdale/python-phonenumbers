@@ -18,22 +18,25 @@ valid_strings = ['+6323168971',
 print '######### - VALID BY LIBRARY - ################'
 for l in valid_strings:
   x = phonenumbers.parse(l, None)
-  print (x), '%10s' % phonenumbers.is_valid_number(x)
-
+  print '%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x
 
 # To be fixed by Dialpad Changes
-dialpad_cases = ['+6278033212174',  # https://switchcomm.atlassian.net/browse/DP-13742
-                 '+63283168971',  # Philipines
-                 '+8031000000141',  # Dialpadistan
+dialpad_cases = ['+6278033212174', # https://switchcomm.atlassian.net/browse/DP-13742
+                 '+63283168971',   # Philipines
+                 '+8031000000141', # Dialpadistan
+                 '+22557715034',   # Ivory Coast - Old Format
+                 '+2250757715034', # Ivory Coast - New Format
+                 '+22521214601',   # Ivory Coast - Old Format
+                 '+2252721214601', # Ivory Coast - New Format
                  ]
 
 print '######### - VALID BY DIALPAD - ################'
 for l in dialpad_cases:
   try:
     x = phonenumbers.parse(l, None)
-    print (x), '%10s' % phonenumbers.is_valid_number(x)
+    print '%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x
   except Exception as e:
-    print (l), '%10s' % (e)
+    print '%15s' % l, '%25s' % (e)
 
 # Invalid Strings
 invalid_strings = ['+4916190899790',  # https://switchcomm.atlassian.net/browse/TEL-8824  Not Fixed
@@ -44,7 +47,7 @@ invalid_strings = ['+4916190899790',  # https://switchcomm.atlassian.net/browse/
 print '######### - INVALID NUMBERS - ################'
 for l in invalid_strings:
   x = phonenumbers.parse(l, None)
-  print (x), '%10s' % phonenumbers.is_valid_number(x)
+  print '%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x
 
 # National Format match
 national_format_match = {'+525547808256': '55 4780 8256'}
@@ -65,4 +68,5 @@ print '######### - REGION NUMBER VALIDITY - ###############'
 for l in number_validity_check:
   region = number_validity_check[l]
   x = phonenumbers.parse(l, region)
-  print (x), 'Region : %s -> %10s' % (region, phonenumbers.is_valid_number(x))
+  print '%15s' % l, '%10s -> Region : %5s' % (phonenumbers.is_valid_number(x), region)
+
