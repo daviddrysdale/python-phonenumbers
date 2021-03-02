@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '55513747':{'en': 'Arroio do Tigre - RS', 'pt': 'Arroio do Tigre - RS'},
+ '55513748':{'en': 'Lajeado - RS', 'pt': 'Lajeado - RS'},
  '55513749':{'en': 'Palanque - RS', 'pt': 'Palanque - RS'},
  '55513750':{'en': 'Vale do Sol - RS', 'pt': 'Vale do Sol - RS'},
  '55513751':{'en': 'Encantado - RS', 'pt': 'Encantado - RS'},
@@ -10017,6 +10019,4 @@ data = {
  '61240209':{'en': 'Mulbring'},
  '61240210':{'en': 'Nelson Bay'},
  '61240211':{'en': 'Newcastle'},
- '61240212':{'en': 'Raymond Terrace'},
- '61240213':{'en': 'Eccleston'},
 }

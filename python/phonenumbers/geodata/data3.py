@@ -627,6 +627,7 @@ data = {
  '194195':{'en': 'Sarasota, FL'},
  '1941964':{'en': 'Boca Grande, FL'},
  '1941979':{'en': 'Port Charlotte, FL'},
+ '1945':{'en': 'Texas'},
  '1947':{'en': 'Michigan'},
  '1949':{'en': 'California'},
  '1949221':{'en': 'Irvine, CA'},
@@ -5274,6 +5275,7 @@ data = {
  '26749':{'en': 'Palapye'},
  '267530':{'en': 'Lobatse'},
  '267533':{'en': 'Lobatse'},
+ '267534':{'en': 'Lobatse'},
  '267538':{'en': 'Ramotswa'},
  '267539':{'en': 'Ramotswa'},
  '26754':{'en': 'Barolong/Ngwaketse'},
@@ -10017,6 +10019,4 @@ data = {
  '3324369':{'en': 'Laval', 'fr': 'Laval'},
  '3324371':{'en': u('La Fert\u00e9 Bernard'), 'fr': u('La Fert\u00e9 Bernard')},
  '3324372':{'en': 'Le Mans', 'fr': 'Le Mans'},
- '3324374':{'en': 'Le Mans', 'fr': 'Le Mans'},
- '3324375':{'en': 'Le Mans', 'fr': 'Le Mans'},
 }

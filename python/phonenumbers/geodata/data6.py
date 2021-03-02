@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '495671':{'de': 'Hofgeismar', 'en': 'Hofgeismar'},
+ '495672':{'de': 'Bad Karlshafen', 'en': 'Bad Karlshafen'},
  '495673':{'de': 'Immenhausen Hessen', 'en': 'Immenhausen Hessen'},
  '495674':{'de': 'Grebenstein', 'en': 'Grebenstein'},
  '495675':{'de': 'Trendelburg', 'en': 'Trendelburg'},
@@ -10017,6 +10019,4 @@ data = {
  '55513744':{'en': 'Ibarama - RS', 'pt': 'Ibarama - RS'},
  '55513745':{'en': 'Segredo - RS', 'pt': 'Segredo - RS'},
  '55513746':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
- '55513747':{'en': 'Arroio do Tigre - RS', 'pt': 'Arroio do Tigre - RS'},
- '55513748':{'en': 'Lajeado - RS', 'pt': 'Lajeado - RS'},
 }
