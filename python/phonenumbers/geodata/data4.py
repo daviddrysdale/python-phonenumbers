@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3324369':{'en': 'Laval', 'fr': 'Laval'},
+ '3324371':{'en': u('La Fert\u00e9 Bernard'), 'fr': u('La Fert\u00e9 Bernard')},
+ '3324372':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324374':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324375':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324377':{'en': 'Le Mans', 'fr': 'Le Mans'},
@@ -10016,7 +10019,4 @@ data = {
  '3522736':{'de': 'Hesperingen/Kockelscheuer/Roeser', 'en': 'Hesperange/Kockelscheuer/Roeser', 'fr': 'Hesperange/Kockelscheuer/Roeser'},
  '3522737':{'de': 'Leudelingen/Ehlingen/Monnerich', 'en': 'Leudelange/Ehlange/Mondercange', 'fr': 'Leudelange/Ehlange/Mondercange'},
  '3522739':{'de': 'Windhof/Steinfort', 'en': 'Windhof/Steinfort', 'fr': 'Windhof/Steinfort'},
- '3522740':{'de': 'Howald', 'en': 'Howald', 'fr': 'Howald'},
- '3522742':{'de': 'Plateau de Kirchberg', 'en': 'Plateau de Kirchberg', 'fr': 'Plateau de Kirchberg'},
- '3522743':{'de': 'Findel/Kirchberg', 'en': 'Findel/Kirchberg', 'fr': 'Findel/Kirchberg'},
 }

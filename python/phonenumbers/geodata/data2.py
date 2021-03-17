@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1708216':{'en': 'Maywood, IL'},
+ '1708222':{'en': 'Cicero, IL'},
  '1708226':{'en': 'Orland Park, IL'},
  '1708245':{'en': 'La Grange, IL'},
  '1708246':{'en': 'Western Springs, IL'},
@@ -5941,6 +5943,7 @@ data = {
  '1832934':{'en': 'Magnolia, TX'},
  '1838':{'en': 'New York'},
  '1839':{'en': 'South Carolina'},
+ '1840':{'en': 'California'},
  '1843':{'en': 'South Carolina'},
  '1843207':{'en': 'North Charleston, SC'},
  '1843208':{'en': 'Hardeeville, SC'},
@@ -6594,7 +6597,7 @@ data = {
  '1850983':{'en': 'Milton, FL'},
  '1850994':{'en': 'Milton, FL'},
  '1850997':{'en': 'Monticello, FL'},
- '1854':{'en': 'Ohio'},
+ '1854':{'en': 'South Carolina'},
  '1856':{'en': 'New Jersey'},
  '1856205':{'en': 'Vineland, NJ'},
  '1856216':{'en': 'Cherry Hill, NJ'},
@@ -10016,7 +10019,4 @@ data = {
  '1925684':{'en': 'Bethel Island, CA'},
  '1925691':{'en': 'Concord, CA'},
  '1925706':{'en': 'Antioch, CA'},
- '1925734':{'en': 'Pleasanton, CA'},
- '1925735':{'en': 'San Ramon, CA'},
- '1925736':{'en': 'Danville, CA'},
 }

@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861882670':{'en': 'Yangjiang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u9633\u6c5f\u5e02')},
+ '861882671':{'en': 'Yangjiang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u9633\u6c5f\u5e02')},
+ '861882672':{'en': 'Yangjiang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u9633\u6c5f\u5e02')},
  '861882673':{'en': 'Maoming, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u8302\u540d\u5e02')},
  '861882674':{'en': 'Maoming, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u8302\u540d\u5e02')},
  '861882675':{'en': 'Shantou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c55\u5934\u5e02')},
@@ -10016,7 +10019,4 @@ data = {
  '9171034':{'en': 'Butibori, Maharashtra'},
  '9171035':{'en': 'Butibori, Maharashtra'},
  '9171036':{'en': 'Butibori, Maharashtra'},
- '9171037':{'en': 'Butibori, Maharashtra'},
- '9171042':{'en': 'Hingua, Maharashtra'},
- '9171043':{'en': 'Hingua, Maharashtra'},
 }

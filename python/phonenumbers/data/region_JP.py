@@ -9,7 +9,7 @@ PHONE_METADATA_JP = PhoneMetadata(id='JP', country_code=81, international_prefix
     premium_rate=PhoneNumberDesc(national_number_pattern='990\\d{6}', example_number='990123456', possible_length=(9,)),
     personal_number=PhoneNumberDesc(national_number_pattern='60\\d{7}', example_number='601234567', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='50[1-9]\\d{7}', example_number='5012345678', possible_length=(10,)),
-    pager=PhoneNumberDesc(national_number_pattern='20[1-9]\\d{7}', example_number='2012345678', possible_length=(10,)),
+    pager=PhoneNumberDesc(national_number_pattern='20\\d{8}', example_number='2012345678', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='570\\d{6}', example_number='570123456', possible_length=(9,)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='00(?:777(?:[01]|(?:5|8\\d)\\d)|882[1245]\\d\\d)\\d\\d|00(?:37|66)\\d{6,13}', possible_length=(8, 9, 10, 11, 12, 13, 14, 15, 16, 17)),
     national_prefix='0',

@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3522740':{'de': 'Howald', 'en': 'Howald', 'fr': 'Howald'},
+ '3522742':{'de': 'Plateau de Kirchberg', 'en': 'Plateau de Kirchberg', 'fr': 'Plateau de Kirchberg'},
+ '3522743':{'de': 'Findel/Kirchberg', 'en': 'Findel/Kirchberg', 'fr': 'Findel/Kirchberg'},
  '3522745':{'de': 'Diedrich', 'en': 'Diedrich', 'fr': 'Diedrich'},
  '3522747':{'de': 'Lintgen', 'en': 'Lintgen', 'fr': 'Lintgen'},
  '3522748':{'de': 'Contern/Foetz', 'en': 'Contern/Foetz', 'fr': 'Contern/Foetz'},
@@ -10016,7 +10019,4 @@ data = {
  '495659':{'de': 'Ringgau', 'en': 'Ringgau'},
  '495661':{'de': 'Melsungen', 'en': 'Melsungen'},
  '495662':{'de': 'Felsberg Hessen', 'en': 'Felsberg Hessen'},
- '495663':{'de': 'Spangenberg', 'en': 'Spangenberg'},
- '495664':{'de': 'Morschen', 'en': 'Morschen'},
- '495665':{'de': 'Guxhagen', 'en': 'Guxhagen'},
 }

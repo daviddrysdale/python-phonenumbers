@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861340454':{'en': 'Tonghua, Jilin', 'zh': u('\u5409\u6797\u7701\u901a\u5316\u5e02')},
+ '861340455':{'en': 'Songyuan, Jilin', 'zh': u('\u5409\u6797\u7701\u677e\u539f\u5e02')},
+ '861340456':{'en': 'Songyuan, Jilin', 'zh': u('\u5409\u6797\u7701\u677e\u539f\u5e02')},
  '861340457':{'en': 'Songyuan, Jilin', 'zh': u('\u5409\u6797\u7701\u677e\u539f\u5e02')},
  '861340458':{'en': 'Songyuan, Jilin', 'zh': u('\u5409\u6797\u7701\u677e\u539f\u5e02')},
  '861340459':{'en': 'Songyuan, Jilin', 'zh': u('\u5409\u6797\u7701\u677e\u539f\u5e02')},
@@ -10016,7 +10019,4 @@ data = {
  '861365441':{'en': 'Changchun, Jilin', 'zh': u('\u5409\u6797\u7701\u957f\u6625\u5e02')},
  '861365442':{'en': 'Jilin, Jilin', 'zh': u('\u5409\u6797\u7701\u5409\u6797\u5e02')},
  '861365443':{'en': 'Yanbian, Jilin', 'zh': u('\u5409\u6797\u7701\u5ef6\u8fb9\u671d\u9c9c\u65cf\u81ea\u6cbb\u5dde')},
- '861365444':{'en': 'Siping, Jilin', 'zh': u('\u5409\u6797\u7701\u56db\u5e73\u5e02')},
- '861365445':{'en': 'Jilin, Jilin', 'zh': u('\u5409\u6797\u7701\u5409\u6797\u5e02')},
- '861365446':{'en': 'Jilin, Jilin', 'zh': u('\u5409\u6797\u7701\u5409\u6797\u5e02')},
 }

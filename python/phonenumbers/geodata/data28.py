@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '9171037':{'en': 'Butibori, Maharashtra'},
+ '9171042':{'en': 'Hingua, Maharashtra'},
+ '9171043':{'en': 'Hingua, Maharashtra'},
  '9171044':{'en': 'Hingua, Maharashtra'},
  '9171045':{'en': 'Hingua, Maharashtra'},
  '9171046':{'en': 'Hingua, Maharashtra'},
@@ -3458,6 +3461,13 @@ data = {
  '960686':{'en': 'Gnaviyani'},
  '960688':{'en': 'Addu'},
  '960689':{'en': 'Addu'},
+ '96121':{'en': 'Beirut'},
+ '96124':{'en': 'Metn'},
+ '96125':{'en': 'Chouf'},
+ '96126':{'en': 'North Lebanon'},
+ '96127':{'en': 'South Lebanon'},
+ '96128':{'en': 'Bekaa'},
+ '96129':{'en': 'Jbeil & Keserwan'},
  '962262':{'en': 'Mafraq'},
  '962263':{'en': 'Jarash'},
  '962264':{'en': 'Ajloun'},

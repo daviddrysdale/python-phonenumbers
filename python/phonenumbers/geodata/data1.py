@@ -930,6 +930,7 @@ data = {
  '1443949':{'en': 'Annapolis, MD'},
  '1443977':{'en': 'Baltimore, MD'},
  '1445':{'en': 'Philadelphia'},
+ '1447':{'en': 'Illinois'},
  '1450':{'en': 'Quebec'},
  '1450218':{'en': 'Vaudreuil-Dorion, QC'},
  '1450224':{'en': u('Pr\u00e9vost, QC')},
@@ -1111,6 +1112,7 @@ data = {
  '1469916':{'en': 'Dallas, TX'},
  '1469952':{'en': 'McKinney, TX'},
  '1470':{'en': 'Georgia'},
+ '1474':{'en': 'Saskatchewan'},
  '1475':{'en': 'Connecticut'},
  '1478':{'en': 'Georgia'},
  '1478218':{'en': 'Perry, GA'},
@@ -10017,6 +10019,4 @@ data = {
  '1708':{'en': 'Illinois'},
  '1708201':{'en': 'Dolton, IL'},
  '1708202':{'en': 'Hines, IL'},
- '1708216':{'en': 'Maywood, IL'},
- '1708222':{'en': 'Cicero, IL'},
 }
