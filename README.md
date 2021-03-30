@@ -210,6 +210,17 @@ load of metadata will not cause a pause or memory exhaustion):
 The `phonenumberslite` version of the package does not include the geocoding, carrier and timezone metadata,
 which can be useful if you have problems installing the main `phonenumbers` package due to space/memory limitations.
 
+Thread Safety
+-------------
+
+The on-demand metadata loading described in the previous section means that synchronization is needed to allow
+for the library being used in a multi-threaded environment. This synchronization (and its overheads) can be avoided by
+either:
+
+* calling `PhoneMetadata.load_all()` to load all metadata in advance
+* setting `phonenumbers.phonemetadata.THREAD_SAFE_METADATA` to `False` (in a single-threaded
+  environment).
+
 Project Layout
 --------------
 

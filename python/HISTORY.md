@@ -12,6 +12,16 @@ This file does not generally include descriptions of patch releases (vX.Y.Z
 changes.  (Metadata updates are best checked
 [upstream](https://github.com/google/libphonenumber/blob/master/release_notes.txt).)
 
+What's new in 8.12.??
+---------------------
+
+On-demand metadata loading is now protected by a mutex to allow use in a multi-threaded
+environment.  This synchronization (and its overheads) can be avoided by either:
+
+- calling `PhoneMetadata.load_all()` to load all metadata in advance
+- setting `phonenumbers.phonemetadata.THREAD_SAFE_METADATA` to `False` (in a single-threaded
+  environment).
+
 What's new in 8.12.0
 ---------------------
 

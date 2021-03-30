@@ -16,10 +16,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import threading
 from .util import UnicodeMixin, ImmutableMixin, mutating_method
 from .util import u, unicod, rpr, force_unicode
 
 REGION_CODE_FOR_NON_GEO_ENTITY = u("001")
+
+# This global flag indicates whether on-demand loading of metadata should be
+# done in a thread-safe (mutex-protected) manner.
+#
+# - Setting to True (the default) is safer but slower.
+# - Setting to False avoids the mutex overhead, but means that metadata
+#   loading is not thread-safe.  This should only be used if the application
+#   is single threaded.
+#
+# Calling PhoneMetadata.load_all() also avoids the mutex overhead, at the
+# cost of increasing startup time and occupancy.
+THREAD_SAFE_METADATA = True
 
 
 class NumberFormat(UnicodeMixin, ImmutableMixin):
@@ -249,6 +262,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     to warn about breaking changes.
 
     """
+    _metadata_lock = threading.Lock()
     # If a region code is a key in this dict, metadata for that region is available.
     # The corresponding value of the map is either:
     #   - a function which loads the region's metadata
@@ -269,29 +283,41 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
 
     @classmethod
     def metadata_for_region(kls, region_code, default=None):
+        if THREAD_SAFE_METADATA:
+            kls._metadata_lock.acquire()
         loader = kls._region_available.get(region_code, None)
         if loader is not None:
             # Region metadata is available but has not yet been loaded.  Do so now.
             loader(region_code)
             kls._region_available[region_code] = None
+        if THREAD_SAFE_METADATA:
+            kls._metadata_lock.release()
         return kls._region_metadata.get(region_code, default)
 
     @classmethod
     def short_metadata_for_region(kls, region_code, default=None):
+        if THREAD_SAFE_METADATA:
+            kls._metadata_lock.acquire()
         loader = kls._short_region_available.get(region_code, None)
         if loader is not None:
             # Region short number metadata is available but has not yet been loaded.  Do so now.
             loader(region_code)
             kls._short_region_available[region_code] = None
+        if THREAD_SAFE_METADATA:
+            kls._metadata_lock.release()
         return kls._short_region_metadata.get(region_code, default)
 
     @classmethod
     def metadata_for_nongeo_region(kls, country_code, default=None):
+        if THREAD_SAFE_METADATA:
+            kls._metadata_lock.acquire()
         loader = kls._country_code_available.get(country_code, None)
         if loader is not None:
             # Region metadata is available but has not yet been loaded.  Do so now.
             loader(country_code)
             kls._country_code_available[country_code] = None
+        if THREAD_SAFE_METADATA:
+            kls._metadata_lock.release()
         return kls._country_code_metadata.get(country_code, default)
 
     @classmethod
@@ -325,6 +351,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
             if loader is not None:
                 loader(country_code)
                 kls._country_code_available[region_code] = None
+        # There will be no more writes to the metadata, so no longer any need to
+        # do synchronization.
+        global THREAD_SAFE_METADATA
+        THREAD_SAFE_METADATA = False
 
     @mutating_method
     def __init__(self,
