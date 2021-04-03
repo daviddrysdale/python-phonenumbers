@@ -16,6 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import threading
 from .util import UnicodeMixin, ImmutableMixin, mutating_method
 from .util import u, unicod, rpr, force_unicode
 
@@ -249,6 +250,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     to warn about breaking changes.
 
     """
+    # Lock that protects the *_available fields while they are being modified.
+    # The modificiation involves loading data from a file, so we cannot just
+    # rely on the GIL.
+    _metadata_lock = threading.Lock()
     # If a region code is a key in this dict, metadata for that region is available.
     # The corresponding value of the map is either:
     #   - a function which loads the region's metadata
@@ -272,8 +277,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         loader = kls._region_available.get(region_code, None)
         if loader is not None:
             # Region metadata is available but has not yet been loaded.  Do so now.
+            kls._metadata_lock.acquire()
             loader(region_code)
             kls._region_available[region_code] = None
+            kls._metadata_lock.release()
         return kls._region_metadata.get(region_code, default)
 
     @classmethod
@@ -281,8 +288,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         loader = kls._short_region_available.get(region_code, None)
         if loader is not None:
             # Region short number metadata is available but has not yet been loaded.  Do so now.
+            kls._metadata_lock.acquire()
             loader(region_code)
             kls._short_region_available[region_code] = None
+            kls._metadata_lock.release()
         return kls._short_region_metadata.get(region_code, default)
 
     @classmethod
@@ -290,8 +299,10 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         loader = kls._country_code_available.get(country_code, None)
         if loader is not None:
             # Region metadata is available but has not yet been loaded.  Do so now.
+            kls._metadata_lock.acquire()
             loader(country_code)
             kls._country_code_available[country_code] = None
+            kls._metadata_lock.release()
         return kls._country_code_metadata.get(country_code, default)
 
     @classmethod
