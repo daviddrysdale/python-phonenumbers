@@ -2,9 +2,10 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_BL = PhoneMetadata(id='BL', country_code=590, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='(?:590|69\\d|976)\\d{6}', possible_length=(9,)),
+    general_desc=PhoneNumberDesc(national_number_pattern='(?:590|(?:69|80)\\d|976)\\d{6}', possible_length=(9,)),
     fixed_line=PhoneNumberDesc(national_number_pattern='590(?:2[7-9]|5[12]|87)\\d{4}', example_number='590271234', possible_length=(9,)),
     mobile=PhoneNumberDesc(national_number_pattern='69(?:0\\d\\d|1(?:2[29]|3[0-5]))\\d{4}', example_number='690001234', possible_length=(9,)),
+    toll_free=PhoneNumberDesc(national_number_pattern='80[0-5]\\d{6}', example_number='800012345', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='976[01]\\d{5}', example_number='976012345', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0',

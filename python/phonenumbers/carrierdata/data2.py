@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '5939999':{'en': 'Movistar'},
+ '5946940':{'en': 'SFR'},
  '59469408':{'en': 'Digicel'},
  '59469409':{'en': 'Digicel'},
  '59469412':{'en': 'Digicel'},
@@ -691,14 +693,11 @@ data = {
  '658027':{'en': 'SingTel'},
  '658028':{'en': 'SingTel'},
  '658029':{'en': 'SingTel'},
- '658030':{'en': 'SingTel'},
- '658031':{'en': 'SingTel'},
+ '65803':{'en': 'SingTel'},
  '658032':{'en': 'Changi Travel Services Pte Ltd'},
  '658033':{'en': 'TPG'},
  '658034':{'en': 'TPG'},
  '658035':{'en': 'TPG'},
- '658036':{'en': 'SingTel'},
- '658037':{'en': 'SingTel'},
  '6581':{'en': 'StarHub'},
  '65810':{'en': 'M1'},
  '65812':{'en': 'SingTel'},
