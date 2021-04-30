@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3522739':{'de': 'Windhof/Steinfort', 'en': 'Windhof/Steinfort', 'fr': 'Windhof/Steinfort'},
  '3522740':{'de': 'Howald', 'en': 'Howald', 'fr': 'Howald'},
  '3522742':{'de': 'Plateau de Kirchberg', 'en': 'Plateau de Kirchberg', 'fr': 'Plateau de Kirchberg'},
  '3522743':{'de': 'Findel/Kirchberg', 'en': 'Findel/Kirchberg', 'fr': 'Findel/Kirchberg'},
@@ -10018,5 +10019,4 @@ data = {
  '495658':{'de': 'Wehretal', 'en': 'Wehretal'},
  '495659':{'de': 'Ringgau', 'en': 'Ringgau'},
  '495661':{'de': 'Melsungen', 'en': 'Melsungen'},
- '495662':{'de': 'Felsberg Hessen', 'en': 'Felsberg Hessen'},
 }

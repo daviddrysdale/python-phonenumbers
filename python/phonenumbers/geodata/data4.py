@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3324367':{'en': 'Laval', 'fr': 'Laval'},
  '3324369':{'en': 'Laval', 'fr': 'Laval'},
  '3324371':{'en': u('La Fert\u00e9 Bernard'), 'fr': u('La Fert\u00e9 Bernard')},
  '3324372':{'en': 'Le Mans', 'fr': 'Le Mans'},
@@ -10018,5 +10019,4 @@ data = {
  '3522735':{'de': 'Sandweiler/Mutfort/Roodt-sur-Syre', 'en': 'Sandweiler/Moutfort/Roodt-sur-Syre', 'fr': 'Sandweiler/Moutfort/Roodt-sur-Syre'},
  '3522736':{'de': 'Hesperingen/Kockelscheuer/Roeser', 'en': 'Hesperange/Kockelscheuer/Roeser', 'fr': 'Hesperange/Kockelscheuer/Roeser'},
  '3522737':{'de': 'Leudelingen/Ehlingen/Monnerich', 'en': 'Leudelange/Ehlange/Mondercange', 'fr': 'Leudelange/Ehlange/Mondercange'},
- '3522739':{'de': 'Windhof/Steinfort', 'en': 'Windhof/Steinfort', 'fr': 'Windhof/Steinfort'},
 }

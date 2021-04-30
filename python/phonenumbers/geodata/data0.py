@@ -7721,6 +7721,7 @@ data = {
  '1364':{'en': 'Kentucky'},
  '1365':{'en': 'Ontario'},
  '1367':{'en': 'Quebec'},
+ '1368':{'en': 'Alberta'},
  '1380':{'en': 'Ohio'},
  '1385':{'en': 'Utah'},
  '1386':{'en': 'Florida'},
@@ -10018,5 +10019,4 @@ data = {
  '1418226':{'en': 'Saint-Georges, QC'},
  '1418227':{'en': 'Saint-Georges, QC'},
  '1418228':{'en': 'Saint-Georges, QC'},
- '1418233':{'en': 'Les Escoumins, QC'},
 }
