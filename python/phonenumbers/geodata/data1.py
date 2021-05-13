@@ -4970,6 +4970,7 @@ data = {
  '1571292':{'en': 'Manassas, VA'},
  '1571379':{'en': 'Manassas, VA'},
  '1571434':{'en': 'Sterling, VA'},
+ '1572':{'en': 'Oklahoma'},
  '1573':{'en': 'Missouri'},
  '1573204':{'en': 'Jackson, MO'},
  '1573214':{'en': 'Columbia, MO'},
@@ -10018,5 +10019,4 @@ data = {
  '1707996':{'en': 'Sonoma, CA'},
  '1707998':{'en': 'Clearlake Oaks, CA'},
  '1708':{'en': 'Illinois'},
- '1708201':{'en': 'Dolton, IL'},
 }
