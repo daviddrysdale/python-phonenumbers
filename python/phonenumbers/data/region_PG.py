@@ -3,8 +3,8 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_PG = PhoneMetadata(id='PG', country_code=675, international_prefix='00|140[1-3]',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:180|[78]\\d{3})\\d{4}|(?:[2-589]\\d|64)\\d{5}', possible_length=(7, 8)),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:64[1-9]|7730|85[02-46-9])\\d{4}|(?:3[0-2]|4[257]|5[34]|77[0-24]|9[78])\\d{5}', example_number='3123456', possible_length=(7, 8)),
-    mobile=PhoneNumberDesc(national_number_pattern='77(?:3[1-9]|[5-9]\\d)\\d{4}|(?:7[0-689]|8[18])\\d{6}', example_number='70123456', possible_length=(8,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:(?:3[0-2]|4[257]|5[34]|9[78])\\d|64[1-9]|85[02-46-9])\\d{4}', example_number='3123456', possible_length=(7,)),
+    mobile=PhoneNumberDesc(national_number_pattern='(?:7\\d|8[18])\\d{6}', example_number='70123456', possible_length=(8,)),
     toll_free=PhoneNumberDesc(national_number_pattern='180\\d{4}', example_number='1801234', possible_length=(7,)),
     voip=PhoneNumberDesc(national_number_pattern='2(?:0[0-47]|7[568])\\d{4}', example_number='2751234', possible_length=(7,)),
     pager=PhoneNumberDesc(national_number_pattern='27[01]\\d{4}', example_number='2700123', possible_length=(7,)),
