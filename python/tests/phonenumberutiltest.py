@@ -588,6 +588,10 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual("+1 650 253 0000",
                          phonenumbers.format_out_of_country_calling_number(US_NUMBER, "001"))
 
+        # Testing preferred international prefixes with ~ are supported (designates waiting).
+        self.assertEqual("8~10 39 02 3661 8300",
+                         phonenumbers.format_out_of_country_calling_number(IT_NUMBER, "UZ"))
+
     def testFormatOutOfCountryKeepingAlphaChars(self):
         alphaNumericNumber = PhoneNumber(country_code=1, national_number=8007493524)
         alphaNumericNumber.raw_input = "1800 six-flag"

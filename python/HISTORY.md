@@ -12,6 +12,18 @@ This file does not generally include descriptions of patch releases (vX.Y.Z
 changes.  (Metadata updates are best checked
 [upstream](https://github.com/google/libphonenumber/blob/master/release_notes.txt).)
 
+What's new in 8.12.24
+---------------------
+
+Merge to
+[upstream commit 8379f2f53bbe](https://github.com/google/libphonenumber/commit/8379f2f53bbe);
+relevant code changes:
+
+- Changes format_out_of_country_calling_number to always use preferred intl prefix if present, not just for numbers
+  with a non-unique IDD. This means we will output "8~10" as the prefix if calling formatOutOfCountryCallingNumber
+  instead of "810" for some regions that have this tilde in their prefix [designates that the user should wait before
+  continuing to dial].
+
 What's new in 8.12.0
 ---------------------
 

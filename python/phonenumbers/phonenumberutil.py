@@ -1339,15 +1339,14 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
     metadata_for_region_calling_from = PhoneMetadata.metadata_for_region_or_calling_code(country_code, region_calling_from.upper())
     international_prefix = metadata_for_region_calling_from.international_prefix
 
-    # For regions that have multiple international prefixes, the international
-    # format of the number is returned, unless there is a preferred
-    # international prefix.
+    # In general, if there is a preferred international prefix, use that. Otherwise, for regions
+    # that have multiple international prefixes, the international format of the number is
+    # returned since we would not know which one to use.
     i18n_prefix_for_formatting = U_EMPTY_STRING
-    i18n_match = fullmatch(_SINGLE_INTERNATIONAL_PREFIX, international_prefix)
-    if i18n_match:
-        i18n_prefix_for_formatting = international_prefix
-    elif metadata_for_region_calling_from.preferred_international_prefix is not None:
+    if metadata_for_region_calling_from.preferred_international_prefix is not None:
         i18n_prefix_for_formatting = metadata_for_region_calling_from.preferred_international_prefix
+    elif fullmatch(_SINGLE_INTERNATIONAL_PREFIX, international_prefix):
+        i18n_prefix_for_formatting = international_prefix
 
     region_code = region_code_for_country_code(country_code)
     # Metadata cannot be None because the country calling code is valid.
