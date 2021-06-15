@@ -932,6 +932,7 @@ data = {
  '1443977':{'en': 'Baltimore, MD'},
  '1445':{'en': 'Philadelphia'},
  '1447':{'en': 'Illinois'},
+ '1448':{'en': 'Florida'},
  '1450':{'en': 'Quebec'},
  '1450218':{'en': 'Vaudreuil-Dorion, QC'},
  '1450224':{'en': u('Pr\u00e9vost, QC')},
@@ -10018,5 +10019,4 @@ data = {
  '1707995':{'en': 'Clearlake, CA'},
  '1707996':{'en': 'Sonoma, CA'},
  '1707998':{'en': 'Clearlake Oaks, CA'},
- '1708':{'en': 'Illinois'},
 }

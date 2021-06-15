@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3522772':{'de': 'Echternach', 'en': 'Echternach', 'fr': 'Echternach'},
  '3522773':{'de': 'Rosport', 'en': 'Rosport', 'fr': 'Rosport'},
  '3522774':{'de': 'Wasserbillig', 'en': 'Wasserbillig', 'fr': 'Wasserbillig'},
  '3522775':{'de': 'Distrikt Grevenmacher-sur-Moselle', 'en': 'Grevenmacher-sur-Moselle', 'fr': 'Grevenmacher-sur-Moselle'},
@@ -10018,5 +10019,4 @@ data = {
  '495691':{'de': 'Bad Arolsen', 'en': 'Bad Arolsen'},
  '495692':{'de': 'Wolfhagen', 'en': 'Wolfhagen'},
  '495693':{'de': 'Volkmarsen', 'en': 'Volkmarsen'},
- '495694':{'de': 'Diemelstadt', 'en': 'Diemelstadt'},
 }

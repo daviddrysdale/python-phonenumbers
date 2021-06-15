@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861533869':{'en': 'Qianxinan, Guizhou', 'zh': u('\u8d35\u5dde\u7701\u9ed4\u897f\u5357\u5e03\u4f9d\u65cf\u82d7\u65cf\u81ea\u6cbb\u5dde')},
  '86153387':{'en': 'Shenzhen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6df1\u5733\u5e02')},
  '86153388':{'en': 'Shenzhen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6df1\u5733\u5e02')},
  '86153389':{'en': 'Haikou, Hainan', 'zh': u('\u6d77\u5357\u7701\u6d77\u53e3\u5e02')},
@@ -10018,5 +10019,4 @@ data = {
  '86156757':{'en': 'Chenzhou, Hunan', 'zh': u('\u6e56\u5357\u7701\u90f4\u5dde\u5e02')},
  '86156758':{'en': 'Changsha, Hunan', 'zh': u('\u6e56\u5357\u7701\u957f\u6c99\u5e02')},
  '86156759':{'en': 'Shaoyang, Hunan', 'zh': u('\u6e56\u5357\u7701\u90b5\u9633\u5e02')},
- '86156760':{'en': 'Chongzuo, Guangxi', 'zh': u('\u5e7f\u897f\u5d07\u5de6\u5e02')},
 }

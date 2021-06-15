@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '618993209':{'en': 'Mingenew'},
  '61899321':{'en': 'Upper Gascoyne'},
  '618993218':{'en': 'Morawa'},
  '618993219':{'en': 'Mount George'},
@@ -4178,7 +4179,7 @@ data = {
  '67837':{'en': 'Luganville'},
  '67838':{'en': 'Penama/Torba'},
  '6784':{'en': 'Malampa'},
- '6788':{'en': 'Tafea'},
+ '67888':{'en': 'Tafea'},
  '6793':{'en': 'Suva City/Nausori/Korovou'},
  '67965':{'en': 'Coral Coast/Sigatoka'},
  '67966':{'en': 'Lautoka/Ba/Vatukoula/Tavua/Rakiraki'},
@@ -10018,5 +10019,4 @@ data = {
  '86130756':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
  '86130757':{'en': 'Wenzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u6e29\u5dde\u5e02')},
  '86130758':{'en': 'Fuzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u798f\u5dde\u5e02')},
- '86130759':{'en': 'Fuzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u798f\u5dde\u5e02')},
 }

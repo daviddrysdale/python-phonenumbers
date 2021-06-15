@@ -19,15 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '59669655':{'en': 'Orange'},
- '59669656':{'en': 'Orange'},
- '59669660':{'en': 'SFR/Rife'},
- '59669661':{'en': 'SFR/Rife'},
- '59669662':{'en': 'SFR/Rife'},
- '59669663':{'en': 'SFR/Rife'},
- '59669664':{'en': 'SFR/Rife'},
- '59669665':{'en': u('Free Cara\u00efbe')},
- '59669666':{'en': u('Free Cara\u00efbe')},
  '59669667':{'en': u('Free Cara\u00efbe')},
  '59669668':{'en': u('Free Cara\u00efbe')},
  '59669669':{'en': u('Free Cara\u00efbe')},
@@ -1727,6 +1718,7 @@ data = {
  '67793':{'en': 'Satsol'},
  '6785':{'en': 'Digicel'},
  '6787':{'en': 'Telecom Vanuatu Ltd'},
+ '6788':{'en': 'Wan Tok'},
  '6792':{'en': 'Vodafone'},
  '6794':{'en': 'Vodafone'},
  '67950':{'en': 'Digicel'},

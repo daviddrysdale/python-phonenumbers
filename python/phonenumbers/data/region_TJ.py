@@ -2,9 +2,9 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_TJ = PhoneMetadata(id='TJ', country_code=992, international_prefix='810',
-    general_desc=PhoneNumberDesc(national_number_pattern='(?:[02]0|11|[3-57-9]\\d)\\d{7}', possible_length=(9,), possible_length_local_only=(3, 5, 6, 7)),
+    general_desc=PhoneNumberDesc(national_number_pattern='(?:00|11|[2-57-9]\\d)\\d{7}', possible_length=(9,), possible_length_local_only=(3, 5, 6, 7)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:3(?:1[3-5]|2[245]|3[12]|4[24-7]|5[25]|72)|4(?:46|74|87))\\d{6}', example_number='372123456', possible_length=(9,), possible_length_local_only=(3, 5, 6, 7)),
-    mobile=PhoneNumberDesc(national_number_pattern='41[18]\\d{6}|(?:[02-4]0|11|5[05]|7[07]|8[08]|9\\d)\\d{7}', example_number='917123456', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='41[18]\\d{6}|(?:[034]0|11|2[02]|5[05]|7[07]|8[08]|9\\d)\\d{7}', example_number='917123456', possible_length=(9,)),
     preferred_international_prefix='8~10',
     national_prefix='8',
     national_prefix_for_parsing='8',

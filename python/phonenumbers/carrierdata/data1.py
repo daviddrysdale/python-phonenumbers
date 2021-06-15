@@ -19,15 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '553399956':{'en': 'Telemig Celular'},
- '553399957':{'en': 'Telemig Celular'},
- '553399958':{'en': 'Telemig Celular'},
- '553399959':{'en': 'Telemig Celular'},
- '553399961':{'en': 'Telemig Celular'},
- '553399962':{'en': 'Telemig Celular'},
- '553399963':{'en': 'Telemig Celular'},
- '553399964':{'en': 'Telemig Celular'},
- '553399965':{'en': 'Telemig Celular'},
  '553399966':{'en': 'Telemig Celular'},
  '553399967':{'en': 'Telemig Celular'},
  '553399968':{'en': 'Telemig Celular'},
@@ -10019,4 +10010,13 @@ data = {
  '59669652':{'en': 'Digicel'},
  '59669653':{'en': 'Digicel'},
  '59669654':{'en': 'Digicel'},
+ '59669655':{'en': 'Orange'},
+ '59669656':{'en': 'Orange'},
+ '59669660':{'en': 'SFR/Rife'},
+ '59669661':{'en': 'SFR/Rife'},
+ '59669662':{'en': 'SFR/Rife'},
+ '59669663':{'en': 'SFR/Rife'},
+ '59669664':{'en': 'SFR/Rife'},
+ '59669665':{'en': u('Free Cara\u00efbe')},
+ '59669666':{'en': u('Free Cara\u00efbe')},
 }
