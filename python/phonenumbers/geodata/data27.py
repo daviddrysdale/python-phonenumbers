@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861882690':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
+ '861882691':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
+ '861882692':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
+ '861882693':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
+ '861882694':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
+ '861882695':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
+ '861882696':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
+ '861882697':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
  '861882698':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
  '861882699':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
  '86188270':{'en': 'Wuhan, Hubei', 'zh': u('\u6e56\u5317\u7701\u6b66\u6c49\u5e02')},
@@ -10011,12 +10019,4 @@ data = {
  '9171053':{'en': 'Narkhed, Maharashtra'},
  '9171054':{'en': 'Narkhed, Maharashtra'},
  '9171055':{'en': 'Narkhed, Maharashtra'},
- '9171056':{'en': 'Narkhed, Maharashtra'},
- '9171057':{'en': 'Narkhed, Maharashtra'},
- '9171062':{'en': 'Bhiwapur, Maharashtra'},
- '9171063':{'en': 'Bhiwapur, Maharashtra'},
- '9171064':{'en': 'Bhiwapur, Maharashtra'},
- '9171065':{'en': 'Bhiwapur, Maharashtra'},
- '9171066':{'en': 'Bhiwapur, Maharashtra'},
- '9171067':{'en': 'Bhiwapur, Maharashtra'},
 }

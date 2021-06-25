@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3324384':{'en': 'Le Mans', 'fr': 'Le Mans'},
+ '3324385':{'en': 'Le Mans', 'fr': 'Le Mans'},
+ '3324386':{'en': 'Le Mans', 'fr': 'Le Mans'},
+ '3324389':{'en': u('Connerr\u00e9'), 'fr': u('Connerr\u00e9')},
+ '3324391':{'en': 'Laval', 'fr': 'Laval'},
+ '3324392':{'en': u('Sabl\u00e9-sur-Sarthe'), 'fr': u('Sabl\u00e9-sur-Sarthe')},
+ '3324394':{'en': u('La Fl\u00e8che'), 'fr': u('La Fl\u00e8che')},
+ '3324395':{'en': u('Sabl\u00e9-sur-Sarthe'), 'fr': u('Sabl\u00e9-sur-Sarthe')},
  '3324400':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324401':{'en': 'Angers', 'fr': 'Angers'},
  '3324402':{'en': 'Le Mans', 'fr': 'Le Mans'},
@@ -10011,12 +10019,4 @@ data = {
  '3522751':{'de': u('D\u00fcdelingen/Bettemburg/Livingen'), 'en': 'Dudelange/Bettembourg/Livange', 'fr': 'Dudelange/Bettembourg/Livange'},
  '3522752':{'de': u('D\u00fcdelingen'), 'en': 'Dudelange', 'fr': 'Dudelange'},
  '3522753':{'de': 'Esch-sur-Alzette', 'en': 'Esch-sur-Alzette', 'fr': 'Esch-sur-Alzette'},
- '3522754':{'de': 'Esch-sur-Alzette', 'en': 'Esch-sur-Alzette', 'fr': 'Esch-sur-Alzette'},
- '3522755':{'de': 'Esch-sur-Alzette/Monnerich', 'en': 'Esch-sur-Alzette/Mondercange', 'fr': 'Esch-sur-Alzette/Mondercange'},
- '3522756':{'de': u('R\u00fcmelingen'), 'en': 'Rumelange', 'fr': 'Rumelange'},
- '3522757':{'de': 'Esch-sur-Alzette/Schifflingen', 'en': 'Esch-sur-Alzette/Schifflange', 'fr': 'Esch-sur-Alzette/Schifflange'},
- '3522758':{'de': 'Soleuvre/Differdingen', 'en': 'Soleuvre/Differdange', 'fr': 'Soleuvre/Differdange'},
- '3522759':{'de': 'Soleuvre', 'en': 'Soleuvre', 'fr': 'Soleuvre'},
- '3522767':{'de': u('D\u00fcdelingen'), 'en': 'Dudelange', 'fr': 'Dudelange'},
- '3522771':{'de': 'Betzdorf', 'en': 'Betzdorf', 'fr': 'Betzdorf'},
 }

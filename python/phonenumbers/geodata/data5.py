@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3522754':{'de': 'Esch-sur-Alzette', 'en': 'Esch-sur-Alzette', 'fr': 'Esch-sur-Alzette'},
+ '3522755':{'de': 'Esch-sur-Alzette/Monnerich', 'en': 'Esch-sur-Alzette/Mondercange', 'fr': 'Esch-sur-Alzette/Mondercange'},
+ '3522756':{'de': u('R\u00fcmelingen'), 'en': 'Rumelange', 'fr': 'Rumelange'},
+ '3522757':{'de': 'Esch-sur-Alzette/Schifflingen', 'en': 'Esch-sur-Alzette/Schifflange', 'fr': 'Esch-sur-Alzette/Schifflange'},
+ '3522758':{'de': 'Soleuvre/Differdingen', 'en': 'Soleuvre/Differdange', 'fr': 'Soleuvre/Differdange'},
+ '3522759':{'de': 'Soleuvre', 'en': 'Soleuvre', 'fr': 'Soleuvre'},
+ '3522767':{'de': u('D\u00fcdelingen'), 'en': 'Dudelange', 'fr': 'Dudelange'},
+ '3522771':{'de': 'Betzdorf', 'en': 'Betzdorf', 'fr': 'Betzdorf'},
  '3522772':{'de': 'Echternach', 'en': 'Echternach', 'fr': 'Echternach'},
  '3522773':{'de': 'Rosport', 'en': 'Rosport', 'fr': 'Rosport'},
  '3522774':{'de': 'Wasserbillig', 'en': 'Wasserbillig', 'fr': 'Wasserbillig'},
@@ -10011,12 +10019,4 @@ data = {
  '495676':{'de': 'Liebenau Hessen', 'en': 'Liebenau Hessen'},
  '495677':{'de': 'Calden-Westuffeln', 'en': 'Calden-Westuffeln'},
  '495681':{'de': 'Homberg Efze', 'en': 'Homberg Efze'},
- '495682':{'de': 'Borken Hessen', 'en': 'Borken Hessen'},
- '495683':{'de': 'Wabern Hessen', 'en': 'Wabern Hessen'},
- '495684':{'de': 'Frielendorf', 'en': 'Frielendorf'},
- '495685':{'de': u('Kn\u00fcllwald'), 'en': u('Kn\u00fcllwald')},
- '495686':{'de': u('Schwarzenborn Kn\u00fcll'), 'en': u('Schwarzenborn Kn\u00fcll')},
- '495691':{'de': 'Bad Arolsen', 'en': 'Bad Arolsen'},
- '495692':{'de': 'Wolfhagen', 'en': 'Wolfhagen'},
- '495693':{'de': 'Volkmarsen', 'en': 'Volkmarsen'},
 }

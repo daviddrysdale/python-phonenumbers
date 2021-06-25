@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61899313':{'en': 'Exmouth'},
+ '61899314':{'en': 'Yuna'},
+ '61899315':{'en': 'Yuna'},
+ '61899316':{'en': 'Yuna East'},
+ '61899317':{'en': 'Yuna East'},
+ '61899318':{'en': 'Ajana'},
+ '61899319':{'en': 'Ajana'},
+ '61899320':{'en': 'Exmouth'},
  '618993209':{'en': 'Mingenew'},
  '61899321':{'en': 'Upper Gascoyne'},
  '618993218':{'en': 'Morawa'},
@@ -10011,12 +10019,4 @@ data = {
  '861307503':{'en': 'Bozhou, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u4eb3\u5dde\u5e02')},
  '861307504':{'en': 'Bozhou, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u4eb3\u5dde\u5e02')},
  '861307507':{'en': 'Bozhou, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u4eb3\u5dde\u5e02')},
- '86130751':{'en': 'Meizhou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6885\u5dde\u5e02')},
- '86130752':{'en': 'Huizhou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u60e0\u5dde\u5e02')},
- '86130753':{'en': 'Jinan, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6d4e\u5357\u5e02')},
- '86130754':{'en': 'Chongqing', 'zh': u('\u91cd\u5e86\u5e02')},
- '86130755':{'en': 'Hefei, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u5408\u80a5\u5e02')},
- '86130756':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
- '86130757':{'en': 'Wenzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u6e29\u5dde\u5e02')},
- '86130758':{'en': 'Fuzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u798f\u5dde\u5e02')},
 }

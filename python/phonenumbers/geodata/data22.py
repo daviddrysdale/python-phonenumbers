@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '86156756':{'en': 'Changde, Hunan', 'zh': u('\u6e56\u5357\u7701\u5e38\u5fb7\u5e02')},
+ '861567566':{'en': 'Chenzhou, Hunan', 'zh': u('\u6e56\u5357\u7701\u90f4\u5dde\u5e02')},
+ '861567567':{'en': 'Chenzhou, Hunan', 'zh': u('\u6e56\u5357\u7701\u90f4\u5dde\u5e02')},
+ '861567568':{'en': 'Chenzhou, Hunan', 'zh': u('\u6e56\u5357\u7701\u90f4\u5dde\u5e02')},
+ '861567569':{'en': 'Chenzhou, Hunan', 'zh': u('\u6e56\u5357\u7701\u90f4\u5dde\u5e02')},
+ '86156757':{'en': 'Chenzhou, Hunan', 'zh': u('\u6e56\u5357\u7701\u90f4\u5dde\u5e02')},
+ '86156758':{'en': 'Changsha, Hunan', 'zh': u('\u6e56\u5357\u7701\u957f\u6c99\u5e02')},
+ '86156759':{'en': 'Shaoyang, Hunan', 'zh': u('\u6e56\u5357\u7701\u90b5\u9633\u5e02')},
  '86156760':{'en': 'Chongzuo, Guangxi', 'zh': u('\u5e7f\u897f\u5d07\u5de6\u5e02')},
  '861567600':{'en': 'Fangchenggang, Guangxi', 'zh': u('\u5e7f\u897f\u9632\u57ce\u6e2f\u5e02')},
  '861567601':{'en': 'Fangchenggang, Guangxi', 'zh': u('\u5e7f\u897f\u9632\u57ce\u6e2f\u5e02')},
@@ -10011,12 +10019,4 @@ data = {
  '861595062':{'en': 'Suqian, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5bbf\u8fc1\u5e02')},
  '861595063':{'en': 'Suqian, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5bbf\u8fc1\u5e02')},
  '861595064':{'en': 'Suqian, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5bbf\u8fc1\u5e02')},
- '861595065':{'en': 'Xuzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5f90\u5dde\u5e02')},
- '861595066':{'en': 'Xuzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5f90\u5dde\u5e02')},
- '861595067':{'en': 'Xuzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5f90\u5dde\u5e02')},
- '861595068':{'en': 'Xuzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5f90\u5dde\u5e02')},
- '861595069':{'en': 'Xuzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5f90\u5dde\u5e02')},
- '86159507':{'en': 'Lianyungang, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u8fde\u4e91\u6e2f\u5e02')},
- '86159508':{'en': 'Nantong, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u901a\u5e02')},
- '86159509':{'en': 'Suzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u82cf\u5dde\u5e02')},
 }

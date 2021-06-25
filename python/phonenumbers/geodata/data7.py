@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '55513755':{'en': u('Mu\u00e7um - RS'), 'pt': u('Mu\u00e7um - RS')},
+ '55513756':{'en': 'Anta Gorda - RS', 'pt': 'Anta Gorda - RS'},
+ '55513757':{'en': u('Nova Br\u00e9scia - RS'), 'pt': u('Nova Br\u00e9scia - RS')},
+ '55513758':{'en': u('Capit\u00e3o - RS'), 'pt': u('Capit\u00e3o - RS')},
+ '55513759':{'en': 'Travesseiro - RS', 'pt': 'Travesseiro - RS'},
+ '55513760':{'en': 'Colinas - RS', 'pt': 'Colinas - RS'},
+ '55513761':{'en': 'Paverama - RS', 'pt': 'Paverama - RS'},
+ '55513762':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
  '55513763':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
  '55513764':{'en': 'Cruzeiro do Sul - RS', 'pt': 'Cruzeiro do Sul - RS'},
  '55513765':{'en': u('Lago\u00e3o - RS'), 'pt': u('Lago\u00e3o - RS')},
@@ -10011,12 +10019,4 @@ data = {
  '61240217':{'en': 'Wootton'},
  '61240218':{'en': 'Bulahdelah'},
  '61240219':{'en': 'Bulahdelah'},
- '61240220':{'en': 'Cessnock'},
- '61240221':{'en': 'Cessnock'},
- '61240222':{'en': 'Clarence Town'},
- '61240223':{'en': 'Dungog'},
- '61240224':{'en': 'East Gresford'},
- '61240225':{'en': 'Karuah'},
- '61240226':{'en': 'Laguna'},
- '61240227':{'en': 'Maitland'},
 }

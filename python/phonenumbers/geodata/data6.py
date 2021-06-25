@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '495682':{'de': 'Borken Hessen', 'en': 'Borken Hessen'},
+ '495683':{'de': 'Wabern Hessen', 'en': 'Wabern Hessen'},
+ '495684':{'de': 'Frielendorf', 'en': 'Frielendorf'},
+ '495685':{'de': u('Kn\u00fcllwald'), 'en': u('Kn\u00fcllwald')},
+ '495686':{'de': u('Schwarzenborn Kn\u00fcll'), 'en': u('Schwarzenborn Kn\u00fcll')},
+ '495691':{'de': 'Bad Arolsen', 'en': 'Bad Arolsen'},
+ '495692':{'de': 'Wolfhagen', 'en': 'Wolfhagen'},
+ '495693':{'de': 'Volkmarsen', 'en': 'Volkmarsen'},
  '495694':{'de': 'Diemelstadt', 'en': 'Diemelstadt'},
  '495695':{'de': 'Twistetal', 'en': 'Twistetal'},
  '495696':{'de': 'Bad Arolsen-Landau', 'en': 'Bad Arolsen-Landau'},
@@ -10011,12 +10019,4 @@ data = {
  '55513752':{'en': 'Jacarezinho - RS', 'pt': 'Jacarezinho - RS'},
  '55513753':{'en': 'Roca Sales - RS', 'pt': 'Roca Sales - RS'},
  '55513754':{'en': 'Imigrante - RS', 'pt': 'Imigrante - RS'},
- '55513755':{'en': u('Mu\u00e7um - RS'), 'pt': u('Mu\u00e7um - RS')},
- '55513756':{'en': 'Anta Gorda - RS', 'pt': 'Anta Gorda - RS'},
- '55513757':{'en': u('Nova Br\u00e9scia - RS'), 'pt': u('Nova Br\u00e9scia - RS')},
- '55513758':{'en': u('Capit\u00e3o - RS'), 'pt': u('Capit\u00e3o - RS')},
- '55513759':{'en': 'Travesseiro - RS', 'pt': 'Travesseiro - RS'},
- '55513760':{'en': 'Colinas - RS', 'pt': 'Colinas - RS'},
- '55513761':{'en': 'Paverama - RS', 'pt': 'Paverama - RS'},
- '55513762':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
 }
