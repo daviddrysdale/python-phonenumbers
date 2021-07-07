@@ -19,6 +19,18 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '59669652':{'en': 'Digicel'},
+ '59669653':{'en': 'Digicel'},
+ '59669654':{'en': 'Digicel'},
+ '59669655':{'en': 'Orange'},
+ '59669656':{'en': 'Orange'},
+ '59669660':{'en': 'SFR/Rife'},
+ '59669661':{'en': 'SFR/Rife'},
+ '59669662':{'en': 'SFR/Rife'},
+ '59669663':{'en': 'SFR/Rife'},
+ '59669664':{'en': 'SFR/Rife'},
+ '59669665':{'en': u('Free Cara\u00efbe')},
+ '59669666':{'en': u('Free Cara\u00efbe')},
  '59669667':{'en': u('Free Cara\u00efbe')},
  '59669668':{'en': u('Free Cara\u00efbe')},
  '59669669':{'en': u('Free Cara\u00efbe')},
@@ -1694,6 +1706,8 @@ data = {
  '67578':{'en': 'Telikom'},
  '67581':{'en': 'DIGIVOIP'},
  '67588':{'en': 'Digicel'},
+ '676555':{'en': 'Toko Wireless'},
+ '676556':{'en': 'Toko Wireless'},
  '67668':{'en': 'Digicel'},
  '67670':{'en': 'Digicel'},
  '67672':{'en': 'U-Call Tonga'},

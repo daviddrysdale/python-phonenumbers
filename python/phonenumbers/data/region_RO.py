@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_RO = PhoneMetadata(id='RO', country_code=40, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:[237]\\d|[89]0)\\d{7}|[23]\\d{5}', possible_length=(6, 9)),
     fixed_line=PhoneNumberDesc(national_number_pattern='[23][13-6]\\d{7}|(?:2(?:19\\d|[3-6]\\d9)|31\\d\\d)\\d\\d', example_number='211234567', possible_length=(6, 9)),
-    mobile=PhoneNumberDesc(national_number_pattern='7[01]20\\d{5}|7(?:0[013-9]|1[01]|[2-7]\\d|8[03-8]|9[09])\\d{6}', example_number='712034567', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='7[01]20\\d{5}|7(?:0[013-9]|1[01]|[2-7]\\d|8[03-8]|9[019])\\d{6}', example_number='712034567', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6}', example_number='800123456', possible_length=(9,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='90[0136]\\d{6}', example_number='900123456', possible_length=(9,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='801\\d{6}', example_number='801123456', possible_length=(9,)),
