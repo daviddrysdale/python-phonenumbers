@@ -1,8 +1,7 @@
 import phonenumbers
 
 # Fixed by Phonenumbers Cases
-valid_strings = ['+6323168971',
-                 '+442083661177',
+valid_strings = ['+442083661177',
                  '+658003211137',
                  '+20573925008',
                  '+2057392500',
@@ -13,7 +12,11 @@ valid_strings = ['+6323168971',
                  '+525547808256',
                  '+13677395285',
                  '+16892226575',
-                 '+48477314848']
+                 '+18404440531',
+                 '+48477314848',
+                 '+6569786318',
+                 '+6560115374',  # https://switchcomm.atlassian.net/browse/TEL-14616
+                 ]
 
 print '######### - VALID BY LIBRARY - ################'
 for l in valid_strings:
@@ -21,13 +24,11 @@ for l in valid_strings:
   print '%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x
 
 # To be fixed by Dialpad Changes
-dialpad_cases = ['+6278033212174', # https://switchcomm.atlassian.net/browse/DP-13742
-                 '+63283168971',   # Philipines
-                 '+8031000000141', # Dialpadistan
-                 '+22557715034',   # Ivory Coast - Old Format
-                 '+2250757715034', # Ivory Coast - New Format
-                 '+22521214601',   # Ivory Coast - Old Format
-                 '+2252721214601', # Ivory Coast - New Format
+dialpad_cases = ['+6278033212174',  # https://switchcomm.atlassian.net/browse/DP-13742
+                 '+63283168971',    # Philipines
+                 '+8031000000141',  # Dialpadistan
+                 '+2250757715034',  # Ivory Coast - New Format
+                 '+2252721214601',  # Ivory Coast - New Format
                  ]
 
 print '######### - VALID BY DIALPAD - ################'
@@ -36,7 +37,7 @@ for l in dialpad_cases:
     x = phonenumbers.parse(l, None)
     print '%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x
   except Exception as e:
-    print '%15s' % l, '%25s' % (e)
+    print '%15s' % l, '%25s' % e
 
 # Invalid Strings
 invalid_strings = ['+4916190899790',  # https://switchcomm.atlassian.net/browse/TEL-8824  Not Fixed
