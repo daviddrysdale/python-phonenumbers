@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '86188268':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
  '861882690':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
  '861882691':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
  '861882692':{'en': 'Zhuhai, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u73e0\u6d77\u5e02')},
@@ -10018,5 +10019,4 @@ data = {
  '9171052':{'en': 'Narkhed, Maharashtra'},
  '9171053':{'en': 'Narkhed, Maharashtra'},
  '9171054':{'en': 'Narkhed, Maharashtra'},
- '9171055':{'en': 'Narkhed, Maharashtra'},
 }

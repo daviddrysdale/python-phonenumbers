@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '553399953':{'en': 'Telemig Celular'},
  '553399954':{'en': 'Telemig Celular'},
  '553399955':{'en': 'Telemig Celular'},
  '553399956':{'en': 'Telemig Celular'},
@@ -9712,14 +9711,7 @@ data = {
  '573147':{'en': 'Claro'},
  '573148':{'en': 'Claro'},
  '57315':{'en': 'Movistar'},
- '573162':{'en': 'Movistar'},
- '573163':{'en': 'Movistar'},
- '573164':{'en': 'Movistar'},
- '573165':{'en': 'Movistar'},
- '573166':{'en': 'Movistar'},
- '573167':{'en': 'Movistar'},
- '573168':{'en': 'Movistar'},
- '573169':{'en': 'Movistar'},
+ '57316':{'en': 'Movistar'},
  '57317':{'en': 'Movistar'},
  '57318':{'en': 'Movistar'},
  '573192':{'en': 'Movistar'},
@@ -9793,6 +9785,7 @@ data = {
  '573507':{'en': 'Avantel'},
  '573508':{'en': 'Avantel'},
  '57351':{'en': 'Avantel'},
+ '579':{'en': 'Movistar'},
  '58412':{'en': 'Digitel GSM'},
  '58414':{'en': 'movistar'},
  '58416':{'en': 'Movilnet'},
@@ -10019,4 +10012,11 @@ data = {
  '5966964':{'en': 'Orange'},
  '59669650':{'en': 'Digicel'},
  '59669651':{'en': 'Digicel'},
+ '59669652':{'en': 'Digicel'},
+ '59669653':{'en': 'Digicel'},
+ '59669654':{'en': 'Digicel'},
+ '59669655':{'en': 'Orange'},
+ '59669656':{'en': 'Orange'},
+ '59669660':{'en': 'SFR/Rife'},
+ '59669661':{'en': 'SFR/Rife'},
 }

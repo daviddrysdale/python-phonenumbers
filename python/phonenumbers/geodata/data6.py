@@ -2806,6 +2806,7 @@ data = {
  '52986':{'en': 'Yucatan', 'es': u('Yucat\u00e1n')},
  '52987':{'en': 'Cozumel, QRO', 'es': 'Cozumel, QRO'},
  '52988':{'en': 'Yucatan', 'es': u('Yucat\u00e1n')},
+ '52990':{'en': 'Merida', 'es': 'Merida'},
  '52991':{'en': 'Yucatan', 'es': u('Yucat\u00e1n')},
  '52992':{'en': 'Chiapas', 'es': 'Chiapas'},
  '52993':{'en': 'Tabasco', 'es': 'Tabasco'},
@@ -10018,5 +10019,4 @@ data = {
  '55513751':{'en': 'Encantado - RS', 'pt': 'Encantado - RS'},
  '55513752':{'en': 'Jacarezinho - RS', 'pt': 'Jacarezinho - RS'},
  '55513753':{'en': 'Roca Sales - RS', 'pt': 'Roca Sales - RS'},
- '55513754':{'en': 'Imigrante - RS', 'pt': 'Imigrante - RS'},
 }

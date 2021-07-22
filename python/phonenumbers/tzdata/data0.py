@@ -3208,6 +3208,7 @@ data = {
  '7808':('Asia/Almaty', 'Asia/Aqtobe', 'Europe/Moscow'),
  '7809':('Asia/Almaty', 'Asia/Aqtobe', 'Europe/Moscow'),
  '781':('Europe/Moscow',),
+ '7810':('Asia/Almaty', 'Asia/Aqtobe', 'Europe/Moscow'),
  '782':('Europe/Moscow',),
  '783':('Europe/Moscow',),
  '7840':('Europe/Bucharest', 'Europe/Moscow'),
