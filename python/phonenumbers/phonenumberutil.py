@@ -552,6 +552,7 @@ def _copy_number_format(other):
 
 
 def _extract_possible_number(number):
+    # type: (str) -> None
     """Attempt to extract a possible number from the string passed in.
 
     This currently strips all leading characters that cannot be used to
@@ -588,6 +589,7 @@ def _extract_possible_number(number):
 
 
 def _is_viable_phone_number(number):
+    # type: (str) -> None
     """Checks to see if a string could possibly be a phone number.
 
     At the moment, checks to see that the string begins with at least 2
@@ -609,6 +611,7 @@ def _is_viable_phone_number(number):
 
 
 def _normalize(number):
+    # type: (str) -> None
     """Normalizes a string of characters representing a phone number.
 
     This performs the following conversions:
@@ -637,6 +640,7 @@ def _normalize(number):
 
 
 def normalize_digits_only(number, keep_non_digits=False):
+    # type: (str, bool) -> None
     """Normalizes a string of characters representing a phone number.
 
     This converts wide-ascii and arabic-indic numerals to European numerals,
@@ -661,6 +665,7 @@ def normalize_digits_only(number, keep_non_digits=False):
 
 
 def normalize_diallable_chars_only(number):
+    # type: (str) -> None
     """Normalizes a string of characters representing a phone number.
 
     This strips all characters which are not diallable on a mobile phone
@@ -675,6 +680,7 @@ def normalize_diallable_chars_only(number):
 
 
 def convert_alpha_characters_in_number(number):
+    # type: (str) -> None
     """Convert alpha chars in a number to their respective digits on a keypad,
     but retains existing formatting."""
     return _normalize_helper(number, _ALPHA_PHONE_MAPPINGS, False)
@@ -2772,6 +2778,7 @@ def _set_italian_leading_zeros_for_phone_number(national_number, numobj):
 
 def parse(number, region=None, keep_raw_input=False,
           numobj=None, _check_region=True):
+    # type: (str, str, bool, **Any, bool) -> None
     """Parse a string and return a corresponding PhoneNumber object.
 
     The method is quite lenient and looks for a number in the input text
