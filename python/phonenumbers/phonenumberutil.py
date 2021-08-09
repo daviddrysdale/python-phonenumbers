@@ -516,9 +516,9 @@ class ValidationResult(object):
 
 
 # Derived data structures
-SUPPORTED_REGIONS = set()
-COUNTRY_CODES_FOR_NON_GEO_REGIONS = set()
-_NANPA_REGIONS = set()
+SUPPORTED_REGIONS = set()  # type: Set[str]
+COUNTRY_CODES_FOR_NON_GEO_REGIONS = set()  # type: Set[int]
+_NANPA_REGIONS = set()  # type: Set[str]
 
 
 def _regenerate_derived_data():

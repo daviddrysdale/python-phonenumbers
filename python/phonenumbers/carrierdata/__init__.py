@@ -18,7 +18,7 @@ from ..util import u
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CARRIER_DATA = {}
+CARRIER_DATA = {}  #  # type: Dict[str, Sequence[str]]
 from .data0 import data
 CARRIER_DATA.update(data)
 from .data1 import data

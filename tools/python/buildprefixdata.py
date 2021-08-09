@@ -192,7 +192,7 @@ def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, pe
         else:
             prnt(PREFIXDATA_FILE_PROLOG % {'module': module_prefix}, file=outfile)
         prnt(COPYRIGHT_NOTICE, file=outfile)
-        prnt("%s_DATA = {}" % varprefix, file=outfile)
+        prnt("%s_DATA = {}  #  # type: Dict[str, Sequence[str]]" % varprefix, file=outfile)
         for chunk_num in range(total_chunks):
             prnt("from .data%d import data" % chunk_num, file=outfile)
             prnt("%s_DATA.update(data)" % varprefix, file=outfile)

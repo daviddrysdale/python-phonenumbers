@@ -18,7 +18,7 @@ from phonenumbers.util import u
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-GEOCODE_DATA = {}
+GEOCODE_DATA = {}  #  # type: Dict[str, Sequence[str]]
 from .data0 import data
 GEOCODE_DATA.update(data)
 del data

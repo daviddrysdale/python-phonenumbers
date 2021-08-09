@@ -18,7 +18,7 @@ from phonenumbers.util import u
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TIMEZONE_DATA = {}
+TIMEZONE_DATA = {}  #  # type: Dict[str, Sequence[str]]
 from .data0 import data
 TIMEZONE_DATA.update(data)
 del data

@@ -254,23 +254,24 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     # The modificiation involves loading data from a file, so we cannot just
     # rely on the GIL.
     _metadata_lock = threading.Lock()
-    # If a region code is a key in this dict, metadata for that region is available.
+    # If a region code (ISO 3166-1 alpha 2) is a key in this dict, metadata for that region is available.
     # The corresponding value of the map is either:
     #   - a function which loads the region's metadata
     #   - None, to indicate that the metadata is already loaded
-    _region_available = {}  # ISO 3166-1 alpha 2 => function or None
+    _region_available = {}  # type: Dict[str, Optional[Callable[[str], None]]]
     # Likewise for short number metadata.
-    _short_region_available = {}  # ISO 3166-1 alpha 2 => function or None
-    # Likewise for non-geo country calling codes.
-    _country_code_available = {}  # country calling code (as int) => function or None
+    _short_region_available = {}  # type: Dict[str, Optional[Callable[[str], None]]]
+    # Likewise for non-geo country calling codes (indexed by country calling code as int)
+    _country_code_available = {}  # type: Dict[str, Optional[Callable[[int], None]]]
 
-    _region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
-    _short_region_metadata = {}  # ISO 3166-1 alpha 2 => PhoneMetadata
+    # PhoneMetadata indexed by ISO 3166-1 alpha 2.
+    _region_metadata = {}  # type: Dict[str, PhoneMetadata]
+    _short_region_metadata = {}  # type: Dict[str, PhoneMetadata]
     # A mapping from a country calling code for a non-geographical entity to
     # the PhoneMetadata for that country calling code. Examples of the country
     # calling codes include 800 (International Toll Free Service) and 808
     # (International Shared Cost Service).
-    _country_code_metadata = {}  # country calling code (as int) => PhoneMetadata
+    _country_code_metadata = {}  # type: Dict[int, PhoneMetadata]
 
     @classmethod
     def metadata_for_region(kls, region_code, default=None):

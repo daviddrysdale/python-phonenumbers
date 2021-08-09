@@ -72,7 +72,6 @@ True
 """
 import bisect
 import unicodedata
-
 from .util import UnicodeMixin, unicod, u
 
 
@@ -159,8 +158,10 @@ class _BlockRange(UnicodeMixin):
 class Block(object):
     """Description of the possible Unicode blocks"""
 
-    _RANGES = {}  # lower end of range => _BlockRange object
-    _RANGE_KEYS = None  # sorted list of _RANGES.keys()
+    # Map lower end of range to _BlockRange object
+    _RANGES = {}  # type: Dict[int, _BlockRange]
+    # Sorted list of _RANGES.keys()
+    _RANGE_KEYS = None  # type: Optional[List[int]]
 
     # Taken from http://www.unicode.org/Public/UNIDATA/Blocks.txt
     BASIC_LATIN = _BlockRange(0x0000, 0x007F, _RANGES)
