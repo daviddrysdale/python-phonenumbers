@@ -638,6 +638,20 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         self.assertEqual("+52 800 123 456", formatter.input_digit('6'))
         self.assertEqual("+52 800 123 4567", formatter.input_digit('7'))
 
+        # +529011234567, proactively ensuring that no formatting is applied, where a format is chosen
+        # that would otherwise have led to some digits being dropped.
+        formatter.clear()
+        self.assertEqual("9", formatter.input_digit('9'))
+        self.assertEqual("90", formatter.input_digit('0'))
+        self.assertEqual("901", formatter.input_digit('1'))
+        self.assertEqual("9011", formatter.input_digit('1'))
+        self.assertEqual("90112", formatter.input_digit('2'))
+        self.assertEqual("901123", formatter.input_digit('3'))
+        self.assertEqual("9011234", formatter.input_digit('4'))
+        self.assertEqual("90112345", formatter.input_digit('5'))
+        self.assertEqual("901123456", formatter.input_digit('6'))
+        self.assertEqual("9011234567", formatter.input_digit('7'))
+
         # +52 55 1234 5678
         formatter.clear()
         self.assertEqual("+", formatter.input_digit('+'))

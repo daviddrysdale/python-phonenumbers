@@ -52,9 +52,12 @@ _NATIONAL_PREFIX_SEPARATORS_PATTERN = re.compile("[- ]")
 # the format element under number_format contains groups of the dollar sign
 # followed by a single digit, separated by valid phone number
 # punctuation. This prevents invalid punctuation (such as the star sign in
-# Israeli star numbers) getting into the output of the AYTF.
+# Israeli star numbers) getting into the output of the AYTF. We require that
+# the first group is present in the output pattern to ensure no data is lost
+# while formatting; when we format as you type, this should always be the case.
 _ELIGIBLE_FORMAT_PATTERN = re.compile(unicod("[") + _VALID_PUNCTUATION + unicod("]*") +
-                                      unicod("(\\\\\\d") + unicod("[") + _VALID_PUNCTUATION + unicod("]*)+"))
+                                      unicod("\\\\1") + unicod("[") + _VALID_PUNCTUATION + unicod("]*") +
+                                      unicod("(\\\\\\d") + unicod("[") + _VALID_PUNCTUATION + unicod("]*)*"))
 
 # This is the minimum length of national number accrued that is required to
 # trigger the formatter. The first element of the leading_digits_pattern of each

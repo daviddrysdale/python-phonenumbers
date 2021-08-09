@@ -16,6 +16,16 @@ What's new in 8.12.24
 ---------------------
 
 Merge to
+[upstream commit e9d8d84f531b](https://github.com/google/libphonenumber/commit/e9d8d84f531b);
+relevant code changes:
+
+- Updated As-You-Type-Formatter to exclude patterns where some digits would be dropped in the output. This also
+  fixes the bug where an extra country code is added in some cases to the user's output. b/183053929
+
+What's new in 8.12.29
+---------------------
+
+Merge to
 [upstream commit 8379f2f53bbe](https://github.com/google/libphonenumber/commit/8379f2f53bbe);
 relevant code changes:
 
