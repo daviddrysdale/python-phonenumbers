@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '59669662':{'en': 'SFR/Rife'},
  '59669663':{'en': 'SFR/Rife'},
  '59669664':{'en': 'SFR/Rife'},
  '59669665':{'en': u('Free Cara\u00efbe')},
@@ -7790,6 +7789,7 @@ data = {
  '9955757':{'en': 'MagtiCom'},
  '995577':{'en': 'Geocell'},
  '995579':{'en': 'Veon'},
+ '995580':{'en': 'Silknet'},
  '995585':{'en': 'MagtiCom'},
  '9955885':{'en': 'Silknet'},
  '9955888':{'en': 'Geocell'},
