@@ -3,14 +3,14 @@ on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        python-version: [2.7, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, pypy2, pypy3]
+        python-version: [2.7, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, pypy2, pypy3]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Check out code
+      uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -33,3 +33,29 @@ jobs:
          git status
          exit 1
         fi
+
+  typecheck:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install protobuf mypy
+    - name: Add typing imports
+      run: |
+        for file in $(find . -name \*.py); do
+          printf '%s\n%s\n' "from typing import Callable, Dict, List, Optional, Sequence, Set" "$(cat $file)" >$file
+        done
+    - name: Run mypy
+      run: |
+        (cd python && mypy phonenumbers --exclude phonenumbers/pb2 --show-error-codes)
