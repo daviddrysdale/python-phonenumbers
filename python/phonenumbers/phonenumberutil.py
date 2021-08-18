@@ -2778,7 +2778,7 @@ def _set_italian_leading_zeros_for_phone_number(national_number, numobj):
 
 def parse(number, region=None, keep_raw_input=False,
           numobj=None, _check_region=True):
-    # type: (str, str, bool, PhoneNumber, bool) -> Optional[PhoneNumber]
+    # type: (str, str, bool, PhoneNumber, bool) -> PhoneNumber
     """Parse a string and return a corresponding PhoneNumber object.
 
     The method is quite lenient and looks for a number in the input text
