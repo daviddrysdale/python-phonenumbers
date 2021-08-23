@@ -77,3 +77,6 @@ from .shortnumberinfo import is_valid_short_number as is_valid_short_number
 from .shortnumberinfo import is_valid_short_number_for_region as is_valid_short_number_for_region
 from .shortnumberinfo import ShortNumberCost as ShortNumberCost
 from .shortnumberinfo import SUPPORTED_SHORT_REGIONS as SUPPORTED_SHORT_REGIONS
+
+__version__: str
+__all__: list[str]
