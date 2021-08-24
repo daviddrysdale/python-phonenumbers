@@ -2856,7 +2856,7 @@ def parse(number, region=None, keep_raw_input=False,
     extension, national_number = _maybe_strip_extension(national_number)
     if len(extension) > 0:
         numobj.extension = extension
-    if region is None:
+    if not region:
         metadata = None
     else:
         metadata = PhoneMetadata.metadata_for_region(region.upper(), None)
