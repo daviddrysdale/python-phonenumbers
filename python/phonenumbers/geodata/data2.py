@@ -3097,6 +3097,7 @@ data = {
  '1770995':{'en': 'Lawrenceville, GA'},
  '1770997':{'en': 'Riverdale, GA'},
  '1770998':{'en': 'Roswell, GA'},
+ '1771':{'en': 'Washington D.C.'},
  '1772':{'en': 'Florida'},
  '1772204':{'en': 'Port St. Lucie, FL'},
  '1772219':{'en': 'Stuart, FL'},
@@ -10018,5 +10019,4 @@ data = {
  '1925674':{'en': 'Concord, CA'},
  '1925676':{'en': 'Concord, CA'},
  '1925679':{'en': 'Oakley, CA'},
- '192568':{'en': 'Concord, CA'},
 }

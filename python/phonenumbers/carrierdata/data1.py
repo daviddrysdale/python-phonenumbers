@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '553399956':{'en': 'Telemig Celular'},
+ '553399957':{'en': 'Telemig Celular'},
+ '553399958':{'en': 'Telemig Celular'},
+ '553399959':{'en': 'Telemig Celular'},
  '553399961':{'en': 'Telemig Celular'},
  '553399962':{'en': 'Telemig Celular'},
  '553399963':{'en': 'Telemig Celular'},
@@ -10015,8 +10019,4 @@ data = {
  '59669661':{'en': 'SFR/Rife'},
  '59669662':{'en': 'SFR/Rife'},
  '59669663':{'en': 'SFR/Rife'},
- '59669664':{'en': 'SFR/Rife'},
- '59669665':{'en': u('Free Cara\u00efbe')},
- '59669666':{'en': u('Free Cara\u00efbe')},
- '59669667':{'en': u('Free Cara\u00efbe')},
 }
