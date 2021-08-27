@@ -1,5 +1,7 @@
 from .phonenumber import PhoneNumber
 
+TIMEZONE_DATA: dict[str, tuple[str, ...]]
+TIMEZONE_LONGEST_PREFIX: int
 UNKNOWN_TIMEZONE: str
 _UNKNOWN_TIME_ZONE_LIST: tuple[str, ...]
 
