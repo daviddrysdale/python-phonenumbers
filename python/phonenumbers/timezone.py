@@ -49,7 +49,7 @@ except ImportError:  # pragma no cover
     if (os.path.basename(sys.argv[0]) == "buildmetadatafromxml.py" or
         os.path.basename(sys.argv[0]) == "buildprefixdata.py"):
         prnt("Failed to import generated data (but OK as during autogeneration)", file=sys.stderr)
-        TIMEZONE_DATA = {'4411': u('Europe/London')}
+        TIMEZONE_DATA = {'4411': (u('Europe/London'),)}
         TIMEZONE_LONGEST_PREFIX = 4
     else:
         raise
