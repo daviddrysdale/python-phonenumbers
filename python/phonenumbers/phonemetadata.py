@@ -328,14 +328,14 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     def load_all(kls):
         """Force immediate load of all metadata"""
         # Force expansion of contents to lists because we invalidate the iterator
-        for region_code, loader in list(kls._region_available.items()):
-            if loader is not None:  # pragma no cover
-                loader(region_code)
+        for region_code, region_loader in list(kls._region_available.items()):
+            if region_loader is not None:  # pragma no cover
+                region_loader(region_code)
                 kls._region_available[region_code] = None
-        for country_code, loader in list(kls._country_code_available.items()):
-            if loader is not None:
-                loader(country_code)
-                kls._country_code_available[region_code] = None
+        for country_code, cc_loader in list(kls._country_code_available.items()):
+            if cc_loader is not None:
+                cc_loader(country_code)
+                kls._country_code_available[country_code] = None
 
     @mutating_method
     def __init__(self,
