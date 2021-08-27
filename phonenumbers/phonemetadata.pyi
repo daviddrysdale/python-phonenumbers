@@ -90,21 +90,21 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
     mobile_number_portable_region: bool
     short_data: bool
     @classmethod
-    def metadata_for_region(kls, region_code: str, default: Optional[PhoneMetadata] = ...) -> Optional[PhoneMetadata]: ...  # type: ignore[misc]
+    def metadata_for_region(kls, region_code: str, default: Optional[PhoneMetadata] = ...) -> Optional[PhoneMetadata]: ...
     @classmethod
-    def short_metadata_for_region(kls, region_code: str, default: Optional[PhoneMetadata] = ...) -> Optional[PhoneMetadata]: ...  # type: ignore[misc]
+    def short_metadata_for_region(kls, region_code: str, default: Optional[PhoneMetadata] = ...) -> Optional[PhoneMetadata]: ...
     @classmethod
-    def metadata_for_nongeo_region(kls, country_code: int, default: Optional[PhoneMetadata] = ...) -> Optional[PhoneMetadata]: ...  # type: ignore[misc]
+    def metadata_for_nongeo_region(kls, country_code: int, default: Optional[PhoneMetadata] = ...) -> Optional[PhoneMetadata]: ...
     @classmethod
-    def metadata_for_region_or_calling_code(kls, country_calling_code: int, region_code: str) -> Optional[PhoneMetadata]: ...  # type: ignore[misc]
+    def metadata_for_region_or_calling_code(kls, country_calling_code: int, region_code: str) -> Optional[PhoneMetadata]: ...
     @classmethod
-    def register_region_loader(kls, region_code: str, loader: Callable[[str], None]) -> None: ...  # type: ignore[misc]
+    def register_region_loader(kls, region_code: str, loader: Callable[[str], None]) -> None: ...
     @classmethod
-    def register_short_region_loader(kls, region_code: str, loader: Callable[[str], None]) -> None: ...  # type: ignore[misc]
+    def register_short_region_loader(kls, region_code: str, loader: Callable[[str], None]) -> None: ...
     @classmethod
-    def register_nongeo_region_loader(kls, country_code: int, loader: Callable[[int], None]) -> None: ...  # type: ignore[misc]
+    def register_nongeo_region_loader(kls, country_code: int, loader: Callable[[int], None]) -> None: ...
     @classmethod
-    def load_all(kls) -> None: ...  # type: ignore[misc]
+    def load_all(kls) -> None: ...
     def __init__(
         self,
         id: str,
