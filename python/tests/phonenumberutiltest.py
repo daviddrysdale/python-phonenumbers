@@ -3159,6 +3159,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         new_metadata = eval(repr(metadata))
         self.assertEqual(new_metadata, metadata)
 
+    def testMetadataRegister(self):
+        # Python version extra tests for metadata registration.
         PhoneMetadata("XY",
                       general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
                                                    example_number='123'),
@@ -3166,10 +3168,68 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                                                       example_number='123'),
                       preferred_international_prefix=u('9123'),
                       register=True)
+        # Registering the same data twice is OK
+        PhoneMetadata("XY",
+                      general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                   example_number='123'),
+                      personal_number=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                      example_number='123'),
+                      preferred_international_prefix=u('9123'),
+                      register=True)
+        # Registering different data is not OK
         self.assertRaises(Exception, PhoneMetadata, *("XY",),
-                          **{'preferred_international_prefix': '9999',
+                          **{'preferred_international_prefix': u('9999'),
                              'register': True})
         self.assertTrue(phonenumbers.example_number_for_type('XY', PhoneNumberType.PERSONAL_NUMBER) is None)
+
+    def testShortMetadataRegister(self):
+        # Python version extra tests for short metadata registration.
+        PhoneMetadata("XZ",
+                      general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                   example_number='123'),
+                      personal_number=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                      example_number='123'),
+                      preferred_international_prefix=u('9123'),
+                      short_data=True,
+                      register=True)
+        # Registering the same data twice is OK
+        PhoneMetadata("XZ",
+                      general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                   example_number='123'),
+                      personal_number=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                      example_number='123'),
+                      preferred_international_prefix=u('9123'),
+                      short_data=True,
+                      register=True)
+        # Registering different data is not OK
+        self.assertRaises(Exception, PhoneMetadata, *("XZ",),
+                          **{'preferred_international_prefix': u('9999'),
+                             'register': True,
+                             'short_data': True})
+        self.assertTrue(phonenumbers.example_number_for_type('XZ', PhoneNumberType.PERSONAL_NUMBER) is None)
+
+    def testNonGeoMetadataRegister(self):
+        # Python version extra tests for non-geo metadata registration.
+        PhoneMetadata("001", country_code=999,
+                      general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                   example_number='123'),
+                      personal_number=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                      example_number='123'),
+                      preferred_international_prefix=u('9123'),
+                      register=True)
+        # Registering the same data twice is OK
+        PhoneMetadata("001", country_code=999,
+                      general_desc=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                   example_number='123'),
+                      personal_number=PhoneNumberDesc(national_number_pattern='\\d{7,10}',
+                                                      example_number='123'),
+                      preferred_international_prefix=u('9123'),
+                      register=True)
+        # Registering different data is not OK
+        self.assertRaises(Exception, PhoneMetadata, *("001",),
+                          **{'country_code': 999,
+                             'preferred_international_prefix': u('9999'),
+                             'register': True})
 
     def testPickledException(self):
         err = NumberParseException(NumberParseException.TOO_SHORT_AFTER_IDD, 'hello world')
