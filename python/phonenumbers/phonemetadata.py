@@ -541,20 +541,26 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
         if register:
             # Register this instance with the relevant class-wide map
             if self.id == REGION_CODE_FOR_NON_GEO_ENTITY:
-                kls_map = PhoneMetadata._country_code_metadata
-                id = self.country_code
+                if self.country_code in PhoneMetadata._country_code_metadata:
+                    other = PhoneMetadata._country_code_metadata[self.country_code]
+                    if self != other:
+                        raise Exception("Duplicate non-geo PhoneMetadata for %s (from %s:%s)" % (self.country_code, self.id, self.country_code))
+                else:
+                    PhoneMetadata._country_code_metadata[self.country_code] = self
             elif self.short_data:
-                kls_map = PhoneMetadata._short_region_metadata
-                id = self.id
+                if self.id in PhoneMetadata._short_region_metadata:
+                    other = PhoneMetadata._short_region_metadata[self.id]
+                    if self != other:
+                        raise Exception("Duplicate short PhoneMetadata for %s (from %s:%s)" % (self.id, self.id, self.country_code))
+                else:
+                    PhoneMetadata._short_region_metadata[self.id] = self
             else:
-                kls_map = PhoneMetadata._region_metadata
-                id = self.id
-            if id in kls_map:
-                other = kls_map[id]
-                if self != other:
-                    raise Exception("Duplicate PhoneMetadata for %s (from %s:%s)" % (id, self.id, self.country_code))
-            else:
-                kls_map[id] = self
+                if self.id in PhoneMetadata._region_metadata:
+                    other = PhoneMetadata._region_metadata[self.id]
+                    if self != other:
+                        raise Exception("Duplicate PhoneMetadata for %s (from %s:%s)" % (self.id, self.id, self.country_code))
+                else:
+                    PhoneMetadata._region_metadata[self.id] = self
 
     def __eq__(self, other):
         if not isinstance(other, PhoneMetadata):
