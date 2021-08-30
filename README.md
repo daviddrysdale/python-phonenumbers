@@ -185,17 +185,17 @@ Memory Usage
 The library includes a lot of metadata, potentially giving a significant memory overhead.  There are two mechanisms
 for dealing with this.
 
-* The normal metadata for the core functionality of the library is loaded on-demand, on a region-by-region basis
-  (i.e. the metadata for a region is only loaded on the first time it is needed).
+* The normal metadata (just over 2 MiB of generated Python code) for the core functionality of the library is loaded
+  on-demand, on a region-by-region basis (i.e. the metadata for a region is only loaded on the first time it is needed).
 * Metadata for extended functionality is held in separate packages, which therefore need to be explicitly
   loaded separately.  This affects:
-    * The geocoding metadata, which is held in `phonenumbers.geocoder` and used by the geocoding functions
+    * The geocoding metadata (~19 MiB), which is held in `phonenumbers.geocoder` and used by the geocoding functions
       (`geocoder.description_for_number`, `geocoder.description_for_valid_number` or
       `geocoder.country_name_for_number`).
-    * The carrier metadata, which is held in `phonenumbers.carrier` and used by the mapping functions (`carrier.name_for_number`
-      or `carrier.name_for_valid_number`).
-    * The timezone metadata, which is held in `phonenumbers.timezone` and used by the timezone functions (`time_zones_for_number`
-      or `time_zones_for_geographical_number`).
+    * The carrier metadata (~1 MiB), which is held in `phonenumbers.carrier` and used by the mapping functions
+      (`carrier.name_for_number` or `carrier.name_for_valid_number`).
+    * The timezone metadata (~100 KiB), which is held in `phonenumbers.timezone` and used by the timezone functions
+      (`time_zones_for_number` or `time_zones_for_geographical_number`).
 
 The `phonenumberslite` version of the library does not include the geocoder, carrier and timezone packages,
 which can be useful if you have problems installing the main `phonenumbers` library due to space/memory limitations.
