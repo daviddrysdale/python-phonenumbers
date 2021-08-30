@@ -1,3 +1,0 @@
-from ..phonemetadata import PhoneMetadata as PhoneMetadata
-
-PHONE_METADATA_881: PhoneMetadata
