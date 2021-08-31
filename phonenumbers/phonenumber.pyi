@@ -1,4 +1,4 @@
-from typing import Any, Optional, overload
+from typing import Optional, overload
 
 from .util import ImmutableMixin
 from .util import UnicodeMixin
@@ -46,19 +46,18 @@ class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
     raw_input: Optional[str] = ...
     country_code_source: int = ...
     preferred_domestic_carrier_code: Optional[str] = ...
-    # @overload
-    # def __init__(self, numobj: PhoneNumber) -> None: ...
-    # @overload
-    # def __init__(
-    #     self,
-    #     country_code: Optional[int] = ...,
-    #     national_number: Optional[int] = ...,
-    #     extension: Optional[str] = ...,
-    #     italian_leading_zero: Optional[bool] = ...,
-    #     number_of_leading_zeros: Optional[int] = ...,
-    #     raw_input: Optional[str] = ...,
-    #     country_code_source: int = ...,
-    #     preferred_domestic_carrier_code: Optional[str] = ...,
-    # ) -> None: ...
-    def __init__(self, *args: Any, **kwargs: Any) -> None: ...
+    @overload
+    def __init__(self, numobj: PhoneNumber) -> None: ...
+    @overload
+    def __init__(
+        self,
+        country_code: Optional[int] = ...,
+        national_number: Optional[int] = ...,
+        extension: Optional[str] = ...,
+        italian_leading_zero: Optional[bool] = ...,
+        number_of_leading_zeros: Optional[int] = ...,
+        raw_input: Optional[str] = ...,
+        country_code_source: int = ...,
+        preferred_domestic_carrier_code: Optional[str] = ...,
+    ) -> None: ...
     def __hash__(self) -> int: ...

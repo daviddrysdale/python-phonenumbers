@@ -1,10 +1,19 @@
+from _typeshed import SupportsWrite
 from typing import Any, Callable, Optional, overload
 
 unicod: type[str]
 u: type[str]
 to_long: type[int]
 
-# def prnt(*args: Any, **kwargs: Any) -> None: ...
+@overload
+def prnt(
+    *values: object,
+    sep: Optional[str] = ...,
+    end: Optional[str] = ...,
+    file: Optional[SupportsWrite[str]] = ...,
+) -> None: ...
+@overload
+def prnt(*values: object, **kwargs: Any) -> None: ...
 
 class UnicodeMixin:
     def __str__(self) -> str: ...
@@ -23,11 +32,10 @@ U_X_UPPER: str
 U_PERCENT: str
 
 def rpr(s: Optional[str]) -> str: ...
-# @overload
-# def force_unicode(s: None) -> None: ...
-# @overload
-# def force_unicode(s: str) -> str: ...
-def force_unicode(s: Optional[str]) -> Optional[str]: ...
+@overload
+def force_unicode(s: None) -> None: ...
+@overload
+def force_unicode(s: str) -> str: ...
 
 class ImmutableMixin:
     _mutable: bool
