@@ -51,11 +51,13 @@ with io.open("README.md", mode="r", encoding="utf-8") as readme:
 # Various parameters depend on whether we are the lite package or not
 if lite:
     pkgname = 'phonenumberslite'
-    pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.shortdata']
+    pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.shortdata',
+            'tests', 'tests.testdata']
 else:
     pkgname = 'phonenumbers'
     pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.geodata', 'phonenumbers.shortdata',
-            'phonenumbers.carrierdata', 'phonenumbers.tzdata']
+            'phonenumbers.carrierdata', 'phonenumbers.tzdata',
+            'tests', 'tests.testdata', 'tests.testcarrierdata', 'tests.testgeodata', 'tests.testtzdata']
 
 distutils.core.setup(name=pkgname,
                      version=__version__,
@@ -69,6 +71,7 @@ distutils.core.setup(name=pkgname,
                      packages=pkgs,
                      test_suite="tests.examplenumberstest",
                      platforms='Posix; MacOS X; Windows',
+                     package_data={"": ["*.pyi", "py.typed"]},
                      classifiers=['Development Status :: 5 - Production/Stable',
                                   'Intended Audience :: Developers',
                                   'License :: OSI Approved :: Apache Software License',
@@ -84,6 +87,8 @@ distutils.core.setup(name=pkgname,
                                   'Programming Language :: Python :: 3.5',
                                   'Programming Language :: Python :: 3.6',
                                   'Programming Language :: Python :: 3.7',
+                                  'Programming Language :: Python :: 3.8',
+                                  'Programming Language :: Python :: 3.9',
                                   'Programming Language :: Python :: Implementation :: CPython',
                                   'Programming Language :: Python :: Implementation :: PyPy',
                                   ],
