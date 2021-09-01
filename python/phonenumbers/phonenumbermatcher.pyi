@@ -21,7 +21,7 @@ _PUNCTUATION: str
 _DIGIT_SEQUENCE: str
 _LEAD_CLASS_CHARS: str
 _LEAD_CLASS: str
-_LEAD_PATTERN: str
+_LEAD_PATTERN: Pattern[str]
 _PATTERN: Pattern[str]
 _PUB_PAGES: Pattern[str]
 _SLASH_SEPARATED_DATES: Pattern[str]
