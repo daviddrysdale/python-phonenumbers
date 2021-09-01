@@ -1,4 +1,4 @@
-from typing import Optional, overload
+from typing import overload
 
 from .util import ImmutableMixin
 from .util import UnicodeMixin
