@@ -1,4 +1,3 @@
-
 from .util import UnicodeMixin
 
 class Category:

@@ -1,4 +1,3 @@
-
 from .phonenumber import PhoneNumber
 
 _LOCALE_NORMALIZATION_MAP: dict[str, str]
@@ -12,5 +11,5 @@ def _prefix_description_for_number(
     numobj: PhoneNumber,
     lang: str,
     script: str | None = ...,
-    region: str | None = ...
+    region: str | None = ...,
 ) -> str: ...

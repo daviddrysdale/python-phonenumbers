@@ -1,5 +1,6 @@
-from _typeshed import SupportsWrite
 from typing import Any, Callable, overload
+
+from _typeshed import SupportsWrite
 
 unicod: type[str]
 u: type[str]

@@ -1,6 +1,7 @@
 from re import Pattern
 
-from .phonemetadata import PhoneMetadata, NumberFormat
+from .phonemetadata import NumberFormat
+from .phonemetadata import PhoneMetadata
 
 _SEPARATOR_BEFORE_NATIONAL_NUMBER: str
 _EMPTY_METADATA: PhoneMetadata
