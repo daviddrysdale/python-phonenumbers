@@ -1,5 +1,5 @@
 from _typeshed import SupportsWrite
-from typing import Any, Callable, Optional, overload
+from typing import Any, Callable, overload
 
 unicod: type[str]
 u: type[str]
@@ -8,9 +8,9 @@ to_long: type[int]
 @overload
 def prnt(
     *values: object,
-    sep: Optional[str] = ...,
-    end: Optional[str] = ...,
-    file: Optional[SupportsWrite[str]] = ...,
+    sep: str | None = ...,
+    end: str | None = ...,
+    file: SupportsWrite[str] | None = ...,
 ) -> None: ...
 @overload
 def prnt(*values: object, **kwargs: Any) -> None: ...
@@ -31,7 +31,7 @@ U_X_LOWER: str
 U_X_UPPER: str
 U_PERCENT: str
 
-def rpr(s: Optional[str]) -> str: ...
+def rpr(s: str | None) -> str: ...
 @overload
 def force_unicode(s: None) -> None: ...
 @overload
