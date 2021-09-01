@@ -19,4 +19,6 @@ jobs:
           pip install mypy types-protobuf
 
       - name: Run mypy.stubtest
-        run: python -m python/run_stubtest.py
+        run: |
+          cd python
+          python run_stubtest.py
