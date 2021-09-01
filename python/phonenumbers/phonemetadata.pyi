@@ -1,5 +1,5 @@
+from collections.abc import Callable
 import threading
-from typing import Callable
 
 from .util import ImmutableMixin
 from .util import UnicodeMixin

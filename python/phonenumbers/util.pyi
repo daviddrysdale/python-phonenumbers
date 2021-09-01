@@ -1,4 +1,5 @@
-from typing import Any, Callable, overload
+from collections.abc import Callable
+from typing import Any, overload
 
 from _typeshed import SupportsWrite
 

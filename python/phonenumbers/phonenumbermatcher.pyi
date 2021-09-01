@@ -1,5 +1,6 @@
+from collections.abc import Callable
+from collections.abc import Iterator
 from re import Pattern
-from typing import Callable, Iterator
 
 from .phonemetadata import NumberFormat
 from .phonenumber import PhoneNumber
