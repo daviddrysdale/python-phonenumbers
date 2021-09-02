@@ -6,7 +6,7 @@ Invocation:
 
 Processes the given XML metadata file and emit generated Python code.
 The output directory will be created if it does not exist, and
-__init__.py and per-region data files will be created in the directory.
+__init__.py[i] and per-region data files will be created in the directory.
 """
 
 # Based on original Java code and XML file:
@@ -72,6 +72,11 @@ def _load_region(code):
 for region_code in _AVAILABLE_REGION_CODES:
     PhoneMetadata.register_%(prefix)sregion_loader(region_code, _load_region)
 '''
+METADATA_FILE_TYPE_IMPORT = "from %(module)s.phonemetadata import NumberFormat\n"
+METADATA_FILE_TYPE_INFO = '''
+def _load_region(code: str) -> None: ...'''
+METADATA_FILE_TYPE_INFO_WITH_NONGEO = '''
+def _load_region(code: str | int) -> None: ...'''
 METADATA_NONGEO_FILE_LOOP = '''
 for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
     PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
@@ -667,6 +672,21 @@ class XPhoneNumberMetadata(UnicodeMixin):
                     country_ids = country_code_to_region_code[country_code]
                     prnt('    %d: ("%s",),' % (country_code, '", "'.join(country_ids)), file=outfile)
                 prnt("}", file=outfile)
+
+        # Emit corresponding typing info
+        with open(modulefilename + "i", "w") as pyifile:
+            if self.alt_territory is not None:
+                prnt(METADATA_FILE_TYPE_IMPORT % {'module': module_prefix}, file=pyifile)
+            prnt("_AVAILABLE_REGION_CODES: list[str]", file=pyifile)
+            if len(nongeo_codes) > 0:
+                prnt("_AVAILABLE_NONGEO_COUNTRY_CODES: list[int]", file=pyifile)
+                prnt(METADATA_FILE_TYPE_INFO_WITH_NONGEO, file=pyifile)
+            else:
+                prnt(METADATA_FILE_TYPE_INFO, file=pyifile)
+            if self.alt_territory is not None:
+                prnt("\n_ALT_NUMBER_FORMATS: dict[int, list[NumberFormat]]", file=pyifile)
+            if len(country_code_to_region_code.keys()) > 0:
+                prnt("_COUNTRY_CODE_TO_REGION_CODE: dict[int, tuple[str, ...]]", file=pyifile)
 
 
 def _standalone(argv):
