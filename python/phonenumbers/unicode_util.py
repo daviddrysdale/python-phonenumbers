@@ -144,6 +144,8 @@ class _BlockRange(UnicodeMixin):
             regdict[start] = self
 
     def __eq__(self, other):
+        if not isinstance(other, _BlockRange):
+            return NotImplemented
         return (self.start == other.start and self.end == other.end)
 
     def __ne__(self, other):
