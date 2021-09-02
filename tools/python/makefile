@@ -10,7 +10,9 @@ DumpLocale.class: DumpLocale.java
 	javac $<
 $(PYDIR)/phonenumbers/geodata/locale.py: DumpLocale.class | $(PYDIR)/phonenumbers/geodata
 	java DumpLocale > $@
-locale: $(PYDIR)/phonenumbers/geodata/locale.py
+$(PYDIR)/phonenumbers/geodata/locale.pyi:
+	echo "LOCALE_DATA: dict[str, dict[str, str]]" > $@
+locale: $(PYDIR)/phonenumbers/geodata/locale.py $(PYDIR)/phonenumbers/geodata/locale.pyi
 
 # Generate Python files from geocoding data
 $(PYDIR)/phonenumbers/geodata:
