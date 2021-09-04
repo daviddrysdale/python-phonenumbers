@@ -916,6 +916,7 @@ def supported_types_for_region(region_code):
     if not _is_valid_region_code(region_code):
         return set()
     metadata = PhoneMetadata.metadata_for_region(region_code.upper())
+    assert metadata is not None  # due to _is_valid_region_code() check
     return _supported_types_for_metadata(metadata)
 
 
@@ -1235,6 +1236,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
             # except for numbers which might potentially be short numbers,
             # which are always dialled in national format.
             metadata = PhoneMetadata.metadata_for_region(region_calling_from)
+            assert metadata is not None  # due to _has_valid_country_calling_code() check
             if (can_be_internationally_dialled(numobj_no_ext) and
                 _test_number_length(national_significant_number(numobj_no_ext),
                                     metadata) != ValidationResult.TOO_SHORT):
@@ -1434,6 +1436,7 @@ def _format_original_allow_mods(numobj, region_calling_from):
         # Metadata cannot be None here because ndd_prefix_for_region() (above) returns None if
         # there is no metadata for the region.
         metadata = PhoneMetadata.metadata_for_region(region_code)
+        assert metadata is not None
         national_number = national_significant_number(numobj)
         format_rule = _choose_formatting_pattern_for_number(metadata.number_format, national_number)
         # The format rule could still be null here if the national number was
@@ -1768,6 +1771,7 @@ def invalid_example_number(region_code):
     # number lengths and we may have to make it very short before we get an
     # invalid number.
     metadata = PhoneMetadata.metadata_for_region(region_code.upper())
+    assert metadata is not None  # due to _is_valid_region_code() check
     desc = _number_desc_by_type(metadata, PhoneNumberType.FIXED_LINE)
     if desc is None or desc.example_number is None:
         # This shouldn't happen; we have a test for this.
@@ -1828,6 +1832,7 @@ def example_number_for_type(region_code, num_type):
     if not _is_valid_region_code(region_code):
         return None
     metadata = PhoneMetadata.metadata_for_region(region_code.upper())
+    assert metadata is not None  # due to _is_valid_region_code() check
     desc = _number_desc_by_type(metadata, num_type)
     if desc is not None and desc.example_number is not None:
         try:
@@ -2886,8 +2891,9 @@ def parse(number, region=None, keep_raw_input=False,
     if country_code != 0:
         number_region = region_code_for_country_code(country_code)
         if number_region != region:
-            # Metadata cannot be null because the country calling code is valid.
+            # Metadata cannot be None because the country calling code is valid.
             metadata = PhoneMetadata.metadata_for_region_or_calling_code(country_code, number_region)
+            assert metadata is not None
     else:
         # If no extracted country calling code, use the region supplied
         # instead. The national number is just the normalized version of the
