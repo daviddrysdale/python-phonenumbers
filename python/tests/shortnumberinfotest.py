@@ -33,7 +33,7 @@ def _parse(number, regionCode):
         return phonenumbers.parse(number, regionCode)
     except NumberParseException:
         e = sys.exc_info()[1]
-        self.fail("Test input data should always parse correctly: %s (%s) => %s %s" % (number, regionCode, e))
+        raise Exception("Test input data should always parse correctly: %s (%s) => %s" % (number, regionCode, e))
 
 
 # Note that these test use real metadata for short numbers, but test metadata o/w.
