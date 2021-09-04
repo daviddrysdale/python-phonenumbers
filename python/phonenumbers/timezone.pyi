@@ -1,5 +1,6 @@
 from .phonenumber import PhoneNumber
 
+__all__: list[str]
 UNKNOWN_TIMEZONE: str
 _UNKNOWN_TIME_ZONE_LIST: tuple[str, ...]
 
