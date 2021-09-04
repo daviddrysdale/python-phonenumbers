@@ -8,10 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python 3.9
+      - name: Set up latest Python 3
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3
 
       - name: Install dependencies
         run: |
@@ -22,3 +22,24 @@ jobs:
         run: |
           cd python
           python run_stubtest.py
+
+  mypy:
+    name: Run mypy on stubs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up latest Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mypy types-protobuf
+
+      - name: Run mypy
+        run: |
+          cd python
+          mypy --exclude pb2/ -p phonenumbers
