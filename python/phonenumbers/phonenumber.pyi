@@ -38,14 +38,6 @@ class PhoneNumber(UnicodeMixin):
     def __unicode__(self) -> str: ...
 
 class FrozenPhoneNumber(PhoneNumber, ImmutableMixin):
-    country_code: int | None
-    national_number: int | None
-    extension: str | None
-    italian_leading_zero: bool | None
-    number_of_leading_zeros: int | None
-    raw_input: str | None
-    country_code_source: int
-    preferred_domestic_carrier_code: str | None
     @overload
     def __init__(self, numobj: PhoneNumber) -> None: ...
     @overload
