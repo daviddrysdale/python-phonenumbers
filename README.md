@@ -210,6 +210,16 @@ load of metadata will not cause a pause or memory exhaustion):
 The `phonenumberslite` version of the package does not include the geocoding, carrier and timezone metadata,
 which can be useful if you have problems installing the main `phonenumbers` package due to space/memory limitations.
 
+Static Typing
+-------------
+
+The library includes a set of type [stub files](https://www.python.org/dev/peps/pep-0484/#stub-files) to support static
+type checking by library users. These stub files signal the types that should be used, and may also be of use in IDEs 
+which have integrated type checking functionalities.
+
+These files are written for Python 3, and as such type checking the library with these stubs on Python 2.5-2.7 is
+unsupported.
+
 Project Layout
 --------------
 
