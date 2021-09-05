@@ -199,6 +199,14 @@ def output_prefixdata_code(prefixdata, outfilename, module_prefix, varprefix, pe
         prnt("del data", file=outfile)
         prnt("%s_LONGEST_PREFIX = %d" % (varprefix, longest_prefix), file=outfile)
 
+    # Emit corresponding typing info.
+    with open(outfilename + "i", "w") as pyifile:
+        if per_locale:
+            prnt("%s_DATA: dict[str, dict[str, str]]" % varprefix, file=pyifile)
+        else:
+            prnt("%s_DATA: dict[str, tuple[str, ...]]" % varprefix, file=pyifile)
+        prnt("%s_LONGEST_PREFIX: int" % varprefix, file=pyifile)
+
 
 def output_prefixdata_chunk(prefixdata, outfilename, module_prefix, per_locale):
     with open(outfilename, "w") as outfile:
