@@ -2,6 +2,7 @@ from .phonemetadata import PhoneNumberDesc
 from .phonenumber import PhoneNumber
 
 SUPPORTED_SHORT_REGIONS: list[str]
+_REGIONS_WHERE_EMERGENCY_NUMBERS_MUST_BE_EXACT: set[str]
 
 class ShortNumberCost:
     TOLL_FREE: int
