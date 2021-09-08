@@ -25,22 +25,22 @@ from phonenumbers.timezone import time_zones_for_number
 from phonenumbers.timezone import _UNKNOWN_TIME_ZONE_LIST
 
 # Allow override library timezone metadata with the test metadata.
-REAL_TIMEZONE_DATA = timezone.TIMEZONE_DATA
-REAL_TIMEZONE_LONGEST_PREFIX = timezone.TIMEZONE_LONGEST_PREFIX
+REAL_TIMEZONE_DATA = timezone.TIMEZONE_DATA  # type: ignore[attr-defined]
+REAL_TIMEZONE_LONGEST_PREFIX = timezone.TIMEZONE_LONGEST_PREFIX  # type: ignore[attr-defined]
 from .testtzdata import TIMEZONE_DATA as TEST_TIMEZONE_DATA
 from .testtzdata import TIMEZONE_LONGEST_PREFIX as TEST_TIMEZONE_LONGEST_PREFIX
 
 
 def reinstate_real_tzdata():
     """Reinstate real phone number timezone metadata"""
-    timezone.TIMEZONE_DATA = REAL_TIMEZONE_DATA
-    timezone.TIMEZONE_LONGEST_PREFIX = REAL_TIMEZONE_LONGEST_PREFIX
+    timezone.TIMEZONE_DATA = REAL_TIMEZONE_DATA  # type: ignore[attr-defined]
+    timezone.TIMEZONE_LONGEST_PREFIX = REAL_TIMEZONE_LONGEST_PREFIX  # type: ignore[attr-defined]
 
 
 def insert_test_tzdata():
     """Insert test timezone metadata into library"""
-    timezone.TIMEZONE_DATA = TEST_TIMEZONE_DATA
-    timezone.TIMEZONE_LONGEST_PREFIX = TEST_TIMEZONE_LONGEST_PREFIX
+    timezone.TIMEZONE_DATA = TEST_TIMEZONE_DATA  # type: ignore[attr-defined]
+    timezone.TIMEZONE_LONGEST_PREFIX = TEST_TIMEZONE_LONGEST_PREFIX  # type: ignore[attr-defined]
 
 
 # Set up some test numbers to re-use.

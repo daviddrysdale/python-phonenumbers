@@ -26,22 +26,22 @@ from phonenumbers.prefix import _prefix_description_for_number
 from phonenumbers.util import u
 
 # Allow override library geocoding metadata with the test metadata.
-REAL_GEOCODE_DATA = geocoder.GEOCODE_DATA
-REAL_GEOCODE_LONGEST_PREFIX = geocoder.GEOCODE_LONGEST_PREFIX
+REAL_GEOCODE_DATA = geocoder.GEOCODE_DATA  # type: ignore[attr-defined]
+REAL_GEOCODE_LONGEST_PREFIX = geocoder.GEOCODE_LONGEST_PREFIX  # type: ignore[attr-defined]
 from .testgeodata import GEOCODE_DATA as TEST_GEOCODE_DATA
 from .testgeodata import GEOCODE_LONGEST_PREFIX as TEST_GEOCODE_LONGEST_PREFIX
 
 
 def reinstate_real_geodata():
     """Reinstate real phone number geocoding metadata"""
-    geocoder.GEOCODE_DATA = REAL_GEOCODE_DATA
-    geocoder.GEOCODE_LONGEST_PREFIX = REAL_GEOCODE_LONGEST_PREFIX
+    geocoder.GEOCODE_DATA = REAL_GEOCODE_DATA  # type: ignore[attr-defined]
+    geocoder.GEOCODE_LONGEST_PREFIX = REAL_GEOCODE_LONGEST_PREFIX  # type: ignore[attr-defined]
 
 
 def insert_test_geodata():
     """Insert test geocoding metadata into library"""
-    geocoder.GEOCODE_DATA = TEST_GEOCODE_DATA
-    geocoder.GEOCODE_LONGEST_PREFIX = TEST_GEOCODE_LONGEST_PREFIX
+    geocoder.GEOCODE_DATA = TEST_GEOCODE_DATA  # type: ignore[attr-defined]
+    geocoder.GEOCODE_LONGEST_PREFIX = TEST_GEOCODE_LONGEST_PREFIX  # type: ignore[attr-defined]
 
 
 # Set up some test numbers to re-use.

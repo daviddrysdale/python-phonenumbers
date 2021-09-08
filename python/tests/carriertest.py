@@ -24,22 +24,22 @@ from phonenumbers.carrier import name_for_number, name_for_valid_number, safe_di
 from phonenumbers.util import u
 
 # Allow override library carrier metadata with the test metadata.
-REAL_CARRIER_DATA = carrier.CARRIER_DATA
-REAL_CARRIER_LONGEST_PREFIX = carrier.CARRIER_LONGEST_PREFIX
+REAL_CARRIER_DATA = carrier.CARRIER_DATA  # type: ignore[attr-defined]
+REAL_CARRIER_LONGEST_PREFIX = carrier.CARRIER_LONGEST_PREFIX  # type: ignore[attr-defined]
 from .testcarrierdata import CARRIER_DATA as TEST_CARRIER_DATA
 from .testcarrierdata import CARRIER_LONGEST_PREFIX as TEST_CARRIER_LONGEST_PREFIX
 
 
 def reinstate_real_carrierdata():
     """Reinstate real phone number carrier metadata"""
-    carrier.CARRIER_DATA = REAL_CARRIER_DATA
-    carrier.CARRIER_LONGEST_PREFIX = REAL_CARRIER_LONGEST_PREFIX
+    carrier.CARRIER_DATA = REAL_CARRIER_DATA  # type: ignore[attr-defined]
+    carrier.CARRIER_LONGEST_PREFIX = REAL_CARRIER_LONGEST_PREFIX  # type: ignore[attr-defined]
 
 
 def insert_test_carrierdata():
     """Insert test carrier metadata into library"""
-    carrier.CARRIER_DATA = TEST_CARRIER_DATA
-    carrier.CARRIER_LONGEST_PREFIX = TEST_CARRIER_LONGEST_PREFIX
+    carrier.CARRIER_DATA = TEST_CARRIER_DATA  # type: ignore[attr-defined]
+    carrier.CARRIER_LONGEST_PREFIX = TEST_CARRIER_LONGEST_PREFIX  # type: ignore[attr-defined]
 
 
 # Set up some test numbers to re-use.
