@@ -2824,17 +2824,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Check raw_input, country_code_source and preferred_domestic_carrier_code are ignored.
         brNumberOne = PhoneNumber(country_code=55, national_number=3121286979,
                                   country_code_source=CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN,
-                                  preferred_domestic_carrier_code=12, raw_input="012 3121286979")
-        brNumberTwo = PhoneNumber(country_code=55, national_number=3121286979,
-                                  country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY,
-                                  preferred_domestic_carrier_code=14, raw_input="143121286979")
-        self.assertEqual(phonenumbers.MatchType.EXACT_MATCH,
-                         phonenumbers.is_number_match(brNumberOne, brNumberTwo))
-
-    def testIsNumberMatchIgnoresSomeFields(self):
-        # Check raw_input, country_code_source and preferred_domestic_carrier_code are ignored.
-        brNumberOne = PhoneNumber(country_code=55, national_number=3121286979,
-                                  country_code_source=CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN,
                                   preferred_domestic_carrier_code="12", raw_input="012 3121286979")
         brNumberTwo = PhoneNumber(country_code=55, national_number=3121286979,
                                   country_code_source=CountryCodeSource.FROM_DEFAULT_COUNTRY,
