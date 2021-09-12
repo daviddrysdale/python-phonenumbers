@@ -39,6 +39,8 @@ True
 'Block[0000, 007f]'
 >>> b1 == unicode_util.Block.BASIC_LATIN
 True
+>>> b1 == [0x0000, 0x0075]
+False
 >>> b2 = unicode_util.Block.get(u2)
 >>> b2 == unicode_util.Block.BASIC_LATIN
 True
