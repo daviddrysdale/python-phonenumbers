@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3324360':{'en': u('La Fert\u00e9 Bernard'), 'fr': u('La Fert\u00e9 Bernard')},
  '3324362':{'en': u('Sabl\u00e9-sur-Sarthe'), 'fr': u('Sabl\u00e9-sur-Sarthe')},
  '3324363':{'en': 'Saint-Calais', 'fr': 'Saint-Calais'},
  '3324366':{'en': 'Laval', 'fr': 'Laval'},
@@ -10018,5 +10019,4 @@ data = {
  '3522731':{'de': 'Bartringen', 'en': 'Bertrange/Mamer/Munsbach/Strassen', 'fr': 'Bertrange/Mamer/Munsbach/Strassen'},
  '3522732':{'de': 'Lintgen/Kanton Mersch/Steinfort', 'en': 'Lintgen/Mersch/Steinfort', 'fr': 'Lintgen/Mersch/Steinfort'},
  '3522733':{'de': 'Walferdingen', 'en': 'Walferdange', 'fr': 'Walferdange'},
- '3522734':{'de': 'Rammeldingen/Senningerberg', 'en': 'Rameldange/Senningerberg', 'fr': 'Rameldange/Senningerberg'},
 }

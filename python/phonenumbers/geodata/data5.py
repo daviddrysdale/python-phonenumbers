@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3522734':{'de': 'Rammeldingen/Senningerberg', 'en': 'Rameldange/Senningerberg', 'fr': 'Rameldange/Senningerberg'},
  '3522735':{'de': 'Sandweiler/Mutfort/Roodt-sur-Syre', 'en': 'Sandweiler/Moutfort/Roodt-sur-Syre', 'fr': 'Sandweiler/Moutfort/Roodt-sur-Syre'},
  '3522736':{'de': 'Hesperingen/Kockelscheuer/Roeser', 'en': 'Hesperange/Kockelscheuer/Roeser', 'fr': 'Hesperange/Kockelscheuer/Roeser'},
  '3522737':{'de': 'Leudelingen/Ehlingen/Monnerich', 'en': 'Leudelange/Ehlange/Mondercange', 'fr': 'Leudelange/Ehlange/Mondercange'},
@@ -10018,5 +10019,4 @@ data = {
  '495654':{'de': 'Herleshausen', 'en': 'Herleshausen'},
  '495655':{'de': 'Wanfried', 'en': 'Wanfried'},
  '495656':{'de': 'Waldkappel', 'en': 'Waldkappel'},
- '495657':{'de': 'Meissner', 'en': 'Meissner'},
 }

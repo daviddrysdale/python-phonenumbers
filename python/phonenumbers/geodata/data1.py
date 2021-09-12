@@ -5352,6 +5352,7 @@ data = {
  '1580938':{'en': 'Shattuck, OK'},
  '1580994':{'en': 'Mooreland, OK'},
  '1581':{'en': 'Quebec'},
+ '1582':{'en': 'Pennsylvania'},
  '1585':{'en': 'New York'},
  '1585218':{'en': 'Pittsford, NY'},
  '1585223':{'en': 'Fairport, NY'},
@@ -10018,5 +10019,4 @@ data = {
  '1707994':{'en': 'Clearlake, CA'},
  '1707995':{'en': 'Clearlake, CA'},
  '1707996':{'en': 'Sonoma, CA'},
- '1707998':{'en': 'Clearlake Oaks, CA'},
 }
