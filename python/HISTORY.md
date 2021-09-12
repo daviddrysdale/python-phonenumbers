@@ -12,6 +12,12 @@ This file does not generally include descriptions of patch releases (vX.Y.Z
 changes.  (Metadata updates are best checked
 [upstream](https://github.com/google/libphonenumber/blob/master/release_notes.txt).)
 
+What's new in 8.12.32
+---------------------
+
+The library now includes `.pyi` stub files providing typing information about the API, thanks
+to Adam Turner.
+
 What's new in 8.12.24
 ---------------------
 
