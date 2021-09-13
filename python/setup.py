@@ -51,13 +51,11 @@ with io.open("README.md", mode="r", encoding="utf-8") as readme:
 # Various parameters depend on whether we are the lite package or not
 if lite:
     pkgname = 'phonenumberslite'
-    pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.shortdata',
-            'tests', 'tests.testdata']
+    pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.shortdata']
 else:
     pkgname = 'phonenumbers'
     pkgs = ['phonenumbers', 'phonenumbers.data', 'phonenumbers.geodata', 'phonenumbers.shortdata',
-            'phonenumbers.carrierdata', 'phonenumbers.tzdata',
-            'tests', 'tests.testdata', 'tests.testcarrierdata', 'tests.testgeodata', 'tests.testtzdata']
+            'phonenumbers.carrierdata', 'phonenumbers.tzdata']
 
 distutils.core.setup(name=pkgname,
                      version=__version__,
