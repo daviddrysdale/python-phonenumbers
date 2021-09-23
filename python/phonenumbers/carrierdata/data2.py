@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '59669652':{'en': 'Digicel'},
  '59669653':{'en': 'Digicel'},
  '59669654':{'en': 'Digicel'},
  '59669655':{'en': 'Orange'},
@@ -7526,12 +7527,12 @@ data = {
  '9655':{'ar': u('\u0641\u064a\u0641\u0627'), 'en': 'VIVA'},
  '9656':{'ar': u('\u0623\u0648\u0631\u064a\u062f\u0648'), 'en': 'Ooredoo'},
  '9659':{'ar': u('\u0632\u064a\u0646'), 'en': 'Zain'},
- '96650':{'en': 'Mofawtar (STC)'},
- '9665153':{'en': 'Mofawtar (STC)'},
- '9665154':{'en': 'Mofawtar (STC)'},
- '96653':{'en': 'Mofawtar (STC)'},
+ '96650':{'en': 'STC'},
+ '9665153':{'en': 'STC'},
+ '9665154':{'en': 'STC'},
+ '96653':{'en': 'STC'},
  '96654':{'en': 'Mobily'},
- '96655':{'en': 'Mofawtar (STC)'},
+ '96655':{'en': 'STC'},
  '96656':{'en': 'Mobily'},
  '966570':{'en': 'Virgin'},
  '966571':{'en': 'Virgin'},

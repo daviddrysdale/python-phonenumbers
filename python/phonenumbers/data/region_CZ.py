@@ -13,6 +13,7 @@ PHONE_METADATA_CZ = PhoneMetadata(id='CZ', country_code=420, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='9(?:5\\d|7[2-4])\\d{6}', example_number='972123456', possible_length=(9,)),
     voicemail=PhoneNumberDesc(national_number_pattern='9(?:3\\d{9}|6\\d{7,10})', example_number='93123456789', possible_length=(9, 10, 11, 12)),
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['[2-8]|9[015-7]']),
+        NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})(\\d{2})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['96']),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['9']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['9'])],
     mobile_number_portable_region=True)
