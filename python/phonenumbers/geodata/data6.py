@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '495654':{'de': 'Herleshausen', 'en': 'Herleshausen'},
+ '495655':{'de': 'Wanfried', 'en': 'Wanfried'},
+ '495656':{'de': 'Waldkappel', 'en': 'Waldkappel'},
  '495657':{'de': 'Meissner', 'en': 'Meissner'},
  '495658':{'de': 'Wehretal', 'en': 'Wehretal'},
  '495659':{'de': 'Ringgau', 'en': 'Ringgau'},
@@ -5896,7 +5899,7 @@ data = {
  '55213642':{'en': u('Teres\u00f3polis - RJ'), 'pt': u('Teres\u00f3polis - RJ')},
  '55213643':{'en': u('Teres\u00f3polis - RJ'), 'pt': u('Teres\u00f3polis - RJ')},
  '55213644':{'en': u('Teres\u00f3polis - RJ'), 'pt': u('Teres\u00f3polis - RJ')},
- '55213660':{'en': 'Barra Mansa - RJ', 'pt': 'Barra Mansa - RJ'},
+ '55213660':{'en': u('Mag\u00e9 - RJ'), 'pt': u('Mag\u00e9 - RJ')},
  '55213664':{'en': 'Belford Roxo - RJ', 'pt': 'Belford Roxo - RJ'},
  '55213665':{'en': 'Queimados - RJ', 'pt': 'Queimados - RJ'},
  '55213667':{'en': 'Duque de Caxias - RJ', 'pt': 'Duque de Caxias - RJ'},
@@ -10016,7 +10019,4 @@ data = {
  '55513731':{'en': 'Rio Pardo - RS', 'pt': 'Rio Pardo - RS'},
  '55513732':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
  '55513733':{'en': 'Encruzilhada do Sul - RS', 'pt': 'Encruzilhada do Sul - RS'},
- '55513734':{'en': 'Pantano Grande - RS', 'pt': 'Pantano Grande - RS'},
- '55513735':{'en': u('V\u00e1rzea do Capivarita - RS'), 'pt': u('V\u00e1rzea do Capivarita - RS')},
- '55513736':{'en': u('Estr\u00eala - RS'), 'pt': u('Estr\u00eala - RS')},
 }

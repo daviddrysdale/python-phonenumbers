@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '55513734':{'en': 'Pantano Grande - RS', 'pt': 'Pantano Grande - RS'},
+ '55513735':{'en': u('V\u00e1rzea do Capivarita - RS'), 'pt': u('V\u00e1rzea do Capivarita - RS')},
+ '55513736':{'en': u('Estr\u00eala - RS'), 'pt': u('Estr\u00eala - RS')},
  '55513737':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
  '55513738':{'en': u('Ven\u00e2ncio Aires - RS'), 'pt': u('Ven\u00e2ncio Aires - RS')},
  '55513739':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
@@ -10016,7 +10019,4 @@ data = {
  '61240011':{'en': 'Bandon Grove'},
  '61240012':{'en': 'Branxton'},
  '61240013':{'en': 'Bulahdelah'},
- '61240014':{'en': 'Cessnock'},
- '61240015':{'en': 'Clarence Town'},
- '61240016':{'en': 'Dungog'},
 }

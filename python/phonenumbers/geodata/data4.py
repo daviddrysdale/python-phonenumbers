@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3324356':{'en': 'Laval', 'fr': 'Laval'},
+ '3324358':{'en': 'Laval', 'fr': 'Laval'},
+ '3324359':{'en': 'Laval', 'fr': 'Laval'},
  '3324360':{'en': u('La Fert\u00e9 Bernard'), 'fr': u('La Fert\u00e9 Bernard')},
  '3324362':{'en': u('Sabl\u00e9-sur-Sarthe'), 'fr': u('Sabl\u00e9-sur-Sarthe')},
  '3324363':{'en': 'Saint-Calais', 'fr': 'Saint-Calais'},
@@ -10016,7 +10019,4 @@ data = {
  '3522728':{'de': 'Luxemburg', 'en': 'Luxembourg City', 'fr': 'Luxembourg-Ville'},
  '3522729':{'de': 'Luxemburg/Kockelscheuer', 'en': 'Luxembourg/Kockelscheuer', 'fr': 'Luxembourg/Kockelscheuer'},
  '3522730':{'de': 'Kanton Capellen/Kehlen', 'en': 'Capellen/Kehlen', 'fr': 'Capellen/Kehlen'},
- '3522731':{'de': 'Bartringen', 'en': 'Bertrange/Mamer/Munsbach/Strassen', 'fr': 'Bertrange/Mamer/Munsbach/Strassen'},
- '3522732':{'de': 'Lintgen/Kanton Mersch/Steinfort', 'en': 'Lintgen/Mersch/Steinfort', 'fr': 'Lintgen/Mersch/Steinfort'},
- '3522733':{'de': 'Walferdingen', 'en': 'Walferdange', 'fr': 'Walferdange'},
 }

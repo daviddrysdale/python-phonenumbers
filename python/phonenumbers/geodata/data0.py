@@ -7189,6 +7189,9 @@ data = {
  '1337991':{'en': 'Lafayette, LA'},
  '1337993':{'en': 'Lafayette, LA'},
  '1339':{'en': 'Massachusetts'},
+ '1340200':{'en': 'Chtamstths, VI'},
+ '1340203':{'en': 'Chtamstths, VI'},
+ '1340208':{'en': 'St. Croix, VI'},
  '1340423':{'en': 'Chtamstths, VI'},
  '134044':{'en': 'Chtamstths, VI'},
  '1340725':{'en': 'Chtamstths, VI'},
@@ -10016,7 +10019,4 @@ data = {
  '1417962':{'en': 'Cabool, MO'},
  '1417967':{'en': 'Houston, MO'},
  '1418':{'en': 'Quebec'},
- '1418226':{'en': 'Saint-Georges, QC'},
- '1418227':{'en': 'Saint-Georges, QC'},
- '1418228':{'en': 'Saint-Georges, QC'},
 }
