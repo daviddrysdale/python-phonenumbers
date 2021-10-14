@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_AZ = PhoneMetadata(id='AZ', country_code=994, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='365\\d{6}|(?:[124579]\\d|60|88)\\d{7}', possible_length=(9,), possible_length_local_only=(7,)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:222[0-79]\\d|365(?:[0-46-9]\\d|5[0-35-9]))\\d{4}|(?:(?:1[28]|46)\\d|2(?:[045]2|1[24]|2[34]|33|6[23]))\\d{6}', example_number='123123456', possible_length=(9,), possible_length_local_only=(7,)),
-    mobile=PhoneNumberDesc(national_number_pattern='(?:36554|99[2-9]\\d\\d)\\d{4}|(?:[16]0|4[04]|5[015]|7[07])\\d{7}', example_number='401234567', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='36554\\d{4}|(?:[16]0|4[04]|5[015]|7[07]|99)\\d{7}', example_number='401234567', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='88\\d{7}', example_number='881234567', possible_length=(9,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='900200\\d{3}', example_number='900200123', possible_length=(9,)),
     national_prefix='0',

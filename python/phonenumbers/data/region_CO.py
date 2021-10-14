@@ -10,7 +10,7 @@ PHONE_METADATA_CO = PhoneMetadata(id='CO', country_code=57, international_prefix
     national_prefix='0',
     national_prefix_for_parsing='0([3579]|4(?:[14]4|56))?',
     number_format=[NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['[146][2-9]|[2578]'], national_prefix_formatting_rule='(\\1)', domestic_carrier_code_formatting_rule='0$CC \\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['6'], national_prefix_formatting_rule='(\\1)', domestic_carrier_code_formatting_rule='0$CC \\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['6'], national_prefix_formatting_rule='(\\1)'),
         NumberFormat(pattern='(\\d{3})(\\d{7})', format='\\1 \\2', leading_digits_pattern=['[39]'], domestic_carrier_code_formatting_rule='0$CC \\1'),
         NumberFormat(pattern='(\\d)(\\d{3})(\\d{7})', format='\\1-\\2-\\3', leading_digits_pattern=['1'], national_prefix_formatting_rule='0\\1')],
     intl_number_format=[NumberFormat(pattern='(\\d)(\\d{7})', format='\\1 \\2', leading_digits_pattern=['[146][2-9]|[2578]']),
