@@ -5,13 +5,13 @@ Examples of use:
 >>> import phonenumbers
 >>> from phonenumbers.pb2 import phonenumber_pb2, PBToPy, PyToPB
 >>> x_py = phonenumbers.PhoneNumber(country_code=44, national_number=7912345678)
->>> print x_py
+>>> print(x_py)
 Country Code: 44 National Number: 7912345678
 >>> y_pb = phonenumber_pb2.PhoneNumber()
 >>> y_pb.country_code = 44
 >>> y_pb.national_number = 7912345678
 >>> y_pb.country_code_source = phonenumber_pb2.PhoneNumber.UNSPECIFIED
->>> print str(y_pb).strip()
+>>> print(str(y_pb).strip())
 country_code: 44
 national_number: 7912345678
 country_code_source: UNSPECIFIED
@@ -19,10 +19,10 @@ country_code_source: UNSPECIFIED
 >>> y_pb.italian_leading_zero
 False
 >>> y_py = PBToPy(y_pb)
->>> print y_py
+>>> print(y_py)
 Country Code: 44 National Number: 7912345678
 >>> x_pb = PyToPB(x_py)
->>> print str(x_pb).strip()
+>>> print(str(x_pb).strip())
 country_code: 44
 national_number: 7912345678
 country_code_source: UNSPECIFIED
