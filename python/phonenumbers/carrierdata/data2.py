@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '5966963':{'en': 'Orange'},
+ '5966964':{'en': 'Orange'},
+ '59669650':{'en': 'Digicel'},
+ '59669651':{'en': 'Digicel'},
  '59669652':{'en': 'Digicel'},
  '59669653':{'en': 'Digicel'},
  '59669654':{'en': 'Digicel'},
@@ -3317,7 +3321,7 @@ data = {
  '8525718':{'en': 'Lycamobile', 'zh': 'Lycamobile', 'zh_Hant': 'Lycamobile'},
  '8525719':{'en': 'Lycamobile', 'zh': 'Lycamobile', 'zh_Hant': 'Lycamobile'},
  '852572':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a'), 'zh_Hant': u('\u6578\u78bc\u901a')},
- '852573':{'en': 'Tai Tung', 'zh': u('\u53f0\u4e1c'), 'zh_Hant': u('\u81fa\u6771')},
+ '852573':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8'), 'zh_Hant': u('\u81fa\u6771')},
  '8525740':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a'), 'zh_Hant': u('\u6578\u78bc\u901a')},
  '8525741':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a'), 'zh_Hant': u('\u6578\u78bc\u901a')},
  '8525742':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a'), 'zh_Hant': u('\u6578\u78bc\u901a')},
@@ -7524,6 +7528,7 @@ data = {
  '96477':{'en': 'Asiacell'},
  '96478':{'en': 'Zain'},
  '96479':{'en': 'Zain'},
+ '9654':{'ar': 'Virgin mobile', 'en': 'Virgin mobile'},
  '9655':{'ar': u('\u0641\u064a\u0641\u0627'), 'en': 'VIVA'},
  '9656':{'ar': u('\u0623\u0648\u0631\u064a\u062f\u0648'), 'en': 'Ooredoo'},
  '9659':{'ar': u('\u0632\u064a\u0646'), 'en': 'Zain'},
