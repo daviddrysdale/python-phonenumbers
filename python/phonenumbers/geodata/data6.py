@@ -2376,7 +2376,7 @@ data = {
  '5042564':{'en': u('San Pedro Sula, Cort\u00e9s')},
  '5042565':{'en': u('Chamelec\u00f3n')},
  '5042566':{'en': 'Jardines Del Valle'},
- '504257':{'en': u('B\u00fafalo')},
+ '5042574':{'en': u('B\u00fafalo')},
  '504261':{'en': u('Choloma, Cort\u00e9s')},
  '5042640':{'en': 'C. Comunitarios'},
  '5042641':{'en': 'C. Comunitarios'},

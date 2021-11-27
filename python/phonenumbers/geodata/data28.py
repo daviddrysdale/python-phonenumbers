@@ -19,10 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '9168446':{'en': 'Kantamal, Odisha'},
- '9168447':{'en': 'Kantamal, Odisha'},
- '9168452':{'en': 'Phiringia, Odisha'},
- '9168453':{'en': 'Phiringia, Odisha'},
  '9168454':{'en': 'Phiringia, Odisha'},
  '9168455':{'en': 'Phiringia, Odisha'},
  '9168456':{'en': 'Phiringia, Odisha'},

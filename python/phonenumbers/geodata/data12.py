@@ -19,10 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '61752064':{'en': 'Jimna'},
- '61752065':{'en': 'Kalbar'},
- '61752066':{'en': 'Kenilworth'},
- '61752067':{'en': 'Kia Ora'},
  '61752068':{'en': 'Kilcoy'},
  '61752069':{'en': 'Kilkivan'},
  '61752070':{'en': 'Laidley'},
@@ -10019,4 +10015,8 @@ data = {
  '618856762':{'en': 'Coonalpyn'},
  '618856763':{'en': 'Coonalpyn'},
  '618856764':{'en': 'Coonalpyn'},
+ '618856765':{'en': 'Coonalpyn'},
+ '618856766':{'en': 'Coonalpyn'},
+ '618856768':{'en': 'Coonalpyn'},
+ '618856769':{'en': 'Coonalpyn'},
 }

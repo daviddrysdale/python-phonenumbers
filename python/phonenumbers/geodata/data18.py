@@ -19,10 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '861365249':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
- '86136525':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
- '86136526':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
- '861365270':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
  '861365271':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
  '861365272':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
  '861365273':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
@@ -10019,4 +10015,8 @@ data = {
  '861394843':{'en': 'Hohhot, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u547c\u548c\u6d69\u7279\u5e02')},
  '861394844':{'en': 'Ulanqab, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u4e4c\u5170\u5bdf\u5e03\u5e02')},
  '861394845':{'en': 'Tongliao, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u901a\u8fbd\u5e02')},
+ '861394846':{'en': 'Chifeng, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u8d64\u5cf0\u5e02')},
+ '861394847':{'en': 'Ordos, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9102\u5c14\u591a\u65af\u5e02')},
+ '861394848':{'en': 'Ulanqab, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u4e4c\u5170\u5bdf\u5e03\u5e02')},
+ '861394849':{'en': 'Ulanqab, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u4e4c\u5170\u5bdf\u5e03\u5e02')},
 }
