@@ -1960,9 +1960,9 @@ def identify_line_type(numobj):
     if (line_type == PhoneNumberType.MOBILE):
         return 'Mobile'
     elif (line_type == PhoneNumberType.FIXED_LINE):
-        return 'Fixed-Line'
+        return 'Landline'
     elif (line_type == PhoneNumberType.FIXED_LINE_OR_MOBILE):
-        return 'Fixed-Line or Mobile'
+        return 'Landline or Mobile'
     elif (line_type == PhoneNumberType.TOLL_FREE):
         return 'Toll Free'
     elif (line_type == PhoneNumberType.SHARED_COST):
