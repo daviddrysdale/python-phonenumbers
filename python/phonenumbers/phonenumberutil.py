@@ -1955,6 +1955,33 @@ def number_type(numobj):
     return _number_type_helper(national_number, metadata)
 
 
+def identify_line_type(numobj: str):
+    line_type = ph.number_type(numobj)
+    if (line_type == PhoneNumberType.MOBILE):
+        return 'Mobile'
+    elif (line_type == PhoneNumberType.FIXED_LINE):
+        return 'Fixed-Line'
+    elif (line_type == PhoneNumberType.FIXED_LINE_OR_MOBILE):
+        return 'Fixed-Line or Mobile'
+    elif (line_type == PhoneNumberType.TOLL_FREE):
+        return 'Toll Free'
+    elif (line_type == PhoneNumberType.SHARED_COST):
+        return 'Shared Cost'
+    elif (line_type == PhoneNumberType.VOIP):
+        return 'VOIP'
+    elif (line_type == PhoneNumberType.PERSONAL_NUMBER):
+        return "Personal Number"
+    elif (line_type == PhoneNumberType.PAGER):
+        return "PAGER"
+    elif (line_type == PhoneNumberType.UAN):
+        return "UAN"
+    elif (line_type == PhoneNumberType.VOICEMAIL):
+        return "VOICEMAIL"
+    else:
+        return "Unknown"
+
+
+
 def _number_type_helper(national_number, metadata):
     """Return the type of the given number against the metadata"""
     if not _is_number_matching_desc(national_number, metadata.general_desc):
