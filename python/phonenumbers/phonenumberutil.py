@@ -1955,8 +1955,8 @@ def number_type(numobj):
     return _number_type_helper(national_number, metadata)
 
 
-def identify_line_type(numobj: str):
-    line_type = ph.number_type(numobj)
+def identify_line_type(numobj):
+    line_type = number_type(numobj)
     if (line_type == PhoneNumberType.MOBILE):
         return 'Mobile'
     elif (line_type == PhoneNumberType.FIXED_LINE):
