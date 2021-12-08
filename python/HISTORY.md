@@ -12,6 +12,12 @@ This file does not generally include descriptions of patch releases (vX.Y.Z
 changes.  (Metadata updates are best checked
 [upstream](https://github.com/google/libphonenumber/blob/master/release_notes.txt).)
 
+What's new in 8.12.40
+---------------------
+
+New `to_string()` methods have been added for enum-like classes, emitting strings that describe
+integer values known to be enum values.
+
 What's new in 8.12.32
 ---------------------
 

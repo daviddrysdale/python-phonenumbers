@@ -424,6 +424,20 @@ class PhoneNumberFormat(object):
     NATIONAL = 2
     RFC3966 = 3
 
+    @classmethod
+    def to_string(cls, val):
+        """Return a string representation of a PhoneNumberFormat value"""
+        if val == PhoneNumberFormat.E164:
+            return u("E164")
+        elif val == PhoneNumberFormat.INTERNATIONAL:
+            return u("INTERNATIONAL")
+        elif val == PhoneNumberFormat.NATIONAL:
+            return u("NATIONAL")
+        elif val == PhoneNumberFormat.RFC3966:
+            return u("RFC3966")
+        else:
+            return u("INVALID (%d)" % val)
+
 
 class PhoneNumberType(object):
     """Type of phone numbers."""
@@ -471,6 +485,36 @@ class PhoneNumberType(object):
                 PhoneNumberType.VOICEMAIL,
                 PhoneNumberType.UNKNOWN)
 
+    @classmethod
+    def to_string(cls, val):
+        """Return a string representation of a PhoneNumberType value"""
+        if val == PhoneNumberType.FIXED_LINE:
+            return u("FIXED_LINE")
+        elif val == PhoneNumberType.MOBILE:
+            return u("MOBILE")
+        elif val == PhoneNumberType.FIXED_LINE_OR_MOBILE:
+            return u("FIXED_LINE_OR_MOBILE")
+        elif val == PhoneNumberType.TOLL_FREE:
+            return u("TOLL_FREE")
+        elif val == PhoneNumberType.PREMIUM_RATE:
+            return u("PREMIUM_RATE")
+        elif val == PhoneNumberType.SHARED_COST:
+            return u("SHARED_COST")
+        elif val == PhoneNumberType.VOIP:
+            return u("VOIP")
+        elif val == PhoneNumberType.PERSONAL_NUMBER:
+            return u("PERSONAL_NUMBER")
+        elif val == PhoneNumberType.PAGER:
+            return u("PAGER")
+        elif val == PhoneNumberType.UAN:
+            return u("UAN")
+        elif val == PhoneNumberType.VOICEMAIL:
+            return u("VOICEMAIL")
+        elif val == PhoneNumberType.UNKNOWN:
+            return u("UNKNOWN")
+        else:
+            return u("INVALID (%d)" % val)
+
 
 class MatchType(object):
     """Types of phone number matches."""
@@ -489,6 +533,22 @@ class MatchType(object):
     # The country_code, NSN, presence of a leading zero for Italian numbers
     # and any extension present are the same.
     EXACT_MATCH = 4
+
+    @classmethod
+    def to_string(cls, val):
+        """Return a string representation of a MatchType value"""
+        if val == MatchType.NOT_A_NUMBER:
+            return u("NOT_A_NUMBER")
+        elif val == MatchType.NO_MATCH:
+            return u("NO_MATCH")
+        elif val == MatchType.SHORT_NSN_MATCH:
+            return u("SHORT_NSN_MATCH")
+        elif val == MatchType.NSN_MATCH:
+            return u("NSN_MATCH")
+        elif val == MatchType.EXACT_MATCH:
+            return u("EXACT_MATCH")
+        else:
+            return u("INVALID (%d)" % val)
 
 
 class ValidationResult(object):
@@ -513,6 +573,24 @@ class ValidationResult(object):
     INVALID_LENGTH = 5
     # The number is longer than all valid numbers for this region.
     TOO_LONG = 3
+
+    @classmethod
+    def to_string(cls, val):
+        """Return a string representation of a ValidationResult value"""
+        if val == ValidationResult.IS_POSSIBLE:
+            return u("IS_POSSIBLE")
+        elif val == ValidationResult.IS_POSSIBLE_LOCAL_ONLY:
+            return u("IS_POSSIBLE_LOCAL_ONLY")
+        elif val == ValidationResult.INVALID_COUNTRY_CODE:
+            return u("INVALID_COUNTRY_CODE")
+        elif val == ValidationResult.TOO_SHORT:
+            return u("TOO_SHORT")
+        elif val == ValidationResult.INVALID_LENGTH:
+            return u("INVALID_LENGTH")
+        elif val == ValidationResult.TOO_LONG:
+            return u("TOO_LONG")
+        else:
+            return u("INVALID (%d)" % val)
 
 
 # Derived data structures
