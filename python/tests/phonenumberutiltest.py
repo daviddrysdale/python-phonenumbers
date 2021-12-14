@@ -24,7 +24,7 @@ from phonenumbers import PhoneNumber, PhoneMetadata
 from phonenumbers import FrozenPhoneNumber, PhoneNumberDesc
 from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseException
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
-from phonenumbers import region_code_for_country_code
+from phonenumbers import region_code_for_country_code, MatchType
 # Access internal functions of phonenumberutil.py
 from phonenumbers import phonenumberutil, shortnumberinfo
 from phonenumbers.phonenumberutil import NumberParseException
@@ -3225,6 +3225,43 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         pickled = pickle.dumps(err)
         recovered = pickle.loads(pickled)
         self.assertEqual("%r" % err, "%r" % recovered)
+
+    def testEnumString(self):
+        # Python version extra test for enum to_string() methods.
+        self.assertEqual(PhoneNumberFormat.to_string(PhoneNumberFormat.E164), u("E164"))
+        self.assertEqual(PhoneNumberFormat.to_string(PhoneNumberFormat.INTERNATIONAL), u("INTERNATIONAL"))
+        self.assertEqual(PhoneNumberFormat.to_string(PhoneNumberFormat.NATIONAL), u("NATIONAL"))
+        self.assertEqual(PhoneNumberFormat.to_string(PhoneNumberFormat.RFC3966), u("RFC3966"))
+        self.assertEqual(PhoneNumberFormat.to_string(999), u("INVALID (999)"))
+
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.FIXED_LINE), u("FIXED_LINE"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.MOBILE), u("MOBILE"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.FIXED_LINE_OR_MOBILE), u("FIXED_LINE_OR_MOBILE"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.TOLL_FREE), u("TOLL_FREE"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.PREMIUM_RATE), u("PREMIUM_RATE"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.SHARED_COST), u("SHARED_COST"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.VOIP), u("VOIP"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.PERSONAL_NUMBER), u("PERSONAL_NUMBER"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.PAGER), u("PAGER"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.UAN), u("UAN"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.VOICEMAIL), u("VOICEMAIL"))
+        self.assertEqual(PhoneNumberType.to_string(PhoneNumberType.UNKNOWN), u("UNKNOWN"))
+        self.assertEqual(PhoneNumberType.to_string(999), u("INVALID (999)"))
+
+        self.assertEqual(MatchType.to_string(MatchType.NOT_A_NUMBER), u("NOT_A_NUMBER"))
+        self.assertEqual(MatchType.to_string(MatchType.NO_MATCH), u("NO_MATCH"))
+        self.assertEqual(MatchType.to_string(MatchType.SHORT_NSN_MATCH), u("SHORT_NSN_MATCH"))
+        self.assertEqual(MatchType.to_string(MatchType.NSN_MATCH), u("NSN_MATCH"))
+        self.assertEqual(MatchType.to_string(MatchType.EXACT_MATCH), u("EXACT_MATCH"))
+        self.assertEqual(MatchType.to_string(999), u("INVALID (999)"))
+
+        self.assertEqual(ValidationResult.to_string(ValidationResult.IS_POSSIBLE), u("IS_POSSIBLE"))
+        self.assertEqual(ValidationResult.to_string(ValidationResult.IS_POSSIBLE_LOCAL_ONLY), u("IS_POSSIBLE_LOCAL_ONLY"))
+        self.assertEqual(ValidationResult.to_string(ValidationResult.INVALID_COUNTRY_CODE), u("INVALID_COUNTRY_CODE"))
+        self.assertEqual(ValidationResult.to_string(ValidationResult.TOO_SHORT), u("TOO_SHORT"))
+        self.assertEqual(ValidationResult.to_string(ValidationResult.INVALID_LENGTH), u("INVALID_LENGTH"))
+        self.assertEqual(ValidationResult.to_string(ValidationResult.TOO_LONG), u("TOO_LONG"))
+        self.assertEqual(ValidationResult.to_string(999), u("INVALID (999)"))
 
     def testCoverage(self):
         # Python version extra tests
