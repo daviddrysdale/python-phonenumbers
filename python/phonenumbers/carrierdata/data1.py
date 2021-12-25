@@ -9917,6 +9917,8 @@ data = {
  '59267':{'en': 'Digicel Guyana'},
  '59268':{'en': 'Digicel Guyana'},
  '59269':{'en': 'Digicel Guyana'},
+ '592700':{'en': 'Digicel Guyana'},
+ '592701':{'en': 'Digicel Guyana'},
  '59393':{'en': 'Claro'},
  '5939586':{'en': 'Movistar'},
  '5939587':{'en': 'Movistar'},
@@ -10017,6 +10019,4 @@ data = {
  '59599':{'en': 'Claro'},
  '5966960':{'en': 'SFR/Rife'},
  '59669610':{'en': 'Digicel'},
- '59669611':{'en': 'Digicel'},
- '59669616':{'en': 'Digicel'},
 }
