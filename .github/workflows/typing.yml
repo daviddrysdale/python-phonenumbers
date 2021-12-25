@@ -16,9 +16,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mypy types-protobuf
+          pip install mypy==0.921 types-protobuf
 
-      - name: Run mypy.stubtest
+      - name: Execute run_stubtest.py
         run: |
           cd python
           python run_stubtest.py
@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mypy types-protobuf
+          pip install mypy==0.921 types-protobuf
 
       - name: Run mypy
         run: |
