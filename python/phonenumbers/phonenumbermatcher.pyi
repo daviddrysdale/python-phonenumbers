@@ -2,6 +2,8 @@ from collections.abc import Callable
 from collections.abc import Iterator
 from re import Pattern
 
+from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER, U_PERCENT
+from .phonenumberutil import NON_DIGITS_PATTERN
 from .phonemetadata import NumberFormat
 from .phonenumber import PhoneNumber
 from .util import UnicodeMixin

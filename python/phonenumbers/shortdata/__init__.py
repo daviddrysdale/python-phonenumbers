@@ -21,6 +21,6 @@ def _load_region(code):
     __import__("region_%s" % code, globals(), locals(),
                fromlist=["PHONE_METADATA_%s" % code], level=1)
 
-for region_code in _AVAILABLE_REGION_CODES:
-    PhoneMetadata.register_short_region_loader(region_code, _load_region)
+for _region_code in _AVAILABLE_REGION_CODES:
+    PhoneMetadata.register_short_region_loader(_region_code, _load_region)
 

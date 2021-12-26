@@ -1,3 +1,4 @@
+from .util import U_EMPTY_STRING
 from .phonemetadata import PhoneNumberDesc
 from .phonenumber import PhoneNumber
 

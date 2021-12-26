@@ -1,6 +1,8 @@
 from re import Pattern
 from re import RegexFlag
 
+from .util import U_EMPTY_STRING, U_SPACE, U_DASH, U_TILDE, U_ZERO, U_SEMICOLON
+from .phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY
 from .phonemetadata import NumberFormat
 from .phonemetadata import PhoneMetadata
 from .phonemetadata import PhoneNumberDesc

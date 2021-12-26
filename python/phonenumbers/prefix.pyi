@@ -1,3 +1,4 @@
+from .util import U_EMPTY_STRING, U_PLUS
 from .phonenumber import PhoneNumber
 
 _LOCALE_NORMALIZATION_MAP: dict[str, str]
