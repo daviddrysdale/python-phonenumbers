@@ -1,7 +1,9 @@
 from re import Pattern
 
+from .util import U_EMPTY_STRING, U_SPACE
 from .phonemetadata import NumberFormat
 from .phonemetadata import PhoneMetadata
+from .phonemetadata import REGION_CODE_FOR_NON_GEO_ENTITY
 
 _SEPARATOR_BEFORE_NATIONAL_NUMBER: str
 _EMPTY_METADATA: PhoneMetadata

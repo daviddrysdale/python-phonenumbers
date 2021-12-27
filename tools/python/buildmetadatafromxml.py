@@ -69,8 +69,8 @@ def _load_region(code):
     __import__("region_%%s" %% code, globals(), locals(),
                fromlist=["PHONE_METADATA_%%s" %% code], level=1)
 
-for region_code in _AVAILABLE_REGION_CODES:
-    PhoneMetadata.register_%(prefix)sregion_loader(region_code, _load_region)
+for _region_code in _AVAILABLE_REGION_CODES:
+    PhoneMetadata.register_%(prefix)sregion_loader(_region_code, _load_region)
 '''
 METADATA_FILE_TYPE_IMPORT = "from %(module)s.phonemetadata import NumberFormat\n"
 METADATA_FILE_TYPE_INFO = '''
@@ -78,8 +78,8 @@ def _load_region(code: str) -> None: ...'''
 METADATA_FILE_TYPE_INFO_WITH_NONGEO = '''
 def _load_region(code: str | int) -> None: ...'''
 METADATA_NONGEO_FILE_LOOP = '''
-for country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
-    PhoneMetadata.register_nongeo_region_loader(country_code, _load_region)
+for _country_code in _AVAILABLE_NONGEO_COUNTRY_CODES:
+    PhoneMetadata.register_nongeo_region_loader(_country_code, _load_region)
 '''
 
 _COUNTRY_CODE_TO_REGION_CODE_PROLOG = '''
@@ -677,6 +677,8 @@ class XPhoneNumberMetadata(UnicodeMixin):
         with open(modulefilename + "i", "w") as pyifile:
             if self.alt_territory is not None:
                 prnt(METADATA_FILE_TYPE_IMPORT % {'module': module_prefix}, file=pyifile)
+                for country_code in sorted(self.alt_territory.keys()):
+                    prnt("from .alt_format_%s import PHONE_ALT_FORMAT_%s" % (country_code, country_code), file=pyifile)
             prnt("_AVAILABLE_REGION_CODES: list[str]", file=pyifile)
             if len(nongeo_codes) > 0:
                 prnt("_AVAILABLE_NONGEO_COUNTRY_CODES: list[int]", file=pyifile)
