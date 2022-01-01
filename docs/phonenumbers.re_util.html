@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module phonenumbers.re_util</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="phonenumbers.html"><font color="#ffffff">phonenumbers</font></a>.re_util</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/phonenumbers/re_util.py">phonenumbers/re_util.py</a></font></td></tr></table>
+    <p><tt>Additional&nbsp;regular&nbsp;expression&nbsp;utilities,&nbsp;to&nbsp;make&nbsp;it&nbsp;easier&nbsp;to&nbsp;sync&nbsp;up<br>
+with&nbsp;Java&nbsp;regular&nbsp;expression&nbsp;code.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;import&nbsp;re<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;.re_util&nbsp;import&nbsp;fullmatch<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;.util&nbsp;import&nbsp;u<br>
+&gt;&gt;&gt;&nbsp;string&nbsp;=&nbsp;'abcd'<br>
+&gt;&gt;&gt;&nbsp;r1&nbsp;=&nbsp;re.compile('abcd')<br>
+&gt;&gt;&gt;&nbsp;r2&nbsp;=&nbsp;re.compile('bc')<br>
+&gt;&gt;&gt;&nbsp;r3&nbsp;=&nbsp;re.compile('abc')<br>
+&gt;&gt;&gt;&nbsp;<a href="#-fullmatch">fullmatch</a>(r1,&nbsp;string)&nbsp;&nbsp;#&nbsp;doctest:&nbsp;+ELLIPSIS<br>
+&lt;...Match&nbsp;object...&gt;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-fullmatch">fullmatch</a>(r2,&nbsp;string)<br>
+&gt;&gt;&gt;&nbsp;<a href="#-fullmatch">fullmatch</a>(r3,&nbsp;string)<br>
+&gt;&gt;&gt;&nbsp;r&nbsp;=&nbsp;re.compile(r'\d{8}|\d{10,11}')<br>
+&gt;&gt;&gt;&nbsp;m&nbsp;=&nbsp;<a href="#-fullmatch">fullmatch</a>(r,&nbsp;'1234567890')<br>
+&gt;&gt;&gt;&nbsp;m.end()<br>
+10<br>
+&gt;&gt;&gt;&nbsp;r&nbsp;=&nbsp;re.compile(u(r'[+＋\d]'),&nbsp;re.UNICODE)<br>
+&gt;&gt;&gt;&nbsp;m&nbsp;=&nbsp;<a href="#-fullmatch">fullmatch</a>(r,&nbsp;u('０'))<br>
+&gt;&gt;&gt;&nbsp;m.end()<br>
+1</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-fullmatch"><strong>fullmatch</strong></a>(pattern, string, flags=0)</dt><dd><tt>Try&nbsp;to&nbsp;apply&nbsp;the&nbsp;pattern&nbsp;at&nbsp;the&nbsp;start&nbsp;of&nbsp;the&nbsp;string,&nbsp;returning&nbsp;a&nbsp;match<br>
+object&nbsp;if&nbsp;the&nbsp;whole&nbsp;string&nbsp;matches,&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;match&nbsp;was&nbsp;found.</tt></dd></dl>
+</td></tr></table>
+</body></html>

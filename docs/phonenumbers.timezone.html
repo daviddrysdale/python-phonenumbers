@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module phonenumbers.timezone</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="phonenumbers.html"><font color="#ffffff">phonenumbers</font></a>.timezone</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/phonenumbers/timezone.py">phonenumbers/timezone.py</a></font></td></tr></table>
+    <p><tt>Phone&nbsp;number&nbsp;to&nbsp;time&nbsp;zone&nbsp;mapping&nbsp;functionality<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;import&nbsp;phonenumbers<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;phonenumbers.timezone&nbsp;import&nbsp;time_zones_for_number<br>
+&gt;&gt;&gt;&nbsp;ro_number&nbsp;=&nbsp;phonenumbers.parse("+40721234567",&nbsp;"RO")<br>
+&gt;&gt;&gt;&nbsp;tzlist&nbsp;=&nbsp;<a href="#-time_zones_for_number">time_zones_for_number</a>(ro_number)<br>
+&gt;&gt;&gt;&nbsp;len(tzlist)<br>
+1<br>
+&gt;&gt;&gt;&nbsp;str(tzlist[0])<br>
+'Europe/Bucharest'<br>
+&gt;&gt;&gt;&nbsp;dual_number&nbsp;=&nbsp;phonenumbers.parse("+976136234567",&nbsp;"US")<br>
+&gt;&gt;&gt;&nbsp;tzlist&nbsp;=&nbsp;<a href="#-time_zones_for_number">time_zones_for_number</a>(dual_number)<br>
+&gt;&gt;&gt;&nbsp;len(tzlist)<br>
+2<br>
+&gt;&gt;&gt;&nbsp;str(tzlist[0])<br>
+'Asia/Choibalsan'<br>
+&gt;&gt;&gt;&nbsp;str(tzlist[1])<br>
+'Asia/Ulaanbaatar'</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-time_zones_for_geographical_number"><strong>time_zones_for_geographical_number</strong></a>(numobj)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;time&nbsp;zones&nbsp;to&nbsp;which&nbsp;a&nbsp;phone&nbsp;number&nbsp;belongs.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;assumes&nbsp;the&nbsp;validity&nbsp;of&nbsp;the&nbsp;number&nbsp;passed&nbsp;in&nbsp;has&nbsp;already&nbsp;been<br>
+checked,&nbsp;and&nbsp;that&nbsp;the&nbsp;number&nbsp;is&nbsp;geo-localizable.&nbsp;We&nbsp;consider&nbsp;fixed-line<br>
+and&nbsp;mobile&nbsp;numbers&nbsp;possible&nbsp;candidates&nbsp;for&nbsp;geo-localization.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;a&nbsp;valid&nbsp;phone&nbsp;number&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;the&nbsp;time&nbsp;zones<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;which&nbsp;it&nbsp;belongs<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;corresponding&nbsp;time&nbsp;zones&nbsp;or&nbsp;a&nbsp;single&nbsp;element&nbsp;list<br>
+with&nbsp;the&nbsp;default&nbsp;unknown&nbsp;time&nbsp;zone&nbsp;if&nbsp;no&nbsp;other&nbsp;time&nbsp;zone&nbsp;was&nbsp;found&nbsp;or&nbsp;if<br>
+the&nbsp;number&nbsp;was&nbsp;invalid</tt></dd></dl>
+ <dl><dt><a name="-time_zones_for_number"><strong>time_zones_for_number</strong></a>(numobj)</dt><dd><tt>As&nbsp;<a href="#-time_zones_for_geographical_number">time_zones_for_geographical_number</a>()&nbsp;but&nbsp;explicitly&nbsp;checks&nbsp;the<br>
+validity&nbsp;of&nbsp;the&nbsp;number&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;a&nbsp;valid&nbsp;phone&nbsp;number&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;the&nbsp;time&nbsp;zones&nbsp;to&nbsp;which&nbsp;it&nbsp;belongs<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;corresponding&nbsp;time&nbsp;zones&nbsp;or&nbsp;a&nbsp;single&nbsp;element&nbsp;list&nbsp;with&nbsp;the&nbsp;default<br>
+unknown&nbsp;time&nbsp;zone&nbsp;if&nbsp;no&nbsp;other&nbsp;time&nbsp;zone&nbsp;was&nbsp;found&nbsp;or&nbsp;if&nbsp;the&nbsp;number&nbsp;was&nbsp;invalid</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>UNKNOWN_TIMEZONE</strong> = 'Etc/Unknown'<br>
+<strong>__all__</strong> = ['UNKNOWN_TIMEZONE', 'time_zones_for_geographical_number', 'time_zones_for_number']</td></tr></table>
+</body></html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module phonenumbers.unicode_util</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="phonenumbers.html"><font color="#ffffff">phonenumbers</font></a>.unicode_util</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/phonenumbers/unicode_util.py">phonenumbers/unicode_util.py</a></font></td></tr></table>
+    <p><tt>Unicode&nbsp;utility&nbsp;functions<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;.import&nbsp;unicode_util<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;.util&nbsp;import&nbsp;u<br>
+&gt;&gt;&gt;&nbsp;u1&nbsp;=&nbsp;'1'&nbsp;&nbsp;#&nbsp;DIGIT&nbsp;ONE<br>
+&gt;&gt;&gt;&nbsp;u2&nbsp;=&nbsp;u('a')&nbsp;&nbsp;#&nbsp;LATIN&nbsp;SMALL&nbsp;LETTER&nbsp;A<br>
+&gt;&gt;&gt;&nbsp;u3&nbsp;=&nbsp;u('２')&nbsp;&nbsp;#&nbsp;FULLWIDTH&nbsp;DIGIT&nbsp;TWO<br>
+&gt;&gt;&gt;&nbsp;u4&nbsp;=&nbsp;u('Ā')&nbsp;&nbsp;#&nbsp;LATIN&nbsp;CAPITAL&nbsp;LETTER&nbsp;A&nbsp;WITH&nbsp;MACRON<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#Category">Category</a>.get(u1)&nbsp;==&nbsp;u('Nd')<br>
+True<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#Category">Category</a>.get(u2)&nbsp;==&nbsp;u('Ll')<br>
+True<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#Category">Category</a>.get(u3)&nbsp;==&nbsp;u('Nd')<br>
+True<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#Category">Category</a>.get(u4)&nbsp;==&nbsp;u('Lu')<br>
+True<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#Category">Category</a>.get(u2)&nbsp;==&nbsp;unicode_util.<a href="#Category">Category</a>.LOWERCASE_LETTER<br>
+True<br>
+&gt;&gt;&gt;&nbsp;try:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beyond_bmp&nbsp;=&nbsp;u('𐄀')&nbsp;&nbsp;#&nbsp;AEGEAN&nbsp;WORD&nbsp;SEPARATOR&nbsp;LINE<br>
+...&nbsp;except&nbsp;Exception:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beyond_bmp&nbsp;=&nbsp;u('')<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;len(beyond_bmp)&nbsp;==&nbsp;1:&nbsp;&nbsp;#&nbsp;We&nbsp;have&nbsp;a&nbsp;UCS4&nbsp;build&nbsp;of&nbsp;Python<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat_po&nbsp;=&nbsp;unicode_util.<a href="#Category">Category</a>.get(beyond_bmp)<br>
+...&nbsp;else:&nbsp;&nbsp;#&nbsp;UCS2&nbsp;build&nbsp;of&nbsp;Python;&nbsp;no&nbsp;non-BMP&nbsp;chars&nbsp;available<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat_po&nbsp;=&nbsp;unicode_util.<a href="#Category">Category</a>.OTHER_PUNCTUATION<br>
+&gt;&gt;&gt;&nbsp;cat_po&nbsp;==&nbsp;u('Po')<br>
+True<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#-is_letter">is_letter</a>(u1)<br>
+False<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#-is_letter">is_letter</a>(u2)<br>
+True<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#-is_letter">is_letter</a>(u3)<br>
+False<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#-is_letter">is_letter</a>(u4)<br>
+True<br>
+&gt;&gt;&gt;&nbsp;b1&nbsp;=&nbsp;unicode_util.<a href="#Block">Block</a>.get(u1)<br>
+&gt;&gt;&gt;&nbsp;str(b1)<br>
+'<a href="#Block">Block</a>[0000,&nbsp;007f]'<br>
+&gt;&gt;&gt;&nbsp;b1&nbsp;==&nbsp;unicode_util.<a href="#Block">Block</a>.BASIC_LATIN<br>
+True<br>
+&gt;&gt;&gt;&nbsp;b1&nbsp;==&nbsp;[0x0000,&nbsp;0x0075]<br>
+False<br>
+&gt;&gt;&gt;&nbsp;b2&nbsp;=&nbsp;unicode_util.<a href="#Block">Block</a>.get(u2)<br>
+&gt;&gt;&gt;&nbsp;b2&nbsp;==&nbsp;unicode_util.<a href="#Block">Block</a>.BASIC_LATIN<br>
+True<br>
+&gt;&gt;&gt;&nbsp;b3&nbsp;=&nbsp;unicode_util.<a href="#Block">Block</a>.get(u3)<br>
+&gt;&gt;&gt;&nbsp;b3&nbsp;!=&nbsp;unicode_util.<a href="#Block">Block</a>.BASIC_LATIN<br>
+True<br>
+&gt;&gt;&gt;&nbsp;b3&nbsp;==&nbsp;unicode_util.<a href="#Block">Block</a>.HALFWIDTH_AND_FULLWIDTH_FORMS<br>
+True<br>
+&gt;&gt;&gt;&nbsp;b4&nbsp;=&nbsp;unicode_util.<a href="#Block">Block</a>.get(u4)<br>
+&gt;&gt;&gt;&nbsp;b4&nbsp;==&nbsp;unicode_util.<a href="#Block">Block</a>.LATIN_EXTENDED_A<br>
+True<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#Block">Block</a>.get(u('ࡠ'))&nbsp;==&nbsp;unicode_util.<a href="#Block">Block</a>.UNKNOWN<br>
+True<br>
+&gt;&gt;&gt;&nbsp;try:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unknown_block&nbsp;=&nbsp;u('𓐰')<br>
+...&nbsp;except&nbsp;Exception:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unknown_block&nbsp;=&nbsp;u('')<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;len(unknown_block)&nbsp;==&nbsp;1:&nbsp;&nbsp;#&nbsp;We&nbsp;have&nbsp;a&nbsp;UCS4&nbsp;build&nbsp;of&nbsp;Python<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unicode_util.<a href="#Block">Block</a>.get(u('𓐰'))&nbsp;==&nbsp;unicode_util.<a href="#Block">Block</a>.UNKNOWN<br>
+...&nbsp;else:&nbsp;&nbsp;#&nbsp;UCS2&nbsp;build&nbsp;of&nbsp;Python;&nbsp;no&nbsp;unknown&nbsp;characters&nbsp;available<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True<br>
+True<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#-digit">digit</a>(u1)<br>
+1<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#-digit">digit</a>(u2,&nbsp;-1)<br>
+-1<br>
+&gt;&gt;&gt;&nbsp;unicode_util.<a href="#-digit">digit</a>(u3,&nbsp;-1)<br>
+2<br>
+&gt;&gt;&gt;&nbsp;str(hash(b3))&nbsp;&nbsp;#&nbsp;doctest:&nbsp;+ELLIPSIS<br>
+'...'</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="bisect.html">bisect</a><br>
+</td><td width="25%" valign=top><a href="unicodedata.html">unicodedata</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="phonenumbers.unicode_util.html#Block">Block</a>
+</font></dt><dt><font face="helvetica, arial"><a href="phonenumbers.unicode_util.html#Category">Category</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Block">class <strong>Block</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Description&nbsp;of&nbsp;the&nbsp;possible&nbsp;Unicode&nbsp;blocks<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="Block-get"><strong>get</strong></a>(uni_char)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Return&nbsp;the&nbsp;Unicode&nbsp;block&nbsp;of&nbsp;the&nbsp;given&nbsp;Unicode&nbsp;character</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>AEGEAN_NUMBERS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ALCHEMICAL_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ALPHABETIC_PRESENTATION_FORMS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ANCIENT_GREEK_MUSICAL_NOTATION</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ANCIENT_GREEK_NUMBERS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ANCIENT_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ARABIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ARABIC_PRESENTATION_FORMS_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ARABIC_PRESENTATION_FORMS_B</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ARABIC_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ARMENIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ARROWS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>AVESTAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BALINESE</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BAMUM</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BAMUM_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BASIC_LATIN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BATAK</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BENGALI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BLOCK_ELEMENTS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BOPOMOFO</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BOPOMOFO_EXTENDED</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BOX_DRAWING</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BRAHMI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BRAILLE_PATTERNS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BUGINESE</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BUHID</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>BYZANTINE_MUSICAL_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CARIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CHAM</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CHEROKEE</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_COMPATIBILITY</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_COMPATIBILITY_FORMS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_COMPATIBILITY_IDEOGRAPHS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_RADICALS_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_STROKES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_SYMBOLS_AND_PUNCTUATION</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_UNIFIED_IDEOGRAPHS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>COMBINING_DIACRITICAL_MARKS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>COMBINING_DIACRITICAL_MARKS_FOR_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>COMBINING_DIACRITICAL_MARKS_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>COMBINING_HALF_MARKS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>COMMON_INDIC_NUMBER_FORMS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CONTROL_PICTURES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>COPTIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>COUNTING_ROD_NUMERALS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CUNEIFORM</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CUNEIFORM_NUMBERS_AND_PUNCTUATION</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CURRENCY_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CYPRIOT_SYLLABARY</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CYRILLIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CYRILLIC_EXTENDED_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CYRILLIC_EXTENDED_B</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>CYRILLIC_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>DESERET</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>DEVANAGARI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>DEVANAGARI_EXTENDED</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>DINGBATS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>DOMINO_TILES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>EGYPTIAN_HIEROGLYPHS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>EMOTICONS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ENCLOSED_ALPHANUMERICS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ENCLOSED_ALPHANUMERIC_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ENCLOSED_CJK_LETTERS_AND_MONTHS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ENCLOSED_IDEOGRAPHIC_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ETHIOPIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ETHIOPIC_EXTENDED</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ETHIOPIC_EXTENDED_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ETHIOPIC_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GENERAL_PUNCTUATION</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GEOMETRIC_SHAPES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GEORGIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GEORGIAN_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GLAGOLITIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GOTHIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GREEK_AND_COPTIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GREEK_EXTENDED</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GUJARATI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>GURMUKHI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HALFWIDTH_AND_FULLWIDTH_FORMS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HANGUL_COMPATIBILITY_JAMO</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HANGUL_JAMO</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HANGUL_JAMO_EXTENDED_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HANGUL_JAMO_EXTENDED_B</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HANGUL_SYLLABLES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HANUNOO</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HEBREW</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HIGH_PRIVATE_USE_SURROGATES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HIGH_SURROGATES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>HIRAGANA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>IDEOGRAPHIC_DESCRIPTION_CHARACTERS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>IMPERIAL_ARAMAIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>INSCRIPTIONAL_PAHLAVI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>INSCRIPTIONAL_PARTHIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>IPA_EXTENSIONS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>JAVANESE</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KAITHI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KANA_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KANBUN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KANGXI_RADICALS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KANNADA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KATAKANA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KATAKANA_PHONETIC_EXTENSIONS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KAYAH_LI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KHAROSHTHI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KHMER</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>KHMER_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LAO</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LATIN_1_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LATIN_EXTENDED_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LATIN_EXTENDED_ADDITIONAL</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LATIN_EXTENDED_B</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LATIN_EXTENDED_C</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LATIN_EXTENDED_D</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LEPCHA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LETTERLIKE_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LIMBU</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LINEAR_B_IDEOGRAMS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LINEAR_B_SYLLABARY</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LISU</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LOW_SURROGATES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LYCIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>LYDIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MAHJONG_TILES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MALAYALAM</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MANDAIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MATHEMATICAL_ALPHANUMERIC_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MATHEMATICAL_OPERATORS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MEETEI_MAYEK</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MISCELLANEOUS_MATHEMATICAL_SYMBOLS_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MISCELLANEOUS_MATHEMATICAL_SYMBOLS_B</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MISCELLANEOUS_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MISCELLANEOUS_SYMBOLS_AND_ARROWS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MISCELLANEOUS_SYMBOLS_AND_PICTOGRAPHS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MISCELLANEOUS_TECHNICAL</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MODIFIER_TONE_LETTERS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MONGOLIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MUSICAL_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MYANMAR</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>MYANMAR_EXTENDED_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>NEW_TAI_LUE</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>NKO</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>NUMBER_FORMS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>OGHAM</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>OLD_ITALIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>OLD_PERSIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>OLD_SOUTH_ARABIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>OLD_TURKIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>OL_CHIKI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>OPTICAL_CHARACTER_RECOGNITION</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>ORIYA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>OSMANYA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>PHAGS_PA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>PHAISTOS_DISC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>PHOENICIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>PHONETIC_EXTENSIONS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>PHONETIC_EXTENSIONS_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>PLAYING_CARDS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>PRIVATE_USE_AREA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>REJANG</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>RUMI_NUMERAL_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>RUNIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SAMARITAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SAURASHTRA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SHAVIAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SINHALA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SMALL_FORM_VARIANTS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SPACING_MODIFIER_LETTERS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SPECIALS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SUNDANESE</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SUPERSCRIPTS_AND_SUBSCRIPTS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SUPPLEMENTAL_ARROWS_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SUPPLEMENTAL_ARROWS_B</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SUPPLEMENTAL_MATHEMATICAL_OPERATORS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SUPPLEMENTAL_PUNCTUATION</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SUPPLEMENTARY_PRIVATE_USE_AREA_A</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SUPPLEMENTARY_PRIVATE_USE_AREA_B</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SYLOTI_NAGRI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>SYRIAC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TAGALOG</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TAGBANWA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TAGS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TAI_LE</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TAI_THAM</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TAI_VIET</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TAI_XUAN_JING_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TAMIL</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TELUGU</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>THAANA</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>THAI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TIBETAN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TIFINAGH</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>TRANSPORT_AND_MAP_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>UGARITIC</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>UNKNOWN</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>VAI</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>VARIATION_SELECTORS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>VARIATION_SELECTORS_SUPPLEMENT</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>VEDIC_EXTENSIONS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>VERTICAL_FORMS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>YIJING_HEXAGRAM_SYMBOLS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>YI_RADICALS</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+<dl><dt><strong>YI_SYLLABLES</strong> = &lt;phonenumbers.unicode_util._BlockRange object&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Category">class <strong>Category</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>General&nbsp;category&nbsp;of&nbsp;a&nbsp;Unicode&nbsp;character.<br>
+&nbsp;<br>
+See&nbsp;<a href="http://www.unicode.org/reports/tr18/#Categories">http://www.unicode.org/reports/tr18/#Categories</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="Category-get"><strong>get</strong></a>(uni_char)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Return&nbsp;the&nbsp;general&nbsp;category&nbsp;code&nbsp;(as&nbsp;Unicode&nbsp;string)&nbsp;for&nbsp;the&nbsp;given&nbsp;Unicode&nbsp;character</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CLOSE_PUNCTUATION</strong> = 'Pe'</dl>
+
+<dl><dt><strong>CONNECTOR_PUNCTUATION</strong> = 'Pc'</dl>
+
+<dl><dt><strong>CONTROL</strong> = 'Cc'</dl>
+
+<dl><dt><strong>CURRENCY_SYMBOL</strong> = 'Sc'</dl>
+
+<dl><dt><strong>DASH_PUNCTUATION</strong> = 'Pd'</dl>
+
+<dl><dt><strong>DECIMAL_DIGIT_NUMBER</strong> = 'Nd'</dl>
+
+<dl><dt><strong>ENCLOSING_MARK</strong> = 'Me'</dl>
+
+<dl><dt><strong>FINAL_PUNCTUATION</strong> = 'Pf'</dl>
+
+<dl><dt><strong>FORMAT</strong> = 'Cf'</dl>
+
+<dl><dt><strong>INITIAL_PUNCTUATION</strong> = 'Pi'</dl>
+
+<dl><dt><strong>LETTER</strong> = 'L'</dl>
+
+<dl><dt><strong>LETTER_NUMBER</strong> = 'Nl'</dl>
+
+<dl><dt><strong>LINE_SEPARATOR</strong> = 'Zl'</dl>
+
+<dl><dt><strong>LOWERCASE_LETTER</strong> = 'Ll'</dl>
+
+<dl><dt><strong>MARK</strong> = 'M'</dl>
+
+<dl><dt><strong>MATH_SYMBOL</strong> = 'Sm'</dl>
+
+<dl><dt><strong>MODIFIER_LETTER</strong> = 'Lm'</dl>
+
+<dl><dt><strong>MODIFIER_SYMBOL</strong> = 'Sk'</dl>
+
+<dl><dt><strong>NON_SPACING_MARK</strong> = 'Mn'</dl>
+
+<dl><dt><strong>NOT_ASSIGNED</strong> = 'Cn'</dl>
+
+<dl><dt><strong>NUMBER</strong> = 'N'</dl>
+
+<dl><dt><strong>OPEN_PUNCTUATION</strong> = 'Ps'</dl>
+
+<dl><dt><strong>OTHER</strong> = 'C'</dl>
+
+<dl><dt><strong>OTHER_LETTER</strong> = 'Lo'</dl>
+
+<dl><dt><strong>OTHER_NUMBER</strong> = 'No'</dl>
+
+<dl><dt><strong>OTHER_PUNCTUATION</strong> = 'Po'</dl>
+
+<dl><dt><strong>OTHER_SYMBOL</strong> = 'So'</dl>
+
+<dl><dt><strong>PARAGRAPH_SEPARATOR</strong> = 'Zp'</dl>
+
+<dl><dt><strong>PRIVATE_USE</strong> = 'Co'</dl>
+
+<dl><dt><strong>PUNCTUATION</strong> = 'P'</dl>
+
+<dl><dt><strong>SEPARATOR</strong> = 'Z'</dl>
+
+<dl><dt><strong>SPACE_SEPARATOR</strong> = 'Zs'</dl>
+
+<dl><dt><strong>SPACING_COMBINING_MARK</strong> = 'Mc'</dl>
+
+<dl><dt><strong>SURROGATE</strong> = 'Cs'</dl>
+
+<dl><dt><strong>SYMBOL</strong> = 'S'</dl>
+
+<dl><dt><strong>TITLECASE_LETTER</strong> = 'Lt'</dl>
+
+<dl><dt><strong>UPPERCASE_LETTER</strong> = 'Lu'</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-digit"><strong>digit</strong></a>(uni_char, default_value=None)</dt><dd><tt>Returns&nbsp;the&nbsp;digit&nbsp;value&nbsp;assigned&nbsp;to&nbsp;the&nbsp;Unicode&nbsp;character&nbsp;uni_char&nbsp;as<br>
+integer.&nbsp;If&nbsp;no&nbsp;such&nbsp;value&nbsp;is&nbsp;defined,&nbsp;default&nbsp;is&nbsp;returned,&nbsp;or,&nbsp;if&nbsp;not<br>
+given,&nbsp;ValueError&nbsp;is&nbsp;raised.</tt></dd></dl>
+ <dl><dt><a name="-is_letter"><strong>is_letter</strong></a>(uni_char)</dt><dd><tt>Determine&nbsp;whether&nbsp;the&nbsp;given&nbsp;Unicode&nbsp;character&nbsp;is&nbsp;a&nbsp;Unicode&nbsp;letter</tt></dd></dl>
+</td></tr></table>
+</body></html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module phonenumbers.shortnumberinfo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="phonenumbers.html"><font color="#ffffff">phonenumbers</font></a>.shortnumberinfo</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/phonenumbers/shortnumberinfo.py">phonenumbers/shortnumberinfo.py</a></font></td></tr></table>
+    <p><tt>Methods&nbsp;for&nbsp;getting&nbsp;information&nbsp;about&nbsp;short&nbsp;phone&nbsp;numbers,<br>
+such&nbsp;as&nbsp;short&nbsp;codes&nbsp;and&nbsp;emergency&nbsp;numbers.<br>
+&nbsp;<br>
+Note&nbsp;most&nbsp;commercial&nbsp;short&nbsp;numbers&nbsp;are&nbsp;not&nbsp;handled&nbsp;here,&nbsp;but&nbsp;by&nbsp;phonenumberutil.py</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="phonenumbers.shortnumberinfo.html#ShortNumberCost">ShortNumberCost</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ShortNumberCost">class <strong>ShortNumberCost</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Cost&nbsp;categories&nbsp;of&nbsp;short&nbsp;numbers.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>PREMIUM_RATE</strong> = 2</dl>
+
+<dl><dt><strong>STANDARD_RATE</strong> = 1</dl>
+
+<dl><dt><strong>TOLL_FREE</strong> = 0</dl>
+
+<dl><dt><strong>UNKNOWN_COST</strong> = 3</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-connects_to_emergency_number"><strong>connects_to_emergency_number</strong></a>(number, region_code)</dt><dd><tt>Returns&nbsp;whether&nbsp;the&nbsp;given&nbsp;number,&nbsp;exactly&nbsp;as&nbsp;dialled,&nbsp;might&nbsp;be&nbsp;used&nbsp;to<br>
+connect&nbsp;to&nbsp;an&nbsp;emergency&nbsp;service&nbsp;in&nbsp;the&nbsp;given&nbsp;region.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;accepts&nbsp;a&nbsp;string,&nbsp;rather&nbsp;than&nbsp;a&nbsp;PhoneNumber,&nbsp;because&nbsp;it<br>
+needs&nbsp;to&nbsp;distinguish&nbsp;cases&nbsp;such&nbsp;as&nbsp;"+1&nbsp;911"&nbsp;and&nbsp;"911",&nbsp;where&nbsp;the&nbsp;former<br>
+may&nbsp;not&nbsp;connect&nbsp;to&nbsp;an&nbsp;emergency&nbsp;service&nbsp;in&nbsp;all&nbsp;cases&nbsp;but&nbsp;the&nbsp;latter&nbsp;would.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;takes&nbsp;into&nbsp;account&nbsp;cases&nbsp;where&nbsp;the&nbsp;number&nbsp;might&nbsp;contain<br>
+formatting,&nbsp;or&nbsp;might&nbsp;have&nbsp;additional&nbsp;digits&nbsp;appended&nbsp;(when&nbsp;it&nbsp;is&nbsp;okay&nbsp;to<br>
+do&nbsp;that&nbsp;in&nbsp;the&nbsp;specified&nbsp;region).<br>
+&nbsp;<br>
+Arguments:<br>
+number&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;to&nbsp;test.<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;where&nbsp;the&nbsp;phone&nbsp;number&nbsp;is&nbsp;being&nbsp;dialed.<br>
+&nbsp;<br>
+Returns&nbsp;whether&nbsp;the&nbsp;number&nbsp;might&nbsp;be&nbsp;used&nbsp;to&nbsp;connect&nbsp;to&nbsp;an&nbsp;emergency<br>
+service&nbsp;in&nbsp;the&nbsp;given&nbsp;region.</tt></dd></dl>
+ <dl><dt><a name="-expected_cost"><strong>expected_cost</strong></a>(numobj)</dt><dd><tt>Gets&nbsp;the&nbsp;expected&nbsp;cost&nbsp;category&nbsp;of&nbsp;a&nbsp;short&nbsp;number&nbsp;(however,&nbsp;nothing&nbsp;is<br>
+implied&nbsp;about&nbsp;its&nbsp;validity).&nbsp;If&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;is&nbsp;unique&nbsp;to&nbsp;a<br>
+region,&nbsp;this&nbsp;method&nbsp;behaves&nbsp;exactly&nbsp;the&nbsp;same&nbsp;as<br>
+expected_cost_for_region.&nbsp;However,&nbsp;if&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;is<br>
+shared&nbsp;by&nbsp;multiple&nbsp;regions,&nbsp;then&nbsp;it&nbsp;returns&nbsp;the&nbsp;highest&nbsp;cost&nbsp;in&nbsp;the<br>
+sequence&nbsp;PREMIUM_RATE,&nbsp;UNKNOWN_COST,&nbsp;STANDARD_RATE,&nbsp;TOLL_FREE.&nbsp;The&nbsp;reason<br>
+for&nbsp;the&nbsp;position&nbsp;of&nbsp;UNKNOWN_COST&nbsp;in&nbsp;this&nbsp;order&nbsp;is&nbsp;that&nbsp;if&nbsp;a&nbsp;number&nbsp;is<br>
+UNKNOWN_COST&nbsp;in&nbsp;one&nbsp;region&nbsp;but&nbsp;STANDARD_RATE&nbsp;or&nbsp;TOLL_FREE&nbsp;in&nbsp;another,&nbsp;its<br>
+expected&nbsp;cost&nbsp;cannot&nbsp;be&nbsp;estimated&nbsp;as&nbsp;one&nbsp;of&nbsp;the&nbsp;latter&nbsp;since&nbsp;it&nbsp;might&nbsp;be&nbsp;a<br>
+PREMIUM_RATE&nbsp;number.<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;if&nbsp;a&nbsp;number&nbsp;is&nbsp;STANDARD_RATE&nbsp;in&nbsp;the&nbsp;US,&nbsp;but&nbsp;TOLL_FREE&nbsp;in<br>
+Canada,&nbsp;the&nbsp;expected&nbsp;cost&nbsp;returned&nbsp;by&nbsp;this&nbsp;method&nbsp;will&nbsp;be&nbsp;STANDARD_RATE,<br>
+since&nbsp;the&nbsp;NANPA&nbsp;countries&nbsp;share&nbsp;the&nbsp;same&nbsp;country&nbsp;calling&nbsp;code.<br>
+&nbsp;<br>
+Note:&nbsp;If&nbsp;the&nbsp;region&nbsp;from&nbsp;which&nbsp;the&nbsp;number&nbsp;is&nbsp;dialed&nbsp;is&nbsp;known,&nbsp;it&nbsp;is&nbsp;highly&nbsp;preferable&nbsp;to&nbsp;call<br>
+expected_cost_for_region&nbsp;instead.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;the&nbsp;short&nbsp;number&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;know&nbsp;the&nbsp;expected&nbsp;cost&nbsp;category<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;highest&nbsp;expected&nbsp;cost&nbsp;category&nbsp;of&nbsp;the&nbsp;short&nbsp;number&nbsp;in&nbsp;the<br>
+region(s)&nbsp;with&nbsp;the&nbsp;given&nbsp;country&nbsp;calling&nbsp;code</tt></dd></dl>
+ <dl><dt><a name="-expected_cost_for_region"><strong>expected_cost_for_region</strong></a>(short_numobj, region_dialing_from)</dt><dd><tt>Gets&nbsp;the&nbsp;expected&nbsp;cost&nbsp;category&nbsp;of&nbsp;a&nbsp;short&nbsp;number&nbsp;when&nbsp;dialled&nbsp;from&nbsp;a<br>
+region&nbsp;(however,&nbsp;nothing&nbsp;is&nbsp;implied&nbsp;about&nbsp;its&nbsp;validity).&nbsp;If&nbsp;it&nbsp;is<br>
+important&nbsp;that&nbsp;the&nbsp;number&nbsp;is&nbsp;valid,&nbsp;then&nbsp;its&nbsp;validity&nbsp;must&nbsp;first&nbsp;be<br>
+checked&nbsp;using&nbsp;is_valid_short_number_for_region.&nbsp;Note&nbsp;that&nbsp;emergency<br>
+numbers&nbsp;are&nbsp;always&nbsp;considered&nbsp;toll-free.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+short_number&nbsp;=&nbsp;"110"<br>
+region_code&nbsp;=&nbsp;"FR"<br>
+if&nbsp;phonenumbers.<a href="#-is_valid_short_number_for_region">is_valid_short_number_for_region</a>(short_number,&nbsp;region_code):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cost&nbsp;=&nbsp;phonenumbers.<a href="#-expected_cost">expected_cost</a>(short_number,&nbsp;region_code)&nbsp;&nbsp;#&nbsp;<a href="#ShortNumberCost">ShortNumberCost</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Do&nbsp;something&nbsp;with&nbsp;the&nbsp;cost&nbsp;information&nbsp;here.<br>
+&nbsp;<br>
+Arguments:<br>
+short_numobj&nbsp;--&nbsp;the&nbsp;short&nbsp;number&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;know&nbsp;the&nbsp;expected&nbsp;cost&nbsp;category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;a&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>.<br>
+region_dialing_from&nbsp;--&nbsp;the&nbsp;region&nbsp;from&nbsp;which&nbsp;the&nbsp;number&nbsp;is&nbsp;dialed<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;expected&nbsp;cost&nbsp;category&nbsp;for&nbsp;that&nbsp;region&nbsp;of&nbsp;the&nbsp;short<br>
+number.&nbsp;Returns&nbsp;UNKNOWN_COST&nbsp;if&nbsp;the&nbsp;number&nbsp;does&nbsp;not&nbsp;match&nbsp;a&nbsp;cost<br>
+category.&nbsp;Note&nbsp;that&nbsp;an&nbsp;invalid&nbsp;number&nbsp;may&nbsp;match&nbsp;any&nbsp;cost&nbsp;category.</tt></dd></dl>
+ <dl><dt><a name="-is_carrier_specific"><strong>is_carrier_specific</strong></a>(numobj)</dt><dd><tt>Given&nbsp;a&nbsp;valid&nbsp;short&nbsp;number,&nbsp;determines&nbsp;whether&nbsp;it&nbsp;is&nbsp;carrier-specific<br>
+(however,&nbsp;nothing&nbsp;is&nbsp;implied&nbsp;about&nbsp;its&nbsp;validity).&nbsp;&nbsp;Carrier-specific&nbsp;numbers<br>
+may&nbsp;connect&nbsp;to&nbsp;a&nbsp;different&nbsp;end-point,&nbsp;or&nbsp;not&nbsp;connect&nbsp;at&nbsp;all,&nbsp;depending<br>
+on&nbsp;the&nbsp;user's&nbsp;carrier.&nbsp;If&nbsp;it&nbsp;is&nbsp;important&nbsp;that&nbsp;the&nbsp;number&nbsp;is&nbsp;valid,&nbsp;then<br>
+its&nbsp;validity&nbsp;must&nbsp;first&nbsp;be&nbsp;checked&nbsp;using&nbsp;is_valid_short_number&nbsp;or<br>
+is_valid_short_number_for_region.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;the&nbsp;valid&nbsp;short&nbsp;number&nbsp;to&nbsp;check<br>
+&nbsp;<br>
+Returns&nbsp;whether&nbsp;the&nbsp;short&nbsp;number&nbsp;is&nbsp;carrier-specific,&nbsp;assuming&nbsp;the&nbsp;input<br>
+was&nbsp;a&nbsp;valid&nbsp;short&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-is_carrier_specific_for_region"><strong>is_carrier_specific_for_region</strong></a>(numobj, region_dialing_from)</dt><dd><tt>Given&nbsp;a&nbsp;valid&nbsp;short&nbsp;number,&nbsp;determines&nbsp;whether&nbsp;it&nbsp;is&nbsp;carrier-specific&nbsp;when<br>
+dialed&nbsp;from&nbsp;the&nbsp;given&nbsp;region&nbsp;(however,&nbsp;nothing&nbsp;is&nbsp;implied&nbsp;about&nbsp;its<br>
+validity).&nbsp;Carrier-specific&nbsp;numbers&nbsp;may&nbsp;connect&nbsp;to&nbsp;a&nbsp;different&nbsp;end-point,<br>
+or&nbsp;not&nbsp;connect&nbsp;at&nbsp;all,&nbsp;depending&nbsp;on&nbsp;the&nbsp;user's&nbsp;carrier.&nbsp;If&nbsp;it&nbsp;is&nbsp;important<br>
+that&nbsp;the&nbsp;number&nbsp;is&nbsp;valid,&nbsp;then&nbsp;its&nbsp;validity&nbsp;must&nbsp;first&nbsp;be&nbsp;checked&nbsp;using<br>
+isValidShortNumber&nbsp;or&nbsp;isValidShortNumberForRegion.&nbsp;Returns&nbsp;false&nbsp;if&nbsp;the<br>
+number&nbsp;doesn't&nbsp;match&nbsp;the&nbsp;region&nbsp;provided.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;the&nbsp;valid&nbsp;short&nbsp;number&nbsp;to&nbsp;check<br>
+region_dialing_from&nbsp;--&nbsp;the&nbsp;region&nbsp;from&nbsp;which&nbsp;the&nbsp;number&nbsp;is&nbsp;dialed<br>
+&nbsp;<br>
+Returns&nbsp;whether&nbsp;the&nbsp;short&nbsp;number&nbsp;is&nbsp;carrier-specific,&nbsp;assuming&nbsp;the&nbsp;input<br>
+was&nbsp;a&nbsp;valid&nbsp;short&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-is_emergency_number"><strong>is_emergency_number</strong></a>(number, region_code)</dt><dd><tt>Returns&nbsp;true&nbsp;if&nbsp;the&nbsp;given&nbsp;number&nbsp;exactly&nbsp;matches&nbsp;an&nbsp;emergency&nbsp;service<br>
+number&nbsp;in&nbsp;the&nbsp;given&nbsp;region.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;takes&nbsp;into&nbsp;account&nbsp;cases&nbsp;where&nbsp;the&nbsp;number&nbsp;might&nbsp;contain<br>
+formatting,&nbsp;but&nbsp;doesn't&nbsp;allow&nbsp;additional&nbsp;digits&nbsp;to&nbsp;be&nbsp;appended.&nbsp;&nbsp;Note&nbsp;that<br>
+<a href="#-is_emergency_number">is_emergency_number</a>(number,&nbsp;region)&nbsp;implies<br>
+<a href="#-connects_to_emergency_number">connects_to_emergency_number</a>(number,&nbsp;region).<br>
+&nbsp;<br>
+Arguments:<br>
+number&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;to&nbsp;test.<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;where&nbsp;the&nbsp;phone&nbsp;number&nbsp;is&nbsp;being&nbsp;dialed.<br>
+&nbsp;<br>
+Returns&nbsp;if&nbsp;the&nbsp;number&nbsp;exactly&nbsp;matches&nbsp;an&nbsp;emergency&nbsp;services&nbsp;number&nbsp;in&nbsp;the<br>
+given&nbsp;region.</tt></dd></dl>
+ <dl><dt><a name="-is_possible_short_number"><strong>is_possible_short_number</strong></a>(numobj)</dt><dd><tt>Check&nbsp;whether&nbsp;a&nbsp;short&nbsp;number&nbsp;is&nbsp;a&nbsp;possible&nbsp;number.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;country&nbsp;calling&nbsp;code&nbsp;is&nbsp;shared&nbsp;by&nbsp;multiple&nbsp;regions,&nbsp;this&nbsp;returns&nbsp;True<br>
+if&nbsp;it's&nbsp;possible&nbsp;in&nbsp;any&nbsp;of&nbsp;them.&nbsp;This&nbsp;provides&nbsp;a&nbsp;more&nbsp;lenient&nbsp;check&nbsp;than<br>
+is_valid_short_number.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;the&nbsp;short&nbsp;number&nbsp;to&nbsp;check<br>
+&nbsp;<br>
+Return&nbsp;whether&nbsp;the&nbsp;number&nbsp;is&nbsp;a&nbsp;possible&nbsp;short&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-is_possible_short_number_for_region"><strong>is_possible_short_number_for_region</strong></a>(short_numobj, region_dialing_from)</dt><dd><tt>Check&nbsp;whether&nbsp;a&nbsp;short&nbsp;number&nbsp;is&nbsp;a&nbsp;possible&nbsp;number&nbsp;when&nbsp;dialled&nbsp;from&nbsp;a<br>
+region.&nbsp;This&nbsp;provides&nbsp;a&nbsp;more&nbsp;lenient&nbsp;check&nbsp;than<br>
+is_valid_short_number_for_region.<br>
+&nbsp;<br>
+Arguments:<br>
+short_numobj&nbsp;--&nbsp;the&nbsp;short&nbsp;number&nbsp;to&nbsp;check&nbsp;as&nbsp;a&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>.<br>
+region_dialing_from&nbsp;--&nbsp;the&nbsp;region&nbsp;from&nbsp;which&nbsp;the&nbsp;number&nbsp;is&nbsp;dialed<br>
+&nbsp;<br>
+Return&nbsp;whether&nbsp;the&nbsp;number&nbsp;is&nbsp;a&nbsp;possible&nbsp;short&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-is_sms_service_for_region"><strong>is_sms_service_for_region</strong></a>(numobj, region_dialing_from)</dt><dd><tt>Given&nbsp;a&nbsp;valid&nbsp;short&nbsp;number,&nbsp;determines&nbsp;whether&nbsp;it&nbsp;is&nbsp;an&nbsp;SMS&nbsp;service<br>
+(however,&nbsp;nothing&nbsp;is&nbsp;implied&nbsp;about&nbsp;its&nbsp;validity).&nbsp;An&nbsp;SMS&nbsp;service&nbsp;is&nbsp;where<br>
+the&nbsp;primary&nbsp;or&nbsp;only&nbsp;intended&nbsp;usage&nbsp;is&nbsp;to&nbsp;receive&nbsp;and/or&nbsp;send&nbsp;text&nbsp;messages<br>
+(SMSs).&nbsp;This&nbsp;includes&nbsp;MMS&nbsp;as&nbsp;MMS&nbsp;numbers&nbsp;downgrade&nbsp;to&nbsp;SMS&nbsp;if&nbsp;the&nbsp;other<br>
+party&nbsp;isn't&nbsp;MMS-capable.&nbsp;If&nbsp;it&nbsp;is&nbsp;important&nbsp;that&nbsp;the&nbsp;number&nbsp;is&nbsp;valid,&nbsp;then<br>
+its&nbsp;validity&nbsp;must&nbsp;first&nbsp;be&nbsp;checked&nbsp;using&nbsp;is_valid_short_number&nbsp;or<br>
+is_valid_short_number_for_region.&nbsp;&nbsp;Returns&nbsp;False&nbsp;if&nbsp;the&nbsp;number&nbsp;doesn't<br>
+match&nbsp;the&nbsp;region&nbsp;provided.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;the&nbsp;valid&nbsp;short&nbsp;number&nbsp;to&nbsp;check<br>
+region_dialing_from&nbsp;--&nbsp;the&nbsp;region&nbsp;from&nbsp;which&nbsp;the&nbsp;number&nbsp;is&nbsp;dialed<br>
+&nbsp;<br>
+Returns&nbsp;whether&nbsp;the&nbsp;short&nbsp;number&nbsp;is&nbsp;an&nbsp;SMS&nbsp;service&nbsp;in&nbsp;the&nbsp;provided&nbsp;region,<br>
+assuming&nbsp;the&nbsp;input&nbsp;was&nbsp;a&nbsp;valid&nbsp;short&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-is_valid_short_number"><strong>is_valid_short_number</strong></a>(numobj)</dt><dd><tt>Tests&nbsp;whether&nbsp;a&nbsp;short&nbsp;number&nbsp;matches&nbsp;a&nbsp;valid&nbsp;pattern.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;country&nbsp;calling&nbsp;code&nbsp;is&nbsp;shared&nbsp;by&nbsp;multiple&nbsp;regions,&nbsp;this&nbsp;returns&nbsp;True<br>
+if&nbsp;it's&nbsp;valid&nbsp;in&nbsp;any&nbsp;of&nbsp;them.&nbsp;Note&nbsp;that&nbsp;this&nbsp;doesn't&nbsp;verify&nbsp;the&nbsp;number&nbsp;is<br>
+actually&nbsp;in&nbsp;use,&nbsp;which&nbsp;is&nbsp;impossible&nbsp;to&nbsp;tell&nbsp;by&nbsp;just&nbsp;looking&nbsp;at&nbsp;the&nbsp;number<br>
+itself.&nbsp;See&nbsp;is_valid_short_number_for_region&nbsp;for&nbsp;details.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;-&nbsp;the&nbsp;short&nbsp;number&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;test&nbsp;the&nbsp;validity<br>
+&nbsp;<br>
+Return&nbsp;whether&nbsp;the&nbsp;short&nbsp;number&nbsp;matches&nbsp;a&nbsp;valid&nbsp;pattern</tt></dd></dl>
+ <dl><dt><a name="-is_valid_short_number_for_region"><strong>is_valid_short_number_for_region</strong></a>(short_numobj, region_dialing_from)</dt><dd><tt>Tests&nbsp;whether&nbsp;a&nbsp;short&nbsp;number&nbsp;matches&nbsp;a&nbsp;valid&nbsp;pattern&nbsp;in&nbsp;a&nbsp;region.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;this&nbsp;doesn't&nbsp;verify&nbsp;the&nbsp;number&nbsp;is&nbsp;actually&nbsp;in&nbsp;use,&nbsp;which&nbsp;is<br>
+impossible&nbsp;to&nbsp;tell&nbsp;by&nbsp;just&nbsp;looking&nbsp;at&nbsp;the&nbsp;number&nbsp;itself.<br>
+&nbsp;<br>
+Arguments:<br>
+short_numobj&nbsp;--&nbsp;the&nbsp;short&nbsp;number&nbsp;to&nbsp;check&nbsp;as&nbsp;a&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>.<br>
+region_dialing_from&nbsp;--&nbsp;the&nbsp;region&nbsp;from&nbsp;which&nbsp;the&nbsp;number&nbsp;is&nbsp;dialed<br>
+&nbsp;<br>
+Return&nbsp;whether&nbsp;the&nbsp;short&nbsp;number&nbsp;matches&nbsp;a&nbsp;valid&nbsp;pattern</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>SUPPORTED_SHORT_REGIONS</strong> = ['AC', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AR', 'AS', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', ...]<br>
+<strong>U_EMPTY_STRING</strong> = ''</td></tr></table>
+</body></html>

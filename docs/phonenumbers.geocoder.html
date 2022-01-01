@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module phonenumbers.geocoder</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="phonenumbers.html"><font color="#ffffff">phonenumbers</font></a>.geocoder</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/phonenumbers/geocoder.py">phonenumbers/geocoder.py</a></font></td></tr></table>
+    <p><tt>Phone&nbsp;number&nbsp;geocoding&nbsp;functionality<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;import&nbsp;phonenumbers<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;phonenumbers.geocoder&nbsp;import&nbsp;description_for_number<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;phonenumbers.util&nbsp;import&nbsp;u<br>
+&gt;&gt;&gt;&nbsp;gb_number&nbsp;=&nbsp;phonenumbers.parse("+442083612345",&nbsp;"GB")<br>
+&gt;&gt;&gt;&nbsp;de_number&nbsp;=&nbsp;phonenumbers.parse("0891234567",&nbsp;"DE")<br>
+&gt;&gt;&gt;&nbsp;ch_number&nbsp;=&nbsp;phonenumbers.parse("0431234567",&nbsp;"CH")<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-description_for_number">description_for_number</a>(gb_number,&nbsp;"en"))<br>
+'London'<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-description_for_number">description_for_number</a>(gb_number,&nbsp;"fr"))&nbsp;&nbsp;#&nbsp;fall&nbsp;back&nbsp;to&nbsp;English<br>
+'London'<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-description_for_number">description_for_number</a>(gb_number,&nbsp;"en",&nbsp;region="GB"))<br>
+'London'<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-description_for_number">description_for_number</a>(gb_number,&nbsp;"en",&nbsp;region="US"))&nbsp;&nbsp;#&nbsp;fall&nbsp;back&nbsp;to&nbsp;country<br>
+'United&nbsp;Kingdom'<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-description_for_number">description_for_number</a>(de_number,&nbsp;"en"))<br>
+'Munich'<br>
+&gt;&gt;&gt;&nbsp;u('München')&nbsp;==&nbsp;<a href="#-description_for_number">description_for_number</a>(de_number,&nbsp;"de")<br>
+True<br>
+&gt;&gt;&gt;&nbsp;u('Zürich')&nbsp;==&nbsp;<a href="#-description_for_number">description_for_number</a>(ch_number,&nbsp;"de")<br>
+True<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-description_for_number">description_for_number</a>(ch_number,&nbsp;"en"))<br>
+'Zurich'<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-description_for_number">description_for_number</a>(ch_number,&nbsp;"fr"))<br>
+'Zurich'<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-description_for_number">description_for_number</a>(ch_number,&nbsp;"it"))<br>
+'Zurigo'</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-country_name_for_number"><strong>country_name_for_number</strong></a>(numobj, lang, script=None, region=None)</dt><dd><tt>Returns&nbsp;the&nbsp;customary&nbsp;display&nbsp;name&nbsp;in&nbsp;the&nbsp;given&nbsp;language&nbsp;for&nbsp;the&nbsp;given<br>
+territory&nbsp;the&nbsp;given&nbsp;PhoneNumber&nbsp;object&nbsp;is&nbsp;from.&nbsp;&nbsp;If&nbsp;it&nbsp;could&nbsp;be&nbsp;from&nbsp;many<br>
+territories,&nbsp;nothing&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;PhoneNumber&nbsp;object&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;a&nbsp;text&nbsp;description.<br>
+lang&nbsp;--&nbsp;A&nbsp;2-letter&nbsp;lowercase&nbsp;ISO&nbsp;639-1&nbsp;language&nbsp;code&nbsp;for&nbsp;the&nbsp;language&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;the&nbsp;description&nbsp;should&nbsp;be&nbsp;returned&nbsp;(e.g.&nbsp;"en")<br>
+script&nbsp;--&nbsp;A&nbsp;4-letter&nbsp;titlecase&nbsp;(first&nbsp;letter&nbsp;uppercase,&nbsp;rest&nbsp;lowercase)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISO&nbsp;script&nbsp;code&nbsp;as&nbsp;defined&nbsp;in&nbsp;ISO&nbsp;15924,&nbsp;separated&nbsp;by&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underscore&nbsp;(e.g.&nbsp;"Hant")<br>
+region&nbsp;--&nbsp;&nbsp;A&nbsp;2-letter&nbsp;uppercase&nbsp;ISO&nbsp;3166-1&nbsp;country&nbsp;code&nbsp;(e.g.&nbsp;"GB")<br>
+&nbsp;<br>
+The&nbsp;script&nbsp;and&nbsp;region&nbsp;parameters&nbsp;are&nbsp;currently&nbsp;ignored.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;text&nbsp;description&nbsp;in&nbsp;the&nbsp;given&nbsp;language&nbsp;code,&nbsp;for&nbsp;the&nbsp;given&nbsp;phone<br>
+number's&nbsp;region,&nbsp;or&nbsp;an&nbsp;empty&nbsp;string&nbsp;if&nbsp;no&nbsp;description&nbsp;is&nbsp;available.</tt></dd></dl>
+ <dl><dt><a name="-description_for_number"><strong>description_for_number</strong></a>(numobj, lang, script=None, region=None)</dt><dd><tt>Return&nbsp;a&nbsp;text&nbsp;description&nbsp;of&nbsp;a&nbsp;PhoneNumber&nbsp;object&nbsp;for&nbsp;the&nbsp;given&nbsp;language.<br>
+&nbsp;<br>
+The&nbsp;description&nbsp;might&nbsp;consist&nbsp;of&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;country&nbsp;where&nbsp;the&nbsp;phone<br>
+number&nbsp;is&nbsp;from&nbsp;and/or&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;geographical&nbsp;area&nbsp;the&nbsp;phone&nbsp;number<br>
+is&nbsp;from.&nbsp;&nbsp;This&nbsp;function&nbsp;explicitly&nbsp;checks&nbsp;the&nbsp;validity&nbsp;of&nbsp;the&nbsp;number&nbsp;passed&nbsp;in<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;PhoneNumber&nbsp;object&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;a&nbsp;text&nbsp;description.<br>
+lang&nbsp;--&nbsp;A&nbsp;2-letter&nbsp;lowercase&nbsp;ISO&nbsp;639-1&nbsp;language&nbsp;code&nbsp;for&nbsp;the&nbsp;language&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;the&nbsp;description&nbsp;should&nbsp;be&nbsp;returned&nbsp;(e.g.&nbsp;"en")<br>
+script&nbsp;--&nbsp;A&nbsp;4-letter&nbsp;titlecase&nbsp;(first&nbsp;letter&nbsp;uppercase,&nbsp;rest&nbsp;lowercase)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISO&nbsp;script&nbsp;code&nbsp;as&nbsp;defined&nbsp;in&nbsp;ISO&nbsp;15924,&nbsp;separated&nbsp;by&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underscore&nbsp;(e.g.&nbsp;"Hant")<br>
+region&nbsp;--&nbsp;The&nbsp;region&nbsp;code&nbsp;for&nbsp;a&nbsp;given&nbsp;user.&nbsp;This&nbsp;region&nbsp;will&nbsp;be&nbsp;omitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;description&nbsp;if&nbsp;the&nbsp;phone&nbsp;number&nbsp;comes&nbsp;from&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;region.&nbsp;It&nbsp;should&nbsp;be&nbsp;a&nbsp;two-letter&nbsp;upper-case&nbsp;CLDR&nbsp;region<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;text&nbsp;description&nbsp;in&nbsp;the&nbsp;given&nbsp;language&nbsp;code,&nbsp;for&nbsp;the&nbsp;given&nbsp;phone<br>
+number,&nbsp;or&nbsp;an&nbsp;empty&nbsp;string&nbsp;if&nbsp;no&nbsp;description&nbsp;is&nbsp;available.</tt></dd></dl>
+ <dl><dt><a name="-description_for_valid_number"><strong>description_for_valid_number</strong></a>(numobj, lang, script=None, region=None)</dt><dd><tt>Return&nbsp;a&nbsp;text&nbsp;description&nbsp;of&nbsp;a&nbsp;PhoneNumber&nbsp;object,&nbsp;in&nbsp;the&nbsp;language<br>
+provided.<br>
+&nbsp;<br>
+The&nbsp;description&nbsp;might&nbsp;consist&nbsp;of&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;country&nbsp;where&nbsp;the&nbsp;phone<br>
+number&nbsp;is&nbsp;from&nbsp;and/or&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;geographical&nbsp;area&nbsp;the&nbsp;phone&nbsp;number<br>
+is&nbsp;from&nbsp;if&nbsp;more&nbsp;detailed&nbsp;information&nbsp;is&nbsp;available.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;phone&nbsp;number&nbsp;is&nbsp;from&nbsp;the&nbsp;same&nbsp;region&nbsp;as&nbsp;the&nbsp;user,&nbsp;only&nbsp;a<br>
+lower-level&nbsp;description&nbsp;will&nbsp;be&nbsp;returned,&nbsp;if&nbsp;one&nbsp;exists.&nbsp;Otherwise,&nbsp;the<br>
+phone&nbsp;number's&nbsp;region&nbsp;will&nbsp;be&nbsp;returned,&nbsp;with&nbsp;optionally&nbsp;some&nbsp;more&nbsp;detailed<br>
+information.<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;for&nbsp;a&nbsp;user&nbsp;from&nbsp;the&nbsp;region&nbsp;"US"&nbsp;(United&nbsp;States),&nbsp;we&nbsp;would<br>
+show&nbsp;"Mountain&nbsp;View,&nbsp;CA"&nbsp;for&nbsp;a&nbsp;particular&nbsp;number,&nbsp;omitting&nbsp;the&nbsp;United<br>
+States&nbsp;from&nbsp;the&nbsp;description.&nbsp;For&nbsp;a&nbsp;user&nbsp;from&nbsp;the&nbsp;United&nbsp;Kingdom&nbsp;(region<br>
+"GB"),&nbsp;for&nbsp;the&nbsp;same&nbsp;number&nbsp;we&nbsp;may&nbsp;show&nbsp;"Mountain&nbsp;View,&nbsp;CA,&nbsp;United&nbsp;States"<br>
+or&nbsp;even&nbsp;just&nbsp;"United&nbsp;States".<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;assumes&nbsp;the&nbsp;validity&nbsp;of&nbsp;the&nbsp;number&nbsp;passed&nbsp;in&nbsp;has&nbsp;already<br>
+been&nbsp;checked,&nbsp;and&nbsp;that&nbsp;the&nbsp;number&nbsp;is&nbsp;suitable&nbsp;for&nbsp;geocoding.&nbsp;&nbsp;We&nbsp;consider<br>
+fixed-line&nbsp;and&nbsp;mobile&nbsp;numbers&nbsp;possible&nbsp;candidates&nbsp;for&nbsp;geocoding.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;A&nbsp;valid&nbsp;PhoneNumber&nbsp;object&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;a&nbsp;text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description.<br>
+lang&nbsp;--&nbsp;A&nbsp;2-letter&nbsp;lowercase&nbsp;ISO&nbsp;639-1&nbsp;language&nbsp;code&nbsp;for&nbsp;the&nbsp;language&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;the&nbsp;description&nbsp;should&nbsp;be&nbsp;returned&nbsp;(e.g.&nbsp;"en")<br>
+script&nbsp;--&nbsp;A&nbsp;4-letter&nbsp;titlecase&nbsp;(first&nbsp;letter&nbsp;uppercase,&nbsp;rest&nbsp;lowercase)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISO&nbsp;script&nbsp;code&nbsp;as&nbsp;defined&nbsp;in&nbsp;ISO&nbsp;15924,&nbsp;separated&nbsp;by&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underscore&nbsp;(e.g.&nbsp;"Hant")<br>
+region&nbsp;--&nbsp;The&nbsp;region&nbsp;code&nbsp;for&nbsp;a&nbsp;given&nbsp;user.&nbsp;This&nbsp;region&nbsp;will&nbsp;be&nbsp;omitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;description&nbsp;if&nbsp;the&nbsp;phone&nbsp;number&nbsp;comes&nbsp;from&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;region.&nbsp;It&nbsp;should&nbsp;be&nbsp;a&nbsp;two-letter&nbsp;upper-case&nbsp;CLDR&nbsp;region<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;text&nbsp;description&nbsp;in&nbsp;the&nbsp;given&nbsp;language&nbsp;code,&nbsp;for&nbsp;the&nbsp;given&nbsp;phone<br>
+number,&nbsp;or&nbsp;an&nbsp;empty&nbsp;string&nbsp;if&nbsp;the&nbsp;number&nbsp;could&nbsp;come&nbsp;from&nbsp;multiple&nbsp;countries,<br>
+or&nbsp;the&nbsp;country&nbsp;code&nbsp;is&nbsp;in&nbsp;fact&nbsp;invalid.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['country_name_for_number', 'description_for_valid_number', 'description_for_number']</td></tr></table>
+</body></html>

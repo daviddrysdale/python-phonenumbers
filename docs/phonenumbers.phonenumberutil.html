@@ -1,0 +1,972 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module phonenumbers.phonenumberutil</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="phonenumbers.html"><font color="#ffffff">phonenumbers</font></a>.phonenumberutil</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/phonenumbers/phonenumberutil.py">phonenumbers/phonenumberutil.py</a></font></td></tr></table>
+    <p><tt>Python&nbsp;phone&nbsp;number&nbsp;parsing&nbsp;and&nbsp;formatting&nbsp;library<br>
+&nbsp;<br>
+If&nbsp;you&nbsp;use&nbsp;this&nbsp;library,&nbsp;and&nbsp;want&nbsp;to&nbsp;be&nbsp;notified&nbsp;about&nbsp;important&nbsp;changes,<br>
+please&nbsp;sign&nbsp;up&nbsp;to&nbsp;the&nbsp;libphonenumber&nbsp;mailing&nbsp;list&nbsp;at<br>
+https://groups.google.com/forum/#!aboutgroup/libphonenumber-discuss.<br>
+&nbsp;<br>
+NOTE:&nbsp;A&nbsp;lot&nbsp;of&nbsp;methods&nbsp;in&nbsp;this&nbsp;module&nbsp;require&nbsp;Region&nbsp;Code&nbsp;strings.&nbsp;These&nbsp;must<br>
+be&nbsp;provided&nbsp;using&nbsp;CLDR&nbsp;two-letter&nbsp;region-code&nbsp;format.&nbsp;These&nbsp;should&nbsp;be&nbsp;in<br>
+upper-case.&nbsp;The&nbsp;list&nbsp;of&nbsp;the&nbsp;codes&nbsp;can&nbsp;be&nbsp;found&nbsp;here:<br>
+<a href="http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm">http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm</a></tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#Exception">builtins.Exception</a>(<a href="builtins.html#BaseException">builtins.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="phonenumbers.phonenumberutil.html#NumberParseException">NumberParseException</a>(<a href="phonenumbers.util.html#UnicodeMixin">phonenumbers.util.UnicodeMixin</a>, <a href="builtins.html#Exception">builtins.Exception</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="phonenumbers.phonenumberutil.html#MatchType">MatchType</a>
+</font></dt><dt><font face="helvetica, arial"><a href="phonenumbers.phonenumberutil.html#PhoneNumberFormat">PhoneNumberFormat</a>
+</font></dt><dt><font face="helvetica, arial"><a href="phonenumbers.phonenumberutil.html#PhoneNumberType">PhoneNumberType</a>
+</font></dt><dt><font face="helvetica, arial"><a href="phonenumbers.phonenumberutil.html#ValidationResult">ValidationResult</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="phonenumbers.util.html#UnicodeMixin">phonenumbers.util.UnicodeMixin</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="phonenumbers.phonenumberutil.html#NumberParseException">NumberParseException</a>(<a href="phonenumbers.util.html#UnicodeMixin">phonenumbers.util.UnicodeMixin</a>, <a href="builtins.html#Exception">builtins.Exception</a>)
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MatchType">class <strong>MatchType</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Types&nbsp;of&nbsp;phone&nbsp;number&nbsp;matches.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="MatchType-to_string"><strong>to_string</strong></a>(val)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Return&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;a&nbsp;<a href="#MatchType">MatchType</a>&nbsp;value</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>EXACT_MATCH</strong> = 4</dl>
+
+<dl><dt><strong>NOT_A_NUMBER</strong> = 0</dl>
+
+<dl><dt><strong>NO_MATCH</strong> = 1</dl>
+
+<dl><dt><strong>NSN_MATCH</strong> = 3</dl>
+
+<dl><dt><strong>SHORT_NSN_MATCH</strong> = 2</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NumberParseException">class <strong>NumberParseException</strong></a>(<a href="phonenumbers.util.html#UnicodeMixin">phonenumbers.util.UnicodeMixin</a>, <a href="builtins.html#Exception">builtins.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#NumberParseException">NumberParseException</a>(error_type,&nbsp;msg)<br>
+&nbsp;<br>
+<a href="builtins.html#Exception">Exception</a>&nbsp;when&nbsp;attempting&nbsp;to&nbsp;parse&nbsp;a&nbsp;putative&nbsp;phone&nbsp;number<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="phonenumbers.phonenumberutil.html#NumberParseException">NumberParseException</a></dd>
+<dd><a href="phonenumbers.util.html#UnicodeMixin">phonenumbers.util.UnicodeMixin</a></dd>
+<dd><a href="builtins.html#Exception">builtins.Exception</a></dd>
+<dd><a href="builtins.html#BaseException">builtins.BaseException</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="NumberParseException-__init__"><strong>__init__</strong></a>(self, error_type, msg)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="NumberParseException-__reduce__"><strong>__reduce__</strong></a>(self)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="NumberParseException-__unicode__"><strong>__unicode__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>INVALID_COUNTRY_CODE</strong> = 0</dl>
+
+<dl><dt><strong>NOT_A_NUMBER</strong> = 1</dl>
+
+<dl><dt><strong>TOO_LONG</strong> = 4</dl>
+
+<dl><dt><strong>TOO_SHORT_AFTER_IDD</strong> = 2</dl>
+
+<dl><dt><strong>TOO_SHORT_NSN</strong> = 3</dl>
+
+<hr>
+Methods inherited from <a href="phonenumbers.util.html#UnicodeMixin">phonenumbers.util.UnicodeMixin</a>:<br>
+<dl><dt><a name="NumberParseException-__str__"><strong>__str__</strong></a>(self)</dt><dd><tt>Return&nbsp;str(self).</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="phonenumbers.util.html#UnicodeMixin">phonenumbers.util.UnicodeMixin</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Static methods inherited from <a href="builtins.html#Exception">builtins.Exception</a>:<br>
+<dl><dt><a name="NumberParseException-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><a name="NumberParseException-__delattr__"><strong>__delattr__</strong></a>(self, name, /)</dt><dd><tt>Implement&nbsp;delattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="NumberParseException-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="NumberParseException-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="NumberParseException-__setattr__"><strong>__setattr__</strong></a>(self, name, value, /)</dt><dd><tt>Implement&nbsp;setattr(self,&nbsp;name,&nbsp;value).</tt></dd></dl>
+
+<dl><dt><a name="NumberParseException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NumberParseException-with_traceback"><strong>with_traceback</strong></a>(...)</dt><dd><tt><a href="builtins.html#Exception">Exception</a>.<a href="#NumberParseException-with_traceback">with_traceback</a>(tb)&nbsp;--<br>
+set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
+<dl><dt><strong>__cause__</strong></dt>
+<dd><tt>exception&nbsp;cause</tt></dd>
+</dl>
+<dl><dt><strong>__context__</strong></dt>
+<dd><tt>exception&nbsp;context</tt></dd>
+</dl>
+<dl><dt><strong>__suppress_context__</strong></dt>
+</dl>
+<dl><dt><strong>__traceback__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PhoneNumberFormat">class <strong>PhoneNumberFormat</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Phone&nbsp;number&nbsp;format.<br>
+&nbsp;<br>
+INTERNATIONAL&nbsp;and&nbsp;NATIONAL&nbsp;formats&nbsp;are&nbsp;consistent&nbsp;with&nbsp;the&nbsp;definition&nbsp;in<br>
+ITU-T&nbsp;Recommendation&nbsp;E123.&nbsp;However&nbsp;we&nbsp;follow&nbsp;local&nbsp;conventions&nbsp;such&nbsp;as&nbsp;using<br>
+'-'&nbsp;instead&nbsp;of&nbsp;whitespace&nbsp;as&nbsp;separators.&nbsp;For&nbsp;example,&nbsp;the&nbsp;number&nbsp;of&nbsp;the<br>
+Google&nbsp;Switzerland&nbsp;office&nbsp;will&nbsp;be&nbsp;written&nbsp;as&nbsp;"+41&nbsp;44&nbsp;668&nbsp;1800"&nbsp;in<br>
+INTERNATIONAL&nbsp;format,&nbsp;and&nbsp;as&nbsp;"044&nbsp;668&nbsp;1800"&nbsp;in&nbsp;NATIONAL&nbsp;format.&nbsp;E164&nbsp;format<br>
+is&nbsp;as&nbsp;per&nbsp;INTERNATIONAL&nbsp;format&nbsp;but&nbsp;with&nbsp;no&nbsp;formatting&nbsp;applied,<br>
+e.g.&nbsp;"+41446681800".&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc3966.txt">RFC3966</a>&nbsp;is&nbsp;as&nbsp;per&nbsp;INTERNATIONAL&nbsp;format,&nbsp;but&nbsp;with&nbsp;all<br>
+spaces&nbsp;and&nbsp;other&nbsp;separating&nbsp;symbols&nbsp;replaced&nbsp;with&nbsp;a&nbsp;hyphen,&nbsp;and&nbsp;with&nbsp;any<br>
+phone&nbsp;number&nbsp;extension&nbsp;appended&nbsp;with&nbsp;";ext=".&nbsp;It&nbsp;also&nbsp;will&nbsp;have&nbsp;a&nbsp;prefix&nbsp;of<br>
+"tel:"&nbsp;added,&nbsp;e.g.&nbsp;"tel:+41-44-668-1800".<br>
+&nbsp;<br>
+Note:&nbsp;If&nbsp;you&nbsp;are&nbsp;considering&nbsp;storing&nbsp;the&nbsp;number&nbsp;in&nbsp;a&nbsp;neutral&nbsp;format,&nbsp;you<br>
+are&nbsp;highly&nbsp;advised&nbsp;to&nbsp;use&nbsp;the&nbsp;PhoneNumber&nbsp;class.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="PhoneNumberFormat-to_string"><strong>to_string</strong></a>(val)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Return&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;a&nbsp;<a href="#PhoneNumberFormat">PhoneNumberFormat</a>&nbsp;value</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>E164</strong> = 0</dl>
+
+<dl><dt><strong>INTERNATIONAL</strong> = 1</dl>
+
+<dl><dt><strong>NATIONAL</strong> = 2</dl>
+
+<dl><dt><strong>RFC3966</strong> = 3</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PhoneNumberType">class <strong>PhoneNumberType</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Type&nbsp;of&nbsp;phone&nbsp;numbers.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="PhoneNumberType-to_string"><strong>to_string</strong></a>(val)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Return&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;a&nbsp;<a href="#PhoneNumberType">PhoneNumberType</a>&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="PhoneNumberType-values"><strong>values</strong></a>()<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>FIXED_LINE</strong> = 0</dl>
+
+<dl><dt><strong>FIXED_LINE_OR_MOBILE</strong> = 2</dl>
+
+<dl><dt><strong>MOBILE</strong> = 1</dl>
+
+<dl><dt><strong>PAGER</strong> = 8</dl>
+
+<dl><dt><strong>PERSONAL_NUMBER</strong> = 7</dl>
+
+<dl><dt><strong>PREMIUM_RATE</strong> = 4</dl>
+
+<dl><dt><strong>SHARED_COST</strong> = 5</dl>
+
+<dl><dt><strong>TOLL_FREE</strong> = 3</dl>
+
+<dl><dt><strong>UAN</strong> = 9</dl>
+
+<dl><dt><strong>UNKNOWN</strong> = 99</dl>
+
+<dl><dt><strong>VOICEMAIL</strong> = 10</dl>
+
+<dl><dt><strong>VOIP</strong> = 6</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ValidationResult">class <strong>ValidationResult</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Possible&nbsp;outcomes&nbsp;when&nbsp;testing&nbsp;if&nbsp;a&nbsp;PhoneNumber&nbsp;is&nbsp;a&nbsp;possible&nbsp;number.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="ValidationResult-to_string"><strong>to_string</strong></a>(val)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Return&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;a&nbsp;<a href="#ValidationResult">ValidationResult</a>&nbsp;value</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>INVALID_COUNTRY_CODE</strong> = 1</dl>
+
+<dl><dt><strong>INVALID_LENGTH</strong> = 5</dl>
+
+<dl><dt><strong>IS_POSSIBLE</strong> = 0</dl>
+
+<dl><dt><strong>IS_POSSIBLE_LOCAL_ONLY</strong> = 4</dl>
+
+<dl><dt><strong>TOO_LONG</strong> = 3</dl>
+
+<dl><dt><strong>TOO_SHORT</strong> = 2</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-can_be_internationally_dialled"><strong>can_be_internationally_dialled</strong></a>(numobj)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;number&nbsp;can&nbsp;only&nbsp;be&nbsp;dialled&nbsp;from&nbsp;outside&nbsp;the&nbsp;region,<br>
+or&nbsp;unknown.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;number&nbsp;can&nbsp;only&nbsp;be&nbsp;dialled&nbsp;from&nbsp;within&nbsp;the&nbsp;region<br>
+as&nbsp;well,&nbsp;returns&nbsp;False.&nbsp;Does&nbsp;not&nbsp;check&nbsp;the&nbsp;number&nbsp;is&nbsp;a&nbsp;valid&nbsp;number.<br>
+Note&nbsp;that,&nbsp;at&nbsp;the&nbsp;moment,&nbsp;this&nbsp;method&nbsp;does&nbsp;not&nbsp;handle&nbsp;short&nbsp;numbers&nbsp;(which<br>
+are&nbsp;currently&nbsp;all&nbsp;presumed&nbsp;to&nbsp;not&nbsp;be&nbsp;diallable&nbsp;from&nbsp;outside&nbsp;their&nbsp;country).<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;the&nbsp;phone&nbsp;number&nbsp;objectfor&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;know&nbsp;whether&nbsp;it&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;diallable&nbsp;from&nbsp;outside&nbsp;the&nbsp;region.</tt></dd></dl>
+ <dl><dt><a name="-convert_alpha_characters_in_number"><strong>convert_alpha_characters_in_number</strong></a>(number)</dt><dd><tt>Convert&nbsp;alpha&nbsp;chars&nbsp;in&nbsp;a&nbsp;number&nbsp;to&nbsp;their&nbsp;respective&nbsp;digits&nbsp;on&nbsp;a&nbsp;keypad,<br>
+but&nbsp;retains&nbsp;existing&nbsp;formatting.</tt></dd></dl>
+ <dl><dt><a name="-country_code_for_region"><strong>country_code_for_region</strong></a>(region_code)</dt><dd><tt>Returns&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;for&nbsp;a&nbsp;specific&nbsp;region.<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;this&nbsp;would&nbsp;be&nbsp;1&nbsp;for&nbsp;the&nbsp;United&nbsp;States,&nbsp;and&nbsp;64&nbsp;for&nbsp;New<br>
+Zealand.<br>
+&nbsp;<br>
+Arguments:<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;for.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;for&nbsp;the&nbsp;region&nbsp;denoted&nbsp;by&nbsp;region_code.</tt></dd></dl>
+ <dl><dt><a name="-country_code_for_valid_region"><strong>country_code_for_valid_region</strong></a>(region_code)</dt><dd><tt>Returns&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;for&nbsp;a&nbsp;specific&nbsp;region.<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;this&nbsp;would&nbsp;be&nbsp;1&nbsp;for&nbsp;the&nbsp;United&nbsp;States,&nbsp;and&nbsp;64&nbsp;for&nbsp;New<br>
+Zealand.&nbsp;&nbsp;Assumes&nbsp;the&nbsp;region&nbsp;is&nbsp;already&nbsp;valid.<br>
+&nbsp;<br>
+Arguments:<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;for.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;for&nbsp;the&nbsp;region&nbsp;denoted&nbsp;by&nbsp;region_code.</tt></dd></dl>
+ <dl><dt><a name="-country_mobile_token"><strong>country_mobile_token</strong></a>(country_code)</dt><dd><tt>Returns&nbsp;the&nbsp;mobile&nbsp;token&nbsp;for&nbsp;the&nbsp;provided&nbsp;country&nbsp;calling&nbsp;code&nbsp;if&nbsp;it&nbsp;has&nbsp;one,&nbsp;otherwise<br>
+returns&nbsp;an&nbsp;empty&nbsp;string.&nbsp;A&nbsp;mobile&nbsp;token&nbsp;is&nbsp;a&nbsp;number&nbsp;inserted&nbsp;before&nbsp;the&nbsp;area&nbsp;code&nbsp;when&nbsp;dialing<br>
+a&nbsp;mobile&nbsp;number&nbsp;from&nbsp;that&nbsp;country&nbsp;from&nbsp;abroad.<br>
+&nbsp;<br>
+Arguments:<br>
+country_code&nbsp;--&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;the&nbsp;mobile&nbsp;token<br>
+Returns&nbsp;the&nbsp;mobile&nbsp;token,&nbsp;as&nbsp;a&nbsp;string,&nbsp;for&nbsp;the&nbsp;given&nbsp;country&nbsp;calling&nbsp;code.</tt></dd></dl>
+ <dl><dt><a name="-example_number"><strong>example_number</strong></a>(region_code)</dt><dd><tt>Gets&nbsp;a&nbsp;valid&nbsp;number&nbsp;for&nbsp;the&nbsp;specified&nbsp;region.<br>
+&nbsp;<br>
+Arguments:<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;for&nbsp;which&nbsp;an&nbsp;example&nbsp;number&nbsp;is&nbsp;needed.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;valid&nbsp;fixed-line&nbsp;number&nbsp;for&nbsp;the&nbsp;specified&nbsp;region.&nbsp;Returns&nbsp;None<br>
+when&nbsp;the&nbsp;metadata&nbsp;does&nbsp;not&nbsp;contain&nbsp;such&nbsp;information,&nbsp;or&nbsp;the&nbsp;region&nbsp;001&nbsp;is<br>
+passed&nbsp;in.&nbsp;&nbsp;For&nbsp;001&nbsp;(representing&nbsp;non-geographical&nbsp;numbers),&nbsp;call<br>
+example_number_for_non_geo_entity&nbsp;instead.</tt></dd></dl>
+ <dl><dt><a name="-example_number_for_non_geo_entity"><strong>example_number_for_non_geo_entity</strong></a>(country_calling_code)</dt><dd><tt>Gets&nbsp;a&nbsp;valid&nbsp;number&nbsp;for&nbsp;the&nbsp;specified&nbsp;country&nbsp;calling&nbsp;code&nbsp;for&nbsp;a&nbsp;non-geographical&nbsp;entity.<br>
+&nbsp;<br>
+Arguments:<br>
+country_calling_code&nbsp;--&nbsp;The&nbsp;country&nbsp;calling&nbsp;code&nbsp;for&nbsp;a&nbsp;non-geographical&nbsp;entity.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;valid&nbsp;number&nbsp;for&nbsp;the&nbsp;non-geographical&nbsp;entity.&nbsp;Returns&nbsp;None&nbsp;when<br>
+the&nbsp;metadata&nbsp;does&nbsp;not&nbsp;contain&nbsp;such&nbsp;information,&nbsp;or&nbsp;the&nbsp;country&nbsp;calling<br>
+code&nbsp;passed&nbsp;in&nbsp;does&nbsp;not&nbsp;belong&nbsp;to&nbsp;a&nbsp;non-geographical&nbsp;entity.</tt></dd></dl>
+ <dl><dt><a name="-example_number_for_type"><strong>example_number_for_type</strong></a>(region_code, num_type)</dt><dd><tt>Gets&nbsp;a&nbsp;valid&nbsp;number&nbsp;for&nbsp;the&nbsp;specified&nbsp;region&nbsp;and&nbsp;number&nbsp;type.<br>
+&nbsp;<br>
+If&nbsp;None&nbsp;is&nbsp;given&nbsp;as&nbsp;the&nbsp;region_code,&nbsp;then&nbsp;the&nbsp;returned&nbsp;number&nbsp;<a href="builtins.html#object">object</a><br>
+may&nbsp;belong&nbsp;to&nbsp;any&nbsp;country.<br>
+&nbsp;<br>
+Arguments:<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;for&nbsp;which&nbsp;an&nbsp;example&nbsp;number&nbsp;is&nbsp;needed,&nbsp;or&nbsp;None.<br>
+num_type&nbsp;--&nbsp;The&nbsp;type&nbsp;of&nbsp;number&nbsp;that&nbsp;is&nbsp;needed.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;valid&nbsp;number&nbsp;for&nbsp;the&nbsp;specified&nbsp;region&nbsp;and&nbsp;type.&nbsp;Returns&nbsp;None<br>
+when&nbsp;the&nbsp;metadata&nbsp;does&nbsp;not&nbsp;contain&nbsp;such&nbsp;information&nbsp;or&nbsp;if&nbsp;an&nbsp;invalid<br>
+region&nbsp;or&nbsp;region&nbsp;001&nbsp;was&nbsp;specified.&nbsp;&nbsp;For&nbsp;001&nbsp;(representing<br>
+non-geographical&nbsp;numbers),&nbsp;call&nbsp;example_number_for_non_geo_entity&nbsp;instead.</tt></dd></dl>
+ <dl><dt><a name="-format_by_pattern"><strong>format_by_pattern</strong></a>(numobj, number_format, user_defined_formats)</dt><dd><tt>Formats&nbsp;a&nbsp;phone&nbsp;number&nbsp;using&nbsp;client-defined&nbsp;formatting&nbsp;rules.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;if&nbsp;the&nbsp;phone&nbsp;number&nbsp;has&nbsp;a&nbsp;country&nbsp;calling&nbsp;code&nbsp;of&nbsp;zero&nbsp;or&nbsp;an<br>
+otherwise&nbsp;invalid&nbsp;country&nbsp;calling&nbsp;code,&nbsp;we&nbsp;cannot&nbsp;work&nbsp;out&nbsp;things&nbsp;like<br>
+whether&nbsp;there&nbsp;should&nbsp;be&nbsp;a&nbsp;national&nbsp;prefix&nbsp;applied,&nbsp;or&nbsp;how&nbsp;to&nbsp;format<br>
+extensions,&nbsp;so&nbsp;we&nbsp;return&nbsp;the&nbsp;national&nbsp;significant&nbsp;number&nbsp;with&nbsp;no<br>
+formatting&nbsp;applied.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;to&nbsp;be&nbsp;formatted<br>
+number_format&nbsp;--&nbsp;The&nbsp;format&nbsp;the&nbsp;phone&nbsp;number&nbsp;should&nbsp;be&nbsp;formatted&nbsp;into,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;a&nbsp;<a href="#PhoneNumberFormat">PhoneNumberFormat</a>&nbsp;value.<br>
+user_defined_formats&nbsp;--&nbsp;formatting&nbsp;rules&nbsp;specified&nbsp;by&nbsp;clients,&nbsp;as&nbsp;a&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;NumberFormat&nbsp;objects.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-format_in_original_format"><strong>format_in_original_format</strong></a>(numobj, region_calling_from)</dt><dd><tt>Format&nbsp;a&nbsp;number&nbsp;using&nbsp;the&nbsp;original&nbsp;format&nbsp;that&nbsp;the&nbsp;number&nbsp;was&nbsp;parsed&nbsp;from.<br>
+&nbsp;<br>
+The&nbsp;original&nbsp;format&nbsp;is&nbsp;embedded&nbsp;in&nbsp;the&nbsp;country_code_source&nbsp;field&nbsp;of&nbsp;the<br>
+PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in.&nbsp;If&nbsp;such&nbsp;information&nbsp;is&nbsp;missing,&nbsp;the&nbsp;number<br>
+will&nbsp;be&nbsp;formatted&nbsp;into&nbsp;the&nbsp;NATIONAL&nbsp;format&nbsp;by&nbsp;default.<br>
+&nbsp;<br>
+When&nbsp;&nbsp;we&nbsp;don't&nbsp;have&nbsp;a&nbsp;formatting&nbsp;pattern&nbsp;for&nbsp;the&nbsp;number,&nbsp;the&nbsp;method<br>
+returns&nbsp;the&nbsp;raw&nbsp;input&nbsp;when&nbsp;it&nbsp;is&nbsp;available.<br>
+&nbsp;<br>
+Note&nbsp;this&nbsp;method&nbsp;guarantees&nbsp;no&nbsp;digit&nbsp;will&nbsp;be&nbsp;inserted,&nbsp;removed&nbsp;or&nbsp;modified<br>
+as&nbsp;a&nbsp;result&nbsp;of&nbsp;formatting.<br>
+&nbsp;<br>
+Arguments:<br>
+number&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;that&nbsp;needs&nbsp;to&nbsp;be&nbsp;formatted&nbsp;in&nbsp;its&nbsp;original<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;format<br>
+region_calling_from&nbsp;--&nbsp;The&nbsp;region&nbsp;whose&nbsp;IDD&nbsp;needs&nbsp;to&nbsp;be&nbsp;prefixed&nbsp;if&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;original&nbsp;number&nbsp;has&nbsp;one.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number&nbsp;in&nbsp;its&nbsp;original&nbsp;number&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-format_national_number_with_carrier_code"><strong>format_national_number_with_carrier_code</strong></a>(numobj, carrier_code)</dt><dd><tt>Format&nbsp;a&nbsp;number&nbsp;in&nbsp;national&nbsp;format&nbsp;for&nbsp;dialing&nbsp;using&nbsp;the&nbsp;specified&nbsp;carrier.<br>
+&nbsp;<br>
+The&nbsp;carrier-code&nbsp;will&nbsp;always&nbsp;be&nbsp;used&nbsp;regardless&nbsp;of&nbsp;whether&nbsp;the&nbsp;phone<br>
+number&nbsp;already&nbsp;has&nbsp;a&nbsp;preferred&nbsp;domestic&nbsp;carrier&nbsp;code&nbsp;stored.&nbsp;If<br>
+carrier_code&nbsp;contains&nbsp;an&nbsp;empty&nbsp;string,&nbsp;returns&nbsp;the&nbsp;number&nbsp;in&nbsp;national<br>
+format&nbsp;without&nbsp;any&nbsp;carrier&nbsp;code.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;to&nbsp;be&nbsp;formatted<br>
+carrier_code&nbsp;--&nbsp;The&nbsp;carrier&nbsp;selection&nbsp;code&nbsp;to&nbsp;be&nbsp;used<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number&nbsp;in&nbsp;national&nbsp;format&nbsp;for&nbsp;dialing&nbsp;using<br>
+the&nbsp;carrier&nbsp;as&nbsp;specified&nbsp;in&nbsp;the&nbsp;carrier_code.</tt></dd></dl>
+ <dl><dt><a name="-format_national_number_with_preferred_carrier_code"><strong>format_national_number_with_preferred_carrier_code</strong></a>(numobj, fallback_carrier_code)</dt><dd><tt>Formats&nbsp;a&nbsp;phone&nbsp;number&nbsp;in&nbsp;national&nbsp;format&nbsp;for&nbsp;dialing&nbsp;using&nbsp;the&nbsp;carrier<br>
+as&nbsp;specified&nbsp;in&nbsp;the&nbsp;preferred_domestic_carrier_code&nbsp;field&nbsp;of&nbsp;the<br>
+PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in.&nbsp;If&nbsp;that&nbsp;is&nbsp;missing,&nbsp;use&nbsp;the<br>
+fallback_carrier_code&nbsp;passed&nbsp;in&nbsp;instead.&nbsp;If&nbsp;there&nbsp;is&nbsp;no<br>
+preferred_domestic_carrier_code,&nbsp;and&nbsp;the&nbsp;fallback_carrier_code&nbsp;contains&nbsp;an<br>
+empty&nbsp;string,&nbsp;return&nbsp;the&nbsp;number&nbsp;in&nbsp;national&nbsp;format&nbsp;without&nbsp;any&nbsp;carrier<br>
+code.<br>
+&nbsp;<br>
+Use&nbsp;format_national_number_with_carrier_code&nbsp;instead&nbsp;if&nbsp;the&nbsp;carrier&nbsp;code<br>
+passed&nbsp;in&nbsp;should&nbsp;take&nbsp;precedence&nbsp;over&nbsp;the&nbsp;number's<br>
+preferred_domestic_carrier_code&nbsp;when&nbsp;formatting.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;to&nbsp;be&nbsp;formatted<br>
+carrier_code&nbsp;--&nbsp;The&nbsp;carrier&nbsp;selection&nbsp;code&nbsp;to&nbsp;be&nbsp;used,&nbsp;if&nbsp;none&nbsp;is&nbsp;found&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;phone&nbsp;number&nbsp;itself.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number&nbsp;in&nbsp;national&nbsp;format&nbsp;for&nbsp;dialing&nbsp;using<br>
+the&nbsp;number's&nbsp;preferred_domestic_carrier_code,&nbsp;or&nbsp;the&nbsp;fallback_carrier_code<br>
+pass&nbsp;in&nbsp;if&nbsp;none&nbsp;is&nbsp;found.</tt></dd></dl>
+ <dl><dt><a name="-format_number"><strong>format_number</strong></a>(numobj, num_format)</dt><dd><tt>Formats&nbsp;a&nbsp;phone&nbsp;number&nbsp;in&nbsp;the&nbsp;specified&nbsp;format&nbsp;using&nbsp;default&nbsp;rules.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;this&nbsp;does&nbsp;not&nbsp;promise&nbsp;to&nbsp;produce&nbsp;a&nbsp;phone&nbsp;number&nbsp;that&nbsp;the&nbsp;user<br>
+can&nbsp;dial&nbsp;from&nbsp;where&nbsp;they&nbsp;are&nbsp;-&nbsp;although&nbsp;we&nbsp;do&nbsp;format&nbsp;in&nbsp;either&nbsp;'national'<br>
+or&nbsp;'international'&nbsp;format&nbsp;depending&nbsp;on&nbsp;what&nbsp;the&nbsp;client&nbsp;asks&nbsp;for,&nbsp;we&nbsp;do&nbsp;not<br>
+currently&nbsp;support&nbsp;a&nbsp;more&nbsp;abbreviated&nbsp;format,&nbsp;such&nbsp;as&nbsp;for&nbsp;users&nbsp;in&nbsp;the&nbsp;same<br>
+"area"&nbsp;who&nbsp;could&nbsp;potentially&nbsp;dial&nbsp;the&nbsp;number&nbsp;without&nbsp;area&nbsp;code.&nbsp;Note&nbsp;that<br>
+if&nbsp;the&nbsp;phone&nbsp;number&nbsp;has&nbsp;a&nbsp;country&nbsp;calling&nbsp;code&nbsp;of&nbsp;0&nbsp;or&nbsp;an&nbsp;otherwise<br>
+invalid&nbsp;country&nbsp;calling&nbsp;code,&nbsp;we&nbsp;cannot&nbsp;work&nbsp;out&nbsp;which&nbsp;formatting&nbsp;rules&nbsp;to<br>
+apply&nbsp;so&nbsp;we&nbsp;return&nbsp;the&nbsp;national&nbsp;significant&nbsp;number&nbsp;with&nbsp;no&nbsp;formatting<br>
+applied.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;to&nbsp;be&nbsp;formatted.<br>
+num_format&nbsp;--&nbsp;The&nbsp;format&nbsp;the&nbsp;phone&nbsp;number&nbsp;should&nbsp;be&nbsp;formatted&nbsp;into<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-format_number_for_mobile_dialing"><strong>format_number_for_mobile_dialing</strong></a>(numobj, region_calling_from, with_formatting)</dt><dd><tt>Returns&nbsp;a&nbsp;number&nbsp;formatted&nbsp;in&nbsp;such&nbsp;a&nbsp;way&nbsp;that&nbsp;it&nbsp;can&nbsp;be&nbsp;dialed&nbsp;from&nbsp;a<br>
+&nbsp;mobile&nbsp;phone&nbsp;in&nbsp;a&nbsp;specific&nbsp;region.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;number&nbsp;cannot&nbsp;be&nbsp;reached&nbsp;from&nbsp;the&nbsp;region&nbsp;(e.g.&nbsp;some&nbsp;countries&nbsp;block<br>
+toll-free&nbsp;numbers&nbsp;from&nbsp;being&nbsp;called&nbsp;outside&nbsp;of&nbsp;the&nbsp;country),&nbsp;the&nbsp;method<br>
+returns&nbsp;an&nbsp;empty&nbsp;string.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;to&nbsp;be&nbsp;formatted<br>
+region_calling_from&nbsp;--&nbsp;The&nbsp;region&nbsp;where&nbsp;the&nbsp;call&nbsp;is&nbsp;being&nbsp;placed.<br>
+&nbsp;<br>
+with_formatting&nbsp;--&nbsp;whether&nbsp;the&nbsp;number&nbsp;should&nbsp;be&nbsp;returned&nbsp;with&nbsp;formatting<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;symbols,&nbsp;such&nbsp;as&nbsp;spaces&nbsp;and&nbsp;dashes.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-format_out_of_country_calling_number"><strong>format_out_of_country_calling_number</strong></a>(numobj, region_calling_from)</dt><dd><tt>Formats&nbsp;a&nbsp;phone&nbsp;number&nbsp;for&nbsp;out-of-country&nbsp;dialing&nbsp;purposes.<br>
+&nbsp;<br>
+If&nbsp;no&nbsp;region_calling_from&nbsp;is&nbsp;supplied,&nbsp;we&nbsp;format&nbsp;the&nbsp;number&nbsp;in&nbsp;its<br>
+INTERNATIONAL&nbsp;format.&nbsp;If&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;is&nbsp;the&nbsp;same&nbsp;as&nbsp;that&nbsp;of<br>
+the&nbsp;region&nbsp;where&nbsp;the&nbsp;number&nbsp;is&nbsp;from,&nbsp;then&nbsp;NATIONAL&nbsp;formatting&nbsp;will&nbsp;be<br>
+applied.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;number&nbsp;itself&nbsp;has&nbsp;a&nbsp;country&nbsp;calling&nbsp;code&nbsp;of&nbsp;zero&nbsp;or&nbsp;an&nbsp;otherwise<br>
+invalid&nbsp;country&nbsp;calling&nbsp;code,&nbsp;then&nbsp;we&nbsp;return&nbsp;the&nbsp;number&nbsp;with&nbsp;no&nbsp;formatting<br>
+applied.<br>
+&nbsp;<br>
+Note&nbsp;this&nbsp;function&nbsp;takes&nbsp;care&nbsp;of&nbsp;the&nbsp;case&nbsp;for&nbsp;calling&nbsp;inside&nbsp;of&nbsp;NANPA&nbsp;and<br>
+between&nbsp;Russia&nbsp;and&nbsp;Kazakhstan&nbsp;(who&nbsp;share&nbsp;the&nbsp;same&nbsp;country&nbsp;calling<br>
+code).&nbsp;In&nbsp;those&nbsp;cases,&nbsp;no&nbsp;international&nbsp;prefix&nbsp;is&nbsp;used.&nbsp;For&nbsp;regions&nbsp;which<br>
+have&nbsp;multiple&nbsp;international&nbsp;prefixes,&nbsp;the&nbsp;number&nbsp;in&nbsp;its&nbsp;INTERNATIONAL<br>
+format&nbsp;will&nbsp;be&nbsp;returned&nbsp;instead.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;to&nbsp;be&nbsp;formatted<br>
+region_calling_from&nbsp;--&nbsp;The&nbsp;region&nbsp;where&nbsp;the&nbsp;call&nbsp;is&nbsp;being&nbsp;placed<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number</tt></dd></dl>
+ <dl><dt><a name="-format_out_of_country_keeping_alpha_chars"><strong>format_out_of_country_keeping_alpha_chars</strong></a>(numobj, region_calling_from)</dt><dd><tt>Formats&nbsp;a&nbsp;phone&nbsp;number&nbsp;for&nbsp;out-of-country&nbsp;dialing&nbsp;purposes.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;in&nbsp;this&nbsp;version,&nbsp;if&nbsp;the&nbsp;number&nbsp;was&nbsp;entered&nbsp;originally&nbsp;using<br>
+alpha&nbsp;characters&nbsp;and&nbsp;this&nbsp;version&nbsp;of&nbsp;the&nbsp;number&nbsp;is&nbsp;stored&nbsp;in&nbsp;raw_input,<br>
+this&nbsp;representation&nbsp;of&nbsp;the&nbsp;number&nbsp;will&nbsp;be&nbsp;used&nbsp;rather&nbsp;than&nbsp;the&nbsp;digit<br>
+representation.&nbsp;Grouping&nbsp;information,&nbsp;as&nbsp;specified&nbsp;by&nbsp;characters&nbsp;such&nbsp;as<br>
+"-"&nbsp;and&nbsp;"&nbsp;",&nbsp;will&nbsp;be&nbsp;retained.<br>
+&nbsp;<br>
+Caveats:<br>
+&nbsp;<br>
+&nbsp;-&nbsp;This&nbsp;will&nbsp;not&nbsp;produce&nbsp;good&nbsp;results&nbsp;if&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;is&nbsp;both<br>
+&nbsp;&nbsp;&nbsp;present&nbsp;in&nbsp;the&nbsp;raw&nbsp;input&nbsp;_and_&nbsp;is&nbsp;the&nbsp;start&nbsp;of&nbsp;the&nbsp;national<br>
+&nbsp;&nbsp;&nbsp;number.&nbsp;This&nbsp;is&nbsp;not&nbsp;a&nbsp;problem&nbsp;in&nbsp;the&nbsp;regions&nbsp;which&nbsp;typically&nbsp;use&nbsp;alpha<br>
+&nbsp;&nbsp;&nbsp;numbers.<br>
+&nbsp;<br>
+&nbsp;-&nbsp;This&nbsp;will&nbsp;also&nbsp;not&nbsp;produce&nbsp;good&nbsp;results&nbsp;if&nbsp;the&nbsp;raw&nbsp;input&nbsp;has&nbsp;any<br>
+&nbsp;&nbsp;&nbsp;grouping&nbsp;information&nbsp;within&nbsp;the&nbsp;first&nbsp;three&nbsp;digits&nbsp;of&nbsp;the&nbsp;national<br>
+&nbsp;&nbsp;&nbsp;number,&nbsp;and&nbsp;if&nbsp;the&nbsp;function&nbsp;needs&nbsp;to&nbsp;strip&nbsp;preceding&nbsp;digits/words&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;raw&nbsp;input&nbsp;before&nbsp;these&nbsp;digits.&nbsp;Normally&nbsp;people&nbsp;group&nbsp;the&nbsp;first<br>
+&nbsp;&nbsp;&nbsp;three&nbsp;digits&nbsp;together&nbsp;so&nbsp;this&nbsp;is&nbsp;not&nbsp;a&nbsp;huge&nbsp;problem&nbsp;-&nbsp;and&nbsp;will&nbsp;be&nbsp;fixed<br>
+&nbsp;&nbsp;&nbsp;if&nbsp;it&nbsp;proves&nbsp;to&nbsp;be&nbsp;so.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;that&nbsp;needs&nbsp;to&nbsp;be&nbsp;formatted.<br>
+region_calling_from&nbsp;--&nbsp;The&nbsp;region&nbsp;where&nbsp;the&nbsp;call&nbsp;is&nbsp;being&nbsp;placed.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number</tt></dd></dl>
+ <dl><dt><a name="-invalid_example_number"><strong>invalid_example_number</strong></a>(region_code)</dt><dd><tt>Gets&nbsp;an&nbsp;invalid&nbsp;number&nbsp;for&nbsp;the&nbsp;specified&nbsp;region.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;useful&nbsp;for&nbsp;unit-testing&nbsp;purposes,&nbsp;where&nbsp;you&nbsp;want&nbsp;to&nbsp;test&nbsp;what<br>
+will&nbsp;happen&nbsp;with&nbsp;an&nbsp;invalid&nbsp;number.&nbsp;Note&nbsp;that&nbsp;the&nbsp;number&nbsp;that&nbsp;is<br>
+returned&nbsp;will&nbsp;always&nbsp;be&nbsp;able&nbsp;to&nbsp;be&nbsp;parsed&nbsp;and&nbsp;will&nbsp;have&nbsp;the&nbsp;correct<br>
+country&nbsp;code.&nbsp;It&nbsp;may&nbsp;also&nbsp;be&nbsp;a&nbsp;valid&nbsp;*short*&nbsp;number/code&nbsp;for&nbsp;this<br>
+region.&nbsp;Validity&nbsp;checking&nbsp;such&nbsp;numbers&nbsp;is&nbsp;handled&nbsp;with&nbsp;shortnumberinfo.<br>
+&nbsp;<br>
+Arguments:<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;for&nbsp;which&nbsp;an&nbsp;example&nbsp;number&nbsp;is&nbsp;needed.<br>
+&nbsp;<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;invalid&nbsp;number&nbsp;for&nbsp;the&nbsp;specified&nbsp;region.&nbsp;Returns&nbsp;None&nbsp;when&nbsp;an<br>
+unsupported&nbsp;region&nbsp;or&nbsp;the&nbsp;region&nbsp;001&nbsp;(Earth)&nbsp;is&nbsp;passed&nbsp;in.</tt></dd></dl>
+ <dl><dt><a name="-is_alpha_number"><strong>is_alpha_number</strong></a>(number)</dt><dd><tt>Checks&nbsp;if&nbsp;the&nbsp;number&nbsp;is&nbsp;a&nbsp;valid&nbsp;vanity&nbsp;(alpha)&nbsp;number&nbsp;such&nbsp;as&nbsp;800<br>
+MICROSOFT.&nbsp;A&nbsp;valid&nbsp;vanity&nbsp;number&nbsp;will&nbsp;start&nbsp;with&nbsp;at&nbsp;least&nbsp;3&nbsp;digits&nbsp;and<br>
+will&nbsp;have&nbsp;three&nbsp;or&nbsp;more&nbsp;alpha&nbsp;characters.&nbsp;This&nbsp;does&nbsp;not&nbsp;do&nbsp;region-specific<br>
+checks&nbsp;-&nbsp;to&nbsp;work&nbsp;out&nbsp;if&nbsp;this&nbsp;number&nbsp;is&nbsp;actually&nbsp;valid&nbsp;for&nbsp;a&nbsp;region,&nbsp;it<br>
+should&nbsp;be&nbsp;parsed&nbsp;and&nbsp;methods&nbsp;such&nbsp;as&nbsp;<a href="#-is_possible_number_with_reason">is_possible_number_with_reason</a>()&nbsp;and<br>
+<a href="#-is_valid_number">is_valid_number</a>()&nbsp;should&nbsp;be&nbsp;used.<br>
+&nbsp;<br>
+Arguments:<br>
+number&nbsp;--&nbsp;the&nbsp;number&nbsp;that&nbsp;needs&nbsp;to&nbsp;be&nbsp;checked<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;number&nbsp;is&nbsp;a&nbsp;valid&nbsp;vanity&nbsp;number</tt></dd></dl>
+ <dl><dt><a name="-is_mobile_number_portable_region"><strong>is_mobile_number_portable_region</strong></a>(region_code)</dt><dd><tt>Returns&nbsp;true&nbsp;if&nbsp;the&nbsp;supplied&nbsp;region&nbsp;supports&nbsp;mobile&nbsp;number&nbsp;portability.<br>
+Returns&nbsp;false&nbsp;for&nbsp;invalid,&nbsp;unknown&nbsp;or&nbsp;regions&nbsp;that&nbsp;don't&nbsp;support&nbsp;mobile<br>
+number&nbsp;portability.<br>
+&nbsp;<br>
+Arguments:<br>
+region_code&nbsp;--&nbsp;the&nbsp;region&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;know&nbsp;whether&nbsp;it&nbsp;supports&nbsp;mobile&nbsp;number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;portability&nbsp;or&nbsp;not.</tt></dd></dl>
+ <dl><dt><a name="-is_nanpa_country"><strong>is_nanpa_country</strong></a>(region_code)</dt><dd><tt>Checks&nbsp;if&nbsp;this&nbsp;region&nbsp;is&nbsp;a&nbsp;NANPA&nbsp;region.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;region_code&nbsp;is&nbsp;one&nbsp;of&nbsp;the&nbsp;regions&nbsp;under&nbsp;the&nbsp;North&nbsp;American<br>
+Numbering&nbsp;Plan&nbsp;Administration&nbsp;(NANPA).</tt></dd></dl>
+ <dl><dt><a name="-is_number_geographical"><strong>is_number_geographical</strong></a>(numobj)</dt><dd><tt>Tests&nbsp;whether&nbsp;a&nbsp;phone&nbsp;number&nbsp;has&nbsp;a&nbsp;geographical&nbsp;association.<br>
+&nbsp;<br>
+It&nbsp;checks&nbsp;if&nbsp;the&nbsp;number&nbsp;is&nbsp;associated&nbsp;with&nbsp;a&nbsp;certain&nbsp;region&nbsp;in&nbsp;the&nbsp;country<br>
+to&nbsp;which&nbsp;it&nbsp;belongs.&nbsp;Note&nbsp;that&nbsp;this&nbsp;doesn't&nbsp;verify&nbsp;if&nbsp;the&nbsp;number&nbsp;is<br>
+actually&nbsp;in&nbsp;use.<br>
+country_code&nbsp;--&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;the&nbsp;mobile&nbsp;token</tt></dd></dl>
+ <dl><dt><a name="-is_number_match"><strong>is_number_match</strong></a>(num1, num2)</dt><dd><tt>Takes&nbsp;two&nbsp;phone&nbsp;numbers&nbsp;and&nbsp;compares&nbsp;them&nbsp;for&nbsp;equality.<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;the&nbsp;numbers&nbsp;+1&nbsp;345&nbsp;657&nbsp;1234&nbsp;and&nbsp;657&nbsp;1234&nbsp;are&nbsp;a&nbsp;SHORT_NSN_MATCH.<br>
+The&nbsp;numbers&nbsp;+1&nbsp;345&nbsp;657&nbsp;1234&nbsp;and&nbsp;345&nbsp;657&nbsp;are&nbsp;a&nbsp;NO_MATCH.<br>
+&nbsp;<br>
+Arguments<br>
+num1&nbsp;--&nbsp;First&nbsp;number&nbsp;<a href="builtins.html#object">object</a>&nbsp;or&nbsp;string&nbsp;to&nbsp;compare.&nbsp;Can&nbsp;contain&nbsp;formatting,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;can&nbsp;have&nbsp;country&nbsp;calling&nbsp;code&nbsp;specified&nbsp;with&nbsp;+&nbsp;at&nbsp;the&nbsp;start.<br>
+num2&nbsp;--&nbsp;Second&nbsp;number&nbsp;<a href="builtins.html#object">object</a>&nbsp;or&nbsp;string&nbsp;to&nbsp;compare.&nbsp;Can&nbsp;contain&nbsp;formatting,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;can&nbsp;have&nbsp;country&nbsp;calling&nbsp;code&nbsp;specified&nbsp;with&nbsp;+&nbsp;at&nbsp;the&nbsp;start.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;-&nbsp;EXACT_MATCH&nbsp;if&nbsp;the&nbsp;country_code,&nbsp;NSN,&nbsp;presence&nbsp;of&nbsp;a&nbsp;leading&nbsp;zero&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;Italian&nbsp;numbers&nbsp;and&nbsp;any&nbsp;extension&nbsp;present&nbsp;are&nbsp;the&nbsp;same.<br>
+&nbsp;-&nbsp;NSN_MATCH&nbsp;if&nbsp;either&nbsp;or&nbsp;both&nbsp;has&nbsp;no&nbsp;region&nbsp;specified,&nbsp;and&nbsp;the&nbsp;NSNs&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;extensions&nbsp;are&nbsp;the&nbsp;same.<br>
+&nbsp;-&nbsp;SHORT_NSN_MATCH&nbsp;if&nbsp;either&nbsp;or&nbsp;both&nbsp;has&nbsp;no&nbsp;region&nbsp;specified,&nbsp;or&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;region&nbsp;specified&nbsp;is&nbsp;the&nbsp;same,&nbsp;and&nbsp;one&nbsp;NSN&nbsp;could&nbsp;be&nbsp;a&nbsp;shorter&nbsp;version&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;other&nbsp;number.&nbsp;This&nbsp;includes&nbsp;the&nbsp;case&nbsp;where&nbsp;one&nbsp;has&nbsp;an&nbsp;extension<br>
+&nbsp;&nbsp;&nbsp;specified,&nbsp;and&nbsp;the&nbsp;other&nbsp;does&nbsp;not.<br>
+&nbsp;-&nbsp;NO_MATCH&nbsp;otherwise.</tt></dd></dl>
+ <dl><dt><a name="-is_number_type_geographical"><strong>is_number_type_geographical</strong></a>(num_type, country_code)</dt><dd><tt>Tests&nbsp;whether&nbsp;a&nbsp;phone&nbsp;number&nbsp;has&nbsp;a&nbsp;geographical&nbsp;association,<br>
+as&nbsp;represented&nbsp;by&nbsp;its&nbsp;type&nbsp;and&nbsp;the&nbsp;country&nbsp;it&nbsp;belongs&nbsp;to.<br>
+&nbsp;<br>
+This&nbsp;version&nbsp;of&nbsp;isNumberGeographical&nbsp;exists&nbsp;since&nbsp;calculating&nbsp;the&nbsp;phone<br>
+number&nbsp;type&nbsp;is&nbsp;expensive;&nbsp;if&nbsp;we&nbsp;have&nbsp;already&nbsp;done&nbsp;this,&nbsp;we&nbsp;don't&nbsp;want&nbsp;to<br>
+do&nbsp;it&nbsp;again.</tt></dd></dl>
+ <dl><dt><a name="-is_possible_number"><strong>is_possible_number</strong></a>(numobj)</dt><dd><tt>Convenience&nbsp;wrapper&nbsp;around&nbsp;is_possible_number_with_reason.<br>
+&nbsp;<br>
+Instead&nbsp;of&nbsp;returning&nbsp;the&nbsp;reason&nbsp;for&nbsp;failure,&nbsp;this&nbsp;method&nbsp;returns&nbsp;true&nbsp;if<br>
+the&nbsp;number&nbsp;is&nbsp;either&nbsp;a&nbsp;possible&nbsp;fully-qualified&nbsp;number&nbsp;(containing&nbsp;the&nbsp;area<br>
+code&nbsp;and&nbsp;country&nbsp;code),&nbsp;or&nbsp;if&nbsp;the&nbsp;number&nbsp;could&nbsp;be&nbsp;a&nbsp;possible&nbsp;local&nbsp;number<br>
+(with&nbsp;a&nbsp;country&nbsp;code,&nbsp;but&nbsp;missing&nbsp;an&nbsp;area&nbsp;code).&nbsp;Local&nbsp;numbers&nbsp;are<br>
+considered&nbsp;possible&nbsp;if&nbsp;they&nbsp;could&nbsp;be&nbsp;possibly&nbsp;dialled&nbsp;in&nbsp;this&nbsp;format:&nbsp;if<br>
+the&nbsp;area&nbsp;code&nbsp;is&nbsp;needed&nbsp;for&nbsp;a&nbsp;call&nbsp;to&nbsp;connect,&nbsp;the&nbsp;number&nbsp;is&nbsp;not&nbsp;considered<br>
+possible&nbsp;without&nbsp;it.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;the&nbsp;number&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;needs&nbsp;to&nbsp;be&nbsp;checked<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;number&nbsp;is&nbsp;possible</tt></dd></dl>
+ <dl><dt><a name="-is_possible_number_for_type"><strong>is_possible_number_for_type</strong></a>(numobj, numtype)</dt><dd><tt>Convenience&nbsp;wrapper&nbsp;around&nbsp;is_possible_number_for_type_with_reason.<br>
+&nbsp;<br>
+Instead&nbsp;of&nbsp;returning&nbsp;the&nbsp;reason&nbsp;for&nbsp;failure,&nbsp;this&nbsp;method&nbsp;returns&nbsp;true&nbsp;if<br>
+the&nbsp;number&nbsp;is&nbsp;either&nbsp;a&nbsp;possible&nbsp;fully-qualified&nbsp;number&nbsp;(containing&nbsp;the&nbsp;area<br>
+code&nbsp;and&nbsp;country&nbsp;code),&nbsp;or&nbsp;if&nbsp;the&nbsp;number&nbsp;could&nbsp;be&nbsp;a&nbsp;possible&nbsp;local&nbsp;number<br>
+(with&nbsp;a&nbsp;country&nbsp;code,&nbsp;but&nbsp;missing&nbsp;an&nbsp;area&nbsp;code).&nbsp;Local&nbsp;numbers&nbsp;are<br>
+considered&nbsp;possible&nbsp;if&nbsp;they&nbsp;could&nbsp;be&nbsp;possibly&nbsp;dialled&nbsp;in&nbsp;this&nbsp;format:&nbsp;if<br>
+the&nbsp;area&nbsp;code&nbsp;is&nbsp;needed&nbsp;for&nbsp;a&nbsp;call&nbsp;to&nbsp;connect,&nbsp;the&nbsp;number&nbsp;is&nbsp;not&nbsp;considered<br>
+possible&nbsp;without&nbsp;it.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;the&nbsp;number&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;needs&nbsp;to&nbsp;be&nbsp;checked<br>
+numtype&nbsp;--&nbsp;the&nbsp;type&nbsp;we&nbsp;are&nbsp;interested&nbsp;in<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;number&nbsp;is&nbsp;possible</tt></dd></dl>
+ <dl><dt><a name="-is_possible_number_for_type_with_reason"><strong>is_possible_number_for_type_with_reason</strong></a>(numobj, numtype)</dt><dd><tt>Check&nbsp;whether&nbsp;a&nbsp;phone&nbsp;number&nbsp;is&nbsp;a&nbsp;possible&nbsp;number&nbsp;of&nbsp;a&nbsp;particular&nbsp;type.<br>
+&nbsp;<br>
+For&nbsp;types&nbsp;that&nbsp;don't&nbsp;exist&nbsp;in&nbsp;a&nbsp;particular&nbsp;region,&nbsp;this&nbsp;will&nbsp;return&nbsp;a&nbsp;result<br>
+that&nbsp;isn't&nbsp;so&nbsp;useful;&nbsp;it&nbsp;is&nbsp;recommended&nbsp;that&nbsp;you&nbsp;use<br>
+supported_types_for_region&nbsp;or&nbsp;supported_types_for_non_geo_entity<br>
+respectively&nbsp;before&nbsp;calling&nbsp;this&nbsp;method&nbsp;to&nbsp;determine&nbsp;whether&nbsp;you&nbsp;should&nbsp;call<br>
+it&nbsp;for&nbsp;this&nbsp;number&nbsp;at&nbsp;all.<br>
+&nbsp;<br>
+This&nbsp;provides&nbsp;a&nbsp;more&nbsp;lenient&nbsp;check&nbsp;than&nbsp;is_valid_number&nbsp;in&nbsp;the&nbsp;following&nbsp;sense:<br>
+&nbsp;<br>
+&nbsp;-&nbsp;It&nbsp;only&nbsp;checks&nbsp;the&nbsp;length&nbsp;of&nbsp;phone&nbsp;numbers.&nbsp;In&nbsp;particular,&nbsp;it&nbsp;doesn't<br>
+&nbsp;&nbsp;&nbsp;check&nbsp;starting&nbsp;digits&nbsp;of&nbsp;the&nbsp;number.<br>
+&nbsp;<br>
+&nbsp;-&nbsp;For&nbsp;some&nbsp;numbers&nbsp;(particularly&nbsp;fixed-line),&nbsp;many&nbsp;regions&nbsp;have&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;concept&nbsp;of&nbsp;area&nbsp;code,&nbsp;which&nbsp;together&nbsp;with&nbsp;subscriber&nbsp;number&nbsp;constitute<br>
+&nbsp;&nbsp;&nbsp;the&nbsp;national&nbsp;significant&nbsp;number.&nbsp;It&nbsp;is&nbsp;sometimes&nbsp;okay&nbsp;to&nbsp;dial&nbsp;only&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;subscriber&nbsp;number&nbsp;when&nbsp;dialing&nbsp;in&nbsp;the&nbsp;same&nbsp;area.&nbsp;This&nbsp;function&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;return&nbsp;IS_POSSIBLE_LOCAL_ONLY&nbsp;if&nbsp;the&nbsp;subscriber-number-only&nbsp;version&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;passed&nbsp;in.&nbsp;On&nbsp;the&nbsp;other&nbsp;hand,&nbsp;because&nbsp;is_valid_number&nbsp;validates&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;information&nbsp;on&nbsp;both&nbsp;starting&nbsp;digits&nbsp;(for&nbsp;fixed&nbsp;line&nbsp;numbers,&nbsp;that&nbsp;would<br>
+&nbsp;&nbsp;&nbsp;most&nbsp;likely&nbsp;be&nbsp;area&nbsp;codes)&nbsp;and&nbsp;length&nbsp;(obviously&nbsp;includes&nbsp;the&nbsp;length&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;area&nbsp;codes&nbsp;for&nbsp;fixed&nbsp;line&nbsp;numbers),&nbsp;it&nbsp;will&nbsp;return&nbsp;false&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;subscriber-number-only&nbsp;version.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;number&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;needs&nbsp;to&nbsp;be&nbsp;checked<br>
+numtype&nbsp;--&nbsp;The&nbsp;type&nbsp;we&nbsp;are&nbsp;interested&nbsp;in<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;value&nbsp;from&nbsp;<a href="#ValidationResult">ValidationResult</a>&nbsp;which&nbsp;indicates&nbsp;whether&nbsp;the&nbsp;number<br>
+is&nbsp;possible</tt></dd></dl>
+ <dl><dt><a name="-is_possible_number_string"><strong>is_possible_number_string</strong></a>(number, region_dialing_from)</dt><dd><tt>Check&nbsp;whether&nbsp;a&nbsp;phone&nbsp;number&nbsp;string&nbsp;is&nbsp;a&nbsp;possible&nbsp;number.<br>
+&nbsp;<br>
+Takes&nbsp;a&nbsp;number&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;string,&nbsp;and&nbsp;the&nbsp;region&nbsp;where&nbsp;the&nbsp;number<br>
+could&nbsp;be&nbsp;dialed&nbsp;from.&nbsp;It&nbsp;provides&nbsp;a&nbsp;more&nbsp;lenient&nbsp;check&nbsp;than<br>
+is_valid_number;&nbsp;see&nbsp;<a href="#-is_possible_number_with_reason">is_possible_number_with_reason</a>()&nbsp;for&nbsp;details.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;first&nbsp;parses&nbsp;the&nbsp;number,&nbsp;then&nbsp;invokes&nbsp;is_possible_number&nbsp;with<br>
+the&nbsp;resultant&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+Arguments:<br>
+number&nbsp;--&nbsp;The&nbsp;number&nbsp;that&nbsp;needs&nbsp;to&nbsp;be&nbsp;checked,&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;string.<br>
+region_dialling_from&nbsp;--&nbsp;The&nbsp;region&nbsp;that&nbsp;we&nbsp;are&nbsp;expecting&nbsp;the&nbsp;number&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialed&nbsp;from.&nbsp;&nbsp;Note&nbsp;this&nbsp;is&nbsp;different&nbsp;from&nbsp;the&nbsp;region&nbsp;where&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;belongs.&nbsp;&nbsp;For&nbsp;example,&nbsp;the&nbsp;number&nbsp;+1&nbsp;650&nbsp;253&nbsp;0000&nbsp;is&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;that&nbsp;belongs&nbsp;to&nbsp;US.&nbsp;When&nbsp;written&nbsp;in&nbsp;this&nbsp;form,&nbsp;it&nbsp;can&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialed&nbsp;from&nbsp;any&nbsp;region.&nbsp;When&nbsp;it&nbsp;is&nbsp;written&nbsp;as&nbsp;00&nbsp;1&nbsp;650&nbsp;253&nbsp;0000,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;can&nbsp;be&nbsp;dialed&nbsp;from&nbsp;any&nbsp;region&nbsp;which&nbsp;uses&nbsp;an&nbsp;international<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialling&nbsp;prefix&nbsp;of&nbsp;00.&nbsp;When&nbsp;it&nbsp;is&nbsp;written&nbsp;as&nbsp;650&nbsp;253&nbsp;0000,&nbsp;it<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;only&nbsp;be&nbsp;dialed&nbsp;from&nbsp;within&nbsp;the&nbsp;US,&nbsp;and&nbsp;when&nbsp;written&nbsp;as&nbsp;253<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0000,&nbsp;it&nbsp;can&nbsp;only&nbsp;be&nbsp;dialed&nbsp;from&nbsp;within&nbsp;a&nbsp;smaller&nbsp;area&nbsp;in&nbsp;the&nbsp;US<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Mountain&nbsp;View,&nbsp;CA,&nbsp;to&nbsp;be&nbsp;more&nbsp;specific).<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;number&nbsp;is&nbsp;possible</tt></dd></dl>
+ <dl><dt><a name="-is_possible_number_with_reason"><strong>is_possible_number_with_reason</strong></a>(numobj)</dt></dl>
+ <dl><dt><a name="-is_valid_number"><strong>is_valid_number</strong></a>(numobj)</dt><dd><tt>Tests&nbsp;whether&nbsp;a&nbsp;phone&nbsp;number&nbsp;matches&nbsp;a&nbsp;valid&nbsp;pattern.<br>
+&nbsp;<br>
+Note&nbsp;this&nbsp;doesn't&nbsp;verify&nbsp;the&nbsp;number&nbsp;is&nbsp;actually&nbsp;in&nbsp;use,&nbsp;which&nbsp;is<br>
+impossible&nbsp;to&nbsp;tell&nbsp;by&nbsp;just&nbsp;looking&nbsp;at&nbsp;a&nbsp;number&nbsp;itself.&nbsp;&nbsp;It&nbsp;only&nbsp;verifies<br>
+whether&nbsp;the&nbsp;parsed,&nbsp;canonicalised&nbsp;number&nbsp;is&nbsp;valid:&nbsp;not&nbsp;whether&nbsp;a<br>
+particular&nbsp;series&nbsp;of&nbsp;digits&nbsp;entered&nbsp;by&nbsp;the&nbsp;user&nbsp;is&nbsp;diallable&nbsp;from&nbsp;the<br>
+region&nbsp;provided&nbsp;when&nbsp;parsing.&nbsp;For&nbsp;example,&nbsp;the&nbsp;number&nbsp;+41&nbsp;(0)&nbsp;78&nbsp;927&nbsp;2696<br>
+can&nbsp;be&nbsp;parsed&nbsp;into&nbsp;a&nbsp;number&nbsp;with&nbsp;country&nbsp;code&nbsp;"41"&nbsp;and&nbsp;national<br>
+significant&nbsp;number&nbsp;"789272696".&nbsp;This&nbsp;is&nbsp;valid,&nbsp;while&nbsp;the&nbsp;original&nbsp;string<br>
+is&nbsp;not&nbsp;diallable.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;validate<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;boolean&nbsp;that&nbsp;indicates&nbsp;whether&nbsp;the&nbsp;number&nbsp;is&nbsp;of&nbsp;a&nbsp;valid&nbsp;pattern.</tt></dd></dl>
+ <dl><dt><a name="-is_valid_number_for_region"><strong>is_valid_number_for_region</strong></a>(numobj, region_code)</dt><dd><tt>Tests&nbsp;whether&nbsp;a&nbsp;phone&nbsp;number&nbsp;is&nbsp;valid&nbsp;for&nbsp;a&nbsp;certain&nbsp;region.<br>
+&nbsp;<br>
+Note&nbsp;this&nbsp;doesn't&nbsp;verify&nbsp;the&nbsp;number&nbsp;is&nbsp;actually&nbsp;in&nbsp;use,&nbsp;which&nbsp;is<br>
+impossible&nbsp;to&nbsp;tell&nbsp;by&nbsp;just&nbsp;looking&nbsp;at&nbsp;a&nbsp;number&nbsp;itself.&nbsp;If&nbsp;the&nbsp;country<br>
+calling&nbsp;code&nbsp;is&nbsp;not&nbsp;the&nbsp;same&nbsp;as&nbsp;the&nbsp;country&nbsp;calling&nbsp;code&nbsp;for&nbsp;the&nbsp;region,<br>
+this&nbsp;immediately&nbsp;exits&nbsp;with&nbsp;false.&nbsp;After&nbsp;this,&nbsp;the&nbsp;specific&nbsp;number&nbsp;pattern<br>
+rules&nbsp;for&nbsp;the&nbsp;region&nbsp;are&nbsp;examined.&nbsp;This&nbsp;is&nbsp;useful&nbsp;for&nbsp;determining&nbsp;for<br>
+example&nbsp;whether&nbsp;a&nbsp;particular&nbsp;number&nbsp;is&nbsp;valid&nbsp;for&nbsp;Canada,&nbsp;rather&nbsp;than&nbsp;just<br>
+a&nbsp;valid&nbsp;NANPA&nbsp;number.<br>
+&nbsp;<br>
+Warning:&nbsp;In&nbsp;most&nbsp;cases,&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;is_valid_number&nbsp;instead.&nbsp;For<br>
+example,&nbsp;this&nbsp;method&nbsp;will&nbsp;mark&nbsp;numbers&nbsp;from&nbsp;British&nbsp;Crown&nbsp;dependencies<br>
+such&nbsp;as&nbsp;the&nbsp;Isle&nbsp;of&nbsp;Man&nbsp;as&nbsp;invalid&nbsp;for&nbsp;the&nbsp;region&nbsp;"GB"&nbsp;(United&nbsp;Kingdom),<br>
+since&nbsp;it&nbsp;has&nbsp;its&nbsp;own&nbsp;region&nbsp;code,&nbsp;"IM",&nbsp;which&nbsp;may&nbsp;be&nbsp;undesirable.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;validate.<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;validate&nbsp;the&nbsp;phone&nbsp;number&nbsp;for.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;boolean&nbsp;that&nbsp;indicates&nbsp;whether&nbsp;the&nbsp;number&nbsp;is&nbsp;of&nbsp;a&nbsp;valid&nbsp;pattern.</tt></dd></dl>
+ <dl><dt><a name="-length_of_geographical_area_code"><strong>length_of_geographical_area_code</strong></a>(numobj)</dt><dd><tt>Return&nbsp;length&nbsp;of&nbsp;the&nbsp;geographical&nbsp;area&nbsp;code&nbsp;for&nbsp;a&nbsp;number.<br>
+&nbsp;<br>
+Gets&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;geographical&nbsp;area&nbsp;code&nbsp;from&nbsp;the&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a><br>
+passed&nbsp;in,&nbsp;so&nbsp;that&nbsp;clients&nbsp;could&nbsp;use&nbsp;it&nbsp;to&nbsp;split&nbsp;a&nbsp;national&nbsp;significant<br>
+number&nbsp;into&nbsp;geographical&nbsp;area&nbsp;code&nbsp;and&nbsp;subscriber&nbsp;number.&nbsp;It&nbsp;works&nbsp;in&nbsp;such<br>
+a&nbsp;way&nbsp;that&nbsp;the&nbsp;resultant&nbsp;subscriber&nbsp;number&nbsp;should&nbsp;be&nbsp;diallable,&nbsp;at&nbsp;least<br>
+on&nbsp;some&nbsp;devices.&nbsp;An&nbsp;example&nbsp;of&nbsp;how&nbsp;this&nbsp;could&nbsp;be&nbsp;used:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;import&nbsp;phonenumbers<br>
+&gt;&gt;&gt;&nbsp;numobj&nbsp;=&nbsp;phonenumbers.<a href="#-parse">parse</a>("16502530000",&nbsp;"US")<br>
+&gt;&gt;&gt;&nbsp;nsn&nbsp;=&nbsp;phonenumbers.<a href="#-national_significant_number">national_significant_number</a>(numobj)<br>
+&gt;&gt;&gt;&nbsp;ac_len&nbsp;=&nbsp;phonenumbers.<a href="#-length_of_geographical_area_code">length_of_geographical_area_code</a>(numobj)<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;ac_len&nbsp;&gt;&nbsp;0:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;area_code&nbsp;=&nbsp;nsn[:ac_len]<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subscriber_number&nbsp;=&nbsp;nsn[ac_len:]<br>
+...&nbsp;else:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;area_code&nbsp;=&nbsp;""<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subscriber_number&nbsp;=&nbsp;nsn<br>
+&nbsp;<br>
+N.B.:&nbsp;area&nbsp;code&nbsp;is&nbsp;a&nbsp;very&nbsp;ambiguous&nbsp;concept,&nbsp;so&nbsp;the&nbsp;I18N&nbsp;team&nbsp;generally<br>
+recommends&nbsp;against&nbsp;using&nbsp;it&nbsp;for&nbsp;most&nbsp;purposes,&nbsp;but&nbsp;recommends&nbsp;using&nbsp;the<br>
+more&nbsp;general&nbsp;national_number&nbsp;instead.&nbsp;Read&nbsp;the&nbsp;following&nbsp;carefully&nbsp;before<br>
+deciding&nbsp;to&nbsp;use&nbsp;this&nbsp;method:<br>
+&nbsp;<br>
+&nbsp;-&nbsp;geographical&nbsp;area&nbsp;codes&nbsp;change&nbsp;over&nbsp;time,&nbsp;and&nbsp;this&nbsp;method&nbsp;honors&nbsp;those<br>
+&nbsp;&nbsp;&nbsp;changes;&nbsp;therefore,&nbsp;it&nbsp;doesn't&nbsp;guarantee&nbsp;the&nbsp;stability&nbsp;of&nbsp;the&nbsp;result&nbsp;it<br>
+&nbsp;&nbsp;&nbsp;produces.<br>
+&nbsp;-&nbsp;subscriber&nbsp;numbers&nbsp;may&nbsp;not&nbsp;be&nbsp;diallable&nbsp;from&nbsp;all&nbsp;devices&nbsp;(notably<br>
+&nbsp;&nbsp;&nbsp;mobile&nbsp;devices,&nbsp;which&nbsp;typically&nbsp;require&nbsp;the&nbsp;full&nbsp;national_number&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;dialled&nbsp;in&nbsp;most&nbsp;countries).<br>
+&nbsp;-&nbsp;most&nbsp;non-geographical&nbsp;numbers&nbsp;have&nbsp;no&nbsp;area&nbsp;codes,&nbsp;including&nbsp;numbers<br>
+&nbsp;&nbsp;&nbsp;from&nbsp;non-geographical&nbsp;entities.<br>
+&nbsp;-&nbsp;some&nbsp;geographical&nbsp;numbers&nbsp;have&nbsp;no&nbsp;area&nbsp;codes.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;find&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;area&nbsp;code&nbsp;form.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;length&nbsp;of&nbsp;area&nbsp;code&nbsp;of&nbsp;the&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in.</tt></dd></dl>
+ <dl><dt><a name="-length_of_national_destination_code"><strong>length_of_national_destination_code</strong></a>(numobj)</dt><dd><tt>Return&nbsp;length&nbsp;of&nbsp;the&nbsp;national&nbsp;destination&nbsp;code&nbsp;code&nbsp;for&nbsp;a&nbsp;number.<br>
+&nbsp;<br>
+Gets&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;national&nbsp;destination&nbsp;code&nbsp;(NDC)&nbsp;from&nbsp;the<br>
+PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in,&nbsp;so&nbsp;that&nbsp;clients&nbsp;could&nbsp;use&nbsp;it&nbsp;to&nbsp;split&nbsp;a<br>
+national&nbsp;significant&nbsp;number&nbsp;into&nbsp;NDC&nbsp;and&nbsp;subscriber&nbsp;number.&nbsp;The&nbsp;NDC&nbsp;of&nbsp;a<br>
+phone&nbsp;number&nbsp;is&nbsp;normally&nbsp;the&nbsp;first&nbsp;group&nbsp;of&nbsp;digit(s)&nbsp;right&nbsp;after&nbsp;the<br>
+country&nbsp;calling&nbsp;code&nbsp;when&nbsp;the&nbsp;number&nbsp;is&nbsp;formatted&nbsp;in&nbsp;the&nbsp;international<br>
+format,&nbsp;if&nbsp;there&nbsp;is&nbsp;a&nbsp;subscriber&nbsp;number&nbsp;part&nbsp;that&nbsp;follows.<br>
+&nbsp;<br>
+N.B.:&nbsp;similar&nbsp;to&nbsp;an&nbsp;area&nbsp;code,&nbsp;not&nbsp;all&nbsp;numbers&nbsp;have&nbsp;an&nbsp;NDC!<br>
+&nbsp;<br>
+An&nbsp;example&nbsp;of&nbsp;how&nbsp;this&nbsp;could&nbsp;be&nbsp;used:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;import&nbsp;phonenumbers<br>
+&gt;&gt;&gt;&nbsp;numobj&nbsp;=&nbsp;phonenumbers.<a href="#-parse">parse</a>("18002530000",&nbsp;"US")<br>
+&gt;&gt;&gt;&nbsp;nsn&nbsp;=&nbsp;phonenumbers.<a href="#-national_significant_number">national_significant_number</a>(numobj)<br>
+&gt;&gt;&gt;&nbsp;ndc_len&nbsp;=&nbsp;phonenumbers.<a href="#-length_of_national_destination_code">length_of_national_destination_code</a>(numobj)<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;ndc_len&nbsp;&gt;&nbsp;0:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;national_destination_code&nbsp;=&nbsp;nsn[:ndc_len]<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subscriber_number&nbsp;=&nbsp;nsn[ndc_len:]<br>
+...&nbsp;else:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;national_destination_code&nbsp;=&nbsp;""<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subscriber_number&nbsp;=&nbsp;nsn<br>
+&nbsp;<br>
+Refer&nbsp;to&nbsp;the&nbsp;unittests&nbsp;to&nbsp;see&nbsp;the&nbsp;difference&nbsp;between&nbsp;this&nbsp;function&nbsp;and<br>
+length_of_geographical_area_code.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;find&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;NDC&nbsp;from.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;length&nbsp;of&nbsp;NDC&nbsp;of&nbsp;the&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in,&nbsp;which<br>
+could&nbsp;be&nbsp;zero.</tt></dd></dl>
+ <dl><dt><a name="-national_significant_number"><strong>national_significant_number</strong></a>(numobj)</dt><dd><tt>Gets&nbsp;the&nbsp;national&nbsp;significant&nbsp;number&nbsp;of&nbsp;a&nbsp;phone&nbsp;number.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;a&nbsp;national&nbsp;significant&nbsp;number&nbsp;doesn't&nbsp;contain&nbsp;a&nbsp;national&nbsp;prefix<br>
+or&nbsp;any&nbsp;formatting.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;for&nbsp;which&nbsp;the&nbsp;national&nbsp;significant&nbsp;number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;needed.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;national&nbsp;significant&nbsp;number&nbsp;of&nbsp;the&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed<br>
+in.</tt></dd></dl>
+ <dl><dt><a name="-ndd_prefix_for_region"><strong>ndd_prefix_for_region</strong></a>(region_code, strip_non_digits)</dt><dd><tt>Returns&nbsp;the&nbsp;national&nbsp;dialling&nbsp;prefix&nbsp;for&nbsp;a&nbsp;specific&nbsp;region.<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;this&nbsp;would&nbsp;be&nbsp;1&nbsp;for&nbsp;the&nbsp;United&nbsp;States,&nbsp;and&nbsp;0&nbsp;for&nbsp;New<br>
+Zealand.&nbsp;Set&nbsp;strip_non_digits&nbsp;to&nbsp;True&nbsp;to&nbsp;strip&nbsp;symbols&nbsp;like&nbsp;"~"&nbsp;(which<br>
+indicates&nbsp;a&nbsp;wait&nbsp;for&nbsp;a&nbsp;dialling&nbsp;tone)&nbsp;from&nbsp;the&nbsp;prefix&nbsp;returned.&nbsp;If&nbsp;no<br>
+national&nbsp;prefix&nbsp;is&nbsp;present,&nbsp;we&nbsp;return&nbsp;None.<br>
+&nbsp;<br>
+Warning:&nbsp;Do&nbsp;not&nbsp;use&nbsp;this&nbsp;method&nbsp;for&nbsp;do-your-own&nbsp;formatting&nbsp;-&nbsp;for&nbsp;some<br>
+regions,&nbsp;the&nbsp;national&nbsp;dialling&nbsp;prefix&nbsp;is&nbsp;used&nbsp;only&nbsp;for&nbsp;certain&nbsp;types&nbsp;of<br>
+numbers.&nbsp;Use&nbsp;the&nbsp;library's&nbsp;formatting&nbsp;functions&nbsp;to&nbsp;prefix&nbsp;the&nbsp;national<br>
+prefix&nbsp;when&nbsp;required.<br>
+&nbsp;<br>
+Arguments:<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;the&nbsp;dialling&nbsp;prefix&nbsp;for.<br>
+strip_non_digits&nbsp;--&nbsp;whether&nbsp;to&nbsp;strip&nbsp;non-digits&nbsp;from&nbsp;the&nbsp;national<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialling&nbsp;prefix.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;dialling&nbsp;prefix&nbsp;for&nbsp;the&nbsp;region&nbsp;denoted&nbsp;by&nbsp;region_code.</tt></dd></dl>
+ <dl><dt><a name="-normalize_diallable_chars_only"><strong>normalize_diallable_chars_only</strong></a>(number)</dt><dd><tt>Normalizes&nbsp;a&nbsp;string&nbsp;of&nbsp;characters&nbsp;representing&nbsp;a&nbsp;phone&nbsp;number.<br>
+&nbsp;<br>
+This&nbsp;strips&nbsp;all&nbsp;characters&nbsp;which&nbsp;are&nbsp;not&nbsp;diallable&nbsp;on&nbsp;a&nbsp;mobile&nbsp;phone<br>
+keypad&nbsp;(including&nbsp;all&nbsp;non-ASCII&nbsp;digits).<br>
+&nbsp;<br>
+Arguments:<br>
+number&nbsp;--&nbsp;a&nbsp;string&nbsp;of&nbsp;characters&nbsp;representing&nbsp;a&nbsp;phone&nbsp;number<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;normalized&nbsp;string&nbsp;version&nbsp;of&nbsp;the&nbsp;phone&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-normalize_digits_only"><strong>normalize_digits_only</strong></a>(number, keep_non_digits=False)</dt><dd><tt>Normalizes&nbsp;a&nbsp;string&nbsp;of&nbsp;characters&nbsp;representing&nbsp;a&nbsp;phone&nbsp;number.<br>
+&nbsp;<br>
+This&nbsp;converts&nbsp;wide-ascii&nbsp;and&nbsp;arabic-indic&nbsp;numerals&nbsp;to&nbsp;European&nbsp;numerals,<br>
+and&nbsp;strips&nbsp;punctuation&nbsp;and&nbsp;alpha&nbsp;characters&nbsp;(optional).<br>
+&nbsp;<br>
+Arguments:<br>
+number&nbsp;--&nbsp;a&nbsp;string&nbsp;representing&nbsp;a&nbsp;phone&nbsp;number<br>
+keep_non_digits&nbsp;--&nbsp;whether&nbsp;to&nbsp;keep&nbsp;non-digits<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;normalized&nbsp;string&nbsp;version&nbsp;of&nbsp;the&nbsp;phone&nbsp;number.</tt></dd></dl>
+ <dl><dt><a name="-number_type"><strong>number_type</strong></a>(numobj)</dt><dd><tt>Gets&nbsp;the&nbsp;type&nbsp;of&nbsp;a&nbsp;valid&nbsp;phone&nbsp;number.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;know&nbsp;the&nbsp;type&nbsp;of.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;phone&nbsp;number,&nbsp;as&nbsp;a&nbsp;<a href="#PhoneNumberType">PhoneNumberType</a>&nbsp;value;<br>
+returns&nbsp;<a href="#PhoneNumberType">PhoneNumberType</a>.UNKNOWN&nbsp;if&nbsp;it&nbsp;is&nbsp;invalid.</tt></dd></dl>
+ <dl><dt><a name="-parse"><strong>parse</strong></a>(number, region=None, keep_raw_input=False, numobj=None, _check_region=True)</dt><dd><tt>Parse&nbsp;a&nbsp;string&nbsp;and&nbsp;return&nbsp;a&nbsp;corresponding&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+The&nbsp;method&nbsp;is&nbsp;quite&nbsp;lenient&nbsp;and&nbsp;looks&nbsp;for&nbsp;a&nbsp;number&nbsp;in&nbsp;the&nbsp;input&nbsp;text<br>
+(raw&nbsp;input)&nbsp;and&nbsp;does&nbsp;not&nbsp;check&nbsp;whether&nbsp;the&nbsp;string&nbsp;is&nbsp;definitely&nbsp;only&nbsp;a<br>
+phone&nbsp;number.&nbsp;To&nbsp;do&nbsp;this,&nbsp;it&nbsp;ignores&nbsp;punctuation&nbsp;and&nbsp;white-space,&nbsp;as<br>
+well&nbsp;as&nbsp;any&nbsp;text&nbsp;before&nbsp;the&nbsp;number&nbsp;(e.g.&nbsp;a&nbsp;leading&nbsp;"Tel:&nbsp;")&nbsp;and&nbsp;trims<br>
+the&nbsp;non-number&nbsp;bits.&nbsp;&nbsp;It&nbsp;will&nbsp;accept&nbsp;a&nbsp;number&nbsp;in&nbsp;any&nbsp;format&nbsp;(E164,<br>
+national,&nbsp;international&nbsp;etc),&nbsp;assuming&nbsp;it&nbsp;can&nbsp;be&nbsp;interpreted&nbsp;with&nbsp;the<br>
+defaultRegion&nbsp;supplied.&nbsp;It&nbsp;also&nbsp;attempts&nbsp;to&nbsp;convert&nbsp;any&nbsp;alpha&nbsp;characters<br>
+into&nbsp;digits&nbsp;if&nbsp;it&nbsp;thinks&nbsp;this&nbsp;is&nbsp;a&nbsp;vanity&nbsp;number&nbsp;of&nbsp;the&nbsp;type&nbsp;"1800<br>
+MICROSOFT".<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;will&nbsp;throw&nbsp;a&nbsp;<a href="#NumberParseException">NumberParseException</a>&nbsp;if&nbsp;the&nbsp;number&nbsp;is&nbsp;not<br>
+considered&nbsp;to&nbsp;be&nbsp;a&nbsp;possible&nbsp;number.&nbsp;Note&nbsp;that&nbsp;validation&nbsp;of&nbsp;whether&nbsp;the<br>
+number&nbsp;is&nbsp;actually&nbsp;a&nbsp;valid&nbsp;number&nbsp;for&nbsp;a&nbsp;particular&nbsp;region&nbsp;is&nbsp;not<br>
+performed.&nbsp;This&nbsp;can&nbsp;be&nbsp;done&nbsp;separately&nbsp;with&nbsp;is_valid_number.<br>
+&nbsp;<br>
+Note&nbsp;this&nbsp;method&nbsp;canonicalizes&nbsp;the&nbsp;phone&nbsp;number&nbsp;such&nbsp;that&nbsp;different<br>
+representations&nbsp;can&nbsp;be&nbsp;easily&nbsp;compared,&nbsp;no&nbsp;matter&nbsp;what&nbsp;form&nbsp;it&nbsp;was<br>
+originally&nbsp;entered&nbsp;in&nbsp;(e.g.&nbsp;national,&nbsp;international).&nbsp;If&nbsp;you&nbsp;want&nbsp;to<br>
+record&nbsp;context&nbsp;about&nbsp;the&nbsp;number&nbsp;being&nbsp;parsed,&nbsp;such&nbsp;as&nbsp;the&nbsp;raw&nbsp;input&nbsp;that<br>
+was&nbsp;entered,&nbsp;how&nbsp;the&nbsp;country&nbsp;code&nbsp;was&nbsp;derived&nbsp;etc.&nbsp;then&nbsp;ensure<br>
+keep_raw_input&nbsp;is&nbsp;set.<br>
+&nbsp;<br>
+Note&nbsp;if&nbsp;any&nbsp;new&nbsp;field&nbsp;is&nbsp;added&nbsp;to&nbsp;this&nbsp;method&nbsp;that&nbsp;should&nbsp;always&nbsp;be&nbsp;filled<br>
+in,&nbsp;even&nbsp;when&nbsp;keep_raw_input&nbsp;is&nbsp;False,&nbsp;it&nbsp;should&nbsp;also&nbsp;be&nbsp;handled&nbsp;in&nbsp;the<br>
+_copy_core_fields_only()&nbsp;function.<br>
+&nbsp;<br>
+Arguments:<br>
+number&nbsp;--&nbsp;The&nbsp;number&nbsp;that&nbsp;we&nbsp;are&nbsp;attempting&nbsp;to&nbsp;parse.&nbsp;This&nbsp;can<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contain&nbsp;formatting&nbsp;such&nbsp;as&nbsp;+,&nbsp;(&nbsp;and&nbsp;-,&nbsp;as&nbsp;well&nbsp;as&nbsp;a&nbsp;phone<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;extension.&nbsp;It&nbsp;can&nbsp;also&nbsp;be&nbsp;provided&nbsp;in&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc3966.txt">RFC3966</a>&nbsp;format.<br>
+region&nbsp;--&nbsp;The&nbsp;region&nbsp;that&nbsp;we&nbsp;are&nbsp;expecting&nbsp;the&nbsp;number&nbsp;to&nbsp;be&nbsp;from.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;only&nbsp;used&nbsp;if&nbsp;the&nbsp;number&nbsp;being&nbsp;parsed&nbsp;is&nbsp;not&nbsp;written&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;international&nbsp;format.&nbsp;The&nbsp;country_code&nbsp;for&nbsp;the&nbsp;number&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;case&nbsp;would&nbsp;be&nbsp;stored&nbsp;as&nbsp;that&nbsp;of&nbsp;the&nbsp;default&nbsp;region<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;supplied.&nbsp;If&nbsp;the&nbsp;number&nbsp;is&nbsp;guaranteed&nbsp;to&nbsp;start&nbsp;with&nbsp;a&nbsp;'+'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;followed&nbsp;by&nbsp;the&nbsp;country&nbsp;calling&nbsp;code,&nbsp;then&nbsp;None&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNKNOWN_REGION&nbsp;can&nbsp;be&nbsp;supplied.<br>
+keep_raw_input&nbsp;--&nbsp;Whether&nbsp;to&nbsp;populate&nbsp;the&nbsp;raw_input&nbsp;field&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;with&nbsp;number&nbsp;(as&nbsp;well&nbsp;as&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;country_code_source&nbsp;field).<br>
+numobj&nbsp;--&nbsp;An&nbsp;optional&nbsp;existing&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;receive&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parsing&nbsp;results<br>
+_check_region&nbsp;--&nbsp;Whether&nbsp;to&nbsp;check&nbsp;the&nbsp;supplied&nbsp;region&nbsp;parameter;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;always&nbsp;be&nbsp;True&nbsp;for&nbsp;external&nbsp;callers.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;filled&nbsp;with&nbsp;the&nbsp;parse&nbsp;number.<br>
+&nbsp;<br>
+Raises:<br>
+<a href="#NumberParseException">NumberParseException</a>&nbsp;if&nbsp;the&nbsp;string&nbsp;is&nbsp;not&nbsp;considered&nbsp;to&nbsp;be&nbsp;a&nbsp;viable<br>
+phone&nbsp;number&nbsp;(e.g.&nbsp;&nbsp;too&nbsp;few&nbsp;or&nbsp;too&nbsp;many&nbsp;digits)&nbsp;or&nbsp;if&nbsp;no&nbsp;default<br>
+region&nbsp;was&nbsp;supplied&nbsp;and&nbsp;the&nbsp;number&nbsp;is&nbsp;not&nbsp;in&nbsp;international&nbsp;format<br>
+(does&nbsp;not&nbsp;start&nbsp;with&nbsp;+).</tt></dd></dl>
+ <dl><dt><a name="-region_code_for_country_code"><strong>region_code_for_country_code</strong></a>(country_code)</dt><dd><tt>Returns&nbsp;the&nbsp;region&nbsp;code&nbsp;that&nbsp;matches&nbsp;a&nbsp;specific&nbsp;country&nbsp;calling&nbsp;code.<br>
+&nbsp;<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;no&nbsp;region&nbsp;code&nbsp;being&nbsp;found,&nbsp;UNKNOWN_REGION&nbsp;('ZZ')&nbsp;will&nbsp;be<br>
+returned.&nbsp;In&nbsp;the&nbsp;case&nbsp;of&nbsp;multiple&nbsp;regions,&nbsp;the&nbsp;one&nbsp;designated&nbsp;in&nbsp;the<br>
+metadata&nbsp;as&nbsp;the&nbsp;"main"&nbsp;region&nbsp;for&nbsp;this&nbsp;calling&nbsp;code&nbsp;will&nbsp;be&nbsp;returned.&nbsp;&nbsp;If<br>
+the&nbsp;country_code&nbsp;entered&nbsp;is&nbsp;valid&nbsp;but&nbsp;doesn't&nbsp;match&nbsp;a&nbsp;specific&nbsp;region<br>
+(such&nbsp;as&nbsp;in&nbsp;the&nbsp;case&nbsp;of&nbsp;non-geographical&nbsp;calling&nbsp;codes&nbsp;like&nbsp;800)&nbsp;the&nbsp;value<br>
+"001"&nbsp;will&nbsp;be&nbsp;returned&nbsp;(corresponding&nbsp;to&nbsp;the&nbsp;value&nbsp;for&nbsp;World&nbsp;in&nbsp;the&nbsp;UN<br>
+M.49&nbsp;schema).</tt></dd></dl>
+ <dl><dt><a name="-region_code_for_number"><strong>region_code_for_number</strong></a>(numobj)</dt><dd><tt>Returns&nbsp;the&nbsp;region&nbsp;where&nbsp;a&nbsp;phone&nbsp;number&nbsp;is&nbsp;from.<br>
+&nbsp;<br>
+This&nbsp;could&nbsp;be&nbsp;used&nbsp;for&nbsp;geocoding&nbsp;at&nbsp;the&nbsp;region&nbsp;level.&nbsp;Only&nbsp;guarantees<br>
+correct&nbsp;results&nbsp;for&nbsp;valid,&nbsp;full&nbsp;numbers&nbsp;(not&nbsp;short-codes,&nbsp;or&nbsp;invalid<br>
+numbers).<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;phone&nbsp;number&nbsp;<a href="builtins.html#object">object</a>&nbsp;whose&nbsp;origin&nbsp;we&nbsp;want&nbsp;to&nbsp;know<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;region&nbsp;where&nbsp;the&nbsp;phone&nbsp;number&nbsp;is&nbsp;from,&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;region<br>
+matches&nbsp;this&nbsp;calling&nbsp;code.</tt></dd></dl>
+ <dl><dt><a name="-region_codes_for_country_code"><strong>region_codes_for_country_code</strong></a>(country_code)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;with&nbsp;the&nbsp;region&nbsp;codes&nbsp;that&nbsp;match&nbsp;the&nbsp;specific&nbsp;country&nbsp;calling&nbsp;code.<br>
+&nbsp;<br>
+For&nbsp;non-geographical&nbsp;country&nbsp;calling&nbsp;codes,&nbsp;the&nbsp;region&nbsp;code&nbsp;001&nbsp;is<br>
+returned.&nbsp;Also,&nbsp;in&nbsp;the&nbsp;case&nbsp;of&nbsp;no&nbsp;region&nbsp;code&nbsp;being&nbsp;found,&nbsp;an&nbsp;empty<br>
+list&nbsp;is&nbsp;returned.</tt></dd></dl>
+ <dl><dt><a name="-supported_calling_codes"><strong>supported_calling_codes</strong></a>()</dt><dd><tt>Returns&nbsp;all&nbsp;country&nbsp;calling&nbsp;codes&nbsp;the&nbsp;library&nbsp;has&nbsp;metadata&nbsp;for,&nbsp;covering<br>
+both&nbsp;non-geographical&nbsp;entities&nbsp;(global&nbsp;network&nbsp;calling&nbsp;codes)&nbsp;and&nbsp;those<br>
+used&nbsp;for&nbsp;geographical&nbsp;entities.&nbsp;This&nbsp;could&nbsp;be&nbsp;used&nbsp;to&nbsp;populate&nbsp;a&nbsp;drop-down<br>
+box&nbsp;of&nbsp;country&nbsp;calling&nbsp;codes&nbsp;for&nbsp;a&nbsp;phone-number&nbsp;widget,&nbsp;for&nbsp;instance.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;unordered&nbsp;set&nbsp;of&nbsp;the&nbsp;country&nbsp;calling&nbsp;codes&nbsp;for&nbsp;every&nbsp;geographica<br>
+and&nbsp;non-geographical&nbsp;entity&nbsp;the&nbsp;library&nbsp;supports.</tt></dd></dl>
+ <dl><dt><a name="-supported_types_for_non_geo_entity"><strong>supported_types_for_non_geo_entity</strong></a>(country_code)</dt><dd><tt>Returns&nbsp;the&nbsp;types&nbsp;for&nbsp;a&nbsp;country-code&nbsp;belonging&nbsp;to&nbsp;a&nbsp;non-geographical&nbsp;entity<br>
+which&nbsp;the&nbsp;library&nbsp;has&nbsp;metadata&nbsp;for.&nbsp;Will&nbsp;not&nbsp;include&nbsp;FIXED_LINE_OR_MOBILE<br>
+(if&nbsp;numbers&nbsp;for&nbsp;this&nbsp;non-geographical&nbsp;entity&nbsp;could&nbsp;be&nbsp;classified&nbsp;as<br>
+FIXED_LINE_OR_MOBILE,&nbsp;both&nbsp;FIXED_LINE&nbsp;and&nbsp;MOBILE&nbsp;would&nbsp;be&nbsp;present)&nbsp;and<br>
+UNKNOWN.<br>
+&nbsp;<br>
+No&nbsp;types&nbsp;will&nbsp;be&nbsp;returned&nbsp;for&nbsp;country&nbsp;calling&nbsp;codes&nbsp;that&nbsp;do&nbsp;not&nbsp;map&nbsp;to&nbsp;a<br>
+known&nbsp;non-geographical&nbsp;entity.</tt></dd></dl>
+ <dl><dt><a name="-supported_types_for_region"><strong>supported_types_for_region</strong></a>(region_code)</dt><dd><tt>Returns&nbsp;the&nbsp;types&nbsp;for&nbsp;a&nbsp;given&nbsp;region&nbsp;which&nbsp;the&nbsp;library&nbsp;has&nbsp;metadata&nbsp;for.<br>
+&nbsp;<br>
+Will&nbsp;not&nbsp;include&nbsp;FIXED_LINE_OR_MOBILE&nbsp;(if&nbsp;numbers&nbsp;in&nbsp;this&nbsp;region&nbsp;could<br>
+be&nbsp;classified&nbsp;as&nbsp;FIXED_LINE_OR_MOBILE,&nbsp;both&nbsp;FIXED_LINE&nbsp;and&nbsp;MOBILE&nbsp;would<br>
+be&nbsp;present)&nbsp;and&nbsp;UNKNOWN.<br>
+&nbsp;<br>
+No&nbsp;types&nbsp;will&nbsp;be&nbsp;returned&nbsp;for&nbsp;invalid&nbsp;or&nbsp;unknown&nbsp;region&nbsp;codes.</tt></dd></dl>
+ <dl><dt><a name="-truncate_too_long_number"><strong>truncate_too_long_number</strong></a>(numobj)</dt><dd><tt>Truncate&nbsp;a&nbsp;number&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;is&nbsp;too&nbsp;long.<br>
+&nbsp;<br>
+Attempts&nbsp;to&nbsp;extract&nbsp;a&nbsp;valid&nbsp;number&nbsp;from&nbsp;a&nbsp;phone&nbsp;number&nbsp;that&nbsp;is&nbsp;too&nbsp;long<br>
+to&nbsp;be&nbsp;valid,&nbsp;and&nbsp;resets&nbsp;the&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in&nbsp;to&nbsp;that&nbsp;valid<br>
+version.&nbsp;If&nbsp;no&nbsp;valid&nbsp;number&nbsp;could&nbsp;be&nbsp;extracted,&nbsp;the&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a><br>
+passed&nbsp;in&nbsp;will&nbsp;not&nbsp;be&nbsp;modified.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;A&nbsp;PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;which&nbsp;contains&nbsp;a&nbsp;number&nbsp;that&nbsp;is&nbsp;too&nbsp;long&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;valid.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;a&nbsp;valid&nbsp;phone&nbsp;number&nbsp;can&nbsp;be&nbsp;successfully&nbsp;extracted.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>COUNTRY_CODES_FOR_NON_GEO_REGIONS</strong> = {800, 808, 870, 878, 881, 882, ...}<br>
+<strong>COUNTRY_CODE_TO_REGION_CODE</strong> = {1: ('US', 'AG', 'AI', 'AS', 'BB', 'BM', 'BS', 'CA', 'DM', 'DO', 'GD', 'GU', 'JM', 'KN', 'KY', 'LC', 'MP', 'MS', 'PR', 'SX', ...), 7: ('RU', 'KZ'), 20: ('EG',), 27: ('ZA',), 30: ('GR',), 31: ('NL',), 32: ('BE',), 33: ('FR',), 34: ('ES',), 36: ('HU',), ...}<br>
+<strong>NON_DIGITS_PATTERN</strong> = re.compile('(?:\\D+)')<br>
+<strong>REGION_CODE_FOR_NON_GEO_ENTITY</strong> = '001'<br>
+<strong>SUPPORTED_REGIONS</strong> = {'AC', 'AD', 'AE', 'AF', 'AG', 'AI', ...}<br>
+<strong>UNKNOWN_REGION</strong> = 'ZZ'<br>
+<strong>U_DASH</strong> = '-'<br>
+<strong>U_EMPTY_STRING</strong> = ''<br>
+<strong>U_SEMICOLON</strong> = ';'<br>
+<strong>U_SPACE</strong> = ' '<br>
+<strong>U_TILDE</strong> = '~'<br>
+<strong>U_ZERO</strong> = '0'</td></tr></table>
+</body></html>

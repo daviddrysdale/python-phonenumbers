@@ -153,3 +153,27 @@ $(PYDIR)/phonenumbers/pb2/phonenumber_pb2.py: $(TOPDIR)/resources/phonenumber.pr
 	protoc -I$(TOPDIR)/resources --python_out=$(PYDIR)/phonenumbers/pb2 $<
 testpb2: pb2
 	cd $(PYDIR) && $(PYTHON) -m testpb2
+
+#####################################################################################################
+# Generate docs with pydoc
+DOCDIR=$(TOPDIR)/docs
+SUBMODULES=asyoutypeformatter.py carrier.py geocoder.py phonemetadata.py phonenumber.py phonenumbermatcher.py phonenumberutil.py prefix.py re_util.py shortnumberinfo.py timezone.py unicode_util.py util.py
+DOCS_SUBMODULES=$(addprefix $(DOCDIR)/phonenumbers.,$(subst .py,.html,$(SUBMODULES)))
+PYDIR_ABS=$(realpath $(PYDIR))
+
+docs: $(DOCDIR)/phonenumbers.html $(DOCS_SUBMODULES)
+
+$(DOCDIR)/phonenumbers.html: $(PYDIR)/phonenumbers/__init__.py
+	cd $(PYDIR) && pydoc -w phonenumbers
+	mv $(PYDIR)/phonenumbers.html $@
+	sed 's@href="file:$(PYDIR_ABS)/@href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/@' $@ | sed 's@$(PYDIR_ABS)/@@' > $@.temp
+	mv $@.temp $@
+
+$(DOCDIR)/phonenumbers.%.html: $(PYDIR)/phonenumbers/%.py
+	cd $(PYDIR) && pydoc -w phonenumbers.$*
+	mv $(PYDIR)/phonenumbers.$*.html $@
+	sed 's@href="file:$(PYDIR_ABS)/@href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/@' $@ | sed 's@$(PYDIR_ABS)/@@' > $@.temp
+	mv $@.temp $@
+
+docclean:
+	rm -f $(DOCDIR)/phonenumbers.html $(DOCS_SUBMODULES)

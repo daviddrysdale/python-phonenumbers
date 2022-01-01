@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module phonenumbers.carrier</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="phonenumbers.html"><font color="#ffffff">phonenumbers</font></a>.carrier</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/phonenumbers/carrier.py">phonenumbers/carrier.py</a></font></td></tr></table>
+    <p><tt>Phone&nbsp;number&nbsp;to&nbsp;carrier&nbsp;mapping&nbsp;functionality<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;import&nbsp;phonenumbers<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;phonenumbers.carrier&nbsp;import&nbsp;name_for_number<br>
+&gt;&gt;&gt;&nbsp;ro_number&nbsp;=&nbsp;phonenumbers.parse("+40721234567",&nbsp;"RO")<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-name_for_number">name_for_number</a>(ro_number,&nbsp;"en"))<br>
+'Vodafone'<br>
+&gt;&gt;&gt;&nbsp;str(<a href="#-name_for_number">name_for_number</a>(ro_number,&nbsp;"fr"))&nbsp;&nbsp;#&nbsp;fall&nbsp;back&nbsp;to&nbsp;English<br>
+'Vodafone'</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-name_for_number"><strong>name_for_number</strong></a>(numobj, lang, script=None, region=None)</dt><dd><tt>Returns&nbsp;a&nbsp;carrier&nbsp;name&nbsp;for&nbsp;the&nbsp;given&nbsp;PhoneNumber&nbsp;object,&nbsp;in&nbsp;the<br>
+language&nbsp;provided.<br>
+&nbsp;<br>
+The&nbsp;carrier&nbsp;name&nbsp;is&nbsp;the&nbsp;one&nbsp;the&nbsp;number&nbsp;was&nbsp;originally&nbsp;allocated&nbsp;to,<br>
+however&nbsp;if&nbsp;the&nbsp;country&nbsp;supports&nbsp;mobile&nbsp;number&nbsp;portability&nbsp;the&nbsp;number&nbsp;might<br>
+not&nbsp;belong&nbsp;to&nbsp;the&nbsp;returned&nbsp;carrier&nbsp;anymore.&nbsp;If&nbsp;no&nbsp;mapping&nbsp;is&nbsp;found&nbsp;an<br>
+empty&nbsp;string&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;explicitly&nbsp;checks&nbsp;the&nbsp;validity&nbsp;of&nbsp;the&nbsp;number&nbsp;passed&nbsp;in<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;PhoneNumber&nbsp;object&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;a&nbsp;carrier&nbsp;name.<br>
+lang&nbsp;--&nbsp;A&nbsp;2-letter&nbsp;lowercase&nbsp;ISO&nbsp;639-1&nbsp;language&nbsp;code&nbsp;for&nbsp;the&nbsp;language&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;the&nbsp;description&nbsp;should&nbsp;be&nbsp;returned&nbsp;(e.g.&nbsp;"en")<br>
+script&nbsp;--&nbsp;A&nbsp;4-letter&nbsp;titlecase&nbsp;(first&nbsp;letter&nbsp;uppercase,&nbsp;rest&nbsp;lowercase)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISO&nbsp;script&nbsp;code&nbsp;as&nbsp;defined&nbsp;in&nbsp;ISO&nbsp;15924,&nbsp;separated&nbsp;by&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underscore&nbsp;(e.g.&nbsp;"Hant")<br>
+region&nbsp;--&nbsp;&nbsp;A&nbsp;2-letter&nbsp;uppercase&nbsp;ISO&nbsp;3166-1&nbsp;country&nbsp;code&nbsp;(e.g.&nbsp;"GB")<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;carrier&nbsp;name&nbsp;in&nbsp;the&nbsp;given&nbsp;language&nbsp;code,&nbsp;for&nbsp;the&nbsp;given&nbsp;phone<br>
+number,&nbsp;or&nbsp;an&nbsp;empty&nbsp;string&nbsp;if&nbsp;no&nbsp;description&nbsp;is&nbsp;available.</tt></dd></dl>
+ <dl><dt><a name="-name_for_valid_number"><strong>name_for_valid_number</strong></a>(numobj, lang, script=None, region=None)</dt><dd><tt>Returns&nbsp;a&nbsp;carrier&nbsp;name&nbsp;for&nbsp;the&nbsp;given&nbsp;PhoneNumber&nbsp;object,&nbsp;in&nbsp;the<br>
+language&nbsp;provided.<br>
+&nbsp;<br>
+The&nbsp;carrier&nbsp;name&nbsp;is&nbsp;the&nbsp;one&nbsp;the&nbsp;number&nbsp;was&nbsp;originally&nbsp;allocated&nbsp;to,<br>
+however&nbsp;if&nbsp;the&nbsp;country&nbsp;supports&nbsp;mobile&nbsp;number&nbsp;portability&nbsp;the&nbsp;number&nbsp;might<br>
+not&nbsp;belong&nbsp;to&nbsp;the&nbsp;returned&nbsp;carrier&nbsp;anymore.&nbsp;If&nbsp;no&nbsp;mapping&nbsp;is&nbsp;found&nbsp;an<br>
+empty&nbsp;string&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;assumes&nbsp;the&nbsp;validity&nbsp;of&nbsp;the&nbsp;number&nbsp;passed&nbsp;in&nbsp;has&nbsp;already&nbsp;been<br>
+checked,&nbsp;and&nbsp;that&nbsp;the&nbsp;number&nbsp;is&nbsp;suitable&nbsp;for&nbsp;carrier&nbsp;lookup.&nbsp;We&nbsp;consider<br>
+mobile&nbsp;and&nbsp;pager&nbsp;numbers&nbsp;possible&nbsp;candidates&nbsp;for&nbsp;carrier&nbsp;lookup.<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;PhoneNumber&nbsp;object&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;a&nbsp;carrier&nbsp;name.<br>
+lang&nbsp;--&nbsp;A&nbsp;2-letter&nbsp;lowercase&nbsp;ISO&nbsp;639-1&nbsp;language&nbsp;code&nbsp;for&nbsp;the&nbsp;language&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;the&nbsp;description&nbsp;should&nbsp;be&nbsp;returned&nbsp;(e.g.&nbsp;"en")<br>
+script&nbsp;--&nbsp;A&nbsp;4-letter&nbsp;titlecase&nbsp;(first&nbsp;letter&nbsp;uppercase,&nbsp;rest&nbsp;lowercase)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISO&nbsp;script&nbsp;code&nbsp;as&nbsp;defined&nbsp;in&nbsp;ISO&nbsp;15924,&nbsp;separated&nbsp;by&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underscore&nbsp;(e.g.&nbsp;"Hant")<br>
+region&nbsp;--&nbsp;&nbsp;A&nbsp;2-letter&nbsp;uppercase&nbsp;ISO&nbsp;3166-1&nbsp;country&nbsp;code&nbsp;(e.g.&nbsp;"GB")<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;carrier&nbsp;name&nbsp;in&nbsp;the&nbsp;given&nbsp;language&nbsp;code,&nbsp;for&nbsp;the&nbsp;given&nbsp;phone<br>
+number,&nbsp;or&nbsp;an&nbsp;empty&nbsp;string&nbsp;if&nbsp;no&nbsp;description&nbsp;is&nbsp;available.</tt></dd></dl>
+ <dl><dt><a name="-safe_display_name"><strong>safe_display_name</strong></a>(numobj, lang, script=None, region=None)</dt><dd><tt>Gets&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;carrier&nbsp;for&nbsp;the&nbsp;given&nbsp;PhoneNumber&nbsp;object&nbsp;only&nbsp;when<br>
+it&nbsp;is&nbsp;'safe'&nbsp;to&nbsp;display&nbsp;to&nbsp;users.&nbsp;&nbsp;A&nbsp;carrier&nbsp;name&nbsp;is&nbsp;onsidered&nbsp;safe&nbsp;if&nbsp;the<br>
+number&nbsp;is&nbsp;valid&nbsp;and&nbsp;for&nbsp;a&nbsp;region&nbsp;that&nbsp;doesn't&nbsp;support&nbsp;mobile&nbsp;number<br>
+portability&nbsp;(<a href="http://en.wikipedia.org/wiki/Mobile_number_portability">http://en.wikipedia.org/wiki/Mobile_number_portability</a>).<br>
+&nbsp;<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;explicitly&nbsp;checks&nbsp;the&nbsp;validity&nbsp;of&nbsp;the&nbsp;number&nbsp;passed&nbsp;in<br>
+&nbsp;<br>
+Arguments:<br>
+numobj&nbsp;--&nbsp;The&nbsp;PhoneNumber&nbsp;object&nbsp;for&nbsp;which&nbsp;we&nbsp;want&nbsp;to&nbsp;get&nbsp;a&nbsp;carrier&nbsp;name.<br>
+lang&nbsp;--&nbsp;A&nbsp;2-letter&nbsp;lowercase&nbsp;ISO&nbsp;639-1&nbsp;language&nbsp;code&nbsp;for&nbsp;the&nbsp;language&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;the&nbsp;description&nbsp;should&nbsp;be&nbsp;returned&nbsp;(e.g.&nbsp;"en")<br>
+script&nbsp;--&nbsp;A&nbsp;4-letter&nbsp;titlecase&nbsp;(first&nbsp;letter&nbsp;uppercase,&nbsp;rest&nbsp;lowercase)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISO&nbsp;script&nbsp;code&nbsp;as&nbsp;defined&nbsp;in&nbsp;ISO&nbsp;15924,&nbsp;separated&nbsp;by&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;underscore&nbsp;(e.g.&nbsp;"Hant")<br>
+region&nbsp;--&nbsp;&nbsp;A&nbsp;2-letter&nbsp;uppercase&nbsp;ISO&nbsp;3166-1&nbsp;country&nbsp;code&nbsp;(e.g.&nbsp;"GB")<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;carrier&nbsp;name&nbsp;that&nbsp;is&nbsp;safe&nbsp;to&nbsp;display&nbsp;to&nbsp;users,&nbsp;or&nbsp;the&nbsp;empty&nbsp;string.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['name_for_valid_number', 'name_for_number', 'safe_display_name']</td></tr></table>
+</body></html>

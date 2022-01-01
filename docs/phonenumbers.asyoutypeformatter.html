@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module phonenumbers.asyoutypeformatter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="phonenumbers.html"><font color="#ffffff">phonenumbers</font></a>.asyoutypeformatter</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/phonenumbers/asyoutypeformatter.py">phonenumbers/asyoutypeformatter.py</a></font></td></tr></table>
+    <p><tt>A&nbsp;formatter&nbsp;which&nbsp;formats&nbsp;phone&nbsp;numbers&nbsp;as&nbsp;they&nbsp;are&nbsp;entered.<br>
+&nbsp;<br>
+An&nbsp;<a href="#AsYouTypeFormatter">AsYouTypeFormatter</a>&nbsp;can&nbsp;be&nbsp;created&nbsp;by&nbsp;invoking<br>
+<a href="#AsYouTypeFormatter">AsYouTypeFormatter</a>(region_code).&nbsp;After&nbsp;that&nbsp;digits&nbsp;can&nbsp;be&nbsp;added&nbsp;by&nbsp;invoking<br>
+input_digit()&nbsp;on&nbsp;the&nbsp;formatter&nbsp;instance,&nbsp;and&nbsp;the&nbsp;partially&nbsp;formatted&nbsp;phone<br>
+number&nbsp;will&nbsp;be&nbsp;returned&nbsp;each&nbsp;time&nbsp;a&nbsp;digit&nbsp;is&nbsp;added.&nbsp;clear()&nbsp;should&nbsp;be&nbsp;invoked<br>
+before&nbsp;a&nbsp;new&nbsp;number&nbsp;needs&nbsp;to&nbsp;be&nbsp;formatted.<br>
+&nbsp;<br>
+See&nbsp;the&nbsp;unit&nbsp;tests&nbsp;for&nbsp;more&nbsp;details&nbsp;on&nbsp;how&nbsp;the&nbsp;formatter&nbsp;is&nbsp;to&nbsp;be&nbsp;used.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="phonenumbers.asyoutypeformatter.html#AsYouTypeFormatter">AsYouTypeFormatter</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AsYouTypeFormatter">class <strong>AsYouTypeFormatter</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#AsYouTypeFormatter">AsYouTypeFormatter</a>(region_code)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="AsYouTypeFormatter-__init__"><strong>__init__</strong></a>(self, region_code)</dt><dd><tt>Gets&nbsp;an&nbsp;<a href="#AsYouTypeFormatter">AsYouTypeFormatter</a>&nbsp;for&nbsp;the&nbsp;specific&nbsp;region.<br>
+&nbsp;<br>
+Arguments:<br>
+region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;where&nbsp;the&nbsp;phone&nbsp;number&nbsp;is&nbsp;being&nbsp;entered<br>
+&nbsp;<br>
+Return&nbsp;an&nbsp;<a href="#AsYouTypeFormatter">AsYouTypeFormatter</a>}&nbsp;<a href="builtins.html#object">object</a>,&nbsp;which&nbsp;could&nbsp;be&nbsp;used&nbsp;to&nbsp;format<br>
+phone&nbsp;numbers&nbsp;in&nbsp;the&nbsp;specific&nbsp;region&nbsp;"as&nbsp;you&nbsp;type"</tt></dd></dl>
+
+<dl><dt><a name="AsYouTypeFormatter-clear"><strong>clear</strong></a>(self)</dt><dd><tt>Clears&nbsp;the&nbsp;internal&nbsp;state&nbsp;of&nbsp;the&nbsp;formatter,&nbsp;so&nbsp;it&nbsp;can&nbsp;be&nbsp;reused.</tt></dd></dl>
+
+<dl><dt><a name="AsYouTypeFormatter-get_remembered_position"><strong>get_remembered_position</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;current&nbsp;position&nbsp;in&nbsp;the&nbsp;partially&nbsp;formatted&nbsp;phone<br>
+number&nbsp;of&nbsp;the&nbsp;character&nbsp;which&nbsp;was&nbsp;previously&nbsp;passed&nbsp;in&nbsp;as&nbsp;the<br>
+parameter&nbsp;of&nbsp;<a href="#AsYouTypeFormatter-input_digit">input_digit</a>(remember_position=True).</tt></dd></dl>
+
+<dl><dt><a name="AsYouTypeFormatter-input_digit"><strong>input_digit</strong></a>(self, next_char, remember_position=False)</dt><dd><tt>Formats&nbsp;a&nbsp;phone&nbsp;number&nbsp;on-the-fly&nbsp;as&nbsp;each&nbsp;digit&nbsp;is&nbsp;entered.<br>
+&nbsp;<br>
+If&nbsp;remember_position&nbsp;is&nbsp;set,&nbsp;remembers&nbsp;the&nbsp;position&nbsp;where&nbsp;next_char&nbsp;is<br>
+inserted,&nbsp;so&nbsp;that&nbsp;it&nbsp;can&nbsp;be&nbsp;retrieved&nbsp;later&nbsp;by&nbsp;using<br>
+get_remembered_position.&nbsp;The&nbsp;remembered&nbsp;position&nbsp;will&nbsp;be&nbsp;automatically<br>
+adjusted&nbsp;if&nbsp;additional&nbsp;formatting&nbsp;characters&nbsp;are&nbsp;later<br>
+inserted/removed&nbsp;in&nbsp;front&nbsp;of&nbsp;next_char.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+next_char&nbsp;--&nbsp;The&nbsp;most&nbsp;recently&nbsp;entered&nbsp;digit&nbsp;of&nbsp;a&nbsp;phone<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number.&nbsp;Formatting&nbsp;characters&nbsp;are&nbsp;allowed,&nbsp;but&nbsp;as&nbsp;soon&nbsp;as&nbsp;they<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;encountered&nbsp;this&nbsp;method&nbsp;formats&nbsp;the&nbsp;number&nbsp;as&nbsp;entered&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;"as&nbsp;you&nbsp;type"&nbsp;anymore.&nbsp;Full&nbsp;width&nbsp;digits&nbsp;and&nbsp;Arabic-indic<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;digits&nbsp;are&nbsp;allowed,&nbsp;and&nbsp;will&nbsp;be&nbsp;shown&nbsp;as&nbsp;they&nbsp;are.<br>
+remember_position&nbsp;--&nbsp;Whether&nbsp;to&nbsp;track&nbsp;the&nbsp;position&nbsp;where&nbsp;next_char&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inserted.<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;partially&nbsp;formatted&nbsp;phone&nbsp;number.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>REGION_CODE_FOR_NON_GEO_ENTITY</strong> = '001'<br>
+<strong>U_EMPTY_STRING</strong> = ''<br>
+<strong>U_SPACE</strong> = ' '</td></tr></table>
+</body></html>
