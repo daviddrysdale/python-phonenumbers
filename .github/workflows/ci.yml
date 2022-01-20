@@ -12,9 +12,9 @@ jobs:
         python-version: [2.7, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, "3.10", pypy2, pypy3]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@629c2de402a417ea7690ca6ce3f33229e27606a5 # v2
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@f38219332975fe8f9c04cca981d674bf22aea1d3 # v2
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
