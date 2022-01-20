@@ -1,5 +1,7 @@
 name: coverage
 on: [push]
+permissions:
+  contents: read
 
 jobs:
   coverage:
