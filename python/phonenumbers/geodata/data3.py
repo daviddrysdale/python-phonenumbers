@@ -2200,6 +2200,7 @@ data = {
  '21338':{'en': 'Annaba/Skikda'},
  '21341':{'en': 'Oran'},
  '21343':{'en': 'Tlemcen'},
+ '21344':{'en': 'Blida'},
  '21349':{'en': u('Adrar/B\u00e9char/Tindouf')},
  '21670':{'en': 'Ben Arous'},
  '21671':{'en': 'Ariana/Ben Arous/Carthage/Tunis'},
@@ -10018,5 +10019,4 @@ data = {
  '3324350':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324352':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324353':{'en': 'Laval', 'fr': 'Laval'},
- '3324354':{'en': 'Le Mans', 'fr': 'Le Mans'},
 }

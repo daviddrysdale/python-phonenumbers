@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61240012':{'en': 'Branxton'},
  '61240013':{'en': 'Bulahdelah'},
  '61240014':{'en': 'Cessnock'},
  '61240015':{'en': 'Clarence Town'},
@@ -43,7 +44,7 @@ data = {
  '61240034':{'en': 'Cessnock'},
  '61240035':{'en': 'Clarence Town'},
  '61240036':{'en': 'Dungog'},
- '61240037':{'en': 'East Gresford'},
+ '61240037':{'en': 'Newcastle'},
  '61240038':{'en': 'Eccleston'},
  '61240039':{'en': 'Karuah'},
  '61240040':{'en': 'Laguna'},
@@ -10018,5 +10019,4 @@ data = {
  '61263586':{'en': 'Running Stream'},
  '61263587':{'en': 'Running Stream'},
  '61263588':{'en': 'Running Stream'},
- '61263589':{'en': 'Running Stream'},
 }
