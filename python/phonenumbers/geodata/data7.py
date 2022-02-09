@@ -5188,6 +5188,7 @@ data = {
  '562198':{'en': 'Santiago, Metropolitan Region', 'es': u('Santiago, Regi\u00f3n Metropolitana')},
  '5622':{'en': 'Santiago, Metropolitan Region', 'es': u('Santiago, Regi\u00f3n Metropolitana')},
  '5623':{'en': 'Santiago, Metropolitan Region', 'es': u('Santiago, Regi\u00f3n Metropolitana')},
+ '5626':{'en': 'Santiago, Metropolitan Region', 'es': u('Santiago, Regi\u00f3n Metropolitana')},
  '5632':{'en': u('Valpara\u00edso'), 'es': u('Valpara\u00edso')},
  '5633':{'en': u('Quillota, Valpara\u00edso'), 'es': u('Quillota, Valpara\u00edso')},
  '5634':{'en': u('San Felipe, Valpara\u00edso'), 'es': u('San Felipe, Valpara\u00edso')},
@@ -10018,5 +10019,4 @@ data = {
  '61240008':{'en': 'Karuah'},
  '61240009':{'en': 'Laguna'},
  '61240010':{'en': 'Newcastle'},
- '61240011':{'en': 'Bandon Grove'},
 }
