@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '3324354':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324356':{'en': 'Laval', 'fr': 'Laval'},
  '3324358':{'en': 'Laval', 'fr': 'Laval'},
  '3324359':{'en': 'Laval', 'fr': 'Laval'},
@@ -10019,4 +10018,5 @@ data = {
  '3522727':{'de': 'Belair, Luxemburg', 'en': 'Belair, Luxembourg', 'fr': 'Belair, Luxembourg'},
  '3522728':{'de': 'Luxemburg', 'en': 'Luxembourg City', 'fr': 'Luxembourg-Ville'},
  '3522729':{'de': 'Luxemburg/Kockelscheuer', 'en': 'Luxembourg/Kockelscheuer', 'fr': 'Luxembourg/Kockelscheuer'},
+ '3522730':{'de': 'Kanton Capellen/Kehlen', 'en': 'Capellen/Kehlen', 'fr': 'Capellen/Kehlen'},
 }

@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '86130687':{'en': 'Shenzhen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6df1\u5733\u5e02')},
  '861306875':{'en': 'Shijiazhuang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u77f3\u5bb6\u5e84\u5e02')},
  '861306876':{'en': 'Shijiazhuang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u77f3\u5bb6\u5e84\u5e02')},
  '861306877':{'en': 'Shijiazhuang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u77f3\u5bb6\u5e84\u5e02')},
@@ -10019,4 +10018,5 @@ data = {
  '861323828':{'en': 'Tieling, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u94c1\u5cad\u5e02')},
  '861323829':{'en': 'Tieling, Liaoning', 'zh': u('\u8fbd\u5b81\u7701\u94c1\u5cad\u5e02')},
  '86132383':{'en': 'Dongguan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e1c\u839e\u5e02')},
+ '861323840':{'en': 'Hohhot, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u547c\u548c\u6d69\u7279\u5e02')},
 }

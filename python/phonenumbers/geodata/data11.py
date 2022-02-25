@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '6139518':{'en': 'Clayton'},
  '61395182':{'en': 'Melbourne'},
  '6139519':{'en': 'Melbourne'},
  '613952':{'en': 'Melbourne'},
@@ -1367,7 +1366,7 @@ data = {
  '61740636':{'en': 'Euramo'},
  '61740637':{'en': 'Euramo'},
  '61740638':{'en': 'Georgetown'},
- '61740639':{'en': 'Gordonvale'},
+ '61740639':{'en': 'Mareeba'},
  '6174064':{'en': 'South Johnstone'},
  '61740649':{'en': 'Herberton'},
  '6174065':{'en': 'Silkwood'},
@@ -1429,7 +1428,7 @@ data = {
  '61740741':{'en': 'Mutchilba'},
  '61740742':{'en': 'Peninsula'},
  '61740743':{'en': 'Ravenshoe'},
- '61740744':{'en': 'Silkwood'},
+ '61740744':{'en': 'Ravenshoe'},
  '61740745':{'en': 'South Johnstone'},
  '61740746':{'en': 'Thursday Island'},
  '61740747':{'en': 'Torres'},
@@ -3560,7 +3559,7 @@ data = {
  '61743480':{'en': 'Boondooma'},
  '61743481':{'en': 'Booyal'},
  '61743482':{'en': 'Brooklands'},
- '61743483':{'en': 'Brooweena'},
+ '61743483':{'en': 'Bundaberg'},
  '61743484':{'en': 'Bundaberg'},
  '61743485':{'en': 'Bunker'},
  '61743486':{'en': 'Burnett'},
@@ -10019,4 +10018,5 @@ data = {
  '61752062':{'en': 'Harrisville'},
  '61752063':{'en': 'Imbil'},
  '61752064':{'en': 'Jimna'},
+ '61752065':{'en': 'Kalbar'},
 }

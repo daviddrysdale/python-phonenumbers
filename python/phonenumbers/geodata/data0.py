@@ -7206,7 +7206,6 @@ data = {
  '13457':{'en': 'Cayman Islands'},
  '134580':{'en': 'Cayman Islands'},
  '134581':{'en': 'Cayman Islands'},
- '134582':{'en': 'Cayman Islands'},
  '1345848':{'en': 'Cayman Islands'},
  '134588':{'en': 'Cayman Islands'},
  '1345914':{'en': 'Cayman Islands'},
@@ -10019,4 +10018,5 @@ data = {
  '1417962':{'en': 'Cabool, MO'},
  '1417967':{'en': 'Houston, MO'},
  '1418':{'en': 'Quebec'},
+ '1418226':{'en': 'Saint-Georges, QC'},
 }

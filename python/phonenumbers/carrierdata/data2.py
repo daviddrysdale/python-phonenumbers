@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '59469447':{'en': 'SFR'},
  '5946949':{'en': 'Digicel'},
  '59595':{'en': 'VOX'},
  '59596':{'en': 'VOX'},

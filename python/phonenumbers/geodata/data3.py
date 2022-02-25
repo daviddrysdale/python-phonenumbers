@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '1925673':{'en': 'Clayton, CA'},
  '1925674':{'en': 'Concord, CA'},
  '1925676':{'en': 'Concord, CA'},
  '1925679':{'en': 'Oakley, CA'},
@@ -2806,8 +2805,8 @@ data = {
  '238223':{'en': u('Pa\u00fal, Santo Ant\u00e3o'), 'pt': u('Pa\u00fal, Santo Ant\u00e3o')},
  '238224':{'en': u('Cocoli, Santo Ant\u00e3o'), 'pt': u('Cocoli, Santo Ant\u00e3o')},
  '238225':{'en': u('Ponta do Sol, Santo Ant\u00e3o'), 'pt': u('Ponta do Sol, Santo Ant\u00e3o')},
- '238226':{'en': u('Ch\u00e3 da Igreja, Santo Ant\u00e3o'), 'pt': u('Ch\u00e3 da Igreja, Santo Ant\u00e3o')},
- '238227':{'en': u('Ribeira das Patas, Santo Ant\u00e3o'), 'pt': u('Ribeira das Patas, Santo Ant\u00e3o')},
+ '238226':{'en': u('Manta Velha/Ch\u00e3 de Igreja  (Santo Ant\u00e3o Island)'), 'pt': u('Manta Velha/Ch\u00e3 de Igreja  (Santo Ant\u00e3o Island)')},
+ '238227':{'en': u('Lajedos/Alto Mira (Santo Ant\u00e3o Island)'), 'pt': u('Lajedos/Alto Mira (Santo Ant\u00e3o Island)')},
  '238230':{'en': u('Mindelo, S\u00e3o Vicente'), 'pt': u('Mindelo, S\u00e3o Vicente')},
  '238231':{'en': u('Mindelo, S\u00e3o Vicente'), 'pt': u('Mindelo, S\u00e3o Vicente')},
  '238232':{'en': u('Mindelo, S\u00e3o Vicente'), 'pt': u('Mindelo, S\u00e3o Vicente')},
@@ -2831,7 +2830,7 @@ data = {
  '238267':{'en': 'Cidade Velha, Santiago', 'pt': 'Cidade Velha, Santiago'},
  '238268':{'en': u('S\u00e3o Domingos, Santiago'), 'pt': u('S\u00e3o Domingos, Santiago')},
  '238269':{'en': 'Pedra Badejo, Santiago', 'pt': 'Pedra Badejo, Santiago'},
- '238271':{'en': u('S\u00e3o Louren\u00e7o dos \u00d3rg\u00e3os/S\u00e3o Jorge, Santiago'), 'pt': u('S\u00e3o Louren\u00e7o dos \u00d3rg\u00e3os/S\u00e3o Jorge, Santiago')},
+ '238271':{'en': u('Org\u00e3o/S\u00e3o Jorge (Santiago Island)'), 'pt': u('Org\u00e3o/S\u00e3o Jorge (Santiago Island)')},
  '238272':{'en': 'Picos, Santiago', 'pt': 'Picos, Santiago'},
  '238273':{'en': u('Calheta de S\u00e3o Miguel, Santiago'), 'pt': u('Calheta de S\u00e3o Miguel, Santiago')},
  '238281':{'en': u('S\u00e3o Filipe, Fogo'), 'pt': u('S\u00e3o Filipe, Fogo')},
@@ -10019,4 +10018,5 @@ data = {
  '3324350':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324352':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324353':{'en': 'Laval', 'fr': 'Laval'},
+ '3324354':{'en': 'Le Mans', 'fr': 'Le Mans'},
 }

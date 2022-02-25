@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '495652':{'de': 'Bad Sooden-Allendorf', 'en': 'Bad Sooden-Allendorf'},
  '495653':{'de': 'Sontra', 'en': 'Sontra'},
  '495654':{'de': 'Herleshausen', 'en': 'Herleshausen'},
  '495655':{'de': 'Wanfried', 'en': 'Wanfried'},
@@ -10019,4 +10018,5 @@ data = {
  '55513729':{'en': 'Lajeado - RS', 'pt': 'Lajeado - RS'},
  '55513730':{'en': 'Passo do Sobrado - RS', 'pt': 'Passo do Sobrado - RS'},
  '55513731':{'en': 'Rio Pardo - RS', 'pt': 'Rio Pardo - RS'},
+ '55513732':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
 }
