@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3522730':{'de': 'Kanton Capellen/Kehlen', 'en': 'Capellen/Kehlen', 'fr': 'Capellen/Kehlen'},
  '3522731':{'de': 'Bartringen', 'en': 'Bertrange/Mamer/Munsbach/Strassen', 'fr': 'Bertrange/Mamer/Munsbach/Strassen'},
  '3522732':{'de': 'Lintgen/Kanton Mersch/Steinfort', 'en': 'Lintgen/Mersch/Steinfort', 'fr': 'Lintgen/Mersch/Steinfort'},
  '3522733':{'de': 'Walferdingen', 'en': 'Walferdange', 'fr': 'Walferdange'},
@@ -10018,5 +10019,4 @@ data = {
  '495648':{'de': 'Brakel-Gehrden', 'en': 'Brakel-Gehrden'},
  '495650':{'de': 'Cornberg', 'en': 'Cornberg'},
  '495651':{'de': 'Eschwege', 'en': 'Eschwege'},
- '495652':{'de': 'Bad Sooden-Allendorf', 'en': 'Bad Sooden-Allendorf'},
 }

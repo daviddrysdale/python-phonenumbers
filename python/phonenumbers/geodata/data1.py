@@ -1103,6 +1103,7 @@ data = {
  '1450991':{'en': 'Granby, QC'},
  '1458':{'en': 'Oregon'},
  '1463':{'en': 'Indiana'},
+ '1464':{'en': 'Illinois'},
  '1469':{'en': 'Texas'},
  '1469232':{'en': 'Dallas, TX'},
  '1469241':{'en': 'Plano, TX'},
@@ -10018,5 +10019,4 @@ data = {
  '1707983':{'en': 'Covelo, CA'},
  '1707984':{'en': 'Laytonville, CA'},
  '1707987':{'en': 'Middletown, CA'},
- '1707994':{'en': 'Clearlake, CA'},
 }

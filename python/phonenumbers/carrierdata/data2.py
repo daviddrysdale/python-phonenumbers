@@ -19,6 +19,20 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '59469409':{'en': 'Digicel'},
+ '59469412':{'en': 'Digicel'},
+ '59469413':{'en': 'Digicel'},
+ '59469414':{'en': 'Digicel'},
+ '59469415':{'en': 'Digicel'},
+ '59469416':{'en': 'Digicel'},
+ '59469417':{'en': 'SFR'},
+ '59469418':{'en': 'SFR'},
+ '59469419':{'en': 'SFR'},
+ '5946942':{'en': 'Orange'},
+ '5946943':{'en': 'Orange'},
+ '5946944':{'en': 'Orange'},
+ '59469446':{'en': 'SFR'},
+ '59469447':{'en': 'SFR'},
  '5946949':{'en': 'Digicel'},
  '59595':{'en': 'VOX'},
  '59596':{'en': 'VOX'},
