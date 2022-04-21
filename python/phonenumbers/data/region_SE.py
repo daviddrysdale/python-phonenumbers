@@ -6,7 +6,7 @@ PHONE_METADATA_SE = PhoneMetadata(id='SE', country_code=46, international_prefix
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:(?:[12][136]|3[356]|4[0246]|6[03]|8\\d)\\d|90[1-9])\\d{4,6}|(?:1(?:2[0-35]|4[0-4]|5[0-25-9]|7[13-6]|[89]\\d)|2(?:2[0-7]|4[0136-8]|5[0138]|7[018]|8[01]|9[0-57])|3(?:0[0-4]|1\\d|2[0-25]|4[056]|7[0-2]|8[0-3]|9[023])|4(?:1[013-8]|3[0135]|5[14-79]|7[0-246-9]|8[0156]|9[0-689])|5(?:0[0-6]|[15][0-5]|2[0-68]|3[0-4]|4\\d|6[03-5]|7[013]|8[0-79]|9[01])|6(?:1[1-3]|2[0-4]|4[02-57]|5[0-37]|6[0-3]|7[0-2]|8[0247]|9[0-356])|9(?:1[0-68]|2\\d|3[02-5]|4[0-3]|5[0-4]|[68][01]|7[0135-8]))\\d{5,6}', example_number='8123456', possible_length=(7, 8, 9)),
     mobile=PhoneNumberDesc(national_number_pattern='7[02369]\\d{7}', example_number='701234567', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='20\\d{4,7}', example_number='20123456', possible_length=(6, 7, 8, 9)),
-    premium_rate=PhoneNumberDesc(national_number_pattern='649\\d{6}|9(?:(?:00|39|44)[1-8]\\d{3,6}|9[1-59]\\d{4})', example_number='9001234567', possible_length=(7, 8, 9, 10)),
+    premium_rate=PhoneNumberDesc(national_number_pattern='649\\d{6}|99[1-59]\\d{4}(?:\\d{3})?|9(?:00|39|44)[1-8]\\d{3,6}', example_number='9001234567', possible_length=(7, 8, 9, 10)),
     shared_cost=PhoneNumberDesc(national_number_pattern='77[0-7]\\d{6}', example_number='771234567', possible_length=(9,)),
     personal_number=PhoneNumberDesc(national_number_pattern='75[1-8]\\d{6}', example_number='751234567', possible_length=(9,)),
     pager=PhoneNumberDesc(national_number_pattern='74[02-9]\\d{6}', example_number='740123456', possible_length=(9,)),
