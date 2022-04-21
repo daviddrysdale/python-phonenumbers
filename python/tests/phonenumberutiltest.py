@@ -2977,6 +2977,21 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Python version extra test: check with bogus region
         self.assertFalse(phonenumbers.is_mobile_number_portable_region("XY"))
 
+    def testGetMetadataForRegionForNonGeoEntity_shouldBeNull(self):
+        self.assertTrue(PhoneMetadata.metadata_for_region("001") is None)
+
+    def testGetMetadataForRegionForUnknownRegion_shouldBeNull(self):
+        self.assertTrue(PhoneMetadata.metadata_for_region("ZZ") is None)
+
+    def testGetMetadataForNonGeographicalRegionForGeoRegion_shouldBeNull(self):
+        self.assertTrue(PhoneMetadata.metadata_for_nongeo_region(country_code=1) is None)
+
+    def testGetMetadataForRegionForMissingMetadata(self):
+        self.assertTrue(PhoneMetadata.metadata_for_region("YYZ") is None)
+
+    def testGetMetadataForNonGeographicalRegionForMissingMetadata(self):
+        self.assertTrue(PhoneMetadata.metadata_for_nongeo_region("800000") is None)
+
     def testMetadataEquality(self):
         # Python version extra tests for equality against other types
         desc1 = PhoneNumberDesc(national_number_pattern="\\d{4,8}")
