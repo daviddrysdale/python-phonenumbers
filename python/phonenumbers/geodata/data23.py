@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861594732':{'en': 'Baotou, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5305\u5934\u5e02')},
+ '861594733':{'en': 'Ordos, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9102\u5c14\u591a\u65af\u5e02')},
+ '861594734':{'en': 'Tongliao, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u901a\u8fbd\u5e02')},
+ '861594735':{'en': 'Tongliao, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u901a\u8fbd\u5e02')},
+ '861594736':{'en': 'Ordos, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9102\u5c14\u591a\u65af\u5e02')},
  '861594737':{'en': 'Ordos, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9102\u5c14\u591a\u65af\u5e02')},
  '861594738':{'en': 'Bayannur, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5df4\u5f66\u6dd6\u5c14\u5e02')},
  '861594739':{'en': 'Ordos, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9102\u5c14\u591a\u65af\u5e02')},
@@ -10014,9 +10019,4 @@ data = {
  '861783981':{'en': 'Sanmenxia, Henan', 'zh': u('\u6cb3\u5357\u7701\u4e09\u95e8\u5ce1\u5e02')},
  '861783982':{'en': 'Sanmenxia, Henan', 'zh': u('\u6cb3\u5357\u7701\u4e09\u95e8\u5ce1\u5e02')},
  '86178399':{'en': 'Zhengzhou, Henan', 'zh': u('\u6cb3\u5357\u7701\u90d1\u5dde\u5e02')},
- '861784':{'en': 'Changchun, Jilin', 'zh': u('\u5409\u6797\u7701\u957f\u6625\u5e02')},
- '86178530':{'en': 'Heze, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u83cf\u6cfd\u5e02')},
- '86178531':{'en': 'Jinan, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6d4e\u5357\u5e02')},
- '86178532':{'en': 'Qingdao, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u9752\u5c9b\u5e02')},
- '86178533':{'en': 'Zibo, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6dc4\u535a\u5e02')},
 }

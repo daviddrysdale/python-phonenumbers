@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '55513727':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
+ '55513728':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
+ '55513729':{'en': 'Lajeado - RS', 'pt': 'Lajeado - RS'},
+ '55513730':{'en': 'Passo do Sobrado - RS', 'pt': 'Passo do Sobrado - RS'},
+ '55513731':{'en': 'Rio Pardo - RS', 'pt': 'Rio Pardo - RS'},
  '55513732':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
  '55513733':{'en': 'Encruzilhada do Sul - RS', 'pt': 'Encruzilhada do Sul - RS'},
  '55513734':{'en': 'Pantano Grande - RS', 'pt': 'Pantano Grande - RS'},
@@ -10014,9 +10019,4 @@ data = {
  '61240003':{'en': 'Cessnock'},
  '61240004':{'en': 'Clarence Town'},
  '61240005':{'en': 'Dungog'},
- '61240006':{'en': 'East Gresford'},
- '61240007':{'en': 'Eccleston'},
- '61240008':{'en': 'Karuah'},
- '61240009':{'en': 'Laguna'},
- '61240010':{'en': 'Newcastle'},
 }

@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '86185519':{'en': 'Changzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5e38\u5dde\u5e02')},
+ '861855197':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
+ '861855198':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
+ '861855199':{'en': 'Taizhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u6cf0\u5dde\u5e02')},
+ '86185520':{'en': 'Wuxi, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u65e0\u9521\u5e02')},
  '86185521':{'en': 'Wuxi, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u65e0\u9521\u5e02')},
  '86185522':{'en': 'Lianyungang, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u8fde\u4e91\u6e2f\u5e02')},
  '861855226':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
@@ -10014,9 +10019,4 @@ data = {
  '861882301':{'en': 'Meizhou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6885\u5dde\u5e02')},
  '861882302':{'en': 'Meizhou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6885\u5dde\u5e02')},
  '861882303':{'en': 'Meizhou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6885\u5dde\u5e02')},
- '861882304':{'en': 'Meizhou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6885\u5dde\u5e02')},
- '861882305':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
- '861882306':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
- '861882307':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
- '861882308':{'en': 'Jiangmen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c5f\u95e8\u5e02')},
 }

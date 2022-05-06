@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1925634':{'en': 'Brentwood, CA'},
+ '1925648':{'en': 'Danville, CA'},
+ '1925671':{'en': 'Concord, CA'},
+ '1925672':{'en': 'Clayton, CA'},
  '1925673':{'en': 'Clayton, CA'},
  '1925674':{'en': 'Concord, CA'},
  '1925676':{'en': 'Concord, CA'},
@@ -640,6 +644,7 @@ data = {
  '1941979':{'en': 'Port Charlotte, FL'},
  '1945':{'en': 'Texas'},
  '1947':{'en': 'Michigan'},
+ '1948':{'en': 'Virginia'},
  '1949':{'en': 'California'},
  '1949221':{'en': 'Irvine, CA'},
  '1949249':{'en': 'Laguna Niguel, CA'},
@@ -10014,9 +10019,4 @@ data = {
  '3324342':{'en': u('\u00c9commoy'), 'fr': u('\u00c9commoy')},
  '3324343':{'en': 'Le Mans', 'fr': 'Le Mans'},
  '3324344':{'en': u('Ch\u00e2teau-du-Loir'), 'fr': u('Ch\u00e2teau-du-Loir')},
- '3324348':{'en': u('La Fl\u00e8che'), 'fr': u('La Fl\u00e8che')},
- '3324349':{'en': 'Laval', 'fr': 'Laval'},
- '3324350':{'en': 'Le Mans', 'fr': 'Le Mans'},
- '3324352':{'en': 'Le Mans', 'fr': 'Le Mans'},
- '3324353':{'en': 'Laval', 'fr': 'Laval'},
 }

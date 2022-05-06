@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3522723':{'de': 'Bad Mondorf', 'en': 'Mondorf-les-Bains/Bascharage/Noerdange/Remich', 'fr': 'Mondorf-les-Bains/Bascharage/Noerdange/Remich'},
+ '3522725':{'de': 'Luxemburg', 'en': 'Luxembourg', 'fr': 'Luxembourg'},
+ '3522727':{'de': 'Belair, Luxemburg', 'en': 'Belair, Luxembourg', 'fr': 'Belair, Luxembourg'},
+ '3522728':{'de': 'Luxemburg', 'en': 'Luxembourg City', 'fr': 'Luxembourg-Ville'},
+ '3522729':{'de': 'Luxemburg/Kockelscheuer', 'en': 'Luxembourg/Kockelscheuer', 'fr': 'Luxembourg/Kockelscheuer'},
  '3522730':{'de': 'Kanton Capellen/Kehlen', 'en': 'Capellen/Kehlen', 'fr': 'Capellen/Kehlen'},
  '3522731':{'de': 'Bartringen', 'en': 'Bertrange/Mamer/Munsbach/Strassen', 'fr': 'Bertrange/Mamer/Munsbach/Strassen'},
  '3522732':{'de': 'Lintgen/Kanton Mersch/Steinfort', 'en': 'Lintgen/Mersch/Steinfort', 'fr': 'Lintgen/Mersch/Steinfort'},
@@ -10014,9 +10019,4 @@ data = {
  '495643':{'de': 'Borgentreich', 'en': 'Borgentreich'},
  '495644':{'de': 'Willebadessen-Peckelsheim', 'en': 'Willebadessen-Peckelsheim'},
  '495645':{'de': 'Borgentreich-Borgholz', 'en': 'Borgentreich-Borgholz'},
- '495646':{'de': 'Willebadessen', 'en': 'Willebadessen'},
- '495647':{'de': 'Lichtenau-Kleinenberg', 'en': 'Lichtenau-Kleinenberg'},
- '495648':{'de': 'Brakel-Gehrden', 'en': 'Brakel-Gehrden'},
- '495650':{'de': 'Cornberg', 'en': 'Cornberg'},
- '495651':{'de': 'Eschwege', 'en': 'Eschwege'},
 }

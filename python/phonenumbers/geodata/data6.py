@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '495646':{'de': 'Willebadessen', 'en': 'Willebadessen'},
+ '495647':{'de': 'Lichtenau-Kleinenberg', 'en': 'Lichtenau-Kleinenberg'},
+ '495648':{'de': 'Brakel-Gehrden', 'en': 'Brakel-Gehrden'},
+ '495650':{'de': 'Cornberg', 'en': 'Cornberg'},
+ '495651':{'de': 'Eschwege', 'en': 'Eschwege'},
  '495652':{'de': 'Bad Sooden-Allendorf', 'en': 'Bad Sooden-Allendorf'},
  '495653':{'de': 'Sontra', 'en': 'Sontra'},
  '495654':{'de': 'Herleshausen', 'en': 'Herleshausen'},
@@ -10014,9 +10019,4 @@ data = {
  '55513724':{'en': 'Cachoeira do Sul - RS', 'pt': 'Cachoeira do Sul - RS'},
  '55513725':{'en': 'Cerro Branco - RS', 'pt': 'Cerro Branco - RS'},
  '55513726':{'en': 'Lajeado - RS', 'pt': 'Lajeado - RS'},
- '55513727':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
- '55513728':{'en': 'Rio Grande do Sul', 'pt': 'Rio Grande do Sul'},
- '55513729':{'en': 'Lajeado - RS', 'pt': 'Lajeado - RS'},
- '55513730':{'en': 'Passo do Sobrado - RS', 'pt': 'Passo do Sobrado - RS'},
- '55513731':{'en': 'Rio Pardo - RS', 'pt': 'Rio Pardo - RS'},
 }

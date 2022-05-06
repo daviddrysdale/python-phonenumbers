@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1707968':{'en': 'Saint Helena, CA'},
+ '1707983':{'en': 'Covelo, CA'},
+ '1707984':{'en': 'Laytonville, CA'},
+ '1707987':{'en': 'Middletown, CA'},
  '1707994':{'en': 'Clearlake, CA'},
  '1707995':{'en': 'Clearlake, CA'},
  '1707996':{'en': 'Sonoma, CA'},
@@ -10015,8 +10019,4 @@ data = {
  '1925609':{'en': 'Concord, CA'},
  '1925625':{'en': 'Oakley, CA'},
  '1925631':{'en': 'Moraga, CA'},
- '1925634':{'en': 'Brentwood, CA'},
- '1925648':{'en': 'Danville, CA'},
- '1925671':{'en': 'Concord, CA'},
- '1925672':{'en': 'Clayton, CA'},
 }

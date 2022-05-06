@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61899133':{'en': 'Three Springs'},
+ '61899134':{'en': 'Three Springs'},
+ '61899135':{'en': 'Three Springs'},
+ '61899136':{'en': 'Upper Gascoyne'},
+ '61899137':{'en': 'Upper Gascoyne'},
  '61899138':{'en': 'Upper Gascoyne'},
  '61899139':{'en': 'Eneabba North'},
  '61899140':{'en': 'Walkaway'},
@@ -10014,9 +10019,4 @@ data = {
  '861306853':{'en': 'Maoming, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u8302\u540d\u5e02')},
  '861306854':{'en': 'Yangjiang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u9633\u6c5f\u5e02')},
  '861306855':{'en': 'Yangjiang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u9633\u6c5f\u5e02')},
- '861306856':{'en': 'Yangjiang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u9633\u6c5f\u5e02')},
- '861306857':{'en': 'Heyuan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6cb3\u6e90\u5e02')},
- '861306858':{'en': 'Heyuan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6cb3\u6e90\u5e02')},
- '861306859':{'en': 'Heyuan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6cb3\u6e90\u5e02')},
- '86130686':{'en': 'Foshan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4f5b\u5c71\u5e02')},
 }

@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '9168442':{'en': 'Kantamal, Odisha'},
+ '9168443':{'en': 'Kantamal, Odisha'},
+ '9168444':{'en': 'Kantamal, Odisha'},
+ '9168445':{'en': 'Kantamal, Odisha'},
+ '9168446':{'en': 'Kantamal, Odisha'},
  '9168447':{'en': 'Kantamal, Odisha'},
  '9168452':{'en': 'Phiringia, Odisha'},
  '9168453':{'en': 'Phiringia, Odisha'},

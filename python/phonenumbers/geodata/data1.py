@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1418226':{'en': 'Saint-Georges, QC'},
  '1418227':{'en': 'Saint-Georges, QC'},
  '1418228':{'en': 'Saint-Georges, QC'},
  '1418233':{'en': 'Les Escoumins, QC'},
@@ -1104,6 +1105,7 @@ data = {
  '1458':{'en': 'Oregon'},
  '1463':{'en': 'Indiana'},
  '1464':{'en': 'Illinois'},
+ '1468':{'en': 'Quebec'},
  '1469':{'en': 'Texas'},
  '1469232':{'en': 'Dallas, TX'},
  '1469241':{'en': 'Plano, TX'},
@@ -5356,6 +5358,7 @@ data = {
  '1580994':{'en': 'Mooreland, OK'},
  '1581':{'en': 'Quebec'},
  '1582':{'en': 'Pennsylvania'},
+ '1584':{'en': 'Manitoba'},
  '1585':{'en': 'New York'},
  '1585218':{'en': 'Pittsford, NY'},
  '1585223':{'en': 'Fairport, NY'},
@@ -8608,6 +8611,7 @@ data = {
  '1651917':{'en': 'Saint Paul, MN'},
  '1651923':{'en': 'Goodhue, MN'},
  '1651999':{'en': 'Saint Paul, MN'},
+ '1656':{'en': 'Florida'},
  '1657':{'en': 'California'},
  '1659':{'en': 'Alabama'},
  '1659200':{'en': 'Lincoln, AL'},
@@ -10015,8 +10019,4 @@ data = {
  '1707964':{'en': 'Fort Bragg, CA'},
  '1707965':{'en': 'Angwin, CA'},
  '1707967':{'en': 'Saint Helena, CA'},
- '1707968':{'en': 'Saint Helena, CA'},
- '1707983':{'en': 'Covelo, CA'},
- '1707984':{'en': 'Laytonville, CA'},
- '1707987':{'en': 'Middletown, CA'},
 }

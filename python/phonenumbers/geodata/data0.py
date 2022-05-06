@@ -3567,6 +3567,7 @@ data = {
  '1262948':{'en': 'Kenosha, WI'},
  '1262965':{'en': 'Dousman, WI'},
  '1262970':{'en': 'Waukesha, WI'},
+ '1263':{'en': 'Montreal, QC'},
  '1267':{'en': 'Pennsylvania'},
  '1267292':{'en': 'Philadelphia, PA'},
  '1267297':{'en': 'Philadelphia, PA'},
@@ -10018,5 +10019,4 @@ data = {
  '1417962':{'en': 'Cabool, MO'},
  '1417967':{'en': 'Houston, MO'},
  '1418':{'en': 'Quebec'},
- '1418226':{'en': 'Saint-Georges, QC'},
 }
