@@ -1086,6 +1086,7 @@ data = {
  '23674':{'en': 'Orange'},
  '23675':{'en': 'Telecel'},
  '23677':{'en': 'Nationlink'},
+ '23762':{'en': 'Camtel'},
  '237650':{'en': 'MTN Cameroon'},
  '237651':{'en': 'MTN Cameroon'},
  '237652':{'en': 'MTN Cameroon'},
@@ -10018,5 +10019,4 @@ data = {
  '553399117':{'en': 'TIM'},
  '553399118':{'en': 'TIM'},
  '553399119':{'en': 'TIM'},
- '553399121':{'en': 'TIM'},
 }

@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '5939924':{'en': 'Claro'},
  '5939925':{'en': 'Movistar'},
  '5939926':{'en': 'Movistar'},
  '5939927':{'en': 'Movistar'},
@@ -1776,6 +1777,7 @@ data = {
  '67577':{'en': 'bmobile'},
  '67578':{'en': 'bmobile'},
  '67581':{'en': 'DIGIVOIP'},
+ '67582':{'en': 'Digicel'},
  '67588':{'en': 'Digicel'},
  '676554':{'en': 'Toko Wireless'},
  '676555':{'en': 'Toko Wireless'},
