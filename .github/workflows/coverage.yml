@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install protobuf pycodestyle coverage coveralls
+        pip install protobuf==3.17.3 pycodestyle coverage coveralls
     - name: Test with coverage
       run: |
         cd python
