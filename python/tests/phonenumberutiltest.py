@@ -2978,19 +2978,19 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertFalse(phonenumbers.is_mobile_number_portable_region("XY"))
 
     def testGetMetadataForRegionForNonGeoEntity_shouldBeNull(self):
-        self.assertTrue(PhoneMetadata.metadata_for_region("001") is None)
+        self.assertIs(PhoneMetadata.metadata_for_region("001"), None)
 
     def testGetMetadataForRegionForUnknownRegion_shouldBeNull(self):
-        self.assertTrue(PhoneMetadata.metadata_for_region("ZZ") is None)
+        self.assertIs(PhoneMetadata.metadata_for_region("ZZ"), None)
 
     def testGetMetadataForNonGeographicalRegionForGeoRegion_shouldBeNull(self):
-        self.assertTrue(PhoneMetadata.metadata_for_nongeo_region(country_code=1) is None)
+        self.assertIs(PhoneMetadata.metadata_for_nongeo_region(country_code=1), None)
 
     def testGetMetadataForRegionForMissingMetadata(self):
-        self.assertTrue(PhoneMetadata.metadata_for_region("YYZ") is None)
+        self.assertIs(PhoneMetadata.metadata_for_region("YYZ"), None)
 
     def testGetMetadataForNonGeographicalRegionForMissingMetadata(self):
-        self.assertTrue(PhoneMetadata.metadata_for_nongeo_region("800000") is None)
+        self.assertIs(PhoneMetadata.metadata_for_nongeo_region("800000"), None)
 
     def testMetadataEquality(self):
         # Python version extra tests for equality against other types
