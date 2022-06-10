@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494827':{'de': 'Wacken', 'en': 'Wacken'},
  '494828':{'de': u('L\u00e4gerdorf'), 'en': u('L\u00e4gerdorf')},
  '494829':{'de': 'Wewelsfleth', 'en': 'Wewelsfleth'},
  '494830':{'de': u('S\u00fcderhastedt'), 'en': u('S\u00fcderhastedt')},
@@ -3632,6 +3633,7 @@ data = {
  '543832':{'en': 'Recreo, Catamarca', 'es': 'Recreo, Catamarca'},
  '543834':{'en': 'San Fernando del Valle de Catamarca, Catamarca', 'es': 'San Fernando del Valle de Catamarca, Catamarca'},
  '543835':{'en': u('Andalgal\u00e1, Catamarca'), 'es': u('Andalgal\u00e1, Catamarca')},
+ '543836':{'en': u('Andalgal\u00e1, Catamarca'), 'es': u('Andalgal\u00e1, Catamarca')},
  '543837':{'en': 'Tinogasta, Catamarca', 'es': 'Tinogasta, Catamarca'},
  '543838':{'en': u('Santa Mar\u00eda, Catamarca'), 'es': u('Santa Mar\u00eda, Catamarca')},
  '543841':{'en': 'Monte Quemado, Santiago del Estero', 'es': 'Monte Quemado, Santiago del Estero'},
@@ -10017,6 +10019,4 @@ data = {
  '55493459':{'en': 'Coronel Martins - SC', 'pt': 'Coronel Martins - SC'},
  '55493482':{'en': u('Conc\u00f3rdia - SC'), 'pt': u('Conc\u00f3rdia - SC')},
  '55493491':{'en': 'Seara - SC', 'pt': 'Seara - SC'},
- '55493521':{'en': u('Joa\u00e7aba - SC'), 'pt': u('Joa\u00e7aba - SC')},
- '55493522':{'en': u('Joa\u00e7aba - SC'), 'pt': u('Joa\u00e7aba - SC')},
 }

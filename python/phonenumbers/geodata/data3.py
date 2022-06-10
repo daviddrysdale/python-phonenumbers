@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1919269':{'en': 'Zebulon, NC'},
  '1919284':{'en': 'Kenly, NC'},
  '1919286':{'en': 'Durham, NC'},
  '1919303':{'en': 'Apex, NC'},
@@ -10018,5 +10019,4 @@ data = {
  '3323656':{'en': u('Orl\u00e9ans'), 'fr': u('Orl\u00e9ans')},
  '3323657':{'en': u('Ch\u00e2teauroux'), 'fr': u('Ch\u00e2teauroux')},
  '3323658':{'en': 'Chartres', 'fr': 'Chartres'},
- '3323659':{'en': 'Amboise', 'fr': 'Amboise'},
 }

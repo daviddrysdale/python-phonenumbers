@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3358736':{'en': 'Aubusson', 'fr': 'Aubusson'},
  '3358737':{'en': 'Bellac', 'fr': 'Bellac'},
  '3358738':{'en': 'Bourganeuf', 'fr': 'Bourganeuf'},
  '3358739':{'en': 'Boussac', 'fr': 'Boussac'},
@@ -199,7 +200,7 @@ data = {
  '34868':{'en': 'Murcia', 'es': 'Murcia'},
  '34869':{'en': 'Cuenca', 'es': 'Cuenca'},
  '34871':{'en': 'Balearic Islands', 'es': 'Baleares'},
- '34872':{'en': 'Gerona', 'es': 'Gerona'},
+ '34872':{'en': 'Girona', 'es': 'Gerona'},
  '34873':{'en': 'Lleida', 'es': u('L\u00e9rida')},
  '34874':{'en': 'Huesca', 'es': 'Huesca'},
  '34875':{'en': 'Soria', 'es': 'Soria'},
@@ -300,7 +301,7 @@ data = {
  '349698':{'en': 'Cuenca', 'es': 'Cuenca'},
  '349699':{'en': 'Cuenca', 'es': 'Cuenca'},
  '34971':{'en': 'Balearic Islands', 'es': 'Baleares'},
- '34972':{'en': 'Gerona', 'es': 'Gerona'},
+ '34972':{'en': 'Girona', 'es': 'Gerona'},
  '349730':{'en': 'Lleida', 'es': u('L\u00e9rida')},
  '349731':{'en': 'Lleida', 'es': u('L\u00e9rida')},
  '349732':{'en': 'Lleida', 'es': u('L\u00e9rida')},
@@ -10018,5 +10019,4 @@ data = {
  '494824':{'de': 'Krempe', 'en': 'Krempe'},
  '494825':{'de': 'Burg Dithmarschen', 'en': 'Burg Dithmarschen'},
  '494826':{'de': 'Hohenlockstedt', 'en': 'Hohenlockstedt'},
- '494827':{'de': 'Wacken', 'en': 'Wacken'},
 }

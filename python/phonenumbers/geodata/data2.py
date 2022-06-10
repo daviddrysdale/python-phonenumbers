@@ -6023,6 +6023,7 @@ data = {
  '1819986':{'en': 'Gatineau, QC'},
  '1820':{'en': 'California'},
  '1825':{'en': 'Alberta'},
+ '1826':{'en': 'Virginia'},
  '1828':{'en': 'North Carolina'},
  '1828210':{'en': 'Asheville, NC'},
  '1828213':{'en': 'Asheville, NC'},
@@ -10018,5 +10019,4 @@ data = {
  '1919261':{'en': 'Knightdale, NC'},
  '1919266':{'en': 'Knightdale, NC'},
  '1919267':{'en': 'Apex, NC'},
- '1919269':{'en': 'Zebulon, NC'},
 }
