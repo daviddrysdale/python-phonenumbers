@@ -40,6 +40,7 @@ AR_NUMBER = FrozenPhoneNumber(country_code=54, national_number=1187654321)
 AU_NUMBER = FrozenPhoneNumber(country_code=61, national_number=236618300)
 BS_MOBILE = FrozenPhoneNumber(country_code=1, national_number=2423570000)
 BS_NUMBER = FrozenPhoneNumber(country_code=1, national_number=2423651234)
+CO_FIXED_LINE = FrozenPhoneNumber(country_code=57, national_number=6012345678)
 # Note that this is the same as the example number for DE in the metadata.
 DE_NUMBER = FrozenPhoneNumber(country_code=49, national_number=30123456)
 DE_SHORT_NUMBER = FrozenPhoneNumber(country_code=49, national_number=1234)
@@ -745,6 +746,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
     def testFormatNumberForMobileDialing(self):
         # Numbers are normally dialed in national format in-country, and
         # international format from outside the country.
+        self.assertEqual("6012345678",
+                         phonenumbers.format_number_for_mobile_dialing(CO_FIXED_LINE, "CO", False))
         self.assertEqual("030123456",
                          phonenumbers.format_number_for_mobile_dialing(DE_NUMBER, "DE", False))
         self.assertEqual("+4930123456",

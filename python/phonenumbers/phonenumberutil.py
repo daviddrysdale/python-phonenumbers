@@ -77,9 +77,6 @@ _MAX_INPUT_STRING_LENGTH = 250
 UNKNOWN_REGION = u("ZZ")
 # The set of regions that share country calling code 1.
 _NANPA_COUNTRY_CODE = 1
-# The prefix that needs to be inserted in front of a Colombian landline number
-# when dialed from a mobile phone in Colombia.
-_COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = unicod("3")
 # Map of country calling codes that use a mobile token before the area
 # code. One example of when this is relevant is when determining the length of
 # the national destination code, which should be the length of the area code
@@ -1291,10 +1288,7 @@ def format_number_for_mobile_dialing(numobj, region_calling_from, with_formattin
                                    (numobj_type == PhoneNumberType.MOBILE) or
                                    (numobj_type == PhoneNumberType.FIXED_LINE_OR_MOBILE))
         # Carrier codes may be needed in some countries. We handle this here.
-        if region_code == "CO" and numobj_type == PhoneNumberType.FIXED_LINE:
-            formatted_number = format_national_number_with_carrier_code(numobj_no_ext,
-                                                                        _COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX)
-        elif region_code == "BR" and is_fixed_line_or_mobile:
+        if region_code == "BR" and is_fixed_line_or_mobile:
             # Historically, we set this to an empty string when parsing with
             # raw input if none was found in the input string. However, this
             # doesn't result in a number we can dial. For this reason, we
@@ -1449,14 +1443,15 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
 
 
 def format_in_original_format(numobj, region_calling_from):
-    """Format a number using the original format that the number was parsed from.
+    """Formats a phone number using the original phone number format
+    (e.g. INTERNATIONAL or NATIONAL) that the number is parsed from, provided
+    that the number has been parsed with parse_and_keep_raw_input. Otherwise the
+    number will be formatted in NATIONAL format.
 
     The original format is embedded in the country_code_source field of the
-    PhoneNumber object passed in. If such information is missing, the number
-    will be formatted into the NATIONAL format by default.
-
-    When  we don't have a formatting pattern for the number, the method
-    returns the raw input when it is available.
+    PhoneNumber object passed in, which is only set when parsing keeps the raw
+    input. When we don't have a formatting pattern for the number, the method
+    falls back to returning the raw input.
 
     Note this method guarantees no digit will be inserted, removed or modified
     as a result of formatting.
