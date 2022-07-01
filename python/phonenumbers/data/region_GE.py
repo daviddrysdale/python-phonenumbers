@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_GE = PhoneMetadata(id='GE', country_code=995, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='(?:[3-57]\\d\\d|800)\\d{6}', possible_length=(9,), possible_length_local_only=(6, 7)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:3(?:[256]\\d|4[124-9]|7[0-4])|4(?:1\\d|2[2-7]|3[1-79]|4[2-8]|7[239]|9[1-7]))\\d{6}', example_number='322123456', possible_length=(9,), possible_length_local_only=(6, 7)),
-    mobile=PhoneNumberDesc(national_number_pattern='5(?:(?:0555|1177)[5-9]|757(?:7[7-9]|8[01]))\\d{3}|5(?:00(?:0\\d|50)|11(?:00|1\\d|2[0-4]|3[01])|5200|75(?:00|[57]5)|8(?:0(?:[01]\\d|2[0-4])|58[89]|8(?:55|88)))\\d{4}|5(?:0070|11(?:33|51)|[25]222|3333)[0-4]\\d{3}|(?:5(?:[14]4|5[0157-9]|68|7[0147-9]|9[1-35-9])|790)\\d{6}', example_number='555123456', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='5(?:(?:0555|1(?:[17]77|555))[5-9]|757(?:7[7-9]|8[01]))\\d{3}|5(?:0070|11(?:33|51)|[25]222|3333)[0-4]\\d{3}|5(?:00(?:0\\d|5[05])|11(?:00|1\\d|2[0-4]|3[01])|5200|75(?:00|[57]5)|8(?:0(?:[01]\\d|2[0-4])|58[89]|8(?:55|88)))\\d{4}|(?:5(?:[14]4|5[0157-9]|68|7[0147-9]|9[1-35-9])|790)\\d{6}', example_number='555123456', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6}', example_number='800123456', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='70[67]\\d{6}', example_number='706123456', possible_length=(9,)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='70[67]\\d{6}', possible_length=(9,)),

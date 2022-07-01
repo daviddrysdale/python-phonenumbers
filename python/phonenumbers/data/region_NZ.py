@@ -15,7 +15,7 @@ PHONE_METADATA_NZ = PhoneMetadata(id='NZ', country_code=64, international_prefix
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3,8})', format='\\1 \\2', leading_digits_pattern=['8[1-579]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2,3})', format='\\1 \\2 \\3', leading_digits_pattern=['50[036-8]|[89]0', '50(?:[0367]|88)|[89]0'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format='\\1-\\2 \\3', leading_digits_pattern=['24|[346]|7[2-57-9]|9[2-9]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d)(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['24|[346]|7[2-57-9]|9[2-9]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3,4})', format='\\1 \\2 \\3', leading_digits_pattern=['2(?:10|74)|[59]|80'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3,4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1|2[028]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{3,5})', format='\\1 \\2 \\3', leading_digits_pattern=['2(?:[169]|7[0-35-9])|7|86'], national_prefix_formatting_rule='0\\1')],

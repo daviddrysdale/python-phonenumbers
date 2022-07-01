@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_KG = PhoneMetadata(id='KG', country_code=996, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='8\\d{9}|(?:[235-8]\\d|99)\\d{7}', possible_length=(9, 10), possible_length_local_only=(5, 6)),
     fixed_line=PhoneNumberDesc(national_number_pattern='312(?:5[0-79]\\d|9(?:[0-689]\\d|7[0-24-9]))\\d{3}|(?:3(?:1(?:2[0-46-8]|3[1-9]|47|[56]\\d)|2(?:22|3[0-479]|6[0-7])|4(?:22|5[6-9]|6\\d)|5(?:22|3[4-7]|59|6\\d)|6(?:22|5[35-7]|6\\d)|7(?:22|3[468]|4[1-9]|59|[67]\\d)|9(?:22|4[1-8]|6\\d))|6(?:09|12|2[2-4])\\d)\\d{5}', example_number='312123456', possible_length=(9,), possible_length_local_only=(5, 6)),
-    mobile=PhoneNumberDesc(national_number_pattern='312(?:58\\d|973)\\d{3}|(?:2(?:0[0-35]|2\\d)|5[0-24-7]\\d|7(?:[07]\\d|55)|880|99[05-9])\\d{6}', example_number='700123456', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='312(?:58\\d|973)\\d{3}|(?:2(?:0[0-35]|2\\d)|5[0-24-7]\\d|7(?:[07]\\d|55)|88[08]|99[05-9])\\d{6}', example_number='700123456', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6,7}', example_number='800123456', possible_length=(9, 10)),
     national_prefix='0',
     national_prefix_for_parsing='0',
