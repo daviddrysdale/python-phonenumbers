@@ -649,7 +649,7 @@ def _extract_possible_number(number):
     match = _VALID_START_CHAR_PATTERN.search(number)
     if match:
         number = number[match.start():]
-        # Remove trailing non-alpha non-numberical characters.
+        # Remove trailing non-alpha non-numerical characters.
         trailing_chars_match = _UNWANTED_END_CHAR_PATTERN.search(number)
         if trailing_chars_match:
             number = number[:trailing_chars_match.start()]

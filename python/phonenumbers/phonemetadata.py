@@ -251,7 +251,7 @@ class PhoneMetadata(UnicodeMixin, ImmutableMixin):
 
     """
     # Lock that protects the *_available fields while they are being modified.
-    # The modificiation involves loading data from a file, so we cannot just
+    # The modification involves loading data from a file, so we cannot just
     # rely on the GIL.
     _metadata_lock = threading.Lock()
     # If a region code is a key in this dict, metadata for that region is available.
