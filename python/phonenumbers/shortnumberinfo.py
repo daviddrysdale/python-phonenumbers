@@ -190,7 +190,7 @@ def expected_cost_for_region(short_numobj, region_dialing_from):
     # The possible lengths are not present for a particular sub-type if they match the general
     # description; for this reason, we check the possible lengths against the general description
     # first to allow an early exit if possible.
-    if not(len(short_number) in metadata.general_desc.possible_length):
+    if not (len(short_number) in metadata.general_desc.possible_length):
         return ShortNumberCost.UNKNOWN_COST
 
     # The cost categories are tested in order of decreasing expense, since if
