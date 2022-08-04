@@ -1023,6 +1023,7 @@ data = {
  '194195':{'en': 'Sarasota, FL'},
  '1941964':{'en': 'Boca Grande, FL'},
  '1941979':{'en': 'Port Charlotte, FL'},
+ '1943':{'en': 'Georgia'},
  '1945':{'en': 'Texas'},
  '1947':{'en': 'Michigan'},
  '1948':{'en': 'Virginia'},
@@ -10018,5 +10019,4 @@ data = {
  '3323655':{'en': 'Vierzon', 'fr': 'Vierzon'},
  '3323656':{'en': u('Orl\u00e9ans'), 'fr': u('Orl\u00e9ans')},
  '3323657':{'en': u('Ch\u00e2teauroux'), 'fr': u('Ch\u00e2teauroux')},
- '3323658':{'en': 'Chartres', 'fr': 'Chartres'},
 }

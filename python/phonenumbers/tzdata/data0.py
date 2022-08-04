@@ -1997,6 +1997,7 @@ data = {
  '1939':('America/Puerto_Rico',),
  '1940':('America/Chicago',),
  '1941':('America/New_York',),
+ '1943':('America/New_York',),
  '1945':('America/Chicago',),
  '1947':('America/New_York',),
  '1948':('America/New_York',),

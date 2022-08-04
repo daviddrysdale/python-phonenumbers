@@ -6,7 +6,7 @@ PHONE_METADATA_PG = PhoneMetadata(id='PG', country_code=675, international_prefi
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:(?:3[0-2]|4[257]|5[34]|9[78])\\d|64[1-9]|85[02-46-9])\\d{4}', example_number='3123456', possible_length=(7,)),
     mobile=PhoneNumberDesc(national_number_pattern='(?:7\\d|8[128])\\d{6}', example_number='70123456', possible_length=(8,)),
     toll_free=PhoneNumberDesc(national_number_pattern='180\\d{4}', example_number='1801234', possible_length=(7,)),
-    voip=PhoneNumberDesc(national_number_pattern='2(?:0[0-47]|7[568])\\d{4}', example_number='2751234', possible_length=(7,)),
+    voip=PhoneNumberDesc(national_number_pattern='2(?:0[0-57]|7[568])\\d{4}', example_number='2751234', possible_length=(7,)),
     pager=PhoneNumberDesc(national_number_pattern='27[01]\\d{4}', example_number='2700123', possible_length=(7,)),
     preferred_international_prefix='00',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{4})', format='\\1 \\2', leading_digits_pattern=['18|[2-69]|85']),
