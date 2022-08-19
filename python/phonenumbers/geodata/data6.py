@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494825':{'de': 'Burg Dithmarschen', 'en': 'Burg Dithmarschen'},
  '494826':{'de': 'Hohenlockstedt', 'en': 'Hohenlockstedt'},
  '494827':{'de': 'Wacken', 'en': 'Wacken'},
  '494828':{'de': u('L\u00e4gerdorf'), 'en': u('L\u00e4gerdorf')},
@@ -3171,7 +3172,8 @@ data = {
  '52652':{'en': 'Chihuahua', 'es': 'Chihuahua'},
  '52653':{'en': 'Luis B. Sanchez/San Luis Rio Colorado, SON', 'es': u('Luis B. S\u00e1nchez/San Luis R\u00edo Colorado, SON')},
  '52656':{'en': 'Chihuahua', 'es': 'Chihuahua'},
- '52657':{'en': 'Chihuahua', 'es': 'Chihuahua'},
+ '526571':{'en': 'Chihuahua', 'es': 'Chihuahua'},
+ '526572':{'en': 'Juarez/Chihuahua', 'es': 'Juarez/Chihuahua'},
  '52658':{'en': 'Baja California', 'es': 'Baja California'},
  '52659':{'en': 'Chihuahua', 'es': 'Chihuahua'},
  '52661':{'en': 'Primo Tapia/Rosarito, BCN', 'es': 'Primo Tapia/Rosarito, BCN'},
@@ -10017,6 +10019,4 @@ data = {
  '55493456':{'en': 'Campina da Alegria - SC', 'pt': 'Campina da Alegria - SC'},
  '55493457':{'en': 'Presidente Castelo Branco - SC', 'pt': 'Presidente Castelo Branco - SC'},
  '55493458':{'en': u('It\u00e1 - SC'), 'pt': u('It\u00e1 - SC')},
- '55493459':{'en': 'Coronel Martins - SC', 'pt': 'Coronel Martins - SC'},
- '55493482':{'en': u('Conc\u00f3rdia - SC'), 'pt': u('Conc\u00f3rdia - SC')},
 }

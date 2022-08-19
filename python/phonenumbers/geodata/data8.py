@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '609783':{'en': 'Bachok'},
+ '609784':{'en': 'Pasirputih'},
  '609785':{'en': 'Pasirputih'},
  '609786':{'en': 'Pasirputih'},
  '609787':{'en': 'Machang'},
@@ -8712,7 +8714,7 @@ data = {
  '612594209':{'en': 'Humula'},
  '612594210':{'en': 'Ivanhoe'},
  '612594211':{'en': 'Junee'},
- '612594212':{'en': 'Junee Reefs'},
+ '612594212':{'en': 'Griffith'},
  '612594213':{'en': 'Kikoira'},
  '612594214':{'en': 'Kyeamba'},
  '612594215':{'en': 'Lachlan'},
@@ -10017,6 +10019,4 @@ data = {
  '61263092':{'en': 'Greenethorpe'},
  '61263093':{'en': 'Grenfell'},
  '61263094':{'en': 'Grenfell'},
- '61263095':{'en': 'Grenfell'},
- '61263096':{'en': 'Gulgong'},
 }

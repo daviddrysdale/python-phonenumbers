@@ -8,7 +8,7 @@ PHONE_METADATA_BE = PhoneMetadata(id='BE', country_code=32, international_prefix
     toll_free=PhoneNumberDesc(national_number_pattern='800[1-9]\\d{4}', example_number='80012345', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='(?:70(?:2[0-57]|3[04-7]|44|6[569]|7[0579])|90(?:0[0-8]|1[36]|2[0-3568]|3[0-689]|[47][2-68]|5[1-68]|6[0-378]|9[34679]))\\d{4}', example_number='90012345', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='7879\\d{4}', example_number='78791234', possible_length=(8,)),
-    uan=PhoneNumberDesc(national_number_pattern='78(?:0[57]|1[0458]|2[25]|3[15-8]|48|[56]0|7[06-8]|9\\d)\\d{4}', example_number='78102345', possible_length=(8,)),
+    uan=PhoneNumberDesc(national_number_pattern='78(?:0[57]|1[014-8]|2[25]|3[15-8]|48|[56]0|7[06-8]|9\\d)\\d{4}', example_number='78102345', possible_length=(8,)),
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['(?:80|9)0'], national_prefix_formatting_rule='0\\1'),

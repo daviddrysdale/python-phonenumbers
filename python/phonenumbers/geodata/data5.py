@@ -358,6 +358,7 @@ data = {
  '351254':{'en': u('Peso da R\u00e9gua'), 'pt': u('Peso da R\u00e9gua')},
  '351255':{'en': 'Penafiel', 'pt': 'Penafiel'},
  '351256':{'en': u('S. Jo\u00e3o da Madeira'), 'pt': u('S. Jo\u00e3o da Madeira')},
+ '351257':{'en': 'Braga', 'pt': 'Braga'},
  '351258':{'en': 'Viana do Castelo', 'pt': 'Viana do Castelo'},
  '351259':{'en': 'Vila Real', 'pt': 'Vila Real'},
  '351261':{'en': 'Torres Vedras', 'pt': 'Torres Vedras'},
@@ -10018,5 +10019,4 @@ data = {
  '494822':{'de': 'Kellinghusen', 'en': 'Kellinghusen'},
  '494823':{'de': 'Wilster', 'en': 'Wilster'},
  '494824':{'de': 'Krempe', 'en': 'Krempe'},
- '494825':{'de': 'Burg Dithmarschen', 'en': 'Burg Dithmarschen'},
 }
