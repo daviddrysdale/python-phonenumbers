@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494821':{'de': 'Itzehoe', 'en': 'Itzehoe'},
+ '494822':{'de': 'Kellinghusen', 'en': 'Kellinghusen'},
+ '494823':{'de': 'Wilster', 'en': 'Wilster'},
+ '494824':{'de': 'Krempe', 'en': 'Krempe'},
  '494825':{'de': 'Burg Dithmarschen', 'en': 'Burg Dithmarschen'},
  '494826':{'de': 'Hohenlockstedt', 'en': 'Hohenlockstedt'},
  '494827':{'de': 'Wacken', 'en': 'Wacken'},
@@ -10015,8 +10019,4 @@ data = {
  '55493452':{'en': 'Seara - SC', 'pt': 'Seara - SC'},
  '55493453':{'en': 'Peritiba - SC', 'pt': 'Peritiba - SC'},
  '55493454':{'en': 'Xavantina - SC', 'pt': 'Xavantina - SC'},
- '55493455':{'en': 'Alto Bela Vista - SC', 'pt': 'Alto Bela Vista - SC'},
- '55493456':{'en': 'Campina da Alegria - SC', 'pt': 'Campina da Alegria - SC'},
- '55493457':{'en': 'Presidente Castelo Branco - SC', 'pt': 'Presidente Castelo Branco - SC'},
- '55493458':{'en': u('It\u00e1 - SC'), 'pt': u('It\u00e1 - SC')},
 }

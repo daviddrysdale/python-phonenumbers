@@ -2713,8 +2713,10 @@ data = {
  '1740984':{'en': 'Beverly, OH'},
  '1740992':{'en': 'Pomeroy, OH'},
  '1740998':{'en': 'Frankfort, OH'},
+ '1742':{'en': 'Ontario'},
  '1743':{'en': 'North Carolina'},
  '1747':{'en': 'California'},
+ '1753':{'en': 'Ontario'},
  '1754':{'en': 'Florida'},
  '1757':{'en': 'Virginia'},
  '1757220':{'en': 'Williamsburg, VA'},
@@ -10017,6 +10019,4 @@ data = {
  '1919256':{'en': 'Raleigh, NC'},
  '1919258':{'en': 'Broadway, NC'},
  '1919261':{'en': 'Knightdale, NC'},
- '1919266':{'en': 'Knightdale, NC'},
- '1919267':{'en': 'Apex, NC'},
 }

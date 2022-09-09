@@ -2,7 +2,7 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_PL = PhoneMetadata(id='PL', country_code=48, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='6\\d{5}(?:\\d{2})?|8\\d{9}|[1-9]\\d{6}(?:\\d{2})?', possible_length=(6, 7, 8, 9, 10)),
+    general_desc=PhoneNumberDesc(national_number_pattern='(?:6|8\\d\\d)\\d{7}|[1-9]\\d{6}(?:\\d{2})?|[26]\\d{5}', possible_length=(6, 7, 8, 9, 10)),
     fixed_line=PhoneNumberDesc(national_number_pattern='47\\d{7}|(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])(?:[02-9]\\d{6}|1(?:[0-8]\\d{5}|9\\d{3}(?:\\d{2})?))', example_number='123456789', possible_length=(7, 9)),
     mobile=PhoneNumberDesc(national_number_pattern='21(?:1(?:[145]\\d|3[1-5])|2[0-4]\\d)\\d{4}|(?:45|5[0137]|6[069]|7[2389]|88)\\d{7}', example_number='512345678', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{6,7}', example_number='800123456', possible_length=(9, 10)),
@@ -12,7 +12,7 @@ PHONE_METADATA_PL = PhoneMetadata(id='PL', country_code=48, international_prefix
     pager=PhoneNumberDesc(national_number_pattern='64\\d{4,7}', example_number='641234567', possible_length=(6, 7, 8, 9)),
     uan=PhoneNumberDesc(national_number_pattern='804\\d{6}', example_number='804123456', possible_length=(9,)),
     number_format=[NumberFormat(pattern='(\\d{5})', format='\\1', leading_digits_pattern=['19']),
-        NumberFormat(pattern='(\\d{3})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['11|64']),
+        NumberFormat(pattern='(\\d{3})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['11|20|64']),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])1', '(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])19']),
         NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2,3})', format='\\1 \\2 \\3', leading_digits_pattern=['64']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['21|39|45|5[0137]|6[0469]|7[02389]|8(?:0[14]|8)']),

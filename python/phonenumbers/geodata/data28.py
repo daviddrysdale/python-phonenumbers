@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '9167654':{'en': 'Palla Hara, Odisha'},
+ '9167655':{'en': 'Palla Hara, Odisha'},
+ '9167656':{'en': 'Palla Hara, Odisha'},
+ '9167657':{'en': 'Palla Hara, Odisha'},
+ '9167662':{'en': 'Keonjhar, Odisha'},
  '9167663':{'en': 'Keonjhar, Odisha'},
  '9167664':{'en': 'Keonjhar, Odisha'},
  '9167665':{'en': 'Keonjhar, Odisha'},
@@ -3796,6 +3801,7 @@ data = {
  '960654':{'en': 'Shaviyani'},
  '960656':{'en': 'Noonu'},
  '960658':{'en': 'Raa'},
+ '960659':{'en': 'Raa'},
  '960660':{'en': 'Baa'},
  '960662':{'en': 'Lhaviyani'},
  '960664':{'en': 'Kaafu'},

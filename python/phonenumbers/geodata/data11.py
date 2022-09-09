@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '6139136':{'en': 'Melbourne'},
+ '61391735':{'en': 'Melbourne'},
+ '61391736':{'en': 'Melbourne'},
+ '61391737':{'en': 'Melbourne'},
+ '61391738':{'en': 'Melbourne'},
  '6139188':{'en': 'Melbourne'},
  '6139189':{'en': 'Melbourne'},
  '6139200':{'en': 'Melbourne'},
@@ -10014,9 +10019,4 @@ data = {
  '61749813':{'en': 'Middlemount'},
  '61749814':{'en': 'Springsure'},
  '61749815':{'en': 'Springsure'},
- '61749816':{'en': 'Tieri'},
- '61749817':{'en': 'Tieri'},
- '61749818':{'en': 'Willows'},
- '61749819':{'en': 'Alpha'},
- '6174982':{'en': 'Emerald'},
 }

@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '618854938':{'en': 'Bower'},
+ '618854940':{'en': 'Eudunda'},
+ '618854941':{'en': 'Eudunda'},
+ '618854942':{'en': 'Eudunda'},
+ '618854943':{'en': 'Eudunda'},
  '618854944':{'en': 'Eudunda'},
  '618854945':{'en': 'Eudunda'},
  '618854946':{'en': 'Eudunda'},
@@ -10014,9 +10019,4 @@ data = {
  '61898942':{'en': 'Mount Barker'},
  '61898943':{'en': 'Mount Barker'},
  '61898944':{'en': 'Porongurup'},
- '61898945':{'en': 'Porongurup'},
- '61898946':{'en': 'Boscabel'},
- '61898947':{'en': 'Boscabel'},
- '61898948':{'en': 'Cranbrook'},
- '61898949':{'en': 'Cranbrook'},
 }

@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1919266':{'en': 'Knightdale, NC'},
+ '1919267':{'en': 'Apex, NC'},
  '1919269':{'en': 'Zebulon, NC'},
  '1919284':{'en': 'Kenly, NC'},
  '1919286':{'en': 'Durham, NC'},
@@ -2826,7 +2828,9 @@ data = {
  '2252536':{'en': 'Korhogo', 'fr': 'Korhogo'},
  '2252720':{'en': 'Plateau, Abidjan', 'fr': 'Plateau, Abidjan'},
  '2252721':{'en': 'Abidjan-sud', 'fr': 'Abidjan-sud'},
- '2252722':{'en': 'Cocody, Abidjan', 'fr': 'Cocody, Abidjan'},
+ '22527222':{'en': 'Abidjan-sud', 'fr': 'Abidjan-sud'},
+ '22527224':{'en': 'Cocody, Abidjan', 'fr': 'Cocody, Abidjan'},
+ '22527225':{'en': 'Cocody, Abidjan', 'fr': 'Cocody, Abidjan'},
  '2252723':{'en': 'Banco, Abidjan', 'fr': 'Banco, Abidjan'},
  '2252724':{'en': 'Abobo, Abidjan', 'fr': 'Abobo, Abidjan'},
  '2252730':{'en': 'Yamoussoukro', 'fr': 'Yamoussoukro'},
@@ -10015,8 +10019,4 @@ data = {
  '3323651':{'en': u('Aubigny-sur-N\u00e8re'), 'fr': u('Aubigny-sur-N\u00e8re')},
  '3323652':{'en': 'La Guerche-sur-lAubois', 'fr': 'La Guerche-sur-lAubois'},
  '3323653':{'en': 'Saint-Amand-Montrond', 'fr': 'Saint-Amand-Montrond'},
- '3323654':{'en': 'Sancerre', 'fr': 'Sancerre'},
- '3323655':{'en': 'Vierzon', 'fr': 'Vierzon'},
- '3323656':{'en': u('Orl\u00e9ans'), 'fr': u('Orl\u00e9ans')},
- '3323657':{'en': u('Ch\u00e2teauroux'), 'fr': u('Ch\u00e2teauroux')},
 }

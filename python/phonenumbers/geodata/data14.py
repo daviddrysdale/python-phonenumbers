@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61898945':{'en': 'Porongurup'},
+ '61898946':{'en': 'Boscabel'},
+ '61898947':{'en': 'Boscabel'},
+ '61898948':{'en': 'Cranbrook'},
+ '61898949':{'en': 'Cranbrook'},
  '61898950':{'en': 'Hopetoun'},
  '61898951':{'en': 'Jacup'},
  '61898952':{'en': 'Jerdacuttup'},
@@ -10014,9 +10019,4 @@ data = {
  '861306302':{'en': 'Zhangzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6f33\u5dde\u5e02')},
  '86130631':{'en': 'Zhangzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6f33\u5dde\u5e02')},
  '861306320':{'en': 'MaAnshan, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u9a6c\u978d\u5c71\u5e02')},
- '861306321':{'en': 'Hefei, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u5408\u80a5\u5e02')},
- '861306322':{'en': 'Huangshan, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u9ec4\u5c71\u5e02')},
- '861306323':{'en': 'Xuancheng, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u5ba3\u57ce\u5e02')},
- '861306324':{'en': 'Xuancheng, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u5ba3\u57ce\u5e02')},
- '861306325':{'en': 'Tongling, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u94dc\u9675\u5e02')},
 }

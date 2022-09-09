@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '55493455':{'en': 'Alto Bela Vista - SC', 'pt': 'Alto Bela Vista - SC'},
+ '55493456':{'en': 'Campina da Alegria - SC', 'pt': 'Campina da Alegria - SC'},
+ '55493457':{'en': 'Presidente Castelo Branco - SC', 'pt': 'Presidente Castelo Branco - SC'},
+ '55493458':{'en': u('It\u00e1 - SC'), 'pt': u('It\u00e1 - SC')},
  '55493459':{'en': 'Coronel Martins - SC', 'pt': 'Coronel Martins - SC'},
  '55493482':{'en': u('Conc\u00f3rdia - SC'), 'pt': u('Conc\u00f3rdia - SC')},
  '55493491':{'en': 'Seara - SC', 'pt': 'Seara - SC'},
@@ -5748,6 +5752,7 @@ data = {
  '5672':{'en': 'Rancagua, O\'Higgins', 'es': 'Rancagua, O\'Higgins'},
  '5673':{'en': 'Linares, Maule', 'es': 'Linares, Maule'},
  '5675':{'en': u('Curic\u00f3, Maule'), 'es': u('Curic\u00f3, Maule')},
+ '576010':{'en': 'Cundinamarca', 'es': 'Cundinamarca'},
  '576012':{'en': u('Bogot\u00e1'), 'es': u('Bogot\u00e1')},
  '576013':{'en': u('Bogot\u00e1'), 'es': u('Bogot\u00e1')},
  '576014':{'en': u('Bogot\u00e1'), 'es': u('Bogot\u00e1')},
@@ -10014,9 +10019,4 @@ data = {
  '609774':{'en': 'Kota Bharu'},
  '609775':{'en': 'Kota Bharu'},
  '609776':{'en': 'Bachok'},
- '609778':{'en': 'Bachok'},
- '609779':{'en': 'Bachok'},
- '609780':{'en': 'Kok Lanas'},
- '609781':{'en': 'Machang'},
- '609782':{'en': 'Bachok'},
 }

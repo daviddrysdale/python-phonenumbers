@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861339858':{'en': 'Liupanshui, Guizhou', 'zh': u('\u8d35\u5dde\u7701\u516d\u76d8\u6c34\u5e02')},
+ '861339859':{'en': 'Qianxinan, Guizhou', 'zh': u('\u8d35\u5dde\u7701\u9ed4\u897f\u5357\u5e03\u4f9d\u65cf\u82d7\u65cf\u81ea\u6cbb\u5dde')},
+ '861339860':{'en': 'Baoding, Hebei', 'zh': u('\u6cb3\u5317\u7701\u4fdd\u5b9a\u5e02')},
+ '861339861':{'en': 'Shijiazhuang, Hebei', 'zh': u('\u6cb3\u5317\u7701\u77f3\u5bb6\u5e84\u5e02')},
+ '861339862':{'en': 'Baoding, Hebei', 'zh': u('\u6cb3\u5317\u7701\u4fdd\u5b9a\u5e02')},
  '861339863':{'en': 'Baoding, Hebei', 'zh': u('\u6cb3\u5317\u7701\u4fdd\u5b9a\u5e02')},
  '861339864':{'en': 'Baoding, Hebei', 'zh': u('\u6cb3\u5317\u7701\u4fdd\u5b9a\u5e02')},
  '861339865':{'en': 'Qinhuangdao, Hebei', 'zh': u('\u6cb3\u5317\u7701\u79e6\u7687\u5c9b\u5e02')},
@@ -10014,9 +10019,4 @@ data = {
  '861364792':{'en': 'Jiujiang, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u4e5d\u6c5f\u5e02')},
  '861364793':{'en': 'Shangrao, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u4e0a\u9976\u5e02')},
  '861364794':{'en': 'Fuzhou, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u629a\u5dde\u5e02')},
- '861364795':{'en': 'Yichun, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u5b9c\u6625\u5e02')},
- '861364796':{'en': 'JiAn, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u5409\u5b89\u5e02')},
- '861364797':{'en': 'Ganzhou, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u8d63\u5dde\u5e02')},
- '861364798':{'en': 'Jingdezhen, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u666f\u5fb7\u9547\u5e02')},
- '861364799':{'en': 'Pingxiang, Jiangxi', 'zh': u('\u6c5f\u897f\u7701\u840d\u4e61\u5e02')},
 }
