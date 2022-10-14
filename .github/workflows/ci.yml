@@ -6,10 +6,10 @@ permissions:
 jobs:
   build:
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python-version: [2.7, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, "3.10", pypy2, pypy3]
+        python-version: [2.7, 3.5, 3.6, 3.7, 3.8, 3.9, "3.10", pypy2, pypy3]
 
     steps:
     - uses: actions/checkout@629c2de402a417ea7690ca6ce3f33229e27606a5 # v2
