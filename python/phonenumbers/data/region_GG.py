@@ -9,7 +9,7 @@ PHONE_METADATA_GG = PhoneMetadata(id='GG', country_code=44, international_prefix
     premium_rate=PhoneNumberDesc(national_number_pattern='(?:8(?:4[2-5]|7[0-3])|9(?:[01]\\d|8[0-3]))\\d{7}|845464\\d', example_number='9012345678', possible_length=(7, 10)),
     personal_number=PhoneNumberDesc(national_number_pattern='70\\d{8}', example_number='7012345678', possible_length=(10,)),
     voip=PhoneNumberDesc(national_number_pattern='56\\d{8}', example_number='5612345678', possible_length=(10,)),
-    pager=PhoneNumberDesc(national_number_pattern='76(?:464|652)\\d{5}|76(?:0[0-2]|2[356]|34|4[01347]|5[49]|6[0-369]|77|8[14]|9[139])\\d{6}', example_number='7640123456', possible_length=(10,)),
+    pager=PhoneNumberDesc(national_number_pattern='76(?:464|652)\\d{5}|76(?:0[0-28]|2[356]|34|4[01347]|5[49]|6[0-369]|77|8[14]|9[139])\\d{6}', example_number='7640123456', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='(?:3[0347]|55)\\d{8}', example_number='5512345678', possible_length=(10,)),
     national_prefix='0',
     national_prefix_for_parsing='0|([25-9]\\d{5})$',

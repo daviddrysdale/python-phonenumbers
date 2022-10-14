@@ -2924,6 +2924,7 @@ data = {
  '2292380':{'en': 'Djougou', 'fr': 'Djougou'},
  '2292382':{'en': 'Natitingou', 'fr': 'Natitingou'},
  '2292383':{'en': u('Tangui\u00e9ta'), 'fr': u('Tangui\u00e9ta')},
+ '22924':{'en': u('Tangui\u00e9ta')},
  '2302':{'en': 'North Region', 'es': u('Regi\u00f3n Norte'), 'fr': u('R\u00e9gion Nord')},
  '2304':{'en': 'Central Region', 'es': u('Regi\u00f3n Central'), 'fr': u('R\u00e9gion Centrale')},
  '2306':{'en': 'South Region', 'es': u('Regi\u00f3n Sur'), 'fr': u('R\u00e9gion Sud')},
@@ -10018,5 +10019,4 @@ data = {
  '3323650':{'en': u('Orl\u00e9ans'), 'fr': u('Orl\u00e9ans')},
  '3323651':{'en': u('Aubigny-sur-N\u00e8re'), 'fr': u('Aubigny-sur-N\u00e8re')},
  '3323652':{'en': 'La Guerche-sur-lAubois', 'fr': 'La Guerche-sur-lAubois'},
- '3323653':{'en': 'Saint-Amand-Montrond', 'fr': 'Saint-Amand-Montrond'},
 }

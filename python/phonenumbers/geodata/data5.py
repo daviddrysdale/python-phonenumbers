@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3358730':{'en': 'Gueret', 'fr': 'Gueret'},
  '3358731':{'en': 'Limoges', 'fr': 'Limoges'},
  '3358732':{'en': 'La Souterraine', 'fr': 'La Souterraine'},
  '3358733':{'en': 'Limoges', 'fr': 'Limoges'},
@@ -10018,5 +10019,4 @@ data = {
  '494804':{'de': 'Nordhastedt', 'en': 'Nordhastedt'},
  '494805':{'de': 'Schafstedt', 'en': 'Schafstedt'},
  '494806':{'de': u('Sarzb\u00fcttel'), 'en': u('Sarzb\u00fcttel')},
- '49481':{'de': 'Heide Holstein', 'en': 'Heide Holstein'},
 }
