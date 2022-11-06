@@ -12,6 +12,14 @@ This file does not generally include descriptions of patch releases (vX.Y.Z
 changes.  (Metadata updates are best checked
 [upstream](https://github.com/google/libphonenumber/blob/master/release_notes.txt).)
 
+What's new in 8.13.0
+--------------------
+
+Merge to [upstream commit
+185004cabd1bb4d3](https://github.com/google/libphonenumber/commit/185004cabd1bb4d3).  Upstream has
+removed the `leading_zero_possible` field from the `PhoneMetadata` type as part of this version;
+however, this change is *not* mirrored in the Python code due to back-compatibility concerns.
+
 What's new in 8.12.40
 ---------------------
 
