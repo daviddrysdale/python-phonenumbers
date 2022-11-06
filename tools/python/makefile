@@ -56,7 +56,7 @@ $(PYDIR)/tests/testdata/__init__.py:  $(TOPDIR)/resources/PhoneNumberMetadataFor
 	$(PYTHON) buildmetadatafromxml.py --lax $(TOPDIR)/resources/PhoneNumberMetadataForTesting.xml $(PYDIR)/tests/testdata phonenumbers
 metadata: $(PYDIR)/phonenumbers/data/__init__.py $(PYDIR)/phonenumbers/shortdata/__init__.py $(PYDIR)/tests/testdata/__init__.py geodata carrierdata tzdata
 
-alldata: metadata geodata carrierdata tzdata locale
+alldata: metadata geodata carrierdata tzdata
 
 test: alldata
 	cd $(PYDIR) && $(PYTHON) -m testwrapper
@@ -126,13 +126,16 @@ clean: coverage_clean profile_clean
 	rm -rf $(PYDIR)/tests/__pycache__ $(PYDIR)/tests/testdata/__pycache__ $(PYDIR)/tests/testgeodata/__pycache__ $(PYDIR)/tests/testcarrierdata/__pycache__
 	rm -rf $(PYDIR)/build $(PYDIR)/deb_dist $(PYDIR)/dist
 
-metaclean:
+metaclean: clean
 	rm -rf $(PYDIR)/phonenumbers/data $(PYDIR)/phonenumbers/shortdata $(PYDIR)/tests/testdata
-	rm -rf $(PYDIR)/phonenumbers/geodata $(PYDIR)/tests/testgeodata
+	rm -rf $(PYDIR)/phonenumbers/geodata/__init__.py*
+	rm -rf $(PYDIR)/phonenumbers/geodata/data*.py*
+	rm -rf $(PYDIR)/tests/testgeodata
 	rm -rf $(PYDIR)/phonenumbers/carrierdata $(PYDIR)/tests/testcarrierdata
 	rm -rf $(PYDIR)/phonenumbers/tzdata $(PYDIR)/tests/testtzdata
 
-distclean: clean metaclean
+distclean: metaclean
+	rm -rf $(PYDIR)/phonenumbers/geodata/locale.py
 	rm -rf $(PYDIR)/$(PACKAGE).egg-info
 	rm -rf $(PYDIR)/build
 	rm -f DumpLocale.class
