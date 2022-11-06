@@ -19,6 +19,17 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '553199903':{'en': 'Telemig Celular'},
+ '553199904':{'en': 'Telemig Celular'},
+ '553199905':{'en': 'Telemig Celular'},
+ '553199906':{'en': 'Telemig Celular'},
+ '553199907':{'en': 'Telemig Celular'},
+ '553199908':{'en': 'Telemig Celular'},
+ '553199909':{'en': 'Telemig Celular'},
+ '553199911':{'en': 'Telemig Celular'},
+ '553199912':{'en': 'Telemig Celular'},
+ '553199913':{'en': 'Telemig Celular'},
+ '553199914':{'en': 'Telemig Celular'},
  '553199915':{'en': 'Telemig Celular'},
  '553199916':{'en': 'Telemig Celular'},
  '553199917':{'en': 'Telemig Celular'},
@@ -10008,15 +10019,4 @@ data = {
  '573134':{'en': 'Claro'},
  '573135':{'en': 'Claro'},
  '573136':{'en': 'Claro'},
- '573137':{'en': 'Claro'},
- '573138':{'en': 'Claro'},
- '573142':{'en': 'Claro'},
- '573143':{'en': 'Claro'},
- '573144':{'en': 'Claro'},
- '573145':{'en': 'Claro'},
- '573146':{'en': 'Claro'},
- '573147':{'en': 'Claro'},
- '573148':{'en': 'Claro'},
- '57315':{'en': 'Movistar'},
- '57316':{'en': 'Movistar'},
 }
