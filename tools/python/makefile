@@ -126,10 +126,12 @@ clean: coverage_clean profile_clean
 	rm -rf $(PYDIR)/tests/__pycache__ $(PYDIR)/tests/testdata/__pycache__ $(PYDIR)/tests/testgeodata/__pycache__ $(PYDIR)/tests/testcarrierdata/__pycache__
 	rm -rf $(PYDIR)/build $(PYDIR)/deb_dist $(PYDIR)/dist
 
-metaclean: clean
+metaclean:
 	rm -rf $(PYDIR)/phonenumbers/data $(PYDIR)/phonenumbers/shortdata $(PYDIR)/tests/testdata
 	rm -rf $(PYDIR)/phonenumbers/geodata/__init__.py*
 	rm -rf $(PYDIR)/phonenumbers/geodata/data*.py*
+	rm -f $(PYDIR)/phonenumbers/geodata/*.pyc
+	rm -rf $(PYDIR)/phonenumbers/geodata/__pycache__
 	rm -rf $(PYDIR)/tests/testgeodata
 	rm -rf $(PYDIR)/phonenumbers/carrierdata $(PYDIR)/tests/testcarrierdata
 	rm -rf $(PYDIR)/phonenumbers/tzdata $(PYDIR)/tests/testtzdata
