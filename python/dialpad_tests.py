@@ -17,7 +17,7 @@ valid_strings = ['+442083661177',
                  '+6569786318',
                  '+6560115374',  # https://switchcomm.atlassian.net/browse/TEL-14616
                  '+576015088865',  # https://switchcomm.atlassian.net/browse/TEL-14616
-                 '+5715088865',  # https://switchcomm.atlassian.net/browse/TEL-14616
+                 '+16562013774', # https://dialpad.atlassian.net/browse/DP-60739
                  ]
 
 print '######### - VALID BY LIBRARY - ################'
