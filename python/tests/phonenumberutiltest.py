@@ -3188,6 +3188,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                           **{'preferred_international_prefix': u('9999'),
                              'register': True})
         self.assertIsNone(phonenumbers.example_number_for_type('XY', PhoneNumberType.PERSONAL_NUMBER))
+        # Deregister "XY" so no other tests are affected.
+        del PhoneMetadata._region_metadata["XY"]
 
     def testShortMetadataRegister(self):
         # Python version extra tests for short metadata registration.
