@@ -19,6 +19,12 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494796':{'de': 'Teufelsmoor', 'en': 'Teufelsmoor'},
+ '494802':{'de': 'Wrohm', 'en': 'Wrohm'},
+ '494803':{'de': 'Pahlen', 'en': 'Pahlen'},
+ '494804':{'de': 'Nordhastedt', 'en': 'Nordhastedt'},
+ '494805':{'de': 'Schafstedt', 'en': 'Schafstedt'},
+ '494806':{'de': u('Sarzb\u00fcttel'), 'en': u('Sarzb\u00fcttel')},
  '49481':{'de': 'Heide Holstein', 'en': 'Heide Holstein'},
  '494821':{'de': 'Itzehoe', 'en': 'Itzehoe'},
  '494822':{'de': 'Kellinghusen', 'en': 'Kellinghusen'},
@@ -10013,10 +10019,4 @@ data = {
  '55493362':{'en': 'Novo Horizonte - SC', 'pt': 'Novo Horizonte - SC'},
  '55493363':{'en': 'Bom Jesus do Oeste - SC', 'pt': 'Bom Jesus do Oeste - SC'},
  '55493364':{'en': 'Serra Alta - SC', 'pt': 'Serra Alta - SC'},
- '55493365':{'en': 'Modelo - SC', 'pt': 'Modelo - SC'},
- '55493366':{'en': 'Pinhalzinho - SC', 'pt': 'Pinhalzinho - SC'},
- '55493367':{'en': 'Sul Brasil - SC', 'pt': 'Sul Brasil - SC'},
- '55493382':{'en': u('Xanxer\u00ea - SC'), 'pt': u('Xanxer\u00ea - SC')},
- '55493424':{'en': 'Bom Jesus - SC', 'pt': 'Bom Jesus - SC'},
- '55493425':{'en': u('Conc\u00f3rdia - SC'), 'pt': u('Conc\u00f3rdia - SC')},
 }

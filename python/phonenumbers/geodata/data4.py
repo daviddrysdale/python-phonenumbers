@@ -19,6 +19,12 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3323647':{'en': u('Orl\u00e9ans'), 'fr': u('Orl\u00e9ans')},
+ '3323648':{'en': 'Gien', 'fr': 'Gien'},
+ '3323649':{'en': 'Tours', 'fr': 'Tours'},
+ '3323650':{'en': u('Orl\u00e9ans'), 'fr': u('Orl\u00e9ans')},
+ '3323651':{'en': u('Aubigny-sur-N\u00e8re'), 'fr': u('Aubigny-sur-N\u00e8re')},
+ '3323652':{'en': 'La Guerche-sur-lAubois', 'fr': 'La Guerche-sur-lAubois'},
  '3323653':{'en': 'Saint-Amand-Montrond', 'fr': 'Saint-Amand-Montrond'},
  '3323654':{'en': 'Sancerre', 'fr': 'Sancerre'},
  '3323655':{'en': 'Vierzon', 'fr': 'Vierzon'},
@@ -10013,10 +10019,4 @@ data = {
  '3358721':{'en': 'Limoges', 'fr': 'Limoges'},
  '3358722':{'en': 'Tulle', 'fr': 'Tulle'},
  '3358723':{'en': 'Gueret', 'fr': 'Gueret'},
- '3358724':{'en': 'Boussac', 'fr': 'Boussac'},
- '3358725':{'en': 'Argentat', 'fr': 'Argentat'},
- '3358726':{'en': 'Aubusson', 'fr': 'Aubusson'},
- '3358727':{'en': 'Bellac', 'fr': 'Bellac'},
- '3358728':{'en': 'Bourganeuf', 'fr': 'Bourganeuf'},
- '3358729':{'en': 'Boussac', 'fr': 'Boussac'},
 }

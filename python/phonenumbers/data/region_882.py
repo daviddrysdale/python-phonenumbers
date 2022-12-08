@@ -2,8 +2,8 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_882 = PhoneMetadata(id='001', country_code=882, international_prefix=None,
-    general_desc=PhoneNumberDesc(national_number_pattern='[13]\\d{6}(?:\\d{2,5})?|285\\d{9}|(?:[19]\\d|49)\\d{6}', possible_length=(7, 8, 9, 10, 11, 12)),
-    mobile=PhoneNumberDesc(national_number_pattern='342\\d{4}|(?:337|49)\\d{6}|3(?:2|47|7\\d{3})\\d{7}', example_number='3421234', possible_length=(7, 8, 9, 10, 12)),
+    general_desc=PhoneNumberDesc(national_number_pattern='[13]\\d{6}(?:\\d{2,5})?|(?:285|50\\d)\\d{9}|(?:[19]\\d|49)\\d{6}', possible_length=(7, 8, 9, 10, 11, 12)),
+    mobile=PhoneNumberDesc(national_number_pattern='342\\d{4}|(?:337|49)\\d{6}|(?:3(?:2|47|7\\d{3})|50\\d{3})\\d{7}', example_number='3421234', possible_length=(7, 8, 9, 10, 12)),
     voip=PhoneNumberDesc(national_number_pattern='1(?:3(?:0[0347]|[13][0139]|2[035]|4[013568]|6[0459]|7[06]|8[15-8]|9[0689])\\d{4}|6\\d{5,10})|(?:(?:285\\d\\d|3(?:45|[69]\\d{3}))\\d|9[89])\\d{6}', example_number='390123456789', possible_length=(7, 8, 9, 10, 11, 12)),
     voicemail=PhoneNumberDesc(national_number_pattern='348[57]\\d{7}', example_number='34851234567', possible_length=(11,)),
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{5})', format='\\1 \\2', leading_digits_pattern=['16|342']),
@@ -13,4 +13,4 @@ PHONE_METADATA_882 = PhoneMetadata(id='001', country_code=882, international_pre
         NumberFormat(pattern='(\\d{2})(\\d{3,4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['1']),
         NumberFormat(pattern='(\\d{2})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['34[57]']),
         NumberFormat(pattern='(\\d{3})(\\d{4})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['34']),
-        NumberFormat(pattern='(\\d{2})(\\d{4,5})(\\d{5})', format='\\1 \\2 \\3', leading_digits_pattern=['[1-3]'])])
+        NumberFormat(pattern='(\\d{2})(\\d{4,5})(\\d{5})', format='\\1 \\2 \\3', leading_digits_pattern=['[1-35]'])])

@@ -19,6 +19,12 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3358724':{'en': 'Boussac', 'fr': 'Boussac'},
+ '3358725':{'en': 'Argentat', 'fr': 'Argentat'},
+ '3358726':{'en': 'Aubusson', 'fr': 'Aubusson'},
+ '3358727':{'en': 'Bellac', 'fr': 'Bellac'},
+ '3358728':{'en': 'Bourganeuf', 'fr': 'Bourganeuf'},
+ '3358729':{'en': 'Boussac', 'fr': 'Boussac'},
  '3358730':{'en': 'Gueret', 'fr': 'Gueret'},
  '3358731':{'en': 'Limoges', 'fr': 'Limoges'},
  '3358732':{'en': 'La Souterraine', 'fr': 'La Souterraine'},
@@ -10013,10 +10019,4 @@ data = {
  '494793':{'de': 'Hambergen', 'en': 'Hambergen'},
  '494794':{'de': 'Worpswede-Ostersode', 'en': 'Worpswede-Ostersode'},
  '494795':{'de': 'Garlstedt', 'en': 'Garlstedt'},
- '494796':{'de': 'Teufelsmoor', 'en': 'Teufelsmoor'},
- '494802':{'de': 'Wrohm', 'en': 'Wrohm'},
- '494803':{'de': 'Pahlen', 'en': 'Pahlen'},
- '494804':{'de': 'Nordhastedt', 'en': 'Nordhastedt'},
- '494805':{'de': 'Schafstedt', 'en': 'Schafstedt'},
- '494806':{'de': u('Sarzb\u00fcttel'), 'en': u('Sarzb\u00fcttel')},
 }

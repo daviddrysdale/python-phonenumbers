@@ -19,6 +19,12 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1919250':{'en': 'Raleigh, NC'},
+ '1919251':{'en': 'Durham, NC'},
+ '1919255':{'en': 'Raleigh, NC'},
+ '1919256':{'en': 'Raleigh, NC'},
+ '1919258':{'en': 'Broadway, NC'},
+ '1919261':{'en': 'Knightdale, NC'},
  '1919266':{'en': 'Knightdale, NC'},
  '1919267':{'en': 'Apex, NC'},
  '1919269':{'en': 'Zebulon, NC'},
@@ -10013,10 +10019,4 @@ data = {
  '3323644':{'en': u('Valen\u00e7ay'), 'fr': u('Valen\u00e7ay')},
  '3323645':{'en': u('Vend\u00f4me'), 'fr': u('Vend\u00f4me')},
  '3323646':{'en': 'Vierzon', 'fr': 'Vierzon'},
- '3323647':{'en': u('Orl\u00e9ans'), 'fr': u('Orl\u00e9ans')},
- '3323648':{'en': 'Gien', 'fr': 'Gien'},
- '3323649':{'en': 'Tours', 'fr': 'Tours'},
- '3323650':{'en': u('Orl\u00e9ans'), 'fr': u('Orl\u00e9ans')},
- '3323651':{'en': u('Aubigny-sur-N\u00e8re'), 'fr': u('Aubigny-sur-N\u00e8re')},
- '3323652':{'en': 'La Guerche-sur-lAubois', 'fr': 'La Guerche-sur-lAubois'},
 }

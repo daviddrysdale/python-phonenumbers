@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1705635':{'en': 'Dwight, ON'},
+ '1705639':{'en': 'Norwood, ON'},
+ '1705645':{'en': 'Bracebridge, ON'},
+ '1705646':{'en': 'Bracebridge, ON'},
+ '1705647':{'en': 'New Liskeard, ON'},
  '1705652':{'en': 'Lakefield, ON'},
  '1705653':{'en': 'Campbellford, ON'},
  '1705656':{'en': 'Apsley, ON'},
@@ -6336,6 +6341,7 @@ data = {
  '1832826':{'en': 'Houston, TX'},
  '1832912':{'en': 'Houston, TX'},
  '1832934':{'en': 'Magnolia, TX'},
+ '1835':{'en': 'Pennsylvania'},
  '1838':{'en': 'New York'},
  '1839':{'en': 'South Carolina'},
  '1840':{'en': 'California'},
@@ -10013,10 +10019,4 @@ data = {
  '1919240':{'en': 'Chapel Hill, NC'},
  '1919242':{'en': 'Fremont, NC'},
  '1919245':{'en': 'Hillsborough, NC'},
- '1919250':{'en': 'Raleigh, NC'},
- '1919251':{'en': 'Durham, NC'},
- '1919255':{'en': 'Raleigh, NC'},
- '1919256':{'en': 'Raleigh, NC'},
- '1919258':{'en': 'Broadway, NC'},
- '1919261':{'en': 'Knightdale, NC'},
 }

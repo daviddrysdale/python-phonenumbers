@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1415':{'en': 'California'},
+ '1415202':{'en': 'San Francisco, CA'},
+ '1415206':{'en': 'San Francisco, CA'},
+ '1415209':{'en': 'Novato, CA'},
  '1415217':{'en': 'San Francisco, CA'},
  '1415221':{'en': 'San Francisco, CA'},
  '1415227':{'en': 'San Francisco, CA'},
@@ -9332,6 +9336,7 @@ data = {
  '1682622':{'en': 'Mansfield, TX'},
  '1682647':{'en': 'Fort Worth, TX'},
  '1682885':{'en': 'Fort Worth, TX'},
+ '1683':{'en': 'Ontario'},
  '1689':{'en': 'Florida'},
  '1701':{'en': 'North Dakota'},
  '1701221':{'en': 'Bismarck, ND'},
@@ -10014,9 +10019,4 @@ data = {
  '1705567':{'en': 'Kirkland Lake, ON'},
  '1705575':{'en': 'Sault Ste. Marie, ON'},
  '1705586':{'en': 'Greater Sudbury, ON'},
- '1705635':{'en': 'Dwight, ON'},
- '1705639':{'en': 'Norwood, ON'},
- '1705645':{'en': 'Bracebridge, ON'},
- '1705646':{'en': 'Bracebridge, ON'},
- '1705647':{'en': 'New Liskeard, ON'},
 }

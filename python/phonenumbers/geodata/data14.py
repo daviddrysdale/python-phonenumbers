@@ -19,6 +19,12 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '618989363':{'en': 'Dongolocking'},
+ '618989366':{'en': 'Dongolocking'},
+ '618989367':{'en': 'Dongolocking'},
+ '618989368':{'en': 'Dongolocking'},
+ '618989370':{'en': 'Dumbleyung'},
+ '618989371':{'en': 'Dumbleyung'},
  '618989372':{'en': 'Dumbleyung'},
  '618989373':{'en': 'Dumbleyung'},
  '618989374':{'en': 'Dumbleyung'},
@@ -10013,10 +10019,4 @@ data = {
  '861306939':{'en': 'Xinxiang, Henan', 'zh': u('\u6cb3\u5357\u7701\u65b0\u4e61\u5e02')},
  '86130694':{'en': 'Jiaozuo, Henan', 'zh': u('\u6cb3\u5357\u7701\u7126\u4f5c\u5e02')},
  '861306950':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
- '861306951':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
- '861306952':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
- '861306953':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
- '861306954':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
- '861306955':{'en': 'Luohe, Henan', 'zh': u('\u6cb3\u5357\u7701\u6f2f\u6cb3\u5e02')},
- '861306956':{'en': 'Luohe, Henan', 'zh': u('\u6cb3\u5357\u7701\u6f2f\u6cb3\u5e02')},
 }

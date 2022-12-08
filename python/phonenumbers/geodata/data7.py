@@ -19,6 +19,12 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '55493365':{'en': 'Modelo - SC', 'pt': 'Modelo - SC'},
+ '55493366':{'en': 'Pinhalzinho - SC', 'pt': 'Pinhalzinho - SC'},
+ '55493367':{'en': 'Sul Brasil - SC', 'pt': 'Sul Brasil - SC'},
+ '55493382':{'en': u('Xanxer\u00ea - SC'), 'pt': u('Xanxer\u00ea - SC')},
+ '55493424':{'en': 'Bom Jesus - SC', 'pt': 'Bom Jesus - SC'},
+ '55493425':{'en': u('Conc\u00f3rdia - SC'), 'pt': u('Conc\u00f3rdia - SC')},
  '55493431':{'en': u('Xanxer\u00ea - SC'), 'pt': u('Xanxer\u00ea - SC')},
  '55493432':{'en': 'Irani - SC', 'pt': 'Irani - SC'},
  '55493433':{'en': u('Xanxer\u00ea - SC'), 'pt': u('Xanxer\u00ea - SC')},
@@ -10013,10 +10019,4 @@ data = {
  '609719':{'en': 'Kota Bharu'},
  '609721':{'en': 'Kota Bharu'},
  '609725':{'en': 'Kota Bharu'},
- '609726':{'en': 'Kota Bharu'},
- '609732':{'en': 'Kota Bharu'},
- '609735':{'en': 'Kota Bharu'},
- '609738':{'en': 'Kota Bharu'},
- '60974':{'en': 'Kota Bharu'},
- '609750':{'en': 'Kota Bharu'},
 }

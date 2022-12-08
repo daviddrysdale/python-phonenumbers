@@ -19,6 +19,12 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861567196':{'en': 'Xiaogan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5b5d\u611f\u5e02')},
+ '861567197':{'en': 'Xiaogan, Hubei', 'zh': u('\u6e56\u5317\u7701\u5b5d\u611f\u5e02')},
+ '861567198':{'en': 'Ezhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u9102\u5dde\u5e02')},
+ '861567199':{'en': 'Ezhou, Hubei', 'zh': u('\u6e56\u5317\u7701\u9102\u5dde\u5e02')},
+ '861567200':{'en': 'Huangshi, Hubei', 'zh': u('\u6e56\u5317\u7701\u9ec4\u77f3\u5e02')},
+ '861567201':{'en': 'Huangshi, Hubei', 'zh': u('\u6e56\u5317\u7701\u9ec4\u77f3\u5e02')},
  '861567202':{'en': 'Huangshi, Hubei', 'zh': u('\u6e56\u5317\u7701\u9ec4\u77f3\u5e02')},
  '861567203':{'en': 'Huangshi, Hubei', 'zh': u('\u6e56\u5317\u7701\u9ec4\u77f3\u5e02')},
  '861567204':{'en': 'Enshi, Hubei', 'zh': u('\u6e56\u5317\u7701\u6069\u65bd\u571f\u5bb6\u65cf\u82d7\u65cf\u81ea\u6cbb\u5dde')},
@@ -10013,10 +10019,4 @@ data = {
  '86159481':{'en': 'Changchun, Jilin', 'zh': u('\u5409\u6797\u7701\u957f\u6625\u5e02')},
  '86159482':{'en': 'Changchun, Jilin', 'zh': u('\u5409\u6797\u7701\u957f\u6625\u5e02')},
  '86159483':{'en': 'Changchun, Jilin', 'zh': u('\u5409\u6797\u7701\u957f\u6625\u5e02')},
- '86159484':{'en': 'Jilin, Jilin', 'zh': u('\u5409\u6797\u7701\u5409\u6797\u5e02')},
- '86159485':{'en': 'Jilin, Jilin', 'zh': u('\u5409\u6797\u7701\u5409\u6797\u5e02')},
- '86159486':{'en': 'Jilin, Jilin', 'zh': u('\u5409\u6797\u7701\u5409\u6797\u5e02')},
- '86159487':{'en': 'Changchun, Jilin', 'zh': u('\u5409\u6797\u7701\u957f\u6625\u5e02')},
- '86159488':{'en': 'Songyuan, Jilin', 'zh': u('\u5409\u6797\u7701\u677e\u539f\u5e02')},
- '861594890':{'en': 'Baicheng, Jilin', 'zh': u('\u5409\u6797\u7701\u767d\u57ce\u5e02')},
 }
