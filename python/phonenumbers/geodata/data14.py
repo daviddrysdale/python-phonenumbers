@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '618989358':{'en': 'Beaufort River'},
+ '618989360':{'en': 'Dongolocking'},
  '618989363':{'en': 'Dongolocking'},
  '618989366':{'en': 'Dongolocking'},
  '618989367':{'en': 'Dongolocking'},
@@ -10017,6 +10019,4 @@ data = {
  '861306937':{'en': 'Xinxiang, Henan', 'zh': u('\u6cb3\u5357\u7701\u65b0\u4e61\u5e02')},
  '861306938':{'en': 'Xinxiang, Henan', 'zh': u('\u6cb3\u5357\u7701\u65b0\u4e61\u5e02')},
  '861306939':{'en': 'Xinxiang, Henan', 'zh': u('\u6cb3\u5357\u7701\u65b0\u4e61\u5e02')},
- '86130694':{'en': 'Jiaozuo, Henan', 'zh': u('\u6cb3\u5357\u7701\u7126\u4f5c\u5e02')},
- '861306950':{'en': 'Xuchang, Henan', 'zh': u('\u6cb3\u5357\u7701\u8bb8\u660c\u5e02')},
 }

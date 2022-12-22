@@ -2996,6 +2996,7 @@ data = {
  '5182':{'en': 'Madre de Dios'},
  '5183':{'en': u('Apur\u00edmac')},
  '5184':{'en': 'Cusco'},
+ '52220':{'en': 'Puebla', 'es': 'Puebla'},
  '52221':{'en': 'Puebla', 'es': 'Puebla'},
  '52222':{'en': 'Puebla', 'es': 'Puebla'},
  '52223':{'en': 'Puebla', 'es': 'Puebla'},
@@ -3233,6 +3234,7 @@ data = {
  '52717':{'en': 'Estado de Mexico', 'es': u('Estado de M\u00e9xico')},
  '52718':{'en': 'Estado de Mexico', 'es': u('Estado de M\u00e9xico')},
  '52719':{'en': 'San Francisco Xonacatlan/Temoaya, MEX', 'es': u('San Francisco Xonacatl\u00e1n/Temoaya, MEX')},
+ '52720':{'en': 'Toluca', 'es': 'Toluca'},
  '52721':{'en': 'Ixtapan de la Sal, MEX', 'es': 'Ixtapan de la Sal, MEX'},
  '52722':{'en': 'Estado de Mexico', 'es': u('Estado de M\u00e9xico')},
  '52723':{'en': 'Coatepec Harinas, MEX', 'es': 'Coatepec Harinas, MEX'},
@@ -10017,6 +10019,4 @@ data = {
  '55493358':{'en': 'Cordilheira Alta - SC', 'pt': 'Cordilheira Alta - SC'},
  '55493361':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493362':{'en': 'Novo Horizonte - SC', 'pt': 'Novo Horizonte - SC'},
- '55493363':{'en': 'Bom Jesus do Oeste - SC', 'pt': 'Bom Jesus do Oeste - SC'},
- '55493364':{'en': 'Serra Alta - SC', 'pt': 'Serra Alta - SC'},
 }
