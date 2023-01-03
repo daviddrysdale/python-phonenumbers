@@ -3216,6 +3216,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                              'register': True,
                              'short_data': True})
         self.assertIsNone(phonenumbers.example_number_for_type('XZ', PhoneNumberType.PERSONAL_NUMBER))
+        # Deregister "XZ" so no other tests are affected.
+        del PhoneMetadata._short_region_metadata["XZ"]
 
     def testNonGeoMetadataRegister(self):
         # Python version extra tests for non-geo metadata registration.
@@ -3239,6 +3241,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                           **{'country_code': 999,
                              'preferred_international_prefix': u('9999'),
                              'register': True})
+        # Deregister "001" / 999 afterwards so no other tests are affected.
+        del PhoneMetadata._country_code_metadata[999]
 
     def testPickledException(self):
         err = NumberParseException(NumberParseException.TOO_SHORT_AFTER_IDD, 'hello world')
