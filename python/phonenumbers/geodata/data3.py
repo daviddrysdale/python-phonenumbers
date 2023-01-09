@@ -4027,6 +4027,7 @@ data = {
  '25111645':{'en': 'Yeka I, Addis Ababa'},
  '25111646':{'en': 'Yeka II, Addis Ababa'},
  '25111647':{'en': 'Yeka Rss III, Addis Ababa'},
+ '25111650':{'en': 'Addis Ababa'},
  '25111651':{'en': 'East Addis Ababa Zone'},
  '25111652':{'en': 'South Addis Ababa Zone'},
  '25111653':{'en': 'South-West Addis Ababa Zone'},
@@ -10018,5 +10019,4 @@ data = {
  '3323643':{'en': 'Tours', 'fr': 'Tours'},
  '3323644':{'en': u('Valen\u00e7ay'), 'fr': u('Valen\u00e7ay')},
  '3323645':{'en': u('Vend\u00f4me'), 'fr': u('Vend\u00f4me')},
- '3323646':{'en': 'Vierzon', 'fr': 'Vierzon'},
 }

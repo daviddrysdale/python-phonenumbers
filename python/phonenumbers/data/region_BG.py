@@ -2,10 +2,10 @@
 from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_BG = PhoneMetadata(id='BG', country_code=359, international_prefix='00',
-    general_desc=PhoneNumberDesc(national_number_pattern='[2-7]\\d{6,7}|[89]\\d{6,8}|2\\d{5}', possible_length=(6, 7, 8, 9), possible_length_local_only=(4, 5)),
+    general_desc=PhoneNumberDesc(national_number_pattern='00800\\d{7}|[2-7]\\d{6,7}|[89]\\d{6,8}|2\\d{5}', possible_length=(6, 7, 8, 9, 12), possible_length_local_only=(4, 5)),
     fixed_line=PhoneNumberDesc(national_number_pattern='2\\d{5,7}|(?:43[1-6]|70[1-9])\\d{4,5}|(?:[36]\\d|4[124-7]|[57][1-9]|8[1-6]|9[1-7])\\d{5,6}', example_number='2123456', possible_length=(6, 7, 8), possible_length_local_only=(4, 5)),
     mobile=PhoneNumberDesc(national_number_pattern='(?:43[07-9]|99[69]\\d)\\d{5}|(?:8[7-9]|98)\\d{7}', example_number='43012345', possible_length=(8, 9)),
-    toll_free=PhoneNumberDesc(national_number_pattern='800\\d{5}', example_number='80012345', possible_length=(8,)),
+    toll_free=PhoneNumberDesc(national_number_pattern='(?:00800\\d\\d|800)\\d{5}', example_number='80012345', possible_length=(8, 12)),
     premium_rate=PhoneNumberDesc(national_number_pattern='90\\d{6}', example_number='90123456', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='700\\d{5}', example_number='70012345', possible_length=(8,)),
     national_prefix='0',

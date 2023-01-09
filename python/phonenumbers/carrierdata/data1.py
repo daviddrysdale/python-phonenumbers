@@ -19,6 +19,17 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '553199735':{'en': 'Telemig Celular'},
+ '553199736':{'en': 'Telemig Celular'},
+ '553199737':{'en': 'Telemig Celular'},
+ '553199738':{'en': 'Telemig Celular'},
+ '553199739':{'en': 'Telemig Celular'},
+ '553199741':{'en': 'Telemig Celular'},
+ '553199742':{'en': 'Telemig Celular'},
+ '553199743':{'en': 'Telemig Celular'},
+ '553199744':{'en': 'Telemig Celular'},
+ '553199745':{'en': 'Telemig Celular'},
+ '553199746':{'en': 'Telemig Celular'},
  '553199747':{'en': 'Telemig Celular'},
  '553199748':{'en': 'Telemig Celular'},
  '553199749':{'en': 'Telemig Celular'},
@@ -10008,15 +10019,4 @@ data = {
  '57305215':{'en': 'Tigo'},
  '57305216':{'en': 'Tigo'},
  '5730522':{'en': 'Tigo'},
- '5730523':{'en': 'Tigo'},
- '5730524':{'en': 'Tigo'},
- '5730525':{'en': 'Tigo'},
- '57305260':{'en': 'Tigo'},
- '57305261':{'en': 'Tigo'},
- '57305262':{'en': 'Tigo'},
- '57305263':{'en': 'Tigo'},
- '57305264':{'en': 'Tigo'},
- '57305265':{'en': 'Tigo'},
- '57305266':{'en': 'Tigo'},
- '573052670':{'en': 'Tigo'},
 }
