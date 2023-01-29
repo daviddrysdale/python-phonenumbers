@@ -19,6 +19,14 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '57305210':{'en': 'Tigo'},
+ '57305211':{'en': 'Tigo'},
+ '57305212':{'en': 'Tigo'},
+ '57305213':{'en': 'Tigo'},
+ '57305214':{'en': 'Tigo'},
+ '57305215':{'en': 'Tigo'},
+ '57305216':{'en': 'Tigo'},
+ '5730522':{'en': 'Tigo'},
  '5730523':{'en': 'Tigo'},
  '5730524':{'en': 'Tigo'},
  '5730525':{'en': 'Tigo'},
@@ -8138,7 +8146,9 @@ data = {
  '97577':{'en': 'TashiCell of Tashi InfoComm'},
  '97650':{'en': 'Unitel'},
  '97655':{'en': 'Unitel'},
- '9766':{'en': 'ONDO'},
+ '97660':{'en': 'ONDO'},
+ '97666':{'en': 'ONDO'},
+ '97669':{'en': 'Skytel'},
  '97680':{'en': 'Unitel'},
  '97681':{'en': 'ONDO'},
  '97683':{'en': 'G-Mobile'},
