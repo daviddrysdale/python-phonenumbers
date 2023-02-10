@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_LA = PhoneMetadata(id='LA', country_code=856, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[23]\\d{9}|3\\d{8}|(?:[235-8]\\d|41)\\d{6}', possible_length=(8, 9, 10), possible_length_local_only=(6,)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:2[13]|[35-7][14]|41|8[1468])\\d{6}', example_number='21212862', possible_length=(8,), possible_length_local_only=(6,)),
-    mobile=PhoneNumberDesc(national_number_pattern='(?:20(?:[239]\\d|5[24-9]|7[6-8]|88)|302\\d)\\d{6}', example_number='2023123456', possible_length=(10,)),
+    mobile=PhoneNumberDesc(national_number_pattern='(?:20(?:[2359]\\d|7[6-8]|88)|302\\d)\\d{6}', example_number='2023123456', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='30[013-9]\\d{6}', example_number='301234567', possible_length=(9,)),
     national_prefix='0',
     national_prefix_for_parsing='0',

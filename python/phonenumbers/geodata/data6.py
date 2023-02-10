@@ -2887,6 +2887,7 @@ data = {
  '5042503':{'en': 'Cortes'},
  '5042505':{'en': 'Cortes'},
  '5042511':{'en': 'Cortes'},
+ '5042512':{'en': u('San Pedro Sula, Cort\u00e9s')},
  '5042513':{'en': 'Cortes'},
  '5042515':{'en': 'Cortes'},
  '5042516':{'en': u('San Pedro Sula, Cort\u00e9s')},
@@ -10018,5 +10019,4 @@ data = {
  '55493355':{'en': 'Lajeado Grande - SC', 'pt': 'Lajeado Grande - SC'},
  '55493356':{'en': 'Arvoredo - SC', 'pt': 'Arvoredo - SC'},
  '55493358':{'en': 'Cordilheira Alta - SC', 'pt': 'Cordilheira Alta - SC'},
- '55493361':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
 }
