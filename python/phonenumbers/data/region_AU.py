@@ -13,7 +13,7 @@ PHONE_METADATA_AU = PhoneMetadata(id='AU', country_code=61, international_prefix
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1(?:3(?:00\\d{5}|45[0-4])|802)\\d{3}|1[38]00\\d{6}|13\\d{4}', possible_length=(6, 7, 8, 10, 12)),
     preferred_international_prefix='0011',
     national_prefix='0',
-    national_prefix_for_parsing='0|(183[12])',
+    national_prefix_for_parsing='(183[12])|0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3,4})', format='\\1 \\2', leading_digits_pattern=['16'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{2})(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['13']),
         NumberFormat(pattern='(\\d{3})(\\d{3})', format='\\1 \\2', leading_digits_pattern=['19']),

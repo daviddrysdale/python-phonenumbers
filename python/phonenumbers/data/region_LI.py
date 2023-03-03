@@ -10,7 +10,7 @@ PHONE_METADATA_LI = PhoneMetadata(id='LI', country_code=423, international_prefi
     uan=PhoneNumberDesc(national_number_pattern='870(?:28|87)\\d\\d', example_number='8702812', possible_length=(7,)),
     voicemail=PhoneNumberDesc(national_number_pattern='697(?:42|56|[78]\\d)\\d{4}', example_number='697861234', possible_length=(9,)),
     national_prefix='0',
-    national_prefix_for_parsing='0|(1001)',
+    national_prefix_for_parsing='(1001)|0',
     number_format=[NumberFormat(pattern='(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2 \\3', leading_digits_pattern=['[2379]|8(?:0[09]|7)', '[2379]|8(?:0(?:02|9)|7)'], domestic_carrier_code_formatting_rule='$CC \\1'),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['8']),
         NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['69'], domestic_carrier_code_formatting_rule='$CC \\1'),

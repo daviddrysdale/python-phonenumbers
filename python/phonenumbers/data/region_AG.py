@@ -11,7 +11,7 @@ PHONE_METADATA_AG = PhoneMetadata(id='AG', country_code=1, international_prefix=
     voip=PhoneNumberDesc(national_number_pattern='26848[01]\\d{4}', example_number='2684801234', possible_length=(10,), possible_length_local_only=(7,)),
     pager=PhoneNumberDesc(national_number_pattern='26840[69]\\d{4}', example_number='2684061234', possible_length=(10,), possible_length_local_only=(7,)),
     national_prefix='1',
-    national_prefix_for_parsing='1|([457]\\d{6})$',
+    national_prefix_for_parsing='([457]\\d{6})$|1',
     national_prefix_transform_rule='268\\1',
     leading_digits='268',
     mobile_number_portable_region=True)

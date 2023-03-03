@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3323643':{'en': 'Tours', 'fr': 'Tours'},
+ '3323644':{'en': u('Valen\u00e7ay'), 'fr': u('Valen\u00e7ay')},
+ '3323645':{'en': u('Vend\u00f4me'), 'fr': u('Vend\u00f4me')},
  '3323646':{'en': 'Vierzon', 'fr': 'Vierzon'},
  '3323647':{'en': u('Orl\u00e9ans'), 'fr': u('Orl\u00e9ans')},
  '3323648':{'en': 'Gien', 'fr': 'Gien'},
@@ -10016,7 +10019,4 @@ data = {
  '3358717':{'en': 'La Souterraine', 'fr': 'La Souterraine'},
  '3358718':{'en': 'Bellac', 'fr': 'Bellac'},
  '3358719':{'en': 'Limoges', 'fr': 'Limoges'},
- '3358720':{'en': 'Limoges', 'fr': 'Limoges'},
- '3358721':{'en': 'Limoges', 'fr': 'Limoges'},
- '3358722':{'en': 'Tulle', 'fr': 'Tulle'},
 }

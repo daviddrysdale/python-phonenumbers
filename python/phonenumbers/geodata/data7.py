@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '55493355':{'en': 'Lajeado Grande - SC', 'pt': 'Lajeado Grande - SC'},
+ '55493356':{'en': 'Arvoredo - SC', 'pt': 'Arvoredo - SC'},
+ '55493358':{'en': 'Cordilheira Alta - SC', 'pt': 'Cordilheira Alta - SC'},
  '55493361':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493362':{'en': 'Novo Horizonte - SC', 'pt': 'Novo Horizonte - SC'},
  '55493363':{'en': 'Bom Jesus do Oeste - SC', 'pt': 'Bom Jesus do Oeste - SC'},
@@ -5917,6 +5920,9 @@ data = {
  '5760633':{'en': 'Pereira', 'es': 'Pereira'},
  '5760634':{'en': 'Pereira', 'es': 'Pereira'},
  '5760635':{'en': 'Pereira', 'es': 'Pereira'},
+ '5760636':{'en': 'Eje Cafetero', 'es': 'Eje Cafetero'},
+ '5760637':{'en': 'Eje Cafetero', 'es': 'Eje Cafetero'},
+ '5760638':{'en': 'Eje Cafetero', 'es': 'Eje Cafetero'},
  '5760687':{'en': 'Manizales', 'es': 'Manizales'},
  '5760688':{'en': 'Manizales', 'es': 'Manizales'},
  '5760689':{'en': 'Manizales', 'es': 'Manizales'},
@@ -10013,10 +10019,4 @@ data = {
  '609701':{'en': 'Kota Bharu'},
  '609703':{'en': 'Kota Bharu'},
  '609706':{'en': 'Kota Bharu'},
- '609707':{'en': 'Kota Bharu'},
- '609708':{'en': 'Kota Bharu'},
- '609710':{'en': 'Kota Bharu'},
- '609712':{'en': 'Kota Bharu'},
- '609713':{'en': 'Kota Bharu'},
- '609714':{'en': 'Kota Bharu'},
 }

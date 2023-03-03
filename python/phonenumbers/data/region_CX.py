@@ -11,5 +11,5 @@ PHONE_METADATA_CX = PhoneMetadata(id='CX', country_code=61, international_prefix
     voip=PhoneNumberDesc(national_number_pattern='14(?:5(?:1[0458]|[23][458])|71\\d)\\d{4}', example_number='147101234', possible_length=(9,)),
     preferred_international_prefix='0011',
     national_prefix='0',
-    national_prefix_for_parsing='0|([59]\\d{7})$',
+    national_prefix_for_parsing='([59]\\d{7})$|0',
     national_prefix_transform_rule='8\\1')

@@ -12,5 +12,5 @@ PHONE_METADATA_JE = PhoneMetadata(id='JE', country_code=44, international_prefix
     pager=PhoneNumberDesc(national_number_pattern='76(?:464|652)\\d{5}|76(?:0[0-28]|2[356]|34|4[01347]|5[49]|6[0-369]|77|8[14]|9[139])\\d{6}', example_number='7640123456', possible_length=(10,)),
     uan=PhoneNumberDesc(national_number_pattern='(?:3(?:0(?:07(?:35|81)|8901)|3\\d{4}|4(?:4(?:4(?:05|42|69)|703)|5(?:041|800))|7(?:0002|1206))|55\\d{4})\\d{4}', example_number='5512345678', possible_length=(10,)),
     national_prefix='0',
-    national_prefix_for_parsing='0|([0-24-8]\\d{5})$',
+    national_prefix_for_parsing='([0-24-8]\\d{5})$|0',
     national_prefix_transform_rule='1534\\1')
