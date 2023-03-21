@@ -18,12 +18,14 @@ valid_strings = ['+442083661177',
                  '+6560115374',  # https://switchcomm.atlassian.net/browse/TEL-14616
                  '+576015088865',  # https://switchcomm.atlassian.net/browse/TEL-14616
                  '+16562013774', # https://dialpad.atlassian.net/browse/DP-60739
+                 '+18352010583', # https://dialpad.atlassian.net/browse/DP-67544
+                 '+15572003655' # https://dialpad.atlassian.net/browse/DP-67544
                  ]
 
-print '######### - VALID BY LIBRARY - ################'
+print ('######### - VALID BY LIBRARY - ################')
 for l in valid_strings:
   x = phonenumbers.parse(l, None)
-  print '%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x
+  print ('%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x)
 
 # To be fixed by Dialpad Changes
 dialpad_cases = ['+6278033212174',  # https://switchcomm.atlassian.net/browse/DP-13742
@@ -33,13 +35,13 @@ dialpad_cases = ['+6278033212174',  # https://switchcomm.atlassian.net/browse/DP
                  '+2252721214601',  # Ivory Coast - New Format
                  ]
 
-print '######### - VALID BY DIALPAD - ################'
+print ('######### - VALID BY DIALPAD - ################')
 for l in dialpad_cases:
   try:
     x = phonenumbers.parse(l, None)
-    print '%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x
+    print ('%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x)
   except Exception as e:
-    print '%15s' % l, '%25s' % e
+    print ('%15s' % l, '%25s' % e)
 
 # Invalid Strings
 invalid_strings = ['+4916190899790',  # https://switchcomm.atlassian.net/browse/TEL-8824  Not Fixed
@@ -47,15 +49,15 @@ invalid_strings = ['+4916190899790',  # https://switchcomm.atlassian.net/browse/
                    '+205739250',
                    ]
 
-print '######### - INVALID NUMBERS - ################'
+print ('######### - INVALID NUMBERS - ################')
 for l in invalid_strings:
   x = phonenumbers.parse(l, None)
-  print '%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x
+  print ('%15s' % l, '%10s' % phonenumbers.is_valid_number(x), '%25s' % x)
 
 # National Format match
 national_format_match = {'+525547808256': '55 4780 8256'}
 
-print '######### - NUMBER FORMAT VALIDITY - ################'
+print ('######### - NUMBER FORMAT VALIDITY - ################')
 for l in national_format_match:
   x = phonenumbers.parse(l, None)
   y = phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.NATIONAL)
@@ -67,9 +69,9 @@ for l in national_format_match:
 
 # Number validity check
 number_validity_check = {'1932621160': 'BR'}
-print '######### - REGION NUMBER VALIDITY - ###############'
+print ('######### - REGION NUMBER VALIDITY - ###############')
 for l in number_validity_check:
   region = number_validity_check[l]
   x = phonenumbers.parse(l, region)
-  print '%15s' % l, '%10s -> Region : %5s' % (phonenumbers.is_valid_number(x), region)
+  print ('%15s' % l, '%10s -> Region : %5s' % (phonenumbers.is_valid_number(x), region))
 
