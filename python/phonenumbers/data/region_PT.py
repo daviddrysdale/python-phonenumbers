@@ -11,7 +11,7 @@ PHONE_METADATA_PT = PhoneMetadata(id='PT', country_code=351, international_prefi
     personal_number=PhoneNumberDesc(national_number_pattern='884[0-4689]\\d{5}', example_number='884123456', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='30\\d{7}', example_number='301234567', possible_length=(9,)),
     pager=PhoneNumberDesc(national_number_pattern='6222\\d{5}', example_number='622212345', possible_length=(9,)),
-    uan=PhoneNumberDesc(national_number_pattern='70(?:7\\d|8[17])\\d{5}', example_number='707123456', possible_length=(9,)),
+    uan=PhoneNumberDesc(national_number_pattern='70(?:38[01]|596|(?:7\\d|8[17])\\d)\\d{4}', example_number='707123456', possible_length=(9,)),
     voicemail=PhoneNumberDesc(national_number_pattern='600\\d{6}|6[06]9233\\d{3}', example_number='600110000', possible_length=(9,)),
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{3})(\\d{4})', format='\\1 \\2 \\3', leading_digits_pattern=['2[12]']),
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{3})', format='\\1 \\2 \\3', leading_digits_pattern=['16|[236-9]'])],

@@ -815,6 +815,7 @@ data = {
  '22051':{'en': 'QCell'},
  '22052':{'en': 'QCell'},
  '22053':{'en': 'QCell'},
+ '22054':{'en': 'QCell'},
  '22058':{'en': 'QCell'},
  '22059':{'en': 'QCell'},
  '2206':{'en': 'Comium'},
@@ -10018,5 +10019,4 @@ data = {
  '553199704':{'en': 'Telemig Celular'},
  '553199705':{'en': 'Telemig Celular'},
  '553199706':{'en': 'Telemig Celular'},
- '553199707':{'en': 'Telemig Celular'},
 }
