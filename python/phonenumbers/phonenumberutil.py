@@ -368,6 +368,21 @@ def _create_extn_pattern(for_parsing):
 _EXTN_PATTERNS_FOR_PARSING = _create_extn_pattern(True)
 _EXTN_PATTERNS_FOR_MATCHING = _create_extn_pattern(False)
 
+# Regular expression of valid global-number-digits for the phone-context
+# parameter, following the syntax defined in RFC3966.
+_RFC3966_VISUAL_SEPARATOR = "[\\-\\.\\(\\)]?"
+_RFC3966_PHONE_DIGIT = "(" + _DIGITS + "|" + _RFC3966_VISUAL_SEPARATOR + ")"
+_RFC3966_GLOBAL_NUMBER_DIGITS = "^\\" + _PLUS_SIGN + _RFC3966_PHONE_DIGIT + "*" + _DIGITS + _RFC3966_PHONE_DIGIT + "*$"
+_RFC3966_GLOBAL_NUMBER_DIGITS_PATTERN = re.compile(_RFC3966_GLOBAL_NUMBER_DIGITS)
+
+# Regular expression of valid domainname for the phone-context parameter,
+# following the syntax defined in RFC3966.
+_ALPHANUM = _VALID_ALPHA + _DIGITS
+_RFC3966_DOMAINLABEL = "[" + _ALPHANUM + "]+((\\-)*[" + _ALPHANUM + "])*"
+_RFC3966_TOPLABEL = "[" + _VALID_ALPHA + "]+((\\-)*[" + _ALPHANUM + "])*"
+_RFC3966_DOMAINNAME = "^(" + _RFC3966_DOMAINLABEL + "\\.)*" + _RFC3966_TOPLABEL + "\\.?$"
+_RFC3966_DOMAINNAME_PATTERN = re.compile(_RFC3966_DOMAINNAME)
+
 # Regexp of all known extension prefixes used by different regions followed by
 # 1 or more valid digits, for use when parsing.
 _EXTN_PATTERN = re.compile(u("(?:") + _EXTN_PATTERNS_FOR_PARSING + u(")$"), _REGEX_FLAGS)
@@ -3010,26 +3025,60 @@ def parse(number, region=None, keep_raw_input=False,
     return numobj
 
 
+def _extract_phone_context(number_to_extract_from, index_of_phone_context):
+    """Extracts the value of the phone-context parameter of number_to_extract_from where the index of
+    ";phone-context=" is the parameter index_of_phone_context, following the syntax defined in
+    RFC3966.
+
+    Returns the extracted string (possibly empty), or None if no phone-context parameter is found."""
+    # If no phone-context parameter is present
+    if index_of_phone_context == -1:
+        return None
+
+    phone_context_start = index_of_phone_context + len(_RFC3966_PHONE_CONTEXT)
+    # If phone-context parameter is empty
+    if phone_context_start >= len(number_to_extract_from):
+        return U_EMPTY_STRING
+
+    phone_context_end = number_to_extract_from.find(';', phone_context_start)
+    # If phone-context is not the last parameter
+    if phone_context_end != -1:
+        return number_to_extract_from[phone_context_start:phone_context_end]
+    else:
+        return number_to_extract_from[phone_context_start:]
+
+
+def _is_phone_context_valid(phone_context):
+    """"Returns whether the value of phoneContext follows the syntax defined in RFC3966."""
+    if phone_context is None:
+        return True
+    if len(phone_context) == 0:
+        return False
+
+    # Does phone-context value match pattern of global-number-digits or domainname
+    return (fullmatch(_RFC3966_GLOBAL_NUMBER_DIGITS_PATTERN, phone_context) or
+            fullmatch(_RFC3966_DOMAINNAME_PATTERN, phone_context))
+
+
 def _build_national_number_for_parsing(number):
     """Converts number to a form that we can parse and return it if it is
     written in RFC3966; otherwise extract a possible number out of it and return it."""
     index_of_phone_context = number.find(_RFC3966_PHONE_CONTEXT)
-    if index_of_phone_context >= 0:
-        phone_context_start = index_of_phone_context + len(_RFC3966_PHONE_CONTEXT)
+
+    phone_context = _extract_phone_context(number, index_of_phone_context)
+    if not _is_phone_context_valid(phone_context):
+        raise NumberParseException(NumberParseException.NOT_A_NUMBER, "The phone-context value is invalid")
+    if phone_context is not None:
         # If the phone context contains a phone number prefix, we need to
         # capture it, whereas domains will be ignored.
-        if (phone_context_start < (len(number) - 1) and
-            number[phone_context_start] == _PLUS_SIGN):
+        if phone_context[0] == _PLUS_SIGN:
             # Additional parameters might follow the phone context. If so, we
             # will remove them here because the parameters after phone context
             # are not important for parsing the phone number.
-            phone_context_end = number.find(U_SEMICOLON, phone_context_start)
-            if phone_context_end > 0:
-                national_number = number[phone_context_start:phone_context_end]
-            else:
-                national_number = number[phone_context_start:]
+            national_number = phone_context
         else:
             national_number = U_EMPTY_STRING
+
         # Now append everything between the "tel:" prefix and the
         # phone-context. This should include the national number, an optional
         # extension or isdn-subaddress component. Note we also handle the case
@@ -3281,6 +3330,12 @@ class NumberParseException(UnicodeMixin, Exception):
     # This generally indicates the string passed in had fewer than 3 digits in
     # it.  The number failed to match the regular expression
     # _VALID_PHONE_NUMBER in phonenumberutil.py.
+
+    # This indicates the string passed is not a valid number. Either the string
+    # had less than 3 digits in it or had an invalid phone-context
+    # parameter. More specifically, the number failed to match the regular
+    # expression _VALID_PHONE_NUMBER, )RFC3966_GLOBAL_NUMBER_DIGITS, or
+    # _RFC3966_DOMAINNAME in phonenumberutil.py.
     NOT_A_NUMBER = 1
 
     # This indicates the string started with an international dialing prefix,

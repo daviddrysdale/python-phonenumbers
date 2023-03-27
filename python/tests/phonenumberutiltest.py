@@ -1981,11 +1981,6 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.parse("tel:253-0000;phone-context=www.google.com", "US"))
         self.assertEqual(US_LOCAL_NUMBER,
                          phonenumbers.parse("tel:253-0000;isub=12345;phone-context=www.google.com", "US"))
-        # This is invalid because no "+" sign is present as part of
-        # phone-context. The phone context is simply ignored in this case just
-        # as if it contains a domain.
-        self.assertEqual(US_LOCAL_NUMBER,
-                         phonenumbers.parse("tel:2530000;isub=12345;phone-context=1-650", "US"))
         self.assertEqual(US_LOCAL_NUMBER,
                          phonenumbers.parse("tel:2530000;isub=12345;phone-context=1234.com", "US"))
 
@@ -2408,11 +2403,11 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             # succeed in being parsed.
             invalidRfcPhoneContext = "tel:555-1234;phone-context=1-331"
             phonenumbers.parse(invalidRfcPhoneContext, "ZZ")
-            self.fail("'Unknown' region code not allowed - should fail.")
+            self.fail("phone-context is missing '+' sign: should fail.")
         except NumberParseException:
             # Expected this exception.
             e = sys.exc_info()[1]
-            self.assertEqual(NumberParseException.INVALID_COUNTRY_CODE,
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
                              e.error_type,
                              msg="Wrong error type stored in exception.")
 
@@ -2420,7 +2415,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
             # Only the phone-context symbol is present, but no data.
             invalidRfcPhoneContext = ";phone-context="
             phonenumbers.parse(invalidRfcPhoneContext, "ZZ")
-            self.fail("No number is present: should fail.")
+            self.fail("phone-context can't be empty: should fail.")
         except NumberParseException:
             # Expected this exception.
             e = sys.exc_info()[1]
@@ -2708,6 +2703,49 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Test the number "0000". This number has 3 leading zeros.
         threeZeros = PhoneNumber(country_code=61, national_number=0, italian_leading_zero=True, number_of_leading_zeros=3)
         self.assertEqual(threeZeros, phonenumbers.parse("0000", "AU"))
+
+    def testParseWithPhoneContext(self):
+        # context    = ";phone-context=" descriptor
+        # descriptor = domainname / global-number-digits
+
+        # Valid global-phone-digits
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:033316005;phone-context=+64", "ZZ"))
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:033316005;phone-context=+64;{this isn't part of phone-context anymore!}", "ZZ"))
+        nzFromPhoneContext = PhoneNumber(country_code=64, national_number=3033316005)
+        self.assertEqual(nzFromPhoneContext, phonenumbers.parse("tel:033316005;phone-context=+64-3", "ZZ"))
+        brFromPhoneContext = PhoneNumber(country_code=55, national_number=5033316005)
+        self.assertEqual(brFromPhoneContext, phonenumbers.parse("tel:033316005;phone-context=+(555)", "ZZ"))
+        usFromPhoneContext = PhoneNumber(country_code=1, national_number=23033316005)
+        self.assertEqual(usFromPhoneContext, phonenumbers.parse("tel:033316005;phone-context=+-1-2.3()", "ZZ"))
+
+        # Valid domainname
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:033316005;phone-context=abc.nz", "NZ"))
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:033316005;phone-context=www.PHONE-numb3r.com", "NZ"))
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:033316005;phone-context=a", "NZ"))
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:033316005;phone-context=3phone.J.", "NZ"))
+        self.assertEqual(NZ_NUMBER, phonenumbers.parse("tel:033316005;phone-context=a--z", "NZ"))
+
+        # Invalid descriptor
+        self.assertThrowsForInvalidPhoneContext("tel:033316005;phone-context=")
+        self.assertThrowsForInvalidPhoneContext("tel:033316005;phone-context=+")
+        self.assertThrowsForInvalidPhoneContext("tel:033316005;phone-context=64")
+        self.assertThrowsForInvalidPhoneContext("tel:033316005;phone-context=++64")
+        self.assertThrowsForInvalidPhoneContext("tel:033316005;phone-context=+abc")
+        self.assertThrowsForInvalidPhoneContext("tel:033316005;phone-context=.")
+        self.assertThrowsForInvalidPhoneContext("tel:033316005;phone-context=3phone")
+        self.assertThrowsForInvalidPhoneContext("tel:033316005;phone-context=a-.nz")
+        self.assertThrowsForInvalidPhoneContext("tel:033316005;phone-context=a{b}c")
+
+    def assertThrowsForInvalidPhoneContext(self, number_to_parse):
+        try:
+            phonenumbers.parse(number_to_parse, "ZZ")
+            self.fail("parsing " + number_to_parse + " should fail")
+        except NumberParseException:
+            # Expected this exception.
+            e = sys.exc_info()[1]
+            self.assertEqual(NumberParseException.NOT_A_NUMBER,
+                             e.error_type,
+                             msg="Wrong error type stored in exception.")
 
     def testCountryWithNoNumberDesc(self):
         # Andorra is a country where we don't have PhoneNumberDesc info in the metadata.
