@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '573046859':{'en': 'Tigo'},
+ '57304686':{'en': 'Tigo'},
+ '57304687':{'en': 'Tigo'},
  '57304688':{'en': 'Tigo'},
  '57304689':{'en': 'Tigo'},
  '5730469':{'en': 'Tigo'},
