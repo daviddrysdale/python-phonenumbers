@@ -3325,6 +3325,12 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(ValidationResult.to_string(ValidationResult.TOO_LONG), u("TOO_LONG"))
         self.assertEqual(ValidationResult.to_string(999), u("INVALID (999)"))
 
+        self.assertEqual(CountryCodeSource.to_string(CountryCodeSource.UNSPECIFIED), u("UNSPECIFIED"))
+        self.assertEqual(CountryCodeSource.to_string(CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN), u("FROM_NUMBER_WITH_PLUS_SIGN"))
+        self.assertEqual(CountryCodeSource.to_string(CountryCodeSource.FROM_NUMBER_WITH_IDD), u("FROM_NUMBER_WITH_IDD"))
+        self.assertEqual(CountryCodeSource.to_string(CountryCodeSource.FROM_DEFAULT_COUNTRY), u("FROM_DEFAULT_COUNTRY"))
+        self.assertEqual(CountryCodeSource.to_string(999), u("INVALID (999)"))
+
     def testCoverage(self):
         # Python version extra tests
         self.assertIsNone(phonenumberutil._region_code_for_number_from_list(GB_NUMBER, ("XX",)))
