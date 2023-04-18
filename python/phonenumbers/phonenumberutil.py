@@ -1460,8 +1460,8 @@ def format_out_of_country_calling_number(numobj, region_calling_from):
 def format_in_original_format(numobj, region_calling_from):
     """Formats a phone number using the original phone number format
     (e.g. INTERNATIONAL or NATIONAL) that the number is parsed from, provided
-    that the number has been parsed with parse_and_keep_raw_input. Otherwise the
-    number will be formatted in NATIONAL format.
+    that the number has been parsed with parse(.., keep_raw_input=True).
+    Otherwise the number will be formatted in NATIONAL format.
 
     The original format is embedded in the country_code_source field of the
     PhoneNumber object passed in, which is only set when parsing keeps the raw

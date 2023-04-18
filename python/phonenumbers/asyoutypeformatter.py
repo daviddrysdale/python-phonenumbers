@@ -89,7 +89,7 @@ class AsYouTypeFormatter(object):
         Arguments:
         region_code -- The region where the phone number is being entered
 
-        Return an AsYouTypeFormatter} object, which could be used to format
+        Return an AsYouTypeFormatter object, which could be used to format
         phone numbers in the specific region "as you type"
         """
         self._clear()
