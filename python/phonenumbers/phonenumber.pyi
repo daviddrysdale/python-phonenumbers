@@ -9,6 +9,8 @@ class CountryCodeSource:
     FROM_NUMBER_WITH_IDD: int
     FROM_NUMBER_WITHOUT_PLUS_SIGN: int
     FROM_DEFAULT_COUNTRY: int
+    @classmethod
+    def to_string(cls, val: int) -> str: ...
 
 class PhoneNumber(UnicodeMixin):
     country_code: int | None

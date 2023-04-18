@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from .util import UnicodeMixin, ImmutableMixin, mutating_method
-from .util import to_long, unicod, rpr, force_unicode
+from .util import to_long, unicod, rpr, force_unicode, u
 
 
 class CountryCodeSource(object):
@@ -47,6 +47,20 @@ class CountryCodeSource(object):
     # parsing the French number "01 42 68 53 00", when default_country is
     # supplied as France.
     FROM_DEFAULT_COUNTRY = 20
+
+    @classmethod
+    def to_string(cls, val):
+        """Return a string representation of a CountryCodeSource value"""
+        if val == CountryCodeSource.UNSPECIFIED:
+            return u("UNSPECIFIED")
+        elif val == CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN:
+            return u("FROM_NUMBER_WITH_PLUS_SIGN")
+        elif val == CountryCodeSource.FROM_NUMBER_WITH_IDD:
+            return u("FROM_NUMBER_WITH_IDD")
+        elif val == CountryCodeSource.FROM_DEFAULT_COUNTRY:
+            return u("FROM_DEFAULT_COUNTRY")
+        else:
+            return u("INVALID (%d)" % val)
 
 
 class PhoneNumber(UnicodeMixin):
