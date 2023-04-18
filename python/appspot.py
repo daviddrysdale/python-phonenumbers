@@ -2,18 +2,20 @@
 """
 Script for comparison with https://phonenumber.appspot.com
 """
+import getopt
 import phonenumbers
 import phonenumbers.carrier
 import phonenumbers.geocoder
 import phonenumbers.timezone
 from phonenumbers import PhoneNumberFormat
+import sys
 import urllib.parse
 
-def main():
+def interactive_query():
     number = prompt("Specify a Phone Number: ")
     country = prompt_or_default("Specify a Default Country: ", None)
     locale = prompt_or_default("Specify a locale for phone number geocoding: ", "en")
-    appspot(number, country, locale)
+    return (number, country, locale)
 
 def prompt(msg):
     result = input(msg)
@@ -91,5 +93,37 @@ def appspot(number, country, locale):
     print("\nPython library version: %s" % phonenumbers.__version__)
     print("\nCompare with: https://libphonenumber.appspot.com/phonenumberparser?number=%s&country=%s" % (urllib.parse.quote_plus(number), country))
 
+
+def usage():
+    print("./appspot.py [opts]")
+    print("  --number <val>  / -n <val>  : number to parse")
+    print("  --country <val> / -c <val>  : default country for parsing (default None)")
+    print("  --locale <val>  / -l <val>  : language (default None)")
+    print("  --help          / -h        : show this message")
+
+
 if __name__ == '__main__':
-    main()
+    number = None
+    country = None
+    locale = None
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hn:c:l:", ["help", "number=", "country=", "locale="])
+    except getopt.GetoptError as err:
+        print(err)  # will print something like "option -a not recognized"
+        usage()
+        sys.exit(2)
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-n", "--number"):
+            number = a
+        elif o in ("-c", "--country"):
+            country = a
+        elif o in ("-l", "--locale"):
+            locale = a
+        else:
+            assert False, "unhandled option"
+    if number is None:
+        (number, country, locale) = interactive_query()
+    appspot(number, country, locale)
