@@ -19,11 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '1919217':{'en': 'Knightdale, NC'},
- '1919220':{'en': 'Durham, NC'},
- '1919231':{'en': 'Raleigh, NC'},
- '1919232':{'en': 'Raleigh, NC'},
- '1919237':{'en': 'Durham, NC'},
  '1919240':{'en': 'Chapel Hill, NC'},
  '1919242':{'en': 'Fremont, NC'},
  '1919245':{'en': 'Hillsborough, NC'},
@@ -10019,4 +10014,9 @@ data = {
  '3323635':{'en': 'Nogent-le-Rotrou', 'fr': 'Nogent-le-Rotrou'},
  '3323636':{'en': 'Dreux', 'fr': 'Dreux'},
  '3323637':{'en': 'Pithiviers', 'fr': 'Pithiviers'},
+ '3323638':{'en': 'Romorantin-Lanthenay', 'fr': 'Romorantin-Lanthenay'},
+ '3323639':{'en': 'Saint-Aignan', 'fr': 'Saint-Aignan'},
+ '3323640':{'en': 'Saint-Amand-Montrond', 'fr': 'Saint-Amand-Montrond'},
+ '3323641':{'en': 'Blois', 'fr': 'Blois'},
+ '3323642':{'en': 'Sancerre', 'fr': 'Sancerre'},
 }

@@ -19,11 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '494776':{'de': 'Osten-Altendorf', 'en': 'Osten-Altendorf'},
- '494777':{'de': 'Cadenberge', 'en': 'Cadenberge'},
- '494778':{'de': 'Wingst', 'en': 'Wingst'},
- '494779':{'de': 'Freiburg Elbe', 'en': 'Freiburg Elbe'},
- '494791':{'de': 'Osterholz-Scharmbeck', 'en': 'Osterholz-Scharmbeck'},
  '494792':{'de': 'Worpswede', 'en': 'Worpswede'},
  '494793':{'de': 'Hambergen', 'en': 'Hambergen'},
  '494794':{'de': 'Worpswede-Ostersode', 'en': 'Worpswede-Ostersode'},
@@ -10019,4 +10014,9 @@ data = {
  '55493345':{'en': 'Santiago do Sul - SC', 'pt': 'Santiago do Sul - SC'},
  '55493346':{'en': 'Quilombo - SC', 'pt': 'Quilombo - SC'},
  '55493347':{'en': 'Coronel Freitas - SC', 'pt': 'Coronel Freitas - SC'},
+ '55493348':{'en': u('Uni\u00e3o do Oeste - SC'), 'pt': u('Uni\u00e3o do Oeste - SC')},
+ '55493349':{'en': 'Irati - SC', 'pt': 'Irati - SC'},
+ '55493351':{'en': 'Entre Rios - SC', 'pt': 'Entre Rios - SC'},
+ '55493353':{'en': 'Xaxim - SC', 'pt': 'Xaxim - SC'},
+ '55493354':{'en': 'Marema - SC', 'pt': 'Marema - SC'},
 }

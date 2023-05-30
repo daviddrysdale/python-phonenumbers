@@ -19,11 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '3358715':{'en': 'Gueret', 'fr': 'Gueret'},
- '3358716':{'en': 'Gueret', 'fr': 'Gueret'},
- '3358717':{'en': 'La Souterraine', 'fr': 'La Souterraine'},
- '3358718':{'en': 'Bellac', 'fr': 'Bellac'},
- '3358719':{'en': 'Limoges', 'fr': 'Limoges'},
  '3358720':{'en': 'Limoges', 'fr': 'Limoges'},
  '3358721':{'en': 'Limoges', 'fr': 'Limoges'},
  '3358722':{'en': 'Tulle', 'fr': 'Tulle'},
@@ -10019,4 +10014,9 @@ data = {
  '494773':{'de': 'Lamstedt', 'en': 'Lamstedt'},
  '494774':{'de': 'Hechthausen', 'en': 'Hechthausen'},
  '494775':{'de': u('Grossenw\u00f6rden'), 'en': u('Grossenw\u00f6rden')},
+ '494776':{'de': 'Osten-Altendorf', 'en': 'Osten-Altendorf'},
+ '494777':{'de': 'Cadenberge', 'en': 'Cadenberge'},
+ '494778':{'de': 'Wingst', 'en': 'Wingst'},
+ '494779':{'de': 'Freiburg Elbe', 'en': 'Freiburg Elbe'},
+ '494791':{'de': 'Osterholz-Scharmbeck', 'en': 'Osterholz-Scharmbeck'},
 }

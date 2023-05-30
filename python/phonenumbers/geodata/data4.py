@@ -19,11 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '3323638':{'en': 'Romorantin-Lanthenay', 'fr': 'Romorantin-Lanthenay'},
- '3323639':{'en': 'Saint-Aignan', 'fr': 'Saint-Aignan'},
- '3323640':{'en': 'Saint-Amand-Montrond', 'fr': 'Saint-Amand-Montrond'},
- '3323641':{'en': 'Blois', 'fr': 'Blois'},
- '3323642':{'en': 'Sancerre', 'fr': 'Sancerre'},
  '3323643':{'en': 'Tours', 'fr': 'Tours'},
  '3323644':{'en': u('Valen\u00e7ay'), 'fr': u('Valen\u00e7ay')},
  '3323645':{'en': u('Vend\u00f4me'), 'fr': u('Vend\u00f4me')},
@@ -10019,4 +10014,9 @@ data = {
  '3358712':{'en': 'Uzerche', 'fr': 'Uzerche'},
  '3358713':{'en': 'Aubusson', 'fr': 'Aubusson'},
  '3358714':{'en': 'Limoges', 'fr': 'Limoges'},
+ '3358715':{'en': 'Gueret', 'fr': 'Gueret'},
+ '3358716':{'en': 'Gueret', 'fr': 'Gueret'},
+ '3358717':{'en': 'La Souterraine', 'fr': 'La Souterraine'},
+ '3358718':{'en': 'Bellac', 'fr': 'Bellac'},
+ '3358719':{'en': 'Limoges', 'fr': 'Limoges'},
 }
