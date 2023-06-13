@@ -3594,7 +3594,6 @@ data = {
  '95642487':{'en': 'Shawpin'},
  '9564472':{'en': 'Meiktila'},
  '956525':{'en': 'Ngape'},
- '9567439':{'en': 'Naypyidaw'},
  '9567460':{'en': 'Naypyitaw'},
  '9567470':{'en': 'Naypyitaw'},
  '9567550':{'en': 'Naypyidaw'},

@@ -10,6 +10,6 @@ PHONE_METADATA_BD = PhoneMetadata(id='BD', country_code=880, international_prefi
     national_prefix='0',
     national_prefix_for_parsing='0',
     number_format=[NumberFormat(pattern='(\\d{2})(\\d{4,6})', format='\\1-\\2', leading_digits_pattern=['31[5-8]|[459]1'], national_prefix_formatting_rule='0\\1'),
-        NumberFormat(pattern='(\\d{3})(\\d{3,7})', format='\\1-\\2', leading_digits_pattern=['3(?:[67]|8[013-9])|4(?:6[168]|7|[89][18])|5(?:6[128]|9)|6(?:28|4[14]|5)|7[2-589]|8(?:0[014-9]|[12])|9[358]|(?:3[2-5]|4[235]|5[2-578]|6[0389]|76|8[3-7]|9[24])1|(?:44|66)[01346-9]'], national_prefix_formatting_rule='0\\1'),
+        NumberFormat(pattern='(\\d{3})(\\d{3,7})', format='\\1-\\2', leading_digits_pattern=['3(?:[67]|8[013-9])|4(?:6[168]|7|[89][18])|5(?:6[128]|9)|6(?:[15]|28|4[14])|7[2-589]|8(?:0[014-9]|[12])|9[358]|(?:3[2-5]|4[235]|5[2-578]|6[0389]|76|8[3-7]|9[24])1|(?:44|66)[01346-9]'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d{4})(\\d{3,6})', format='\\1-\\2', leading_digits_pattern=['[13-9]|22'], national_prefix_formatting_rule='0\\1'),
         NumberFormat(pattern='(\\d)(\\d{7,8})', format='\\1-\\2', leading_digits_pattern=['2'], national_prefix_formatting_rule='0\\1')])
