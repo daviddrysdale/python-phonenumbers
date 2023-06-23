@@ -19,7 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '5730463':{'en': 'Tigo'},
  '5730464':{'en': 'Tigo'},
  '5730465':{'en': 'Tigo'},
  '5730466':{'en': 'Tigo'},
@@ -8223,6 +8222,7 @@ data = {
  '9681':{'en': 'Ooredoo'},
  '96871':{'en': 'Omantel'},
  '96872':{'en': 'Omantel'},
+ '96876':{'en': 'Vodafone Oman'},
  '96877':{'en': 'Vodafone Oman'},
  '96878':{'en': 'Ooredoo'},
  '968790':{'en': 'Ooredoo'},
@@ -8273,8 +8273,10 @@ data = {
  '9725531':{'en': '019mobile'},
  '9725532':{'en': 'Free Telecom'},
  '9725533':{'en': 'Free Telecom'},
+ '9725541':{'en': 'Merkaziya'},
  '9725543':{'en': 'Maskyoo'},
  '9725544':{'en': 'Cellran Cellular Communications'},
+ '97255440':{'en': 'Merkaziya'},
  '9725550':{'en': 'Annatel'},
  '9725551':{'en': 'Annatel'},
  '9725555':{'en': 'Rami Levy'},
