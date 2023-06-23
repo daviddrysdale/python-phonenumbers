@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python-version: [2.7, 3.5, 3.6, 3.7, 3.8, 3.9, "3.10", 3.11, pypy2.7, pypy3.9]
+        python-version: [3.5, 3.6, 3.7, 3.8, 3.9, "3.10", 3.11, pypy2.7, pypy3.9]
 
     steps:
     - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
