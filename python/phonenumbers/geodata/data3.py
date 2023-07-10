@@ -5677,6 +5677,7 @@ data = {
  '26736':{'en': 'Gaborone'},
  '267370':{'en': 'Gaborone'},
  '267371':{'en': 'Gaborone'},
+ '26738':{'en': 'Gaborone'},
  '267390':{'en': 'Gaborone'},
  '267391':{'en': 'Gaborone'},
  '267392':{'en': 'Gaborone'},
@@ -10018,5 +10019,4 @@ data = {
  '3323639':{'en': 'Saint-Aignan', 'fr': 'Saint-Aignan'},
  '3323640':{'en': 'Saint-Amand-Montrond', 'fr': 'Saint-Amand-Montrond'},
  '3323641':{'en': 'Blois', 'fr': 'Blois'},
- '3323642':{'en': 'Sancerre', 'fr': 'Sancerre'},
 }

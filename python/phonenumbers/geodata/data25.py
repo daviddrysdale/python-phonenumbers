@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861819927':{'en': 'Changji, Xinjiang', 'zh': u('\u65b0\u7586\u660c\u5409\u56de\u65cf\u81ea\u6cbb\u5dde')},
  '861819928':{'en': 'Changji, Xinjiang', 'zh': u('\u65b0\u7586\u660c\u5409\u56de\u65cf\u81ea\u6cbb\u5dde')},
  '861819929':{'en': 'Changji, Xinjiang', 'zh': u('\u65b0\u7586\u660c\u5409\u56de\u65cf\u81ea\u6cbb\u5dde')},
  '86181993':{'en': 'Hotan, Xinjiang', 'zh': u('\u65b0\u7586\u548c\u7530\u5730\u533a')},
@@ -10018,5 +10019,4 @@ data = {
  '861854790':{'en': 'Xilin, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9521\u6797\u90ed\u52d2\u76df')},
  '861854791':{'en': 'Xilin, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9521\u6797\u90ed\u52d2\u76df')},
  '861854792':{'en': 'Xilin, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9521\u6797\u90ed\u52d2\u76df')},
- '861854793':{'en': 'Xilin, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9521\u6797\u90ed\u52d2\u76df')},
 }
