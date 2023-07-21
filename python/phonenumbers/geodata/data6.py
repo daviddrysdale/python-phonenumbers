@@ -3393,6 +3393,7 @@ data = {
  '5346':{'en': 'Isle of Youth'},
  '5347':{'en': 'Mayabeque and Artemisa'},
  '5348':{'en': u('Pinar del R\u00edo Province')},
+ '5349':{'en': 'Artemisa Province'},
  '537':{'en': 'Havana City'},
  '541':{'en': 'Buenos Aires', 'es': 'Buenos Aires'},
  '542202':{'en': u('Gonz\u00e1lez Cat\u00e1n/Virrey del Pino, Buenos Aires'), 'es': u('Gonz\u00e1lez Cat\u00e1n/Virrey del Pino, Buenos Aires')},
@@ -10018,5 +10019,4 @@ data = {
  '55493348':{'en': u('Uni\u00e3o do Oeste - SC'), 'pt': u('Uni\u00e3o do Oeste - SC')},
  '55493349':{'en': 'Irati - SC', 'pt': 'Irati - SC'},
  '55493351':{'en': 'Entre Rios - SC', 'pt': 'Entre Rios - SC'},
- '55493353':{'en': 'Xaxim - SC', 'pt': 'Xaxim - SC'},
 }

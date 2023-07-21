@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '9168155':{'en': 'Parlakhemundi, Odisha'},
  '9168156':{'en': 'Parlakhemundi, Odisha'},
  '9168157':{'en': 'Parlakhemundi, Odisha'},
  '9168162':{'en': 'Mohana, Odisha'},
