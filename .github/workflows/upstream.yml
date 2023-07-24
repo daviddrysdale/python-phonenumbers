@@ -1,0 +1,21 @@
+name: Check libphonenumbers releases
+
+on:
+  schedule:
+    - cron: '30 7,19 * * *'  # Run daily at 07:30 and 19:30
+  workflow_dispatch:
+
+jobs:
+  versioncheck:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == "daviddrysdale"
+    steps:
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+      - uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435 # v4
+        with:
+          python-version: 3
+      - name: Check upstream version
+        run: |
+          pip install -U pip
+          pip install requests
+          python3 tools/python/checkupstreamversion.py
