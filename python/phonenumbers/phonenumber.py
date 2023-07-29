@@ -57,6 +57,8 @@ class CountryCodeSource(object):
             return u("FROM_NUMBER_WITH_PLUS_SIGN")
         elif val == CountryCodeSource.FROM_NUMBER_WITH_IDD:
             return u("FROM_NUMBER_WITH_IDD")
+        elif val == CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN:
+            return u("FROM_NUMBER_WITHOUT_PLUS_SIGN")
         elif val == CountryCodeSource.FROM_DEFAULT_COUNTRY:
             return u("FROM_DEFAULT_COUNTRY")
         else:

@@ -3328,6 +3328,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(CountryCodeSource.to_string(CountryCodeSource.UNSPECIFIED), u("UNSPECIFIED"))
         self.assertEqual(CountryCodeSource.to_string(CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN), u("FROM_NUMBER_WITH_PLUS_SIGN"))
         self.assertEqual(CountryCodeSource.to_string(CountryCodeSource.FROM_NUMBER_WITH_IDD), u("FROM_NUMBER_WITH_IDD"))
+        self.assertEqual(CountryCodeSource.to_string(CountryCodeSource.FROM_NUMBER_WITHOUT_PLUS_SIGN), u("FROM_NUMBER_WITHOUT_PLUS_SIGN"))
         self.assertEqual(CountryCodeSource.to_string(CountryCodeSource.FROM_DEFAULT_COUNTRY), u("FROM_DEFAULT_COUNTRY"))
         self.assertEqual(CountryCodeSource.to_string(999), u("INVALID (999)"))
 
