@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>phonenumbers</strong></big></big> (version 8.12.40)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>phonenumbers</strong></big></big> (version 8.13.17)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/phonenumbers/__init__.py">phonenumbers/__init__.py</a></font></td></tr></table>
     <p><tt>Python&nbsp;phone&nbsp;number&nbsp;parsing&nbsp;and&nbsp;formatting&nbsp;library<br>
@@ -162,7 +162,7 @@ True<br>
 Arguments:<br>
 region_code&nbsp;--&nbsp;The&nbsp;region&nbsp;where&nbsp;the&nbsp;phone&nbsp;number&nbsp;is&nbsp;being&nbsp;entered<br>
 &nbsp;<br>
-Return&nbsp;an&nbsp;<a href="#AsYouTypeFormatter">AsYouTypeFormatter</a>}&nbsp;<a href="builtins.html#object">object</a>,&nbsp;which&nbsp;could&nbsp;be&nbsp;used&nbsp;to&nbsp;format<br>
+Return&nbsp;an&nbsp;<a href="#AsYouTypeFormatter">AsYouTypeFormatter</a>&nbsp;<a href="builtins.html#object">object</a>,&nbsp;which&nbsp;could&nbsp;be&nbsp;used&nbsp;to&nbsp;format<br>
 phone&nbsp;numbers&nbsp;in&nbsp;the&nbsp;specific&nbsp;region&nbsp;"as&nbsp;you&nbsp;type"</tt></dd></dl>
 
 <dl><dt><a name="AsYouTypeFormatter-clear"><strong>clear</strong></a>(self)</dt><dd><tt>Clears&nbsp;the&nbsp;internal&nbsp;state&nbsp;of&nbsp;the&nbsp;formatter,&nbsp;so&nbsp;it&nbsp;can&nbsp;be&nbsp;reused.</tt></dd></dl>
@@ -208,7 +208,11 @@ Data descriptors defined here:<br>
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>The&nbsp;source&nbsp;from&nbsp;which&nbsp;a&nbsp;country&nbsp;code&nbsp;is&nbsp;derived.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
-<td width="100%">Data descriptors defined here:<br>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="CountryCodeSource-to_string"><strong>to_string</strong></a>(val)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Return&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;a&nbsp;<a href="#CountryCodeSource">CountryCodeSource</a>&nbsp;value</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -1082,14 +1086,15 @@ user_defined_formats&nbsp;--&nbsp;formatting&nbsp;rules&nbsp;specified&nbsp;by&n
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;<a href="#NumberFormat">NumberFormat</a>&nbsp;objects.<br>
 &nbsp;<br>
 Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number.</tt></dd></dl>
- <dl><dt><a name="-format_in_original_format"><strong>format_in_original_format</strong></a>(numobj, region_calling_from)</dt><dd><tt>Format&nbsp;a&nbsp;number&nbsp;using&nbsp;the&nbsp;original&nbsp;format&nbsp;that&nbsp;the&nbsp;number&nbsp;was&nbsp;parsed&nbsp;from.<br>
+ <dl><dt><a name="-format_in_original_format"><strong>format_in_original_format</strong></a>(numobj, region_calling_from)</dt><dd><tt>Formats&nbsp;a&nbsp;phone&nbsp;number&nbsp;using&nbsp;the&nbsp;original&nbsp;phone&nbsp;number&nbsp;format<br>
+(e.g.&nbsp;INTERNATIONAL&nbsp;or&nbsp;NATIONAL)&nbsp;that&nbsp;the&nbsp;number&nbsp;is&nbsp;parsed&nbsp;from,&nbsp;provided<br>
+that&nbsp;the&nbsp;number&nbsp;has&nbsp;been&nbsp;parsed&nbsp;with&nbsp;<a href="#-parse">parse</a>(..,&nbsp;keep_raw_input=True).<br>
+Otherwise&nbsp;the&nbsp;number&nbsp;will&nbsp;be&nbsp;formatted&nbsp;in&nbsp;NATIONAL&nbsp;format.<br>
 &nbsp;<br>
 The&nbsp;original&nbsp;format&nbsp;is&nbsp;embedded&nbsp;in&nbsp;the&nbsp;country_code_source&nbsp;field&nbsp;of&nbsp;the<br>
-<a href="#PhoneNumber">PhoneNumber</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in.&nbsp;If&nbsp;such&nbsp;information&nbsp;is&nbsp;missing,&nbsp;the&nbsp;number<br>
-will&nbsp;be&nbsp;formatted&nbsp;into&nbsp;the&nbsp;NATIONAL&nbsp;format&nbsp;by&nbsp;default.<br>
-&nbsp;<br>
-When&nbsp;&nbsp;we&nbsp;don't&nbsp;have&nbsp;a&nbsp;formatting&nbsp;pattern&nbsp;for&nbsp;the&nbsp;number,&nbsp;the&nbsp;method<br>
-returns&nbsp;the&nbsp;raw&nbsp;input&nbsp;when&nbsp;it&nbsp;is&nbsp;available.<br>
+<a href="#PhoneNumber">PhoneNumber</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in,&nbsp;which&nbsp;is&nbsp;only&nbsp;set&nbsp;when&nbsp;parsing&nbsp;keeps&nbsp;the&nbsp;raw<br>
+input.&nbsp;When&nbsp;we&nbsp;don't&nbsp;have&nbsp;a&nbsp;formatting&nbsp;pattern&nbsp;for&nbsp;the&nbsp;number,&nbsp;the&nbsp;method<br>
+falls&nbsp;back&nbsp;to&nbsp;returning&nbsp;the&nbsp;raw&nbsp;input.<br>
 &nbsp;<br>
 Note&nbsp;this&nbsp;method&nbsp;guarantees&nbsp;no&nbsp;digit&nbsp;will&nbsp;be&nbsp;inserted,&nbsp;removed&nbsp;or&nbsp;modified<br>
 as&nbsp;a&nbsp;result&nbsp;of&nbsp;formatting.<br>

@@ -392,14 +392,15 @@ user_defined_formats&nbsp;--&nbsp;formatting&nbsp;rules&nbsp;specified&nbsp;by&n
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;NumberFormat&nbsp;objects.<br>
 &nbsp;<br>
 Returns&nbsp;the&nbsp;formatted&nbsp;phone&nbsp;number.</tt></dd></dl>
- <dl><dt><a name="-format_in_original_format"><strong>format_in_original_format</strong></a>(numobj, region_calling_from)</dt><dd><tt>Format&nbsp;a&nbsp;number&nbsp;using&nbsp;the&nbsp;original&nbsp;format&nbsp;that&nbsp;the&nbsp;number&nbsp;was&nbsp;parsed&nbsp;from.<br>
+ <dl><dt><a name="-format_in_original_format"><strong>format_in_original_format</strong></a>(numobj, region_calling_from)</dt><dd><tt>Formats&nbsp;a&nbsp;phone&nbsp;number&nbsp;using&nbsp;the&nbsp;original&nbsp;phone&nbsp;number&nbsp;format<br>
+(e.g.&nbsp;INTERNATIONAL&nbsp;or&nbsp;NATIONAL)&nbsp;that&nbsp;the&nbsp;number&nbsp;is&nbsp;parsed&nbsp;from,&nbsp;provided<br>
+that&nbsp;the&nbsp;number&nbsp;has&nbsp;been&nbsp;parsed&nbsp;with&nbsp;<a href="#-parse">parse</a>(..,&nbsp;keep_raw_input=True).<br>
+Otherwise&nbsp;the&nbsp;number&nbsp;will&nbsp;be&nbsp;formatted&nbsp;in&nbsp;NATIONAL&nbsp;format.<br>
 &nbsp;<br>
 The&nbsp;original&nbsp;format&nbsp;is&nbsp;embedded&nbsp;in&nbsp;the&nbsp;country_code_source&nbsp;field&nbsp;of&nbsp;the<br>
-PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in.&nbsp;If&nbsp;such&nbsp;information&nbsp;is&nbsp;missing,&nbsp;the&nbsp;number<br>
-will&nbsp;be&nbsp;formatted&nbsp;into&nbsp;the&nbsp;NATIONAL&nbsp;format&nbsp;by&nbsp;default.<br>
-&nbsp;<br>
-When&nbsp;&nbsp;we&nbsp;don't&nbsp;have&nbsp;a&nbsp;formatting&nbsp;pattern&nbsp;for&nbsp;the&nbsp;number,&nbsp;the&nbsp;method<br>
-returns&nbsp;the&nbsp;raw&nbsp;input&nbsp;when&nbsp;it&nbsp;is&nbsp;available.<br>
+PhoneNumber&nbsp;<a href="builtins.html#object">object</a>&nbsp;passed&nbsp;in,&nbsp;which&nbsp;is&nbsp;only&nbsp;set&nbsp;when&nbsp;parsing&nbsp;keeps&nbsp;the&nbsp;raw<br>
+input.&nbsp;When&nbsp;we&nbsp;don't&nbsp;have&nbsp;a&nbsp;formatting&nbsp;pattern&nbsp;for&nbsp;the&nbsp;number,&nbsp;the&nbsp;method<br>
+falls&nbsp;back&nbsp;to&nbsp;returning&nbsp;the&nbsp;raw&nbsp;input.<br>
 &nbsp;<br>
 Note&nbsp;this&nbsp;method&nbsp;guarantees&nbsp;no&nbsp;digit&nbsp;will&nbsp;be&nbsp;inserted,&nbsp;removed&nbsp;or&nbsp;modified<br>
 as&nbsp;a&nbsp;result&nbsp;of&nbsp;formatting.<br>
