@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494779':{'de': 'Freiburg Elbe', 'en': 'Freiburg Elbe'},
  '494791':{'de': 'Osterholz-Scharmbeck', 'en': 'Osterholz-Scharmbeck'},
  '494792':{'de': 'Worpswede', 'en': 'Worpswede'},
  '494793':{'de': 'Hambergen', 'en': 'Hambergen'},
@@ -10018,5 +10019,4 @@ data = {
  '55493347':{'en': 'Coronel Freitas - SC', 'pt': 'Coronel Freitas - SC'},
  '55493348':{'en': u('Uni\u00e3o do Oeste - SC'), 'pt': u('Uni\u00e3o do Oeste - SC')},
  '55493349':{'en': 'Irati - SC', 'pt': 'Irati - SC'},
- '55493351':{'en': 'Entre Rios - SC', 'pt': 'Entre Rios - SC'},
 }

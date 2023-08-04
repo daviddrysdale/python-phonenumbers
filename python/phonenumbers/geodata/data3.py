@@ -5812,6 +5812,7 @@ data = {
  '29934':{'en': 'Nuuk'},
  '29935':{'en': 'Nuuk'},
  '29936':{'en': 'Nuuk'},
+ '29937':{'en': 'Nuuk'},
  '29961':{'en': 'Nanortalik'},
  '29964':{'en': 'Qaqortoq'},
  '29966':{'en': 'Narsaq'},
@@ -10018,5 +10019,4 @@ data = {
  '3323638':{'en': 'Romorantin-Lanthenay', 'fr': 'Romorantin-Lanthenay'},
  '3323639':{'en': 'Saint-Aignan', 'fr': 'Saint-Aignan'},
  '3323640':{'en': 'Saint-Amand-Montrond', 'fr': 'Saint-Amand-Montrond'},
- '3323641':{'en': 'Blois', 'fr': 'Blois'},
 }
