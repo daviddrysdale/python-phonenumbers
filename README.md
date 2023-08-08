@@ -12,6 +12,8 @@ Original Java code is Copyright (C) 2009-2015 The Libphonenumber Authors.
 Release [HISTORY](https://github.com/daviddrysdale/python-phonenumbers/blob/dev/python/HISTORY.md),
 derived from [upstream release notes](https://github.com/google/libphonenumber/blob/master/release_notes.txt).
 
+[Documentation](https://daviddrysdale.github.io/python-phonenumbers/)
+
 Installation
 ------------
 
