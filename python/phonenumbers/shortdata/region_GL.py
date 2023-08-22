@@ -5,5 +5,5 @@ PHONE_METADATA_GL = PhoneMetadata(id='GL', country_code=None, international_pref
     general_desc=PhoneNumberDesc(national_number_pattern='1\\d\\d', possible_length=(3,)),
     toll_free=PhoneNumberDesc(national_number_pattern='112', example_number='112', possible_length=(3,)),
     emergency=PhoneNumberDesc(national_number_pattern='112', example_number='112', possible_length=(3,)),
-    short_code=PhoneNumberDesc(national_number_pattern='112', example_number='112', possible_length=(3,)),
+    short_code=PhoneNumberDesc(national_number_pattern='1[1-8]\\d', example_number='110', possible_length=(3,)),
     short_data=True)

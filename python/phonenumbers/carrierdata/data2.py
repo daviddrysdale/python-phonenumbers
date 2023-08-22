@@ -19,10 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '573017':{'en': 'Tigo'},
- '573022':{'en': 'Tigo'},
- '573023':{'en': 'Tigo'},
- '573024':{'en': 'Tigo'},
  '5730247':{'en': 'Partners Telecom Colombia'},
  '5730248':{'en': 'Partners Telecom Colombia'},
  '5730249':{'en': 'Partners Telecom Colombia'},
@@ -845,6 +841,7 @@ data = {
  '601173':{'en': 'YTL'},
  '601174':{'en': 'YTL'},
  '601175':{'en': 'YTL'},
+ '6011757':{'en': 'U Mobile'},
  '60118886':{'en': 'U Mobile'},
  '60118888':{'en': 'red ONE'},
  '60118889':{'en': 'U Mobile'},
@@ -8326,8 +8323,6 @@ data = {
  '97253':{'en': 'Hot Mobile'},
  '97254':{'en': 'Orange'},
  '972550':{'en': 'Beezz'},
- '9725517':{'en': 'Cellact'},
- '9725519':{'en': '019mobile'},
  '972552':{'en': '019mobile'},
  '9725522':{'en': 'Home Cellular'},
  '9725523':{'en': 'Home Cellular'},
@@ -8477,8 +8472,10 @@ data = {
  '99202':{'en': 'Megafon'},
  '99203':{'en': 'ZET-MOBILE'},
  '99204':{'en': 'ZET-MOBILE'},
+ '99205':{'en': 'ZET-MOBILE'},
  '99207':{'en': 'Megafon'},
  '99208':{'en': 'ZET-MOBILE'},
+ '99209':{'en': 'ZET-MOBILE'},
  '99210':{'en': 'O-Mobile'},
  '99211':{'en': 'Tcell'},
  '99217':{'en': 'Babilon-M'},

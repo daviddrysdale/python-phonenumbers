@@ -2024,6 +2024,7 @@ data = {
  '1978':('America/New_York',),
  '1979':('America/Chicago',),
  '1980':('America/New_York',),
+ '1983':('America/Denver',),
  '1984':('America/New_York',),
  '1985':('America/Chicago',),
  '1986':('America/Boise', 'America/Los_Angeles'),

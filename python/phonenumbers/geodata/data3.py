@@ -2283,6 +2283,7 @@ data = {
  '1980343':{'en': 'Charlotte, NC'},
  '1980487':{'en': 'Shelby, NC'},
  '1980819':{'en': 'Charlotte, NC'},
+ '1983':{'en': 'Colorado'},
  '1984':{'en': 'North Carolina'},
  '1985':{'en': 'Louisiana'},
  '1985223':{'en': 'Houma, LA'},
@@ -10018,5 +10019,4 @@ data = {
  '3323637':{'en': 'Pithiviers', 'fr': 'Pithiviers'},
  '3323638':{'en': 'Romorantin-Lanthenay', 'fr': 'Romorantin-Lanthenay'},
  '3323639':{'en': 'Saint-Aignan', 'fr': 'Saint-Aignan'},
- '3323640':{'en': 'Saint-Amand-Montrond', 'fr': 'Saint-Amand-Montrond'},
 }

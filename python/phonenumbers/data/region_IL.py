@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefix='0(?:0|1[2-9])',
     general_desc=PhoneNumberDesc(national_number_pattern='1\\d{6}(?:\\d{3,5})?|[57]\\d{8}|[1-489]\\d{7}', possible_length=(7, 8, 9, 10, 11, 12)),
     fixed_line=PhoneNumberDesc(national_number_pattern='153\\d{8,9}|29[1-9]\\d{5}|(?:2[0-8]|[3489]\\d)\\d{6}', example_number='21234567', possible_length=(8, 11, 12), possible_length_local_only=(7,)),
-    mobile=PhoneNumberDesc(national_number_pattern='55410\\d{4}|5(?:(?:[02368]\\d|[19][2-9]|4[1-9])\\d|5(?:01|1[79]|2[2-9]|3[0-3]|4[34]|5[0-25689]|6[6-8]|7[0-267]|8[7-9]|9[1-9]))\\d{5}', example_number='502345678', possible_length=(9,)),
+    mobile=PhoneNumberDesc(national_number_pattern='55410\\d{4}|5(?:(?:[0-249][2-9]|[36]\\d|8[3-7])\\d|5(?:01|2[2-9]|3[0-3]|4[34]|5[0-25689]|6[6-8]|7[0-267]|8[7-9]|9[1-9]))\\d{5}', example_number='502345678', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='1(?:255|80[019]\\d{3})\\d{3}', example_number='1800123456', possible_length=(7, 10)),
     premium_rate=PhoneNumberDesc(national_number_pattern='1212\\d{4}|1(?:200|9(?:0[0-2]|19))\\d{6}', example_number='1919123456', possible_length=(8, 10)),
     shared_cost=PhoneNumberDesc(national_number_pattern='1700\\d{6}', example_number='1700123456', possible_length=(10,)),
