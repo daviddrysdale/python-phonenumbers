@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '553199638':{'en': 'Telemig Celular'},
+ '553199639':{'en': 'Telemig Celular'},
+ '553199641':{'en': 'Telemig Celular'},
  '553199642':{'en': 'Telemig Celular'},
  '553199643':{'en': 'Telemig Celular'},
  '553199644':{'en': 'Telemig Celular'},
@@ -9566,6 +9569,7 @@ data = {
  '569379':{'en': 'Ops Ingenieria Ltda.'},
  '569380':{'en': 'Ops Ingenieria Ltda.'},
  '569381':{'en': 'Ops Ingenieria Ltda.'},
+ '569388':{'en': 'Entel'},
  '56940':{'en': 'Entel'},
  '56941':{'en': 'Movistar'},
  '56942':{'en': 'Entel'},
@@ -10015,8 +10019,4 @@ data = {
  '573014':{'en': 'Tigo'},
  '573015':{'en': 'Tigo'},
  '573016':{'en': 'Tigo'},
- '573017':{'en': 'Tigo'},
- '573022':{'en': 'Tigo'},
- '573023':{'en': 'Tigo'},
- '573024':{'en': 'Tigo'},
 }
