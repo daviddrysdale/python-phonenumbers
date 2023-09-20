@@ -3345,6 +3345,7 @@ data = {
  '52867':{'en': 'Nuevo Laredo/Tamaulipas', 'es': u('Nuevo Le\u00f3n/Tamaulipas')},
  '52868':{'en': 'Tamaulipas', 'es': 'Tamaulipas'},
  '52869':{'en': 'Cuatro Cienegas/San Buenaventura, COAH', 'es': u('Cuatro Ci\u00e9negas/San Buenaventura, COAH')},
+ '52870':{'en': 'Coahuila/Durango', 'es': 'Coahuila/Durango'},
  '52871':{'en': 'Coahuila', 'es': 'Coahuila'},
  '52872':{'en': 'Coahuila/Durango', 'es': 'Coahuila/Durango'},
  '52873':{'en': 'Nuevo Leon', 'es': u('Nuevo Le\u00f3n')},
@@ -10018,5 +10019,4 @@ data = {
  '55493329':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493330':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493332':{'en': u('\u00c1guas Frias - SC'), 'pt': u('\u00c1guas Frias - SC')},
- '55493333':{'en': 'Nova Erechim - SC', 'pt': 'Nova Erechim - SC'},
 }
