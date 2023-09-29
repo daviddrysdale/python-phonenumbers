@@ -19,14 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '861819961':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
- '861819962':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
- '861819963':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
- '861819964':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
- '861819965':{'en': 'Shihezi, Xinjiang', 'zh': u('\u65b0\u7586\u77f3\u6cb3\u5b50\u5e02')},
- '861819966':{'en': 'Shihezi, Xinjiang', 'zh': u('\u65b0\u7586\u77f3\u6cb3\u5b50\u5e02')},
- '861819967':{'en': 'Shihezi, Xinjiang', 'zh': u('\u65b0\u7586\u77f3\u6cb3\u5b50\u5e02')},
- '861819968':{'en': 'Shihezi, Xinjiang', 'zh': u('\u65b0\u7586\u77f3\u6cb3\u5b50\u5e02')},
  '861819969':{'en': 'Shihezi, Xinjiang', 'zh': u('\u65b0\u7586\u77f3\u6cb3\u5b50\u5e02')},
  '861819970':{'en': 'Kizilsu, Xinjiang', 'zh': u('\u65b0\u7586\u514b\u5b5c\u52d2\u82cf\u67ef\u5c14\u514b\u5b5c\u81ea\u6cbb\u5dde')},
  '861819971':{'en': 'Kizilsu, Xinjiang', 'zh': u('\u65b0\u7586\u514b\u5b5c\u52d2\u82cf\u67ef\u5c14\u514b\u5b5c\u81ea\u6cbb\u5dde')},
@@ -10019,4 +10011,12 @@ data = {
  '86185482':{'en': 'Hinggan, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5174\u5b89\u76df')},
  '861854830':{'en': 'Alxa, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u963f\u62c9\u5584\u76df')},
  '861854831':{'en': 'Bayannur, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5df4\u5f66\u6dd6\u5c14\u5e02')},
+ '861854832':{'en': 'Bayannur, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5df4\u5f66\u6dd6\u5c14\u5e02')},
+ '86185487':{'en': 'Ordos, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9102\u5c14\u591a\u65af\u5e02')},
+ '86185488':{'en': 'Beijing', 'zh': u('\u5317\u4eac\u5e02')},
+ '86185489':{'en': 'Beijing', 'zh': u('\u5317\u4eac\u5e02')},
+ '8618549':{'en': 'Beijing', 'zh': u('\u5317\u4eac\u5e02')},
+ '86185498':{'en': 'Suzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u82cf\u5dde\u5e02')},
+ '86185499':{'en': 'Suzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u82cf\u5dde\u5e02')},
+ '8618550':{'en': 'Suzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u82cf\u5dde\u5e02')},
 }

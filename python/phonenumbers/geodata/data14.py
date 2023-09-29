@@ -19,14 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '618989127':{'en': 'Cuballing'},
- '618989128':{'en': 'Cuballing'},
- '618989130':{'en': 'Narrakine'},
- '618989133':{'en': 'Narrakine'},
- '618989136':{'en': 'Narrakine'},
- '618989137':{'en': 'Narrakine'},
- '618989138':{'en': 'Narrakine'},
- '618989140':{'en': 'Narrogin'},
  '618989141':{'en': 'Narrogin'},
  '618989142':{'en': 'Narrogin'},
  '618989143':{'en': 'Narrogin'},
@@ -10019,4 +10011,12 @@ data = {
  '86130668':{'en': 'Shenzhen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6df1\u5733\u5e02')},
  '86130669':{'en': 'Shenzhen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6df1\u5733\u5e02')},
  '86130670':{'en': 'Quanzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6cc9\u5dde\u5e02')},
+ '861306700':{'en': 'Sanming, Fujian', 'zh': u('\u798f\u5efa\u7701\u4e09\u660e\u5e02')},
+ '861306701':{'en': 'Sanming, Fujian', 'zh': u('\u798f\u5efa\u7701\u4e09\u660e\u5e02')},
+ '86130671':{'en': 'Quanzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6cc9\u5dde\u5e02')},
+ '861306710':{'en': 'Fuzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u798f\u5dde\u5e02')},
+ '861306711':{'en': 'Fuzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u798f\u5dde\u5e02')},
+ '86130672':{'en': 'Fuzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u798f\u5dde\u5e02')},
+ '86130673':{'en': 'Fuzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u798f\u5dde\u5e02')},
+ '86130674':{'en': 'Fuzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u798f\u5dde\u5e02')},
 }
