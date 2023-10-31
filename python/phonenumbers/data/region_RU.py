@@ -23,4 +23,5 @@ PHONE_METADATA_RU = PhoneMetadata(id='RU', country_code=7, international_prefix=
         NumberFormat(pattern='(\\d{3})(\\d{3})(\\d{2})(\\d{2})', format='\\1 \\2-\\3-\\4', leading_digits_pattern=['[349]|8(?:[02-7]|1[1-8])']),
         NumberFormat(pattern='(\\d{4})(\\d{4})(\\d{3})(\\d{3})', format='\\1 \\2 \\3 \\4', leading_digits_pattern=['8'])],
     main_country_for_code=True,
-    leading_digits='3[04-689]|[489]')
+    leading_digits='3[04-689]|[489]',
+    mobile_number_portable_region=True)

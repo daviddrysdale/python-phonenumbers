@@ -1017,6 +1017,7 @@ data = {
  '230700':{'en': 'Cellplus'},
  '230701':{'en': 'Emtel'},
  '230702':{'en': 'MTML'},
+ '230703':{'en': 'Emtel'},
  '230730':{'en': 'Emtel'},
  '230731':{'en': 'MTML'},
  '230733':{'en': 'Cellplus'},
@@ -7128,6 +7129,7 @@ data = {
  '5025918':{'en': 'Tigo'},
  '5025919':{'en': 'Tigo'},
  '502599':{'en': 'Tigo'},
+ '5028':{'en': 'Tigo'},
  '503600':{'en': 'Tigo'},
  '503601':{'en': 'Tigo'},
  '503602':{'en': 'Tigo'},
@@ -10017,6 +10019,4 @@ data = {
  '553199614':{'en': 'Telemig Celular'},
  '553199615':{'en': 'Telemig Celular'},
  '553199616':{'en': 'Telemig Celular'},
- '553199617':{'en': 'Telemig Celular'},
- '553199618':{'en': 'Telemig Celular'},
 }

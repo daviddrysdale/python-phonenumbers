@@ -13,4 +13,5 @@ PHONE_METADATA_KZ = PhoneMetadata(id='KZ', country_code=7, international_prefix=
     preferred_international_prefix='8~10',
     national_prefix='8',
     national_prefix_for_parsing='8',
-    leading_digits='33|7')
+    leading_digits='33|7',
+    mobile_number_portable_region=True)
