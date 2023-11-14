@@ -783,6 +783,7 @@ data = {
  '21270':{'en': 'Inwi'},
  '21271':{'en': 'Inwi'},
  '21272':{'en': 'Inwi'},
+ '21275':{'en': 'Maroc Telecom'},
  '21276':{'en': 'Maroc Telecom'},
  '21277':{'en': u('M\u00e9ditel')},
  '21278':{'en': u('M\u00e9ditel')},
@@ -952,6 +953,7 @@ data = {
  '22941':{'en': 'Celtiis'},
  '22942':{'en': 'MTN'},
  '22943':{'en': 'Celtiis'},
+ '22944':{'en': 'Celtiis'},
  '22945':{'en': 'Celtiis'},
  '22946':{'en': 'MTN'},
  '2295':{'en': 'MTN'},
@@ -10017,6 +10019,4 @@ data = {
  '553199612':{'en': 'Telemig Celular'},
  '553199613':{'en': 'Telemig Celular'},
  '553199614':{'en': 'Telemig Celular'},
- '553199615':{'en': 'Telemig Celular'},
- '553199616':{'en': 'Telemig Celular'},
 }

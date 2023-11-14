@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494758':{'de': 'Nordleda', 'en': 'Nordleda'},
+ '494761':{'de': u('Bremerv\u00f6rde'), 'en': u('Bremerv\u00f6rde')},
+ '494762':{'de': 'Kutenholz', 'en': 'Kutenholz'},
+ '494763':{'de': 'Gnarrenburg', 'en': 'Gnarrenburg'},
  '494764':{'de': 'Gnarrenburg-Klenkendorf', 'en': 'Gnarrenburg-Klenkendorf'},
  '494765':{'de': u('Ebersdorf bei Bremerv\u00f6rde'), 'en': u('Ebersdorf bei Bremerv\u00f6rde')},
  '494766':{'de': 'Basdahl', 'en': 'Basdahl'},
@@ -10015,8 +10019,4 @@ data = {
  '55493325':{'en': u('S\u00e3o Carlos - SC'), 'pt': u('S\u00e3o Carlos - SC')},
  '55493326':{'en': 'Caxambu do Sul - SC', 'pt': 'Caxambu do Sul - SC'},
  '55493327':{'en': 'Nova Itaberaba - SC', 'pt': 'Nova Itaberaba - SC'},
- '55493328':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493329':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493330':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493332':{'en': u('\u00c1guas Frias - SC'), 'pt': u('\u00c1guas Frias - SC')},
 }
