@@ -19,6 +19,13 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3323629':{'en': 'Chinon', 'fr': 'Chinon'},
+ '3323630':{'en': 'Dreux', 'fr': 'Dreux'},
+ '3323631':{'en': 'La Guerche-sur-lAubois', 'fr': 'La Guerche-sur-lAubois'},
+ '3323632':{'en': 'Issoudun', 'fr': 'Issoudun'},
+ '3323633':{'en': 'Loches', 'fr': 'Loches'},
+ '3323634':{'en': 'Montargis', 'fr': 'Montargis'},
+ '3323635':{'en': 'Nogent-le-Rotrou', 'fr': 'Nogent-le-Rotrou'},
  '3323636':{'en': 'Dreux', 'fr': 'Dreux'},
  '3323637':{'en': 'Pithiviers', 'fr': 'Pithiviers'},
  '3323638':{'en': 'Romorantin-Lanthenay', 'fr': 'Romorantin-Lanthenay'},
@@ -10012,11 +10019,4 @@ data = {
  '3358703':{'en': 'Limoges', 'fr': 'Limoges'},
  '3358704':{'en': 'Aubusson', 'fr': 'Aubusson'},
  '3358705':{'en': 'Uzerche', 'fr': 'Uzerche'},
- '3358706':{'en': 'Argentat', 'fr': 'Argentat'},
- '3358707':{'en': 'Limoges', 'fr': 'Limoges'},
- '3358708':{'en': 'Limoges', 'fr': 'Limoges'},
- '3358709':{'en': 'Tulle', 'fr': 'Tulle'},
- '3358710':{'en': 'Tulle', 'fr': 'Tulle'},
- '3358711':{'en': 'Ussel', 'fr': 'Ussel'},
- '3358712':{'en': 'Uzerche', 'fr': 'Uzerche'},
 }

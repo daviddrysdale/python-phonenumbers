@@ -19,6 +19,13 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '609663':{'en': 'Batu Rakit'},
+ '609664':{'en': 'Batu Rakit'},
+ '609665':{'en': 'Kuala Brang'},
+ '609666':{'en': 'Kuala Brang'},
+ '609667':{'en': 'Kuala Brang'},
+ '609668':{'en': 'Batu Rakit'},
+ '609669':{'en': 'Batu Rakit'},
  '609679':{'en': 'Jerteh'},
  '609680':{'en': 'Kuala Brang'},
  '609681':{'en': 'Kuala Brang'},
@@ -10012,11 +10019,4 @@ data = {
  '61263014':{'en': 'Bathurst'},
  '61263015':{'en': 'Bathurst'},
  '61263016':{'en': 'Birriwa'},
- '61263017':{'en': 'Birriwa'},
- '61263018':{'en': 'Birriwa'},
- '61263019':{'en': 'Bathurst'},
- '61263020':{'en': 'Blayney'},
- '61263021':{'en': 'Blayney'},
- '61263022':{'en': 'Blayney'},
- '61263023':{'en': 'Boorowa'},
 }

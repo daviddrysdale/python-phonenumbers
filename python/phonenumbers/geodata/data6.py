@@ -19,6 +19,13 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494751':{'de': 'Otterndorf', 'en': 'Otterndorf'},
+ '494752':{'de': 'Neuhaus Oste', 'en': 'Neuhaus Oste'},
+ '494753':{'de': 'Balje', 'en': 'Balje'},
+ '494754':{'de': u('B\u00fclkau'), 'en': u('B\u00fclkau')},
+ '494755':{'de': 'Ihlienworth', 'en': 'Ihlienworth'},
+ '494756':{'de': 'Odisheim', 'en': 'Odisheim'},
+ '494757':{'de': 'Wanna', 'en': 'Wanna'},
  '494758':{'de': 'Nordleda', 'en': 'Nordleda'},
  '494761':{'de': u('Bremerv\u00f6rde'), 'en': u('Bremerv\u00f6rde')},
  '494762':{'de': 'Kutenholz', 'en': 'Kutenholz'},
@@ -10012,11 +10019,4 @@ data = {
  '55493312':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493313':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493316':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493319':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493321':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493322':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493323':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493325':{'en': u('S\u00e3o Carlos - SC'), 'pt': u('S\u00e3o Carlos - SC')},
- '55493326':{'en': 'Caxambu do Sul - SC', 'pt': 'Caxambu do Sul - SC'},
- '55493327':{'en': 'Nova Itaberaba - SC', 'pt': 'Nova Itaberaba - SC'},
 }

@@ -4,7 +4,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 PHONE_METADATA_MK = PhoneMetadata(id='MK', country_code=389, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[2-578]\\d{7}', possible_length=(8,), possible_length_local_only=(6, 7)),
     fixed_line=PhoneNumberDesc(national_number_pattern='(?:(?:2(?:62|77)0|3444)\\d|4[56]440)\\d{3}|(?:34|4[357])700\\d{3}|(?:2(?:[0-3]\\d|5[0-578]|6[01]|82)|3(?:1[3-68]|[23][2-68]|4[23568])|4(?:[23][2-68]|4[3-68]|5[2568]|6[25-8]|7[24-68]|8[4-68]))\\d{5}', example_number='22012345', possible_length=(8,), possible_length_local_only=(6, 7)),
-    mobile=PhoneNumberDesc(national_number_pattern='7(?:3555|(?:474|9[019]7)7)\\d{3}|7(?:[0-25-8]\\d\\d|3(?:[1-48]\\d|60|7[01578])|4(?:2\\d|60|7[01578])|9(?:[2-4]\\d|5[01]|7[015]))\\d{4}', example_number='72345678', possible_length=(8,)),
+    mobile=PhoneNumberDesc(national_number_pattern='7(?:3555|(?:474|9[019]7)7)\\d{3}|7(?:[0-25-8]\\d\\d|3(?:[1-48]\\d|6[01]|7[01578])|4(?:2\\d|60|7[01578])|9(?:[2-4]\\d|5[01]|7[015]))\\d{4}', example_number='72345678', possible_length=(8,)),
     toll_free=PhoneNumberDesc(national_number_pattern='800\\d{5}', example_number='80012345', possible_length=(8,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='5\\d{7}', example_number='50012345', possible_length=(8,)),
     shared_cost=PhoneNumberDesc(national_number_pattern='8(?:0[1-9]|[1-9]\\d)\\d{5}', example_number='80123456', possible_length=(8,)),

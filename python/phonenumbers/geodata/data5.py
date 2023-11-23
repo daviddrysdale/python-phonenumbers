@@ -19,6 +19,13 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3358706':{'en': 'Argentat', 'fr': 'Argentat'},
+ '3358707':{'en': 'Limoges', 'fr': 'Limoges'},
+ '3358708':{'en': 'Limoges', 'fr': 'Limoges'},
+ '3358709':{'en': 'Tulle', 'fr': 'Tulle'},
+ '3358710':{'en': 'Tulle', 'fr': 'Tulle'},
+ '3358711':{'en': 'Ussel', 'fr': 'Ussel'},
+ '3358712':{'en': 'Uzerche', 'fr': 'Uzerche'},
  '3358713':{'en': 'Aubusson', 'fr': 'Aubusson'},
  '3358714':{'en': 'Limoges', 'fr': 'Limoges'},
  '3358715':{'en': 'Gueret', 'fr': 'Gueret'},
@@ -10012,11 +10019,4 @@ data = {
  '494747':{'de': 'Beverstedt', 'en': 'Beverstedt'},
  '494748':{'de': 'Stubben bei Bremerhaven', 'en': 'Stubben bei Bremerhaven'},
  '494749':{'de': 'Schiffdorf-Geestenseth', 'en': 'Schiffdorf-Geestenseth'},
- '494751':{'de': 'Otterndorf', 'en': 'Otterndorf'},
- '494752':{'de': 'Neuhaus Oste', 'en': 'Neuhaus Oste'},
- '494753':{'de': 'Balje', 'en': 'Balje'},
- '494754':{'de': u('B\u00fclkau'), 'en': u('B\u00fclkau')},
- '494755':{'de': 'Ihlienworth', 'en': 'Ihlienworth'},
- '494756':{'de': 'Odisheim', 'en': 'Odisheim'},
- '494757':{'de': 'Wanna', 'en': 'Wanna'},
 }
