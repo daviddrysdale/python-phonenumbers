@@ -32,7 +32,7 @@ if sys.version_info >= (3, 4):  # pragma no cover
 
         return pattern.fullmatch(string)
 
-else:
+else:  # pragma no cover
 
     def fullmatch(pattern, string):
         """Try to apply the pattern at the start of the string, returning a match
