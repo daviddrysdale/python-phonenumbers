@@ -22,21 +22,31 @@ with Java regular expression code.
 1
 """
 import re
+import sys
 
+if sys.version_info >= (3, 4):  # pragma no cover
 
-def fullmatch(pattern, string, flags=0):
-    """Try to apply the pattern at the start of the string, returning a match
-    object if the whole string matches, or None if no match was found."""
-    # Build a version of the pattern with a non-capturing group around it.
-    # This is needed to get m.end() to correctly report the size of the
-    # matched expression (as per the final doctest above).
-    grouped_pattern = re.compile("^(?:%s)$" % pattern.pattern, pattern.flags)
-    m = grouped_pattern.match(string)
-    if m and m.end() < len(string):
-        # Incomplete match (which should never happen because of the $ at the
-        # end of the regexp), treat as failure.
-        m = None  # pragma no cover
-    return m
+    def fullmatch(pattern, string):
+        """Try to apply the pattern at the start of the string, returning a match
+        object if the whole string matches, or None if no match was found."""
+
+        return pattern.fullmatch(string)
+
+else:
+
+    def fullmatch(pattern, string):
+        """Try to apply the pattern at the start of the string, returning a match
+        object if the whole string matches, or None if no match was found."""
+        # Build a version of the pattern with a non-capturing group around it.
+        # This is needed to get m.end() to correctly report the size of the
+        # matched expression (as per the final doctest above).
+        grouped_pattern = re.compile("^(?:%s)$" % pattern.pattern, pattern.flags)
+        m = grouped_pattern.match(string)
+        if m and m.end() < len(string):
+            # Incomplete match (which should never happen because of the $ at the
+            # end of the regexp), treat as failure.
+            m = None  # pragma no cover
+        return m
 
 
 if __name__ == '__main__':  # pragma no cover
