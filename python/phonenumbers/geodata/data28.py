@@ -19,11 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '9168167':{'en': 'Mohana, Odisha'},
- '9168172':{'en': 'R.Udayigiri, Odisha'},
- '9168173':{'en': 'R.Udayigiri, Odisha'},
- '9168174':{'en': 'R.Udayigiri, Odisha'},
- '9168175':{'en': 'R.Udayigiri, Odisha'},
  '9168176':{'en': 'R.Udayigiri, Odisha'},
  '9168177':{'en': 'R.Udayigiri, Odisha'},
  '9168182':{'en': 'Buguda, Odisha'},

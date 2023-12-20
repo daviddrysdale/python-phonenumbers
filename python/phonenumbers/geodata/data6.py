@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494749':{'de': 'Schiffdorf-Geestenseth', 'en': 'Schiffdorf-Geestenseth'},
  '494751':{'de': 'Otterndorf', 'en': 'Otterndorf'},
  '494752':{'de': 'Neuhaus Oste', 'en': 'Neuhaus Oste'},
  '494753':{'de': 'Balje', 'en': 'Balje'},
@@ -3727,13 +3728,7 @@ data = {
  '543868':{'en': 'Cafayate, Salta', 'es': 'Cafayate, Salta'},
  '543869':{'en': u('Ranchillos y San Miguel, Tucum\u00e1n'), 'es': u('Ranchillos y San Miguel, Tucum\u00e1n')},
  '543872':{'en': 'Salta, Salta', 'es': 'Salta, Salta'},
- '5438730':{'en': 'Tartagal, Salta', 'es': 'Tartagal, Salta'},
- '5438731':{'en': 'Tartagal, Salta', 'es': 'Tartagal, Salta'},
- '5438732':{'en': 'Tartagal, Salta', 'es': 'Tartagal, Salta'},
- '5438733':{'en': 'Tartagal, Salta', 'es': 'Tartagal, Salta'},
- '5438734':{'en': 'Tartagal, Salta', 'es': 'Tartagal, Salta'},
- '5438735':{'en': 'Tartagal, Salta', 'es': 'Tartagal, Salta'},
- '5438736':{'en': 'Tartagal, Salta', 'es': 'Tartagal, Salta'},
+ '543873':{'en': 'Tartagal, Salta', 'es': 'Tartagal, Salta'},
  '543874':{'en': 'Salta, Salta', 'es': 'Salta, Salta'},
  '543875':{'en': 'Salta, Salta', 'es': 'Salta, Salta'},
  '543876':{'en': u('San Jos\u00e9 de Met\u00e1n, Salta'), 'es': u('San Jos\u00e9 de Met\u00e1n, Salta')},
@@ -10019,4 +10014,9 @@ data = {
  '55493312':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493313':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493316':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
+ '55493319':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
+ '55493321':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
+ '55493322':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
+ '55493323':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
+ '55493325':{'en': u('S\u00e3o Carlos - SC'), 'pt': u('S\u00e3o Carlos - SC')},
 }

@@ -19,11 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '86181994':{'en': 'Aksu, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u514b\u82cf\u5730\u533a')},
- '86181995':{'en': 'Kashi, Xinjiang', 'zh': u('\u65b0\u7586\u5580\u4ec0\u5730\u533a')},
- '861819960':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
- '861819961':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
- '861819962':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
  '861819963':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
  '861819964':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
  '861819965':{'en': 'Shihezi, Xinjiang', 'zh': u('\u65b0\u7586\u77f3\u6cb3\u5b50\u5e02')},
@@ -10019,4 +10014,9 @@ data = {
  '861854801':{'en': 'Bayannur, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5df4\u5f66\u6dd6\u5c14\u5e02')},
  '861854802':{'en': 'Bayannur, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5df4\u5f66\u6dd6\u5c14\u5e02')},
  '86185481':{'en': 'Hohhot, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u547c\u548c\u6d69\u7279\u5e02')},
+ '86185482':{'en': 'Hinggan, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5174\u5b89\u76df')},
+ '861854830':{'en': 'Alxa, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u963f\u62c9\u5584\u76df')},
+ '861854831':{'en': 'Bayannur, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5df4\u5f66\u6dd6\u5c14\u5e02')},
+ '861854832':{'en': 'Bayannur, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u5df4\u5f66\u6dd6\u5c14\u5e02')},
+ '86185487':{'en': 'Ordos, Inner Mongolia', 'zh': u('\u5185\u8499\u53e4\u9102\u5c14\u591a\u65af\u5e02')},
 }

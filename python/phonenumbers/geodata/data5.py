@@ -1173,6 +1173,7 @@ data = {
  '35887':{'en': 'Oulu', 'fi': 'Oulu', 'se': u('Ule\u00e5borg'), 'sv': u('Ule\u00e5borg')},
  '35888':{'en': 'Oulu', 'fi': 'Oulu', 'se': u('Ule\u00e5borg'), 'sv': u('Ule\u00e5borg')},
  '3589':{'en': 'Helsinki', 'fi': 'Helsinki', 'sv': 'Helsingfors'},
+ '35890':{'en': 'Uusimaa', 'fi': 'Uusimaa', 'sv': 'Nyland'},
  '35891':{'se': 'Helsingfors'},
  '35892':{'se': 'Helsingfors'},
  '35893':{'se': 'Helsingfors'},
@@ -10018,5 +10019,4 @@ data = {
  '494746':{'de': 'Hagen bei Bremerhaven', 'en': 'Hagen bei Bremerhaven'},
  '494747':{'de': 'Beverstedt', 'en': 'Beverstedt'},
  '494748':{'de': 'Stubben bei Bremerhaven', 'en': 'Stubben bei Bremerhaven'},
- '494749':{'de': 'Schiffdorf-Geestenseth', 'en': 'Schiffdorf-Geestenseth'},
 }
