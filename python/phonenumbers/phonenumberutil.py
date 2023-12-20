@@ -1091,14 +1091,13 @@ def format_number(numobj, num_format):
 
     Returns the formatted phone number.
     """
-    if numobj.national_number == 0 and numobj.raw_input is not None:
+    if numobj.national_number == 0:
         # Unparseable numbers that kept their raw input just use that.  This
         # is the only case where a number can be formatted as E164 without a
         # leading '+' symbol (but the original number wasn't parseable
         # anyway).
-        # TODO: Consider removing the 'if' above so that unparseable strings
-        # without raw input format to the empty string instead of "+00".
-        if len(numobj.raw_input) > 0:
+        raw_input = numobj.raw_input or ""
+        if len(raw_input) > 0 or numobj.country_code is None:
             return numobj.raw_input
     country_calling_code = numobj.country_code
     nsn = national_significant_number(numobj)
