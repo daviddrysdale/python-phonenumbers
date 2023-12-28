@@ -34,7 +34,9 @@ dialpad_cases = ['+6278033212174',  # https://switchcomm.atlassian.net/browse/DP
                  '+63283168971',    # Philipines
                  '+8031000000141',  # Dialpadistan
                  '+2250757715034',  # Ivory Coast - New Format
-                 '+2252721214601',  # Ivory Coast - New Format
+                 '+2252721214601',  # Ivory Coast - New Format,
+                 '+2342012278701',  # Nigeria, new format https://dialpad.atlassian.net/browse/TEL-21006
+                 '+23412278701',    # Nigeria, old format for backwards comp
                  ]
 
 print ('######### - VALID BY DIALPAD - ################')
