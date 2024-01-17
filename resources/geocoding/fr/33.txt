@@ -1,20 +1,3 @@
-# Copyright (C) 2011 The Libphonenumber Authors
-
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-
-# http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Generated from:
-# Internal statistics data (2014-04-10).
-
 33105|Ile de France
 331241|Ile de France
 331242|Ile de France
@@ -5466,24 +5449,6 @@
 3326197|Avranches
 3326198|Carentan-les-Marais
 3326199|Coutances
-3326201|Saint-Denis
-3326202|Saint-Denis
-3326203|Saint-Denis
-3326204|Saint-Denis
-3326205|Saint-Denis
-3326206|Saint-Denis
-3326207|Saint-Denis
-3326208|Saint-Denis
-3326209|Saint-Denis
-332621|Saint-Denis
-332622|Saint-Denis
-332623|Saint-Denis
-332624|Saint-Denis
-332625|Saint-Denis
-332626|Saint-Denis
-332627|Saint-Denis
-332628|Saint-Denis
-332629|Saint-Denis
 3326300|Saint-Denis
 3327202|Nantes
 3327210|Cholet
@@ -13862,55 +13827,6 @@
 3358797|Gueret
 3358798|La Souterraine
 3358799|Bellac
-3359020|Les Abymes
-3359021|Pointe-à-Pitre
-3359022|Petit-Canal
-3359023|Le Moule
-3359024|Morne-À-l'Eau
-3359025|Baie Mahault
-3359026|Baie Mahault
-3359027|Saint Barthélémy
-3359028|Sainte Rose
-3359029|Saint Barthélémy
-3359032|Baie Mahault
-3359038|Baie Mahault
-3359041|Baie Mahault
-3359048|Les Abymes
-3359052|Saint Barthélémy
-3359060|Baie Mahault
-3359068|Les Abymes
-3359080|Saint-Claude
-3359081|Basse Terre
-3359082|Pointe-à-Pitre
-3359083|Pointe-à-Pitre
-3359084|Le Gosier
-3359085|Sainte-Anne
-3359086|Capesterre Belle Eau
-3359087|Saint Barthélémy
-3359088|Sainte-Anne
-3359089|Les Abymes
-3359090|Pointe-à-Pitre
-3359091|Les Abymes
-3359092|Trois Rivieres
-3359093|Pointe-à-Pitre
-3359094|Petit Bourg
-3359095|Petit Bourg
-3359097|Grand-Bourg
-3359098|Vieux Habitants
-3359099|Basse Terre
-3359422|Kourou
-3359425|Cayenne
-3359427|Saint-Laurent-du-Maroni
-3359428|Cayenne
-3359429|Cayenne
-3359430|Cayenne
-3359431|Cayenne
-3359432|Kourou
-3359434|Saint-Laurent-du-Maroni
-3359435|Matoury
-3359437|Cayenne
-3359438|Cayenne
-3359439|Cayenne
 3359638|Le Robert
 3359639|Fort de France
 3359642|Fort de France
