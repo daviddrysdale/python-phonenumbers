@@ -10,7 +10,7 @@ PHONE_METADATA_KR = PhoneMetadata(id='KR', country_code=82, international_prefix
     personal_number=PhoneNumberDesc(national_number_pattern='50\\d{8,9}', example_number='5012345678', possible_length=(10, 11)),
     voip=PhoneNumberDesc(national_number_pattern='70\\d{8}', example_number='7012345678', possible_length=(10,)),
     pager=PhoneNumberDesc(national_number_pattern='15\\d{7,8}', example_number='1523456789', possible_length=(9, 10)),
-    uan=PhoneNumberDesc(national_number_pattern='1(?:5(?:22|33|44|66|77|88|99)|6(?:[07]0|44|6[168]|88)|8(?:00|33|55|77|99))\\d{4}', example_number='15441234', possible_length=(8,)),
+    uan=PhoneNumberDesc(national_number_pattern='1(?:5(?:22|33|44|66|77|88|99)|6(?:[07]0|44|6[0168]|88)|8(?:00|33|55|77|99))\\d{4}', example_number='15441234', possible_length=(8,)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='00(?:3(?:08\\d{6,7}|68\\d{7})|798\\d{7,9})', possible_length=(11, 12, 13, 14)),
     national_prefix='0',
     national_prefix_for_parsing='0(8(?:[1-46-8]|5\\d\\d))?',

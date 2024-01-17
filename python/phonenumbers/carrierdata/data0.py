@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2023 The Libphonenumber Authors
+# Copyright (C) 2011-2024 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -139,7 +139,8 @@ data = {
  '144159':{'en': 'Digicel Bermuda'},
  '14417':{'en': 'Cellular One'},
  '14418':{'en': 'Cellular One'},
- '14419':{'en': 'Deltronics'},
+ '144190':{'en': 'Paradise Mobile'},
+ '144192':{'en': 'Deltronics'},
  '1473402':{'en': 'Affordable Island Communications'},
  '147341':{'en': 'Digicel Grenada'},
  '147342':{'en': 'Digicel Grenada'},
@@ -945,12 +946,8 @@ data = {
  '22897':{'en': 'TOGOCEL'},
  '22898':{'en': 'Moov'},
  '22899':{'en': 'Moov'},
- '22940':{'en': 'Celtiis'},
- '22941':{'en': 'Celtiis'},
+ '2294':{'en': 'Celtiis'},
  '22942':{'en': 'MTN'},
- '22943':{'en': 'Celtiis'},
- '22944':{'en': 'Celtiis'},
- '22945':{'en': 'Celtiis'},
  '22946':{'en': 'MTN'},
  '2295':{'en': 'MTN'},
  '22955':{'en': 'Moov'},
@@ -1021,6 +1018,7 @@ data = {
  '230733':{'en': 'Cellplus'},
  '231220':{'en': 'Liberia Telecom'},
  '231330':{'en': 'West Africa Telecom'},
+ '23142':{'en': 'Connect'},
  '231555':{'en': 'Lonestar Cell'},
  '2316':{'en': 'Lonestar Cell'},
  '2317':{'en': 'Orange'},
@@ -3308,6 +3306,7 @@ data = {
  '3859750':{'en': 'Lancelot Telecom'},
  '3859751':{'en': 'Telefocus'},
  '3859754':{'en': 'Lancelot Telecom'},
+ '3859755':{'en': 'BSG'},
  '3859757':{'en': 'Mobile One'},
  '38597595':{'en': 'YATECO'},
  '38597596':{'en': 'Altavox'},
@@ -3670,7 +3669,7 @@ data = {
  '42079260':{'en': 'SIA Net Balt'},
  '4207928':{'en': 'Tesco Mobile CR'},
  '4207929':{'en': 'Tesco Mobile CR'},
- '42079390':{'en': 'T-Mobile'},
+ '4207939':{'en': 'T-Mobile'},
  '4207940':{'en': 'O2'},
  '4207941':{'en': 'O2'},
  '4207942':{'en': 'O2'},
@@ -3695,7 +3694,7 @@ data = {
  '4207978':{'en': 'T-Mobile'},
  '42079797':{'en': 'T-Mobile'},
  '42079799':{'en': 'T-Mobile'},
- '42079900':{'en': 'MAXPROGRES'},
+ '4207990':{'en': 'T-Mobile'},
  '4207991':{'en': 'T-Mobile'},
  '42079920':{'en': 'METRONET'},
  '42079950':{'en': 'TERMS'},
@@ -3706,8 +3705,10 @@ data = {
  '42079955':{'en': 'GoMobil'},
  '42079956':{'en': 'GoMobil'},
  '42079957':{'en': 'T-Mobile'},
+ '42079958':{'en': 'GoMobil'},
  '42079979':{'en': 'miniTEL'},
- '42079999':{'en': 'T-Mobile'},
+ '4207998':{'en': 'T-Mobile'},
+ '4207999':{'en': 'T-Mobile'},
  '421901':{'en': 'T-Mobile (Slovak Telekom)'},
  '421902':{'en': 'T-Mobile (Slovak Telekom)'},
  '421903':{'en': 'T-Mobile (Slovak Telekom)'},
@@ -10018,5 +10019,4 @@ data = {
  '553199606':{'en': 'Telemig Celular'},
  '553199607':{'en': 'Telemig Celular'},
  '553199608':{'en': 'Telemig Celular'},
- '553199609':{'en': 'Telemig Celular'},
 }

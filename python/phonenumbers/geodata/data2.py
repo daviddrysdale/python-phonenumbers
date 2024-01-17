@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2023 The Libphonenumber Authors
+# Copyright (C) 2011-2024 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1705549':{'en': 'Penetanguishene, ON'},
  '1705560':{'en': 'Greater Sudbury, ON'},
  '1705563':{'en': 'Earlton, ON'},
  '1705566':{'en': 'Greater Sudbury, ON'},
@@ -10018,5 +10019,4 @@ data = {
  '1919207':{'en': 'Benson, NC'},
  '1919209':{'en': 'Smithfield, NC'},
  '1919212':{'en': 'Raleigh, NC'},
- '1919217':{'en': 'Knightdale, NC'},
 }

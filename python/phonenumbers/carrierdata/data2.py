@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2023 The Libphonenumber Authors
+# Copyright (C) 2011-2024 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '5699971':{'en': 'Movistar'},
  '5699972':{'en': 'Movistar'},
  '5699973':{'en': 'Movistar'},
  '5699974':{'en': 'Movistar'},
@@ -1178,6 +1179,7 @@ data = {
  '64204':{'en': 'Sure (Guernsey) New Zealand Limited'},
  '64205':{'en': 'Vodafone'},
  '64206':{'en': 'Voyager Internet Limted'},
+ '64208':{'en': 'Vodafone'},
  '6421':{'en': 'Vodafone'},
  '6422':{'en': '2degrees'},
  '64260':{'en': '2degrees'},
@@ -1247,6 +1249,7 @@ data = {
  '658070':{'en': 'SingTel'},
  '658071':{'en': 'SingTel'},
  '65808':{'en': 'Simba'},
+ '658082':{'en': 'SingTel'},
  '658083':{'en': 'M1'},
  '658084':{'en': 'SingTel'},
  '6581':{'en': 'StarHub'},
@@ -2293,8 +2296,9 @@ data = {
  '67576':{'en': 'bmobile'},
  '67577':{'en': 'bmobile'},
  '67578':{'en': 'bmobile'},
- '67581':{'en': 'DIGIVOIP'},
- '67582':{'en': 'Digicel'},
+ '67581':{'en': 'Vodafone'},
+ '67582':{'en': 'Vodafone'},
+ '67583':{'en': 'Vodafone'},
  '67588':{'en': 'Digicel'},
  '676554':{'en': 'Toko Wireless'},
  '676555':{'en': 'Toko Wireless'},
@@ -3950,6 +3954,8 @@ data = {
  '852444':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf')},
  '852445':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf')},
  '852446':{'en': 'Hutchison Telecom.', 'zh': u('\u548c\u8a18\u96fb\u8a71\u6709\u9650\u516c\u53f8')},
+ '852447':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8')},
+ '852448':{'en': 'Hutchison Telecom.', 'zh': u('\u548c\u8a18\u96fb\u8a71\u6709\u9650\u516c\u53f8')},
  '852460':{'en': 'China Unicom', 'zh': u('\u4e2d\u56fd\u8054\u901a'), 'zh_Hant': u('\u4e2d\u570b\u79fb\u52d5')},
  '8524607':{'en': 'Multibyte', 'zh': 'Multibyte'},
  '8524608':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf')},
@@ -4218,6 +4224,8 @@ data = {
  '852697':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf'), 'zh_Hant': u('\u9999\u6e2f\u79fb\u52d5\u901a\u8a0a')},
  '852699':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8'), 'zh_Hant': u('\u4e2d\u570b\u79fb\u52d5')},
  '85270':{'zh_Hant': u('\u6578\u78bc\u901a')},
+ '852701':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8')},
+ '852702':{'en': 'Hutchison Telecom.', 'zh': u('\u548c\u8a18\u96fb\u8a71\u6709\u9650\u516c\u53f8')},
  '8527071':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a')},
  '8527072':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a')},
  '8527073':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a')},
@@ -4230,6 +4238,7 @@ data = {
  '8528480':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf'), 'zh_Hant': 'Handy'},
  '8528481':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf'), 'zh_Hant': u('\u65b0\u79fb\u52d5\u901a\u8a0a')},
  '8528482':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf')},
+ '8528483':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf')},
  '8528485':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a')},
  '8528486':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a')},
  '8528487':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a')},
@@ -4276,6 +4285,7 @@ data = {
  '852936':{'en': '3', 'zh': '3', 'zh_Hant': '3'},
  '852937':{'en': '3', 'zh': '3', 'zh_Hant': '3'},
  '852938':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a'), 'zh_Hant': u('\u6578\u78bc\u901a')},
+ '852939':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf')},
  '852940':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf'), 'zh_Hant': u('\u9999\u6e2f\u79fb\u52d5\u901a\u8a0a')},
  '852941':{'en': '3', 'zh': '3', 'zh_Hant': '3'},
  '852942':{'en': '3', 'zh': '3', 'zh_Hant': '3'},

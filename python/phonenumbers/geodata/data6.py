@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2023 The Libphonenumber Authors
+# Copyright (C) 2011-2024 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,20 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '494749':{'de': 'Schiffdorf-Geestenseth', 'en': 'Schiffdorf-Geestenseth'},
- '494751':{'de': 'Otterndorf', 'en': 'Otterndorf'},
- '494752':{'de': 'Neuhaus Oste', 'en': 'Neuhaus Oste'},
- '494753':{'de': 'Balje', 'en': 'Balje'},
- '494754':{'de': u('B\u00fclkau'), 'en': u('B\u00fclkau')},
- '494755':{'de': 'Ihlienworth', 'en': 'Ihlienworth'},
- '494756':{'de': 'Odisheim', 'en': 'Odisheim'},
- '494757':{'de': 'Wanna', 'en': 'Wanna'},
- '494758':{'de': 'Nordleda', 'en': 'Nordleda'},
- '494761':{'de': u('Bremerv\u00f6rde'), 'en': u('Bremerv\u00f6rde')},
- '494762':{'de': 'Kutenholz', 'en': 'Kutenholz'},
- '494763':{'de': 'Gnarrenburg', 'en': 'Gnarrenburg'},
- '494764':{'de': 'Gnarrenburg-Klenkendorf', 'en': 'Gnarrenburg-Klenkendorf'},
- '494765':{'de': u('Ebersdorf bei Bremerv\u00f6rde'), 'en': u('Ebersdorf bei Bremerv\u00f6rde')},
  '494766':{'de': 'Basdahl', 'en': 'Basdahl'},
  '494767':{'de': u('Bremerv\u00f6rde-Bevern'), 'en': u('Bremerv\u00f6rde-Bevern')},
  '494768':{'de': 'Hipstedt', 'en': 'Hipstedt'},
@@ -10019,4 +10005,18 @@ data = {
  '55493322':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493323':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493325':{'en': u('S\u00e3o Carlos - SC'), 'pt': u('S\u00e3o Carlos - SC')},
+ '55493326':{'en': 'Caxambu do Sul - SC', 'pt': 'Caxambu do Sul - SC'},
+ '55493327':{'en': 'Nova Itaberaba - SC', 'pt': 'Nova Itaberaba - SC'},
+ '55493328':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
+ '55493329':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
+ '55493330':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
+ '55493332':{'en': u('\u00c1guas Frias - SC'), 'pt': u('\u00c1guas Frias - SC')},
+ '55493333':{'en': 'Nova Erechim - SC', 'pt': 'Nova Erechim - SC'},
+ '55493334':{'en': 'Saudades - SC', 'pt': 'Saudades - SC'},
+ '55493335':{'en': 'Planalto Alegre - SC', 'pt': 'Planalto Alegre - SC'},
+ '55493336':{'en': u('Guatamb\u00fa - SC'), 'pt': u('Guatamb\u00fa - SC')},
+ '55493337':{'en': u('Jardin\u00f3polis - SC'), 'pt': u('Jardin\u00f3polis - SC')},
+ '55493338':{'en': u('Cunhata\u00ed - SC'), 'pt': u('Cunhata\u00ed - SC')},
+ '55493339':{'en': u('\u00c1guas de Chapec\u00f3 - SC'), 'pt': u('\u00c1guas de Chapec\u00f3 - SC')},
+ '55493341':{'en': u('Jupi\u00e1 - SC'), 'pt': u('Jupi\u00e1 - SC')},
 }

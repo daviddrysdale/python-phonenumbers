@@ -3,7 +3,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_FR = PhoneMetadata(id='FR', country_code=33, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[1-9]\\d{8}', possible_length=(9,)),
-    fixed_line=PhoneNumberDesc(national_number_pattern='59[1-9]\\d{6}|(?:[1-3]\\d|4[1-9]|5[0-8])\\d{7}', example_number='123456789', possible_length=(9,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:26[013-9]|59[1-35-9])\\d{6}|(?:[13]\\d|2[0-57-9]|4[1-9]|5[0-8])\\d{7}', example_number='123456789', possible_length=(9,)),
     mobile=PhoneNumberDesc(national_number_pattern='(?:6(?:[0-24-8]\\d|3[0-8]|9[589])|7[3-9]\\d)\\d{6}', example_number='612345678', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='80[0-5]\\d{6}', example_number='801234567', possible_length=(9,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='836(?:0[0-36-9]|[1-9]\\d)\\d{4}|8(?:1[2-9]|2[2-47-9]|3[0-57-9]|[569]\\d|8[0-35-9])\\d{6}', example_number='891123456', possible_length=(9,)),

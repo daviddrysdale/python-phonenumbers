@@ -4,7 +4,7 @@ Auto-generated file, do not edit by hand.
 """
 from ..util import u
 
-# Copyright (C) 2011-2023 The Libphonenumber Authors
+# Copyright (C) 2011-2024 The Libphonenumber Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,20 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '55493326':{'en': 'Caxambu do Sul - SC', 'pt': 'Caxambu do Sul - SC'},
- '55493327':{'en': 'Nova Itaberaba - SC', 'pt': 'Nova Itaberaba - SC'},
- '55493328':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493329':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493330':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493332':{'en': u('\u00c1guas Frias - SC'), 'pt': u('\u00c1guas Frias - SC')},
- '55493333':{'en': 'Nova Erechim - SC', 'pt': 'Nova Erechim - SC'},
- '55493334':{'en': 'Saudades - SC', 'pt': 'Saudades - SC'},
- '55493335':{'en': 'Planalto Alegre - SC', 'pt': 'Planalto Alegre - SC'},
- '55493336':{'en': u('Guatamb\u00fa - SC'), 'pt': u('Guatamb\u00fa - SC')},
- '55493337':{'en': u('Jardin\u00f3polis - SC'), 'pt': u('Jardin\u00f3polis - SC')},
- '55493338':{'en': u('Cunhata\u00ed - SC'), 'pt': u('Cunhata\u00ed - SC')},
- '55493339':{'en': u('\u00c1guas de Chapec\u00f3 - SC'), 'pt': u('\u00c1guas de Chapec\u00f3 - SC')},
- '55493341':{'en': u('Jupi\u00e1 - SC'), 'pt': u('Jupi\u00e1 - SC')},
  '55493342':{'en': u('Galv\u00e3o - SC'), 'pt': u('Galv\u00e3o - SC')},
  '55493343':{'en': 'Formosa do Sul - SC', 'pt': 'Formosa do Sul - SC'},
  '55493344':{'en': u('S\u00e3o Louren\u00e7o do Oeste - SC'), 'pt': u('S\u00e3o Louren\u00e7o do Oeste - SC')},
@@ -10019,4 +10005,18 @@ data = {
  '609665':{'en': 'Kuala Brang'},
  '609666':{'en': 'Kuala Brang'},
  '609667':{'en': 'Kuala Brang'},
+ '609668':{'en': 'Batu Rakit'},
+ '609669':{'en': 'Batu Rakit'},
+ '609679':{'en': 'Jerteh'},
+ '609680':{'en': 'Kuala Brang'},
+ '609681':{'en': 'Kuala Brang'},
+ '609682':{'en': 'Kuala Brang'},
+ '6096830':{'en': 'Kuala Brang'},
+ '609684':{'en': 'Bukit Bading'},
+ '609685':{'en': 'Kuala Brang'},
+ '609686':{'en': 'Kuala Brang'},
+ '609687':{'en': 'Bukit Bading'},
+ '609688':{'en': 'Kuala Brang'},
+ '60969':{'en': 'Jerteh'},
+ '609700':{'en': 'Kota Bharu'},
 }
