@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '5699969':{'en': 'Entel'},
+ '5699970':{'en': 'Movistar'},
  '5699971':{'en': 'Movistar'},
  '5699972':{'en': 'Movistar'},
  '5699973':{'en': 'Movistar'},
@@ -1030,6 +1032,7 @@ data = {
  '61460':{'en': 'Telstra'},
  '61461':{'en': 'Telstra'},
  '61462':{'en': 'Telstra'},
+ '61463':{'en': 'Telstra'},
  '61466':{'en': 'Optus'},
  '61467':{'en': 'Telstra'},
  '61468':{'en': 'Optus'},
@@ -2572,9 +2575,7 @@ data = {
  '69197':{'en': 'FSMTC'},
  '69223':{'en': 'National Telecommunications Authority'},
  '6923':{'en': 'National Telecommunications Authority'},
- '692453':{'en': 'National Telecommunications Authority'},
- '692455':{'en': 'National Telecommunications Authority'},
- '692456':{'en': 'National Telecommunications Authority'},
+ '6924':{'en': 'National Telecommunications Authority'},
  '69254':{'en': 'National Telecommunications Authority'},
  '7700':{'en': 'Altel', 'ru': u('\u0410\u041b\u0422\u0415\u041b')},
  '7701':{'en': 'Kcell/Activ', 'ru': 'Kcell/Activ'},

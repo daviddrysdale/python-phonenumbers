@@ -3549,6 +3549,7 @@ data = {
  '4207057':{'en': 'T-Mobile'},
  '4207058':{'en': 'T-Mobile'},
  '4207059':{'en': 'T-Mobile'},
+ '420706':{'en': 'DataCell'},
  '42072':{'en': 'O2'},
  '4207300':{'en': 'T-Mobile'},
  '4207301':{'en': 'T-Mobile'},
@@ -3683,6 +3684,7 @@ data = {
  '4207951':{'en': 'Vectone Distribution Czech Republic s.r.o(Mundio)'},
  '4207952':{'en': 'O2'},
  '4207953':{'en': 'O2'},
+ '4207954':{'en': 'Tesco Mobile CR'},
  '42079750':{'en': 'Dial Telecom'},
  '4207976':{'en': 'T-Mobile'},
  '42079770':{'en': 'T-Mobile'},
@@ -10017,6 +10019,4 @@ data = {
  '553199604':{'en': 'Telemig Celular'},
  '553199605':{'en': 'Telemig Celular'},
  '553199606':{'en': 'Telemig Celular'},
- '553199607':{'en': 'Telemig Celular'},
- '553199608':{'en': 'Telemig Celular'},
 }
