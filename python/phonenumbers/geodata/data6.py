@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494765':{'de': u('Ebersdorf bei Bremerv\u00f6rde'), 'en': u('Ebersdorf bei Bremerv\u00f6rde')},
  '494766':{'de': 'Basdahl', 'en': 'Basdahl'},
  '494767':{'de': u('Bremerv\u00f6rde-Bevern'), 'en': u('Bremerv\u00f6rde-Bevern')},
  '494768':{'de': 'Hipstedt', 'en': 'Hipstedt'},
@@ -3299,6 +3300,7 @@ data = {
  '52767':{'en': 'Guerrero', 'es': 'Guerrero'},
  '52768':{'en': 'Veracruz', 'es': 'Veracruz'},
  '52769':{'en': 'Morelos', 'es': 'Morelos'},
+ '52770':{'en': 'Cuernavaca/Emiliano Zapata/Temixco/Xochitepec/Jiutepec', 'es': 'Cuernavaca/Emiliano Zapata/Temixco/Xochitepec/Jiutepec'},
  '52771':{'en': 'Pachuca/Real Del Monte, HGO', 'es': 'Pachuca/Real del Monte, HGO'},
  '52772':{'en': 'Actopan, HGO', 'es': 'Actopan, HGO'},
  '52773':{'en': 'Hidalgo', 'es': 'Hidalgo'},
@@ -10017,6 +10019,4 @@ data = {
  '55493336':{'en': u('Guatamb\u00fa - SC'), 'pt': u('Guatamb\u00fa - SC')},
  '55493337':{'en': u('Jardin\u00f3polis - SC'), 'pt': u('Jardin\u00f3polis - SC')},
  '55493338':{'en': u('Cunhata\u00ed - SC'), 'pt': u('Cunhata\u00ed - SC')},
- '55493339':{'en': u('\u00c1guas de Chapec\u00f3 - SC'), 'pt': u('\u00c1guas de Chapec\u00f3 - SC')},
- '55493341':{'en': u('Jupi\u00e1 - SC'), 'pt': u('Jupi\u00e1 - SC')},
 }

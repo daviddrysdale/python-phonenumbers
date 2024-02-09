@@ -8106,6 +8106,7 @@ data = {
  '1361992':{'en': 'Corpus Christi, TX'},
  '1361993':{'en': 'Corpus Christi, TX'},
  '1361994':{'en': 'Corpus Christi, TX'},
+ '1363':{'en': 'New York'},
  '1364':{'en': 'Kentucky'},
  '1365':{'en': 'Ontario'},
  '1367':{'en': 'Quebec'},
@@ -10018,5 +10019,4 @@ data = {
  '1414933':{'en': 'Milwaukee, WI'},
  '1414961':{'en': 'Milwaukee, WI'},
  '1414962':{'en': 'Milwaukee, WI'},
- '1414963':{'en': 'Milwaukee, WI'},
 }
