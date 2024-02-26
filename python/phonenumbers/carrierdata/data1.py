@@ -19,6 +19,13 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '553199182':{'en': 'TIM'},
+ '553199183':{'en': 'TIM'},
+ '553199184':{'en': 'TIM'},
+ '553199185':{'en': 'TIM'},
+ '553199186':{'en': 'TIM'},
+ '553199187':{'en': 'TIM'},
+ '553199188':{'en': 'TIM'},
  '553199189':{'en': 'TIM'},
  '553199191':{'en': 'TIM'},
  '553199192':{'en': 'TIM'},
@@ -10012,11 +10019,4 @@ data = {
  '56996084':{'en': 'Entel'},
  '56996085':{'en': 'Movistar'},
  '56996086':{'en': 'Movistar'},
- '56996087':{'en': 'Movistar'},
- '56996088':{'en': 'Movistar'},
- '56996089':{'en': 'Movistar'},
- '5699609':{'en': 'Claro'},
- '569961':{'en': 'Entel'},
- '569962':{'en': 'Movistar'},
- '569963':{'en': 'Movistar'},
 }

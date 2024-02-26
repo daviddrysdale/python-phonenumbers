@@ -1435,6 +1435,7 @@ data = {
  '1725':('America/Los_Angeles',),
  '1726':('America/Chicago',),
  '1727':('America/New_York',),
+ '1728':('America/New_York',),
  '1730':('America/Chicago',),
  '1731':('America/Chicago',),
  '1732':('America/New_York',),
