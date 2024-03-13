@@ -6340,6 +6340,7 @@ data = {
  '44114704':{'en': 'Sheffield'},
  '44114705':{'en': 'Sheffield'},
  '44114707':{'en': 'Sheffield'},
+ '44114708':{'en': 'Sheffield'},
  '44114709':{'en': 'Sheffield'},
  '44115':{'en': 'Nottingham'},
  '44116':{'en': 'Leicester'},
@@ -10018,5 +10019,4 @@ data = {
  '494761':{'de': u('Bremerv\u00f6rde'), 'en': u('Bremerv\u00f6rde')},
  '494762':{'de': 'Kutenholz', 'en': 'Kutenholz'},
  '494763':{'de': 'Gnarrenburg', 'en': 'Gnarrenburg'},
- '494764':{'de': 'Gnarrenburg-Klenkendorf', 'en': 'Gnarrenburg-Klenkendorf'},
 }

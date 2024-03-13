@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '56996084':{'en': 'Entel'},
+ '56996085':{'en': 'Movistar'},
+ '56996086':{'en': 'Movistar'},
  '56996087':{'en': 'Movistar'},
  '56996088':{'en': 'Movistar'},
  '56996089':{'en': 'Movistar'},

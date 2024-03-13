@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '55493338':{'en': u('Cunhata\u00ed - SC'), 'pt': u('Cunhata\u00ed - SC')},
  '55493339':{'en': u('\u00c1guas de Chapec\u00f3 - SC'), 'pt': u('\u00c1guas de Chapec\u00f3 - SC')},
  '55493341':{'en': u('Jupi\u00e1 - SC'), 'pt': u('Jupi\u00e1 - SC')},
  '55493342':{'en': u('Galv\u00e3o - SC'), 'pt': u('Galv\u00e3o - SC')},
@@ -10018,5 +10019,4 @@ data = {
  '609685':{'en': 'Kuala Brang'},
  '609686':{'en': 'Kuala Brang'},
  '609687':{'en': 'Bukit Bading'},
- '609688':{'en': 'Kuala Brang'},
 }
