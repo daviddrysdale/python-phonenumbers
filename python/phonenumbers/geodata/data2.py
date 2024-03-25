@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1705538':{'en': 'Waubaushene, ON'},
  '1705544':{'en': 'Englehart, ON'},
  '1705549':{'en': 'Penetanguishene, ON'},
  '1705560':{'en': 'Greater Sudbury, ON'},
@@ -7963,6 +7964,7 @@ data = {
  '1873':{'en': 'Quebec'},
  '1876957':{'en': 'Negril'},
  '1878':{'en': 'Pennsylvania'},
+ '1879':{'en': 'Newfoundland and Labrador'},
  '1901':{'en': 'Tennessee'},
  '1901213':{'en': 'Memphis, TN'},
  '1901226':{'en': 'Memphis, TN'},
@@ -10017,6 +10019,4 @@ data = {
  '1918967':{'en': 'Stigler, OK'},
  '1918968':{'en': 'Stroud, OK'},
  '1919':{'en': 'North Carolina'},
- '1919207':{'en': 'Benson, NC'},
- '1919209':{'en': 'Smithfield, NC'},
 }

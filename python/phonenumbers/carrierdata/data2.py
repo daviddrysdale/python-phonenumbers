@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '56996082':{'en': 'Entel'},
+ '56996083':{'en': 'Entel'},
  '56996084':{'en': 'Entel'},
  '56996085':{'en': 'Movistar'},
  '56996086':{'en': 'Movistar'},
@@ -8490,6 +8492,7 @@ data = {
  '9725543':{'en': 'Maskyoo'},
  '9725544':{'en': 'Cellran Cellular Communications'},
  '97255440':{'en': 'Merkaziya'},
+ '97255442':{'en': 'Xphone'},
  '9725550':{'en': 'Annatel'},
  '9725551':{'en': 'Annatel'},
  '9725552':{'en': 'Annatel'},
@@ -8675,6 +8678,7 @@ data = {
  '99367':{'en': 'MTS (BARASH Communication)'},
  '99368':{'en': 'MTS (BARASH Communication)'},
  '99369':{'en': 'MTS (BARASH Communication)'},
+ '9937':{'en': 'TM-Cell'},
  '99410':{'en': 'Azercell'},
  '99436554':{'en': 'Naxtel'},
  '99440':{'en': 'FONEX'},
@@ -8708,6 +8712,7 @@ data = {
  '9955008':{'en': 'Silknet'},
  '99550090':{'en': 'Cellfie'},
  '99550099':{'en': 'Silknet'},
+ '995501':{'en': 'Cellfie'},
  '9955050':{'en': 'Silknet'},
  '9955055':{'en': 'MagtiCom'},
  '995510':{'en': 'Silknet'},
