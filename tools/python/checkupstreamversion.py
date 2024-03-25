@@ -44,4 +44,5 @@ else:
     print(
         f"Local version {local_version} does not match upstream version {upstream_version}"
     )
+    os.environ["LIBPHONENUMBER_UPSTREAM_VERSION"] = upstream_version
     raise SystemExit(1)
