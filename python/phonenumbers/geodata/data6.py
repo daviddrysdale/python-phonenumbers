@@ -3377,6 +3377,7 @@ data = {
  '52938':{'en': 'Ciudad Del Carmen, CAMP', 'es': 'Ciudad del Carmen, CAMP'},
  '5295':{'en': 'Oaxaca', 'es': 'Oaxaca'},
  '5296':{'en': 'Chiapas', 'es': 'Chiapas'},
+ '52960':{'en': 'Tuxtla Gutierrez', 'es': 'Tuxtla Gutierrez'},
  '52966':{'en': 'Arriaga/Tonala, CHIS', 'es': u('Arriaga/Tonal\u00e1, CHIS')},
  '52967':{'en': 'San Cristobal de las Casas, CHIS', 'es': u('San Crist\u00f3bal de las Casas, CHIS')},
  '52969':{'en': 'Flamboyanes/Yucalpeten, YUC', 'es': 'Flamboyanes/Yucalpeten, YUC'},
@@ -10018,5 +10019,4 @@ data = {
  '55493332':{'en': u('\u00c1guas Frias - SC'), 'pt': u('\u00c1guas Frias - SC')},
  '55493333':{'en': 'Nova Erechim - SC', 'pt': 'Nova Erechim - SC'},
  '55493334':{'en': 'Saudades - SC', 'pt': 'Saudades - SC'},
- '55493335':{'en': 'Planalto Alegre - SC', 'pt': 'Planalto Alegre - SC'},
 }

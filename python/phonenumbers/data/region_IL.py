@@ -8,7 +8,7 @@ PHONE_METADATA_IL = PhoneMetadata(id='IL', country_code=972, international_prefi
     toll_free=PhoneNumberDesc(national_number_pattern='1(?:255|80[019]\\d{3})\\d{3}', example_number='1800123456', possible_length=(7, 10)),
     premium_rate=PhoneNumberDesc(national_number_pattern='1212\\d{4}|1(?:200|9(?:0[0-2]|19))\\d{6}', example_number='1919123456', possible_length=(8, 10)),
     shared_cost=PhoneNumberDesc(national_number_pattern='1700\\d{6}', example_number='1700123456', possible_length=(10,)),
-    voip=PhoneNumberDesc(national_number_pattern='7(?:38(?:0\\d|5[019]|88)|8(?:33|55|77|81)\\d)\\d{4}|7(?:18|2[23]|3[237]|47|6[258]|7\\d|82|9[2-9])\\d{6}', example_number='771234567', possible_length=(9,)),
+    voip=PhoneNumberDesc(national_number_pattern='7(?:38(?:0\\d|5[0-29]|88)|8(?:33|55|77|81)\\d)\\d{4}|7(?:18|2[23]|3[237]|47|6[258]|7\\d|82|9[2-9])\\d{6}', example_number='771234567', possible_length=(9,)),
     uan=PhoneNumberDesc(national_number_pattern='1599\\d{6}', example_number='1599123456', possible_length=(10,)),
     voicemail=PhoneNumberDesc(national_number_pattern='151\\d{8,9}', example_number='15112340000', possible_length=(11, 12)),
     no_international_dialling=PhoneNumberDesc(national_number_pattern='1700\\d{6}', possible_length=(10,)),
