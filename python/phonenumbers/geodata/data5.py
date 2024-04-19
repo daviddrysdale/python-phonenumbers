@@ -7944,7 +7944,7 @@ data = {
  '492623':{'de': 'Ransbach-Baumbach', 'en': 'Ransbach-Baumbach'},
  '492624':{'de': u('H\u00f6hr-Grenzhausen'), 'en': u('H\u00f6hr-Grenzhausen')},
  '492625':{'de': 'Ochtendung', 'en': 'Ochtendung'},
- '492626':{'de': 'Selters Westferwald', 'en': 'Selters Westferwald'},
+ '492626':{'de': 'Selters Westerwald', 'en': 'Selters Westerwald'},
  '492627':{'de': 'Braubach', 'en': 'Braubach'},
  '492628':{'de': 'Rhens', 'en': 'Rhens'},
  '492630':{'de': u('M\u00fclheim-K\u00e4rlich'), 'en': u('M\u00fclheim-K\u00e4rlich')},
