@@ -143,7 +143,7 @@ PhoneNumberMatch [51,62) 703-4800500
 ```
 
 You might want to get some information about the location that corresponds to a phone number.  The
-`geocoder.area_description_for_number` does this, when possible.
+`geocoder.description_for_number` does this, when possible.
 
 ```pycon
 >>> from phonenumbers import geocoder
