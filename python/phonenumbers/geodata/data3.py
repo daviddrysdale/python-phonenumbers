@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1918962':{'en': 'Spiro, OK'},
+ '1918967':{'en': 'Stigler, OK'},
+ '1918968':{'en': 'Stroud, OK'},
+ '1919':{'en': 'North Carolina'},
  '1919207':{'en': 'Benson, NC'},
  '1919209':{'en': 'Smithfield, NC'},
  '1919212':{'en': 'Raleigh, NC'},
@@ -10015,8 +10019,4 @@ data = {
  '3323553':{'en': 'Le Havre', 'fr': 'Le Havre'},
  '3323554':{'en': 'Le Havre', 'fr': 'Le Havre'},
  '3323556':{'en': 'Yvetot', 'fr': 'Yvetot'},
- '3323557':{'en': 'Saint-Valery-en-Caux', 'fr': 'Saint-Valery-en-Caux'},
- '3323559':{'en': 'Bois-Guillaume', 'fr': 'Bois-Guillaume'},
- '3323560':{'en': 'Bois-Guillaume', 'fr': 'Bois-Guillaume'},
- '3323561':{'en': 'Bois-Guillaume', 'fr': 'Bois-Guillaume'},
 }

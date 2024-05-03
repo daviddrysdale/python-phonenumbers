@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494756':{'de': 'Odisheim', 'en': 'Odisheim'},
+ '494757':{'de': 'Wanna', 'en': 'Wanna'},
+ '494758':{'de': 'Nordleda', 'en': 'Nordleda'},
+ '494761':{'de': u('Bremerv\u00f6rde'), 'en': u('Bremerv\u00f6rde')},
  '494762':{'de': 'Kutenholz', 'en': 'Kutenholz'},
  '494763':{'de': 'Gnarrenburg', 'en': 'Gnarrenburg'},
  '494764':{'de': 'Gnarrenburg-Klenkendorf', 'en': 'Gnarrenburg-Klenkendorf'},
@@ -10015,8 +10019,4 @@ data = {
  '55493327':{'en': 'Nova Itaberaba - SC', 'pt': 'Nova Itaberaba - SC'},
  '55493328':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493329':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493330':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493332':{'en': u('\u00c1guas Frias - SC'), 'pt': u('\u00c1guas Frias - SC')},
- '55493333':{'en': 'Nova Erechim - SC', 'pt': 'Nova Erechim - SC'},
- '55493334':{'en': 'Saudades - SC', 'pt': 'Saudades - SC'},
 }
