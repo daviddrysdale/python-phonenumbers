@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861508221':{'en': 'Leshan, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u4e50\u5c71\u5e02')},
+ '861508222':{'en': 'Leshan, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u4e50\u5c71\u5e02')},
+ '861508223':{'en': 'Leshan, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u4e50\u5c71\u5e02')},
+ '861508224':{'en': 'Leshan, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u4e50\u5c71\u5e02')},
+ '861508225':{'en': 'Liangshan, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u51c9\u5c71\u5f5d\u65cf\u81ea\u6cbb\u5dde')},
  '861508226':{'en': 'Liangshan, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u51c9\u5c71\u5f5d\u65cf\u81ea\u6cbb\u5dde')},
  '861508227':{'en': 'Liangshan, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u51c9\u5c71\u5f5d\u65cf\u81ea\u6cbb\u5dde')},
  '861508228':{'en': 'Liangshan, Sichuan', 'zh': u('\u56db\u5ddd\u7701\u51c9\u5c71\u5f5d\u65cf\u81ea\u6cbb\u5dde')},
@@ -10014,9 +10019,4 @@ data = {
  '861534516':{'en': 'Xuzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5f90\u5dde\u5e02')},
  '861534517':{'en': 'HuaiAn, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u6dee\u5b89\u5e02')},
  '861534518':{'en': 'Nanjing, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5357\u4eac\u5e02')},
- '861534519':{'en': 'Changzhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u5e38\u5dde\u5e02')},
- '861534520':{'en': 'HuaiAn, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u6dee\u5b89\u5e02')},
- '861534521':{'en': 'HuaiAn, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u6dee\u5b89\u5e02')},
- '861534522':{'en': 'Taizhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u6cf0\u5dde\u5e02')},
- '861534523':{'en': 'Taizhou, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u6cf0\u5dde\u5e02')},
 }

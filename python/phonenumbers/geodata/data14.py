@@ -19,6 +19,11 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61899368':{'en': 'Nangetty'},
+ '61899369':{'en': 'Nangetty'},
+ '61899370':{'en': 'Kalbarri'},
+ '61899371':{'en': 'Kalbarri'},
+ '61899372':{'en': 'Kalbarri'},
  '61899373':{'en': 'Yandanooka'},
  '61899374':{'en': 'Yandanooka'},
  '61899375':{'en': 'Guranu'},
@@ -10014,9 +10019,4 @@ data = {
  '861308383':{'en': 'Jiaozuo, Henan', 'zh': u('\u6cb3\u5357\u7701\u7126\u4f5c\u5e02')},
  '861308384':{'en': 'Jiaozuo, Henan', 'zh': u('\u6cb3\u5357\u7701\u7126\u4f5c\u5e02')},
  '861308385':{'en': 'Anyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u5b89\u9633\u5e02')},
- '861308386':{'en': 'Anyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u5b89\u9633\u5e02')},
- '861308387':{'en': 'Anyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u5b89\u9633\u5e02')},
- '861308388':{'en': 'Kaifeng, Henan', 'zh': u('\u6cb3\u5357\u7701\u5f00\u5c01\u5e02')},
- '861308389':{'en': 'Puyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u6fee\u9633\u5e02')},
- '861308390':{'en': 'Huzhou, Zhejiang', 'zh': u('\u6d59\u6c5f\u7701\u6e56\u5dde\u5e02')},
 }
