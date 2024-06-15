@@ -1150,6 +1150,7 @@ data = {
  '61479':{'en': 'Optus'},
  '614800':{'en': 'Pivotel Satellite'},
  '614801':{'en': 'Telstra'},
+ '614802':{'en': 'Telstra'},
  '614803':{'en': 'Telstra'},
  '614804':{'en': 'Telstra'},
  '614805':{'en': 'Telstra'},
