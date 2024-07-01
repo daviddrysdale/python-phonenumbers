@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61899333':{'en': 'Eneabba'},
  '61899334':{'en': 'Eneabba'},
  '61899335':{'en': 'Eneabba South'},
  '61899336':{'en': 'Arrowsmith'},
@@ -10018,5 +10019,4 @@ data = {
  '861308346':{'en': 'Huainan, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u6dee\u5357\u5e02')},
  '861308347':{'en': 'Fuyang, Anhui', 'zh': u('\u5b89\u5fbd\u7701\u961c\u9633\u5e02')},
  '861308350':{'en': 'Wuxi, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u65e0\u9521\u5e02')},
- '861308351':{'en': 'Wuxi, Jiangsu', 'zh': u('\u6c5f\u82cf\u7701\u65e0\u9521\u5e02')},
 }

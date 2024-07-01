@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861820906':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
  '861820907':{'en': 'Altay, Xinjiang', 'zh': u('\u65b0\u7586\u963f\u52d2\u6cf0\u5730\u533a')},
  '861820908':{'en': 'Kizilsu, Xinjiang', 'zh': u('\u65b0\u7586\u514b\u5b5c\u52d2\u82cf\u67ef\u5c14\u514b\u5b5c\u81ea\u6cbb\u5dde')},
  '861820909':{'en': 'Bortala, Xinjiang', 'zh': u('\u65b0\u7586\u535a\u5c14\u5854\u62c9\u8499\u53e4\u81ea\u6cbb\u5dde')},
@@ -10018,5 +10019,4 @@ data = {
  '861856749':{'en': 'Xinxiang, Henan', 'zh': u('\u6cb3\u5357\u7701\u65b0\u4e61\u5e02')},
  '86185675':{'en': 'Xinxiang, Henan', 'zh': u('\u6cb3\u5357\u7701\u65b0\u4e61\u5e02')},
  '861856750':{'en': 'Xinyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u4fe1\u9633\u5e02')},
- '861856751':{'en': 'Xinyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u4fe1\u9633\u5e02')},
 }

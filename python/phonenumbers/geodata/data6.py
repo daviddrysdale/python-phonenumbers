@@ -3276,6 +3276,7 @@ data = {
  '526572':{'en': 'Juarez/Chihuahua', 'es': 'Juarez/Chihuahua'},
  '52658':{'en': 'Baja California', 'es': 'Baja California'},
  '52659':{'en': 'Chihuahua', 'es': 'Chihuahua'},
+ '52660':{'en': 'Culiacan', 'es': u('Culiac\u00e1n')},
  '52661':{'en': 'Primo Tapia/Rosarito, BCN', 'es': 'Primo Tapia/Rosarito, BCN'},
  '52662':{'en': 'Sonora', 'es': 'Sonora'},
  '52665':{'en': 'Tecate, BCN', 'es': 'Tecate, BCN'},
@@ -10018,5 +10019,4 @@ data = {
  '55493228':{'en': 'Bocaina do Sul - SC', 'pt': 'Bocaina do Sul - SC'},
  '55493232':{'en': 'Bom Jardim da Serra - SC', 'pt': 'Bom Jardim da Serra - SC'},
  '55493233':{'en': u('S\u00e3o Joaquim - SC'), 'pt': u('S\u00e3o Joaquim - SC')},
- '55493235':{'en': 'Painel - SC', 'pt': 'Painel - SC'},
 }
