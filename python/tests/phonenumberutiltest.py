@@ -236,6 +236,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertEqual(1, phonenumbers.length_of_geographical_area_code(AU_NUMBER))
         # Italian numbers - there is no national prefix, but it still has an area code.
         self.assertEqual(2, phonenumbers.length_of_geographical_area_code(IT_NUMBER))
+        # Mexico numbers - there is no national prefix, but it still has an area code.
+        self.assertEqual(2, phonenumbers.length_of_geographical_area_code(MX_NUMBER1))
         # Google Singapore. Singapore has no area code and no national prefix.
         self.assertEqual(0, phonenumbers.length_of_geographical_area_code(SG_NUMBER))
         # An invalid US number (1 digit shorter), which has no area code.

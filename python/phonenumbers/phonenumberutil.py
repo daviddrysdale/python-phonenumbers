@@ -89,6 +89,10 @@ _MOBILE_TOKEN_MAPPINGS = {54: u('9')}
 # area code.
 _GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES = frozenset((
     86,))  # China
+# Set of country codes that doesn't have national prefix, but it has area codes.
+_COUNTRIES_WITHOUT_NATIONAL_PREFIX_WITH_AREA_CODES = frozenset((
+    52,))  # Mexico
+
 # Set of country calling codes that have geographically assigned mobile
 # numbers. This may not be complete; we add calling codes case by case, as we
 # find geographical mobile numbers or hear from user reports.  Note that
@@ -814,14 +818,17 @@ def length_of_geographical_area_code(numobj):
     if metadata is None:
         return 0
 
+    ntype = number_type(numobj)
+    country_code = numobj.country_code
     # If a country doesn't use a national prefix, and this number doesn't have
     # an Italian leading zero, we assume it is a closed dialling plan with no
     # area codes.
-    if metadata.national_prefix is None and not numobj.italian_leading_zero:
+    # Note:this is our general assumption, but there are exceptions which are tracked in
+    # _COUNTRIES_WITHOUT_NATIONAL_PREFIX_WITH_AREA_CODES.
+    if (metadata.national_prefix is None and not numobj.italian_leading_zero and
+        country_code not in _COUNTRIES_WITHOUT_NATIONAL_PREFIX_WITH_AREA_CODES):
         return 0
 
-    ntype = number_type(numobj)
-    country_code = numobj.country_code
     if (ntype == PhoneNumberType.MOBILE and
         (country_code in _GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES)):
         # Note this is a rough heuristic; it doesn't cover Indonesia well, for
