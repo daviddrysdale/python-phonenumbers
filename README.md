@@ -209,9 +209,6 @@ load of metadata will not cause a pause or memory exhaustion):
 * Force-load the extended metadata by `import`ing the appropriate packages (`phonenumbers.geocoder`,
   `phonenumbers.carrier`, `phonenumbers.timezone`).
 
-The `phonenumberslite` version of the package does not include the geocoding, carrier and timezone metadata,
-which can be useful if you have problems installing the main `phonenumbers` package due to space/memory limitations.
-
 Static Typing
 -------------
 
