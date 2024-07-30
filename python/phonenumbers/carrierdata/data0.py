@@ -1135,7 +1135,7 @@ data = {
  '237685':{'en': 'NEXTTEL'},
  '237686':{'en': 'Orange'},
  '237687':{'en': 'Orange'},
- '237688':{'en': 'NEXTTEL'},
+ '237688':{'en': 'Orange'},
  '237689':{'en': 'NEXTTEL'},
  '23769':{'en': 'Orange'},
  '23836':{'en': 'CVMOVEL'},

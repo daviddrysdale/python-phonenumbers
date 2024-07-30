@@ -3490,6 +3490,7 @@ data = {
  '861709997':{'en': 'Zhongshan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e2d\u5c71\u5e02')},
  '861709998':{'en': 'Shenzhen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6df1\u5733\u5e02')},
  '861709999':{'en': 'Guangzhou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u5e7f\u5dde\u5e02')},
+ '86173':{'en': 'Beijing', 'zh': u('\u5317\u4eac\u5e02')},
  '8617600':{'en': 'Beijing', 'zh': u('\u5317\u4eac\u5e02')},
  '8617601':{'en': 'Beijing', 'zh': u('\u5317\u4eac\u5e02')},
  '86176012':{'en': 'Shanghai', 'zh': u('\u4e0a\u6d77\u5e02')},
@@ -10018,5 +10019,4 @@ data = {
  '861787659':{'en': 'Maoming, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u8302\u540d\u5e02')},
  '861787660':{'en': 'Shanwei, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6c55\u5c3e\u5e02')},
  '861787661':{'en': 'Yunfu, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4e91\u6d6e\u5e02')},
- '861787662':{'en': 'Yangjiang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u9633\u6c5f\u5e02')},
 }
