@@ -2005,7 +2005,7 @@ data = {
  '1919':('America/New_York',),
  '1920':('America/Chicago',),
  '1925':('America/Los_Angeles',),
- '1928':('America/Denver', 'America/Phoenix'),
+ '1928':('America/Phoenix',),
  '1929':('America/New_York',),
  '1930':('America/New_York',),
  '1931':('America/Chicago',),
