@@ -7,7 +7,7 @@ PHONE_METADATA_FR = PhoneMetadata(id='FR', country_code=33, international_prefix
     mobile=PhoneNumberDesc(national_number_pattern='(?:6(?:[0-24-8]\\d|3[0-8]|9[589])|7[3-9]\\d)\\d{6}', example_number='612345678', possible_length=(9,)),
     toll_free=PhoneNumberDesc(national_number_pattern='80[0-5]\\d{6}', example_number='801234567', possible_length=(9,)),
     premium_rate=PhoneNumberDesc(national_number_pattern='836(?:0[0-36-9]|[1-9]\\d)\\d{4}|8(?:1[2-9]|2[2-47-9]|3[0-57-9]|[569]\\d|8[0-35-9])\\d{6}', example_number='891123456', possible_length=(9,)),
-    shared_cost=PhoneNumberDesc(national_number_pattern='8(?:1[01]|2[0156]|4[02]|84)\\d{6}', example_number='884012345', possible_length=(9,)),
+    shared_cost=PhoneNumberDesc(national_number_pattern='8(?:1[01]|2[0156]|4[024]|84)\\d{6}', example_number='884012345', possible_length=(9,)),
     voip=PhoneNumberDesc(national_number_pattern='9\\d{8}', example_number='912345678', possible_length=(9,)),
     uan=PhoneNumberDesc(national_number_pattern='80[6-9]\\d{6}', example_number='806123456', possible_length=(9,)),
     national_prefix='0',
