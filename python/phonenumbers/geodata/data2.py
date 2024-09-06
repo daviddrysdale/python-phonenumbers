@@ -4813,6 +4813,7 @@ data = {
  '1807854':{'en': 'Geraldton, ON'},
  '1807876':{'en': 'Longlac, ON'},
  '1807887':{'en': 'Nipigon, ON'},
+ '1807933':{'en': 'Kaministiquia, ON'},
  '1807934':{'en': 'Ignace, ON'},
  '1807937':{'en': 'Oxdrift, ON'},
  '1807939':{'en': 'Thunder Bay, ON'},
@@ -10018,5 +10019,4 @@ data = {
  '1918664':{'en': 'Tulsa, OK'},
  '1918665':{'en': 'Tulsa, OK'},
  '191868':{'en': 'Muskogee, OK'},
- '1918689':{'en': 'Eufaula, OK'},
 }

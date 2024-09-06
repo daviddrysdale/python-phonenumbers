@@ -3,7 +3,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_NZ = PhoneMetadata(id='NZ', country_code=64, international_prefix='0(?:0|161)',
     general_desc=PhoneNumberDesc(national_number_pattern='[1289]\\d{9}|50\\d{5}(?:\\d{2,3})?|[27-9]\\d{7,8}|(?:[34]\\d|6[0-35-9])\\d{6}|8\\d{4,6}', possible_length=(5, 6, 7, 8, 9, 10)),
-    fixed_line=PhoneNumberDesc(national_number_pattern='24099\\d{3}|(?:3[2-79]|[49][2-9]|6[235-9]|7[2-57-9])\\d{6}', example_number='32345678', possible_length=(8,), possible_length_local_only=(7,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='240\\d{5}|(?:3[2-79]|[49][2-9]|6[235-9]|7[2-57-9])\\d{6}', example_number='32345678', possible_length=(8,), possible_length_local_only=(7,)),
     mobile=PhoneNumberDesc(national_number_pattern='2(?:[0-27-9]\\d|6)\\d{6,7}|2(?:1\\d|75)\\d{5}', example_number='211234567', possible_length=(8, 9, 10)),
     toll_free=PhoneNumberDesc(national_number_pattern='508\\d{6,7}|80\\d{6,8}', example_number='800123456', possible_length=(8, 9, 10)),
     premium_rate=PhoneNumberDesc(national_number_pattern='(?:1[13-57-9]\\d{5}|50(?:0[08]|30|66|77|88))\\d{3}|90\\d{6,8}', example_number='900123456', possible_length=(7, 8, 9, 10)),

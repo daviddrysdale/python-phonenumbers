@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '569936':{'en': 'Movistar'},
+ '569937':{'en': 'Movistar'},
+ '5699380':{'en': 'Movistar'},
  '5699381':{'en': 'Movistar'},
  '5699382':{'en': 'Entel'},
  '5699383':{'en': 'Entel'},
@@ -8531,6 +8534,7 @@ data = {
  '97158':{'en': 'du'},
  '97250':{'en': 'Pelephone'},
  '97251':{'en': 'Xphone'},
+ '972510':{'en': 'Wecom'},
  '97252':{'en': 'Cellcom'},
  '97253':{'en': 'Hot Mobile'},
  '97254':{'en': 'Orange'},

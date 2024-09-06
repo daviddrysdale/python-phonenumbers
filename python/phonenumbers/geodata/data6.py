@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494821':{'de': 'Itzehoe', 'en': 'Itzehoe'},
+ '494822':{'de': 'Kellinghusen', 'en': 'Kellinghusen'},
  '494823':{'de': 'Wilster', 'en': 'Wilster'},
  '494824':{'de': 'Krempe', 'en': 'Krempe'},
  '494825':{'de': 'Burg Dithmarschen', 'en': 'Burg Dithmarschen'},
@@ -3121,6 +3123,7 @@ data = {
  '52447':{'en': 'Contepec/Maravatio, MICH', 'es': u('Contepec/Maravat\u00edo, MICH')},
  '52448':{'en': 'Queretaro', 'es': u('Quer\u00e9taro')},
  '52449':{'en': 'Aguascalientes/Jesus Maria, AGS', 'es': u('Aguascalientes/Jes\u00fas Mar\u00eda, AGS')},
+ '52450':{'en': 'Morelia', 'es': 'Morelia'},
  '52451':{'en': 'Michoacan', 'es': u('Michoac\u00e1n')},
  '52452':{'en': 'Nuevo San Juan Parangaricutiro/Uruapan, MICH', 'es': 'Nuevo San Juan Parangaricutiro/Uruapan, MICH'},
  '52453':{'en': 'Apatzingan, MICH', 'es': u('Apatzing\u00e1n, MICH')},
@@ -3558,6 +3561,7 @@ data = {
  '543409':{'en': u('Mois\u00e9s Ville, Santa Fe'), 'es': u('Mois\u00e9s Ville, Santa Fe')},
  '54341':{'en': 'Rosario, Santa Fe', 'es': 'Rosario, Santa Fe'},
  '54342':{'en': 'Santa Fe, Santa Fe', 'es': 'Santa Fe, Santa Fe'},
+ '543433':{'en': u('Paran\u00e1, Entre R\u00edos'), 'es': u('Paran\u00e1, Entre R\u00edos')},
  '543434':{'en': u('Paran\u00e1, Entre R\u00edos'), 'es': u('Paran\u00e1, Entre R\u00edos')},
  '543435':{'en': u('Nogoy\u00e1, Entre R\u00edos'), 'es': u('Nogoy\u00e1, Entre R\u00edos')},
  '543436':{'en': u('Victoria, Entre R\u00edos'), 'es': u('Victoria, Entre R\u00edos')},
@@ -10015,8 +10019,4 @@ data = {
  '55493358':{'en': 'Cordilheira Alta - SC', 'pt': 'Cordilheira Alta - SC'},
  '55493361':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
  '55493362':{'en': 'Novo Horizonte - SC', 'pt': 'Novo Horizonte - SC'},
- '55493363':{'en': 'Bom Jesus do Oeste - SC', 'pt': 'Bom Jesus do Oeste - SC'},
- '55493364':{'en': 'Serra Alta - SC', 'pt': 'Serra Alta - SC'},
- '55493365':{'en': 'Modelo - SC', 'pt': 'Modelo - SC'},
- '55493366':{'en': 'Pinhalzinho - SC', 'pt': 'Pinhalzinho - SC'},
 }

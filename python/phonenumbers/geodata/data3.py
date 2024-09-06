@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1918689':{'en': 'Eufaula, OK'},
  '1918696':{'en': 'Stilwell, OK'},
  '1918712':{'en': 'Tulsa, OK'},
  '1918723':{'en': 'Westville, OK'},
@@ -4051,6 +4052,7 @@ data = {
  '25111466':{'en': 'Keria III, Addis Ababa'},
  '25111467':{'en': 'Keira IV, Addis Ababa'},
  '25111468':{'en': 'Keria V, Addis Ababa'},
+ '2511147':{'en': 'Addis Ababa'},
  '25111515':{'en': 'Filwoha II, Addis Ababa'},
  '25111517':{'en': 'Sheraton/DID, Addis Ababa'},
  '25111518':{'en': 'Addis Ababa Region'},
@@ -10017,6 +10019,4 @@ data = {
  '3323600':{'en': 'Tours', 'fr': 'Tours'},
  '3323601':{'en': u('La Ch\u00e2tre'), 'fr': u('La Ch\u00e2tre')},
  '3323602':{'en': u('Valen\u00e7ay'), 'fr': u('Valen\u00e7ay')},
- '3323603':{'en': 'Amboise', 'fr': 'Amboise'},
- '3323604':{'en': 'Chinon', 'fr': 'Chinon'},
 }

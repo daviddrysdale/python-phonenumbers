@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '61350419':{'en': 'Wentworth'},
+ '61350420':{'en': 'Werrimull'},
+ '61350421':{'en': 'Willandra Lakes'},
+ '61350422':{'en': 'Cowangie'},
  '61350423':{'en': 'Mittyack'},
  '61350424':{'en': 'Murrayville'},
  '61350425':{'en': 'Ouyen'},
@@ -10015,8 +10019,4 @@ data = {
  '6173040':{'en': 'Brisbane'},
  '6173041':{'en': 'Brisbane'},
  '6173042':{'en': 'Cleveland'},
- '6173043':{'en': 'Beenleigh'},
- '6173044':{'en': 'Ipswich'},
- '6173045':{'en': 'Redcliffe'},
- '6173046':{'en': 'Brisbane'},
 }

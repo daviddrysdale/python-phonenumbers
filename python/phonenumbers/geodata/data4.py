@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3323603':{'en': 'Amboise', 'fr': 'Amboise'},
+ '3323604':{'en': 'Chinon', 'fr': 'Chinon'},
  '3323605':{'en': 'Loches', 'fr': 'Loches'},
  '3323606':{'en': 'Saint-Aignan', 'fr': 'Saint-Aignan'},
  '3323607':{'en': 'Tours', 'fr': 'Tours'},
@@ -10017,6 +10019,4 @@ data = {
  '3358695':{'en': 'Civray', 'fr': 'Civray'},
  '3358696':{'en': 'Loudun', 'fr': 'Loudun'},
  '3358697':{'en': 'Montmorillon', 'fr': 'Montmorillon'},
- '3358698':{'en': 'Poitiers', 'fr': 'Poitiers'},
- '3358699':{'en': 'Niort', 'fr': 'Niort'},
 }

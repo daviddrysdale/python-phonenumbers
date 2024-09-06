@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '86188394':{'en': 'Zhoukou, Henan', 'zh': u('\u6cb3\u5357\u7701\u5468\u53e3\u5e02')},
+ '86188395':{'en': 'Luohe, Henan', 'zh': u('\u6cb3\u5357\u7701\u6f2f\u6cb3\u5e02')},
+ '86188396':{'en': 'Zhumadian, Henan', 'zh': u('\u6cb3\u5357\u7701\u9a7b\u9a6c\u5e97\u5e02')},
+ '86188397':{'en': 'Anyang, Henan', 'zh': u('\u6cb3\u5357\u7701\u5b89\u9633\u5e02')},
  '861883977':{'en': 'Zhengzhou, Henan', 'zh': u('\u6cb3\u5357\u7701\u90d1\u5dde\u5e02')},
  '861883978':{'en': 'Zhengzhou, Henan', 'zh': u('\u6cb3\u5357\u7701\u90d1\u5dde\u5e02')},
  '861883979':{'en': 'Zhengzhou, Henan', 'zh': u('\u6cb3\u5357\u7701\u90d1\u5dde\u5e02')},
@@ -10015,8 +10019,4 @@ data = {
  '9171857':{'en': 'Pauni, Maharashtra'},
  '9171862':{'en': 'Sakoli, Maharashtra'},
  '9171863':{'en': 'Sakoli, Maharashtra'},
- '9171864':{'en': 'Sakoli, Maharashtra'},
- '9171865':{'en': 'Sakoli, Maharashtra'},
- '9171866':{'en': 'Sakoli, Maharashtra'},
- '9171867':{'en': 'Sakoli, Maharashtra'},
 }
