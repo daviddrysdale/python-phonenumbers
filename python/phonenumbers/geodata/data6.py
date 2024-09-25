@@ -2988,9 +2988,11 @@ data = {
  '5165':{'en': 'Loreto'},
  '5166':{'en': 'Ayacucho'},
  '5167':{'en': 'Huancavelica'},
+ '5168':{'en': 'Lima'},
  '5172':{'en': 'Tumbes'},
  '5173':{'en': 'Piura'},
  '5174':{'en': 'Lambayeque'},
+ '5175':{'en': 'Lima'},
  '5176':{'en': 'Cajamarca'},
  '5182':{'en': 'Madre de Dios'},
  '5183':{'en': u('Apur\u00edmac')},
@@ -10017,6 +10019,4 @@ data = {
  '55493355':{'en': 'Lajeado Grande - SC', 'pt': 'Lajeado Grande - SC'},
  '55493356':{'en': 'Arvoredo - SC', 'pt': 'Arvoredo - SC'},
  '55493358':{'en': 'Cordilheira Alta - SC', 'pt': 'Cordilheira Alta - SC'},
- '55493361':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493362':{'en': 'Novo Horizonte - SC', 'pt': 'Novo Horizonte - SC'},
 }
