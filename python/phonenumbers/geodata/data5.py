@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3358697':{'en': 'Montmorillon', 'fr': 'Montmorillon'},
  '3358698':{'en': 'Poitiers', 'fr': 'Poitiers'},
  '3358699':{'en': 'Niort', 'fr': 'Niort'},
  '3358700':{'en': 'Limoges', 'fr': 'Limoges'},
@@ -4388,7 +4389,7 @@ data = {
  '3804741':{'en': 'Shpola, Cherkasy', 'uk': u('\u0428\u043f\u043e\u043b\u0430, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804742':{'en': 'Katerinopil, Cherkasy', 'uk': u('\u041a\u0430\u0442\u0435\u0440\u0438\u043d\u043e\u043f\u0456\u043b\u044c, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804744':{'en': 'Uman, Cherkasy', 'uk': u('\u0423\u043c\u0430\u043d\u044c, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
- '3804745':{'en': 'Khrystynivka, Cherkasy', 'uk': u('\u0425\u0440\u0438\u0441\u0442\u0438\u043d\u0456\u0432\u043a\u0430, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
+ '3804745':{'en': 'Monastyrysche, Cherkasy', 'uk': u('\u041c\u043e\u043d\u0430\u0441\u0442\u0438\u0440\u0438\u0449\u0435, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804746':{'en': 'Monastyrysche, Cherkasy', 'uk': u('\u041c\u043e\u043d\u0430\u0441\u0442\u0438\u0440\u0438\u0449\u0435, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804747':{'en': 'Zhashkiv, Cherkasy', 'uk': u('\u0416\u0430\u0448\u043a\u0456\u0432, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
  '3804748':{'en': 'Mankivka, Cherkasy', 'uk': u('\u041c\u0430\u043d\u044c\u043a\u0456\u0432\u043a\u0430, \u0427\u0435\u0440\u043a\u0430\u0441\u0438')},
@@ -10018,5 +10019,4 @@ data = {
  '494804':{'de': 'Nordhastedt', 'en': 'Nordhastedt'},
  '494805':{'de': 'Schafstedt', 'en': 'Schafstedt'},
  '494806':{'de': u('Sarzb\u00fcttel'), 'en': u('Sarzb\u00fcttel')},
- '49481':{'de': 'Heide Holstein', 'en': 'Heide Holstein'},
 }

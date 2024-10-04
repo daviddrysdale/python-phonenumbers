@@ -1316,6 +1316,7 @@ data = {
  '256720':{'en': 'Smile'},
  '256724':{'en': 'Hamilton Telecom'},
  '256726':{'en': 'Tangerine'},
+ '256727':{'en': 'Tangerine'},
  '256728':{'en': 'Talkio'},
  '25673':{'en': 'Hamilton Telecom'},
  '25674':{'en': 'Airtel'},
@@ -3282,6 +3283,7 @@ data = {
  '38073':{'en': 'lifecell', 'uk': 'lifecell'},
  '38075':{'en': 'Vodafone', 'uk': u('Vodafone \u0423\u043a\u0440\u0430\u0457\u043d\u0430')},
  '38077':{'en': 'Kyivstar', 'uk': u('\u041a\u0438\u0457\u0432\u0441\u0442\u0430\u0440')},
+ '38079':{'en': 'J&Y', 'uk': 'J&Y'},
  '38091':{'en': 'TriMob', 'uk': u('\u0422\u0440\u0438\u041c\u043e\u0431')},
  '38092':{'en': 'PEOPLEnet', 'uk': 'PEOPLEnet'},
  '38093':{'en': 'lifecell', 'uk': 'lifecell'},
@@ -10017,6 +10019,4 @@ data = {
  '552899986':{'en': 'Vivo'},
  '552899987':{'en': 'Vivo'},
  '552899988':{'en': 'Vivo'},
- '552899989':{'en': 'Vivo'},
- '552899991':{'en': 'Vivo'},
 }

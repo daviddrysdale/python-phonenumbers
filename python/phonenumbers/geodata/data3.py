@@ -4432,6 +4432,7 @@ data = {
  '26120729':{'en': 'Mananjary'},
  '2612073':{'en': 'Farafangana'},
  '2612075':{'en': 'Fianarantsoa'},
+ '2612076':{'en': 'Antananarivo'},
  '2612082':{'en': 'Antsiranana'},
  '2612086':{'en': 'Nosy Be'},
  '2612088':{'en': 'Sambava'},
@@ -10018,5 +10019,4 @@ data = {
  '3323598':{'en': 'Rouen', 'fr': 'Rouen'},
  '3323600':{'en': 'Tours', 'fr': 'Tours'},
  '3323601':{'en': u('La Ch\u00e2tre'), 'fr': u('La Ch\u00e2tre')},
- '3323602':{'en': u('Valen\u00e7ay'), 'fr': u('Valen\u00e7ay')},
 }

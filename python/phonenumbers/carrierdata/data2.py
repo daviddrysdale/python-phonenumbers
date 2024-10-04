@@ -19,6 +19,8 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '569932':{'en': 'Movistar'},
+ '569933':{'en': 'Movistar'},
  '569934':{'en': 'Movistar'},
  '569935':{'en': 'Entel'},
  '569936':{'en': 'Movistar'},
@@ -4126,6 +4128,7 @@ data = {
  '8524699':{'en': 'South China Telecommunications', 'zh': u('\u4e2d\u570b\u5357\u65b9\u96fb\u4fe1(\u9999\u6e2f)\u6709\u9650\u516c\u53f8')},
  '852470':{'en': 'Hutchison Telecom', 'zh': u('\u548c\u8a18\u96fb\u8a71\u6709\u9650\u516c\u53f8')},
  '852474':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8')},
+ '852475':{'en': 'Hutchison Telecom', 'zh': u('\u548c\u8a18\u96fb\u8a71\u6709\u9650\u516c\u53f8')},
  '852510':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8'), 'zh_Hant': u('\u4e2d\u570b\u79fb\u52d5')},
  '852511':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf'), 'zh_Hant': u('\u65b0\u79fb\u52d5\u901a\u8a0a')},
  '852512':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8'), 'zh_Hant': u('\u4e2d\u570b\u79fb\u52d5')},
@@ -4347,6 +4350,7 @@ data = {
  '852701':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8')},
  '852702':{'en': 'Hutchison Telecom', 'zh': u('\u548c\u8a18\u96fb\u8a71\u6709\u9650\u516c\u53f8')},
  '852703':{'en': 'Hutchison Telecom', 'zh': u('\u548c\u8a18\u96fb\u8a71\u6709\u9650\u516c\u53f8')},
+ '852704':{'en': 'Hutchison Telecom', 'zh': u('\u548c\u8a18\u96fb\u8a71\u6709\u9650\u516c\u53f8')},
  '8527071':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a')},
  '8527072':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a')},
  '8527073':{'en': 'SmarTone', 'zh': u('\u6570\u7801\u901a')},
@@ -8802,7 +8806,12 @@ data = {
  '9955112':{'en': 'MagtiCom'},
  '9955113':{'en': 'MagtiCom'},
  '9955114':{'en': 'MagtiCom'},
- '9955115':{'en': 'Silknet'},
+ '99551151':{'en': 'Silknet'},
+ '99551152':{'en': 'MagtiCom'},
+ '99551153':{'en': 'MagtiCom'},
+ '99551154':{'en': 'MagtiCom'},
+ '99551155':{'en': 'MagtiCom'},
+ '99551156':{'en': 'MagtiCom'},
  '9955117':{'en': 'MagtiCom'},
  '995514':{'en': 'Silknet'},
  '995515':{'en': 'MagtiCom'},
