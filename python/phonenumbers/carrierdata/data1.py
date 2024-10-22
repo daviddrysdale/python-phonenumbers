@@ -19,14 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '552899989':{'en': 'Vivo'},
- '552899991':{'en': 'Vivo'},
- '552899992':{'en': 'Vivo'},
- '552899993':{'en': 'Vivo'},
- '552899994':{'en': 'Vivo'},
- '552899995':{'en': 'Vivo'},
- '552899996':{'en': 'Vivo'},
- '552899997':{'en': 'Vivo'},
  '552899998':{'en': 'Vivo'},
  '55319820':{'en': 'Claro'},
  '55319821':{'en': 'Claro'},
@@ -10019,4 +10011,12 @@ data = {
  '569929':{'en': 'Entel'},
  '569930':{'en': 'Entel'},
  '569931':{'en': 'Entel'},
+ '569932':{'en': 'Movistar'},
+ '569933':{'en': 'Movistar'},
+ '569934':{'en': 'Movistar'},
+ '569935':{'en': 'Entel'},
+ '569936':{'en': 'Movistar'},
+ '569937':{'en': 'Movistar'},
+ '5699380':{'en': 'Movistar'},
+ '5699381':{'en': 'Movistar'},
 }

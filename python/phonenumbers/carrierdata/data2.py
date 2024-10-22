@@ -19,14 +19,6 @@ from ..util import u
 # limitations under the License.
 
 data = {
- '569932':{'en': 'Movistar'},
- '569933':{'en': 'Movistar'},
- '569934':{'en': 'Movistar'},
- '569935':{'en': 'Entel'},
- '569936':{'en': 'Movistar'},
- '569937':{'en': 'Movistar'},
- '5699380':{'en': 'Movistar'},
- '5699381':{'en': 'Movistar'},
  '5699382':{'en': 'Entel'},
  '5699383':{'en': 'Entel'},
  '5699385':{'en': 'Claro'},
