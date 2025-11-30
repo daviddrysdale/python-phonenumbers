@@ -1,0 +1,44 @@
+[project]
+name = "phonenumberslite"
+
+authors = [{name = "David Drysdale", email = "dmd@lurklurk.org"}]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Communications :: Telephony",
+    "Programming Language :: Python :: 2",
+    "Programming Language :: Python :: 2.5",
+    "Programming Language :: Python :: 2.6",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.3",
+    "Programming Language :: Python :: 3.4",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
+dynamic = ["version"]
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=2.5"
+urls = {homepage = "https://github.com/daviddrysdale/python-phonenumbers"}
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = {attr = "phonenumbers.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["phonenumbers", "phonenumbers.data", "phonenumbers.shortdata"]

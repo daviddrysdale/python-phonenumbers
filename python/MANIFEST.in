@@ -2,3 +2,4 @@ recursive-include tests *.py
 include HISTORY.md
 include LICENSE
 include testwrapper.py
+recursive-exclude phonenumberslite *
