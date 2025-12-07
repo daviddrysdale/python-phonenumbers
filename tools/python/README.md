@@ -13,8 +13,7 @@ Install using `setup.py`:
 ```console
 tar xfz phonenumbers-<version>.tar.gz
 cd phonenumbers-<version>
-python setup.py build
-sudo python setup.py install  # or su first
+sudo python -m pip install .  # or su first
 ```
 
 Running Tests
@@ -134,15 +133,17 @@ Release Procedure
     `git tag vX.Y.Z`
 - Push the tag to Github with:
     `git push <github-remote> vX.Y.Z`
+- Ensure you have the requirements to build:
+    `pip install build twine`
 - Push the lite package to PyPI with:
     ```
-    cd python && rm -rf build dist && ./setup.py lite sdist bdist_wheel
+    cd python/phonenumberslite && rm -rf build dist phonenumberslite.egg-info && python -m build
     twine check dist/*
     twine upload dist/*
     ```
 - Push the package to PyPI with:
     ```
-    cd python && rm -rf build dist && ./setup.py sdist bdist_wheel
+    cd python && rm -rf build dist phonenumbers.egg-info && python -m build
     twine check dist/*
     twine upload dist/*
     ```
