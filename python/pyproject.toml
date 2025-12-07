@@ -41,4 +41,4 @@ version = {attr = "phonenumbers.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["phonenumbers"]
+include = ["phonenumbers*"]
