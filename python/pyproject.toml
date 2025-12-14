@@ -36,9 +36,18 @@ urls = {homepage = "https://github.com/daviddrysdale/python-phonenumbers"}
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+# phonenumbers/pb2 is considered as package data
+include-package-data = false
+
+packages = [
+    "phonenumbers",
+    "phonenumbers.data",
+    "phonenumbers.geodata",
+    "phonenumbers.shortdata",
+    "phonenumbers.carrierdata",
+    "phonenumbers.tzdata",
+]
+
 [tool.setuptools.dynamic]
 version = {attr = "phonenumbers.__version__"}
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["phonenumbers*"]

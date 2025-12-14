@@ -39,6 +39,8 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.dynamic]
 version = {attr = "phonenumbers.__version__"}
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["phonenumbers", "phonenumbers.data", "phonenumbers.shortdata"]
+[tool.setuptools]
+# phonenumbers/pb2 is considered as package data
+include-package-data = false
+
+packages = ["phonenumbers", "phonenumbers.data", "phonenumbers.shortdata"]

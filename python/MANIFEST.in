@@ -1,5 +1,9 @@
-recursive-include tests *.py
 include HISTORY.md
 include LICENSE
+include appspot.py
+include run_stubtest.py
 include testwrapper.py
+include testpb2.py
+recursive-include tests *.py *.pyi
+recursive-include phonenumbers/pb2 *.py
 recursive-exclude phonenumberslite *
