@@ -988,3 +988,25 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
         num_format = NumberFormat(pattern="(\\d{3})(\\d{3})(\\d{4})", format="\\1-\\2-\\3")
         self.assertEqual(["650", "253", "0000"],
                          _get_national_number_groups(us_number, num_format))
+
+    def testMinCandidateLengthFiltersShortNumbers(self):
+        # Python-specific test: min_candidate_length parameter
+        text = "Call +1800-123-4567 or 415-666-7777 for help"
+        # With min_candidate_length=13, the short candidate should be skipped
+        matcher = PhoneNumberMatcher(text, "US", Leniency.POSSIBLE, 65535, min_candidate_length=13)
+        match = matcher.next() if matcher.has_next() else None
+        self.assertIsNotNone(match)
+        self.assertEqual("+1800-123-4567", match.raw_string)
+        # Should be no more matches
+        self.assertFalse(matcher.has_next())
+
+    def testMinCandidateLengthDoesNotConsumeMaxTries(self):
+        # Python-specific test: skipped short candidates don't consume max_tries
+        # Text with 5 short candidates followed by one valid number
+        text = "Try 123, 456, 789, 012, 345, then call 415-666-7777"
+        # With max_tries=1, if short candidates consumed tries, we'd fail to find the valid number
+        # But with min_candidate_length=10, short candidates are skipped without consuming tries
+        matcher = PhoneNumberMatcher(text, "US", Leniency.VALID, max_tries=1, min_candidate_length=10)
+        match = matcher.next() if matcher.has_next() else None
+        self.assertIsNotNone(match)
+        self.assertEqual("415-666-7777", match.raw_string)

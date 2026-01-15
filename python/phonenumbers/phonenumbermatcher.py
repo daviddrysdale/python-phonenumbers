@@ -456,7 +456,8 @@ class PhoneNumberMatcher(object):
     _DONE = 2
 
     def __init__(self, text, region,
-                 leniency=Leniency.VALID, max_tries=65535):
+                 leniency=Leniency.VALID, max_tries=65535,
+                 min_candidate_length=1):
         """Creates a new instance.
 
         Arguments:
@@ -471,6 +472,9 @@ class PhoneNumberMatcher(object):
         max_tries -- The maximum number of invalid numbers to try before
               giving up on the text.  This is to cover degenerate cases where
               the text has a lot of false positives in it. Must be >= 0.
+        min_candidate_length -- The minimum length of a candidate phone number.
+              Can be used to quickly skip candidates that are too short to be valid,
+              depending on your use-case needs.
         """
         if leniency is None:
             raise ValueError("Need a leniency value")
@@ -487,6 +491,8 @@ class PhoneNumberMatcher(object):
         self.leniency = leniency
         # The maximum number of retries after matching an invalid number.
         self._max_tries = int(max_tries)
+        # The minimum length of a candidate phone number.
+        self._min_candidate_length = int(min_candidate_length)
         # The iteration tristate.
         self._state = PhoneNumberMatcher._NOT_READY
         # The last successful match, None unless in state _READY
@@ -513,13 +519,18 @@ class PhoneNumberMatcher(object):
             # 123 45 67 / 68).
             candidate = self._trim_after_first_match(_SECOND_NUMBER_START_PATTERN,
                                                      candidate)
+            candidate_len = len(candidate)
 
-            match = self._extract_match(candidate, start)
-            if match is not None:
-                return match
+            # UPSTREAM DIVERGENCE: The min_candidate_length is Python-specific
+            # feature, not present in the upstream Java version.
+            if candidate_len >= self._min_candidate_length:
+                match = self._extract_match(candidate, start)
+                if match is not None:
+                    return match
+                self._max_tries -= 1
+
             # Move along
-            index = start + len(candidate)
-            self._max_tries -= 1
+            index = start + candidate_len
             match = _PATTERN.search(self.text, index)
         return None
 
