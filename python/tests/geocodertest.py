@@ -178,6 +178,29 @@ class PhoneNumberGeocoderTest(unittest.TestCase):
         # We have a geocoding prefix, but we shouldn't use it since this is not geographical.
         self.assertEqual("South Korea", description_for_number(KO_MOBILE, _ENGLISH))
 
+    def testPrefixFallsBackToShorterPrefixWhenLanguageMissing(self):
+        # Python version extra test - this has no equivalent Java test.
+        # This can occur when only a subset of sub-prefixes carry alternative-language
+        # entries for a region.
+        #
+        # Simulate: '1212' has 'en', '12123' exists only for 'de'.
+        # Asking for 'fr' on a number whose digits start with 12123 should fall back
+        # to '1212' and return the English name (since French falls back to English),
+        # not the empty string from '12123'.
+        TEST_GEOCODE_DATA['12123'] = {'de': u("TestDistrict")}
+        try:
+            # US_NUMBER3 is +1 212-812-0000; its prefix digits start with '12128' so
+            # it won't hit '12123'.  Use a fabricated number whose digits begin '12123'.
+            test_num = FrozenPhoneNumber(country_code=1, national_number=2123000000)
+            # '12123' has no 'fr', '1212' has 'en' -> French should fall back to 'NY'
+            self.assertEqual("NY", _prefix_description_for_number(
+                TEST_GEOCODE_DATA, TEST_GEOCODE_LONGEST_PREFIX, test_num, "fr"))
+            # 'de' is directly present in '12123', so German gets the detailed name
+            self.assertEqual("TestDistrict", _prefix_description_for_number(
+                TEST_GEOCODE_DATA, TEST_GEOCODE_LONGEST_PREFIX, test_num, "de"))
+        finally:
+            del TEST_GEOCODE_DATA['12123']
+
     def testCoverage(self):
         # Python version extra tests
         invalid_number = PhoneNumber(country_code=210, national_number=123456)

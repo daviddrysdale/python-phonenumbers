@@ -85,6 +85,5 @@ def _prefix_description_for_number(data, longest_prefix, numobj, lang, script=No
             name = _find_lang(data[prefix], lang, script, region)
             if name is not None:
                 return name
-            else:
-                return U_EMPTY_STRING
+            # Language not available for this prefix; try a less-specific (shorter) prefix.
     return U_EMPTY_STRING
