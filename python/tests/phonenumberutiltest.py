@@ -18,6 +18,7 @@
 # limitations under the License.
 import sys
 import pickle
+import time
 
 import phonenumbers
 from phonenumbers import PhoneNumber, PhoneMetadata
@@ -2003,6 +2004,17 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                          phonenumbers.parse("tel:253-0000;isub=12345;phone-context=www.google.com", "US"))
         self.assertEqual(US_LOCAL_NUMBER,
                          phonenumbers.parse("tel:2530000;isub=12345;phone-context=1234.com", "US"))
+
+        # A long phone-context domain with an ambiguous label structure must
+        # be rejected quickly. The old domainname pattern
+        # ([alnum]+((\-)*[alnum])* per label) made CPython's backtracking
+        # engine spend ~50s on this input before failing.
+        evil_context = "aa." * 25 + "aa!"
+        start = time.time()
+        self.assertRaises(NumberParseException,
+                          phonenumbers.parse,
+                          "tel:253-0000;phone-context=" + evil_context, "US")
+        self.assertLess(time.time() - start, 10)
 
         nzNumber = PhoneNumber(country_code=64, national_number=64123456)
         self.assertEqual(nzNumber, phonenumbers.parse("64(0)64123456", "NZ"))
