@@ -19,6 +19,9 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '5730459':{'en': 'Tigo'},
+ '5730460':{'en': 'Tigo'},
+ '5730461':{'en': 'Tigo'},
  '5730462':{'en': 'Tigo'},
  '5730463':{'en': 'Tigo'},
  '5730464':{'en': 'Tigo'},
@@ -2333,6 +2336,7 @@ data = {
  '67582':{'en': 'Vodafone'},
  '67583':{'en': 'Vodafone'},
  '67584':{'en': 'Vodafone'},
+ '67585':{'en': 'Vodafone'},
  '67588':{'en': 'Digicel'},
  '67654':{'en': 'Toko Wireless'},
  '676554':{'en': 'Toko Wireless'},
@@ -3977,7 +3981,8 @@ data = {
  '850191':{'en': 'Koryolink'},
  '850192':{'en': 'Koryolink'},
  '850193':{'en': 'KPTC'},
- '85240':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8')},
+ '852406':{'en': 'China Unicom', 'zh': u('\u4e2d\u56fd\u8054\u901a')},
+ '852409':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8')},
  '85242':{'en': 'China Telecom Global Limited', 'zh': u('\u4e2d\u56fd\u7535\u4fe1\u56fd\u9645\u6709\u9650\u516c\u53f8')},
  '852440':{'en': 'China Mobile', 'zh': u('\u4e2d\u56fd\u79fb\u52a8')},
  '852441':{'en': 'HKT', 'zh': u('\u9999\u6e2f\u79fb\u52a8\u901a\u8baf')},
@@ -8356,6 +8361,8 @@ data = {
  '961818':{'en': 'Touch'},
  '961819':{'en': 'Touch'},
  '9624':{'en': 'Orange'},
+ '96271':{'en': 'Umniah'},
+ '96272':{'en': 'Zain JO'},
  '96277':{'en': 'Orange'},
  '96278':{'en': 'Umniah'},
  '96279':{'en': 'Zain JO'},
