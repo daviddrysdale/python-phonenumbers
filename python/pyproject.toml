@@ -51,3 +51,6 @@ packages = [
 
 [tool.setuptools.dynamic]
 version = {attr = "phonenumbers.__version__"}
+
+[tool.pytest.ini_options]
+testpaths = ["testwrapper.py"]
