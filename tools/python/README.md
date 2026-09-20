@@ -37,8 +37,8 @@ from the master metadata under `resources/`:
 - `python/phonenumbers/carrierdata` is generated from files under `resources/carrier/`.
 - `python/phonenumbers/tzdata` is generated from files under `resources/timezones/`.
 
-The script `tools/buildmetadatafromxml.py` performs the first pair of autogenerations.
-The script `tools/buildprefixdata.py` performs the latter 3 sets of autogenerations.
+The script `tools/python/buildmetadatafromxml.py` performs the first pair of autogenerations.
+The script `tools/python/buildprefixdata.py` performs the latter 3 sets of autogenerations.
 
 This approach results in a large set of Python files, but makes it easy
 to apply local fixes to the formatting metadata.
