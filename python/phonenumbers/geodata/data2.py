@@ -19,6 +19,7 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '1705497':{'en': 'North Bay, ON'},
  '1705503':{'en': 'Barrie, ON'},
  '1705521':{'en': 'Greater Sudbury, ON'},
  '1705522':{'en': 'Greater Sudbury, ON'},
@@ -10018,5 +10019,4 @@ data = {
  '1918828':{'en': 'Tulsa, OK'},
  '1918832':{'en': 'Tulsa, OK'},
  '1918834':{'en': 'Tulsa, OK'},
- '1918835':{'en': 'Tulsa, OK'},
 }

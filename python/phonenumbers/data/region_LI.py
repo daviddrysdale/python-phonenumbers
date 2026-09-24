@@ -3,7 +3,7 @@ from ..phonemetadata import NumberFormat, PhoneNumberDesc, PhoneMetadata
 
 PHONE_METADATA_LI = PhoneMetadata(id='LI', country_code=423, international_prefix='00',
     general_desc=PhoneNumberDesc(national_number_pattern='[68]\\d{8}|(?:[2378]\\d|90)\\d{5}', possible_length=(7, 9)),
-    fixed_line=PhoneNumberDesc(national_number_pattern='(?:2(?:01|1[27]|2[024]|3\\d|6[02-578]|96)|3(?:[24]0|33|7[0135-7]|8[048]|9[0269]))\\d{4}', example_number='2345678', possible_length=(7,)),
+    fixed_line=PhoneNumberDesc(national_number_pattern='(?:2(?:01|1[27]|2[024]|3\\d|6[02-578]|9[06])|3(?:[24]0|33|7[0135-7]|8[048]|9[0269]))\\d{4}', example_number='2345678', possible_length=(7,)),
     mobile=PhoneNumberDesc(national_number_pattern='(?:6(?:(?:4[5-9]|5\\d)\\d|6(?:[024-68]\\d|1[01]|3[7-9]|7[02]))\\d|7(?:[37-9]\\d|42|56))\\d{4}', example_number='660234567', possible_length=(7, 9)),
     toll_free=PhoneNumberDesc(national_number_pattern='8002[28]\\d\\d|80(?:05\\d|9)\\d{4}', example_number='8002222', possible_length=(7, 9)),
     premium_rate=PhoneNumberDesc(national_number_pattern='90(?:02[258]|1(?:23|3[14])|66[136])\\d\\d', example_number='9002222', possible_length=(7,)),
