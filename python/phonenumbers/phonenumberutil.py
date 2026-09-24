@@ -382,8 +382,8 @@ _RFC3966_GLOBAL_NUMBER_DIGITS_PATTERN = re.compile(_RFC3966_GLOBAL_NUMBER_DIGITS
 # Regular expression of valid domainname for the phone-context parameter,
 # following the syntax defined in RFC3966.
 _ALPHANUM = _VALID_ALPHA + _DIGITS
-_RFC3966_DOMAINLABEL = "[" + _ALPHANUM + "]+((\\-)*[" + _ALPHANUM + "])*"
-_RFC3966_TOPLABEL = "[" + _VALID_ALPHA + "]+((\\-)*[" + _ALPHANUM + "])*"
+_RFC3966_DOMAINLABEL = "[" + _ALPHANUM + "]+(\\-+[" + _ALPHANUM + "]+)*"
+_RFC3966_TOPLABEL = "[" + _VALID_ALPHA + "]+(\\-+[" + _ALPHANUM + "]+)*"
 _RFC3966_DOMAINNAME = "^(" + _RFC3966_DOMAINLABEL + "\\.)*" + _RFC3966_TOPLABEL + "\\.?$"
 _RFC3966_DOMAINNAME_PATTERN = re.compile(_RFC3966_DOMAINNAME)
 
