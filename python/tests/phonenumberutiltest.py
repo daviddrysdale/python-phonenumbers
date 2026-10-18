@@ -3304,6 +3304,10 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         del PhoneMetadata._country_code_metadata[999]
 
     def testMetadataPatternsCompiledOnce(self):
+        if sys.version_info < (3, 4):  # pragma no cover
+            # Without re.fullmatch, re_util.fullmatch compiles a grouped copy
+            # of the pattern on every call.
+            return
         # Python version extra test: regular expressions from the metadata are
         # compiled once and then re-used, rather than being recompiled whenever
         # they have dropped out of the re module's own cache.
