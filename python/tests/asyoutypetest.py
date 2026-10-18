@@ -15,6 +15,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import re
+import sys
+
 from phonenumbers import AsYouTypeFormatter
 from phonenumbers import PhoneMetadata, PhoneNumberDesc, NumberFormat
 # Access internal functions of phonenumberutil.py
@@ -1177,6 +1180,35 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
         self.assertEqual("1", formatter.input_digit('1'))
         self.assertEqual("10", formatter.input_digit('0'))
         self.assertEqual("101", formatter.input_digit('1'))
+
+    def testAYTFMetadataPatternsCompiledOnce(self):
+        if sys.version_info < (3, 4):  # pragma no cover
+            # Without re.fullmatch, re_util.fullmatch compiles a grouped copy
+            # of the pattern on every call.
+            return
+        # Python version extra test: regular expressions from the metadata are
+        # compiled once and then re-used by later formatters.
+        def exercise():
+            for region, digits in (("US", "16502532222"), ("GB", "02070313000"),
+                                   ("DE", "00498001234567"), ("US", "+48881231234")):
+                formatter = AsYouTypeFormatter(region)
+                for digit in digits:
+                    formatter.input_digit(digit)
+
+        exercise()
+        compiled = []
+        original_compile = re.compile
+
+        def recording_compile(pattern, flags=0):
+            compiled.append(pattern)
+            return original_compile(pattern, flags)
+
+        re.compile = recording_compile
+        try:
+            exercise()
+        finally:
+            re.compile = original_compile
+        self.assertEqual([], compiled)
 
     def testEdgeCases(self):
         # Python version extra tests for coverage

@@ -49,6 +49,25 @@ else:  # pragma no cover
         return m
 
 
+# Compiled regular expressions, keyed by pattern string.  The patterns used come
+# from the (fixed) metadata, so the number of entries is bounded; holding on to
+# them means that applications which work with numbers from many regions don't
+# keep recompiling patterns that have dropped out of the re module's own,
+# smaller, cache.
+_COMPILED_PATTERNS = {}
+
+
+def compile_pattern(regex):
+    """Return a compiled version of the given regular expression string,
+    re-using an earlier compilation of the same string if there is one (as the
+    RegexCache class in the Java code does)."""
+    pattern = _COMPILED_PATTERNS.get(regex, None)
+    if pattern is None:
+        pattern = re.compile(regex)
+        _COMPILED_PATTERNS[regex] = pattern
+    return pattern
+
+
 if __name__ == '__main__':  # pragma no cover
     import doctest
     doctest.testmod()

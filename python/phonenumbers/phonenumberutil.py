@@ -29,6 +29,7 @@ import sys
 import re
 
 from .re_util import fullmatch   # Extra regexp function; see README
+from .re_util import compile_pattern
 from .util import UnicodeMixin, u, unicod, prnt, to_long
 from .util import U_EMPTY_STRING, U_SPACE, U_DASH, U_TILDE, U_ZERO, U_SEMICOLON
 from .unicode_util import digit as unicode_digit
@@ -1592,10 +1593,10 @@ def _choose_formatting_pattern_for_number(available_formats, national_number):
         size = len(num_format.leading_digits_pattern)
         # We always use the last leading_digits_pattern, as it is the most detailed.
         if size > 0:
-            ld_pattern = re.compile(num_format.leading_digits_pattern[-1])
+            ld_pattern = compile_pattern(num_format.leading_digits_pattern[-1])
             ld_match = ld_pattern.match(national_number)
         if size == 0 or ld_match:
-            format_pattern = re.compile(num_format.pattern)
+            format_pattern = compile_pattern(num_format.pattern)
             if fullmatch(format_pattern, national_number):
                 return num_format
     return None
@@ -1786,7 +1787,7 @@ def _format_nsn_using_pattern(national_number, formatting_pattern, number_format
     # Note that carrier_code is optional - if None or an empty string, no
     # carrier code replacement will take place.
     number_format_rule = formatting_pattern.format
-    m_re = re.compile(formatting_pattern.pattern)
+    m_re = compile_pattern(formatting_pattern.pattern)
     formatted_national_number = U_EMPTY_STRING
 
     if (number_format == PhoneNumberFormat.NATIONAL and carrier_code and
@@ -2194,7 +2195,7 @@ def _region_code_for_number_from_list(numobj, regions):
         if metadata is None:
             continue
         if metadata.leading_digits is not None:
-            leading_digit_re = re.compile(metadata.leading_digits)
+            leading_digit_re = compile_pattern(metadata.leading_digits)
             match = leading_digit_re.match(national_number)
             if match:
                 return region_code
@@ -2749,7 +2750,7 @@ def _maybe_strip_i18n_prefix_and_normalize(number, possible_idd_prefix):
                 _normalize(number))
 
     # Attempt to parse the first digits as an international prefix.
-    idd_pattern = re.compile(possible_idd_prefix)
+    idd_pattern = compile_pattern(possible_idd_prefix)
     number = _normalize(number)
     stripped, number = _parse_prefix_as_idd(idd_pattern, number)
     if stripped:
@@ -2781,7 +2782,7 @@ def _maybe_strip_national_prefix_carrier_code(number, metadata):
         return (U_EMPTY_STRING, number, False)
 
     # Attempt to parse the first digits as a national prefix.
-    prefix_pattern = re.compile(possible_national_prefix)
+    prefix_pattern = compile_pattern(possible_national_prefix)
     prefix_match = prefix_pattern.match(number)
     if prefix_match:
         general_desc = metadata.general_desc
@@ -3387,7 +3388,7 @@ def _match_national_number(number, number_desc, allow_prefix_match):
     # pattern.
     if number_desc is None or number_desc.national_number_pattern is None or len(number_desc.national_number_pattern) == 0:
         return False
-    return _match(number, re.compile(number_desc.national_number_pattern), allow_prefix_match)
+    return _match(number, compile_pattern(number_desc.national_number_pattern), allow_prefix_match)
 
 
 def _match(number, pattern, allow_prefix_match):
