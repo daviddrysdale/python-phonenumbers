@@ -57,7 +57,7 @@ else:  # pragma no cover
 _COMPILED_PATTERNS = {}
 
 
-def compile_pattern(regex):
+def re_compile(regex):
     """Return a compiled version of the given regular expression string,
     re-using an earlier compilation of the same string if there is one (as the
     RegexCache class in the Java code does)."""

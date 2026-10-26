@@ -3324,6 +3324,8 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                 phonenumbers.format_number(numobj, PhoneNumberFormat.INTERNATIONAL)
                 phonenumbers.format_out_of_country_calling_number(numobj, "US")
 
+        # Ensure that all of the regexps in the test are already cached, regardless of
+        # whether other test cases have used them or not.
         exercise()
         compiled = []
         original_compile = re.compile

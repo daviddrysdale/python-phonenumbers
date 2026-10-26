@@ -28,7 +28,7 @@ import re
 
 from .util import u, unicod, U_EMPTY_STRING, U_SPACE
 from .unicode_util import digit as unicode_digit
-from .re_util import fullmatch, compile_pattern
+from .re_util import fullmatch, re_compile
 from .phonemetadata import PhoneMetadata, REGION_CODE_FOR_NON_GEO_ENTITY
 from .phonenumberutil import _VALID_PUNCTUATION
 from .phonenumberutil import _PLUS_SIGN, _PLUS_CHARS_PATTERN
@@ -169,7 +169,7 @@ class AsYouTypeFormatter(object):
                 continue
             last_leading_digits_pattern = min(index_of_leading_digits_pattern,
                                               len(num_format.leading_digits_pattern) - 1)
-            leading_digits_pattern = compile_pattern(num_format.leading_digits_pattern[last_leading_digits_pattern])
+            leading_digits_pattern = re_compile(num_format.leading_digits_pattern[last_leading_digits_pattern])
             m = leading_digits_pattern.match(leading_digits)
             if not m:
                 # remove the element we've just examined, now at (ii-1)
@@ -191,7 +191,7 @@ class AsYouTypeFormatter(object):
         # Create a phone number consisting only of the digit 9 that matches the
         # number_pattern by applying the pattern to the longest_phone_number string.
         longest_phone_number = unicod("999999999999999")
-        number_re = compile_pattern(number_pattern)
+        number_re = re_compile(number_pattern)
         m = number_re.search(longest_phone_number)  # this will always succeed
         a_phone_number = m.group(0)
         # No formatting template can be created if the number of digits
@@ -390,7 +390,7 @@ class AsYouTypeFormatter(object):
         instead of any other formatting template whose leadingDigitsPattern also matches the input.
         """
         for number_format in self._possible_formats:
-            num_re = compile_pattern(number_format.pattern)
+            num_re = re_compile(number_format.pattern)
             if fullmatch(num_re, self._national_number):
                 if number_format.national_prefix_formatting_rule is None:
                     self._should_add_space_after_national_prefix = False
@@ -496,7 +496,7 @@ class AsYouTypeFormatter(object):
             self._prefix_before_national_number += unicod("1") + _SEPARATOR_BEFORE_NATIONAL_NUMBER
             self._is_complete_number = True
         elif self._current_metadata.national_prefix_for_parsing is not None:
-            npp_re = compile_pattern(self._current_metadata.national_prefix_for_parsing)
+            npp_re = re_compile(self._current_metadata.national_prefix_for_parsing)
             m = npp_re.match(self._national_number)
             # Since some national prefix patterns are entirely optional, check
             # that a national prefix could actually be extracted.
@@ -520,7 +520,7 @@ class AsYouTypeFormatter(object):
         Returns True when accrued_input_without_formatting begins with the plus sign or valid IDD for
         default_country.
         """
-        international_prefix = compile_pattern(unicod("\\") + _PLUS_SIGN + unicod("|") +
+        international_prefix = re_compile(unicod("\\") + _PLUS_SIGN + unicod("|") +
                                                (self._current_metadata.international_prefix or U_EMPTY_STRING))
         idd_match = international_prefix.match(self._accrued_input_without_formatting)
         if idd_match:

@@ -1195,6 +1195,8 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
                 for digit in digits:
                     formatter.input_digit(digit)
 
+        # Ensure that all of the regexps in the test are already cached, regardless of
+        # whether other test cases have used them or not.
         exercise()
         compiled = []
         original_compile = re.compile
