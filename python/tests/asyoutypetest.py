@@ -1188,6 +1188,7 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
             return
         # Python version extra test: regular expressions from the metadata are
         # compiled once and then re-used by later formatters.
+
         def exercise():
             for region, digits in (("US", "16502532222"), ("GB", "02070313000"),
                                    ("DE", "00498001234567"), ("US", "+48881231234")):

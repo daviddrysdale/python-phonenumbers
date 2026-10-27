@@ -521,7 +521,7 @@ class AsYouTypeFormatter(object):
         default_country.
         """
         international_prefix = re_compile(unicod("\\") + _PLUS_SIGN + unicod("|") +
-                                               (self._current_metadata.international_prefix or U_EMPTY_STRING))
+                                          (self._current_metadata.international_prefix or U_EMPTY_STRING))
         idd_match = international_prefix.match(self._accrued_input_without_formatting)
         if idd_match:
             self._is_complete_number = True

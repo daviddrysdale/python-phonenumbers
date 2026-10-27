@@ -3311,6 +3311,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         # Python version extra test: regular expressions from the metadata are
         # compiled once and then re-used, rather than being recompiled whenever
         # they have dropped out of the re module's own cache.
+
         def exercise():
             for number, region in (("+44 20 7031 3000", None),
                                    ("011 64 3 331 6005", "US"),
