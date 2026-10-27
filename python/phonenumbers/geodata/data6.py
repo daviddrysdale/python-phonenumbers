@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '494722':{'de': 'Cuxhaven-Altenbruch', 'en': 'Cuxhaven-Altenbruch'},
+ '494723':{'de': 'Cuxhaven-Altenwalde', 'en': 'Cuxhaven-Altenwalde'},
+ '494724':{'de': u('Cuxhaven-L\u00fcdingworth'), 'en': u('Cuxhaven-L\u00fcdingworth')},
+ '494725':{'de': 'Helgoland', 'en': 'Helgoland'},
  '494731':{'de': 'Nordenham', 'en': 'Nordenham'},
  '494732':{'de': 'Stadland-Rodenkirchen', 'en': 'Stadland-Rodenkirchen'},
  '494733':{'de': 'Butjadingen-Burhave', 'en': 'Butjadingen-Burhave'},
@@ -10015,8 +10019,4 @@ data = {
  '55493018':{'en': 'Lages - SC', 'pt': 'Lages - SC'},
  '55493019':{'en': 'Lages - SC', 'pt': 'Lages - SC'},
  '55493021':{'en': 'Lages - SC', 'pt': 'Lages - SC'},
- '55493025':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
- '55493030':{'en': u('Conc\u00f3rdia - SC'), 'pt': u('Conc\u00f3rdia - SC')},
- '55493198':{'en': 'Maravilha - SC', 'pt': 'Maravilha - SC'},
- '55493199':{'en': u('Chapec\u00f3 - SC'), 'pt': u('Chapec\u00f3 - SC')},
 }

@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3323512':{'en': 'Mont-Saint-Aignan', 'fr': 'Mont-Saint-Aignan'},
+ '3323514':{'en': 'Rouen', 'fr': 'Rouen'},
+ '3323515':{'en': 'Rouen', 'fr': 'Rouen'},
+ '3323519':{'en': 'Le Havre', 'fr': 'Le Havre'},
  '3323521':{'en': 'Le Havre', 'fr': 'Le Havre'},
  '3323522':{'en': 'Le Havre', 'fr': 'Le Havre'},
  '3323524':{'en': 'Le Havre', 'fr': 'Le Havre'},
@@ -10015,8 +10019,4 @@ data = {
  '3358631':{'en': 'Poitiers', 'fr': 'Poitiers'},
  '3358632':{'en': 'Barbezieux-Saint-Hilaire', 'fr': 'Barbezieux-Saint-Hilaire'},
  '3358633':{'en': 'Confolens', 'fr': 'Confolens'},
- '3358634':{'en': 'Jonzac', 'fr': 'Jonzac'},
- '3358635':{'en': 'Rochefort', 'fr': 'Rochefort'},
- '3358636':{'en': 'Saintes', 'fr': 'Saintes'},
- '3358637':{'en': 'Bressuire', 'fr': 'Bressuire'},
 }

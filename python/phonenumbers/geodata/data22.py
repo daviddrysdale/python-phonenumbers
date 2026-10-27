@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '86156840':{'en': 'Yantai, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u70df\u53f0\u5e02')},
+ '86156841':{'en': 'Yantai, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u70df\u53f0\u5e02')},
+ '86156842':{'en': 'Weifang, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6f4d\u574a\u5e02')},
+ '86156843':{'en': 'Weifang, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6f4d\u574a\u5e02')},
  '86156844':{'en': 'Weifang, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6f4d\u574a\u5e02')},
  '86156845':{'en': 'Weihai, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u5a01\u6d77\u5e02')},
  '86156846':{'en': 'Binzhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6ee8\u5dde\u5e02')},
@@ -10015,8 +10019,4 @@ data = {
  '861595946':{'en': 'Sanming, Fujian', 'zh': u('\u798f\u5efa\u7701\u4e09\u660e\u5e02')},
  '861595947':{'en': 'Sanming, Fujian', 'zh': u('\u798f\u5efa\u7701\u4e09\u660e\u5e02')},
  '861595948':{'en': 'Zhangzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6f33\u5dde\u5e02')},
- '861595949':{'en': 'Zhangzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6f33\u5dde\u5e02')},
- '86159595':{'en': 'Quanzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6cc9\u5dde\u5e02')},
- '86159596':{'en': 'Zhangzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6f33\u5dde\u5e02')},
- '861595970':{'en': 'Longyan, Fujian', 'zh': u('\u798f\u5efa\u7701\u9f99\u5ca9\u5e02')},
 }

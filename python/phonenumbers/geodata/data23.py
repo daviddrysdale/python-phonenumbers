@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '861595949':{'en': 'Zhangzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6f33\u5dde\u5e02')},
+ '86159595':{'en': 'Quanzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6cc9\u5dde\u5e02')},
+ '86159596':{'en': 'Zhangzhou, Fujian', 'zh': u('\u798f\u5efa\u7701\u6f33\u5dde\u5e02')},
+ '861595970':{'en': 'Longyan, Fujian', 'zh': u('\u798f\u5efa\u7701\u9f99\u5ca9\u5e02')},
  '861595971':{'en': 'Longyan, Fujian', 'zh': u('\u798f\u5efa\u7701\u9f99\u5ca9\u5e02')},
  '861595972':{'en': 'Longyan, Fujian', 'zh': u('\u798f\u5efa\u7701\u9f99\u5ca9\u5e02')},
  '861595973':{'en': 'Longyan, Fujian', 'zh': u('\u798f\u5efa\u7701\u9f99\u5ca9\u5e02')},
@@ -231,8 +235,8 @@ data = {
  '861596501':{'en': 'Binzhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6ee8\u5dde\u5e02')},
  '86159651':{'en': 'Yantai, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u70df\u53f0\u5e02')},
  '861596510':{'en': 'Jining, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u6d4e\u5b81\u5e02')},
- '861596511':{'en': 'Zaozhuang, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u67a3\u5e84\u5e02')},
- '861596512':{'en': 'Zaozhuang, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u67a3\u5e84\u5e02')},
+ '861596511':{'en': 'Zaozhuang, Shandong', 'zh': u('\u5c71\u4e1c\ufffd\ufffd\ufffd\u67a3\u5e84\u5e02')},
+ '861596512':{'en': 'Zaozhuang, Shandong', 'zh': u('\u5c71\u4e1c\ufffd\ufffd\ufffd\u67a3\u5e84\u5e02')},
  '861596520':{'en': 'Dezhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u5fb7\u5dde\u5e02')},
  '861596521':{'en': 'Dezhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u5fb7\u5dde\u5e02')},
  '861596522':{'en': 'Dezhou, Shandong', 'zh': u('\u5c71\u4e1c\u7701\u5fb7\u5dde\u5e02')},
@@ -10015,8 +10019,4 @@ data = {
  '861787649':{'en': 'Shenzhen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6df1\u5733\u5e02')},
  '861787650':{'en': 'Foshan, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u4f5b\u5c71\u5e02')},
  '861787651':{'en': 'Maoming, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u8302\u540d\u5e02')},
- '861787652':{'en': 'Jieyang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u63ed\u9633\u5e02')},
- '861787653':{'en': 'Yangjiang, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u9633\u6c5f\u5e02')},
- '861787654':{'en': 'Meizhou, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6885\u5dde\u5e02')},
- '861787655':{'en': 'Shenzhen, Guangdong', 'zh': u('\u5e7f\u4e1c\u7701\u6df1\u5733\u5e02')},
 }

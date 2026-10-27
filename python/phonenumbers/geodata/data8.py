@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '609571':{'en': 'Kuantan'},
+ '609572':{'en': 'Kuantan'},
+ '609573':{'en': 'Kuantan'},
+ '609575':{'en': 'Kuantan'},
  '609580':{'en': 'Gebeng'},
  '609581':{'en': 'Gebeng'},
  '609582':{'en': 'Gebeng'},
@@ -10015,8 +10019,4 @@ data = {
  '61263696':{'en': 'Molong'},
  '6126370':{'en': 'Mudgee'},
  '61263701':{'en': 'Twelve Mile'},
- '61263702':{'en': 'Wollar'},
- '61263703':{'en': 'Dunedoo'},
- '61263704':{'en': 'Windeyer'},
- '61263710':{'en': 'Wollar'},
 }

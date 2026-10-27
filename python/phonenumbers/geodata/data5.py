@@ -19,6 +19,10 @@ from ..util import u
 # limitations under the License.
 
 data = {
+ '3358634':{'en': 'Jonzac', 'fr': 'Jonzac'},
+ '3358635':{'en': 'Rochefort', 'fr': 'Rochefort'},
+ '3358636':{'en': 'Saintes', 'fr': 'Saintes'},
+ '3358637':{'en': 'Bressuire', 'fr': 'Bressuire'},
  '3358638':{'en': 'Melle', 'fr': 'Melle'},
  '3358639':{'en': 'Parthenay', 'fr': 'Parthenay'},
  '3358640':{'en': 'Thouars', 'fr': 'Thouars'},
@@ -10015,8 +10019,4 @@ data = {
  '494708':{'de': 'Ringstedt', 'en': 'Ringstedt'},
  '49471':{'de': 'Bremerhaven', 'en': 'Bremerhaven'},
  '494721':{'de': 'Cuxhaven', 'en': 'Cuxhaven'},
- '494722':{'de': 'Cuxhaven-Altenbruch', 'en': 'Cuxhaven-Altenbruch'},
- '494723':{'de': 'Cuxhaven-Altenwalde', 'en': 'Cuxhaven-Altenwalde'},
- '494724':{'de': u('Cuxhaven-L\u00fcdingworth'), 'en': u('Cuxhaven-L\u00fcdingworth')},
- '494725':{'de': 'Helgoland', 'en': 'Helgoland'},
 }
