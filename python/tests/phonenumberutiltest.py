@@ -3029,6 +3029,7 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
         self.assertFalse(phonenumbers.is_alpha_number("+800 1234-1234"))
         # Python version extra test
         self.assertFalse(phonenumbers.is_alpha_number(""))
+        self.assertFalse(phonenumbers.is_alpha_number("1800 six-flags" + " " * 250))
 
     def testIsMobileNumberPortableRegion(self):
         self.assertTrue(phonenumbers.is_mobile_number_portable_region("US"))
