@@ -209,6 +209,9 @@ load of metadata will not cause a pause or memory exhaustion):
 * Force-load the extended metadata by `import`ing the appropriate packages (`phonenumbers.geocoder`,
   `phonenumbers.carrier`, `phonenumbers.timezone`).
 
+If you check many numbers from many regions, `phonenumbers.enable_pattern_cache()` keeps every compiled metadata
+pattern, so they are not recompiled once `re`'s own cache is full.
+
 Static Typing
 -------------
 

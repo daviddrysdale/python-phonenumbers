@@ -21,7 +21,7 @@ import sys
 from phonenumbers import AsYouTypeFormatter
 from phonenumbers import PhoneMetadata, PhoneNumberDesc, NumberFormat
 # Access internal functions of phonenumberutil.py
-from phonenumbers import phonenumberutil
+from phonenumbers import enable_pattern_cache, phonenumberutil, re_util
 from phonenumbers.util import u
 from .testmetadatatest import TestMetadataTestCase
 
@@ -1186,9 +1186,17 @@ class AsYouTypeFormatterTest(TestMetadataTestCase):
             # Without re.fullmatch, re_util.fullmatch compiles a grouped copy
             # of the pattern on every call.
             return
-        # Python version extra test: regular expressions from the metadata are
-        # compiled once and then re-used by later formatters.
+        # Python version extra test: with enable_pattern_cache(), regular
+        # expressions from the metadata are compiled once and then re-used by
+        # later formatters.
+        saved_patterns = re_util._COMPILED_PATTERNS
+        enable_pattern_cache()
+        try:
+            self._checkAYTFMetadataPatternsCompiledOnce()
+        finally:
+            re_util._COMPILED_PATTERNS = saved_patterns
 
+    def _checkAYTFMetadataPatternsCompiledOnce(self):
         def exercise():
             for region, digits in (("US", "16502532222"), ("GB", "02070313000"),
                                    ("DE", "00498001234567"), ("US", "+48881231234")):
