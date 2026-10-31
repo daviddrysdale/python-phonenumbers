@@ -16,6 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import re
 import sys
 import pickle
 
@@ -26,7 +27,7 @@ from phonenumbers import PhoneNumberType, PhoneNumberFormat, NumberParseExceptio
 from phonenumbers import ValidationResult, NumberFormat, CountryCodeSource
 from phonenumbers import region_code_for_country_code, MatchType
 # Access internal functions of phonenumberutil.py
-from phonenumbers import phonenumberutil, shortnumberinfo
+from phonenumbers import phonenumberutil, shortnumberinfo, re_util
 from phonenumbers.phonenumberutil import NumberParseException
 from phonenumbers.util import u, to_long
 from .testmetadatatest import TestMetadataTestCase
@@ -3302,6 +3303,76 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                              'register': True})
         # Deregister "001" / 999 afterwards so no other tests are affected.
         del PhoneMetadata._country_code_metadata[999]
+
+    def testMetadataPatternsCompiledOnce(self):
+        if sys.version_info < (3, 4):  # pragma no cover
+            # Without re.fullmatch, re_util.fullmatch compiles a grouped copy
+            # of the pattern on every call.
+            return
+        # Python version extra test: with enable_pattern_cache(), regular
+        # expressions from the metadata are compiled once and then re-used,
+        # rather than being recompiled whenever they have dropped out of the re
+        # module's own cache.
+        saved_patterns = re_util._COMPILED_PATTERNS
+        phonenumbers.enable_pattern_cache()
+        try:
+            self._checkMetadataPatternsCompiledOnce()
+        finally:
+            re_util._COMPILED_PATTERNS = saved_patterns
+
+    def _checkMetadataPatternsCompiledOnce(self):
+        def exercise():
+            for number, region in (("+44 20 7031 3000", None),
+                                   ("011 64 3 331 6005", "US"),
+                                   ("030 123456", "DE"),
+                                   ("+1 242 365 1234", None)):
+                numobj = phonenumbers.parse(number, region)
+                phonenumbers.is_valid_number(numobj)
+                phonenumbers.number_type(numobj)
+                phonenumbers.region_code_for_number(numobj)
+                phonenumbers.format_number(numobj, PhoneNumberFormat.NATIONAL)
+                phonenumbers.format_number(numobj, PhoneNumberFormat.INTERNATIONAL)
+                phonenumbers.format_out_of_country_calling_number(numobj, "US")
+
+        # Ensure that all of the regexps in the test are already cached, regardless of
+        # whether other test cases have used them or not.
+        exercise()
+        compiled = []
+        original_compile = re.compile
+
+        def recording_compile(pattern, flags=0):
+            compiled.append(pattern)
+            return original_compile(pattern, flags)
+
+        re.compile = recording_compile
+        try:
+            exercise()
+        finally:
+            re.compile = original_compile
+        self.assertEqual([], compiled)
+
+    def testMetadataPatternsNotCachedByDefault(self):
+        # Python version extra test: until enable_pattern_cache() is called,
+        # re_compile leaves caching to the re module, and compiles the same
+        # pattern again on every call.
+        self.assertTrue(re_util._COMPILED_PATTERNS is None)
+        compiled = []
+        original_compile = re.compile
+
+        def recording_compile(pattern, flags=0):
+            compiled.append(pattern)
+            return original_compile(pattern, flags)
+
+        re.compile = recording_compile
+        try:
+            first = re_util.re_compile("[0-9]{3}")
+            second = re_util.re_compile("[0-9]{3}")
+        finally:
+            re.compile = original_compile
+        self.assertEqual(["[0-9]{3}", "[0-9]{3}"], compiled)
+        self.assertEqual("[0-9]{3}", first.pattern)
+        self.assertEqual("[0-9]{3}", second.pattern)
+        self.assertTrue(re_util._COMPILED_PATTERNS is None)
 
     def testPickledException(self):
         err = NumberParseException(NumberParseException.TOO_SHORT_AFTER_IDD, 'hello world')

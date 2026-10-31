@@ -19,7 +19,7 @@
 import re
 
 # Extra regexp function; see README
-from .re_util import fullmatch
+from .re_util import fullmatch, re_compile
 from .util import UnicodeMixin, u, unicod, prnt
 from .util import U_EMPTY_STRING, U_DASH, U_SEMICOLON, U_SLASH, U_X_LOWER, U_X_UPPER, U_PERCENT
 from .unicode_util import Category, Block, is_letter
@@ -689,7 +689,7 @@ class PhoneNumberMatcher(object):
             for alternate_format in alternate_formats:
                 if len(alternate_format.leading_digits_pattern) > 0:
                     # There is only one leading digits pattern for alternate formats.
-                    pattern = re.compile(alternate_format.leading_digits_pattern[0])
+                    pattern = re_compile(alternate_format.leading_digits_pattern[0])
                     if not pattern.match(nsn):
                         # Leading digits don't match; try another one.
                         continue
