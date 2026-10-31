@@ -2325,6 +2325,10 @@ def is_alpha_number(number):
 
     Returns True if the number is a valid vanity number
     """
+    if len(number) > _MAX_INPUT_STRING_LENGTH:
+        # Too long to parse, so can't be a valid number; also avoids quadratic
+        # time in _maybe_strip_extension() for long runs of separators.
+        return False
     if not _is_viable_phone_number(number):
         # Number is too short, or doesn't match the basic phone number pattern.
         return False
