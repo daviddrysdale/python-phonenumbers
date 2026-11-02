@@ -248,7 +248,10 @@ _SECOND_NUMBER_START_PATTERN = re.compile(_SECOND_NUMBER_START)
 # which nets down to: >=1 non-Number, non-Letter, non-# characters at string end
 # In Python Unicode regexp mode '(?u)', the class '[^#\w]' will match anything
 # that is not # and is not alphanumeric and is not underscore.
-_UNWANTED_END_CHARS = u(r"(?u)(?:_|[^#\w])+$")
+# The negative lookbehind only lets a match start at the beginning of a run
+# of these characters; without it, search() retries from every position in a
+# run that is not at the end of the string, which is quadratic in its length.
+_UNWANTED_END_CHARS = u(r"(?u)(?<!_|[^#\w])(?:_|[^#\w])+$")
 _UNWANTED_END_CHAR_PATTERN = re.compile(_UNWANTED_END_CHARS)
 
 # We use this pattern to check if the phone number has at least three letters
