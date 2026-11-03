@@ -49,6 +49,36 @@ else:  # pragma no cover
         return m
 
 
+# Compiled regular expressions, keyed by pattern string, or None while the
+# cache is off (the default).  The patterns used come from the (fixed) metadata,
+# so the number of entries is bounded; holding on to them means that
+# applications which work with numbers from many regions don't keep recompiling
+# patterns that have dropped out of the re module's own, smaller, cache.
+_COMPILED_PATTERNS = None
+
+
+def enable_pattern_cache():
+    """Keep every compiled metadata regular expression from now on, rather than
+    relying on the re module's own (bounded) cache."""
+    global _COMPILED_PATTERNS
+    if _COMPILED_PATTERNS is None:
+        _COMPILED_PATTERNS = {}
+
+
+def re_compile(regex):
+    """Return a compiled version of the given regular expression string.  Once
+    enable_pattern_cache() has been called, an earlier compilation of the same
+    string is re-used (as the RegexCache class in the Java code does);
+    otherwise this is just re.compile."""
+    if _COMPILED_PATTERNS is None:
+        return re.compile(regex)
+    pattern = _COMPILED_PATTERNS.get(regex, None)
+    if pattern is None:
+        pattern = re.compile(regex)
+        _COMPILED_PATTERNS[regex] = pattern
+    return pattern
+
+
 if __name__ == '__main__':  # pragma no cover
     import doctest
     doctest.testmod()
