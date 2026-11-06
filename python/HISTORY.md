@@ -12,6 +12,12 @@ This file does not generally include descriptions of patch releases (vX.Y.Z
 changes.  (Metadata updates are best checked
 [upstream](https://github.com/google/libphonenumber/blob/master/release_notes.txt).)
 
+What's new in 9.0.43
+--------------------
+
+Added a new `enable_pattern_cache()` entrypoint which enables a cache of compiled regular expressions (over and above
+the built-in cache provided by `re.compile()`.
+
 What's new in 9.0.0
 --------------------
 
