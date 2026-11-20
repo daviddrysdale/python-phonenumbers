@@ -620,7 +620,8 @@ class PhoneNumberMatcher(object):
                 if match is not None:
                     return match
                 self._max_tries -= 1
-                group_match = possible_inner_match.search(candidate, group_match.start() + 1)
+                # Resume after the previous match, as Java's Matcher.find() does.
+                group_match = possible_inner_match.search(candidate, group_match.end())
         return None
 
     def _parse_and_verify(self, candidate, offset):
