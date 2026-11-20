@@ -2067,6 +2067,60 @@ class PhoneNumberUtilTest(TestMetadataTestCase):
                              NumberParseException.TOO_LONG,
                              msg="Wrong error type stored in exception.")
 
+    def testParseRFC3966PhoneContextDomainname(self):
+        # Domain phone-contexts keep parsing, including labels with single or repeated hyphens.
+        self.assertEqual(US_LOCAL_NUMBER, phonenumbers.parse("tel:253-0000;phone-context=www.google.com", "US"))
+        self.assertEqual(US_LOCAL_NUMBER, phonenumbers.parse("tel:253-0000;phone-context=ex--ample.domain.com", "US"))
+
+        # A long ambiguous domain is rejected. The old label pattern ([alnum]+((\-)*[alnum])*) made
+        # backtracking engines in the JS and Python ports of this pattern spend minutes on this
+        # input; Java's own matcher prunes it, this pins the rejection and the accepted language.
+        evil_context = ""
+        for i in range(25):
+            evil_context += "aa."
+        evil_context += "aa!"
+        try:
+            phonenumbers.parse("tel:253-0000;phone-context=" + evil_context, "US")
+            self.fail("This should not parse without throwing an exception.")
+        except NumberParseException:
+            # Expected this exception.
+            pass
+
+        # The rewritten label matches alnum runs separated by one or more hyphens, but not labels
+        # with leading/trailing hyphens or empty labels.
+        domainname = phonenumberutil._RFC3966_DOMAINNAME_PATTERN
+        self.assertTrue(domainname.match("a.b.c"))
+        self.assertTrue(domainname.match("ab-cd.ef"))
+        self.assertTrue(domainname.match("a--b.c"))
+        self.assertTrue(domainname.match("example.com."))
+        self.assertFalse(domainname.match("aa.bb-"))
+        self.assertFalse(domainname.match("aa..bb"))
+        self.assertFalse(domainname.match("-aa.bb"))
+        self.assertFalse(domainname.match("a-.b"))
+
+        # Valid top-level labels containing digits and hyphens (including Punycode TLDs).
+        self.assertEqual(US_LOCAL_NUMBER, phonenumbers.parse("tel:253-0000;phone-context=example.c1", "US"))
+        self.assertEqual(US_LOCAL_NUMBER, phonenumbers.parse("tel:253-0000;phone-context=example.b2b", "US"))
+        self.assertEqual(US_LOCAL_NUMBER, phonenumbers.parse("tel:253-0000;phone-context=sub.example.a1-b2", "US"))
+        self.assertEqual(US_LOCAL_NUMBER, phonenumbers.parse("tel:253-0000;phone-context=example.xn--p1ai", "US"))
+        self.assertEqual(US_LOCAL_NUMBER, phonenumbers.parse("tel:253-0000;phone-context=a.b", "US"))
+        self.assertEqual(US_LOCAL_NUMBER, phonenumbers.parse("tel:253-0000;phone-context=www.google.com.", "US"))
+        # Top-level labels starting with or consisting solely of digits must be rejected.
+        invalid_top_labels = (
+            "tel:253-0000;phone-context=example.123",
+            "tel:253-0000;phone-context=example.1a",
+            "tel:253-0000;phone-context=example.-c1",
+            "tel:253-0000;phone-context=example.c1-"
+        )
+        for input in invalid_top_labels:
+            try:
+                phonenumbers.parse(input, "US")
+                self.fail("Should have rejected invalid phone-context domain: " + input)
+            except NumberParseException:
+                e = sys.exc_info()[1]
+                self.assertEqual(e.error_type,
+                                 NumberParseException.NOT_A_NUMBER)
+
     def testParseWithInternationalPrefixes(self):
         self.assertEqual(US_NUMBER, phonenumbers.parse("+1 (650) 253-0000", "NZ"))
         self.assertEqual(INTERNATIONAL_TOLL_FREE, phonenumbers.parse("011 800 1234 5678", "US"))

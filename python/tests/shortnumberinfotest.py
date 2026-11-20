@@ -313,6 +313,16 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertEqual(ShortNumberCost.TOLL_FREE,
                          shortnumberinfo.expected_cost_for_region(_parse("211", "CA"), "CA"))
 
+    def testOutOfRangeNumberOfLeadingZeros(self):
+        # The field has no bounds in the proto, so these values can come straight from the input.
+        negative = PhoneNumber(country_code=33, national_number=1010, italian_leading_zero=True, number_of_leading_zeros=-1)
+        self.assertTrue(shortnumberinfo.is_possible_short_number(negative))
+        self.assertTrue(shortnumberinfo.is_valid_short_number(negative))
+
+        huge = PhoneNumber(country_code=33, national_number=1010, italian_leading_zero=True, number_of_leading_zeros=2147483647)
+        self.assertFalse(shortnumberinfo.is_possible_short_number(huge))
+        self.assertFalse(shortnumberinfo.is_valid_short_number(huge))
+
     def testMetadataPrint(self):
         # Python version extra test
         # Convert all metadata to strings to check the printing code doesn't blow up.
