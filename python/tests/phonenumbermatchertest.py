@@ -590,13 +590,13 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
         # Like Java's Matcher.find(), each inner-match search starts where the
         # previous match ended. The wide-hyphen pattern takes the rest of the
         # candidate, so only the first wide hyphen splits it.
-        text = u("1234–650-253-0000")
+        text = u("1234\u2013650-253-0000")
         matcher = PhoneNumberMatcher(text, "US")
         self.assertEqual("650-253-0000", matcher.next().raw_string)
         self.assertFalse(matcher.has_next())
         # The text after the first wide hyphen is not a valid number, and the
         # second wide hyphen must not be used as a new split point.
-        text = u("12–34–650-253-0000")
+        text = u("12\u201334\u2013650-253-0000")
         self.assertTrue(self.hasNoMatches(PhoneNumberMatcher(text, "US")))
 
     def testMatchesWithPossibleLeniency(self):
