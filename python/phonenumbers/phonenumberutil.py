@@ -1740,6 +1740,8 @@ def national_significant_number(numobj):
         if num_zeros is None:
             num_zeros = 1
         if num_zeros > 0:
+            # Defensively cap the number of leading zeros to avoid OOM from malicious input.
+            num_zeros = min(num_zeros, 10)
             national_number = U_ZERO * num_zeros
     national_number += str(numobj.national_number)
     return national_number
@@ -2313,6 +2315,16 @@ def is_nanpa_country(region_code):
     return region_code in _NANPA_REGIONS
 
 
+def _has_at_least_three_alpha_chars(number):
+    alpha_count = 0
+    for i, c in enumerate(number):
+        if (c >= 'A' and c <= 'Z') or (c >= 'a' and c <= 'z'):
+            alpha_count += 1
+            if alpha_count >= 3:
+                return True
+    return False
+
+
 def is_alpha_number(number):
     """Checks if the number is a valid vanity (alpha) number such as 800
     MICROSOFT. A valid vanity number will start with at least 3 digits and
@@ -2334,7 +2346,7 @@ def is_alpha_number(number):
         # Number is too short, or doesn't match the basic phone number pattern.
         return False
     extension, stripped_number = _maybe_strip_extension(number)
-    return bool(fullmatch(_VALID_ALPHA_PHONE_PATTERN, stripped_number))
+    return _has_at_least_three_alpha_chars(stripped_number)
 
 
 def is_possible_number(numobj):
