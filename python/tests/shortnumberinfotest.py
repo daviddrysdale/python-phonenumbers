@@ -17,6 +17,7 @@
 # limitations under the License.
 
 import sys
+import time
 
 import phonenumbers
 from phonenumbers import connects_to_emergency_number, is_emergency_number, ShortNumberCost
@@ -268,6 +269,15 @@ class ShortNumberInfoTest(TestMetadataTestCase):
         self.assertFalse(is_emergency_number("9111", "BR"))
         self.assertFalse(is_emergency_number("1900", "BR"))
         self.assertFalse(is_emergency_number("9996", "BR"))
+
+    def testEmergencyNumberLongSeparatorRun(self):
+        # Python version extra test: a long run of separators that isn't at
+        # the end of the input used to take quadratic time to strip.
+        number = "911" + " " * 20000 + "1"
+        start = time.time()
+        self.assertFalse(is_emergency_number(number, "US"))
+        self.assertTrue(connects_to_emergency_number(number, "US"))
+        self.assertTrue(time.time() - start < 1)
 
     def testIsEmergencyNumber_AO(self):
         # Angola doesn't have any metadata for emergency numbers in the test metadata.
