@@ -857,7 +857,7 @@ data = {
  '22176':{'en': 'Yas'},
  '22177':{'en': 'Orange'},
  '22178':{'en': 'Orange'},
- '22179':{'en': 'ADIE'},
+ '22179':{'en': 'Yas'},
  '22220':{'en': 'Chinguitel'},
  '22221':{'en': 'Chinguitel'},
  '22222':{'en': 'Chinguitel'},
