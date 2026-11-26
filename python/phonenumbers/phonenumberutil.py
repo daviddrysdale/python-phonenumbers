@@ -1826,9 +1826,9 @@ def _format_nsn_using_pattern(national_number, formatting_pattern, number_format
         # Strip any leading punctuation.
         m = _SEPARATOR_PATTERN.match(formatted_national_number)
         if m:
-            formatted_national_number = re.sub(_SEPARATOR_PATTERN, U_EMPTY_STRING, formatted_national_number, count=1)
+            formatted_national_number = _SEPARATOR_PATTERN.sub(U_EMPTY_STRING, formatted_national_number, count=1)
         # Replace the rest with a dash between each number group
-        formatted_national_number = re.sub(_SEPARATOR_PATTERN, U_DASH, formatted_national_number)
+        formatted_national_number = _SEPARATOR_PATTERN.sub(U_DASH, formatted_national_number)
 
     return formatted_national_number
 
