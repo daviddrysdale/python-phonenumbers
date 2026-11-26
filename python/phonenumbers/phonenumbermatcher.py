@@ -307,6 +307,10 @@ def _all_number_groups_are_exactly_present(numobj, normalized_candidate, formatt
     Returns True if expectations matched.
     """
     candidate_groups = re.split(NON_DIGITS_PATTERN, normalized_candidate)
+    # Java's String.split() drops trailing empty strings, so do the same here
+    # (e.g. for a candidate that ends with '#' after the extension).
+    while len(candidate_groups) > 1 and not candidate_groups[-1]:
+        candidate_groups.pop()
     # Set this to the last group, skipping it if the number has an extension.
     if numobj.extension is not None:
         candidate_number_group_index = len(candidate_groups) - 2

@@ -599,6 +599,17 @@ class PhoneNumberMatcherTest(TestMetadataTestCase):
         text = u("12\u201334\u2013650-253-0000")
         self.assertTrue(self.hasNoMatches(PhoneNumberMatcher(text, "US")))
 
+    def testExactGroupingWithTrailingNonDigit(self):
+        # Like Java's String.split(), splitting the candidate into digit groups
+        # must drop trailing empty groups, so a '#' after the extension does not
+        # shift which group is compared.
+        text = "415-666-7777 ext. 503#"
+        matcher = PhoneNumberMatcher(text, "US", Leniency.EXACT_GROUPING)
+        match = matcher.next()
+        self.assertEqual(text, match.raw_string)
+        self.assertEqual("503", match.number.extension)
+        self.assertFalse(matcher.has_next())
+
     def testMatchesWithPossibleLeniency(self):
         testCases = STRICT_GROUPING_CASES + EXACT_GROUPING_CASES + VALID_CASES + POSSIBLE_ONLY_CASES
         self._doTestNumberMatchesForLeniency(testCases, Leniency.POSSIBLE)
